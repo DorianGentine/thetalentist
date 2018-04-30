@@ -1,4 +1,6 @@
 class Credential < ApplicationRecord
+  attr_reader :firstname
+
   belongs_to :talent
 
   validates :company_name, presence: true
