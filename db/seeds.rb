@@ -1,5 +1,3 @@
-# require "pry-byebug"
-
 p "Destroy Talent"
 
 Talent.destroy_all
@@ -22,7 +20,7 @@ TalentLanguage.destroy_all
 TalentTechno.destroy_all
 
 Startup.destroy_all
-# TheTalentist.destroy_all
+Talentist.destroy_all
 Headhunter.destroy_all
 
 p "Creating talents"
@@ -145,21 +143,9 @@ market = Sector.create(title: "Market", description: "Suis deflecti sub nec rebu
 
 p "Creating talent_sectors"
 
-luc_sector = TalentSector.new
-donatien_sector = TalentSector.new
-dorian_sector = TalentSector.new
-
-luc_sector.talent = luc
-donatien_sector.talent = donatien
-dorian_sector.talent = dorian
-
-luc_sector.sector = data
-donatien_sector.sector = data
-dorian_sector.sector = data
-
-luc_sector.save!
-donatien_sector.save!
-dorian_sector.save!
+luc_sector = TalentSector.create!(talent: luc , sector: data)
+donatien_sector = TalentSector.create!(talent: donatien, sector: data)
+dorian_sector = TalentSector.create!(talent: dorian, sector: data)
 
 p "Creating skills"
 
