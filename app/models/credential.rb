@@ -1,5 +1,4 @@
 class Credential < ApplicationRecord
-  attr_reader :firstname
 
   belongs_to :talent
 

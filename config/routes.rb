@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :talentists
   devise_for :headhunters
   devise_for :talents
   root to: 'pages#home'
