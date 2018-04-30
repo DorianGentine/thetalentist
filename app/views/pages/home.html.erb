@@ -1,2 +1,36 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="navbar-wagon">
+
+  <!-- Right Navigation -->
+  <div class="navbar-wagon-right hidden-xs hidden-sm">
+    <!-- Profile picture with dropdown list -->
+    <div class="navbar-wagon-item">
+      <div class="dropdown">
+        <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+        <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+          <li><a href="#">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h1>Ceci est la page d'accueil</h1>
+<div class="centrer_la_page">
+  <%= link_to 'Je suis un talent', root_path, class: "btn btn-primary" %>
+  <%= link_to 'Je suis une startup', root_path, class: "btn btn-primary" %>
+</div>
+
+<style>
+.navbar-wagon {
+  position: relative;
+}
+.navbar-wagon-item {
+  position: absolute;
+  right: 20px;
+}
+.centrer_la_page {
+  margin-left: 37%;
+  margin-top: 20%;
+}
+</style>
