@@ -5,6 +5,19 @@ Formation.destroy_all
 Known.destroy_all
 Skill.destroy_all
 Keyword.destroy_all
+Language.destroy_all
+Techno.destroy_all
+
+Experience.destroy_all
+Credential.destroy_all
+NextAventure.destroy_all
+
+TalentFormation.destroy_all
+TalentKnown.destroy_all
+TalentSkill.destroy_all
+TalentKeyword.destroy_all
+TalentLanguage.destroy_all
+TalentTechno.destroy_all
 
 p "Creating talents"
 
@@ -288,4 +301,8 @@ donatien_technos_ruby.save!
 donatien_technos_sql.save!
 dorian_technos_dig.save!
 dorian_technos_sql.save!
+
+
+p "Creating Startup part"
+
 
