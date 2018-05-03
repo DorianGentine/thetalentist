@@ -32,3 +32,6 @@ end
 # add devise & pundit for talent / talentist / startup log
 gem 'devise'
 gem "pundit"
+
+# add multi-step form the form talent / startup
+gem 'wicked'

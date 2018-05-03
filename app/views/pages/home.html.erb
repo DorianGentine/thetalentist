@@ -7,7 +7,9 @@
       <div class="dropdown">
         <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
         <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-          <li><a href="#">Log Out</a></li>
+          <li>
+            <%= link_to 'Log out', destroy_talent_session_path, :method => 'delete' %>
+          </li>
         </ul>
       </div>
     </div>
@@ -17,7 +19,7 @@
 
 <h1>Ceci est la page d'accueil</h1>
 <div class="centrer_la_page">
-  <%= link_to 'Je suis un talent', root_path, class: "btn btn-primary" %>
+  <%= link_to 'Je suis un talent', new_talent_registration_path, class: "btn btn-primary" %>
   <%= link_to 'Je suis une startup', root_path, class: "btn btn-primary" %>
 </div>
 
