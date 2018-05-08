@@ -1,0 +1,17 @@
+<% @sectors.each do |sector| %>
+  <%= sector.title %>| <%= sector.description %>
+  <br>
+<% end %>
+
+
+
+<%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
+  <%= f.association :sectors, as: :check_boxes %>
+  <%= f.submit "Continuer", class: "b-btn" %>
+<% end %>
+
+
+
+
+<%= link_to "Précedent", previous_wizard_path, class: "b-btn-link" %>
+

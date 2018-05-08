@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     registrations: 'talents/registrations'
   }
   root to: 'pages#home'
-  resources :after_signup
+  resources :steps_talent_infos
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
 
