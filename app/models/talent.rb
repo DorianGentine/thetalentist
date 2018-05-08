@@ -3,21 +3,21 @@ class Talent < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :talent_formation, dependent: :destroy
-  has_many :talent_keyword, dependent: :destroy
-  has_many :talent_known, dependent: :destroy
-  has_many :talent_language, dependent: :destroy
-  has_many :talent_sector, dependent: :destroy
-  has_many :talent_skill, dependent: :destroy
-  has_many :talent_techno, dependent: :destroy
-  has_many :credential, dependent: :destroy
-  has_many :experience, dependent: :destroy
-  has_many :next_aventure, dependent: :destroy
+  has_many :talent_formations, dependent: :destroy
+  has_many :talent_keywords, dependent: :destroy
+  has_many :talent_knowns, dependent: :destroy
+  has_many :talent_languages, dependent: :destroy
+  has_many :talent_skills, dependent: :destroy
 
-  validates :name, presence: true
-  validates :firstname, presence: true
-  validates :city, presence: true
-  validates :phone, presence: true
-  validates :email, presence: true
+  has_many :talent_technos, dependent: :destroy
+  has_many :credentials, dependent: :destroy
+  has_many :experiences, dependent: :destroy
+  has_many :next_aventures, dependent: :destroy
+
+  # Tu devras ajouter les lignes has_many :xx through: :xx pour tous les champs que le talent devra remplir dans le questionnaire
+  has_many :talent_sectors, dependent: :destroy
+  has_many :sectors, through: :talent_sectors
+
+  validates :name, :firstname, :city, :phone, :email, presence: true
 
 end
