@@ -1,27 +1,29 @@
 # p "Destroy Talent"
 
-# Talent.destroy_all
-# Formation.destroy_all
-# Known.destroy_all
-# Skill.destroy_all
-# Keyword.destroy_all
-# Language.destroy_all
-# Techno.destroy_all
+Talent.destroy_all
+Formation.destroy_all
+Known.destroy_all
+Skill.destroy_all
+Sector.destroy_all
+Job.destroy_all
+Keyword.destroy_all
+Language.destroy_all
+Techno.destroy_all
 
-# Experience.destroy_all
-# Credential.destroy_all
-# NextAventure.destroy_all
+Experience.destroy_all
+Credential.destroy_all
+NextAventure.destroy_all
 
-# TalentFormation.destroy_all
-# TalentKnown.destroy_all
-# TalentSkill.destroy_all
-# TalentKeyword.destroy_all
-# TalentLanguage.destroy_all
-# TalentTechno.destroy_all
+TalentFormation.destroy_all
+TalentKnown.destroy_all
+TalentSkill.destroy_all
+TalentKeyword.destroy_all
+TalentLanguage.destroy_all
+TalentTechno.destroy_all
 
-# Startup.destroy_all
-# Talentist.destroy_all
-# Headhunter.destroy_all
+Startup.destroy_all
+Talentist.destroy_all
+Headhunter.destroy_all
 
 # p "Creating talents"
 
@@ -135,10 +137,10 @@
 
 p "Creating jobs"
 
-data = Job.create(title: "Data", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-sales = Job.create(title: "Sales", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-product = Job.create(title: "Product", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-market = Job.create(title: "Market", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
+data = Job.create(title: "Data")
+sales = Job.create(title: "Sales")
+product = Job.create(title: "Product")
+market = Job.create(title: "Market")
 
 p "Creating sectors"
 

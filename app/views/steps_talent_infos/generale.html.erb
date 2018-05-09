@@ -1,0 +1,34 @@
+<%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
+  <!-- Dans le formulaire, tu utilises la table Sectors et la collection Sector.all / C'est le controller qui comprend qu'il doit créer les champs dans la table intermédiaire, tu n'as pas à le gérer manuellement ! -->
+  <%= f.input :btoc, as: :boolean   %>
+  <%= f.input :btob, as: :boolean   %>
+  <%= f.association :jobs, as: :check_boxes, collection: Job.all %>
+  <%= f.association :sectors, as: :select, collection: Sector.all %>
+
+
+
+
+  <table class='table'>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nouvelle experience</th>
+        <th>Completed</th>
+        <th>Due</th>
+      </tr>
+    </thead>
+    <tbody class='fields'>
+      <%= f.simple_fields_for :experiences do |builder| %>
+        <%= render 'experience', e: builder %>
+      <% end %>
+    </tbody>
+  </table>
+
+
+
+
+  <%= link_to_add_row('Ajouter une experience', f, :experiences, class: 'btn btn-primary') %>
+  <%= f.submit "Continuer", class: "b-btn" %>
+<% end %>
+<%= link_to "Précedent", previous_wizard_path, class: "b-btn-link" %>
+
