@@ -39,4 +39,5 @@ gem "pundit"
 
 # add multi-step form the form talent / startup
 gem 'wicked'
-
+gem 'turbolinks', '~> 5.0.0'
+gem 'jquery-rails'

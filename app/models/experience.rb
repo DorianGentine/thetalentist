@@ -5,4 +5,5 @@ class Experience < ApplicationRecord
   validates :company_name, presence: true
   validates :years, presence: true
 
+
 end
