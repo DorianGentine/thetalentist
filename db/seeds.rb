@@ -47,23 +47,23 @@ Headhunter.destroy_all
 # data_scientist = Experience.new( position: "data scientist", talent: donatien, company_name: "uber", link:"https://www.uber.com/", years:"2017", currently: true, overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
 # data_owner = Experience.new( position: "data owner", talent: dorian, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2012 2015", currently: false, overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
 
-# p "Creating formations"
+p "Creating formations"
 
-# hec = Formation.create( title: "HEC")
-# icam = Formation.create( title: "Icam")
-# agroparistech = Formation.create( title: "AgroParisTech")
-# audencia = Formation.create( title: "Audencia")
-# celsa = Formation.create( title: "CELSA")
-# centrale_lyon = Formation.create( title: "Centrale Lyon")
-# centrale_paris = Formation.create( title: "Centrale Paris")
-# dauphine = Formation.create( title: "Dauphine")
-# ecole_42 = Formation.create( title: "Ecole 42")
-# ensae = Formation.create( title: "ENSAE")
-# edhec = Formation.create( title: "EDHEC")
-# em_lyon = Formation.create( title: "EM Lyon")
-# ens = Formation.create( title: "ENS")
-# escp_europe = Formation.create( title: "ESCP Europe")
-# agroparistech = Formation.create( title: "AgroParisTech")
+hec = Formation.create( title: "HEC")
+icam = Formation.create( title: "Icam")
+agroparistech = Formation.create( title: "AgroParisTech")
+audencia = Formation.create( title: "Audencia")
+celsa = Formation.create( title: "CELSA")
+centrale_lyon = Formation.create( title: "Centrale Lyon")
+centrale_paris = Formation.create( title: "Centrale Paris")
+dauphine = Formation.create( title: "Dauphine")
+ecole_42 = Formation.create( title: "Ecole 42")
+ensae = Formation.create( title: "ENSAE")
+edhec = Formation.create( title: "EDHEC")
+em_lyon = Formation.create( title: "EM Lyon")
+ens = Formation.create( title: "ENS")
+escp_europe = Formation.create( title: "ESCP Europe")
+agroparistech = Formation.create( title: "AgroParisTech")
 
 # p "Creating talent_formations"
 
@@ -116,10 +116,10 @@ Headhunter.destroy_all
 
 # p "Creating languages"
 
-# english = Language.create(title: "english")
-# francais = Language.create(title: "Francais")
-# spanish = Language.create(title: "spanish")
-# german = Language.create(title: "german")
+english = Language.create(title: "english")
+francais = Language.create(title: "french")
+spanish = Language.create(title: "spanish")
+german = Language.create(title: "german")
 
 
 # p "Creating talent_languages"
