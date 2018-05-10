@@ -2,16 +2,16 @@ class StepsTalentInfosController < ApplicationController
   include Wicked::Wizard
   steps :generale, :formations, :skills
   # TODO: before actions add find_talent for show and update
+  before_action :find_talent, only: [:show, :update]
 
   def show
-    @talent = Talent.find(session[:talent_id])
     @talent.experiences.build
     render_wizard
   end
 
   def update
-    @talent = Talent.find(session[:talent_id])
     # une fois que tu auras plusieurs étapes, il faudra ajouter un champ "status" et le mettre à jour comme suit :
+    # Si tu as un problème de validation pour créer talent
     # @talent.status = step.to_s
     # @talent.status = 'active' if step == steps.last
     if @talent.update(talent_params)
@@ -36,21 +36,12 @@ class StepsTalentInfosController < ApplicationController
       :btob,
       :sector_ids,
       job_ids: [],
-      experiences_attributes: Experience.attribute_names.map(&:to_sym).push(:_destroy)
+      experiences_attributes: Experience.attribute_names.map(&:to_sym).push(:_destroy),
+      formation_ids: [],
+      language_ids: []
     )
   end
 
 end
-
-
-# experiences_attributes: [
-#         :position,
-#         :company_name,
-#         :years,
-#         :overview,
-#         :link,
-#         :currently,
-#         :_destroy
-#       ]
 
 
