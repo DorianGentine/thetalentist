@@ -5,6 +5,7 @@ class Headhunter < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :startup
+  accepts_nested_attributes_for :startup
 
   validates :firstname, presence: true
   validates :job, presence: true
