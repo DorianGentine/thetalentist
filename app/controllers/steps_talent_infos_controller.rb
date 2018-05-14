@@ -21,7 +21,7 @@ class StepsTalentInfosController < ApplicationController
       # ça render la méthode "show" mais propre à UNE étape en particulier, donc tu dois la nommer explicitement et pas juste "show"
       render "steps_talent_infos/#{step}"
     end
-  end
+  endx
 
   private
 

@@ -5,8 +5,14 @@
 
   <div class="form-inputs">
     <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :firstname, required: true, autofocus: true %>
+    <%= f.input :job, required: true, autofocus: true %>
     <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
     <%= f.input :password_confirmation, required: true %>
+
+    <!-- add table belong -->
+    <%= f.collection_select :startup_id, Startup.all, :id, :name %>
+
   </div>
 
   <div class="form-actions">
@@ -14,4 +20,7 @@
   </div>
 <% end %>
 
-<%= render "startups/shared/links" %>
+<%= render "headhunters/shared/links" %>
+
+
+
