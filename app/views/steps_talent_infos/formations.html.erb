@@ -2,11 +2,16 @@
 <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
   <!-- Dans le formulaire, tu utilises la table Sectors et la collection Sector.all / C'est le controller qui comprend qu'il doit créer les champs dans la table intermédiaire, tu n'as pas à le gérer manuellement ! -->
 
-  <%= f.association :formations, as: :check_boxes, collection: Formation.all %>
-  <%= f.association :languages, as: :check_boxes, collection: Language.all %>
 
 
 
+  <%= f.simple_fields_for :talent_formations do |forma|%>
+    <%= forma.collection_select :formation, Formation.all, :id, :title %>
+    <%= forma.input :title %>
+    <%= forma.input :year, :as => :integer %>
+  <% end %>
+
+  <%= f.collection_select :languages, Language.all, :id, :title, label: "Compétence languistique" %>
 
 
   <%= f.submit "Continuer", class: "b-btn" %>

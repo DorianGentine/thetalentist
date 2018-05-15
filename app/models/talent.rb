@@ -16,6 +16,7 @@ class Talent < ApplicationRecord
 
   has_many :talent_formations, dependent: :destroy
   has_many :formations, through: :talent_formations
+  accepts_nested_attributes_for :talent_formations, allow_destroy: true
 
   has_many :talent_keywords, dependent: :destroy
   has_many :keywords, through: :talent_keywords
@@ -38,5 +39,10 @@ class Talent < ApplicationRecord
   has_many :next_aventures, dependent: :destroy
 
   validates :name, :firstname, :city, :phone, :email, presence: true
+
+
+
+  # link with pdf_uploader
+  mount_uploader :cv, PdfUploader
 
 end
