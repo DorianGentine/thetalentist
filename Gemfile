@@ -43,3 +43,7 @@ gem "pundit"
 gem 'wicked'
 gem 'turbolinks', '~> 5.0.0'
 gem 'jquery-rails'
+
+# add picture and pdf file
+gem 'cloudinary'
+gem 'carrierwave', '~> 1.2'

@@ -1,10 +1,11 @@
 class StepsTalentInfosController < ApplicationController
   include Wicked::Wizard
-  steps :generale, :formations, :skills
+  steps :formations, :experiences, :next_aventure
   # TODO: before actions add find_talent for show and update
   before_action :find_talent, only: [:show, :update]
 
   def show
+    @talent.talent_formations.build
     @talent.experiences.build
     render_wizard
   end
@@ -15,13 +16,14 @@ class StepsTalentInfosController < ApplicationController
     # @talent.status = step.to_s
     # @talent.status = 'active' if step == steps.last
     if @talent.update(talent_params)
+    raise
       render_wizard @talent
     else
       # si l'update ne fonctionne pas, il faut render l'étape sur laquelle tu te trouves donc tu as besoin de la connaître
       # ça render la méthode "show" mais propre à UNE étape en particulier, donc tu dois la nommer explicitement et pas juste "show"
       render "steps_talent_infos/#{step}"
     end
-  endx
+  end
 
   private
 
@@ -37,9 +39,12 @@ class StepsTalentInfosController < ApplicationController
       :sector_ids,
       job_ids: [],
       experiences_attributes: Experience.attribute_names.map(&:to_sym).push(:_destroy),
+      # talent_formations_attributes: TalentFormation.attribute_names.map(&:to_sym).push(:_destroy),
+      talent_formations_attributes: [:id, :title, :year, formation_id: []],
       formation_ids: [],
       language_ids: []
     )
+
   end
 
 end

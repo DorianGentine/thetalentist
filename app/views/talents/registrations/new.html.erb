@@ -4,19 +4,21 @@
   <%= f.error_notification %>
   <h3>Info de base</h3>
   <div class="form-inputs">
-    <%= f.input :firstname, required: true, autofocus: true %>
-    <%= f.input :name, required: true, autofocus: true %>
-    <%= f.input :city, required: true, autofocus: true %>
-    <%= f.input :phone, required: true, autofocus: true %>
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
-    <%= f.input :linkedin, autofocus: true %>
-    <!-- TODO : ajouter les champs complémentaires ici
-    <#%= f.association :skills, as: :check_boxes, collection: Skill.all, prompt: "Choose a Company" %> -->
+    <%= f.input :firstname, required: true, autofocus: true, placeholder: "Prénom", label: "Nom" %>
+    <%= f.input :name, required: true, autofocus: true, placeholder: "Nom", label: false %>
+    <%= f.input :email, required: true, autofocus: true, placeholder: "exemple@gmail.com", label: "Compte"  %>
+    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", label: false %>
+    <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false %>
+    <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: "Téléphone" %>
+    <%= f.input :city, required: true, autofocus: true, placeholder: "Ville", label: false %>
+    <%= f.input :cv %>
+    <%= f.input :cv_cache, as: :hidden %>
+    <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: "Linkedin" %>
+    <%= f.collection_select( :job_ids, Job.all, :id, :title)%>
   </div>
   <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= link_to 'Précédent', root_path %>
+    <%= f.button :submit, "Suivant" %>
   </div>
 <% end %>
 
