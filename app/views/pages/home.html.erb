@@ -1,21 +1,4 @@
-<div class="navbar-wagon">
-
-  <!-- Right Navigation -->
-  <div class="navbar-wagon-right hidden-xs hidden-sm">
-    <!-- Profile picture with dropdown list -->
-    <div class="navbar-wagon-item">
-      <div class="dropdown">
-        <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" class="avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
-        <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-          <li>
-            <%= link_to 'Log out', destroy_talent_session_path, :method => 'delete' %>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
+<%= render "shared/navbar" %>
 
 <h1>Ceci est la page d'accueil</h1>
 <div class="centrer_la_page">
@@ -23,16 +6,4 @@
   <%= link_to 'Je suis une startup', new_headhunter_registration_path, class: "btn btn-primary" %>
 </div>
 
-<style>
-.navbar-wagon {
-  position: relative;
-}
-.navbar-wagon-item {
-  position: absolute;
-  right: 20px;
-}
-.centrer_la_page {
-  text-align: center;
-  margin-top: 20%;
-}
-</style>
+<%= render "shared/footer" %>
