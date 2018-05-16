@@ -7,6 +7,14 @@ Rails.application.routes.draw do
     registrations: 'headhunters/registrations'
   }
 
+
+
+  resources :headhunters, only: [:show, :update]
+  # show is to display the profil and update to edit it
+  # le repertoire est la où on affiche tous les talents
+  get 'repertoire', to: "headhunters#repertory"
+
+
   devise_for :talents, path: 'talents', controllers: {
     sessions: 'talents/sessions',
     passwords: 'talents/passwords',
