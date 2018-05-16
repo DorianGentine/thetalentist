@@ -16,6 +16,18 @@
     <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: "Linkedin" %>
     <%= f.collection_select( :job_ids, Job.all, :id, :title)%>
   </div>
+
+  <%= f.simple_fields_for :hobbies do |hobby| %>
+    <%= hobby.input :title, html: { id: :hobby } %>
+    <%= hobby.submit html: { id: :filldetails, onclick: "addFields()" } %>
+  <% end %>
+
+
+
+
+
+
+
   <div class="form-actions">
     <%= link_to 'Précédent', root_path %>
     <%= f.button :submit, "Suivant" %>
