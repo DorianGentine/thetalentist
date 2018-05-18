@@ -3,8 +3,6 @@
   <!-- Dans le formulaire, tu utilises la table Sectors et la collection Sector.all / C'est le controller qui comprend qu'il doit créer les champs dans la table intermédiaire, tu n'as pas à le gérer manuellement ! -->
 
 
-
-
   <%= f.simple_fields_for :talent_formations do |forma|%>
     <%= forma.collection_select :formation, Formation.all, :id, :title %>
     <%= forma.input :title %>
@@ -17,4 +15,16 @@
   <%= f.submit "Continuer", class: "b-btn" %>
 <% end %>
 <%= link_to "Précedent", previous_wizard_path, class: "b-btn-link" %>
+<!--
+ou
 
+<#%= simple_form_for [@talent, @talent_formation], url: wizard_path, method: :put do |f| %>
+  <#%= f.input :title, placeholder: "Master" %>
+  <#%= f.input :year, placeholder: "2015" %>
+  <#%= f.association :formation, prompt: "Select an formation" %>
+
+  <#%= f.submit "Add an ingredient", class: "btn btn-primary" %>
+
+  <#%= f.submit "Continuer", class: "b-btn" %>
+<#% end %>
+ -->

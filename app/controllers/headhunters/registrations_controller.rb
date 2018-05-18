@@ -2,6 +2,9 @@
 
 class Headhunters::RegistrationsController < Devise::RegistrationsController
 
+
+
+
 def create
   @headhunter = Headhunter.new(headhunter_params)
   if @headhunter.save
