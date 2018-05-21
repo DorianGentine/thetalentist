@@ -16,6 +16,7 @@ class Talent < ApplicationRecord
 
   has_many :talent_formations, dependent: :destroy
   has_many :formations, through: :talent_formations
+  has_many :talent_formations, inverse_of: :talent
   accepts_nested_attributes_for :talent_formations, allow_destroy: true
 
   has_many :talent_keywords, dependent: :destroy

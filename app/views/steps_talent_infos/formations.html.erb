@@ -1,15 +1,14 @@
-<h2>hey next step</h2>
+<h2>hey next 2 step</h2>
 <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
   <!-- Dans le formulaire, tu utilises la table Sectors et la collection Sector.all / C'est le controller qui comprend qu'il doit créer les champs dans la table intermédiaire, tu n'as pas à le gérer manuellement ! -->
 
- <%= f.simple_fields_for :talent_formations do |u|%>
-    <%= u.input :formation, as: :radio_buttons, collection: Formation.all %>
+  <%= f.simple_fields_for :talent_formations do |u| %>
     <%= u.input :title %>
     <%= u.input :year, :as => :integer %>
+    <%= u.association :formation, collection: Formation.all %>
   <% end %>
 
-
-  <%= f.collection_select :languages, Language.all, :id, :title, label: "Compétence languistique" %> <br>
+  <%= f.input :languages, collection: Language.all, label: "Compétence languistique", input_html: { class:"select2", multiple: "multiple"}, multiple: true %> <br>
 
 
   <%= f.submit "Continuer", class: "b-btn" %> <br>
@@ -17,3 +16,4 @@
 
 
 <%= link_to "Précedent", previous_wizard_path, class: "b-btn-link" %>
+
