@@ -18,7 +18,13 @@
       </div>
       <div class="talent-btob talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
-        <p><%= talent.btoc %></p>
+        <% if talent.btoc && talent.btob %>
+          <p> BTOB & BTOC</p>
+        <% elsif talent.btoc %>
+          <p>BTOB</p>
+        <% else %>
+          <p>BTOC</p>
+        <% end %>
       </div>
       <div class="talent-cdi talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-briefcase"></i></p>
@@ -26,20 +32,25 @@
       </div>
     </div>
 
-    <div class="talent-school-1 card-dispsition">
-      <p class="icon"><i class="fas fa-graduation-cap"></i></p>
-      <p><%= talent.formations.first.title %></p>
-      <!-- <p>HEC, Master entrepreneuriat - 2015</p> -->
-    </div>
-
-    <div class="talent-school-2 card-dispsition">
-      <p class="icon"><i class="fas fa-graduation-cap"></i></p>
-      <p><%= talent.formations.second %></p>
-    </div>
-
+    <% talent.talent_formations.first(2).each do |formation| %>
+      <div class="talent-school-1 card-dispsition">
+        <p class="icon"><i class="fas fa-graduation-cap"></i></p>
+        <p><%= formation.formation.title %> - <%= formation.title %></p>
+        <!-- <p>HEC, Master entrepreneuriat - 2015</p> -->
+      </div>
+        <!--
+        TODO: j'ai fait un each se qui permet dévité les répétions de code, a toi de voir si mieux ou pas. Je te laisse le supprmié
+        <div class="talent-school-2 card-dispsition">
+        <p class="icon"><i class="fas fa-graduation-cap"></i></p>
+        <p><%= formation.formation.title %></p>
+      </div> -->
+    <% end %>
     <div class="talent-description">
-      <p><%= talent.overview %></p>
+      <p><%= truncate(talent.overview, length: 250) %></p>
     </div>
+
+
+
 
     <div class="talent-update card-dispsition">
       <p class="icon"><i class="far fa-clock"></i></p>
