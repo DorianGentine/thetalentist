@@ -217,7 +217,13 @@ p "Creating The Talenist part"
 dimitri = Talentist.create!(email: "dimitri@hotmail.fr", password:"password", firstname: "dimitri", name:"mussat", super_admin: false)
 magdalena = Talentist.create!(email: "magdalena@hotmail.fr", password:"password", firstname: "MAGDALENA", name:"mussat", super_admin: true)
 
+p "Creating hobbies"
 
+Hobby.create!(title: "Voile")
+Hobby.create!(title: "Boxe")
+Hobby.create!(title: "Footbbal")
+Hobby.create!(title: "ski")
+Hobby.create!(title: "Danse")
 
 
 
