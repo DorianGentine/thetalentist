@@ -5,7 +5,7 @@ class StepsTalentInfosController < ApplicationController
   before_action :find_talent, only: [:show, :update]
 
   def show
-    @talent_formation = TalentFormation.new
+    # @talent_formation = TalentFormation.new
     # @talent.talent_formations.build
     @talent.experiences.build
     render_wizard

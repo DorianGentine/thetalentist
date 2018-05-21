@@ -30,6 +30,11 @@ class Talent < ApplicationRecord
   has_many :talent_technos, dependent: :destroy
   has_many :technos, through: :talent_technos
 
+  has_many :talent_hobbies, dependent: :destroy
+  has_many :talent_hobbies, inverse_of: :talent
+  has_many :hobbies, through: :talent_hobbies
+  accepts_nested_attributes_for :hobbies, allow_destroy: true
+
   # relation one to many
   has_many :credentials, dependent: :destroy
 
