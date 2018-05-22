@@ -34,10 +34,23 @@
 
   <!-- Répertoire des talents -->
   <div class="cards-repertory">
+
     <% @talents.each do |talent| %>
       <%= render 'talent-card', talent: talent %>
     <% end %>
+    
   </div>
+
+  <!-- TEST LIGHTBOX -->
+  <div id="myModal" class="modal">
+    <span class="close cursor" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+      <p>LIGHTBOX A REMPLIR</p>
+    </div>
+  </div>
+
+
+  <!-- FIN TEST -->
 
   <!-- Choix des pages -->
   <div class="page-choice">
