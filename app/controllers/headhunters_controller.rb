@@ -7,4 +7,5 @@ class HeadhuntersController < ApplicationController
   def show
     @headhunter = Headhunter.find(params[:id])
   end
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_21_092410) do
+ActiveRecord::Schema.define(version: 2018_05_22_180519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2018_05_21_092410) do
     t.bigint "talent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "starting"
     t.index ["talent_id"], name: "index_experiences_on_talent_id"
   end
 
@@ -149,6 +150,7 @@ ActiveRecord::Schema.define(version: 2018_05_21_092410) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
+    t.string "level"
     t.index ["formation_id"], name: "index_talent_formations_on_formation_id"
     t.index ["talent_id"], name: "index_talent_formations_on_talent_id"
   end
