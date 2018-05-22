@@ -1,0 +1,57 @@
+/* The Modal (background) */
+.modal {
+  display: block; /* !!!!! remettre display: none; !!!!*/ /* Hidden by default */
+  padding-top: 100px; /* Location of the box */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  .modal-header{
+    background-color: $violet;
+    padding: 10px 45px;
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h3, p, span {
+      color: white;
+      opacity: 1;
+      margin: 0;
+    }
+  }
+  .modal-header:before, .modal-header:after {
+    display: none;
+  }
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: black;
+  float: right;
+  margin-right: 25px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}

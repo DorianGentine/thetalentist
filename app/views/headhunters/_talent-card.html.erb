@@ -12,21 +12,21 @@
     </div>
 
     <div class="talent-info">
-      <div class="talent-city talent-info-item card-dispsition">
+      <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
         <p><%= talent.city %></p>
       </div>
-      <div class="talent-btob talent-info-item card-dispsition">
+      <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
         <% if talent.btoc && talent.btob %>
-          <p> BTOB & BTOC</p>
+          <p> BtoB & BtoC</p>
         <% elsif talent.btoc %>
-          <p>BTOB</p>
+          <p>BtoB</p>
         <% else %>
-          <p>BTOC</p>
+          <p>BtoC</p>
         <% end %>
       </div>
-      <div class="talent-cdi talent-info-item card-dispsition">
+      <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-briefcase"></i></p>
         <p>CDI</p>
       </div>
@@ -38,12 +38,6 @@
         <p><%= formation.formation.title %> - <%= formation.title %></p>
         <!-- <p>HEC, Master entrepreneuriat - 2015</p> -->
       </div>
-        <!--
-        TODO: j'ai fait un each se qui permet dévité les répétions de code, a toi de voir si mieux ou pas. Je te laisse le supprmié
-        <div class="talent-school-2 card-dispsition">
-        <p class="icon"><i class="fas fa-graduation-cap"></i></p>
-        <p><%= formation.formation.title %></p>
-      </div> -->
     <% end %>
     <div class="talent-description">
       <p><%= truncate(talent.overview, length: 250) %></p>
@@ -58,9 +52,7 @@
     </div>
 
     <div class="talent-more">
-      <%= link_to talent_path(talent) do %>
-        En savoir plus <i class="fas fa-angle-right"></i>
-      <% end %>
+        <p id="myBtn">En savoir plus <i class="fas fa-angle-right"></i></p>
     </div>
   </div>
 </div>
