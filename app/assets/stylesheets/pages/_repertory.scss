@@ -137,12 +137,14 @@
     bottom: 10px;
     right: -17px;
     align-self: flex-end;
-    a{
+    p{
       color: $green;
       font-size: 12px;
       font-weight: bold;
+      cursor: pointer;
+      margin: 0;
     }
-    a:hover{
+    p:hover{
       text-decoration: none;
       color: $red;
     }
@@ -158,4 +160,35 @@
     background-color: $green;
     color: white;
   }
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
 }
