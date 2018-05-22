@@ -1,20 +1,21 @@
+<%= render 'shared/modal' %>
 <%= render "shared/navbar" %>
 
 <div class="filter">
 
   <div class="filter-category">
-    <p><i class="fal fa-filter"></i> Filtrer par MÉTIER</p>
+    <p><i class="fas fa-filter"></i> Filtrer par MÉTIER</p>
   </div>
 
   <div class="filter-item">
 
-    <a href="" class="item-data"><i class="fas fa-search"></i> DATA</a>
+    <a href=""><i class="fas fa-search"></i> DATA</a>
 
-    <a href="" class="item-sales"><i class="far fa-comments"></i> SALES</a>
+    <a href=""><i class="far fa-comments"></i> SALES</a>
 
-    <a href="" class="item-market"><i class="fas fa-tachometer-alt"></i> MARKET</a>
+    <a href=""><i class="fas fa-tachometer-alt"></i> MARKET</a>
 
-    <a href="" class="item-product"><i class="fas fa-archive"></i> PRODUCT</a>
+    <a href=""><i class="fas fa-archive"></i> PRODUCT</a>
 
   </div>
 
@@ -38,28 +39,13 @@
     <% @talents.each do |talent| %>
       <%= render 'talent-card', talent: talent %>
     <% end %>
-    
+
   </div>
-
-  <!-- TEST LIGHTBOX -->
-  <div id="myModal" class="modal">
-    <span class="close cursor" onclick="closeModal()">&times;</span>
-    <div class="modal-content">
-      <p>LIGHTBOX A REMPLIR</p>
-    </div>
-  </div>
-
-
-  <!-- FIN TEST -->
 
   <!-- Choix des pages -->
   <div class="page-choice">
     <p>Préc. <strong>1</strong> 2 3 Suiv.</p>
   </div>
 </section>
-
-<% @talents.each do |talent| %>
-  <%= talent.name %> <%= talent.firstname%> <% talent.jobs %> <br>
-<% end %>
 
 <%= render "shared/footer" %>
