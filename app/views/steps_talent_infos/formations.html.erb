@@ -1,14 +1,18 @@
-<h2>hey next 2 step</h2>
+<h2>Quel est votre parcours scolaire ?</h2>
 <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
-  <!-- Dans le formulaire, tu utilises la table Sectors et la collection Sector.all / C'est le controller qui comprend qu'il doit créer les champs dans la table intermédiaire, tu n'as pas à le gérer manuellement ! -->
 
   <%= f.simple_fields_for :talent_formations do |u| %>
-    <%= u.input :title %>
-    <%= u.input :year, :as => :integer %>
-    <%= u.association :formation, collection: Formation.all %>
+    <%= u.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
+    <%= u.input :title, placeholder: "Diplôme", label: false  %>
+    <%= u.input :year, collection: 1992..2018, prompt: "année d'obtention", label: false   %>
   <% end %>
 
-  <%= f.input :languages, collection: Language.all, label: "Compétence languistique", input_html: { class:"select2", multiple: "multiple"}, multiple: true %> <br>
+  <%= f.input :techno_ids, collection: Techno.all, label: "Compétence téchniques", input_html: { class:"select2", multiple: "multiple"}, multiple: true %>
+
+  <%= f.simple_fields_for :talent_languages do |u| %>
+    <%= u.association :language, collection: Language.all, prompt:"Anglais", label: false, input_html: { class:"select2"}  %>
+    <%= u.input :level, collection: 0..5, prompt: "Niveau", label: false %>
+  <% end %>
 
 
   <%= f.submit "Continuer", class: "b-btn" %> <br>

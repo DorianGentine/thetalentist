@@ -1,0 +1,17 @@
+<h2>Quelle direction souhaitez-vous prendre ?</h2>
+
+<%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
+
+  <%= f.simple_fields_for :next_aventures do |u| %>
+    <%= u.input :city, label: "Ville souhaitée", placeholder:"Paris" %>
+    <%= u.input :contrat, label: "Type de contrat", placeholder:"Freelance" %>
+    <%= u.input :remuneration, label: "Rémunération", placeholder: "100 000€" %>
+    <%= u.input :overview, label: "Le job de vos rêves? (50 mots max", placeholder: "Descrpition", as: :text %>
+    <%= u.input :no_more, label: "Un dérnier mot ? (50 mots max", placeholder: "Descrpition", as: :text, input_html: {rows: '6'} %>
+  <% end %>
+  <%= f.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label:"Secteurs souhaités (max: 5)" %>
+
+  <%= f.submit "Continuer", class: "b-btn" %>
+<% end %>
+<%= link_to "Précedent", previous_wizard_path, class: "b-btn-link" %>
+

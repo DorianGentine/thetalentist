@@ -7,6 +7,10 @@ class Talents::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
+
+    # supprimer les string vide
+    # params['talent']['hobbies'].delete("")
+
     @talent = Talent.new(talent_params)
     if @talent.save
 
@@ -17,6 +21,9 @@ class Talents::RegistrationsController < Devise::RegistrationsController
       raise
     end
   end
+
+# faire update dans ici
+
 
   private
 
@@ -31,7 +38,7 @@ class Talents::RegistrationsController < Devise::RegistrationsController
       :cv,
       :linkedin,
       :job_ids,
-      talent_hobbies_attribbutes: [hobby_id: []]
+      hobby_ids: []
       )
   end
 end

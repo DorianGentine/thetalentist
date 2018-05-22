@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<h2>Qui se cache derrière ce Talent?</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
@@ -14,14 +14,9 @@
     <%= f.input :cv %>
     <%= f.input :cv_cache, as: :hidden %>
     <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: "Linkedin" %>
-    <%= f.collection_select( :job_ids, Job.all, :id, :title)%>
+    <%= f.input :job_ids, collection:Job.all, label: "Secteur actuel", placeholder:'Marketing'%>
+    <%= f.input :hobby_ids, collection: Hobby.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label:"Loisir (max: 5)" %>
   </div>
-
-
-  <%= f.simple_fields_for :talent_hobbies do |talent_hobby| %>
-    <%= talent_hobby.input :hobbies, collection: Hobby.all, input_html: { class:"select2", multiple: "multiple"}, multiple: true %>
-  <% end %>
-
 
   <div class="form-actions">
     <%= link_to 'Précédent', root_path %>
