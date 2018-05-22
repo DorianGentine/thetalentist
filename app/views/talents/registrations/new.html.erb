@@ -17,15 +17,10 @@
     <%= f.collection_select( :job_ids, Job.all, :id, :title)%>
   </div>
 
-  <%= f.simple_fields_for :hobbies do |hobby| %>
-    <%= hobby.input :title, html: { id: :hobby } %>
-    <%= hobby.submit html: { id: :filldetails, onclick: "addFields()" } %>
+
+  <%= f.simple_fields_for :talent_hobbies do |talent_hobby| %>
+    <%= talent_hobby.input :hobbies, collection: Hobby.all, input_html: { class:"select2", multiple: "multiple"}, multiple: true %>
   <% end %>
-
-
-
-
-
 
 
   <div class="form-actions">
@@ -35,9 +30,10 @@
 <% end %>
 
 <%= render "talents/shared/links" %>
+<!--
+    <#%= hobby.submit html: { id: :filldetails, onclick: "addFields()" } %>
 
-
-
+ -->
 <style>
   .form-inputs {
     width: 400px;

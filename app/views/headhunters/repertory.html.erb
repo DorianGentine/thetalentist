@@ -29,64 +29,16 @@
 
   <!-- Division pour résultats de recherche -->
   <div class="search-results">
-    <p><strong>X Profils</strong> correspondent à votre recherche '<em>DATA</em>'</p>
+    <p><strong><%= @talents.count %> Profils</strong> correspondent à votre recherche '<em>DATA</em>'</p>
   </div>
 
   <!-- Répertoire des talents -->
   <div class="cards-repertory">
-    <div class="talent-card">
 
-      <div class="card-title">
-          <p>LE TALENT</p>
-      </div>
-
-      <div class="illu-card"></div>
-
-      <div class="border">
-
-        <div class="talent-job">
-          <h2>Chef de projet web / mobile</h2>
-        </div>
-
-        <div class="talent-info">
-          <div class="talent-city talent-info-item card-dispsition">
-            <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
-            <p>Paris</p>
-          </div>
-          <div class="talent-btob talent-info-item card-dispsition">
-            <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
-            <p>BtoB</p>
-          </div>
-          <div class="talent-cdi talent-info-item card-dispsition">
-            <p class="icon icon-info"><i class="fas fa-briefcase"></i></p>
-            <p>CDI</p>
-          </div>
-        </div>
-
-        <div class="talent-school-1 card-dispsition">
-          <p class="icon"><i class="fas fa-graduation-cap"></i></p>
-          <p>HEC, Master entrepreneuriat - 2015</p>
-        </div>
-
-        <div class="talent-school-2 card-dispsition">
-          <p class="icon"><i class="fas fa-graduation-cap"></i></p>
-          <p>Centrale, Master entrepreneuriat - 2015</p>
-        </div>
-
-        <div class="talent-description">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. Tempor incididunt ut labore et dolore magna aliqua eiusmod tempor incididunt.</p>
-        </div>
-
-        <div class="talent-update card-dispsition">
-          <p class="icon"><i class="far fa-clock"></i></p>
-          <p>Mise à jour le 5 avril 2018</p>
-        </div>
-
-        <div class="talent-more">
-          <p onclick="openModal()" class="hover-shadow">En savoir plus <i class="fas fa-angle-right"></i></p>
-        </div>
-      </div>
-    </div>
+    <% @talents.each do |talent| %>
+      <%= render 'talent-card', talent: talent %>
+    <% end %>
+    
   </div>
 
   <!-- TEST LIGHTBOX -->

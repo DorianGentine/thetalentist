@@ -5,6 +5,7 @@ class StepsTalentInfosController < ApplicationController
   before_action :find_talent, only: [:show, :update]
 
   def show
+    # @talent_formation = TalentFormation.new
     @talent.talent_formations.build
     @talent.experiences.build
     render_wizard
@@ -15,8 +16,8 @@ class StepsTalentInfosController < ApplicationController
     # Si tu as un problème de validation pour créer talent
     # @talent.status = step.to_s
     # @talent.status = 'active' if step == steps.last
+      raise
     if @talent.update(talent_params)
-    raise
       render_wizard @talent
     else
       # si l'update ne fonctionne pas, il faut render l'étape sur laquelle tu te trouves donc tu as besoin de la connaître

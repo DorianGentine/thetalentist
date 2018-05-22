@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_08_141602) do
+ActiveRecord::Schema.define(version: 2018_05_21_092410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,12 @@ ActiveRecord::Schema.define(version: 2018_05_08_141602) do
     t.index ["email"], name: "index_headhunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_headhunters_on_reset_password_token", unique: true
     t.index ["startup_id"], name: "index_headhunters_on_startup_id"
+  end
+
+  create_table "hobbies", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -145,6 +151,15 @@ ActiveRecord::Schema.define(version: 2018_05_08_141602) do
     t.string "title"
     t.index ["formation_id"], name: "index_talent_formations_on_formation_id"
     t.index ["talent_id"], name: "index_talent_formations_on_talent_id"
+  end
+
+  create_table "talent_hobbies", force: :cascade do |t|
+    t.bigint "talent_id"
+    t.bigint "hobby_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hobby_id"], name: "index_talent_hobbies_on_hobby_id"
+    t.index ["talent_id"], name: "index_talent_hobbies_on_talent_id"
   end
 
   create_table "talent_jobs", force: :cascade do |t|
@@ -271,6 +286,8 @@ ActiveRecord::Schema.define(version: 2018_05_08_141602) do
   add_foreign_key "next_aventures", "talents"
   add_foreign_key "talent_formations", "formations"
   add_foreign_key "talent_formations", "talents"
+  add_foreign_key "talent_hobbies", "hobbies"
+  add_foreign_key "talent_hobbies", "talents"
   add_foreign_key "talent_jobs", "jobs"
   add_foreign_key "talent_jobs", "talents"
   add_foreign_key "talent_keywords", "keywords"
