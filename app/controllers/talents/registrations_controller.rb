@@ -13,7 +13,6 @@ class Talents::RegistrationsController < Devise::RegistrationsController
 
     @talent = Talent.new(talent_params)
     if @talent.save
-
       session[:talent_id] = @talent.id
       redirect_to steps_talent_infos_path
     else

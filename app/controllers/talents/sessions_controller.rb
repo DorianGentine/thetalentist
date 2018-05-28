@@ -4,17 +4,17 @@ class Talents::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  def new
-    super
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource/sign_in
-  def create
-    super
-    # raise
-    session[:talent_id] = @talent.id
-    redirect_to talent_path
-  end
+  # def create
+  #   super
+  #   # raise
+  #   session[:talent_id] = @talent.id
+  #   redirect_to talent_path
+  # end
 
   # DELETE /resource/sign_out
   # def destroy
