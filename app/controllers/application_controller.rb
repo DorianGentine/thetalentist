@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # TODO modifier authenticate_talent pour tous les users
-  before_action :authenticate_talent!
+  before_action :authenticate!
+  before_action :current_user
 
   # Pundit: white-list approach.
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
@@ -18,6 +19,15 @@ class ApplicationController < ActionController::Base
   # end
 
   private
+
+  def authenticate!
+    authenticate_talent! || authenticate_headhunter!
+    @current_user = talent_signed_in? ? current_talent : current_headhunter
+  end
+
+  def current_user
+    @current_user
+  end
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/

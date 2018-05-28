@@ -53,4 +53,8 @@ class Talent < ApplicationRecord
   # link with pdf_uploader
   mount_uploader :cv, PdfUploader
 
+  def is_connected_to?(headhunter)
+    # vérifier que self est connecté à headhunter
+  end
+
 end
