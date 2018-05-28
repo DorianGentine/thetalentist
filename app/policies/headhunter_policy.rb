@@ -6,6 +6,7 @@ class HeadhunterPolicy < ApplicationPolicy
   end
 
 
+
   def repertory
     record.headhunter == headhunter
     true
