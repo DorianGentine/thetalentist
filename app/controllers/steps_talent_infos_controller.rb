@@ -7,6 +7,11 @@ class StepsTalentInfosController < ApplicationController
   skip_before_action :current_user
 
 
+  skip_before_action :authenticate!, only: [ :show, :create ]
+  skip_before_action :current_user, only: [ :show, :create ]
+
+
+
   def show
     # @talent_formation = TalentFormation.new
     @talent.talent_formations.build
@@ -37,6 +42,7 @@ class StepsTalentInfosController < ApplicationController
     @talent = Talent.find(session[:talent_id])
     authorize @talent
     # va chercher l'autorisation dans talent_policy.rb dans show? ou dans update? (pas besoin de méthode find_talent?)
+
   end
 
   def talent_params

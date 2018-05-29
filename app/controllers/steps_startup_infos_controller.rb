@@ -5,11 +5,19 @@ class StepsStartupInfosController < ApplicationController
   before_action :find_headhunter, only: [:show, :update]
 
   def show
+    @startup = Startup.new
     render_wizard
   end
 
   def update
-
+    @startup = Startup.new(startup_params)
+    @startup.save
+    @headhunter.startup << @startup.id
+    if @headhunter.update
+      render_wizard @headhunter
+    else
+      render "steps_startup_infos/#{step}"
+    end
   end
 
 private
@@ -18,5 +26,9 @@ private
     @headhunter = Headhunter.find(session[:headhunter_id])
   end
 
+  def startup_params
+    params.require(:startup).permit()
+
+  end
 
 end
