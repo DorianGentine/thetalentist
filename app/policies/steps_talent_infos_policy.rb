@@ -7,13 +7,25 @@ class StepsTalentInfosPolicy < ApplicationPolicy
 
   def show?
     true
+    user == record
+  end
+
+  def index
+    true
   end
 
   def update?
     # définir qui a le droit d'updater
     # user = l'utilisateur connecté
     # record = le talent
+
     user == record
+  end
+
+private
+
+  def is_owner?
+    user == record.user
   end
 
 end
