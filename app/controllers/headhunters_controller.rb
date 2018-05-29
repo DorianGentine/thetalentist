@@ -2,8 +2,9 @@ class HeadhuntersController < ApplicationController
 
 
   def repertory
+    @headhunter = Headhunter.find(session[:headhunter_id])
     @talents = Talent.all.order(updated_at: :desc)
-    authorize @talent
+    authorize @headhunter
   end
 
   def show

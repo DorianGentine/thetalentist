@@ -24,7 +24,7 @@ class HeadhunterPolicy < ApplicationPolicy
 
 
   def repertory?
-    record.headhunter == headhunter
+    user == record
     true
   end
 end
