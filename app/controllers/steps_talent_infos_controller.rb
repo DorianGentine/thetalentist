@@ -4,6 +4,11 @@ class StepsTalentInfosController < ApplicationController
   # TODO: before actions add find_talent for show and update
   before_action :find_talent, only: [:show, :update]
 
+  skip_before_action :authenticate!, only: [ :show, :create ]
+  skip_before_action :current_user, only: [ :show, :create ]
+
+
+
   def show
     # @talent_formation = TalentFormation.new
     @talent.talent_formations.build
@@ -11,7 +16,6 @@ class StepsTalentInfosController < ApplicationController
     @talent.experiences.build
     @talent.next_aventures.build
 
-    authorize @talent
     render_wizard
   end
 
@@ -34,6 +38,7 @@ class StepsTalentInfosController < ApplicationController
 
   def find_talent
     @talent = Talent.find(session[:talent_id])
+
   end
 
   def talent_params
@@ -50,7 +55,6 @@ class StepsTalentInfosController < ApplicationController
       techno_ids: [],
       sector_ids: []
     )
-
   end
 
 end

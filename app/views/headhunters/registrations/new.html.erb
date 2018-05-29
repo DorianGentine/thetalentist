@@ -11,8 +11,7 @@
     <%= f.input :password_confirmation, required: true %>
 
     <!-- add table belong -->
-    <%= f.collection_select :startup_id, Startup.all, :id, :name %>
-
+    <%= f.input :startup_id, collection: Startup.all, input_html: { class:"select2"}, :include_blank => "Autre", label:"Votre entreprise"  %>
   </div>
 
   <div class="form-actions">

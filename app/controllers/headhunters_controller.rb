@@ -10,5 +10,4 @@ class HeadhuntersController < ApplicationController
     @headhunter = Headhunter.find(params[:id])
     authorize @headhunter
   end
-
 end

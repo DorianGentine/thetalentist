@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate!
-    authenticate_talent! || authenticate_headhunter!
+   :authenticate_talent! || :authenticate_headhunter!
     @current_user = talent_signed_in? ? current_talent : current_headhunter
   end
 

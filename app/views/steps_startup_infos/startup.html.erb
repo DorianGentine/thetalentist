@@ -1,1 +1,21 @@
-<h1>We in</h1>
+<h2>Renseigner votre entreprise ?</h2>
+<%= simple_form_for @startup, url: wizard_path, method: :put do |f| %>
+
+  <%= f.input :name %>
+  <%= f.input :year_of_creation %>
+  <%= f.input :collaborators %>
+  <%= f.input :parity %>
+  <%= f.input :average_age %>
+  <%= f.input :turnover, placeholder: "200 k€ ou +5%" %>
+  <%= f.input :link %>
+  <%= f.input :address %>
+  <%= f.input :zip_code %>
+  <%= f.input :city %>
+
+
+  <%= f.submit "Créer", class: "b-btn" %> <br>
+<% end %>
+
+
+<%= link_to "Précedent", previous_wizard_path, class: "b-btn-link" %>
+
