@@ -163,3 +163,23 @@
     color: white;
   }
 }
+
+
+@media screen and (max-width: 991px) {
+  .filter{
+    justify-content: center;
+    .filter-category{
+      border-right: none;
+      .fa-angle-down{
+        color: $green;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 960px){
+  .cards-repertory{
+    justify-content: center;
+  }
+}
