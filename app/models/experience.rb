@@ -3,7 +3,5 @@ class Experience < ApplicationRecord
 
   validates :position, presence: true
   validates :company_name, presence: true
-  validates :starting, presence: true
-
 
 end

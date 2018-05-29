@@ -31,6 +31,7 @@ private
   end
 
   def startup_params
+    raise
     params.require(:startup).permit()
 
   end
