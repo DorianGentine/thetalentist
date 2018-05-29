@@ -1,8 +1,11 @@
 class StepsTalentInfosController < ApplicationController
   include Wicked::Wizard
   steps :formations, :experiences, :next_aventure
-  # TODO: before actions add find_talent for show and update
+
   before_action :find_talent, only: [:show, :update]
+  skip_before_action :authenticate!
+  skip_before_action :current_user
+
 
   def show
     # @talent_formation = TalentFormation.new
@@ -10,8 +13,6 @@ class StepsTalentInfosController < ApplicationController
     @talent.talent_languages.build
     @talent.experiences.build
     @talent.next_aventures.build
-
-    authorize @talent
     render_wizard
   end
 
@@ -34,6 +35,8 @@ class StepsTalentInfosController < ApplicationController
 
   def find_talent
     @talent = Talent.find(session[:talent_id])
+    authorize @talent
+    # va chercher l'autorisation dans talent_policy.rb dans show? ou dans update? (pas besoin de méthode find_talent?)
   end
 
   def talent_params
@@ -50,9 +53,5 @@ class StepsTalentInfosController < ApplicationController
       techno_ids: [],
       sector_ids: []
     )
-
   end
-
 end
-
-
