@@ -1,7 +1,7 @@
 /* The Modal (background) */
 .modal {
   display: block; /* !!!!! remettre display: none; !!!!*/ /* Hidden by default */
-  padding-top: 100px; /* Location of the box */
+  padding: 2% 4%; /* Location of the box */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
@@ -11,29 +11,225 @@
   position: relative;
   background-color: #fefefe;
   margin: auto;
-  padding: 0;
+  padding: 0 0 20px 0;
   border: 1px solid #888;
-  width: 80%;
+  width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   animation-name: animatetop;
   animation-duration: 0.4s;
-  .modal-header{
-    background-color: $violet;
-    padding: 10px 45px;
-    height: 120px;
+}
+
+.modal-header{
+  background-color: $violet;
+  padding: 10px 35px;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h3, p, span {
+    color: white;
+    opacity: 1;
+    margin: 0;
+  }
+  h3{
+    flex-grow: 2;
+    font-size: 35px;
+    font-weight: 900;
+  }
+  .contact-btn{
+    width: 140px;
+    height: 40px;
+    margin-right: 40px;
+    background-color: $green;
+    border-radius: 25px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    h3, p, span {
+    justify-content: center;
+  }
+}
+.modal-header:before, .modal-header:after {
+  display: none;
+}
+
+.modal-body{
+  padding: 0 30px;
+  i{
+    margin-right: 6px;
+  }
+}
+
+.upper-body{
+  width: 100%;
+  height: 192px;
+  display: flex;
+  .upper-left-body{
+    width: 60%;
+    height: 100%;
+    padding: 30px 30px 30px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .talent-school{
+      width: 100%;
+      height: 56px;
+      border: 2px solid $violet;
+      display: flex;
+      justify-content: space-between;
+      .talent-school-item{
+        margin: 0;
+        height: 100%;
+        font-size: 1.2vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+      }
+      .blue-background{
+        color: white;
+        background-color: rgba(1, 10, 80, 0.55);
+      }
+    }
+  }
+  .upper-right-body{
+    height: 100%;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .talent-metier{
+      font-size: 50px;
+      color: $green;
+      font-weight: bold;
+      margin-right: 10%;
+      z-index: 1;
+    }
+    .illu-modal{
+      align-self: flex-start;
+      top: 0;
+      right: -30px;
+    }
+  }
+}
+
+
+
+.lower-body{
+  width: 100%;
+  height: 430px;
+  display: flex;
+  justify-content: space-between;
+  .lower-body-item{
+    height: 100%;
+    width: 29%;
+    padding: 30px 0;
+    h4{
+      color: $black;
+      font-size: 26px;
+      font-weight: 900;
+      margin: 0 0 40px 0;
+    }
+    p{
+      font-size: 16px;
+      text-align: justify;
+    }
+  }
+  .lower-body-item-content{
+    height: calc(100% - 69px);
+  }
+  .lower-left-body{
+    h5{
+      color: $green;
+      font-size: 16px;
+      font-weight: 600;
+      font-style: oblique;
+      margin: 0;
+    }
+    p{
+      margin-bottom: 30px;
+    }
+  }
+  .lower-middle-body{
+    .lower-body-item-content{
+      display: flex;
+      .talent-experiences{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        p{
+          margin: 0;
+          font-weight: 600;
+        }
+        .experience-post{
+          text-transform: uppercase;
+        }
+        .experience-entreprise{
+          font-style: oblique;
+        }
+        .experience-duree{
+          font-weight: 300;
+        }
+      }
+    }
+  }
+  .lower-right-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    .talent-competences{
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -10px;
+      p{
+        font-size: 14px;
+        color: white;
+        background-color: #73789E;
+        padding: 2px 20px;
+        margin: 0 10px 20px 10px;
+        border-radius: 20px;
+        text-transform: capitalize;
+      }
+    }
+  }
+  .contact-btn{
+    display: none;
+    width: 140px;
+    height: 40px;
+    background-color: $green;
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    p{
       color: white;
-      opacity: 1;
       margin: 0;
     }
   }
-  .modal-header:before, .modal-header:after {
-    display: none;
-  }
 }
+
+/* CSS pour barre pointée */
+.barre-pointee{
+  height: calc( 100% - 5px);
+  width: 2px;
+  background-color: $green;
+  margin: 5px 0 0 6px;
+  border-top: 0;
+}
+.point-barre-pointee{
+  height: 12px;
+  width: 12px;
+  background-color: $green;
+  border: 1px solid white;
+  border-radius: 20px;
+  z-index: 1;
+  margin: 5px 10px 0 0;
+}
+.placement-point-barre{
+  display: flex;
+  position: relative;
+  left: -7px;
+}
+
 
 /* Add Animation */
 @keyframes animatetop {
@@ -43,10 +239,12 @@
 
 /* The Close Button */
 .close {
-  color: black;
+  height: 42px;
+  width: 42px;
   float: right;
   margin-right: 25px;
-  font-weight: bold;
+  font-weight: 100;
+  font-size: 42px;
 }
 
 .close:hover,
@@ -54,4 +252,84 @@
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1095px) {
+  .upper-body{
+    .upper-left-body{
+      width: 100%;
+      padding-right: 0;
+      .talent-school .talent-school-item{
+        font-size: 1.8vw;
+      }
+    }
+    .upper-right-body{
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .lower-body{
+    flex-wrap: wrap;
+    height: 630px;
+    .lower-body-item{
+      width: 45%;
+      height: 430px;
+    }
+    .lower-right-body{
+      width: 100%;
+      height: 200px;
+      flex-direction: row;
+      .lower-right-body-item{
+        width: 45%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 916px) {
+  .modal-header .contact-btn {
+    display: none;
+  }
+  .lower-body{
+    height: 800px;
+   .contact-btn {
+      display: flex
+    }
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .upper-body{
+    height: 220px;
+    .upper-left-body{
+      .talent-info{
+        flex-wrap: wrap;
+        .talent-info-item-33{
+          width: 33%;
+        }
+      }
+      .talent-school{
+        height: 70px;
+        flex-direction: column;
+        .talent-school-item{
+          font-size: calc(12px + 0.5vw);
+        }
+      }
+    }
+  }
+  .lower-body{
+    height: 1122px;
+    .lower-body-item{
+      width: 100%;
+      height: 355px;
+    }
+    .lower-right-body{
+      flex-direction: column;
+      .lower-right-body-item{
+        width: 100%;
+      }
+    }
+  }
 }
