@@ -1,23 +1,22 @@
 class Talents::RegistrationsController < Devise::RegistrationsController
+  skip_before_action :authenticate!
+  skip_before_action :current_user
 
   def new
-    super
+    @talent = Talent.new
+    authorize @talent
     @talent_hobby = TalentHobby.new
     @talent.talent_hobbies.build.build_hobby
   end
 
   def create
-
-    # supprimer les string vide
-    # params['talent']['hobbies'].delete("")
-
     @talent = Talent.new(talent_params)
+    authorize @talent
     if @talent.save
       session[:talent_id] = @talent.id
-      redirect_to steps_talent_infos_path
+      redirect_to steps_talent_info_path(:formations)
     else
       render :new
-      raise
     end
   end
 

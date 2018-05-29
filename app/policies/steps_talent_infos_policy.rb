@@ -1,31 +1,21 @@
-class StepsTalentInfosPolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      scope
-    end
-  end
+# A SUPPRIMER, PUNDIT NE FAIT APPEL QU'AU TALENT POLICY MEME SI CONTROLLER DIFFERENT
 
-  def show?
-    true
-    user == record
-  end
+# class StepsTalentInfosPolicy < ApplicationPolicy
+#   class Scope < Scope
+#     def resolve
+#       scope
+#     end
+#   end
 
-  def index
-    true
-  end
+#   def show?
+#     true
+#   end
 
-  def update?
-    # définir qui a le droit d'updater
-    # user = l'utilisateur connecté
-    # record = le talent
+#   def update?
+#     # définir qui a le droit d'updater
+#     # user = l'utilisateur connecté
+#     # record = le talent
+#     user == record
+#   end
 
-    user == record
-  end
-
-private
-
-  def is_owner?
-    user == record.user
-  end
-
-end
+# end
