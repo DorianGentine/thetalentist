@@ -5,7 +5,15 @@ class HeadhunterPolicy < ApplicationPolicy
     end
   end
 
-  def show
+  def new?
+    true
+  end
+
+  def create?
+    true
+  end
+
+  def show?
     true
     # user = l'utilisateur connecté : soit un talent / soit un headhunter / soit un talentist
     # record = un headhunter
@@ -15,7 +23,7 @@ class HeadhunterPolicy < ApplicationPolicy
   end
 
 
-  def repertory
+  def repertory?
     record.headhunter == headhunter
     true
   end
