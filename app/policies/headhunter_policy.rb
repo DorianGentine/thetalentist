@@ -12,6 +12,10 @@ class HeadhunterPolicy < ApplicationPolicy
   def create?
     true
   end
+  def update?
+    user == record
+    true
+  end
 
   def show?
     true

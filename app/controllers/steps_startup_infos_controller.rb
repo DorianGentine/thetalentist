@@ -15,9 +15,8 @@ class StepsStartupInfosController < ApplicationController
   def update
     @startup = Startup.new(startup_params)
     @startup.save
-    @headhunter.startup << @startup.id
-    if @headhunter.update
-      render_wizard @headhunter
+    if @headhunter.update(startup_id: @startup.id)
+      redirect_to repertoire_path
     else
       render "steps_startup_infos/#{step}"
     end
@@ -31,8 +30,16 @@ private
   end
 
   def startup_params
-    raise
-    params.require(:startup).permit()
+    params.require(:startup).permit(
+      :name,
+      :year_of_creation,
+      :collaborators,
+      :parity,
+      :average_age,
+      :turnover,
+      :link,
+      :address
+      )
 
   end
 
