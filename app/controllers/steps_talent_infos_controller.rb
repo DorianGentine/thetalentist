@@ -10,6 +10,8 @@ class StepsTalentInfosController < ApplicationController
     @talent.talent_languages.build
     @talent.experiences.build
     @talent.next_aventures.build
+
+    authorize @talent
     render_wizard
   end
 
@@ -18,6 +20,7 @@ class StepsTalentInfosController < ApplicationController
     # Si tu as un problème de validation pour créer talent
     # @talent.status = step.to_s
     # @talent.status = 'active' if step == steps.last
+
     if @talent.update(talent_params)
       render_wizard @talent
     else

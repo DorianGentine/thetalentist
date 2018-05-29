@@ -16,6 +16,8 @@
     <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: "Linkedin" %>
     <%= f.input :job_ids, collection:Job.all, label: "Secteur actuel", placeholder:'Marketing'%>
     <%= f.input :hobby_ids, collection: Hobby.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label:"Loisir (max: 5)" %>
+    <!-- TODO button -->
+    <%= f.button :submit, 'Ajouter +' %>
   </div>
 
   <div class="form-actions">

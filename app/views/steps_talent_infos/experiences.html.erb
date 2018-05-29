@@ -8,6 +8,8 @@
     <%= u.input :currently %>
     <%= u.input :starting, as: :date, html5: true, label: "De" %>
     <%= u.input :years, as: :date, html5: true, label: "À"  %>
+    <!-- TODO button -->
+    <%= u.button :submit, 'Ajouter une expérience +' %>
   <% end %>
 
   <%= f.submit "Continuer", class: "b-btn" %>
