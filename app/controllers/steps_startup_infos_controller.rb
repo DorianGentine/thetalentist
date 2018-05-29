@@ -3,6 +3,9 @@ class StepsStartupInfosController < ApplicationController
   steps :startup
 
   before_action :find_headhunter, only: [:show, :update]
+  skip_before_action :authenticate!
+  skip_before_action :current_user
+
 
   def show
     @startup = Startup.new
@@ -24,6 +27,7 @@ private
 
   def find_headhunter
     @headhunter = Headhunter.find(session[:headhunter_id])
+    authorize @headhunter
   end
 
   def startup_params

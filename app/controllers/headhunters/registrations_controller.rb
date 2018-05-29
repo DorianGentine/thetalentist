@@ -1,18 +1,23 @@
 # frozen_string_literal: true
 
 class Headhunters::RegistrationsController < Devise::RegistrationsController
+  skip_before_action :authenticate!
+  skip_before_action :current_user
 
-
-
+def new
+  @headhunter = Headhunter.new
+  authorize @headhunter
+end
 
 def create
   @headhunter = Headhunter.new(headhunter_params)
+  authorize @headhunter
 
   if @headhunter.startup == nil
 
     if @headhunter.save(validate: false)
       session[:headhunter_id] = @headhunter.id
-      redirect_to steps_startup_infos_path
+      redirect_to steps_startup_infos_path(:startup)
     else
       render :new
     end

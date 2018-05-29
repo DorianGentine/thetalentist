@@ -6,12 +6,6 @@ class StepsTalentInfosController < ApplicationController
   skip_before_action :authenticate!
   skip_before_action :current_user
 
-
-  skip_before_action :authenticate!, only: [ :show, :create ]
-  skip_before_action :current_user, only: [ :show, :create ]
-
-
-
   def show
     # @talent_formation = TalentFormation.new
     @talent.talent_formations.build
