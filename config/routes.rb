@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     passwords: 'headhunters/passwords',
     registrations: 'headhunters/registrations'
   }
-  resources :headhunters, only: [:show, :update]
+  resources :headhunters, only: [:show, :update, :index]
   # show is to display the profil and update to edit it
   # le repertoire est la où on affiche tous les talents
   get 'repertoire', to: "headhunters#repertory"
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     passwords: 'talents/passwords',
     registrations: 'talents/registrations'
   }
-  resources :talents, only: [:show, :update, :index]
+  resources :talents, only: [:show, :update]
 
 
 

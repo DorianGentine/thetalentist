@@ -17,7 +17,7 @@ def create
 
     if @headhunter.save(validate: false)
       session[:headhunter_id] = @headhunter.id
-      redirect_to steps_startup_infos_path(:startup)
+      redirect_to steps_startup_info_path(:startup)
     else
       render :new
     end
@@ -26,11 +26,9 @@ def create
 
     if @headhunter.save
       session[:headhunter_id] = @headhunter.id
-      raise
       redirect_to repertoire_path
     else
       render :new
-      raise
     end
 
   end
