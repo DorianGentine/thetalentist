@@ -47,3 +47,6 @@ gem 'jquery-rails'
 # add picture and pdf file
 gem 'cloudinary'
 gem 'carrierwave', '~> 1.2'
+
+# Pour la fonction adresse de la startup
+gem "geocoder"
