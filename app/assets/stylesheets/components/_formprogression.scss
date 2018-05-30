@@ -1,0 +1,61 @@
+.form-progression{
+  padding: 0 50px;
+  margin: 80px 0;
+  hr{
+    height: 2px;
+    width: 100%;
+    background-color: $green;
+    margin: 18px 0 0 0;
+  }
+  .form-progression-items{
+    position: relative;
+    top: -18px;
+    display: flex;
+    justify-content: space-around;
+    .form-progression-item{
+      display: flex;
+      flex-direction: column;
+      .point-barre-pointee{
+        width: 35.5px;
+        height: 35.5px;
+        border: 7px solid white;
+        margin: 0 0 0 -7px;
+      }
+      .progression-step{
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        p{
+          margin: 0 10px 0 0;
+          font-weight: 900;
+        }
+        .step-number{
+          font-size: 36px;
+          p{
+            color: $green;
+          }
+        }
+        .step-name{
+          font-size: 12px;
+          text-transform: uppercase;
+        }
+      }
+    }
+    .progression-past{
+      .point-barre-pointee{
+        background-color: $black;
+      }
+      .progression-step .step-number p{
+        color: $black !important ;
+      }
+    }
+    .progression-next{
+      .point-barre-pointee{
+        background-color: $gray;
+      }
+      .progression-step p{
+        color: $gray !important ;
+      }
+    }
+  }
+}

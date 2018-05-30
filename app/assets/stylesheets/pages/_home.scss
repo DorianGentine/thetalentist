@@ -1,6 +1,120 @@
 // Specific CSS for your home-page
 
-
+.home-container{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  .home-left{
+    width: 50%;
+    margin: 50px 0;
+    padding: 0 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    h1{
+      font-size: 40px;
+      font-weight: 900;
+      color: $black;
+      strong{
+        color: $green;
+      }
+    }
+    h2{
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 80px;
+    }
+    .home-connexion{
+      width: 80%;
+      .connexion-item{
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        padding: 6px 12px;
+        margin: 20px 0;
+        p{
+          margin: 0;
+        }
+      }
+      .connexion-item:focus {
+        border: solid #4ECCA3 1px !important;
+        box-shadow: 0 0 8px rgba(78, 204, 163, 0.6);
+      }
+      .connexion-btns{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .mdp-oublie{
+          font-weight: 600;
+          font-size: 16px;
+        }
+        .btn-connexion{
+          width: 170px;
+          height: 40px;
+          background-color: $green;
+          color: white;
+          font-weight: 600;
+          font-size: 21px;
+          border-radius: 25px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      .alternative-connexion{
+        margin: 20px 0;
+        hr{
+          width: 100%;
+          height: 2px;
+          background-color: $violet;
+          margin: 0;
+          border-top: 0
+        }
+        p{
+          width: 26%;
+          font-size: 16px;
+          font-weight: 600;
+          color: $violet;
+          background-color: white;
+          position: relative;
+          z-index: 1;
+          top: -12px;
+          margin: auto;
+          text-align: center;
+        }
+      }
+      .inscription-items{
+        display: flex;
+        justify-content: space-between;
+        .btn-inscription{
+          width: 45%;
+          border: 2px solid $green;
+          border-radius: 4px;
+          background-color: white;
+          text-transform: uppercase;
+          font-size: 16px;
+          font-weight: 900;
+          color: $green;
+          display: flex;
+          justify-content: center;
+        }
+        .btn-inscription:hover{
+          color: white;
+          background-color: $green;
+          transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
+        }
+      }
+    }
+  }
+  .home-right{
+    width: 50%;
+    background-image: url("00_Icon.png");
+    background-position: center;
+    background-size: cover;
+  }
+}
 
 // Faire un parcours generale des text-align:
 h1 {

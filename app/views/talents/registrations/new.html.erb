@@ -1,46 +1,100 @@
-<h2>Qui se cache derrière ce Talent?</h2>
+<%= render 'shared/navbar' %>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-  <h3>Info de base</h3>
-  <div class="form-inputs">
-    <%= f.input :firstname, required: true, autofocus: true, placeholder: "Prénom", label: "Nom" %>
-    <%= f.input :name, required: true, autofocus: true, placeholder: "Nom", label: false %>
-    <%= f.input :email, required: true, autofocus: true, placeholder: "exemple@gmail.com", label: "Compte"  %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", label: false %>
-    <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false %>
-    <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: "Téléphone" %>
-    <%= f.input :city, required: true, autofocus: true, placeholder: "Ville", label: false %>
-    <%= f.input :cv %>
-    <%= f.input :cv_cache, as: :hidden %>
-    <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: "Linkedin" %>
-    <%= f.input :job_ids, collection:Job.all, label: "Secteur actuel", placeholder:'Marketing'%>
-    <%= f.input :hobby_ids, collection: Hobby.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label:"Loisir (max: 5)" %>
-    <!-- TODO button -->
-    <%= f.button :submit, 'Ajouter +' %>
+<div class="form-container">
+
+  <div class="form-progression">
+    <hr>
+    <div class="form-progression-items">
+      <div class="form-progression-item progression-acitve">
+        <div class="point-barre-pointee"></div>
+        <div class="progression-step">
+          <div class="step-number"><p>01</p></div>
+          <div class="step-name"><p>Informations<br>générales</p></div>
+        </div>
+      </div>
+      <div class="form-progression-item progression-next">
+        <div class="point-barre-pointee"></div>
+        <div class="progression-step">
+          <div class="step-number"><p>02</p></div>
+          <div class="step-name"><p>Formation &<br>compétences</p></div>
+        </div>
+      </div>
+      <div class="form-progression-item progression-next">
+        <div class="point-barre-pointee"></div>
+        <div class="progression-step">
+          <div class="step-number"><p>03</p></div>
+          <div class="step-name"><p>Expériences<br>Professionnelles</p></div>
+        </div>
+      </div>
+      <div class="form-progression-item progression-next">
+        <div class="point-barre-pointee"></div>
+        <div class="progression-step">
+          <div class="step-number"><p>04</p></div>
+          <div class="step-name"><p>Ma prochaine<br>aventure</p></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= link_to 'Précédent', root_path %>
-    <%= f.button :submit, "Suivant" %>
-  </div>
-<% end %>
+  <h2 class="form-titre-page"><i class="far fa-id-badge"></i> Qui se cache derrière <strong>ce Talent</strong> ?</h2>
 
-<%= render "talents/shared/links" %>
-<!--
-    <#%= hobby.submit html: { id: :filldetails, onclick: "addFields()" } %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <div class="form-inputs-1">
+        <div class="form-line form-nom">
+          <p class="form-label requis">Nom</p>
+          <%= f.input :firstname, required: true, autofocus: true, placeholder: "Prénom", label: false, :input_html => { :class => "prenom"} %>
+          <%= f.input :name, required: true, autofocus: true, placeholder: "Nom", label: false %>
+        </div>
+        <div class="form-line form-compte">
+          <p class="form-label requis">Compte</p>
+          <%= f.input :email, required: true, autofocus: true, placeholder: "exemple@gmail.com", label: false  %>
+          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", label: false %>
+          <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false %>
+        </div>
+        <div class="form-line form-phone">
+          <p class="form-label requis">Téléphone</p>
+          <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: false %>
+        </div>
+        <div class="form-line form-ville">
+          <p class="form-label requis">Adresse</p>
+          <%= f.input :city, required: true, autofocus: true, placeholder: "Ville", label: false %>
+        </div>
+      </div>
+      <div class="form-inputs-2">
+        <div class="form-line">
+          <p class="form-label">CV</p>
+          <%= f.input :cv, label: false %>
+          <%= f.input :cv_cache, as: :hidden %>
+          <p class="form-label">Secteur actuel</p>
+          <%= f.input :job_ids, collection:Job.all, label: false, placeholder:'Marketing'%>
+        </div>
+        <div class="form-line">
+          <p class="form-label">Linkedin</p>
+          <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: false %>
+          <p class="form-label form-hobby">Loisir <em>(max.5)</em></p>
+          <%= f.input :hobby_ids, collection: Hobby.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label: false %>
+          <!-- TODO button -->
+          <%= f.button :submit, 'Ajouter +', { :class => "form-hobby-add"} %>
+        </div>
+      </div>
+    </div>
 
- -->
-<style>
-  .form-inputs {
-    width: 400px;
-    text-align: center;
-    margin: auto;
-  }
-  h3 {
-    text-align: center;
-  }
-</style>
+    <div class="form-actions">
+      <%= link_to 'Précédent', root_path, { :class => "form-btn form-btn-precedent"} %>
+      <%= f.button :submit, "Suivant", { :class => "form-btn form-btn-suivant"} %>
+    </div>
+  <% end %>
+
+  <%= render "talents/shared/links" %>
+  <!--
+      <#%= hobby.submit html: { id: :filldetails, onclick: "addFields()" } %>
+
+   -->
+</div>
+
+<%= render 'shared/footer' %>
 
 
 
