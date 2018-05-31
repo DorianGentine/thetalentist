@@ -1,4 +1,3 @@
-<%= render 'shared/modal' %>
 <%= render "shared/navbar" %>
 
 <div class="filter">
@@ -53,6 +52,7 @@
 
     <% @talents.each do |talent| %>
       <%= render 'talent-card', talent: talent %>
+      <%= render 'shared/modal', talent: talent %>
     <% end %>
 
   </div>
