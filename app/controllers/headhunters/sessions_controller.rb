@@ -9,9 +9,10 @@ class Headhunters::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+    headhunter_path(resource)
+  end
 
   # DELETE /resource/sign_out
   # def destroy

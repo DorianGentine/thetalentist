@@ -2,3 +2,15 @@
 
 
 
+<%= form_tag("/talents/2", method: 'get', remote: true, class: "form-stuff" ) do %>
+
+  <fieldset class="form-group">
+    <input type="hidden" name="talent[job_ids][]" value="">
+    <% Job.all.each do |job| %>
+      <input class="form-check-input is-valid check_boxes optional" type="checkbox" value="<%= job.id %>" checked="checked" name="talent[job_ids][]" id="talent_job_ids_<%= job.id %>">
+      <label class="collection_check_boxes" for="talent_job_ids_<%= job.id %>"><%= job.title %></label>
+    <% end %>
+    <input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
+  </fieldset>
+
+<% end %>
