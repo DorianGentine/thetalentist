@@ -138,20 +138,22 @@ input[type="radio"], input[type="checkbox"] {
   width: 100%;
   text-align: left;
 }
-.form-line-next-aventure{
-  width: 50%
-}
-.form-group-lg{
-  width: 200%;
+.form-next_aventure{
+  display: flex;
 }
 .bloc-next-aventure{
-  position: relative;
-  top: -228px;
-  right: -50%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .form-group{
+    width: 60%;
+  }
 }
-.form-secteur{
-  position: relative;
-  top: -228px;
+.bloc-next-aventure-right{
+  .form-group{
+    width: calc(100% - 15px);
+  }
 }
 
 

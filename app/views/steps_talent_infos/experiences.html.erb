@@ -1,40 +1,8 @@
 <%= render 'shared/navbar' %>
 
-<div class="form-container">
+<div class="form-container" data-page="3">
 
-  <div class="form-progression">
-    <hr>
-    <div class="form-progression-items">
-      <div class="form-progression-item progression-past">
-        <div class="point-barre-pointee"></div>
-        <div class="progression-step">
-          <div class="step-number"><p>01</p></div>
-          <div class="step-name"><p>Informations<br>générales</p></div>
-        </div>
-      </div>
-      <div class="form-progression-item progression-past">
-        <div class="point-barre-pointee"></div>
-        <div class="progression-step">
-          <div class="step-number"><p>02</p></div>
-          <div class="step-name"><p>Formation &<br>compétences</p></div>
-        </div>
-      </div>
-      <div class="form-progression-item progression-acitve">
-        <div class="point-barre-pointee"></div>
-        <div class="progression-step">
-          <div class="step-number"><p>03</p></div>
-          <div class="step-name"><p>Expériences<br>Professionnelles</p></div>
-        </div>
-      </div>
-      <div class="form-progression-item progression-next">
-        <div class="point-barre-pointee"></div>
-        <div class="progression-step">
-          <div class="step-number"><p>04</p></div>
-          <div class="step-name"><p>Ma prochaine<br>aventure</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render 'shared/formprogression' %>
 
   <h2 class="form-titre-page"><i class="far fa-file-alt"></i> Quel est votre expérience <strong>en entreprise</strong> ?</h2>
 
