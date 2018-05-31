@@ -1,68 +1,40 @@
 <%= render 'shared/navbar' %>
 
-<div class="form-container">
+<div class="form-container" data-page="4">
 
-  <div class="form-progression">
-    <hr>
-    <div class="form-progression-items">
-      <div class="form-progression-item progression-past">
-        <div class="point-barre-pointee"></div>
-        <div class="progression-step">
-          <div class="step-number"><p>01</p></div>
-          <div class="step-name"><p>Informations<br>générales</p></div>
-        </div>
-      </div>
-      <div class="form-progression-item progression-past">
-        <div class="point-barre-pointee"></div>
-        <div class="progression-step">
-          <div class="step-number"><p>02</p></div>
-          <div class="step-name"><p>Formation &<br>compétences</p></div>
-        </div>
-      </div>
-      <div class="form-progression-item progression-past">
-        <div class="point-barre-pointee"></div>
-        <div class="progression-step">
-          <div class="step-number"><p>03</p></div>
-          <div class="step-name"><p>Expériences<br>Professionnelles</p></div>
-        </div>
-      </div>
-      <div class="form-progression-item progression-acitve">
-        <div class="point-barre-pointee"></div>
-        <div class="progression-step">
-          <div class="step-number"><p>04</p></div>
-          <div class="step-name"><p>Ma prochaine<br>aventure</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render 'shared/formprogression' %>
 
   <h2 class="form-titre-page"><i class="far fa-compass"></i> Quelle direction <strong>souhaitez-vous</strong> prendre ?</h2>
 
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
 
     <%= f.simple_fields_for :next_aventures do |u| %>
-      <div class="form-line form-line-next-aventure">
-        <p class="form-label label-next_aventure requis">Ville souhaitée</p>
-        <%= u.input :city, label: false, placeholder:"Paris", :input_html => { :class => "form-group-lg"} %>
-      </div>
-      <div class="form-line form-line-next-aventure">
-        <p class="form-label label-next_aventure requis">Type de contrat</p>
-        <%= u.input :contrat, label: false, placeholder:"Freelance", :input_html => { :class => "form-group-lg"} %>
-      </div>
-      <div class="form-line form-line-next-aventure">
-        <p class="form-label label-next_aventure requis">Rémunération</p>
-        <%= u.input :remuneration, label: false, placeholder: "100 000€", :input_html => { :class => "form-group-lg"} %>
-      </div>
-      <div class="form-line form-line-next-aventure form-secteur">
-        <p class="form-label label-next_aventure requis">Secteurs souhaités <em>(max: 5)</em></p>
-        <%= f.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label: false, :input_html => { :class => "form-group-lg"} %>
-      </div>
+    <div class="form-next_aventure">
       <div class="bloc-next-aventure">
-        <p class="form-label label-next_aventure-lg requis">Le job de vos rêves ? <em>(50 mots max)</em></p>
-        <%= u.input :overview, label: false, placeholder: "Descrpition", as: :text, :input_html => { :class => "form-group-lg"} %>
-        <p class="form-label label-next_aventure-lg requis">Un dernier mot ? <em>(50 mots max)</em></p>
-        <%= u.input :no_more, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '6'}, :input_html => { :class => "form-group-lg"} %>
+        <div class="form-line form-line-next-aventure">
+          <p class="form-label label-next_aventure requis">Ville souhaitée</p>
+          <%= u.input :city, label: false, placeholder:"Paris" %>
+        </div>
+        <div class="form-line form-line-next-aventure">
+          <p class="form-label label-next_aventure requis">Type de contrat</p>
+          <%= u.input :contrat, label: false, placeholder:"Freelance" %>
+        </div>
+        <div class="form-line form-line-next-aventure">
+          <p class="form-label label-next_aventure requis">Rémunération</p>
+          <%= u.input :remuneration, label: false, placeholder: "100 000€" %>
+        </div>
+        <div class="form-line form-line-next-aventure form-secteur">
+          <p class="form-label label-next_aventure requis">Secteurs souhaités <em>(max: 5)</em></p>
+          <%= f.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label: false %>
+        </div>
       </div>
+      <div class="bloc-next-aventure bloc-next-aventure-right">
+        <p class="form-label label-next_aventure-lg requis">Le job de vos rêves ? <em>(50 mots max)</em></p>
+        <%= u.input :overview, label: false, placeholder: "Descrpition", as: :text %>
+        <p class="form-label label-next_aventure-lg requis">Un dernier mot ? <em>(50 mots max)</em></p>
+        <%= u.input :no_more, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+      </div>
+    </div>
     <% end %>
 
 
