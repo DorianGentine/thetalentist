@@ -53,6 +53,10 @@
         <p class="form-label label-next_aventure requis">Rémunération</p>
         <%= u.input :remuneration, label: false, placeholder: "100 000€", :input_html => { :class => "form-group-lg"} %>
       </div>
+      <div class="form-line form-line-next-aventure form-secteur">
+        <p class="form-label label-next_aventure requis">Secteurs souhaités <em>(max: 5)</em></p>
+        <%= f.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label: false, :input_html => { :class => "form-group-lg"} %>
+      </div>
       <div class="bloc-next-aventure">
         <p class="form-label label-next_aventure-lg requis">Le job de vos rêves ? <em>(50 mots max)</em></p>
         <%= u.input :overview, label: false, placeholder: "Descrpition", as: :text, :input_html => { :class => "form-group-lg"} %>
@@ -60,10 +64,6 @@
         <%= u.input :no_more, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '6'}, :input_html => { :class => "form-group-lg"} %>
       </div>
     <% end %>
-    <div class="form-line form-line-next-aventure form-secteur">
-      <p class="form-label label-next_aventure requis">Secteurs souhaités <em>(max: 5)</em></p>
-      <%= f.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label: false, :input_html => { :class => "form-group-lg"} %>
-    </div>
 
 
 
