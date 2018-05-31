@@ -15,3 +15,7 @@ autocomplete();
 import { revealModal } from "../components/modal";
 
 revealModal();
+
+import { dynamicFormBar } from "../components/formprogression";
+
+dynamicFormBar();
