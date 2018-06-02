@@ -24,18 +24,14 @@
       text-align: center;
       font-size: 16px;
       font-weight: 600;
-      margin-bottom: 80px;
+      margin-bottom: 30px;
     }
     .home-connexion{
       width: 80%;
       .connexion-item{
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 2px;
-        padding: 6px 12px;
-        margin: 20px 0;
-        p{
-          margin: 0;
+        margin: 30px 0;
+        .form-group{
+          width: calc(100% - 30px);
         }
       }
       .connexion-item:focus {
@@ -46,21 +42,32 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        .mdp-oublie{
+        margin: 40px 0;
+        a{
           font-weight: 600;
           font-size: 16px;
+        }
+        a:hover{
+          text-decoration: none;
+          color: $green;
+          transition: color ease-in-out 0.15s;
         }
         .btn-connexion{
           width: 170px;
           height: 40px;
-          background-color: $green;
-          color: white;
+          border: 2px solid $green;
+          color: $green;
           font-weight: 600;
           font-size: 21px;
           border-radius: 25px;
           display: flex;
           align-items: center;
           justify-content: center;
+        }
+        .btn-connexion:hover{
+          background-color: $green;
+          color: white;
+          transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
         }
       }
       .alternative-connexion{
@@ -87,9 +94,9 @@
       }
       .inscription-items{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         .btn-inscription{
-          width: auto;
+          width: 30%;
           border: 2px solid $green;
           border-radius: 4px;
           background-color: white;
