@@ -37,6 +37,7 @@
   a:hover{
     color: $green;
     text-decoration: none;
+    transition: color ease-in-out 0.15s;
   }
 }
 
@@ -47,5 +48,19 @@
   }
   a:hover {
     color: $red;
+  }
+}
+
+@media screen and (max-width: 535px){
+  .footer{
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px;
+    height: unset;
+  }
+  .footer-small-case{
+    border: none;
+    margin: 20px 0;
+    padding: 0;
   }
 }

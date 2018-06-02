@@ -50,12 +50,10 @@
     </div>
 
     <div class="form-actions">
-      <%= link_to 'Précédent', root_path, { :class => "form-btn form-btn-precedent"} %>
+      <%= link_to 'Précédent', new_session_path(resource_name), { :class => "form-btn form-btn-precedent"} %>
       <%= f.button :submit, "Suivant", { :class => "form-btn form-btn-suivant"} %>
     </div>
   <% end %>
-
-  <%= render "talents/shared/links" %>
   <!--
       <#%= hobby.submit html: { id: :filldetails, onclick: "addFields()" } %>
 

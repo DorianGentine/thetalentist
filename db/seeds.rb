@@ -1,4 +1,4 @@
-# p "Destroy Talent"
+p "Destroy Talent"
 
 Talent.destroy_all
 Formation.destroy_all
@@ -31,6 +31,7 @@ luc = Talent.create!(email: "luc@hotmail.fr", password: "password", firstname: "
 donatien = Talent.create!(email: "donatien@hotmail.fr", password: "password", firstname: "donatien", name: "rolland", city: "nantes", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
 dorian = Talent.create!(email: "dorian@hotmail.fr", password: "password", firstname: "dorian", name: "gentine", city: "point-a-pitre", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:false, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
 erwan = Talent.create!(email: "erwan@hotmail.fr", password: "password", firstname: "erwan", name: "guillou", city: "Saint-Etienne", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
+louis = Talent.create!(email: "louis@hotmail.fr", password: "password", firstname: "louis", name: "dupont", city: "Saint-Maurice", phone:"0786013426", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:false, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
 
     p "Created #{Talent.count} talents"
 
@@ -54,6 +55,9 @@ data_analyst = Experience.create!( position: "Data analyste", talent: erwan, com
 data_scientist = Experience.create!( position: "data scientist", talent: dorian, company_name: "uber", link:"https://www.uber.com/", years:"2017", currently: true, overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
 data_owner = Experience.create!( position: "data owner", talent: donatien, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2012 2015", currently: false, overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
 data_owner = Experience.create!( position: "data owner", talent: luc, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2012 2015", currently: false, overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_scientist = Experience.create!( position: "data scientist", talent: louis, company_name: "uber", link:"https://www.uber.com/", years:"2017", currently: true, overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
+data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2012 2015", currently: false, overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2012 2015", currently: false, overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
 
 p "Creating formations"
 
@@ -83,6 +87,8 @@ TalentFormation.create!(year: "2013-2015", title:"Master en ingénierie d'affair
 TalentFormation.create!(year: "2011", talent: donatien, formation: ecole_42, title:"Formation developpement fullstack")
 TalentFormation.create!(year: "2009 2014", talent: dorian, formation: em_lyon, title:"Master startégie d'entreprise grand compte")
 TalentFormation.create!(year: "2009 2014", talent: erwan, formation: agroparistech, title:"Master agro spécialiste BIO")
+TalentFormation.create!(year: "2009 2014", talent: louis, formation: em_lyon, title:"Master startégie d'entreprise grand compte")
+TalentFormation.create!(year: "2009 2014", talent: louis, formation: agroparistech, title:"Master agro spécialiste BIO")
 
 
 p "Creating keywords"
@@ -103,6 +109,10 @@ dorian_keyword_actif = TalentKeyword.create!(talent: dorian, keyword: actif)
 TalentKeyword.create!(talent: erwan, keyword: motiver)
 TalentKeyword.create!(talent: erwan, keyword: actif)
 dorian_keyword_intuitif = TalentKeyword.create!(talent: dorian, keyword: intuitif)
+TalentKeyword.create!(talent: louis, keyword: motiver)
+TalentKeyword.create!(talent: louis, keyword: actif)
+TalentKeyword.create!(talent: erwan, keyword: aimable)
+TalentKeyword.create!(talent: erwan, keyword: intuitif)
 
 p "Creating knowns"
 
@@ -118,13 +128,14 @@ luc_known = TalentKnown.create!(talent: luc, known: bouche_a_oreille)
 donatien_known = TalentKnown.create!(talent: donatien, known: facebook)
 dorian_known = TalentKnown.create!(talent: dorian, known: evenement)
 TalentKnown.create!(talent: erwan, known: twitter)
+TalentKnown.create!(talent: louis, known: evenement)
 
 p "Creating languages"
 
-english = Language.create!(title: "english")
-francais = Language.create!(title: "french")
-spanish = Language.create!(title: "spanish")
-german = Language.create!(title: "german")
+english = Language.create!(title: "anglais")
+francais = Language.create!(title: "français")
+spanish = Language.create!(title: "espagnol")
+german = Language.create!(title: "allemand")
 
 
 p "Creating talent_languages"
@@ -134,13 +145,29 @@ donatien_language = TalentLanguage.create!(level: 4, talent: donatien, language:
 dorian_language = TalentLanguage.create!(level: 2, talent: dorian, language: german)
 dorian_language2 = TalentLanguage.create!(level: 4, talent: dorian, language: spanish)
 TalentLanguage.create!(level: 4, talent: erwan, language: spanish)
+TalentLanguage.create!(level: 4, talent: louis, language: german)
 
 p "Creating next_aventures"
 
-manger = NextAventure.create!(city: "paris", talent: luc, contrat:"cdi", remuneration: "2000 - 3000", no_more: "Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", overview:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", why_leaving:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", last_words:"Et sis et eadem in ambigente venias in adsiduitati ad te cum tandem quo numerando.", available: true)
-data = NextAventure.create!(city: "bordeux", talent: donatien, contrat:"cdd", remuneration: "10000 - 15000", no_more: "Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis. Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.", overview:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.", why_leaving:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", last_words:"Et sis et eadem in ambigente venias in adsiduitati ad te cum tandem quo numerando.Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.", available: false)
-sales = NextAventure.create!(city: "normandie", talent: dorian, contrat:"cdi", remuneration: "4000", no_more: "Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", overview:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", why_leaving:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", last_words:"Et sis et eadem in ambigente venias in adsiduitati ad te cum tandem quo numerando.", available: true)
-sales = NextAventure.create!(city: "normandie", talent: erwan, contrat:"cdi", remuneration: "8000", no_more: "Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", overview:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", why_leaving:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", last_words:"Et sis et eadem in ambigente venias in adsiduitati ad te cum tandem quo numerando.", available: true)
+NextAventure.create!(city: "paris", talent: luc, contrat:"cdi", remuneration: "2000 - 3000", no_more: "Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", overview:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", why_leaving:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", last_words:"Et sis et eadem in ambigente venias in adsiduitati ad te cum tandem quo numerando.", available: true)
+NextAventure.create!(city: "bordeux", talent: donatien, contrat:"cdd", remuneration: "10000 - 15000", no_more: "Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis. Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.", overview:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.", why_leaving:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", last_words:"Et sis et eadem in ambigente venias in adsiduitati ad te cum tandem quo numerando.Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.", available: false)
+NextAventure.create!(city: "normandie", talent: dorian, contrat:"cdi", remuneration: "4000", no_more: "Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", overview:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", why_leaving:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", last_words:"Et sis et eadem in ambigente venias in adsiduitati ad te cum tandem quo numerando.", available: true)
+NextAventure.create!(city: "normandie", talent: erwan, contrat:"cdi", remuneration: "8000", no_more: "Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", overview:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", why_leaving:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", last_words:"Et sis et eadem in ambigente venias in adsiduitati ad te cum tandem quo numerando.", available: true)
+NextAventure.create!(city: "normandie", talent: louis, contrat:"cdi", remuneration: "8000", no_more: "Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", overview:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", why_leaving:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", last_words:"Et sis et eadem in ambigente venias in adsiduitati ad te cum tandem quo numerando.", available: true)
+
+p "Creating sectors"
+
+saas = Sector.create!(title: "Saas", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
+marketplace = Sector.create!(title: "Marketplace", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
+iot = Sector.create!(title: "IOT", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
+
+p "Creating talent_sectors"
+
+TalentSector.create!(sector: saas, year: 5, talent: luc)
+TalentSector.create!(sector: marketplace, year: 3, talent: donatien)
+TalentSector.create!(sector: iot, year: 8, talent: dorian)
+TalentSector.create!(sector: marketplace, year: 1, talent: erwan)
+TalentSector.create!(sector: saas, year: 10, talent: louis)
 
 p "Creating jobs"
 
@@ -149,18 +176,13 @@ sales = Job.create!(title: "Sales")
 product = Job.create!(title: "Product")
 market = Job.create!(title: "Market")
 
-p "Creating sectors"
-
-saas = Sector.create!(title: "Saas", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-marketplace = Sector.create!(title: "Marketplace", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-iot = Sector.create!(title: "IOT", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-
 p "Creating talent_jobs"
 
 luc_job = TalentJob.create!(talent: luc , job: data)
 donatien_job = TalentJob.create!(talent: donatien, job: data)
 dorian_job = TalentJob.create!(talent: dorian, job: data)
 TalentJob.create!(talent: erwan, job: data)
+TalentJob.create!(talent: louis, job: product)
 
 p "Creating skills"
 
@@ -180,6 +202,10 @@ TalentSkill.create!(level: 2, talent: erwan, skill: programmation)
 donatien_skills_hado = TalentSkill.create!(level: 2, talent: donatien, skill: hadoop )
 dorian_skills_log = TalentSkill.create!(level: 1, talent: dorian, skill: hadoop )
 dorian_skills_hado = TalentSkill.create!(level: 1, talent: dorian, skill:logiciel)
+TalentSkill.create!(level: 4, talent: louis, skill: outils_analytiques)
+TalentSkill.create!(level: 2, talent: louis, skill: programmation)
+TalentSkill.create!(level: 4, talent: louis, skill: outils_analytiques)
+TalentSkill.create!(level: 2, talent: louis, skill: programmation)
 
 p "Creating technos"
 
@@ -198,6 +224,18 @@ TalentTechno.create!(talent: erwan, techno: ruby)
 donatien_technos_sql = TalentTechno.create!(talent: donatien, techno: sql)
 dorian_technos_dig = TalentTechno.create!(talent: dorian, techno: digital)
 dorian_technos_sql = TalentTechno.create!(talent: dorian, techno: sql)
+TalentTechno.create!(talent: louis, techno: php)
+TalentTechno.create!(talent: louis, techno: ruby)
+
+p "Creating hobbies"
+
+Hobby.create!(title: "Voile")
+Hobby.create!(title: "Boxe")
+Hobby.create!(title: "Football")
+Hobby.create!(title: "ski")
+Hobby.create!(title: "Danse")
+
+
 
 p "Creating Startup part"
 
@@ -207,23 +245,16 @@ doctolib = Startup.create!(name: "doctolib", year_of_creation: 2010, collaborato
 
 p "Creating Headhunter part"
 
-lucas = Headhunter.create!(email: "lucas@hotmail.fr", password:"password", firstname: "lucas", job:"HR", validated: true, startup: backmarket )
+lucas = Headhunter.create!(email: "lucas@hotmail.fr", password:"password", firstname: "lucas", job:"HR", validated: true, startup: backmarket)
 amelie = Headhunter.create!(email: "amelie@hotmail.fr", password:"password", firstname: "amelie", job:"HR data_analyst", validated: false, startup: manomano)
 justine = Headhunter.create!(email: "justine@hotmail.fr", password:"password", firstname: "justine", job:"drh", validated: true, startup: doctolib)
 loic = Headhunter.create!(email: "loic@hotmail.fr", password:"password", firstname: "loic", job:"rh for sales and product owner", validated: true, startup: doctolib)
+
+
+
+
 
 p "Creating The Talenist part"
 
 dimitri = Talentist.create!(email: "dimitri@hotmail.fr", password:"password", firstname: "dimitri", name:"mussat", super_admin: false)
 magdalena = Talentist.create!(email: "magdalena@hotmail.fr", password:"password", firstname: "MAGDALENA", name:"mussat", super_admin: true)
-
-p "Creating hobbies"
-
-Hobby.create!(title: "Voile")
-Hobby.create!(title: "Boxe")
-Hobby.create!(title: "Footbbal")
-Hobby.create!(title: "ski")
-Hobby.create!(title: "Danse")
-
-
-

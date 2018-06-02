@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_29_172423) do
+ActiveRecord::Schema.define(version: 2018_05_31_134054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(version: 2018_05_29_172423) do
     t.bigint "sector_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "year"
     t.index ["sector_id"], name: "index_talent_sectors_on_sector_id"
     t.index ["talent_id"], name: "index_talent_sectors_on_talent_id"
   end

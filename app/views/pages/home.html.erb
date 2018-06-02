@@ -23,18 +23,18 @@
         <p>OU S'INSCRIRE</p>
       </div>
       <div class="inscription-items">
-        <%= link_to new_talent_session_path do  %>
-            <div class="btn btn-primary btn-inscription">
-              <i class="fas fa-rocket"></i>
-              <a>Je suis un<br>talent</a>
-            </div>
-        <% end %>
-        <%= link_to new_headhunter_session_path do %>
-          <div class="btn btn-primary btn-inscription">
+        <div class="btn btn-primary btn-inscription">
+          <%= link_to new_talent_session_path do  %>
+            <i class="fas fa-rocket"></i>
+            <a>Je suis un<br>talent</a>
+          <% end %>
+        </div>
+        <div class="btn btn-primary btn-inscription">
+          <%= link_to new_headhunter_session_path do %>
             <i class="fas fa-user"></i>
             <a>Je suis une<br>start-up</a>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
 
