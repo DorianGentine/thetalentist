@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :talentists, path: 'talentists'
 
   devise_for :headhunters, path: 'headhunters', controllers: {
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
   get 'repertoire', to: "headhunters#repertory"
 
 
-
   devise_for :talents, path: 'talents', controllers: {
     sessions: 'talents/sessions',
     passwords: 'talents/passwords',
@@ -20,8 +20,10 @@ Rails.application.routes.draw do
   }
   resources :talents, only: [:show, :update]
 
-
-
+  resources :relationships, only: [:show, :index, :create] do
+    resources :talent_message, only: [:create]
+    resources :headhunter_message, only: [:create]
+  end
 
   root to: 'pages#home'
   resources :steps_talent_infos

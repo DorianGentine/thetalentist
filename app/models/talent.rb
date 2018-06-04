@@ -48,10 +48,12 @@ class Talent < ApplicationRecord
 
   validates :name, :firstname, :city, :phone, :email, presence: true
 
-
+  # messagerie
   has_many :relationships, dependent: :destroy
   has_many :headhunters, through: :relationships
 
+  has_many :talent_messages, dependent: :destroy
+  # has_many :relationships, through: :talent_messages
 
 
   # link with pdf_uploader

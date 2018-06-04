@@ -10,7 +10,8 @@ class Headhunter < ApplicationRecord
   has_many :relationships, dependent: :destroy
   has_many :talents, through: :relationships
 
-
+  has_many :headhunter_messages, dependent: :destroy
+  # has_many :relationships, through: :headhunter_messages
 
 
 

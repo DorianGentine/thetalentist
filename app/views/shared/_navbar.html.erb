@@ -11,7 +11,7 @@
 
       <!-- Links when logged in -->
       <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "MESSAGERIE", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "MESSAGERIE", relationships_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
@@ -41,7 +41,7 @@
     <% elsif talent_signed_in? %>
 <!-- Links when logged in -->
       <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "MESSAGERIE", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "MESSAGERIE", relationships_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">

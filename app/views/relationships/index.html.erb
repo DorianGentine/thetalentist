@@ -1,0 +1,23 @@
+<h1>Relationships#index</h1>
+<p>Find me in app/views/relationships/index.html.erb</p>
+
+
+<% @relationships.each do |relationship| %>
+    <li style="color:black "><%= relationship.talent.firstname %> <%= relationship.connected_to %></li>
+
+
+    <%= link_to relationship.talent.firstname, relationship_path(relationship) %>
+
+
+
+
+
+<% end %>
+
+
+
+
+
+
+
+
