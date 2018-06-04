@@ -1,9 +1,11 @@
 <%= render "shared/navbar" %>
 
-<div class="home-container">
+<div class="home-container container-show">
 
   <div class="talent-left">
-    <div class="photo-profil"></div>
+    <div class="photo-profil">
+      <div class="statut"></div>
+    </div>
     <div class="talent-name">
       <h1><%= @talent.firstname %> <%= @talent.name %></h1>
       <h2 class="talent-post">Chef de projet digital</h2>
@@ -55,17 +57,17 @@
 
   <div class="talent-right">
     <div class="talent-right-up">
-      <div class="qui-suis-je">
+      <div class="right-up-item qui-suis-je">
         <h4>Qui suis-je ?</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
-      <div class="le-job-de-reve">
+      <div class="right-up-item le-job-de-reve">
         <h4>Le job de rêve !</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
-      <div class="je-recherche">
+      <div class="right-up-item je-recherche">
         <h4>Je recherche</h4>
-        <div>
+        <div class="recherche-first-line">
           <div class="recherche-item">
             <h5>CDD</h5>
             <p>CONTRAT</p>
@@ -79,17 +81,17 @@
           <h5>FINANCE</h5>
           <p>SECTEUR</p>
         </div>
-        <div class="recherche-map">
+        <div class="recherche-item">
           <div class="map-ville"></div>
           <p><%= @talent.city %></p>
         </div>
       </div>
     </div>
-    <div class="talent-right-down">
-      <div class="lower-body-item lower-middle-body">
+    <div class="talent-right-down lower-body">
+      <div class="lower-middle-body">
         <h4><i class="far fa-file-alt"></i> EXPÉRIENCES</h4>
         <div class="lower-body-item-content">
-          <hr class="barre-pointee">
+          <hr class="barre-pointee" style="width: 5px;">
           <div class="talent-experiences">
             <div class="placement-point-barre">
               <div>
@@ -99,7 +101,7 @@
                 <p class="experience-post">Chef de projet Web et mobile</p>
                 <p class="experience-entreprise">GE (Groupe international)</p>
                 <p class="experience-duree">Mai 2015 - Aujourd’hui</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p class="experience-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
             <div class="placement-point-barre">
@@ -110,7 +112,7 @@
                 <p class="experience-post">CHEF DE PROJET WEB & MOBILE</p>
                 <p class="experience-entreprise">GE (Groupe international)</p>
                 <p class="experience-duree">Mai 2015 - Aujourd’hui</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p class="experience-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
             <div class="placement-point-barre">
@@ -121,13 +123,13 @@
                 <p class="experience-post">CHEF DE PROJET WEB & MOBILE</p>
                 <p class="experience-entreprise">GE (Groupe international)</p>
                 <p class="experience-duree">Mai 2015 - Aujourd’hui</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p class="experience-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="lower-body-item lower-right-body">
+      <div class="lower-middle-body">
         <h4><i class="fas fa-graduation-cap"></i> FORMATIONS</h4>
         <div class="lower-body-item-content">
           <hr class="barre-pointee">
@@ -137,7 +139,7 @@
                 <div class="point-barre-pointee"></div>
               </div>
               <div class="placement-talent-experience">
-                <p class="experience-post">Master entrepreneuriate</p>
+                <p class="experience-post">Master entrepreneuriat</p>
                 <p class="experience-entreprise">EM LYON</p>
                 <p class="experience-duree">Mai 2015 - Aujourd’hui</p>
               </div>
@@ -172,17 +174,15 @@
 
 </div>
 
+<%= render "shared/footer" %>
 
 
 
 
 
 
-<!-- <%= render "shared/footer" %>
 
-
-
-
+<!--
 
 <h2> Ici sera le profil de <%= @talent.firstname %> <%= @talent.name %></h2>
 
