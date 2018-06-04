@@ -115,6 +115,12 @@
 }
 
 
+h4{
+  color: $black;
+  font-size: 26px;
+  font-weight: 900;
+  margin: 0 0 40px 0;
+}
 
 .lower-body{
   width: 100%;
@@ -125,12 +131,6 @@
     height: 100%;
     width: 29%;
     padding: 30px 0;
-    h4{
-      color: $black;
-      font-size: 26px;
-      font-weight: 900;
-      margin: 0 0 40px 0;
-    }
     p{
       font-size: 16px;
       text-align: justify;
@@ -174,26 +174,6 @@
       }
     }
   }
-  .lower-right-body{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 10px;
-    .talent-competences{
-      display: flex;
-      flex-wrap: wrap;
-      margin: 0 -10px;
-      p{
-        font-size: 14px;
-        color: white;
-        background-color: #73789E;
-        padding: 2px 20px;
-        margin: 0 10px 20px 10px;
-        border-radius: 20px;
-        text-transform: capitalize;
-      }
-    }
-  }
   .contact-btn{
     display: none;
     width: 140px;
@@ -206,6 +186,26 @@
     p{
       color: white;
       margin: 0;
+    }
+  }
+}
+.lower-right-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  .talent-competences{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+    p{
+      font-size: 14px;
+      color: white;
+      background-color: #73789E;
+      padding: 2px 20px;
+      margin: 0 10px 20px 10px;
+      border-radius: 20px;
+      text-transform: capitalize;
     }
   }
 }
