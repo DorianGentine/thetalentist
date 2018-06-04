@@ -1,0 +1,107 @@
+.container-show{
+  padding: 60px;
+  height: 100vh;
+}
+
+.talent-left{
+  height: 100%;
+  width: 340px;
+  margin: 0 90px 0 0;
+  > div{
+    margin-bottom: 30px;
+  }
+  .photo-profil{
+    width: 192px;
+    height: 192px;
+    border-radius: 100px;
+    background-image: url(logo.png);
+    background-position: center;
+    background-size: cover;
+    .statut{
+      width: 48px;
+      height: 48px;
+      background-color: $green;
+      border-radius: 30px;
+      border: 4px solid white;
+      position: relative;
+      top: 144px;
+    }
+  }
+  .talent-name{
+    h1{
+      font-size: 38px;
+      font-weight: 600;
+      text-transform: capitalize;
+      margin: 0;
+    }
+    .talent-post{
+      font-size: 24px;
+      color: $gray;
+      margin: 0;
+      font-weight: 100;
+    }
+  }
+}
+
+
+.talent-right{
+  height: 100%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  .talent-right-up{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(3, 13, 88, 0.05);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 30px;
+    .right-up-item{
+      width: 30%;
+      margin: 0 10px;
+      p{
+        font-size: 14px;
+        text-align: justify;
+      }
+    }
+    .recherche-first-line{
+      display: flex;
+      justify-content: space-between;
+    }
+    .recherche-item{
+      h5{
+        font-size: 28px;
+        color: $green;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      p{
+        font-size: 14px;
+        color: $black;
+        text-transform: uppercase;
+      }
+    }
+    .recherche-item:last-child{
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  .talent-right-down{
+    height: 50%;
+    .lower-middle-body:first-child{
+      width: 60%;
+      flex-grow: 1;
+      margin-right: 20px;
+    }
+    .talent-experiences{
+      display: block !important;
+      overflow: auto;
+    }
+    .placement-point-barre{
+      margin-bottom: 30px;
+    }
+  }
+}

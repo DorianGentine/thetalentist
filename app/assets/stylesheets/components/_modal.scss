@@ -167,9 +167,15 @@ h4{
         }
         .experience-entreprise{
           font-style: oblique;
+          color: $green;
         }
         .experience-duree{
           font-weight: 300;
+        }
+        .experience-desc{
+          font-size: 14px;
+          font-weight: 100;
+          text-align: justify;
         }
       }
     }
@@ -208,6 +214,10 @@ h4{
       text-transform: capitalize;
     }
   }
+}
+
+.talent-info-item p{
+  text-transform: capitalize;
 }
 
 /* CSS pour barre pointée */
