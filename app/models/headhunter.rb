@@ -7,6 +7,13 @@ class Headhunter < ApplicationRecord
   belongs_to :startup
   accepts_nested_attributes_for :startup
 
+  has_many :relationships, dependent: :destroy
+  has_many :talents, through: :relationships
+
+
+
+
+
   validates :firstname, presence: true
   validates :job, presence: true
 

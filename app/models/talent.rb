@@ -49,12 +49,15 @@ class Talent < ApplicationRecord
   validates :name, :firstname, :city, :phone, :email, presence: true
 
 
+  has_many :relationships, dependent: :destroy
+  has_many :headhunters, through: :relationships
+
+
 
   # link with pdf_uploader
   mount_uploader :cv, PdfUploader
 
   def is_connected_to?(headhunter)
-    # vérifier que self est connecté à headhunter
+    Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
   end
-
 end
