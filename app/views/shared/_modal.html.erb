@@ -6,7 +6,20 @@
       <div class="modal-header">
         <h3><%= talent.experiences.last.position.capitalize %></h3>
         <div class="contact-btn">
-          <p>Contacter <i class="fas fa-location-arrow"></i></p>
+          <!-- <p>Contacter <i class="fas fa-location-arrow"></i></p> -->
+<!--
+          <#% if @headhunter.talents.first == talent %>
+           -->
+          <% if talent.is_connected_to?(@headhunter) %>
+            <p>Vous êtes déjà en relation <i class="fas fa-location-arrow"></i></p>
+          <% else %>
+            <%= simple_form_for talent, methode: :get do |f| %>
+              <%= f.simple_fields_for :relationships do |u| %>
+                <%= u.button :submit, inline_label: "Contacter 2" %>
+              <% end %>
+            <% end %>
+          <% end %>
+
         </div>
         <span class="close">
           <p>&times;</p>
@@ -124,6 +137,9 @@
               </div>
             </div>
           </div>
+
+
+          <!-- ???????????  C'EST OU CETTE PARTIE?-->
           <div class="contact-btn">
             <p>Contacter <i class="fas fa-location-arrow"></i></p>
           </div>
