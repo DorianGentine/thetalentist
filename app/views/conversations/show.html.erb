@@ -1,2 +1,34 @@
-<h1>Conversations#show</h1>
-<p>Find me in app/views/conversations/show.html.erb</p>
+<%= render "shared/navbar" %>
+
+
+
+<%  @conversations.each do |conversation| %>
+  <div>
+
+
+
+        <%= link_to conversation_path(conversation) do %>
+          <% parti = conversation.participants - [current_user] %>
+          <%= parti[0].firstname %> <br>
+          <%= truncate(conversation.messages.last.body, length: 20) %>
+        <% end %>
+  </div>
+<% end %>
+
+
+
+
+<h1><%= @conversation.subject %></h1>
+
+<% @conversation.receipts_for(current_user).reverse_each do |receipt| %>
+  <div>
+    <div><%= receipt.message.sender.firstname %> commented:</div>
+    <p><%= receipt.message.body %></p>
+  </div>
+<% end %>
+
+
+<%= form_tag conversation_messages_path(@conversation), method: :post do %>
+  <%= text_area_tag :body %>
+  <%= submit_tag %>
+<% end %>

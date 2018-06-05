@@ -17,5 +17,7 @@ class Headhunter < ApplicationRecord
   validates :firstname, presence: true
   validates :job, presence: true
 
-
+  def mailboxer_email(object)
+   #return the model's email here
+  end
 end

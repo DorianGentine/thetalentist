@@ -1,8 +1,13 @@
 class ConversationsController < ApplicationController
 
+
+
   def show
-    @conversations = current_user.mailbox.conversations
     @conversation = current_user.mailbox.conversations.find(params[:id])
+    @conversations = current_user.mailbox.conversations
+
+
+    authorize @conversation
   end
 
   def new
@@ -16,4 +21,8 @@ class ConversationsController < ApplicationController
       redirect_to conversation_path(receipt.conversation)
     end
   end
+
+private
+
+
 end
