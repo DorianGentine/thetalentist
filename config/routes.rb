@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :talentists, path: 'talentists'
 
   devise_for :headhunters, path: 'headhunters', controllers: {
@@ -21,7 +22,10 @@ Rails.application.routes.draw do
   resources :talents, only: [:show, :update]
 
 
-
+  # pour la messagerie
+  resources :conversations do
+    resources :messages, only: [ :create ]
+  end
 
   root to: 'pages#home'
   resources :steps_talent_infos

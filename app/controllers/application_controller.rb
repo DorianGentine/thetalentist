@@ -25,9 +25,20 @@ class ApplicationController < ActionController::Base
     @current_user = talent_signed_in? ? current_talent : current_headhunter
   end
 
+  # def current_user
+  #   @current_user
+  # end
+
+  # TEST
   def current_user
-    @current_user
+    if current_talent
+      @current_talent
+     else
+      @current_headhunter
+    end
   end
+  helper_method :current_user
+  #
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
