@@ -53,6 +53,8 @@ class Talent < ApplicationRecord
   has_many :headhunters, through: :relationships
 
 
+  # for mailboxer
+  acts_as_messageable
 
   # link with pdf_uploader
   mount_uploader :cv, PdfUploader

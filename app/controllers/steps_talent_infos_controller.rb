@@ -20,7 +20,7 @@ class StepsTalentInfosController < ApplicationController
     # Si tu as un problème de validation pour créer talent
     # @talent.status = step.to_s
     # @talent.status = 'active' if step == steps.last
-
+    raise
     if @talent.update(talent_params)
       render_wizard @talent
     else

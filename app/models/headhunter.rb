@@ -11,8 +11,8 @@ class Headhunter < ApplicationRecord
   has_many :talents, through: :relationships
 
 
-
-
+  # for mailboxer
+  acts_as_messageable
 
   validates :firstname, presence: true
   validates :job, presence: true

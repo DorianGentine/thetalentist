@@ -9,16 +9,29 @@
 
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
 
-    <%= f.simple_fields_for :talent_formations do |u| %>
-      <div class="form-line form-formations">
-        <p class="form-label requis">Formation(s)</p>
-        <%= u.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
-        <%= u.input :title, placeholder: "Diplôme", label: false  %>
-        <%= u.input :year, collection: 1992..2018, prompt: "Année d'obtention", label: false   %>
-      <!-- TODO button -->
-      <%= u.button :submit, 'Ajouter une formation +', { :class => "form-hobby-add"} %>
+    <div id="formations">
+      <%= f.simple_fields_for :talent_formations do |u| %>
+        <div class="form-line form-formations">
+          <p class="form-label requis">Formation(s)</p>
+          <%= u.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
+          <%= u.input :title, placeholder: "Diplôme", label: false  %>
+          <%= u.input :year, collection: 1992..2018, prompt: "Année d'obtention", label: false   %>
+        </div>
+      <% end %>
+      <div id="formation-hidden" style="display: none">
+        <%= f.simple_fields_for :talent_formations do |u| %>
+          <div class="form-line form-formations">
+            <p class="form-label requis">Formation(s)</p>
+            <%= u.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select"}  %>
+            <%= u.input :title, placeholder: "Diplôme", label: false  %>
+            <%= u.input :year, collection: 1992..2018, prompt: "Année d'obtention", label: false   %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+
+
+    <p class= "form-hobby-add" id="bt-formation">Ajouter une formation + </p>
 
     <div class="form-line">
       <div class="form-semi-line">
