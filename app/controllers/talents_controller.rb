@@ -1,8 +1,5 @@
 class TalentsController < ApplicationController
 
-
-  # def index
-  # end
   def update
     @relationship = Relationship.new
     @headhunter = @current_headhunter
@@ -10,7 +7,7 @@ class TalentsController < ApplicationController
 
     @relationship = Relationship.create(headhunter_id:@headhunter.id, talent_id:@talent.id, status:"pending")
     if @relationship.save
-      @headhunter.send_message(@talent, "#{@headhunter.firstname}, souhait rentrer en contact avec vous", "#{@headhunter.firstname}")
+      @headhunter.send_message(@talent, "#{@headhunter.firstname}, souhaite rentrer en contact avec vous", "#{@headhunter.firstname}")
       flash[:success] = "Relationship was created!"
       redirect_to repertoire_path
     else

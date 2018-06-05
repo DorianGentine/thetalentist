@@ -11,7 +11,7 @@
 
       <!-- Links when logged in -->
       <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "MESSAGERIE", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "MESSAGERIE", conversation_path(@current_user.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
@@ -19,7 +19,7 @@
           <%= image_tag "http://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
-              <%= link_to headhunter_path(@headhunter) do %>
+              <%= link_to headhunter_path(@current_user) do %>
                 <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
               <% end %>
             </li>
@@ -41,18 +41,18 @@
     <% elsif talent_signed_in? %>
 <!-- Links when logged in -->
       <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "MESSAGERIE", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "MESSAGERIE", conversation_path(@current_user.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
           <%= image_tag "http://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-         <!--    <li>
-              <#%= link_to talent_path(@talent) do %>
-                <i class="fa fa-user"></i> <#%= t(".profile", default: "Profile") %>
-              <#% end %>
-            </li> -->
+            <li>
+              <%= link_to talent_path(@current_user) do %>
+                <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+              <% end %>
+            </li>
             <li>
               <%= link_to "#" do %>
                 <i class="fa fa-cog"></i>  <%= t(".settings", default: "Settings") %>
