@@ -47,17 +47,6 @@ ActiveRecord::Schema.define(version: 2018_06_06_132943) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "headhunter_messages", force: :cascade do |t|
-    t.text "content"
-    t.boolean "is_read"
-    t.bigint "headhunter_id"
-    t.bigint "relationship_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["headhunter_id"], name: "index_headhunter_messages_on_headhunter_id"
-    t.index ["relationship_id"], name: "index_headhunter_messages_on_relationship_id"
-  end
-
   create_table "headhunters", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -276,17 +265,6 @@ ActiveRecord::Schema.define(version: 2018_06_06_132943) do
     t.index ["talent_id"], name: "index_talent_languages_on_talent_id"
   end
 
-  create_table "talent_messages", force: :cascade do |t|
-    t.text "content"
-    t.boolean "is_read"
-    t.bigint "talent_id"
-    t.bigint "relationship_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["relationship_id"], name: "index_talent_messages_on_relationship_id"
-    t.index ["talent_id"], name: "index_talent_messages_on_talent_id"
-  end
-
   create_table "talent_sectors", force: :cascade do |t|
     t.bigint "talent_id"
     t.bigint "sector_id"
@@ -373,8 +351,6 @@ ActiveRecord::Schema.define(version: 2018_06_06_132943) do
 
   add_foreign_key "credentials", "talents"
   add_foreign_key "experiences", "talents"
-  add_foreign_key "headhunter_messages", "headhunters"
-  add_foreign_key "headhunter_messages", "relationships"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
@@ -393,8 +369,6 @@ ActiveRecord::Schema.define(version: 2018_06_06_132943) do
   add_foreign_key "talent_knowns", "talents"
   add_foreign_key "talent_languages", "languages"
   add_foreign_key "talent_languages", "talents"
-  add_foreign_key "talent_messages", "relationships"
-  add_foreign_key "talent_messages", "talents"
   add_foreign_key "talent_sectors", "sectors"
   add_foreign_key "talent_sectors", "talents"
   add_foreign_key "talent_skills", "skills"
