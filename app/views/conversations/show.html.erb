@@ -1,51 +1,78 @@
 <%= render "shared/navbar" %>
 
-<%  @current_user.relationships.each do |relationship| %>
-  <p> <%= relationship %></p>
-<% end %>
 
-<%  @conversations.each do |conversation| %>
-
-  <!-- div connexion pas encore accepté -->
+<div class="fenetre-ecran">
 
 
-  <!-- div connexion accepté -->
-    <%= link_to conversation_path(conversation) do %>
-      <% parti = conversation.participants - [current_user] %><%= parti[0].firstname %> <br>
-      <%= truncate(conversation.messages.last.body, length: 20) %> <br>
-    <% end %>
+  <div class="colonne col-gauche bordure-droite">
+    <div class="premiere-ligne">
+      <h4>MESSAGERIE</h4>
+    </div>
+    <div class="index-talents">
+      <%  @conversations.each do |conversation| %>
+
+        <!-- div connexion pas encore accepté -->
+
+
+        <!-- div connexion accepté -->
+          <%= link_to conversation_path(conversation) do %>
+            <% parti = conversation.participants - [current_user] %><%= parti[0].firstname %> <br>
+            <%= truncate(conversation.messages.last.body, length: 20) %> <br>
+          <% end %>
 
 
 
-<% end %>
-
-
-
-<!-- div Prénom Nom et poste  -->
-
-<h2><%= @participant[0].firstname.capitalize %> <%= @participant[0].name.capitalize %></h2>
-<p style="color: gray"> <%= @participant[0].experiences.last.position.capitalize %> </p>
-
-
-<!-- div link vers profil -->
-
-<%= link_to talent_path(@participant[0]) do %>
-  <p>Vous pouvez accéder au profil du talent</p><h6> Visiter le profil --> </h6>
-<% end %>
-
-
-<!-- div conversation -->
-
-<% @conversation.receipts_for(current_user).reverse_each do |receipt| %>
-  <div>
-    <p><%= receipt.message.sender.firstname %> commented:</p>
-    <p><%= receipt.message.body %></p>
+      <% end %>
+    </div>
   </div>
-<% end %>
+
+  <div class="colonne col-centre bordure-droite">
+    <div class="premiere-ligne nom-discussion">
+      <!-- div Prénom Nom et poste  -->
+      <h2><%= @participant[0].firstname.capitalize %> <%= @participant[0].name.capitalize %></h2>
+      <p> <%= @participant[0].experiences.last.position.capitalize %> </p>
+    </div>
+    <div class="conversation">
+      <!-- div link vers profil -->
+      <%= link_to talent_path(@participant[0]) do %>
+        <p>Vous pouvez accéder au profil du talent</p>
+        <p>Visiter le profil > </p>
+      <% end %>
+      <!-- div conversation -->
+      <% @conversation.receipts_for(current_user).reverse_each do |receipt| %>
+        <div class="message">
+          <p><%= receipt.message.sender.firstname %> commented:</p>
+          <p><%= receipt.message.body %></p>
+        </div>
+      <% end %>
+    </div>
+    <div class="boite-envoi">
+      <%= form_tag conversation_messages_path(@conversation), method: :post do %>
+        <%= text_area_tag :body %>
+        <%= submit_tag %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="colonne col-droite">
+    <div class="premiere-ligne">
+      <h4>Documents échangés</h4>
+    </div>
+    <div class="doc-echanges"></div>
+  </div>
 
 
-<%= form_tag conversation_messages_path(@conversation), method: :post do %>
-  <%= text_area_tag :body %>
-  <%= submit_tag %>
-<% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
