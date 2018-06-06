@@ -7,7 +7,7 @@
   <!-- Right Navigation -->
   <div class="navbar-talentist-right hidden-xs hidden-sm">
 
-    <% if headhunter_signed_in? %>
+    <% if headhunter_signed_in? && @current_user %>
 
       <!-- Links when logged in -->
       <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
@@ -38,8 +38,8 @@
       </div>
 
 
-    <% elsif talent_signed_in? %>
-<!-- Links when logged in -->
+    <% elsif talent_signed_in? && @current_user %>
+
       <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "MESSAGERIE", conversation_path(@current_user.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
 
@@ -66,6 +66,8 @@
           </ul>
         </div>
       </div>
+    <% else %>
+      <%= link_to "REVENIR  À LA PAGE DE CONNEXION", root_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
   </div>
 
