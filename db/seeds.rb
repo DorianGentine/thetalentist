@@ -33,6 +33,14 @@ dorian = Talent.create!(email: "dorian@hotmail.fr", password: "password", firstn
 erwan = Talent.create!(email: "erwan@hotmail.fr", password: "password", firstname: "erwan", name: "guillou", city: "Saint-Etienne", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
 louis = Talent.create!(email: "louis@hotmail.fr", password: "password", firstname: "louis", name: "dupont", city: "Saint-Maurice", phone:"0786013426", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:false, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
 
+dorian.photo = "https://media.licdn.com/dms/image/C4E03AQHlWPVF9-TZyg/profile-displayphoto-shrink_800_800/0?e=1533772800&v=beta&t=YtCazu0yDhrD2XJSokpVEVGjOaGKfo6TL7Eh2vjSJ80"
+donatien.photo = "https://www.linkedin.com/dms/C4E00AQGSp34ebVs6YQ/profile-originalphoto-shrink_450_600/0?m=AQKd2pBXvJqn-AAAAWPVT97u_l6HiC6a4w2WvwtRWOjXyxNM5iG6XKpj1w&e=1528378571&v=beta&t=dx3eN7h4DzHagtfY6QBkiPPILCo0BNv66ER6TylnbzU"
+erwan.photo = "https://media.licdn.com/dms/image/C4D03AQFn2PULZrtZww/profile-displayphoto-shrink_800_800/0?e=1533772800&v=beta&t=_FtWnk5aTFTeWJUr_bmmn-XA4vh_dDcjex6HynUBNR0"
+
+dorian.save!
+donatien.save!
+erwan.save!
+
     p "Created #{Talent.count} talents"
 
 p "Creating credentials"

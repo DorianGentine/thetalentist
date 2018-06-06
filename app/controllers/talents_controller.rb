@@ -32,7 +32,18 @@ class TalentsController < ApplicationController
   end
 
 
+  def update
+    @talent.update(talent_params)
+    redirect_to talent_path(@talent)
+  end
 
+private
 
+  def talent_params
+    # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
+     params.require(:talent).permit(
+
+    )
 
 end
+

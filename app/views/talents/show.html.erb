@@ -1,14 +1,30 @@
 <%= render "shared/navbar" %>
 
+
 <div class="home-container container-show">
 
   <div class="talent-left">
-    <div class="photo-profil" style="background-image: url(logo.png);">
-      <div class="statut"></div>
-    </div>
+
+
+    <% if @talent.photo %>
+
+      <div class="photo-profil" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
+        <div class="statut"></div>
+      </div>
+
+    <% else %>
+
+      <div class="photo-profil" style="background-image: url(logo.png);">
+        <p><%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %></p>
+        <div class="statut"></div>
+      </div>
+
+    <% end %>
+
+
     <div class="talent-name">
       <h1><%= @talent.firstname %> <%= @talent.name %></h1>
-      <h2 class="talent-post">Chef de projet digital</h2>
+      <h2 class="talent-post"><%= @talent.experiences.last.position %></h2>
     </div>
     <div class="talent-info">
       <div class="talent-info-item card-dispsition">
@@ -50,7 +66,9 @@
       </div>
     </div>
     <div class="credentials">
-      <p><i class="far fa-star"></i> Voir mes recommandations</p>
+      <%= link_to talent_path(@talent) do %>
+      <p><i class="far fa-star"></i> Voir mes <%= @talent.credentials.count %> recommandations</p>
+        <% end %>
     </div>
   </div>
 
@@ -59,26 +77,26 @@
     <div class="talent-right-up">
       <div class="right-up-item qui-suis-je">
         <h4>Qui suis-je ?</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p><%= @talent.overview %></p>
       </div>
       <div class="right-up-item le-job-de-reve">
-        <h4>Le job de rêve !</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <h4>Le job de rêve ! TODO</h4>
+        <p> <%= @talent.next_aventures.last.overview %></p>
       </div>
       <div class="right-up-item je-recherche">
         <h4>Je recherche</h4>
         <div class="recherche-first-line">
           <div class="recherche-item">
-            <h5>CDD</h5>
+            <h5><%= @talent.next_aventures.last.contrat %></h5>
             <p>CONTRAT</p>
           </div>
           <div class="recherche-item">
-            <h5>25K</h5>
+            <h5><%= @talent.next_aventures.last.remuneration %></h5>
             <p>SALAIRE</p>
           </div>
         </div>
         <div class="recherche-item">
-          <h5>FINANCE</h5>
+          <h5>FINANCE TODO</h5>
           <p>SECTEUR</p>
         </div>
         <div class="recherche-item">
@@ -93,39 +111,21 @@
         <div class="lower-body-item-content">
           <hr class="barre-pointee" style="width: 5px;">
           <div class="talent-experiences">
-            <div class="placement-point-barre">
-              <div>
-                <div class="point-barre-pointee"></div>
+
+            <% @talent.experiences.each do |experience| %>
+              <div class="placement-point-barre">
+                <div>
+                  <div class="point-barre-pointee"></div>
+                </div>
+                <div class="placement-talent-experience">
+                  <p class="experience-post"><%= experience.position %></p>
+                  <p class="experience-entreprise">GE TODO(Groupe international)</p>
+                  <p class="experience-duree"><%= experience.startig %> - <%= experience.currently ? "Aujourd’hui" : experience.years %></p>
+                  <p class="experience-desc"><%= experience.overview %></p>
+                </div>
               </div>
-              <div class="placement-talent-experience">
-                <p class="experience-post">Chef de projet Web et mobile</p>
-                <p class="experience-entreprise">GE (Groupe international)</p>
-                <p class="experience-duree">Mai 2015 - Aujourd’hui</p>
-                <p class="experience-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-            </div>
-            <div class="placement-point-barre">
-              <div>
-                <div class="point-barre-pointee"></div>
-              </div>
-              <div class="placement-talent-experience">
-                <p class="experience-post">CHEF DE PROJET WEB & MOBILE</p>
-                <p class="experience-entreprise">GE (Groupe international)</p>
-                <p class="experience-duree">Mai 2015 - Aujourd’hui</p>
-                <p class="experience-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-            </div>
-            <div class="placement-point-barre">
-              <div>
-                <div class="point-barre-pointee"></div>
-              </div>
-              <div class="placement-talent-experience">
-                <p class="experience-post">CHEF DE PROJET WEB & MOBILE</p>
-                <p class="experience-entreprise">GE (Groupe international)</p>
-                <p class="experience-duree">Mai 2015 - Aujourd’hui</p>
-                <p class="experience-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-            </div>
+            <% end %>
+
           </div>
         </div>
       </div>
@@ -134,36 +134,20 @@
         <div class="lower-body-item-content">
           <hr class="barre-pointee">
           <div class="talent-experiences">
-            <div class="placement-point-barre">
-              <div>
-                <div class="point-barre-pointee"></div>
+
+            <% @talent.talent_formations.each do |formation| %>
+              <div class="placement-point-barre">
+                <div>
+                  <div class="point-barre-pointee"></div>
+                </div>
+                <div class="placement-talent-experience">
+                  <p class="experience-post"><%= formation.title %></p>
+                  <p class="experience-entreprise"><%= formation.formation.title %></p>
+                  <p class="experience-duree"><%= formation.year %></p>
+                </div>
               </div>
-              <div class="placement-talent-experience">
-                <p class="experience-post">Master entrepreneuriat</p>
-                <p class="experience-entreprise">EM LYON</p>
-                <p class="experience-duree">Mai 2015 - Aujourd’hui</p>
-              </div>
-            </div>
-            <div class="placement-point-barre">
-              <div>
-                <div class="point-barre-pointee"></div>
-              </div>
-              <div class="placement-talent-experience">
-                <p class="experience-post">Master entrepreneuriat</p>
-                <p class="experience-entreprise">EM LYON</p>
-                <p class="experience-duree">Mai 2015 - Aujourd’hui</p>
-              </div>
-            </div>
-            <div class="placement-point-barre">
-              <div>
-                <div class="point-barre-pointee"></div>
-              </div>
-              <div class="placement-talent-experience">
-                <p class="experience-post">Master entrepreneuriat</p>
-                <p class="experience-entreprise">EM LYON</p>
-                <p class="experience-duree">Mai 2015 - Aujourd’hui</p>
-              </div>
-            </div>
+            <% end %>
+
           </div>
         </div>
       </div>
@@ -176,27 +160,3 @@
 
 <%= render "shared/footer" %>
 
-
-
-
-
-
-
-<!--
-
-<h2> Ici sera le profil de <%= @talent.firstname %> <%= @talent.name %></h2>
-
-
-<%= form_tag("/talents/2", method: 'get', remote: true, class: "form-stuff" ) do %>
-
-  <fieldset class="form-group">
-    <input type="hidden" name="talent[job_ids][]" value="">
-    <% Job.all.each do |job| %>
-      <input class="form-check-input is-valid check_boxes optional" type="checkbox" value="<%= job.id %>" checked="checked" name="talent[job_ids][]" id="talent_job_ids_<%= job.id %>">
-      <label class="collection_check_boxes" for="talent_job_ids_<%= job.id %>"><%= job.title %></label>
-    <% end %>
-    <input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
-  </fieldset>
-
-<% end %>
--->
