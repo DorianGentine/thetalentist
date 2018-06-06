@@ -7,6 +7,13 @@ class ConversationsController < ApplicationController
     @conversations = current_user.mailbox.conversations
 
 
+    @participant = @conversation.participants - [current_user]
+
+    @conversation.participants.each do |participant|
+
+    end
+
+
     authorize @conversation
   end
 
@@ -21,8 +28,5 @@ class ConversationsController < ApplicationController
       redirect_to conversation_path(receipt.conversation)
     end
   end
-
-private
-
 
 end

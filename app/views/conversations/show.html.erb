@@ -1,28 +1,44 @@
 <%= render "shared/navbar" %>
 
-
+<%  @current_user.relationships.each do |relationship| %>
+  <p> <%= relationship %></p>
+<% end %>
 
 <%  @conversations.each do |conversation| %>
-  <div>
+
+  <!-- div connexion pas encore accepté -->
+
+
+  <!-- div connexion accepté -->
+    <%= link_to conversation_path(conversation) do %>
+      <% parti = conversation.participants - [current_user] %><%= parti[0].firstname %> <br>
+      <%= truncate(conversation.messages.last.body, length: 20) %> <br>
+    <% end %>
 
 
 
-        <%= link_to conversation_path(conversation) do %>
-          <% parti = conversation.participants - [current_user] %>
-          <%= parti[0].firstname %> <br>
-          <%= truncate(conversation.messages.last.body, length: 20) %>
-        <% end %>
-  </div>
 <% end %>
 
 
 
+<!-- div Prénom Nom et poste  -->
 
-<h1><%= @conversation.subject %></h1>
+<h2><%= @participant[0].firstname.capitalize %> <%= @participant[0].name.capitalize %></h2>
+<p style="color: gray"> <%= @participant[0].experiences.last.position.capitalize %> </p>
+
+
+<!-- div link vers profil -->
+
+<%= link_to talent_path(@participant[0]) do %>
+  <p>Vous pouvez accéder au profil du talent</p><h6> Visiter le profil --> </h6>
+<% end %>
+
+
+<!-- div conversation -->
 
 <% @conversation.receipts_for(current_user).reverse_each do |receipt| %>
   <div>
-    <div><%= receipt.message.sender.firstname %> commented:</div>
+    <p><%= receipt.message.sender.firstname %> commented:</p>
     <p><%= receipt.message.body %></p>
   </div>
 <% end %>
@@ -32,3 +48,4 @@
   <%= text_area_tag :body %>
   <%= submit_tag %>
 <% end %>
+
