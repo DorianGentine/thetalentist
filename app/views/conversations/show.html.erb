@@ -29,15 +29,36 @@
   <div class="colonne col-centre bordure-droite">
     <div class="premiere-ligne nom-discussion">
       <!-- div Prénom Nom et poste  -->
-      <h2><%= @participant[0].firstname.capitalize %> <%= @participant[0].name.capitalize %></h2>
-      <p> <%= @participant[0].experiences.last.position.capitalize %> </p>
+      <% if @participant[0].is_a?(Headhunter) %>
+        <h2><%= @participant[0].firstname.capitalize %> de <%= @participant[0].startup.name.capitalize %></h2>
+        <p> <%= @participant[0].job.capitalize %> </p>
+      <% elsif @participant[0].is_a?(Talent)%>
+        <h2><%= @participant[0].firstname.capitalize %> <%= @participant[0].name.capitalize %></h2>
+        <p> <%= @participant[0].experiences.last.position.capitalize %> </p>
+
+      <% else %>
+        <h2><%= @participant[0].firstname.capitalize %> <%= @participant[0].name.capitalize %></h2>
+        <p> Chargé digitale TODO </p>
+      <% end %>
     </div>
     <div class="conversation">
+
       <!-- div link vers profil -->
-      <%= link_to talent_path(@participant[0]) do %>
-        <p>Vous pouvez accéder au profil du talent</p>
-        <p>Visiter le profil > </p>
+      <% if @participant[0].is_a?(Headhunter) %>
+        <%= link_to headhunter_path(@participant[0]) do %>
+          <p>Vous pouvez accéder au profil de la Start-up</p>
+          <p>Visiter le profil > </p>
+        <% end %>
+      <% elsif @participant[0].is_a?(Talent)%>
+        <%= link_to headhunter_path(@participant[0]) do %>
+          <p>Vous pouvez accéder au profil de la Start-up</p>
+          <p>Visiter le profil > </p>
+        <% end %>
+      <% else %>
+
       <% end %>
+
+
       <!-- div conversation -->
       <% @conversation.receipts_for(current_user).reverse_each do |receipt| %>
         <div class="message">
