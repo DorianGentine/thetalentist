@@ -27,7 +27,7 @@
       justify-content: center;
       align-items: center;
       p{
-        font-size: 120px;
+        font-size: 100px;
         font-weight: 900;
         margin: 0;
         color: white;
@@ -74,6 +74,7 @@
     border-radius: 4px;
     padding: 20px;
     margin-bottom: 30px;
+    position: relative;
     .right-up-item{
       width: 30%;
       margin: 0 10px;
@@ -82,7 +83,7 @@
         text-align: justify;
       }
     }
-    .recherche-item:last-child{
+    .recherche-item-center{
       align-self: center;
       display: flex;
       flex-direction: column;
@@ -91,6 +92,9 @@
   }
   .talent-right-down{
     height: 50%;
+    .lower-middle-body{
+      position: relative;
+    }
     .lower-middle-body:first-child{
       width: 60%;
       flex-grow: 1;
@@ -105,6 +109,44 @@
     }
   }
 }
+
+.btn-edition{
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  color: $green;
+  border: 1px solid $green;
+  transition: 0.5s;
+  span{
+    font-size: 14px;
+    position: relative;
+    display: inline-block;
+    padding: 0 7px;
+  }
+  span:after{
+    content: 'Modifier';
+    font-size: 14px;
+    margin-left: 10px;
+    color: white;
+    opacity: 0;
+    position: absolute;
+  }
+}
+.btn-edition:hover{
+  background-color: $green;
+  color: white;
+  width: 95px;
+  transition: all 0.5s;
+  span:after{
+    opacity: 1;
+    transition: all 0.5s;
+  }
+}
+
 
 .recherche-first-line{
   display: flex;
@@ -223,7 +265,12 @@
   border-color: #D33FE4;
 }
 
-
+.space-between-vertical{
+  height: calc(100% - 68px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 
 

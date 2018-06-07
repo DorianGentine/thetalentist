@@ -16,8 +16,10 @@
 
     <% else %>
 
-      <div class="photo-profil" style="background-image: url(logo.png);">
-        <p><%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %></p>
+      <div class="photo-profil">
+        <div class="initiale">
+          <p><%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %></p>
+        </div>
         <div class="statut"></div>
       </div>
 
@@ -76,8 +78,8 @@
 
 
   <div class="talent-right">
-    <p data-target= "modal_aventure" class= "modal-button"> édit</p>
     <div class="talent-right-up">
+      <p data-target= "modal_aventure" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
       <div class="right-up-item qui-suis-je">
         <h4>Qui suis-je ?</h4>
         <p><%= @talent.overview %></p>
@@ -88,33 +90,36 @@
       </div>
       <div class="right-up-item je-recherche">
         <h4>Je recherche</h4>
-        <div class="recherche-first-line">
-          <div class="recherche-item">
-            <h5><%= @talent.next_aventures.last.contrat %></h5>
-            <p>CONTRAT</p>
+        <div class="space-between-vertical">
+          <div class="recherche-first-line">
+            <div class="recherche-item">
+              <h5><%= @talent.next_aventures.last.contrat %></h5>
+              <p>CONTRAT</p>
+            </div>
+            <div class="recherche-item">
+              <h5><%= @talent.next_aventures.last.remuneration %></h5>
+              <p>SALAIRE (Annuel)</p>
+            </div>
           </div>
           <div class="recherche-item">
-            <h5><%= @talent.next_aventures.last.remuneration %></h5>
-            <p>SALAIRE (Annuel)</p>
-          </div>
-        </div>
-        <div class="recherche-item">
-          <% @sectors.each do |sector| %>
+            <h5>(TO DO)</h5>   <!-- A enlever quand fonction en dessous fonctionnera -->
+            <% @sectors.each do |sector| %>
               <h5><%= sector.sector.title.capitalize %></h5>
-          <% end %>
-          <p>SECTEURS</p>
-        </div>
-        <div class="recherche-item">
-          <div class="map-ville"></div>
-          <h5><%= @talent.next_aventures.last.city %></h5>
-          <p>VILLE</p>
+            <% end %>
+            <p>SECTEURS</p>
+          </div>
+          <div class="recherche-item recherche-item-center">
+            <div class="map-ville"></div>
+            <h5><%= @talent.next_aventures.last.city %></h5>
+            <p>VILLE</p>
+          </div>
         </div>
       </div>
     </div>
     <div class="talent-right-down lower-body">
       <div class="lower-middle-body">
         <h4><i class="far fa-file-alt"></i> EXPÉRIENCES</h4>
-        <p data-target= "modal_experience" class= "modal-button"> édit</p>
+        <p data-target= "modal_experience" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
           <!--  <#%= link_to 'edit', edit_talent_path(@talent), class:"edit-btn", id:"edit-experience" %> -->
 
 
@@ -141,7 +146,7 @@
       </div>
       <div class="lower-middle-body">
         <h4><i class="fas fa-graduation-cap"></i> FORMATIONS</h4>
-        <p data-target= "modal_formation" class= "modal-button"> édit</p>
+        <p data-target= "modal_formation" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
         <div class="lower-body-item-content">
           <hr class="barre-pointee">
           <div class="talent-experiences">
