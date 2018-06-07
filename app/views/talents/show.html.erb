@@ -33,7 +33,7 @@
       </div>
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="far fa-compass"></i></p>
-        <p>Marketing (TODO)</p>
+        <p><%= @talent.sectors.last.title %></p>
       </div>
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
@@ -80,7 +80,7 @@
         <p><%= @talent.overview %></p>
       </div>
       <div class="right-up-item le-job-de-reve">
-        <h4>Le job de rêve ! TODO</h4>
+        <h4>Le job de rêve !</h4>
         <p> <%= @talent.next_aventures.last.overview %></p>
       </div>
       <div class="right-up-item je-recherche">
@@ -120,7 +120,7 @@
                 <div class="placement-talent-experience">
                   <p class="experience-post"><%= experience.position %></p>
                   <p class="experience-entreprise">GE TODO(Groupe international)</p>
-                  <p class="experience-duree"><%= experience.startig %> - <%= experience.currently ? "Aujourd’hui" : experience.years %></p>
+                  <p class="experience-duree"><%= experience.starting %> - <%= experience.currently ? "Aujourd’hui" : experience.years %></p>
                   <p class="experience-desc"><%= experience.overview %></p>
                 </div>
               </div>

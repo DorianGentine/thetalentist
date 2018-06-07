@@ -35,8 +35,8 @@
           <p class="form-label">CV</p>
           <%= f.input :cv, label: false %>
           <%= f.input :cv_cache, as: :hidden %>
-          <p class="form-label">Secteur actuel</p>
-          <%= f.input :job_ids, collection:Job.all, label: false, placeholder:'Marketing'%>
+          <p class="form-label">Environnement métier</p>
+          <%= f.input :sector_ids, collection:Sector.all, label: false, placeholder:'Marketing'%>
         </div>
         <div class="form-line">
           <p class="form-label">Linkedin</p>
