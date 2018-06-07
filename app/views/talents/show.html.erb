@@ -1,5 +1,7 @@
 <%= render "shared/navbar" %>
-
+<%= render 'experience' %>
+<%= render 'aventure' %>
+<%= render 'formation' %>
 
 <div class="home-container container-show">
 
@@ -74,6 +76,7 @@
 
 
   <div class="talent-right">
+    <p data-target= "modal_aventure" class= "modal-button"> édit</p>
     <div class="talent-right-up">
       <div class="right-up-item qui-suis-je">
         <h4>Qui suis-je ?</h4>
@@ -92,27 +95,34 @@
           </div>
           <div class="recherche-item">
             <h5><%= @talent.next_aventures.last.remuneration %></h5>
-            <p>SALAIRE</p>
+            <p>SALAIRE (Annuel)</p>
           </div>
         </div>
         <div class="recherche-item">
-          <h5>FINANCE TODO</h5>
-          <p>SECTEUR</p>
+          <% @sectors.each do |sector| %>
+              <h5><%= sector.sector.title.capitalize %></h5>
+          <% end %>
+          <p>SECTEURS</p>
         </div>
         <div class="recherche-item">
           <div class="map-ville"></div>
-          <p><%= @talent.city %></p>
+          <h5><%= @talent.next_aventures.last.city %></h5>
+          <p>VILLE</p>
         </div>
       </div>
     </div>
     <div class="talent-right-down lower-body">
       <div class="lower-middle-body">
         <h4><i class="far fa-file-alt"></i> EXPÉRIENCES</h4>
+        <p data-target= "modal_experience" class= "modal-button"> édit</p>
+          <!--  <#%= link_to 'edit', edit_talent_path(@talent), class:"edit-btn", id:"edit-experience" %> -->
+
+
         <div class="lower-body-item-content">
           <hr class="barre-pointee" style="width: 5px;">
           <div class="talent-experiences">
 
-            <% @talent.experiences.each do |experience| %>
+            <% @experiences.reverse_each do |experience| %>
               <div class="placement-point-barre">
                 <div>
                   <div class="point-barre-pointee"></div>
@@ -131,11 +141,12 @@
       </div>
       <div class="lower-middle-body">
         <h4><i class="fas fa-graduation-cap"></i> FORMATIONS</h4>
+        <p data-target= "modal_formation" class= "modal-button"> édit</p>
         <div class="lower-body-item-content">
           <hr class="barre-pointee">
           <div class="talent-experiences">
 
-            <% @talent.talent_formations.each do |formation| %>
+            <% @talent_formations.reverse_each do |formation| %>
               <div class="placement-point-barre">
                 <div>
                   <div class="point-barre-pointee"></div>
