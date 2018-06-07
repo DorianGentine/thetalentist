@@ -39,6 +39,7 @@ class StepsTalentInfosController < ApplicationController
   end
 
   def talent_params
+    raise
     # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
      params.require(:talent).permit(
       :btoc,

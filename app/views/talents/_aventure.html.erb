@@ -1,0 +1,45 @@
+<div id="modal_aventure" class="modal modal-content">
+  <%= simple_form_for @talent, method: :put do |f| %>
+
+      <%= f.simple_fields_for :next_aventures do |u| %>
+      <div class="form-next_aventure">
+        <div class="bloc-next-aventure">
+          <div class="form-line form-line-next-aventure">
+            <p class="form-label label-next_aventure requis">Ville souhaitée</p>
+            <%= u.input :city, label: false, placeholder:"Paris" %>
+          </div>
+          <div class="form-line form-line-next-aventure">
+            <p class="form-label label-next_aventure requis">Type de contrat</p>
+            <%= u.input :contrat, label: false, placeholder:"Freelance" %>
+          </div>
+          <div class="form-line form-line-next-aventure">
+            <p class="form-label label-next_aventure requis">Rémunération</p>
+            <%= u.input :remuneration, label: false, placeholder: "100 000€" %>
+          </div>
+          <div class="form-line form-line-next-aventure form-secteur">
+            <p class="form-label label-next_aventure requis">Environnement métier souhaité<em>(max: 5)</em></p>
+            <%= u.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label: false %>
+          </div>
+        </div>
+        <div class="bloc-next-aventure bloc-next-aventure-right">
+          <p class="form-label label-next_aventure-lg requis">Le job de vos rêves ? <em>(50 mots max)</em></p>
+          <%= u.input :overview, label: false, placeholder: "Descrpition", as: :text %>
+          <p class="form-label label-next_aventure-lg requis">Un dernier mot ? <em>(50 mots max)</em></p>
+          <%= u.input :no_more, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+        </div>
+      </div>
+      <% end %>
+      <p class="form-label label-next_aventure-lg requis">Qui êtes-vous ? <em>(50 mots max)</em></p>
+        <%= f.input :overview, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+
+
+      <div class="form-actions">
+        <%= f.submit "Terminer", class: "b-btn form-btn form-btn-suivant" %>
+      </div>
+    <% end %>
+
+  <span class="close">
+    <p>&times;</p>
+  </span>
+
+</div>

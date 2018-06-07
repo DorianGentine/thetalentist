@@ -1,0 +1,33 @@
+<div id="modal_experience" class="modal modal-content">
+  <h1>Experiences</h1>
+  <%= simple_form_for @talent, method: :put do |f| %>
+    <%= f.simple_fields_for :experiences do |u| %>
+      <div class="form-line">
+        <p class="form-label requis">Expérience</p>
+        <%= u.input :company_name, label: false, placeholder:"Nom de l'entreprise" %>
+        <%= u.input :position, label: false, placeholder:"Intitulé du poste" %>
+        <%= u.input :currently %>
+      </div>
+      <div class="form-line">
+        <p class="form-label requis">De</p>
+        <%= u.input :starting, label: false %>
+        <p class="form-label" style="width: 0">À</p>
+        <%= u.input :years, label: false  %>
+        <!-- TODO button -->
+        <%= u.input :overview, label: false %>
+      </div>
+    <% end %>
+
+    <div class="form-actions">
+      <%= f.submit "Continuer", class: "b-btn form-btn form-btn-suivant" %>
+    </div>
+
+    <% end %>
+
+  <span class="close">
+    <p>&times;</p>
+  </span>
+
+</div>
+
+<!-- TODO ajouter un btn supprimer -->

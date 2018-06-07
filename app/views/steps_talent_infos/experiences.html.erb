@@ -17,9 +17,9 @@
       </div>
       <div class="form-line">
         <p class="form-label requis">De</p>
-        <%= u.input :starting, as: :date, html5: true, label: false %>
+        <%= u.input :starting, placeholder:"mai 2013 ou 2013", label: false %>
         <p class="form-label" style="width: 0">À</p>
-        <%= u.input :years, as: :date, html5: true, label: false  %>
+        <%= u.input :years, placeholder:"juin 2015 ou 2015", label: false  %>
         <!-- TODO button -->
         <%= u.button :submit, 'Ajouter une expérience +', { :class => "form-hobby-add"} %>
       </div>

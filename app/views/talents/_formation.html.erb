@@ -1,0 +1,50 @@
+<div id="modal_formation" class="modal modal-content">
+  <%= simple_form_for @talent, method: :put do |f| %>
+
+    <div id="formations">
+      <%= f.simple_fields_for :talent_formations do |u| %>
+        <div class="form-line form-formations">
+          <p class="form-label requis">Formation(s)</p>
+          <%= u.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
+          <%= u.input :title, placeholder: "Diplôme", label: false  %>
+          <%= u.input :year, collection: 1992..2018, prompt: "Année d'obtention", label: false   %>
+          <%= u.input :level, collection: 0..5, prompt: "Année d'obtention", label: false   %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-line">
+      <div class="form-semi-line">
+        <p class="form-label form-label-semi-line requis">Compétences techniques</p>
+        <div class="form-line">
+          <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class:"select2", multiple: "multiple"}, multiple: true, required: true %>
+          <p class="form-hobby-add simili-btn-A-VIRER">Ajouter +</p>
+        </div>
+      </div>
+
+      <div class="form-semi-line">
+        <p class="form-label form-label-semi-line requis">Compétences linguistiques</p>
+        <div class="form-line">
+          <%= f.simple_fields_for :talent_languages do |u| %>
+            <%= u.association :language, collection: Language.all, prompt:"Anglais", label: false, input_html: { class:"select2"}  %>
+            <%= u.input :level, collection: 0..5, prompt: "Niveau", label: false %>
+            <!-- TODO button -->
+            <%= u.button :submit, 'Ajouter +', { :class => "form-hobby-add"} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Continuer", class: "b-btn form-btn form-btn-suivant" %>
+    </div>
+
+
+  <% end %>
+
+  <!-- TODO ajouter un btn supprimer -->
+    <span class="close">
+    <p>&times;</p>
+  </span>
+
+</div>

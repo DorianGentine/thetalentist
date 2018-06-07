@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     passwords: 'talents/passwords',
     registrations: 'talents/registrations'
   }
-  resources :talents, only: [:show, :update]
+  resources :talents, only: [:show, :update, :destroy]
 
 
   # pour la messagerie
