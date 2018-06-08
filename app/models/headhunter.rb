@@ -14,6 +14,7 @@ class Headhunter < ApplicationRecord
   # for mailboxer
   acts_as_messageable
 
+
   validates :firstname, presence: true
   validates :job, presence: true
 

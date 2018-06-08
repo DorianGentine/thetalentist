@@ -13,13 +13,18 @@ Rails.application.routes.draw do
   get 'repertoire', to: "headhunters#repertory"
 
 
-
   devise_for :talents, path: 'talents', controllers: {
     sessions: 'talents/sessions',
     passwords: 'talents/passwords',
     registrations: 'talents/registrations'
   }
-  resources :talents, only: [:show, :update, :destroy]
+
+  resources :talents, only: [:show, :update]
+
+  resources :relationships, only: [:show, :index, :create] do
+    resources :talent_message, only: [:create]
+    resources :headhunter_message, only: [:create]
+
 
 
   # pour la messagerie
