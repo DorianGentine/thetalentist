@@ -9,6 +9,7 @@
       <h4>MESSAGERIE</h4>
     </div>
     <div class="index-talents">
+
       <%  @conversations.each do |conversation| %>
 
         <!-- div connexion pas encore accepté -->
@@ -29,30 +30,34 @@
   <div class="colonne col-centre bordure-droite">
     <div class="premiere-ligne nom-discussion">
       <!-- div Prénom Nom et poste  -->
-      <% if @participant[0].is_a?(Headhunter) %>
-        <h2><%= @participant[0].firstname.capitalize %> de <%= @participant[0].startup.name.capitalize %></h2>
-        <p> <%= @participant[0].job.capitalize %> </p>
-      <% elsif @participant[0].is_a?(Talent)%>
-        <h2><%= @participant[0].firstname.capitalize %> <%= @participant[0].name.capitalize %></h2>
-        <p> <%= @participant[0].experiences.last.position.capitalize %> </p>
+      <% if @participant.is_a?(Headhunter) %>
+        <h2><%= @participant.firstname.capitalize %> de <%= @participant.startup.name.capitalize %></h2>
+        <p> <%= @participant.job.capitalize %> </p>
+      <% elsif @participant.is_a?(Talent)%>
+        <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
+        <p> <%= @participant.experiences.last.position.capitalize %> </p>
 
       <% else %>
-        <h2><%= @participant[0].firstname.capitalize %> <%= @participant[0].name.capitalize %></h2>
+        <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
         <p> Chargé digitale TODO </p>
       <% end %>
     </div>
     <div class="conversation">
 
       <!-- div link vers profil -->
-      <% if @participant[0].is_a?(Headhunter) %>
-        <%= link_to headhunter_path(@participant[0]) do %>
-          <p>Vous pouvez accéder au profil de <%= @participant[0].startup.name.capitalize %></p>
+
+      <% if current_user.is_a?(Talent) %>
+
+        <%= link_to headhunter_path(@participant) do %>
+          <p>Vous pouvez accéder au profil de <%= @participant.startup.name.capitalize %></p>
           <p>Visiter le profil > </p>
         <% end %>
-      <% elsif @participant[0].is_a?(Talent)%>
-        <%= link_to headhunter_path(@participant[0]) do %>
-          <p>Vous pouvez accéder au profil de <%= @participant[0].firstname.capitalize %></p>
-          <p>Visiter le profil > </p>
+      <% elsif current_user.is_a?(Headhunter)%>
+        <% if @relationship && @relationship.status == "Accepter" %>
+          <%= link_to headhunter_path(@participant) do %>
+            <p>Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
+            <p>Visiter le profil > </p>
+          <% end %>
         <% end %>
       <% else %>
 
@@ -61,16 +66,30 @@
 
       <!-- div conversation -->
       <% @conversation.receipts_for(current_user).each do |receipt| %>
-        <div class="message">
-          <% if receipt.message.sender.photo %>
-            <%= image_tag receipt.message.sender.photo, :transformation=>[ :gravity=>"face"] %>
-          <% else %>
-            <p><%= receipt.message.sender.firstname.split(//).first.upcase %>
-             <!--  <#%= receipt.message.sender.name.split(//).first.upcase %> --></p>
-          <% end %>
-          <p><%= receipt.message.sender.firstname %> commented:</p>
-          <p><%= receipt.message.body %></p>
-        </div>
+
+        <!-- partie gauche -->
+        <% if receipt.message.sender == (@participant) %>
+          <div class="message left">
+            <% if receipt.message.sender.photo %>
+              <%= image_tag receipt.message.sender.photo, :transformation=>[ :gravity=>"face"] %>
+            <% else %>
+              <p><%= receipt.message.sender.firstname.split(//).first.upcase %>
+            <% end %>
+            <p><%= receipt.message.sender.firstname %> commented:</p>
+            <p><%= receipt.message.body %></p>
+          </div>
+        <!-- partie droite -->
+        <% else %>
+          <div class="message right">
+            <% if receipt.message.sender.photo %>
+              <%= image_tag receipt.message.sender.photo, :transformation=>[ :gravity=>"face"] %>
+            <% else %>
+              <p><%= receipt.message.sender.firstname.split(//).first.upcase %>
+            <% end %>
+            <p><%= receipt.message.sender.firstname %> commented:</p>
+            <p><%= receipt.message.body %></p>
+          </div>
+        <% end %>
       <% end %>
     </div>
     <div class="boite-envoi">
@@ -82,15 +101,16 @@
 
     <!-- div accepter la relation -->
 
-    <% if current_user.is_a?(Talent) %>
-      <% if current_talent.relationships.last.status == "pending"  %>
-        <%= simple_form_for current_talent, methode: :get do |f| %>
-          <%= f.simple_fields_for :relationships do |u| %>
-            <%= u.button :submit, inline_label: "Accepter" %>
-            <%= u.button :submit, inline_label: "Refuser" %>
+    <% if current_user.is_a?(Talent) && @connexion %>
+      <% if @relationship.status == "pending"  %>
+        <%= simple_form_for :current_user, method: :put do |f| %>
+          <%= f.simple_fields_for @relationship do |u| %>
+            <%= u.submit "Accepter" %>
+            <%= u.submit "Refuser" %>
           <% end %>
         <% end %>
       <% end %>
+    <% else %>
     <% end %>
 
   </div>

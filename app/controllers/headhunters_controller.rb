@@ -5,7 +5,6 @@ class HeadhuntersController < ApplicationController
     @headhunter = current_headhunter
     @talents = Talent.all.order(updated_at: :desc)
     authorize @headhunter
-
   end
 
   def show
@@ -18,3 +17,8 @@ private
 
   end
 end
+
+
+
+
+

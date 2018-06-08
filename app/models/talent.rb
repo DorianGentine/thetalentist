@@ -51,6 +51,7 @@ class Talent < ApplicationRecord
 
   has_many :relationships, dependent: :destroy
   has_many :headhunters, through: :relationships
+  has_many :talentists, through: :relationships
 
 
   # for mailboxer
@@ -58,8 +59,6 @@ class Talent < ApplicationRecord
 
   # link with pdf_uploader
   mount_uploader :cv, PdfUploader
-
-
 
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0

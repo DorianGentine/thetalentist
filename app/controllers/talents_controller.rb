@@ -8,6 +8,7 @@ class TalentsController < ApplicationController
     @experiences = @talent.experiences.order(:years)
     @talent_formations = @talent.talent_formations.order(:year)
     @sectors = @talent.next_aventures.last.next_aventure_sectors
+
   end
 
   def update
@@ -21,10 +22,13 @@ class TalentsController < ApplicationController
         @headhunter.send_message(@talent, "#{@headhunter.firstname}, souhaite rentrer en contact avec vous", "#{@headhunter.firstname}")
         flash[:success] = "Relationship was created!"
         redirect_to repertoire_path
-      else
-
       end
       authorize @headhunter
+
+    elsif current_talent.relationships.last.status == "pending"
+
+      raise
+      @relationship = Relationship.where("headhunter_id = ? AND talent_id = ?", @participant[0].id, current_user.id)
     else
       @talent = Talent.find(params[:id])
       @talent.update_attributes(talent_params)

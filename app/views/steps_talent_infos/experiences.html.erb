@@ -7,7 +7,6 @@
   <h2 class="form-titre-page"><i class="far fa-file-alt"></i> Quel est votre expérience <strong>en entreprise</strong> ?</h2>
 
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
-
     <%= f.simple_fields_for :experiences do |u| %>
       <div class="form-line">
         <p class="form-label requis">Expérience</p>
@@ -40,6 +39,7 @@
         <!-- TODO button -->
         <%= u.button :submit, 'Ajouter une expérience +', { :class => "form-hobby-add"} %>
       </div>
+      <%= f.error_notification message: 'INFORMATIONS NON COMPLÈTES!', id: 'user_error_message', class: 'form_error' %>
     <% end %>
 
     <div class="form-actions">

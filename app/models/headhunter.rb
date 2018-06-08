@@ -9,7 +9,7 @@ class Headhunter < ApplicationRecord
 
   has_many :relationships, dependent: :destroy
   has_many :talents, through: :relationships
-
+  has_many :talentists, through: :relationships
 
   # for mailboxer
   acts_as_messageable
