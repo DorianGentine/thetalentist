@@ -18,11 +18,18 @@ Rails.application.routes.draw do
     passwords: 'talents/passwords',
     registrations: 'talents/registrations'
   }
+
   resources :talents, only: [:show, :update]
 
   resources :relationships, only: [:show, :index, :create] do
     resources :talent_message, only: [:create]
     resources :headhunter_message, only: [:create]
+
+
+
+  # pour la messagerie
+  resources :conversations do
+    resources :messages, only: [ :create ]
   end
 
   root to: 'pages#home'

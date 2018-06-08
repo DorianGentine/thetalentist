@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   skip_before_action :current_user, only: [ :home ]
 
   def home
-    # @talents = Talent.all
+
   end
 
 end

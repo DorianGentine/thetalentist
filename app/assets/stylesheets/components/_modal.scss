@@ -122,6 +122,19 @@ h4{
   margin: 0 0 40px 0;
 }
 
+
+.lower-left-body{
+  h5{
+    color: $green;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: oblique;
+    margin: 0;
+  }
+  p{
+    margin-bottom: 30px;
+  }
+}
 .lower-body{
   width: 100%;
   height: 430px;
@@ -139,18 +152,6 @@ h4{
   .lower-body-item-content{
     height: calc(100% - 69px);
   }
-  .lower-left-body{
-    h5{
-      color: $green;
-      font-size: 16px;
-      font-weight: 600;
-      font-style: oblique;
-      margin: 0;
-    }
-    p{
-      margin-bottom: 30px;
-    }
-  }
   .lower-middle-body{
     .lower-body-item-content{
       display: flex;
@@ -167,9 +168,15 @@ h4{
         }
         .experience-entreprise{
           font-style: oblique;
+          color: $green;
         }
         .experience-duree{
           font-weight: 300;
+        }
+        .experience-desc{
+          font-size: 14px;
+          font-weight: 100;
+          text-align: justify;
         }
       }
     }
@@ -208,6 +215,10 @@ h4{
       text-transform: capitalize;
     }
   }
+}
+
+.talent-info-item p{
+  text-transform: capitalize;
 }
 
 /* CSS pour barre pointée */

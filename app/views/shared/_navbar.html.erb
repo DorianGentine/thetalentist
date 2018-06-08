@@ -7,11 +7,13 @@
   <!-- Right Navigation -->
   <div class="navbar-talentist-right hidden-xs hidden-sm">
 
-    <% if headhunter_signed_in? %>
+    <% if headhunter_signed_in? && @current_user %>
 
       <!-- Links when logged in -->
       <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "MESSAGERIE", relationships_path, class: "navbar-wagon-item navbar-wagon-link" %>
+
+      <%= link_to "MESSAGERIE", conversation_path(@current_user.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
+
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
@@ -19,7 +21,7 @@
           <%= image_tag "http://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
-              <%= link_to headhunter_path(@headhunter) do %>
+              <%= link_to headhunter_path(@current_user) do %>
                 <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
               <% end %>
             </li>
@@ -38,10 +40,12 @@
       </div>
 
 
-    <% elsif talent_signed_in? %>
-<!-- Links when logged in -->
+    <% elsif talent_signed_in? && @current_user %>
+
       <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "MESSAGERIE", relationships_path, class: "navbar-wagon-item navbar-wagon-link" %>
+
+      <%= link_to "MESSAGERIE", conversation_path(@current_user.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
+
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
@@ -49,7 +53,7 @@
           <%= image_tag "http://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
-              <%= link_to talent_path(@talent) do %>
+              <%= link_to talent_path(@current_user) do %>
                 <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
               <% end %>
             </li>
@@ -66,11 +70,13 @@
           </ul>
         </div>
       </div>
+    <% else %>
+      <%= link_to "REVENIR  À LA PAGE DE CONNEXION", root_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
   </div>
 
   <!-- Dropdown list appearing on mobile only -->
-  <div class="navbar-wagon-item hidden-md hidden-lg">
+  <div class="navbar-wagon-item hidden-450px hidden-md hidden-lg">
     <div class="dropdown">
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
@@ -80,5 +86,44 @@
       </ul>
     </div>
   </div>
+
+  <!-- Menu appearing at page bottom -->
+  <div class="bottom-menu">
+    <% if headhunter_signed_in? %>
+
+      <!-- Links when logged in -->
+      <div class="bottom-menu-item">
+        <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      </div>
+      <div class="bottom-menu-item">
+        <%= link_to "MESSAGERIE", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      </div>
+      <div class="bottom-menu-item">
+        <a href=""><i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i></a>
+      </div>
+
+    <% elsif talent_signed_in? %>
+
+      <div class="bottom-menu-item">
+        <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      </div>
+      <div class="bottom-menu-item">
+        <%= link_to "MESSAGERIE", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      </div>
+      <div class="bottom-menu-item">
+        <a href=""><i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i></a>
+      </div>
+
+    <% end %>
+
+
+  </div>
 </div>
+
+
+
+
+
+
+
 

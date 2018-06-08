@@ -17,7 +17,7 @@ class Talent < ApplicationRecord
   has_many :talent_formations, dependent: :destroy
   has_many :formations, through: :talent_formations
   has_many :talent_formations, inverse_of: :talent
-  accepts_nested_attributes_for :talent_formations, allow_destroy: true
+  accepts_nested_attributes_for :talent_formations, allow_destroy: true, reject_if: proc { |att| att['title'].blank? }
 
   has_many :talent_keywords, dependent: :destroy
   has_many :keywords, through: :talent_keywords
@@ -55,9 +55,13 @@ class Talent < ApplicationRecord
   has_many :talent_messages, dependent: :destroy
   # has_many :relationships, through: :talent_messages
 
+  # for mailboxer
+  acts_as_messageable
 
   # link with pdf_uploader
   mount_uploader :cv, PdfUploader
+
+
 
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0

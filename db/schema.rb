@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_04_120228) do
+ActiveRecord::Schema.define(version: 2018_06_08_090254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_120228) do
     t.bigint "talent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "starting"
     t.index ["talent_id"], name: "index_experiences_on_talent_id"
   end
 
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_120228) do
     t.bigint "startup_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo"
     t.index ["email"], name: "index_headhunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_headhunters_on_reset_password_token", unique: true
     t.index ["startup_id"], name: "index_headhunters_on_startup_id"
@@ -163,6 +165,24 @@ ActiveRecord::Schema.define(version: 2018_06_04_120228) do
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
   end
 
+  create_table "next_aventure_jobs", force: :cascade do |t|
+    t.bigint "next_aventure_id"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_next_aventure_jobs_on_job_id"
+    t.index ["next_aventure_id"], name: "index_next_aventure_jobs_on_next_aventure_id"
+  end
+
+  create_table "next_aventure_sectors", force: :cascade do |t|
+    t.bigint "next_aventure_id"
+    t.bigint "sector_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["next_aventure_id"], name: "index_next_aventure_sectors_on_next_aventure_id"
+    t.index ["sector_id"], name: "index_next_aventure_sectors_on_sector_id"
+  end
+
   create_table "next_aventures", force: :cascade do |t|
     t.string "city"
     t.string "contrat"
@@ -179,11 +199,11 @@ ActiveRecord::Schema.define(version: 2018_06_04_120228) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.boolean "connected_to"
     t.bigint "talent_id"
     t.bigint "headhunter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
     t.index ["headhunter_id"], name: "index_relationships_on_headhunter_id"
     t.index ["talent_id"], name: "index_relationships_on_talent_id"
   end
@@ -331,6 +351,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_120228) do
     t.boolean "super_admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo"
     t.index ["email"], name: "index_talentists_on_email", unique: true
     t.index ["reset_password_token"], name: "index_talentists_on_reset_password_token", unique: true
   end
@@ -359,6 +380,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_120228) do
     t.boolean "visible"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo"
     t.index ["email"], name: "index_talents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_talents_on_reset_password_token", unique: true
   end
@@ -376,6 +398,10 @@ ActiveRecord::Schema.define(version: 2018_06_04_120228) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "next_aventure_jobs", "jobs"
+  add_foreign_key "next_aventure_jobs", "next_aventures"
+  add_foreign_key "next_aventure_sectors", "next_aventures"
+  add_foreign_key "next_aventure_sectors", "sectors"
   add_foreign_key "next_aventures", "talents"
   add_foreign_key "relationships", "headhunters"
   add_foreign_key "relationships", "talents"

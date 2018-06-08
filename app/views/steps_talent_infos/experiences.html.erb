@@ -17,9 +17,26 @@
       </div>
       <div class="form-line">
         <p class="form-label requis">De</p>
-        <%= u.input :position, as: :date, html5: true, label: false %>
+        <%= u.input :starting, placeholder:"mai 2013 ou 2013", label: false %>
         <p class="form-label" style="width: 0">À</p>
-        <%= u.input :years, as: :date, html5: true, label: false  %>
+        <%= u.input :years, placeholder:"juin 2015 ou 2015", label: false  %>
+        <!-- TODO button -->
+        <%= u.button :submit, 'Ajouter une expérience +', { :class => "form-hobby-add"} %>
+      </div>
+    <% end %>
+
+     <%= f.simple_fields_for :experiences do |u| %>
+      <div class="form-line">
+        <p class="form-label requis">Expérience</p>
+        <%= u.input :company_name, label: false, placeholder:"Nom de l'entreprise" %>
+        <%= u.input :position, label: false, placeholder:"Intitulé du poste" %>
+        <%= u.input :currently %>
+      </div>
+      <div class="form-line">
+        <p class="form-label requis">De</p>
+        <%= u.input :starting, placeholder:"mai 2013 ou 2013", label: false %>
+        <p class="form-label" style="width: 0">À</p>
+        <%= u.input :years, placeholder:"juin 2015 ou 2015", label: false  %>
         <!-- TODO button -->
         <%= u.button :submit, 'Ajouter une expérience +', { :class => "form-hobby-add"} %>
       </div>

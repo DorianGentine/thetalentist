@@ -1,0 +1,112 @@
+.fenetre-ecran{
+  display: flex;
+  height: calc(100vh - 70px);
+  width: 100vw;
+}
+
+.col-gauche{
+  width: 25%;
+}
+.col-centre{
+  width: 55%;
+}
+.col-droite{
+  width: 20%;
+}
+
+.premiere-ligne{
+  height: 90px;
+  border-bottom: 1px solid $gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h4{
+    margin: 0;
+  }
+}
+
+.index-talents{
+  padding: 20px;
+  a{
+    margin: 10px 0;
+  }
+}
+
+.nom-discussion{
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 20px;
+  h2{
+    font-size: 20px;
+  }
+  p{
+    color: $gray;
+    font-weight: 100;
+    font-style: oblique;
+  }
+}
+
+.conversation{
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  position: relative;
+  overflow: auto;
+  a{
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    background-color: lightgray;
+    width: 100%;
+    padding: 20px;
+    p{
+      margin: 0;
+      color: darkgray;
+    }
+    p:last-child{
+      color: $green;
+      font-weight: 600;
+    }
+  }
+  a:hover{
+    text-decoration: none;
+    background-color: $green;
+    transition: background-color ease-in-out 0.15s;
+    p:last-child{
+      color: $red;
+      transition: color ease-in-out 0.15s;
+    }
+  }
+  .message{
+    max-width: 75%;
+
+    p:first-child{
+      font-size: 12px;
+      color: $gray;
+      text-align: end;
+      margin: 0;
+    }
+    p:last-child{
+      background-color: $green;
+      border-radius: 8px;
+    }
+  }
+}
+
+.boite-envoi{
+  input, button, select, textarea {
+    color: black;
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+

@@ -5,6 +5,11 @@ class HeadhunterPolicy < ApplicationPolicy
     end
   end
 
+  # def index?
+  #   user == record
+  #   true
+  # end
+
   def new?
     true
   end

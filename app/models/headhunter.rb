@@ -10,13 +10,15 @@ class Headhunter < ApplicationRecord
   has_many :relationships, dependent: :destroy
   has_many :talents, through: :relationships
 
-  has_many :headhunter_messages, dependent: :destroy
-  # has_many :relationships, through: :headhunter_messages
 
+  # for mailboxer
+  acts_as_messageable
 
 
   validates :firstname, presence: true
   validates :job, presence: true
 
-
+  def mailboxer_email(object)
+   #return the model's email here
+  end
 end

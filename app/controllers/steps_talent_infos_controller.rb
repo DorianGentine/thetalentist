@@ -20,7 +20,6 @@ class StepsTalentInfosController < ApplicationController
     # Si tu as un problème de validation pour créer talent
     # @talent.status = step.to_s
     # @talent.status = 'active' if step == steps.last
-
     if @talent.update(talent_params)
       render_wizard @talent
     else
@@ -48,7 +47,7 @@ class StepsTalentInfosController < ApplicationController
       job_ids: [],
       experiences_attributes: Experience.attribute_names.map(&:to_sym).push(:_destroy),
       next_aventures_attributes: NextAventure.attribute_names.map(&:to_sym).push(:_destroy),
-      talent_formations_attributes: [ :title, :year, :formation_id],
+      talent_formations_attributes: [ :id, :title, :year, :formation_id],
       talent_languages_attributes: [ :level, :language_id],
       techno_ids: [],
       sector_ids: []
