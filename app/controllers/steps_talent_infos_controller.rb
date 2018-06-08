@@ -39,7 +39,6 @@ class StepsTalentInfosController < ApplicationController
   end
 
   def talent_params
-    raise
     # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
      params.require(:talent).permit(
       :btoc,
@@ -48,7 +47,7 @@ class StepsTalentInfosController < ApplicationController
       job_ids: [],
       experiences_attributes: Experience.attribute_names.map(&:to_sym).push(:_destroy),
       next_aventures_attributes: NextAventure.attribute_names.map(&:to_sym).push(:_destroy),
-      talent_formations_attributes: [ :title, :year, :formation_id],
+      talent_formations_attributes: [ :id, :title, :year, :formation_id],
       talent_languages_attributes: [ :level, :language_id],
       techno_ids: [],
       sector_ids: []
