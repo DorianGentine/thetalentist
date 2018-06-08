@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_08_090254) do
+ActiveRecord::Schema.define(version: 2018_06_08_122258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,8 +204,10 @@ ActiveRecord::Schema.define(version: 2018_06_08_090254) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
+    t.bigint "talentist_id"
     t.index ["headhunter_id"], name: "index_relationships_on_headhunter_id"
     t.index ["talent_id"], name: "index_relationships_on_talent_id"
+    t.index ["talentist_id"], name: "index_relationships_on_talentist_id"
   end
 
   create_table "sectors", force: :cascade do |t|
@@ -404,6 +406,7 @@ ActiveRecord::Schema.define(version: 2018_06_08_090254) do
   add_foreign_key "next_aventure_sectors", "sectors"
   add_foreign_key "next_aventures", "talents"
   add_foreign_key "relationships", "headhunters"
+  add_foreign_key "relationships", "talentists"
   add_foreign_key "relationships", "talents"
   add_foreign_key "talent_formations", "formations"
   add_foreign_key "talent_formations", "talents"

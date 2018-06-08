@@ -18,7 +18,7 @@
         <div class="form-line form-compte">
           <p class="form-label requis">Compte</p>
           <%= f.input :email, required: true, autofocus: true, placeholder: "exemple@gmail.com", label: false  %>
-          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", label: false %>
+          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", label: false %><%= f.error_notification %>
           <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false %>
         </div>
         <div class="form-line form-phone">
@@ -32,9 +32,6 @@
       </div>
       <div class="form-inputs-2">
         <div class="form-line">
-          <p class="form-label">CV</p>
-          <%= f.input :cv, label: false %>
-          <%= f.input :cv_cache, as: :hidden %>
           <p class="form-label">Environnement métier</p>
           <%= f.input :sector_ids, collection:Sector.all, label: false, placeholder:'Marketing'%>
         </div>

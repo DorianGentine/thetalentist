@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :headhunters, only: [:show, :update, :index]
   # show is to display the profil and update to edit it
   # le repertoire est la où on affiche tous les talents
+
   get 'repertoire', to: "headhunters#repertory"
 
 
@@ -28,7 +29,7 @@ Rails.application.routes.draw do
 
 
   # pour la messagerie
-  resources :conversations do
+  resources :conversations, only: [ :show, :update, :create, :new] do
     resources :messages, only: [ :create ]
   end
 

@@ -51,6 +51,7 @@ class Talent < ApplicationRecord
   # messagerie
   has_many :relationships, dependent: :destroy
   has_many :headhunters, through: :relationships
+  has_many :talentists, through: :relationships
 
   has_many :talent_messages, dependent: :destroy
   # has_many :relationships, through: :talent_messages
@@ -60,8 +61,6 @@ class Talent < ApplicationRecord
 
   # link with pdf_uploader
   mount_uploader :cv, PdfUploader
-
-
 
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
