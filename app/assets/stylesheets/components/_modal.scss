@@ -48,6 +48,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    .btn{
+      opacity: 0;
+      width: 140px;
+      height: 40px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .en-relation{
+    width: 240px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid white;
   }
 }
 .modal-header:before, .modal-header:after {
@@ -66,7 +81,7 @@
   height: 192px;
   display: flex;
   .upper-left-body{
-    width: 60%;
+    width: 70%;
     height: 100%;
     padding: 30px 30px 30px 0;
     display: flex;
@@ -95,7 +110,7 @@
   }
   .upper-right-body{
     height: 100%;
-    width: 40%;
+    width: 30%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -103,7 +118,7 @@
       font-size: 50px;
       color: $green;
       font-weight: bold;
-      margin-right: 10%;
+      margin: 0;
       z-index: 1;
     }
     .illu-modal{
@@ -137,7 +152,6 @@ h4{
 }
 .lower-body{
   width: 100%;
-  height: 430px;
   display: flex;
   justify-content: space-between;
   .lower-body-item{
@@ -190,10 +204,25 @@ h4{
     align-items: center;
     justify-content: center;
     margin: auto;
+    position: relative;
     p{
       color: white;
       margin: 0;
     }
+    .btn{
+      opacity: 0;
+      width: 140px;
+      height: 40px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .en-relation{
+    width: 240px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid white;
   }
 }
 .lower-right-body{
@@ -286,7 +315,6 @@ h4{
 @media screen and (max-width: 960px) {
   .lower-body{
     flex-wrap: wrap;
-    height: 630px;
     .lower-body-item{
       width: 45%;
       height: 430px;
@@ -307,41 +335,41 @@ h4{
     display: none;
   }
   .lower-body{
-    height: 800px;
    .contact-btn {
       display: flex
+    }
+    .en-relation{
+      width: 240px;
+      background-color: rgba(0, 0, 0, 0);
+      border: 2px solid $violet;
+      p{
+        color: $violet;
+      }
     }
   }
 }
 
 @media screen and (max-width: 660px) {
   .upper-body{
-    height: 220px;
+    height: unset;
     .upper-left-body{
       .talent-info{
         flex-wrap: wrap;
-        justify-content: space-around;
-        .talent-info-item-33{
-          width: 33%;
-        }
-        .talent-info-item-33:nth-child(2){
-          justify-content: center;
-        }
-        .talent-info-item-33:nth-child(3){
-          justify-content: flex-end;
+        .talent-info-item{
+          margin: 0 10px;
         }
       }
       .talent-school{
-        height: 70px;
+        height: 100px;
         flex-direction: column;
         .talent-school-item{
           font-size: calc(12px + 0.5vw);
+          padding: 0 10px;
         }
       }
     }
   }
   .lower-body{
-    height: 1122px;
     display: block;
     .lower-body-item{
       width: 100%;

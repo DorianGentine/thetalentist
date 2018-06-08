@@ -1,0 +1,28 @@
+#modal_aventure, #modal_experience, #modal_formation{
+  .modal-header{
+    margin-bottom: 30px;
+  }
+  .form-actions{
+    margin: 40px;
+  }
+}
+
+#modal_formation{
+  .form-group{
+    width: 20%;
+  }
+  .form-semi-line .form-group{
+    width: unset;
+  }
+  .flex-vertical{
+    align-items: flex-start;
+  }
+}
+
+.inline-flex{
+  display: inline-flex;
+  align-items: center;
+}
+.flex-vertical{
+  flex-direction: column;
+}
