@@ -59,9 +59,7 @@ class Talent < ApplicationRecord
   # link with pdf_uploader
   mount_uploader :cv, PdfUploader
 
-  def mailboxer_email(object)
-   #return the model's email here
-  end
+
 
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0

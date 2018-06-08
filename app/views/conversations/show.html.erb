@@ -46,12 +46,12 @@
       <!-- div link vers profil -->
       <% if @participant[0].is_a?(Headhunter) %>
         <%= link_to headhunter_path(@participant[0]) do %>
-          <p>Vous pouvez accéder au profil de la Start-up</p>
+          <p>Vous pouvez accéder au profil de <%= @participant[0].startup.name.capitalize %></p>
           <p>Visiter le profil > </p>
         <% end %>
       <% elsif @participant[0].is_a?(Talent)%>
         <%= link_to headhunter_path(@participant[0]) do %>
-          <p>Vous pouvez accéder au profil de la Start-up</p>
+          <p>Vous pouvez accéder au profil de <%= @participant[0].firstname.capitalize %></p>
           <p>Visiter le profil > </p>
         <% end %>
       <% else %>
@@ -60,8 +60,14 @@
 
 
       <!-- div conversation -->
-      <% @conversation.receipts_for(current_user).reverse_each do |receipt| %>
+      <% @conversation.receipts_for(current_user).each do |receipt| %>
         <div class="message">
+          <% if receipt.message.sender.photo %>
+            <%= image_tag receipt.message.sender.photo, :transformation=>[ :gravity=>"face"] %>
+          <% else %>
+            <p><%= receipt.message.sender.firstname.split(//).first.upcase %>
+             <!--  <#%= receipt.message.sender.name.split(//).first.upcase %> --></p>
+          <% end %>
           <p><%= receipt.message.sender.firstname %> commented:</p>
           <p><%= receipt.message.body %></p>
         </div>
@@ -73,6 +79,20 @@
         <%= submit_tag %>
       <% end %>
     </div>
+
+    <!-- div accepter la relation -->
+
+    <% if current_user.is_a?(Talent) %>
+      <% if current_talent.relationships.last.status == "pending"  %>
+        <%= simple_form_for current_talent, methode: :get do |f| %>
+          <%= f.simple_fields_for :relationships do |u| %>
+            <%= u.button :submit, inline_label: "Accepter" %>
+            <%= u.button :submit, inline_label: "Refuser" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
   </div>
 
   <div class="colonne col-droite">
