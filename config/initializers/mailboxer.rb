@@ -4,7 +4,7 @@ Mailboxer.setup do |config|
   config.uses_emails = true
 
   # test
-  config.email_method = :email
+  # config.email_method = :email
 
   #Configures the default from for emails sent for Messages and Notifications
   config.default_from = "no-reply@mailboxer.com"
