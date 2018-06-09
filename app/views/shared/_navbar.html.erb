@@ -78,6 +78,41 @@
           </ul>
         </div>
       </div>
+    <% elsif talentist_signed_in? && current_talentist %>
+
+      <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+
+      <%= link_to "TALENTS", talents_path, class: "navbar-wagon-item navbar-wagon-link" %>
+
+
+      <!-- Avatar with dropdown menu -->
+      <div class="navbar-wagon-item">
+        <div class="dropdown">
+          <% if current_talentist.photo.present? %>
+            <%= cl_image_tag current_talent.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <% else %>
+            <%= image_tag "http://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <% end %>
+          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+            <!-- <li>
+              <#%= link_to talent_path(current_talent) do %>
+                <i class="fa fa-user"></i> <#%= t(".profile", default: "Profile") %>
+              <#% end %>
+            </li> -->
+            <!-- <li>
+              <#%= link_to "#" do %>
+                <i class="fa fa-cog"></i>  <#%= t(".settings", default: "Settings") %>
+              <#% end %>
+            </li> -->
+            <li>
+              <%= link_to destroy_talentist_session_path, method: :delete do %>
+                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+
     <% else %>
       <%= link_to "REVENIR  À LA PAGE DE CONNEXION", root_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>

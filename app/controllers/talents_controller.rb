@@ -1,5 +1,11 @@
 class TalentsController < ApplicationController
 
+  def index
+    @talentist = current_talentist
+    @talents = Talent.all
+    authorize @talentist
+  end
+
   def show
     @talents = Talent.all
     @talent = Talent.find(params[:id])
@@ -14,7 +20,7 @@ class TalentsController < ApplicationController
   def update
     if @headhunter = current_headhunter
       @relationship = Relationship.new
-      @headhunter = @current_headhunter
+      # @headhunter = @current_headhunter
       @talent = Talent.find(params[:id])
 
       @relationship = Relationship.create(headhunter_id:@headhunter.id, talent_id:@talent.id, status:"pending")

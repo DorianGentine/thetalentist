@@ -4,20 +4,22 @@
 
     <div class="modal-header">
       <h3><%= talent.experiences.last.position.capitalize %></h3>
-<!-- <#% if @headhunter.talents.first == talent %>  -->
-      <% if talent.is_connected_to?(@headhunter) %>
-        <div class="contact-btn en-relation">
-          <p>Vous êtes déjà en relation</p>
-        </div>
-      <% else %>
-        <div class="contact-btn">
-          <%= simple_form_for talent, methode: :get do |f| %>
-            <p>Contacter <i class="fas fa-location-arrow"></i></p>
-            <%= f.simple_fields_for :relationships do |u| %>
-              <%= u.button :submit, inline_label: "Contacter 2" %>
+      <% if current_user.is_a?(Headhunter) %>
+        <% raise %>
+        <% if talent.is_connected_to?(@headhunter) %>
+          <div class="contact-btn en-relation">
+            <p>Vous êtes déjà en relation</p>
+          </div>
+        <% else %>
+          <div class="contact-btn">
+            <%= simple_form_for talent, methode: :get do |f| %>
+              <p>Contacter <i class="fas fa-location-arrow"></i></p>
+              <%= f.simple_fields_for :relationships do |u| %>
+                <%= u.button :submit, inline_label: "Contacter 2" %>
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       <% end %>
 
       <span class="close">
@@ -138,19 +140,22 @@
         </div>
 
 
-        <% if talent.is_connected_to?(@headhunter) %>
-          <div class="contact-btn en-relation">
-            <p>Vous êtes déjà en relation</p>
-          </div>
-        <% else %>
-          <div class="contact-btn">
-            <%= simple_form_for talent, methode: :get do |f| %>
-              <p>Contacter <i class="fas fa-location-arrow"></i></p>
-              <%= f.simple_fields_for :relationships do |u| %>
-                <%= u.button :submit, inline_label: "Contacter 2" %>
+        <!-- C'est utile ? -->
+        <% if current_user.is_a?(Headhunter) %>
+          <% if talent.is_connected_to?(@headhunter) %>
+            <div class="contact-btn en-relation">
+              <p>Vous êtes déjà en relation</p>
+            </div>
+          <% else %>
+            <div class="contact-btn">
+              <%= simple_form_for talent, methode: :get do |f| %>
+                <p>Contacter <i class="fas fa-location-arrow"></i></p>
+                <%= f.simple_fields_for :relationships do |u| %>
+                  <%= u.button :submit, inline_label: "Contacter 2" %>
+                <% end %>
               <% end %>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
