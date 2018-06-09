@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     registrations: 'talents/registrations'
   }
 
-  resources :talents, only: [:show, :update]
+  resources :talents, only: [:show, :update, :index]
 
   # resources :relationships, only: [:show, :index, :create] do
   #   resources :talent_message, only: [:create]

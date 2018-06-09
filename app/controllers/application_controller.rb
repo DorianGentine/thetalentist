@@ -21,8 +21,15 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate!
-   :authenticate_talent! || :authenticate_headhunter!
-    @current_user = talent_signed_in? ? current_talent : current_headhunter
+   :authenticate_talent! || :authenticate_headhunter! || :authenticate_talentist!
+    # @current_user = talent_signed_in? ? current_talent : current_headhunter
+    if talent_signed_in?
+      @current_user = current_talent
+    elsif talentist_signed_in?
+      @current_user = current_talentist
+    else
+      @current_user = current_headhunter
+    end
   end
 
   # def current_user
@@ -33,7 +40,9 @@ class ApplicationController < ActionController::Base
   def current_user
     if current_talent
       @current_talent
-     else
+    elsif current_talentist
+      @current_talentist
+    else
       @current_headhunter
     end
   end
@@ -47,8 +56,12 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if resource.is_a?(Headhunter)
       repertoire_path
-    else
+    elsif resource.is_a?(Talent)
       talent_path(resource)
+    elsif resource.is_a?(Talentist)
+      talents_path
+    else
+      new
     end
   end
 

@@ -5,6 +5,7 @@ class TalentPolicy < ApplicationPolicy
     end
   end
 
+
   def new?
     true
   end
