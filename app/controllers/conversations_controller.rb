@@ -1,7 +1,6 @@
 class ConversationsController < ApplicationController
 
-  # test
-  # config.email_method = :email
+
 
   def show
 

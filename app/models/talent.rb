@@ -1,8 +1,15 @@
 class Talent < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise  :database_authenticatable,
+          :registerable,
+          :recoverable,
+          :rememberable,
+          :trackable,
+          :validatable
+
+  validates_confirmation_of :password
+
 
   # Tu devras ajouter les lignes has_many :xx through: :xx pour tous les champs que le talent devra remplir dans le questionnaire
   has_many :talent_sectors, dependent: :destroy
@@ -61,6 +68,7 @@ class Talent < ApplicationRecord
 
   # link with pdf_uploader
   mount_uploader :cv, PdfUploader
+  mount_uploader :photo, PhotoUploader
 
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0

@@ -265,10 +265,10 @@ doctolib = Startup.create!(name: "doctolib", year_of_creation: 2010, collaborato
 
 p "Creating Headhunter part"
 
-lucas = Headhunter.create!(email: "lucas@hotmail.fr", password:"password", firstname: "lucas", job:"HR", validated: true, startup: backmarket)
-amelie = Headhunter.create!(email: "amelie@hotmail.fr", password:"password", firstname: "amelie", job:"HR data_analyst", validated: false, startup: manomano)
-justine = Headhunter.create!(email: "justine@hotmail.fr", password:"password", firstname: "justine", job:"drh", validated: true, startup: doctolib)
-loic = Headhunter.create!(email: "loic@hotmail.fr", password:"password", firstname: "loic", job:"rh for sales and product owner", validated: true, startup: doctolib)
+lucas = Headhunter.create!(email: "lucas@hotmail.fr", password:"password", name: "Rideau", firstname: "lucas", job:"HR", validated: true, startup: backmarket)
+amelie = Headhunter.create!(email: "amelie@hotmail.fr", password:"password", name: "Rideau", firstname: "amelie", job:"HR data_analyst", validated: false, startup: manomano)
+justine = Headhunter.create!(email: "justine@hotmail.fr", password:"password", name: "Rideau", firstname: "justine", job:"drh", validated: true, startup: doctolib)
+loic = Headhunter.create!(email: "loic@hotmail.fr", password:"password", name: "Rideau", firstname: "loic", job:"rh for sales and product owner", validated: true, startup: doctolib)
 
 
 

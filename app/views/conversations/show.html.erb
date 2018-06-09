@@ -47,14 +47,15 @@
       <!-- div link vers profil -->
 
       <% if current_user.is_a?(Talent) %>
-
-        <%= link_to headhunter_path(@participant) do %>
-          <p>Vous pouvez accéder au profil de <%= @participant.startup.name.capitalize %></p>
-          <p>Visiter le profil > </p>
+        <% if @participant.is_a?(Headhunter) %>
+          <%= link_to headhunter_path(@participant) do %>
+            <p>Vous pouvez accéder au profil de <%= @participant.startup.name.capitalize %></p>
+            <p>Visiter le profil > </p>
+          <% end %>
         <% end %>
       <% elsif current_user.is_a?(Headhunter)%>
         <% if @relationship && @relationship.status == "Accepter" %>
-          <%= link_to headhunter_path(@participant) do %>
+          <%= link_to talent_path(@participant) do %>
             <p>Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
             <p>Visiter le profil > </p>
           <% end %>
@@ -65,15 +66,15 @@
 
 
       <!-- div conversation -->
-      <% @conversation.receipts_for(current_user).each do |receipt| %>
+      <% @conversation.receipts_for(current_user).reverse_each do |receipt| %>
 
         <!-- partie gauche -->
-        <% if receipt.message.sender == (@participant) %>
+        <% if receipt.message.sender == @participant %>
           <div class="message left">
-            <% if receipt.message.sender.photo %>
-              <%= image_tag receipt.message.sender.photo, :transformation=>[ :gravity=>"face"] %>
+            <% if @participant.photo.present? %>
+              <%= cl_image_tag @participant.photo.url(:bright_face) %>
             <% else %>
-              <p><%= receipt.message.sender.firstname.split(//).first.upcase %>
+              <p><%= @participant.firstname.split(//).first.upcase %>
             <% end %>
             <p><%= receipt.message.sender.firstname %> commented:</p>
             <p><%= receipt.message.body %></p>
@@ -81,10 +82,10 @@
         <!-- partie droite -->
         <% else %>
           <div class="message right">
-            <% if receipt.message.sender.photo %>
-              <%= image_tag receipt.message.sender.photo, :transformation=>[ :gravity=>"face"] %>
+            <% if current_user.photo.present? %>
+              <%= cl_image_tag current_user.photo.url(:bright_face) %>
             <% else %>
-              <p><%= receipt.message.sender.firstname.split(//).first.upcase %>
+              <p><%= current_user.firstname.split(//).first.upcase %>
             <% end %>
             <p><%= receipt.message.sender.firstname %> commented:</p>
             <p><%= receipt.message.body %></p>
