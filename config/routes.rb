@@ -22,11 +22,10 @@ Rails.application.routes.draw do
 
   resources :talents, only: [:show, :update]
 
-  resources :relationships, only: [:show, :index, :create] do
-    resources :talent_message, only: [:create]
-    resources :headhunter_message, only: [:create]
-
-
+  # resources :relationships, only: [:show, :index, :create] do
+  #   resources :talent_message, only: [:create]
+  #   resources :headhunter_message, only: [:create]
+  # end
 
   # pour la messagerie
   resources :conversations, only: [ :show, :update, :create, :new] do

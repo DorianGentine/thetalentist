@@ -51,3 +51,5 @@ gem 'carrierwave', '~> 1.2'
 # Pour la fonction adresse de la startup
 gem "geocoder"
 
+# add for messagerie system
+gem 'mailboxer'
