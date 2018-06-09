@@ -35,6 +35,7 @@ class Talents::RegistrationsController < Devise::RegistrationsController
       :phone,
       :email,
       :password,
+      :password_confirmation,
       :cv,
       :linkedin,
       :sector_ids,

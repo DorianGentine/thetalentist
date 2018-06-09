@@ -8,11 +8,11 @@ class TalentsController < ApplicationController
     @experiences = @talent.experiences.order(:years)
     @talent_formations = @talent.talent_formations.order(:year)
     @sectors = @talent.next_aventures.last.next_aventure_sectors
-
+    @credentials = @talent.credentials
   end
 
   def update
-    if @headhunter = @current_headhunter
+    if @headhunter = current_headhunter
       @relationship = Relationship.new
       @headhunter = @current_headhunter
       @talent = Talent.find(params[:id])
@@ -25,10 +25,9 @@ class TalentsController < ApplicationController
       end
       authorize @headhunter
 
-    elsif current_talent.relationships.last.status == "pending"
+    # elsif current_talent.relationships.last.status == "pending"
 
-      raise
-      @relationship = Relationship.where("headhunter_id = ? AND talent_id = ?", @participant[0].id, current_user.id)
+    #   @relationship = Relationship.where("headhunter_id = ? AND talent_id = ?", @participant[0].id, current_user.id)
     else
       @talent = Talent.find(params[:id])
       @talent.update_attributes(talent_params)
@@ -43,6 +42,7 @@ private
     # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
      params.require(:talent).permit(
       :overview,
+      :photo,
       experiences_attributes:[ :id, :company_name, :years, :starting, :overview, :position, :currently],
       talent_formations_attributes:[ :id, :title, :year, :level, :formation_id],
       next_aventures_attributes:[ :id, :remuneration, :contrat, :overview, :city, :no_more, sector_ids: [] ]

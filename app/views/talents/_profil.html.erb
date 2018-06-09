@@ -1,0 +1,33 @@
+<div id="modal_profil" class="modal">
+  <div class="modal-content">
+    <%= simple_form_for @talent, method: :put do |f| %>
+      <div class="form-line form-nom">
+        <p class="form-label requis">Nom</p>
+        <%= f.input :firstname, required: true, autofocus: true, placeholder: "Prénom", label: false, :input_html => { :class => "prenom"} %>
+        <%= f.input :name, required: true, autofocus: true, placeholder: "Nom", label: false %>
+      </div>
+      <div class="form-line form-phone">
+        <p class="form-label requis">Téléphone</p>
+        <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: false %>
+      </div>
+      <div class="form-line form-ville">
+        <p class="form-label requis">Adresse</p>
+        <%= f.input :city, required: true, autofocus: true, placeholder: "Ville", label: false %>
+      </div>
+      <div class="form-line">
+        <p class="form-label">Linkedin</p>
+        <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: false %>
+        <p class="form-label form-hobby">Loisir <em>(max.5)</em></p>
+        <%= f.input :hobby_ids, collection: Hobby.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label: false %>
+        <!-- TODO button -->
+        <%= f.button :submit, 'Ajouter +', { :class => "form-hobby-add"} %>
+      </div>
+      <%= f.simple_fields_for :talent_skills do |u| %>
+        <%= u.input :skill, collection: Skill.all, label: false, input_html: { class:"select2", multiple: "multiple"}  %>
+      <% end %>
+      <%= f.simple_fields_for :talent_hobbies do |u| %>
+        <%= u.input :hobby, collection: Hobby.all, label: false, input_html: { class:"select2", multiple: "multiple"}  %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

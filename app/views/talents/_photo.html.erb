@@ -1,0 +1,17 @@
+<div id="modal_photo" class="modal">
+
+  <div class="modal-content">
+
+    <%= simple_form_for @talent, method: :put do |f| %>
+      <%= f.input :photo %>
+      <%= f.input :photo_cache, as: :hidden %>
+      <div class="form-actions">
+        <%= f.submit "Continuer", class: "b-btn form-btn form-btn-suivant" %>
+      </div>
+
+    <% end %>
+
+  </div>
+
+
+</div>
