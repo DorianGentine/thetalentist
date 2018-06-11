@@ -7,16 +7,27 @@ class ConversationsController < ApplicationController
     # 1. Liste des conversations dont la relationship n'est pas acceptée = construire @pending_conversations
     # Les messages des recruteurs avec lesquels j'ai une relationship "pending"
     # user = current_user
-    pending_relationships = Relationship.where(talent_id: current_user.id).where(status: "pending")
-    pending_headhunters_ids = []
+    if current_user == Headhunter
+      pending_relationships = Relationship.where(talent_id: current_user.id).where(status: "pending")
+      pending_ids = []
+      pending_relationships.each do |relationship|
+        pending_ids << relationship.headhunter_id
+      end
+    else
+      pending_relationships = Relationship.where(headhunter_id: current_user.id).where(status: "pending")
+      pending_ids = []
+      pending_relationships.each do |relationship|
+        pending_ids << relationship.talent_id
+      end
+    end
     pending_relationships.each do |relationship|
-      pending_headhunters_ids << relationship.headhunter_id
+      pending_ids << relationship.headhunter_id
     end
     @pending_conversations = []
     conversations = current_user.mailbox.conversations
     conversations.each do |conversation|
       headhunter = (conversation.participants - [current_user]).first
-      if pending_headhunters_ids.include?(headhunter.id)
+      if pending_ids.include?(headhunter.id)
         @pending_conversations << conversation
       end
     end
@@ -75,10 +86,8 @@ class ConversationsController < ApplicationController
   private
 
   def user_conversation
-
     @conversation = current_user.mailbox.conversations.find(params[:id])
     @conversations = current_user.mailbox.conversations
-
     authorize @conversation
   end
 

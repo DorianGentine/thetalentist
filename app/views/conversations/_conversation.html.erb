@@ -1,0 +1,15 @@
+<%= link_to conversation_path(conversation) do %>
+  <div class="conversation-card">
+    <div class="photo-profil">
+      <div class="initiale">
+        <p><% parti = conversation.participants - [current_user] %><%= parti[0].firstname.split(//).first.upcase %></p>
+      </div>
+      <div class="statut"></div>
+    </div>
+
+    <div class="conversation-text">
+      <p class="prenom-contact"><% parti = conversation.participants - [current_user] %><%= parti[0].firstname %></p>
+      <p class="aperçu-message"><%= truncate(conversation.messages.last.body, length: 20) %></p>
+    </div>
+  </div>
+<% end %>

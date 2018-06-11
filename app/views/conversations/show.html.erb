@@ -11,52 +11,24 @@
     <div class="index-talents">
 
       <h3>EN ATTENTE</h3>
+        <%  @pending_conversations.each do |conversation| %>
+         <%= render 'conversation', :conversation => conversation %>
+        <% end %>
       <h3>CONTACTÉS</h3>
 
-      <%  @conversations.each do |conversation| %>
-
-        <!-- div connexion pas encore accepté -->
-
-
-        <!-- div connexion accepté -->
-          <%= link_to conversation_path(conversation) do %>
-            <div class="conversation-card">
-              <div class="photo-profil">
-                <div class="initiale">
-                  <p><% parti = conversation.participants - [current_user] %><%= parti[0].firstname.split(//).first.upcase %></p>
-                </div>
-                <div class="statut"></div>
-              </div>
-
-              <div class="conversation-text">
-                <p class="prenom-contact"><% parti = conversation.participants - [current_user] %><%= parti[0].firstname %></p>
-                <p class="aperçu-message"><%= truncate(conversation.messages.last.body, length: 20) %></p>
-              </div>
-            </div>
-      <% @pending_conversations.each do |conversation| %>
-        <%= link_to conversation_path(conversation) do %>
-            <% parti = conversation.participants - [current_user] %><%= parti[0].firstname %> <br>
-            <%= truncate(conversation.messages.last.body, length: 20) %> <br>
-          <% end %>
+      <br>
+      <%  @unread_conversations.reverse_each do |conversation| %>
+        <%= render 'conversation', :conversation => conversation %>
       <% end %>
-
-    <br>
-    <br>
-
-    <%  @unread_conversations.reverse_each do |conversation| %>
-      <%= link_to conversation_path(conversation) do %>
-        <% parti = conversation.participants - [current_user] %><%= parti[0].firstname %> <br>
-        <%= truncate(conversation.messages.last.body, length: 20) %> <br>
-      <% end %>
-    <% end %>
 
     <br>
 
       <%  @read_accepted_conversations.reverse_each do |conversation| %>
-        <%= link_to conversation_path(conversation) do %>
-          <% parti = conversation.participants - [current_user] %><%= parti[0].firstname %> <br>
-          <%= truncate(conversation.messages.last.body, length: 20) %> <br>
-        <% end %>
+        <%= render 'conversation', :conversation => conversation %>
+      <% end %>
+
+      <%  @read_accepted_conversations.reverse_each do |conversation| %>
+        <%= render 'conversation', :conversation => conversation %>
       <% end %>
     </div>
   </div>
@@ -134,12 +106,13 @@
     </div>
     <div class="boite-envoi">
 
-      <%= form_tag conversation_messages_path(@conversation), method: :post do %>
-        <%= text_area_tag :body, "Écrivez votre message..." %>
-        <i class="far fa-image"></i>
+      <%= form_for @message, url: conversation_messages_path(@conversation) do |f|  %>
+        <%= f.text_area :body, placeholder: "Écrivez votre message..." %>
+        <i class="far fa-image"><%= f.file_field :attachment %></i>
         <i class="fas fa-paperclip"></i>
-        <%= submit_tag "Envoyer" %>
+        <%= f.submit "Envoyer" %>
       <% end %>
+
     <!-- div accepter la relation -->
 
         <% if current_user.is_a?(Talent) && @connexion %>
