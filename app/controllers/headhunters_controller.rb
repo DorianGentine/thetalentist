@@ -3,8 +3,13 @@ class HeadhuntersController < ApplicationController
 
   def repertory
     @headhunter = current_headhunter
-    @talents = Talent.all.order(updated_at: :desc)
     authorize @headhunter
+    if params[:tag].blank?
+      @talents = Talent.all.order(updated_at: :desc)
+    else
+      # les talents dont le job est : params[:tag]
+      @talents = Talent.all.order(updated_at: :desc)
+    end
   end
 
   def show
@@ -12,7 +17,7 @@ class HeadhuntersController < ApplicationController
     authorize @headhunter
   end
 
-private
+  private
   def params_job
 
   end
