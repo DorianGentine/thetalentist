@@ -16,7 +16,11 @@ class RelationshipsController < ApplicationController
 
   # end
 
-  # def create
-  #   raise
-  # end
+  def create
+    raise
+    # 1. Tu crées la relation
+
+    # 2. Tu initialises la conversation
+
+  end
 end
