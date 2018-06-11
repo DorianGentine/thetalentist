@@ -12,6 +12,7 @@ class MessagesController < ApplicationController
       )
     # pour récupérer le fichier attaché :
     # receipt.message.attachment.url --> "http://res.cloudinary.com/da4nnrzbu/image/upload/v1528733299/jhwimkdrds6gs4pxhvyw.jpg"
+
     redirect_to conversation_path(receipt.conversation)
     authorize @conversation
   end

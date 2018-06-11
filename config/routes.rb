@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   # end
 
   # pour la messagerie
-  resources :conversations, only: [ :show, :update, :create, :new] do
+  resources :conversations, only: [ :show, :update, :create] do
     resources :messages, only: [ :create ]
   end
 
