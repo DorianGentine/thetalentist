@@ -9,20 +9,31 @@
       <h4>MESSAGERIE</h4>
     </div>
     <div class="index-talents">
-
-      <%  @conversations.each do |conversation| %>
-
-        <!-- div connexion pas encore accepté -->
-
-
-        <!-- div connexion accepté -->
-          <%= link_to conversation_path(conversation) do %>
+      <% @pending_conversations.each do |conversation| %>
+        <%= link_to conversation_path(conversation) do %>
             <% parti = conversation.participants - [current_user] %><%= parti[0].firstname %> <br>
             <%= truncate(conversation.messages.last.body, length: 20) %> <br>
           <% end %>
 
+      <% end %>
 
+    <br>
+    <br>
 
+    <%  @unread_conversations.reverse_each do |conversation| %>
+      <%= link_to conversation_path(conversation) do %>
+        <% parti = conversation.participants - [current_user] %><%= parti[0].firstname %> <br>
+        <%= truncate(conversation.messages.last.body, length: 20) %> <br>
+      <% end %>
+    <% end %>
+
+    <br>
+
+      <%  @read_accepted_conversations.reverse_each do |conversation| %>
+        <%= link_to conversation_path(conversation) do %>
+          <% parti = conversation.participants - [current_user] %><%= parti[0].firstname %> <br>
+          <%= truncate(conversation.messages.last.body, length: 20) %> <br>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -94,11 +105,9 @@
       <% end %>
     </div>
     <div class="boite-envoi">
-      <%= simple_form_for conversation_messages_path(@conversation), method: :post do |f| %>
-        <%= f.input :body %>
-        <%= f.input :attachment %>
-        <%= f.input :attachment, as: :hidden %>
-        <%= f.submit %>
+      <%= form_tag conversation_messages_path(@conversation), method: :post do %>
+        <%= text_area_tag :body %>
+        <%= submit_tag %>
       <% end %>
     </div>
 
