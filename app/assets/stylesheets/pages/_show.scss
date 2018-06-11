@@ -7,41 +7,9 @@
   width: 340px;
   display: inline-block;
   margin: 0 90px 0 0;
+  position: relative;
   > div{
     margin-bottom: 30px;
-  }
-  .photo-profil{
-    width: 192px;
-    height: 192px;
-    border-radius: 100px;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    .initiale{
-      height: 100%;
-      width: 100%;
-      border-radius: 100px;
-      background-color: $gray;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      p{
-        font-size: 100px;
-        font-weight: 900;
-        margin: 0;
-        color: white;
-      }
-    }
-    .statut{
-      width: 48px;
-      height: 48px;
-      background-color: $green;
-      border-radius: 30px;
-      border: 4px solid white;
-      position: absolute;
-      bottom: 0;
-      z-index: 1;
-    }
   }
   .talent-name{
     h1{
@@ -56,6 +24,55 @@
       margin: 0;
       font-weight: 100;
     }
+  }
+  .credentials{
+    background-color: $green;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    p{
+      color: white;
+      margin: 0;
+      font-size: 18px;
+      font-weight: 100;
+    }
+  }
+  .credentials:hover{
+    cursor: pointer;
+  }
+}
+
+.photo-profil{
+  width: 192px;
+  height: 192px;
+  border-radius: 100px;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  .initiale{
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    background-color: $gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p{
+      font-size: 100px;
+      font-weight: 900;
+      margin: 0;
+      color: white;
+    }
+  }
+  .statut{
+    width: 48px;
+    height: 48px;
+    background-color: $green;
+    border-radius: 30px;
+    border: 4px solid white;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
   }
 }
 

@@ -1,5 +1,14 @@
 <div id="modal_profil" class="modal">
   <div class="modal-content">
+
+    <div class="modal-header">
+      <h3>Modifiez vos infos</h3>
+
+      <span class="close">
+        <p>&times;</p>
+      </span>
+    </div>
+
     <%= simple_form_for @talent, method: :put do |f| %>
       <div class="form-line form-nom">
         <p class="form-label requis">Nom</p>
@@ -17,17 +26,24 @@
       <div class="form-line">
         <p class="form-label">Linkedin</p>
         <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: false %>
+      </div>
+      <div class="form-line loisir-comp">
         <p class="form-label form-hobby">Loisir <em>(max.5)</em></p>
-        <%= f.input :hobby_ids, collection: Hobby.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label: false %>
+        <%= f.input :hobby_ids, collection: Hobby.all, input_html: { class:"select2", multiple: "multiple", style: "width: 100%;" }, include_blank: true, label: false %>
         <!-- TODO button -->
         <%= f.button :submit, 'Ajouter +', { :class => "form-hobby-add"} %>
       </div>
-      <%= f.simple_fields_for :talent_skills do |u| %>
-        <%= u.input :skill, collection: Skill.all, label: false, input_html: { class:"select2", multiple: "multiple"}  %>
-      <% end %>
-      <%= f.simple_fields_for :talent_hobbies do |u| %>
-        <%= u.input :hobby, collection: Hobby.all, label: false, input_html: { class:"select2", multiple: "multiple"}  %>
-      <% end %>
+      <div class="form-line loisir-comp">
+        <p class="form-label form-hobby">Compétences <em>(max.5)</em></p>
+        <%= f.simple_fields_for :talent_skills do |u| %>
+          <%= u.input :skill, collection: Skill.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 100%;" }  %>
+        <% end %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit "Terminer", class: "b-btn form-btn form-btn-suivant" %>
+      </div>
+
     <% end %>
   </div>
 </div>

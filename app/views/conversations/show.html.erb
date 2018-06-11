@@ -9,12 +9,35 @@
       <h4>MESSAGERIE</h4>
     </div>
     <div class="index-talents">
+
+      <h3>EN ATTENTE</h3>
+      <h3>CONTACTÉS</h3>
+
+      <%  @conversations.each do |conversation| %>
+
+        <!-- div connexion pas encore accepté -->
+
+
+        <!-- div connexion accepté -->
+          <%= link_to conversation_path(conversation) do %>
+            <div class="conversation-card">
+              <div class="photo-profil">
+                <div class="initiale">
+                  <p><% parti = conversation.participants - [current_user] %><%= parti[0].firstname.split(//).first.upcase %></p>
+                </div>
+                <div class="statut"></div>
+              </div>
+
+              <div class="conversation-text">
+                <p class="prenom-contact"><% parti = conversation.participants - [current_user] %><%= parti[0].firstname %></p>
+                <p class="aperçu-message"><%= truncate(conversation.messages.last.body, length: 20) %></p>
+              </div>
+            </div>
       <% @pending_conversations.each do |conversation| %>
         <%= link_to conversation_path(conversation) do %>
             <% parti = conversation.participants - [current_user] %><%= parti[0].firstname %> <br>
             <%= truncate(conversation.messages.last.body, length: 20) %> <br>
           <% end %>
-
       <% end %>
 
     <br>
@@ -53,80 +76,90 @@
         <p> Chargé digitale TODO </p>
       <% end %>
     </div>
-    <div class="conversation">
 
       <!-- div link vers profil -->
 
-      <% if current_user.is_a?(Talent) %>
-        <% if @participant.is_a?(Headhunter) %>
-          <%= link_to headhunter_path(@participant) do %>
-            <p>Vous pouvez accéder au profil de <%= @participant.startup.name.capitalize %></p>
-            <p>Visiter le profil > </p>
+
+    <div class="conversation">
+      <div class="link-profil">
+        <% if current_user.is_a?(Talent) %>
+          <% if @participant.is_a?(Headhunter) %>
+            <%= link_to headhunter_path(@participant) do %>
+              <p>Vous pouvez accéder au profil de <%= @participant.startup.name.capitalize %></p>
+              <p>Visiter le profil > </p>
+            <% end %>
           <% end %>
-        <% end %>
-      <% elsif current_user.is_a?(Headhunter)%>
-        <% if @relationship && @relationship.status == "Accepter" %>
-          <%= link_to talent_path(@participant) do %>
-            <p>Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
-            <p>Visiter le profil > </p>
+        <% elsif current_user.is_a?(Headhunter)%>
+          <% if @relationship && @relationship.status == "Accepter" %>
+            <%= link_to talent_path(@participant) do %>
+              <p>Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
+              <p>Visiter le profil > </p>
+            <% end %>
           <% end %>
+        <% else %>
+
         <% end %>
-      <% else %>
-
-      <% end %>
-
-
+      </div>
       <!-- div conversation -->
       <% @conversation.receipts_for(current_user).reverse_each do |receipt| %>
 
         <!-- partie gauche -->
         <% if receipt.message.sender == @participant %>
           <div class="message left">
-            <% if @participant.photo.present? %>
-              <%= cl_image_tag @participant.photo.url(:bright_face) %>
-            <% else %>
-              <p><%= @participant.firstname.split(//).first.upcase %>
-            <% end %>
-            <p><%= receipt.message.sender.firstname %> commented:</p>
-            <p><%= receipt.message.body %></p>
+            <div class="avatar">
+              <% if @participant.photo.present? %>
+                <%= cl_image_tag @participant.photo.url(:bright_face) %>
+              <% else %>
+                <p><%= @participant.firstname.split(//).first.upcase %>
+              <% end %>
+            </div>
+            <p class="x-commented"><%= receipt.message.sender.firstname %></p>
+            <p class="the-message"><%= receipt.message.body %></p>
           </div>
         <!-- partie droite -->
         <% else %>
           <div class="message right">
-            <% if current_user.photo.present? %>
-              <%= cl_image_tag current_user.photo.url(:bright_face) %>
-            <% else %>
-              <p><%= current_user.firstname.split(//).first.upcase %>
-            <% end %>
-            <p><%= receipt.message.sender.firstname %> commented:</p>
-            <p><%= receipt.message.body %></p>
+            <div class="avatar">
+              <% if current_user.photo.present? %>
+                <%= cl_image_tag current_user.photo.url(:bright_face) %>
+              <% else %>
+                <p><%= current_user.firstname.split(//).first.upcase %>
+              <% end %>
+            </div>
+            <p class="x-commented"><%= receipt.message.sender.firstname %></p>
+            <p class="the-message"><%= receipt.message.body %></p>
           </div>
         <% end %>
       <% end %>
     </div>
     <div class="boite-envoi">
 
-      <%= form_for @message, url: conversation_messages_path(@conversation) do |f| %>
-        <div><%= f.text_area :body %></div>
-        <div><%= f.file_field :attachment %></div>
-        <%= f.submit %>
-
+      <%= form_tag conversation_messages_path(@conversation), method: :post do %>
+        <%= text_area_tag :body, "Écrivez votre message..." %>
+        <i class="far fa-image"></i>
+        <i class="fas fa-paperclip"></i>
+        <%= submit_tag "Envoyer" %>
       <% end %>
-    </div>
-
     <!-- div accepter la relation -->
 
-    <% if current_user.is_a?(Talent) && @connexion %>
-      <% if @relationship.status == "pending"  %>
-        <%= simple_form_for :current_user, method: :put do |f| %>
-          <%= f.simple_fields_for @relationship do |u| %>
-            <%= u.submit "Accepter" %>
-            <%= u.submit "Refuser" %>
+        <% if current_user.is_a?(Talent) && @connexion %>
+          <% if @relationship.status == "pending"  %>
+            <div class="accept-relation">
+              <%= simple_form_for :current_user, method: :put do |f| %>
+                <%= f.simple_fields_for @relationship do |u| %>
+                  <%= u.submit "Accepter" %>
+                  <%= u.submit "Refuser" %>
+                <% end %>
+              <% end %>
+            </div>
           <% end %>
+        <% else %>
         <% end %>
-      <% end %>
-    <% else %>
-    <% end %>
+
+    </div>
+
+
+
 
   </div>
 
