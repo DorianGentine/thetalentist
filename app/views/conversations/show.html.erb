@@ -105,9 +105,12 @@
       <% end %>
     </div>
     <div class="boite-envoi">
-      <%= form_tag conversation_messages_path(@conversation), method: :post do %>
-        <%= text_area_tag :body %>
-        <%= submit_tag %>
+
+      <%= form_for @message, url: conversation_messages_path(@conversation) do |f| %>
+        <div><%= f.text_area :body %></div>
+        <div><%= f.file_field :attachment %></div>
+        <%= f.submit %>
+
       <% end %>
     </div>
 

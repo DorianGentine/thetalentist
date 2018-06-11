@@ -47,6 +47,10 @@ class ConversationsController < ApplicationController
       relationship = Relationship.where("headhunter_id = ? AND talent_id = ?", current_user.id, @participant.id)
       @relationship = relationship[0]
     end
+
+
+    # Partie création d'un message
+    @message = Mailboxer::Message.new
   end
 
   def update
