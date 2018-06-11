@@ -5,7 +5,7 @@
     <div class="modal-header">
       <h3><%= talent.experiences.last.position.capitalize %></h3>
       <% if current_user.is_a?(Headhunter) %>
-        <% raise %>
+        <!-- <#% raise %> -->
         <% if talent.is_connected_to?(@headhunter) %>
           <div class="contact-btn en-relation">
             <p>Vous êtes déjà en relation</p>

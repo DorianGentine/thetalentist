@@ -10,17 +10,23 @@
 
   <div class="talent-left">
     <% if current_user.is_a?(Talent) %>
-      <p data-target= "modal_photo" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
+      <p data-target= "modal_profil" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
     <% end %>
     <% if @talent.photo.present? %>
 
       <div class="photo-profil" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
+        <% if current_user.is_a?(Talent) %>
+          <p data-target= "modal_photo" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
+        <% end %>
         <div class="statut"></div>
       </div>
 
     <% else %>
 
       <div class="photo-profil">
+        <% if current_user.is_a?(Talent) %>
+          <p data-target= "modal_photo" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
+        <% end %>
         <div class="initiale">
           <p><%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %></p>
         </div>
@@ -29,9 +35,6 @@
 
     <% end %>
 
-    <% if current_user.is_a?(Talent) %>
-      <p data-target= "modal_profil" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
-    <% end %>
     <div class="talent-name">
       <h1><%= @talent.firstname %> <%= @talent.name %></h1>
       <h2 class="talent-post"><%= @talent.experiences.last.position %></h2>
@@ -78,7 +81,7 @@
 
     <!-- DORIAN TODO -->
     <div class="credentials">
-      <p data-target= "modal_credentials"><i class="far fa-star"></i> Voir mes <%= @talent.credentials.count %> recommandations</p>
+      <p data-target= "modal_credentials"><i class="far fa-star"></i> Voir mes recommandations</p>
     </div>
   </div>
 

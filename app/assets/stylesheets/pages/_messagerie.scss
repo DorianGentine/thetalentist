@@ -28,7 +28,34 @@
 .index-talents{
   padding: 20px;
   a{
-    margin: 10px 0;
+    text-decoration: none;
+  }
+  h3{
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #5ED1AD;
+  }
+  .photo-profil{
+    transform: scale(0.3, 0.3);
+    margin: -67px -47px -67px -57px;
+  }
+  .conversation-card{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    p{
+      margin: 0;
+    }
+  }
+  .conversation-card:hover{
+    background-color: rgba(3,13,89,0.1);
+  }
+  .prenom-contact{
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: capitalize;
   }
 }
 
@@ -46,23 +73,13 @@
   }
 }
 
-.conversation{
-  height: 75%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-  position: relative;
-  overflow: auto;
+.link-profil{
   a{
-    position: absolute;
-    top: 0;
-    z-index: 1;
     display: flex;
     justify-content: space-between;
     background-color: lightgray;
-    width: 100%;
     padding: 20px;
+    margin: -10px -50px 0;
     p{
       margin: 0;
       color: darkgray;
@@ -81,29 +98,126 @@
       transition: color ease-in-out 0.15s;
     }
   }
-  .message{
-    max-width: 75%;
+}
 
-    p:first-child{
+.conversation{
+  height: 70%;
+  padding: 10px 50px 0;
+  position: relative;
+  overflow: auto;
+
+
+
+  .message{
+    .avatar{
+      height: 35px;
+      width: 35px;
+      background-color: lightgray;
+      border-radius: 20px;
+      position: relative;
+      p{
+        font-size: 14px;
+        color: white;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      img{
+        height: 35px;
+      }
+    }
+    .x-commented{
       font-size: 12px;
       color: $gray;
-      text-align: end;
       margin: 0;
+      display: inline-block
     }
-    p:last-child{
+    .the-message{
+      max-width: 75%;
+      padding: 10px;
       background-color: $green;
       border-radius: 8px;
     }
   }
   .left {
-
+    .avatar{
+      display: inline-block;
+      margin-left: -40px;
+      margin-bottom: -20px;
+    }
+    .x-commented{
+      margin-left: 6px;
+    }
+    .the-message{
+      background-color: #EEEEEE;
+    }
+  }
+  .right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    .avatar{
+      margin-right: -40px;
+      margin-bottom: -30px;
+    }
+    .x-commented{
+      margin-right: 6px;
+    }
   }
 }
 
 .boite-envoi{
-  input, button, select, textarea {
+  height: calc(30% - 90px);
+  position: relative;
+  textarea {
+    height: 90px;
     color: black;
     width: 100%;
+    border-top: 4px solid $violet;
+    border-right: 0px;
+    border-bottom: 1px solid $gray;
+    border-left: 0px;
+    padding: 10px;
+  }
+  i{
+    color: black;
+    font-size: 24px;
+    margin: 0 20px;
+  }
+  input{
+    background-color: $green;
+    border-radius: 20px;
+    padding: 0px 10px;
+    color: white;
+    border: 0px;
+    box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.17);
+    position: absolute;
+    right: 50px;
+  }
+  input:hover{
+    box-shadow: none;
+  }
+  .accept-relation{
+    position: absolute;
+    top: 6%;
+    left: 0.5%;
+    z-index: 1;
+    width: 99%;
+    height: 92%;
+    background-color: rgba(216, 216, 216, 0.87);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    input{
+      position: unset;
+      margin: 20px;
+    }
+    input:last-child{
+      background-color: $red;
+    }
   }
 }
 
