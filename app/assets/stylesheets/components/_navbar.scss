@@ -97,13 +97,28 @@
       justify-content: center;
       align-items: center;
       border-left: 1px solid $gray;
-      a{
+      a, i{
         color: $violet;
       }
     }
     .bottom-menu-item:active{
       color: $green;
     }
+  }
+  .dropdown-menu{
+    top: initial;
+    bottom: 30px;
+  }
+  .dropdown-menu-right{
+    right: -8px;
+  }
+  .navbar-wagon-dropdown-menu:before{
+    top: initial;
+    bottom: -5px;
+    border-top: none;
+    border-left: none;
+    border-bottom: 1px solid #E6E6E6;
+    border-right: 1px solid #E6E6E6;
   }
 }
 

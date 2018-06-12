@@ -10,6 +10,11 @@
 .col-centre{
   width: 55%;
 }
+@media screen and (max-width: 991px) {
+  .col-centre{
+    width: 75%;
+  }
+}
 .col-droite{
   width: 20%;
 }
@@ -22,6 +27,7 @@
   justify-content: center;
   h4{
     margin: 0;
+    font-size: 20px
   }
 }
 
@@ -39,6 +45,7 @@
   .photo-profil{
     transform: scale(0.3, 0.3);
     margin: -67px -47px -67px -57px;
+    min-width: 192px;
   }
   .conversation-card{
     display: flex;
@@ -56,6 +63,10 @@
     font-size: 16px;
     font-weight: 600;
     text-transform: capitalize;
+  }
+  .apercu-message{
+    overflow: hidden;
+    height: 25px;
   }
 }
 
@@ -79,7 +90,6 @@
     justify-content: space-between;
     background-color: lightgray;
     padding: 20px;
-    margin: -10px -50px 0;
     p{
       margin: 0;
       color: darkgray;
@@ -101,7 +111,7 @@
 }
 
 .conversation{
-  height: 70%;
+  height: calc(100% - 265px);
   padding: 10px 50px 0;
   position: relative;
   overflow: auto;
@@ -169,10 +179,10 @@
 }
 
 .boite-envoi{
-  height: calc(30% - 90px);
+  // height: calc(30% - 90px);
   position: relative;
   textarea {
-    height: 90px;
+    // height: 90px;
     color: black;
     width: 100%;
     border-top: 4px solid $violet;
@@ -201,11 +211,11 @@
   }
   .accept-relation{
     position: absolute;
-    top: 6%;
-    left: 0.5%;
+    top: 7px;
+    left: 3px;
+    bottom: 3px;
+    right: 3px;
     z-index: 1;
-    width: 99%;
-    height: 92%;
     background-color: rgba(216, 216, 216, 0.87);
     border-radius: 5px;
     display: flex;
@@ -233,6 +243,36 @@
     }
   }
 }
+
+.doc-echanges{
+  padding: 20px;
+  i{
+    display: inline-block;
+    color: $green;
+  }
+  p{
+    display: inline-block;
+  }
+}
+
+
+
+
+@media screen and (max-width: 767px) {
+  .col-centre{
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

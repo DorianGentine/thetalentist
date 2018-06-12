@@ -9,7 +9,7 @@
 
     <div class="conversation-text">
       <p class="prenom-contact"><% parti = conversation.participants - [current_user] %><%= parti[0].firstname %></p>
-      <p class="aperçu-message"><%= truncate(conversation.messages.last.body, length: 20) %></p>
+      <p class="apercu-message"><%= conversation.messages.last.body %></p>
     </div>
   </div>
 <% end %>

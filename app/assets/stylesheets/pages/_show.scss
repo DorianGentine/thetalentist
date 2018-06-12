@@ -298,6 +298,104 @@
 
 
 
+@media screen and (max-width: 991px) {
+  .container-show{
+    padding: 20px;
+    display: block;
+    .talent-left, .talent-right{
+      display: block;
+    }
+    .talent-left{
+      width: unset;
+      margin: 0;
+    }
+    .talent-right{
+      width: 100%;
+      .talent-right-up{
+        flex-direction: column;
+        margin: 20px 0;
+        .right-up-item{
+          width: unset;
+          margin: 20px 10px;
+          h4{
+            margin-bottom: 20px;
+          }
+        }
+      }
+      .talent-right-down{
+        margin: 20px 0;
+        .lower-middle-body{
+          width: unset;
+          margin: 20px 0;
+          .talent-experiences{
+            height: unset;
+            overflow: initial;
+          }
+        }
+      }
+    }
+  }
+
+  .headhunter-right-up{
+    height: unset;
+    margin-bottom: 40px;
+    .photos-environnement{
+      flex-direction: column;
+      .photo-env-item{
+        height: 85vw;
+        width: unset;
+        margin: 10px 0;
+      }
+      .photo-env-item:last-child .decouvrir-plus{
+        display: flex;
+      }
+    }
+  }
+  .headhunter-right-down{
+    height: unset;
+    h4{
+      margin-bottom: 20px;
+    }
+    .headhunter-chiffres{
+      margin: 40px auto;
+    }
+    .entreprise-quelques-mots{
+      width: unset;
+      margin: 40px auto;
+      .lower-left-body p{
+        text-align: justify;
+      }
+    }
+    .lower-body-item{
+      padding: 0;
+      .lower-right-body-item{
+        padding: 0;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
