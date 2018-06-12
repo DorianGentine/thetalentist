@@ -108,7 +108,7 @@
 
       <%= form_for @message, url: conversation_messages_path(@conversation) do |f|  %>
         <%= f.text_area :body, placeholder: "Écrivez votre message..." %>
-        <i class="far fa-image"><%= f.file_field :attachment %></i>
+        <%= f.file_field :attachment %>
         <i class="fas fa-paperclip"></i>
         <%= f.submit "Envoyer" %>
       <% end %>
