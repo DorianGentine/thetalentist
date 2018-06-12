@@ -24,7 +24,8 @@ class Talent < ApplicationRecord
   has_many :talent_formations, dependent: :destroy
   has_many :formations, through: :talent_formations
   has_many :talent_formations, inverse_of: :talent
-  accepts_nested_attributes_for :talent_formations, allow_destroy: true, reject_if: proc { |att| att['title'].blank? }
+  accepts_nested_attributes_for :talent_formations, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :formations, allow_destroy: true, reject_if: :all_blank
 
   has_many :talent_keywords, dependent: :destroy
   has_many :keywords, through: :talent_keywords
@@ -34,7 +35,7 @@ class Talent < ApplicationRecord
 
   has_many :talent_languages, dependent: :destroy
   has_many :languages, through: :talent_languages
-  accepts_nested_attributes_for :talent_languages, allow_destroy: true
+  accepts_nested_attributes_for :talent_languages, allow_destroy: true, reject_if: :all_blank
 
   has_many :talent_technos, dependent: :destroy
   has_many :technos, through: :talent_technos
@@ -42,7 +43,7 @@ class Talent < ApplicationRecord
   has_many :talent_hobbies, dependent: :destroy
   has_many :talent_hobbies, inverse_of: :talent
   has_many :hobbies, through: :talent_hobbies
-  accepts_nested_attributes_for :hobbies, allow_destroy: true
+  accepts_nested_attributes_for :hobbies, allow_destroy: true, reject_if: :all_blank, allow_destroy: true
 
   # relation one to many
   has_many :credentials, dependent: :destroy
@@ -51,7 +52,7 @@ class Talent < ApplicationRecord
   accepts_nested_attributes_for :experiences, allow_destroy: true, reject_if: proc { |att| att['position'].blank? }
 
   has_many :next_aventures, dependent: :destroy
-  accepts_nested_attributes_for :next_aventures, allow_destroy: true
+  accepts_nested_attributes_for :next_aventures, allow_destroy: true, reject_if: :all_blank
 
   validates :name, :firstname, :city, :phone, :email, presence: true
 

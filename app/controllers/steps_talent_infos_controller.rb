@@ -7,10 +7,9 @@ class StepsTalentInfosController < ApplicationController
   skip_before_action :current_user
 
   def show
-    # @talent_formation = TalentFormation.new
-    @talent.talent_formations.build
-    @talent.talent_languages.build
-    @talent.experiences.build
+    # @talent.talent_formations.build
+    # @talent.talent_languages.build
+    # @talent.experiences.build
     @talent.next_aventures.build
     render_wizard
   end
@@ -31,6 +30,12 @@ class StepsTalentInfosController < ApplicationController
 
   private
 
+
+
+  def finish_wizard_path
+    talent_path(@talent)
+  end
+
   def find_talent
     @talent = Talent.find(session[:talent_id])
     authorize @talent
@@ -45,10 +50,10 @@ class StepsTalentInfosController < ApplicationController
       :btob,
       :sector_ids,
       job_ids: [],
-      experiences_attributes: Experience.attribute_names.map(&:to_sym).push(:_destroy),
+      experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :_destroy],
       next_aventures_attributes: NextAventure.attribute_names.map(&:to_sym).push(:_destroy),
-      talent_formations_attributes: [ :id, :title, :year, :formation_id],
-      talent_languages_attributes: [ :level, :language_id],
+      talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
+      talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       techno_ids: [],
       sector_ids: []
     )

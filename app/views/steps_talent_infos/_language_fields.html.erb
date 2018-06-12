@@ -1,0 +1,6 @@
+<div class='nested-fields'>
+  <%= f.association :language, collection: Language.all, label: false, input_html: { class:"select2"}  %>
+  <%= f.input :level, collection: 0..5, prompt: "Niveau", label: false %>
+  <!-- TODO button -->
+  <%= link_to_remove_association "remove language", f, { :class => "form-hobby-add"}  %>
+</div>

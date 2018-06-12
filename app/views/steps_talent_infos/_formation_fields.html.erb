@@ -1,0 +1,9 @@
+<div class="form-line form-formations">
+  <p class="form-label requis">Formation(s)</p>
+  <div class='nested-fields'>
+    <%= f.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
+    <%= f.input :title, placeholder: "Diplôme", label: false  %>
+    <%= f.input :year, collection: 1992..2018, prompt: "Année d'obtention", label: false   %>
+    <%= link_to_remove_association "remove formation", f %>
+  </div>
+</div>

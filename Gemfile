@@ -43,6 +43,8 @@ gem "pundit"
 gem 'wicked'
 gem 'turbolinks', '~> 5.0.0'
 gem 'jquery-rails'
+# gerer les formulaire avec nested table
+gem "cocoon"
 
 # add picture and pdf file
 gem 'cloudinary'
