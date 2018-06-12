@@ -11,8 +11,29 @@
     <div class="index-talents">
 
       <h3>EN ATTENTE</h3>
+
         <%  @pending_conversations.each do |conversation| %>
-         <%= render 'conversation', :conversation => conversation %>
+          <% if current_user.is_a?(Headhunter) %>
+            <%= link_to conversation_path(conversation) do %>
+              <div class="conversation-card">
+                <div class="photo-profil">
+                  <div class="initiale">
+                    <p><i class="fas fa-rocket"></i></p>
+                  </div>
+                  <div class="statut"></div>
+                </div>
+
+                <div class="conversation-text">
+                  <% participant = conversation.participants - [current_user] %>
+                  <p class="prenom-contact"> Talent - <%= participant[0].experiences.last.position.capitalize %> </p>
+                  <p class="aperçu-message"><%= truncate(conversation.messages.last.body, length: 20) %></p>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <%= render 'conversation', :conversation => conversation %>
+          <% end %>
+
         <% end %>
       <h3>CONTACTÉS</h3>
 
@@ -27,21 +48,23 @@
         <%= render 'conversation', :conversation => conversation %>
       <% end %>
 
-      <%  @read_accepted_conversations.reverse_each do |conversation| %>
-        <%= render 'conversation', :conversation => conversation %>
-      <% end %>
     </div>
   </div>
 
   <div class="colonne col-centre bordure-droite">
     <div class="premiere-ligne nom-discussion">
       <!-- div Prénom Nom et poste  -->
-      <% if @participant.is_a?(Headhunter) %>
+      <% if @participant.is_a?(Talent) %>
+        <% if @relationship && @relationship.status == "Accepter" %>
+          <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
+          <p> <%= @participant.experiences.last.position.capitalize %> </p>
+        <% else %>
+          <h2>Talent - <%= @participant.experiences.last.position.capitalize %></h2>
+          <p>En attente ...</p>
+        <% end %>
+      <% elsif @participant.is_a?(Headhunter)%>
         <h2><%= @participant.firstname.capitalize %> de <%= @participant.startup.name.capitalize %></h2>
         <p> <%= @participant.job.capitalize %> </p>
-      <% elsif @participant.is_a?(Talent)%>
-        <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
-        <p> <%= @participant.experiences.last.position.capitalize %> </p>
 
       <% else %>
         <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
@@ -126,7 +149,6 @@
               <% end %>
             </div>
           <% end %>
-        <% else %>
         <% end %>
 
     </div>
