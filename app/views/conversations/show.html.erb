@@ -4,7 +4,7 @@
 <div class="fenetre-ecran">
 
 
-  <div class="colonne col-gauche bordure-droite">
+  <div class="colonne col-gauche bordure-droite hidden-xs">
     <div class="premiere-ligne">
       <h4>MESSAGERIE</h4>
     </div>
@@ -72,29 +72,29 @@
       <% end %>
     </div>
 
-      <!-- div link vers profil -->
+    <!-- div link vers profil -->
+    <div class="link-profil">
+      <% if current_user.is_a?(Talent) %>
+        <% if @participant.is_a?(Headhunter) %>
+          <%= link_to headhunter_path(@participant) do %>
+            <p>Vous pouvez accéder au profil de <%= @participant.startup.name.capitalize %></p>
+            <p>Visiter le profil > </p>
+          <% end %>
+        <% end %>
+      <% elsif current_user.is_a?(Headhunter)%>
+        <% if @relationship && @relationship.status == "Accepter" %>
+          <%= link_to talent_path(@participant) do %>
+            <p>Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
+            <p>Visiter le profil > </p>
+          <% end %>
+        <% end %>
+      <% else %>
 
+      <% end %>
+    </div>
 
     <div class="conversation">
-      <div class="link-profil">
-        <% if current_user.is_a?(Talent) %>
-          <% if @participant.is_a?(Headhunter) %>
-            <%= link_to headhunter_path(@participant) do %>
-              <p>Vous pouvez accéder au profil de <%= @participant.startup.name.capitalize %></p>
-              <p>Visiter le profil > </p>
-            <% end %>
-          <% end %>
-        <% elsif current_user.is_a?(Headhunter)%>
-          <% if @relationship && @relationship.status == "Accepter" %>
-            <%= link_to talent_path(@participant) do %>
-              <p>Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
-              <p>Visiter le profil > </p>
-            <% end %>
-          <% end %>
-        <% else %>
 
-        <% end %>
-      </div>
       <!-- div conversation -->
       <% @conversation.receipts_for(current_user).reverse_each do |receipt| %>
 
@@ -110,6 +110,9 @@
             </div>
             <p class="x-commented"><%= receipt.message.sender.firstname %></p>
             <p class="the-message"><%= receipt.message.body %></p>
+            <% if receipt.message.attachment.url.present? %>
+              <p class="the-message"><%= link_to  "Document envoyé", receipt.message.attachment.url, target: "_blank" %></p>
+            <% end %>
           </div>
         <!-- partie droite -->
         <% else %>
@@ -123,6 +126,9 @@
             </div>
             <p class="x-commented"><%= receipt.message.sender.firstname %></p>
             <p class="the-message"><%= receipt.message.body %></p>
+            <% if receipt.message.attachment.url.present? %>
+              <p class="the-message"><%= link_to  "Document envoyé", receipt.message.attachment.url, target: "_blank" %></p>
+            <% end %>
           </div>
         <% end %>
       <% end %>
@@ -158,11 +164,21 @@
 
   </div>
 
-  <div class="colonne col-droite">
+  <div class="colonne col-droite hidden-xs hidden-sm">
     <div class="premiere-ligne">
       <h4>Documents échangés</h4>
     </div>
-    <div class="doc-echanges"></div>
+    <div class="doc-echanges">
+      <% @conversation.messages.each do |message| %>
+        <% if message.attachment.url.present? %>
+          <%= link_to message.attachment.url, target: "_blank", :format => 'pdf' do %>
+            <i class="far fa-file-pdf"></i>
+            <p>Document envoyé</p>
+            <br>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
 
