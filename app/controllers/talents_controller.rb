@@ -48,9 +48,9 @@ private
      params.require(:talent).permit(
       :overview,
       :photo,
-      experiences_attributes:[ :id, :company_name, :years, :starting, :overview, :position, :currently],
-      talent_formations_attributes:[ :id, :title, :year, :level, :formation_id],
-      next_aventures_attributes:[ :id, :remuneration, :contrat, :overview, :city, :no_more, sector_ids: [] ]
+      experiences_attributes:[ :id, :company_name, :years, :starting, :overview, :position, :currently, :_destroy],
+      talent_formations_attributes:[ :id, :title, :year, :level, :formation_id, :_destroy],
+      next_aventures_attributes:[ :id, :remuneration, :contrat, :overview, :city, :no_more, :_destroy, sector_ids: [] ]
       )
   end
 

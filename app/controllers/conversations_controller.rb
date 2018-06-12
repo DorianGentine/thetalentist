@@ -1,7 +1,10 @@
 class ConversationsController < ApplicationController
-
   before_action :user_conversation, only: [ :show, :update ]
   # before_action :user_conversations, only: [ :show, :update ]
+
+  def index
+
+  end
 
   def show
     # 1. Liste des conversations dont la relationship n'est pas acceptée = construire @pending_conversations
@@ -55,8 +58,6 @@ class ConversationsController < ApplicationController
     # 3. Lister les conversations lues et les ordonner = construire @read_conversations
     @read_accepted_conversations = conversations - @unread_conversations
 
-    accepters = Relationship.where(status: "Accepter")
-    pendings = Relationship.all.where(status:"pending")
 
     participant = @conversation.participants - [current_user]
     @participant = participant[0]

@@ -11,27 +11,12 @@
 
     <div id="formations">
       <%= f.simple_fields_for :talent_formations do |u| %>
-        <div class="form-line form-formations">
-          <p class="form-label requis">Formation(s)</p>
-          <%= u.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
-          <%= u.input :title, placeholder: "Diplôme", label: false  %>
-          <%= u.input :year, collection: 1992..2018, prompt: "Année d'obtention", label: false   %>
-        </div>
+        <%= render 'formation_fields', :f => u %>
       <% end %>
-      <div id="formation-hidden" style="display: none">
-        <%= f.simple_fields_for :talent_formations do |u| %>
-          <div class="form-line form-formations">
-            <p class="form-label requis">Formation(s)</p>
-            <%= u.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select"}  %>
-            <%= u.input :title, placeholder: "Diplôme", label: false  %>
-            <%= u.input :year, collection: 1992..2018, prompt: "Année d'obtention", label: false   %>
-          </div>
-        <% end %>
+      <div class='links'>
+        <%= link_to_add_association 'add formation', f, :talent_formations, :partial => 'formation_fields', class: "form-hobby-add" %>
       </div>
     </div>
-
-
-    <p class= "form-hobby-add" id="bt-formation">Ajouter une formation + </p>
 
     <div class="form-line">
       <div class="form-semi-line">
@@ -45,11 +30,11 @@
         <p class="form-label form-label-semi-line requis">Compétences linguistiques</p>
         <div class="form-line">
           <%= f.simple_fields_for :talent_languages do |u| %>
-            <%= u.association :language, collection: Language.all, label: false, input_html: { class:"select2"}  %>
-            <%= u.input :level, collection: 0..5, prompt: "Niveau", label: false %>
-            <!-- TODO button -->
-            <%= u.button :submit, 'Ajouter +', { :class => "form-hobby-add"} %>
+            <%= render 'language_fields', :f => u %>
           <% end %>
+          <div class='links'>
+            <%= link_to_add_association 'add language', f, :talent_languages, :partial => 'language_fields' %>
+          </div>
         </div>
       </div>
     </div>

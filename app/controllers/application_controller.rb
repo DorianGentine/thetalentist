@@ -64,5 +64,15 @@ class ApplicationController < ActionController::Base
       new
     end
   end
-
+  def after_sign_up_path_for(resource)
+    if resource.is_a?(Headhunter)
+      repertoire_path
+    elsif resource.is_a?(Talent)
+      talent_path(resource)
+    elsif resource.is_a?(Talentist)
+      talents_path
+    else
+      new
+    end
+  end
 end

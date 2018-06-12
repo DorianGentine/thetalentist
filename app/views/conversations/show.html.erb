@@ -42,7 +42,7 @@
         <%= render 'conversation', :conversation => conversation %>
       <% end %>
 
-    <br>
+      <br>
 
       <%  @read_accepted_conversations.reverse_each do |conversation| %>
         <%= render 'conversation', :conversation => conversation %>
@@ -167,6 +167,7 @@
   <div class="colonne col-droite hidden-xs hidden-sm">
     <div class="premiere-ligne">
       <h4>Documents échangés</h4>
+
     </div>
     <div class="doc-echanges">
       <% @conversation.messages.each do |message| %>
