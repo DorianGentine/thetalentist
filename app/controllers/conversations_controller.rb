@@ -7,30 +7,40 @@ class ConversationsController < ApplicationController
     # 1. Liste des conversations dont la relationship n'est pas acceptée = construire @pending_conversations
     # Les messages des recruteurs avec lesquels j'ai une relationship "pending"
     # user = current_user
-    if current_user == Headhunter
+    if current_user.is_a?(Talent)
       pending_relationships = Relationship.where(talent_id: current_user.id).where(status: "pending")
+      # Return un array des relationship avec le talent
       pending_ids = []
+      # Return un array des ids headhunter des ces relationships
       pending_relationships.each do |relationship|
         pending_ids << relationship.headhunter_id
       end
+      @pending_conversations = []
+      conversations = current_user.mailbox.conversations
+      conversations.each do |conversation|
+        participant = (conversation.participants - [current_user]).first
+        if pending_ids.include?(participant.id)
+          @pending_conversations << conversation
+        end
+      end
     else
       pending_relationships = Relationship.where(headhunter_id: current_user.id).where(status: "pending")
+      # Return un array des relationship avec le headhunter
       pending_ids = []
+      # Return un array des ids headhunter des ces relationships
       pending_relationships.each do |relationship|
         pending_ids << relationship.talent_id
       end
-    end
-    pending_relationships.each do |relationship|
-      pending_ids << relationship.headhunter_id
-    end
-    @pending_conversations = []
-    conversations = current_user.mailbox.conversations
-    conversations.each do |conversation|
-      headhunter = (conversation.participants - [current_user]).first
-      if pending_ids.include?(headhunter.id)
-        @pending_conversations << conversation
+      @pending_conversations = []
+      conversations = current_user.mailbox.conversations
+      conversations.each do |conversation|
+        participant = (conversation.participants - [current_user]).first
+        if pending_ids.include?(participant.id)
+          @pending_conversations << conversation
+        end
       end
     end
+
 
 
     # 2. Liste les conversations avec nouveau message et les ordonner construire @unread_conversations
@@ -65,6 +75,7 @@ class ConversationsController < ApplicationController
   end
 
   def update
+    participant = @conversation.participants - [current_user]
     @participant = @conversation.participants - [current_user]
     user_relationship
     if @relationship.update(status:params[:commit])

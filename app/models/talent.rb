@@ -73,4 +73,7 @@ class Talent < ApplicationRecord
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
   end
+
+
+
 end
