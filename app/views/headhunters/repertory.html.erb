@@ -23,16 +23,18 @@
 
     <div class="filter-item hidden-xs hidden-sm">
 
-      <%= link_to repertoire_path(tag: "DATA") do %>
+      <%= link_to repertoire_path(tag: "Data") do %>
         <i class="fas fa-search"></i> DATA
       <% end %>
-      <a href=""><i class="fas fa-search"></i> DATA</a>
-
-      <a href=""><i class="far fa-comments"></i> SALES</a>
-
-      <a href=""><i class="fas fa-tachometer-alt"></i> MARKET</a>
-
-      <a href=""><i class="fas fa-archive"></i> PRODUCT</a>
+      <%= link_to repertoire_path(tag: "Sales") do %>
+        <i class="far fa-comments"></i> SALES
+      <% end %>
+      <%= link_to repertoire_path(tag: "Market") do %>
+        <i class="fas fa-tachometer-alt"></i> MARKET
+      <% end %>
+      <%= link_to repertoire_path(tag: "Product") do %>
+        <i class="fas fa-archive"></i> PRODUCT
+      <% end %>
 
     </div>
 
@@ -47,7 +49,7 @@
 
   <!-- Division pour résultats de recherche -->
   <div class="search-results">
-    <p><strong><%= @talents.count %> Profils</strong> correspondent à votre recherche '<em>DATA</em>'</p>
+    <p><strong><%= @talents.count %> Profils</strong> correspondent à votre recherche '<em><%= @titre %></em>'</p>
   </div>
 
   <!-- Répertoire des talents -->
