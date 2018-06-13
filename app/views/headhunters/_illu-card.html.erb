@@ -1,0 +1,9 @@
+<% if talent_job = Data %>
+  <div class="illu-card" style="background-image: url(/assets/illu-data.png);"></div>
+<% elsif talent_job = Product %>
+  <div class="illu-card" style="background-image: url(/assets/illu-product.png);"></div>
+<% elsif talent_job = Sales %>
+  <div class="illu-card" style="background-image: url(/assets/illu-sales.png);"></div>
+<% else %>
+  <div class="illu-card" style="background-image: url(/assets/illu-market.png);"></div>
+<% end %>

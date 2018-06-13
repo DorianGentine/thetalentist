@@ -20,6 +20,7 @@
   width: 365px;
   height: 398px;
   margin: 20px 0;
+  position: relative
 }
   @media screen and (max-width: 767px){
     .talent-card{
@@ -34,7 +35,10 @@
 
 .card-title{
   background-color: white;
-  position: relative;
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translate( -50% );
   z-index: 2;
   margin: auto;
   width: 60%;
@@ -52,28 +56,24 @@
 .illu-card{
   width: 131px;
   height: 138px;
-  background-image: url("illu-data.png");
+  // background-image: url("illu-data.png");
   background-size: cover;
   background-position: center;
-  opacity: 0.59;
-  position: relative;
-  top: -16px;
-  right: -232px;
+  // opacity: 0.59;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
-  @media screen and (max-width: 400px) {
-    .illu-card{
-      right: -167px;
-    }
-  }
 
 .border{
+  width: 100%;
   border: 2px solid $violet;
   border-radius: 4px;
   padding: 0 34px;
   box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.21);
   height: calc(100% - 12px);
-  position: relative;
-  top: -154px;
+  position: absolute;
+  top: 0;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -91,6 +91,9 @@
   }
   p{
     font-size: 12px;
+  }
+  .talent-description{
+    text-align: justify;
   }
   .talent-more {
     position: relative;

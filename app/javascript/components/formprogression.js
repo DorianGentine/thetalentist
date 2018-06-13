@@ -7,8 +7,10 @@ function dynamicFormBar() {
     items.forEach(function(item){
       if(item.getAttribute('id') < currentPage) {
         item.classList.add('progression-past')
+        item.classList.add('hidden-xs')
       } else if (item.getAttribute('id') > currentPage) {
         item.classList.add('progression-next')
+        item.classList.add('hidden-xs')
       }
     })
   }
