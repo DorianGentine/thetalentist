@@ -3,7 +3,7 @@ class TalentsController < ApplicationController
   def index
     @talentist = current_talentist
     @talents = Talent.all
-    authorize @talentist
+    @talents = policy_scope(Talent)
   end
 
   def show
