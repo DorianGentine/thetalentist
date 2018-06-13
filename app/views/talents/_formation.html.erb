@@ -16,7 +16,7 @@
 
         <div id="formations">
           <%= f.simple_fields_for :talent_formations do |u| %>
-            <div class="form-line form-formations">
+            <div class="form-line">
               <p class="form-label requis">Formation(s)</p>
               <%= u.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
               <%= u.input :title, placeholder: "Diplôme", label: false  %>

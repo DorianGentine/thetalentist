@@ -200,8 +200,8 @@ p "Creating talent_jobs"
 
 luc_job = TalentJob.create!(talent: luc , job: data)
 donatien_job = TalentJob.create!(talent: donatien, job: data)
-dorian_job = TalentJob.create!(talent: dorian, job: data)
-TalentJob.create!(talent: erwan, job: data)
+dorian_job = TalentJob.create!(talent: dorian, job: market)
+TalentJob.create!(talent: erwan, job: sales)
 TalentJob.create!(talent: louis, job: product)
 
 p "Creating skills"

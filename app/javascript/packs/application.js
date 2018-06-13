@@ -19,3 +19,7 @@ revealModal();
 import { dynamicFormBar } from "../components/formprogression";
 
 dynamicFormBar();
+
+import { scrollToBottom } from "../components/scrollToBottom";
+
+scrollToBottom();

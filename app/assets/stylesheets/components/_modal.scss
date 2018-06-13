@@ -168,7 +168,7 @@ h4{
   }
   .lower-middle-body{
     .lower-body-item-content{
-      display: flex;
+      position: relative;
       .talent-experiences{
         display: flex;
         flex-direction: column;
@@ -252,10 +252,13 @@ h4{
 
 /* CSS pour barre pointée */
 .barre-pointee{
+  position: absolute;
+  top: 6px;
+  left: 5px;
   height: calc( 100% - 5px);
   width: 2px;
   background-color: $green;
-  margin: 5px 0 0 6px;
+  margin: 0;
   border-top: 0;
 }
 .point-barre-pointee{
@@ -269,8 +272,6 @@ h4{
 }
 .placement-point-barre{
   display: flex;
-  position: relative;
-  left: -7px;
 }
 
 

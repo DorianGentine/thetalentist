@@ -1,3 +1,79 @@
+<div id="new_landing">
+
+  <div class="top-menu">
+    <div class="little-square">
+      <hr class="first">
+      <hr class="second">
+      <hr class="third">
+    </div>
+    <h4 class="titre-menu">MENU</h4>
+  </div>
+
+  <img class="new-landing-logo-talentist" src="/assets/Logo The talentist-01.png" alt="logo The talentist">
+
+  <div class="landing-top">
+    <h2>When the <strong>most talented</strong> <br>candidate <strong>meet providing</strong> <br>start-up.</h2>
+    <div class="inscription-items">
+      <div class="btn btn-primary btn-inscription">
+        <%= link_to new_talent_session_path do  %>
+          <i class="fas fa-rocket"></i>
+          <a>Je suis un<br>talent</a>
+        <% end %>
+      </div>
+      <div class="btn btn-primary btn-inscription">
+        <%= link_to new_headhunter_session_path do %>
+          <i class="fas fa-user"></i>
+          <a>Je suis une<br>start-up</a>
+        <% end %>
+      </div>
+    </div>
+    <div class="image-habillage">
+      <img src="/assets/rawpixel-617400-unsplash.jpg" alt="image de fond">
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Old landing -->
 <%= render "shared/navbar" %>
 
 <div class="home-container">
@@ -5,7 +81,7 @@
   <div class="home-left">
 
     <h1><strong>Bienvenue</strong> sur The Talentist !</h1>
-    <h2>Quelque soit votre talent, vous réussirez à intégrer la start-up qui vous correspond et dans laquelle vous vous épanouirez.</h2>
+    <h2>When the most talented candidate meet providing startup.</h2>
 
     <div class="home-connexion">
 
@@ -34,7 +110,7 @@
   </div>
 
 
-  <div class="home-right"></div>
+  <div class="home-right hidden-xs hidden-sm"></div>
 
 </div>
 

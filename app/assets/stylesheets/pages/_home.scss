@@ -1,8 +1,142 @@
 // Specific CSS for your home-page
+#new_landing{
+  height: 200vh; // A retirer
+  .top-menu{
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    top: 30px;
+    left: 30px;
+    .little-square{
+      height: 36px;
+      width: 36px;
+      background-color: $violet;
+      border-radius: 3px;
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+      position: relative;
+      hr{
+        margin: 0;
+        height: 3px;
+        background-color: white;
+        border-top: 0px;
+        border-radius: 3px;
+        position: absolute;
+        left: 6px;
+      }
+      .first{
+        top: 8px;
+        width: 11.5px;
+      }
+      .second{
+        top: 16px;
+        width: 25px;
+      }
+      .third{
+        top: 24px;
+        width: 18.5px;
+      }
+    }
+    .titre-menu{
+      color: $violet;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 20px;
+    }
+  }
 
+.new-landing-logo-talentist{
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translate(-50%);
+  height: 55px;
+}
+
+  .landing-top{
+    background-color: rgba(3, 13, 89, 0.05);
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100vw - 155px);
+    padding: 120px 50px 80px;
+    display: flex;
+    flex-direction: column;
+    h2{
+      font-size: 85px;
+      font-weight: 600;
+      color: #191B26;
+      z-index: 1;
+      margin-top: 75px;
+      strong{
+        color: $green;
+      }
+    }
+    .inscription-items{
+      margin: 62.5px 0 0;
+      width: 450px;
+      display: inline-flex;
+      justify-content: flex-start;
+      .btn-inscription{
+        width: 152px;
+        margin: 0 50px 0 0;
+      }
+    }
+    .image-habillage{
+      position: absolute;
+      top: 120px;
+      right: 0;
+      height: 800px;
+      width: 837px;
+      overflow: hidden;
+      img{
+        height: 127%;
+        margin: 0 0 0 -533px;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Old landing
 .home-container{
   display: flex;
-  width: 100%;
   height: calc(100vh - 190px);
   min-height: 550px;
   .home-left{
@@ -93,38 +227,6 @@
           text-align: center;
         }
       }
-      .inscription-items{
-        display: flex;
-        justify-content: space-around;
-        .btn-inscription{
-          width: 30%;
-          border: 2px solid $green;
-          border-radius: 4px;
-          background-color: white;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          i{
-            font-size: 72px;
-            margin: 10px;
-          }
-          a{
-            text-transform: uppercase;
-            font-size: 16px;
-            font-weight: 900;
-            color: $green;
-          }
-        }
-        .btn-inscription:hover{
-          background-color: $green;
-          transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
-          a{
-            color: white;
-            text-decoration: none;
-            transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
-          }
-        }
-      }
     }
   }
   .home-right{
@@ -132,6 +234,48 @@
     background-image: url("00_Icon.png");
     background-position: center;
     background-size: cover;
+  }
+}
+.inscription-items{
+  display: flex;
+  justify-content: space-around;
+  .btn-inscription{
+    width: 30%;
+    border: 2px solid $green;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    i{
+      font-size: 72px;
+      margin: 10px;
+    }
+    a{
+      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: 900;
+      color: $green;
+    }
+  }
+  .btn-inscription:hover{
+    background-color: $green;
+    transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
+    a{
+      color: white;
+      text-decoration: none;
+      transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .home-container .home-left{
+    width: 100%;
+    padding: 0;
+    .home-connexion .inscription-items .btn-inscription{
+      width: unset;
+    }
   }
 }
 
