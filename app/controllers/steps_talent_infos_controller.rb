@@ -7,10 +7,10 @@ class StepsTalentInfosController < ApplicationController
   skip_before_action :current_user
 
   def show
-    # @talent.talent_formations.build
-    # @talent.talent_languages.build
-    # @talent.experiences.build
-    @talent.next_aventures.build
+    1.times { @talent.talent_formations.build }
+    1.times { @talent.talent_languages.build }
+    1.times { @talent.experiences.build }
+    1.times { @talent.next_aventures.build }
     render_wizard
   end
 
