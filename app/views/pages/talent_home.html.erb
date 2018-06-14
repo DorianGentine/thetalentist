@@ -2,7 +2,8 @@
 
   <img class="new-landing-logo-talentist" src="/assets/Logo The talentist-01.png" alt="logo The talentist">
 
-  <%= link_to new_talent_session_path, { :class=>"connectez-vous" } do  %>
+
+  <%= link_to new_talent_session_path, { :class=>"connectez-vous hidden-xs" } do  %>
     <p>CONNECTEZ-VOUS</p>
   <% end %>
 
@@ -12,7 +13,15 @@
 
     <p class="top-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
 
-    <div class="inscription-items">
+    <div class="actions-xs hidden visible-xs">
+      <div class="btn-connexion">
+        <%= link_to("Je m'inscris", new_talent_registration_path)  %>
+      </div>
+      <div class="btn-connexion blue-connexion">
+        <%= link_to("Je me connecte", new_talent_session_path) %>
+      </div>
+    </div>
+    <div class="inscription-items hidden-xs">
       <div class="btn-connexion">
         <div class="btn-connexion">
           <%= link_to("Je m'inscris", new_talent_registration_path)  %>
@@ -56,7 +65,7 @@
       </div>
     </div>
 
-    <div class="banniere-inscription" style="position: relative;">
+    <div class="banniere-inscription hidden-xs" style="position: relative;">
       <p>Lorem ipsum dolor sit amet, consectetur</p>
       <div class="btn-connexion">
         <%= link_to("Je m'inscris", new_talent_registration_path)  %>
@@ -108,7 +117,7 @@
       </div>
     </div>
 
-    <div class="banniere-inscription">
+    <div class="banniere-inscription hidden-xs">
       <p>Lorem ipsum dolor sit amet, consectetur</p>
       <div class="btn-connexion">
         <%= link_to("Je m'inscris", new_talent_registration_path)  %>
@@ -159,14 +168,18 @@
       <p class="citation">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
     </div>
 
-    <div class="banniere-inscription">
+    <div class="banniere-inscription hidden-xs">
       <p>Lorem ipsum dolor sit amet, consectetur</p>
       <div class="btn-connexion">
         <%= link_to("Je m'inscris", new_talent_registration_path)  %>
       </div>
     </div>
   </div>
+
+
 </div>
+
+
 
 <%= render "shared/footer" %>
 
