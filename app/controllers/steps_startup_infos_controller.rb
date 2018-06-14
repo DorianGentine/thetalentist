@@ -3,8 +3,8 @@ class StepsStartupInfosController < ApplicationController
   steps :startup
 
   before_action :find_headhunter, only: [:show, :update]
-  skip_before_action :authenticate!
-  skip_before_action :current_user
+  # skip_before_action :authenticate!
+  # skip_before_action :current_user
 
 
   def show
