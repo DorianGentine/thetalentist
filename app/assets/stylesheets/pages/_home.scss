@@ -1,5 +1,6 @@
 // Specific CSS for your home-page
 .new_landing{
+  width: 100vw;
   // .top-menu{
   //   position: absolute;
   //   display: inline-flex;
@@ -172,52 +173,6 @@
   }
 }
 
-@media screen and (max-width: 1430px) {
-  .new_landing{
-    .landing-top{
-      margin: 0;
-      width: unset;
-      padding: 120px 20px 80px;
-      height: 100vh;
-      h1{
-        font-size: 7vw;
-      }
-      .inscription-items{
-        width: unset;
-        justify-content: center;
-        margin-top: 15vh;
-        .btn-inscription{
-          margin: 0 5vw;
-        }
-      }
-      .image-habillage{
-        height: 200px;
-        width: 61vw;
-      }
-      .fleche-bas{
-        left: 50%;
-      }
-    }
-    .landing-main{
-      padding: 0 50px;
-      h2{
-        margin-top: 150px;
-      }
-      .desc-service{
-        font-size: 20px;
-        margin-bottom: 150px;
-      }
-      .service-steps{
-        flex-direction: column;
-        align-items: center;
-        .service-step p{
-          margin-bottom: 90px;
-        }
-      }
-    }
-  }
-}
-
 #talent-landing{
   .landing-top{
     h1{
@@ -342,7 +297,7 @@
     }
     .fonctionnement{
       h2{
-        margin-bottom: 84px;
+        margin-bottom: 100px;
       }
       .placement-card{
         display: flex;
@@ -419,10 +374,135 @@
       }
     }
   }
+  .actions-xs{
+    // position: fixed;
+    // top: calc( 100vh - 100px);
+    // bottom: 0px;
+    // left: 0;
+    // z-index: 10;
+    // -webkit-transform: translateZ(0);
+    width: 100vw;
+    margin: 40px 0 0 -20px;
+    display: flex !important;
+    justify-content: center;
+    .btn-connexion{
+      // position: absolute;
+      margin: 0 7.5px;
+      a{
+        // background-color: white;
+      }
+    }
+  }
 }
 
 
+@media screen and (max-width: 1430px) {
+  .new_landing{
+    .landing-top{
+      margin: 0;
+      width: unset;
+      padding: 120px 20px 80px;
+      height: 100vh;
+      h1{
+        font-size: 7vw;
+      }
+      .inscription-items{
+        width: unset;
+        justify-content: center;
+        margin-top: 15vh;
+        .btn-inscription{
+          margin: 0 5vw;
+        }
+      }
+      .image-habillage{
+        height: 200px;
+        width: 61vw;
+      }
+      .fleche-bas{
+        left: 50%;
+      }
+    }
+    .landing-main{
+      padding: 0 50px;
+      h2{
+        margin-top: 150px;
+      }
+      .desc-service{
+        font-size: 20px;
+        margin-bottom: 150px;
+      }
+      .service-steps{
+        flex-direction: column;
+        align-items: center;
+        .service-step p{
+          margin-bottom: 90px;
+        }
+      }
+    }
+  }
 
+
+  #talent-landing{
+    .landing-top{
+      h1{
+        margin-bottom: 130px;
+      }
+      .top-text{
+        width: unset;
+      }
+    }
+    .landing-main{
+      padding: 20px;
+      .opportunites{
+        padding: unset;
+        flex-direction: column;
+        align-items: center;
+        .opportunite{
+          margin-bottom: 50px;
+        }
+      }
+      .nos-chiffres{
+        width: unset;
+        .chiffres{
+          padding: unset;
+          flex-direction: column;
+          align-items: center;
+          .chiffres-item{
+            margin-bottom: 50px;
+          }
+        }
+      }
+      .destine{
+        margin-bottom: 150px;
+        p{
+          width: unset;
+        }
+      }
+      .fonctionnement .placement-card{
+        flex-direction: column;
+        align-items: center;
+        .card-fonctionnement{
+          margin-bottom: 90px;
+        }
+      }
+      .citations{
+        padding: 20px;
+        margin-left: -20px;
+        flex-direction: column;
+        i{
+          margin: 0;
+        }
+        .auteur-citation{
+          order: 2;
+          margin: 0;
+        }
+        .citation{
+          margin: 30px 20px;
+        }
+      }
+    }
+  }
+}
 
 
 
@@ -488,135 +568,16 @@
   text-decoration: none;
   transition: 0.15s;
 }
-
-
-// Old landing
-.home-container{
-  display: flex;
-  height: calc(100vh - 190px);
-  min-height: 550px;
-  .home-left{
-    width: 50%;
-    margin: 50px 0;
-    padding: 0 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    h1{
-      font-size: 40px;
-      font-weight: 900;
-      color: $black;
-      strong{
-        color: $green;
-      }
-    }
-    h2{
-      text-align: center;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 30px;
-    }
-    .home-connexion{
-      width: 80%;
-      .connexion-item{
-        margin: 30px 0;
-        .form-group{
-          width: calc(100% - 30px);
-        }
-      }
-      .connexion-item:focus {
-        border: solid #4ECCA3 1px !important;
-        box-shadow: 0 0 8px rgba(78, 204, 163, 0.6);
-      }
-      .connexion-btns{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 40px 0;
-        a{
-          font-weight: 600;
-          font-size: 16px;
-        }
-        a:hover{
-          text-decoration: none;
-          color: $green;
-          transition: color ease-in-out 0.15s;
-        }
-      }
-      .alternative-connexion{
-        margin: 20px 0;
-        hr{
-          width: 100%;
-          height: 2px;
-          background-color: $violet;
-          margin: 0;
-          border-top: 0
-        }
-        p{
-          width: 26%;
-          font-size: 16px;
-          font-weight: 600;
-          color: $violet;
-          background-color: white;
-          position: relative;
-          z-index: 1;
-          top: -12px;
-          margin: auto;
-          text-align: center;
-        }
-      }
-    }
-  }
-  .home-right{
-    width: 50%;
-    background-image: url("00_Icon.png");
-    background-position: center;
-    background-size: cover;
-  }
+.blue-connexion a{
+  border: 2px solid $violet;
+  color: $violet;
 }
-.inscription-items{
-  display: flex;
-  justify-content: space-around;
-  .btn-inscription{
-    width: 30%;
-    border: 2px solid $green;
-    border-radius: 4px;
-    background-color: rgba(0,0,0,0);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    i{
-      font-size: 72px;
-      margin: 10px;
-    }
-    a{
-      text-transform: uppercase;
-      font-size: 16px;
-      font-weight: 900;
-      color: $green;
-    }
-  }
-  .btn-inscription:hover{
-    background-color: $green;
-    transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
-    a{
-      color: white;
-      text-decoration: none;
-      transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
-    }
-  }
+.blue-connexion a:hover{
+  background-color: $violet;
+  color: white;
 }
 
-@media screen and (max-width: 991px) {
-  .home-container .home-left{
-    width: 100%;
-    padding: 0;
-    .home-connexion .inscription-items .btn-inscription{
-      width: unset;
-    }
-  }
-}
+
 
 // Faire un parcours generale des text-align:
 h1 {
