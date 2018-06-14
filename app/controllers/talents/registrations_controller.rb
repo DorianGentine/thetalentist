@@ -14,7 +14,6 @@ class Talents::RegistrationsController < Devise::RegistrationsController
     @talent = Talent.new(talent_params)
     authorize @talent
     if @talent.save
-    raise
       @talentist.send_message(@talent, "Bonjour #{@talent.firstname}, Bienvenue sur notre plateforme!", "#{@talent.id}")
       session[:talent_id] = @talent.id
       after_sign_up_path_for(resource)

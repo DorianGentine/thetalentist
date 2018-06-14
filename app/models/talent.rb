@@ -1,6 +1,7 @@
 class Talent < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise  :database_authenticatable,
           :registerable,
           :recoverable,
@@ -10,6 +11,7 @@ class Talent < ApplicationRecord
 
   validates_confirmation_of :password
 
+  after_create :send_welcome_email
 
   # Tu devras ajouter les lignes has_many :xx through: :xx pour tous les champs que le talent devra remplir dans le questionnaire
   has_many :talent_sectors, dependent: :destroy
@@ -75,6 +77,11 @@ class Talent < ApplicationRecord
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
   end
 
+  private
+
+  def send_welcome_email
+    TalentMailer.welcome(self).deliver_now
+  end
 
 
 end

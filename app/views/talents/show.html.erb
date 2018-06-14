@@ -39,7 +39,11 @@
       </div>
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="far fa-compass"></i></p>
-        <p><%= @talent.sectors.last.title %></p>
+        <% if @talent.sectors.present? %>
+          <p><%= @talent.sectors.last.title %></p>
+        <% else %>
+          <p> Ajoute ton secteur activité</p>
+        <% end %>
       </div>
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
