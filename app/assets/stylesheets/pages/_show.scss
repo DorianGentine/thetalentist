@@ -1,6 +1,7 @@
 .container-show{
   padding: 60px;
   display: inline-flex;
+  width: 100vw;
 }
 
 .talent-left{
@@ -96,11 +97,11 @@
         text-align: justify;
       }
     }
-    .recherche-item-center{
-      align-self: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .recherche-item-right{
+      align-self: flex-end;
+      h5, p{
+        text-align: right;
+      }
     }
   }
   .talent-right-down{
@@ -325,7 +326,7 @@
         margin: 20px 0;
         .lower-middle-body{
           width: unset;
-          margin: 20px 0;
+          margin: 60px 0;
           .talent-experiences{
             height: unset;
             overflow: initial;

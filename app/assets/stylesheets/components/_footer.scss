@@ -36,8 +36,9 @@
   }
   a:hover{
     color: $green;
+    cursor: pointer;
     text-decoration: none;
-    transition: color ease-in-out 0.15s;
+    transition: 0.15s;
   }
 }
 
