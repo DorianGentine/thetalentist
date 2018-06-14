@@ -1,6 +1,5 @@
 // Specific CSS for your home-page
 #new_landing{
-  height: 200vh; // A retirer
   .top-menu{
     position: absolute;
     display: inline-flex;
@@ -44,20 +43,19 @@
     }
   }
 
-.new-landing-logo-talentist{
-  position: absolute;
-  top: 15px;
-  left: 50%;
-  transform: translate(-50%);
-  height: 55px;
-}
+  .new-landing-logo-talentist{
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translate(-50%);
+    height: 55px;
+  }
 
   .landing-top{
     background-color: rgba(3, 13, 89, 0.05);
     border-radius: 5px;
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: relative;
+    margin: 0 0 140px 155px;
     width: calc(100vw - 155px);
     padding: 120px 50px 80px;
     display: flex;
@@ -92,6 +90,61 @@
       img{
         height: 127%;
         margin: 0 0 0 -533px;
+      }
+    }
+
+    .fleche-bas{
+      position: absolute;
+      bottom: 40px;
+      font-size: 24px;
+      color: white;
+      left: calc(50% - 77.5px);
+      transform: translate(-50%);
+      animation: fleche-bas 1s ease-out infinite alternate;
+    }
+    @keyframes fleche-bas {
+    from {bottom: 40px;}
+    to {bottom: 20px;}
+}
+  }
+
+  .landing-main{
+    padding: 50px 150px;
+    h1{
+      text-align: center;
+      font-size: 22px;
+      font-weight: 900;
+      color: $green;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+    .desc-service{
+      font-size: 28px;
+      color: #191B26;
+      text-align: center;
+      margin-bottom: 100px;
+    }
+    .service-steps{
+      display: flex;
+      justify-content: space-between;
+      .service-step{
+        width: 250px;
+        text-align: center;
+        i{
+          color: $green;
+          font-size: 100px;
+        }
+        h5{
+          text-transform: uppercase;
+          font-size: 26px;
+          font-weight: 900;
+          color: #191B26;
+          margin: 50px 0 40px 0;
+        }
+        p{
+          font-size: 18px;
+          margin: 0 0 180px;
+        }
       }
     }
   }
