@@ -39,7 +39,7 @@
       </div>
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="far fa-compass"></i></p>
-        <p><%= @talent.sectors.last.title %></p>
+        <!-- <p><#%= @talent.sectors.last.title %></p> -->
       </div>
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
@@ -95,15 +95,13 @@
       <div class="right-up-item je-recherche">
         <h4>Je recherche</h4>
         <div class="space-between-vertical">
-          <div class="recherche-first-line">
-            <div class="recherche-item">
-              <h5><%= @talent.next_aventures.last.contrat %></h5>
-              <p>CONTRAT</p>
-            </div>
-            <div class="recherche-item">
-              <h5><%= @talent.next_aventures.last.remuneration %></h5>
-              <p>SALAIRE (Annuel)</p>
-            </div>
+          <div class="recherche-item">
+            <h5><%= @talent.next_aventures.last.contrat %></h5>
+            <p>CONTRAT</p>
+          </div>
+          <div class="recherche-item recherche-item-right">
+            <h5><%= @talent.next_aventures.last.remuneration %></h5>
+            <p>SALAIRE (Annuel)</p>
           </div>
           <div class="recherche-item">
             <h5>(TO DO)</h5>   <!-- A enlever quand fonction en dessous fonctionnera -->
@@ -112,14 +110,14 @@
             <% end %>
             <p>SECTEURS</p>
           </div>
-          <div class="recherche-item recherche-item-center">
-            <div class="map-ville"></div>
+          <div class="recherche-item recherche-item-right">
             <h5><%= @talent.next_aventures.last.city %></h5>
             <p>VILLE</p>
           </div>
         </div>
       </div>
     </div>
+
     <div class="talent-right-down lower-body">
       <div class="lower-middle-body">
         <h4><i class="far fa-file-alt"></i> EXPÉRIENCES</h4>
@@ -128,7 +126,7 @@
         <% end %>
 
         <div class="lower-body-item-content">
-          <hr class="barre-pointee">
+          <hr class="barre-pointee hidden-xs">
           <div class="talent-experiences">
 
             <% @experiences.reverse_each do |experience| %>
@@ -154,7 +152,7 @@
           <p data-target= "modal_formation" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
         <% end %>
         <div class="lower-body-item-content">
-          <hr class="barre-pointee">
+          <hr class="barre-pointee hidden-xs">
           <div class="talent-experiences">
 
             <% @talent_formations.reverse_each do |formation| %>
