@@ -46,7 +46,7 @@
 
     <% elsif talent_signed_in? && current_talent %>
 
-      <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "START-UP", repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
       <%= link_to "MESSAGERIE", conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
 

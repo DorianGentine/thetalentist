@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   #   resources :headhunter_message, only: [:create]
   # end
 
+  get 'repertoire_startup', to: "talents#repertory"
+
+
   # pour la messagerie
   resources :conversations, only: [ :show, :update, :create, :index] do
     resources :messages, only: [ :create ]
