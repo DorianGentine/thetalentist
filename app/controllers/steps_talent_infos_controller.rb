@@ -20,6 +20,7 @@ class StepsTalentInfosController < ApplicationController
     # @talent.status = step.to_s
     # @talent.status = 'active' if step == steps.last
     if @talent.update(talent_params)
+      # @talent = current_user
       render_wizard @talent
     else
       # si l'update ne fonctionne pas, il faut render l'étape sur laquelle tu te trouves donc tu as besoin de la connaître
@@ -33,6 +34,7 @@ class StepsTalentInfosController < ApplicationController
 
 
   def finish_wizard_path
+    current_user = @talent
     talent_path(@talent)
   end
 

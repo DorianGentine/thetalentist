@@ -16,7 +16,6 @@ class Talents::RegistrationsController < Devise::RegistrationsController
     if @talent.save
       @talentist.send_message(@talent, "Bonjour #{@talent.firstname}, Bienvenue sur notre plateforme!", "#{@talent.id}")
       session[:talent_id] = @talent.id
-      after_sign_up_path_for(resource)
       redirect_to steps_talent_info_path(:formations)
     else
       render :new

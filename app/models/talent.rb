@@ -77,6 +77,16 @@ class Talent < ApplicationRecord
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
   end
 
+  def job_is?(job)
+    job_ids = []
+    jobs = TalentJob.joins(:job).where(:jobs => {:title => job })
+    jobs.each do |job|
+      job_ids << job.id
+    end
+    talent = TalentJob.joins(:talent).where(:talents => { :id => self.id })
+    job_ids.include?(talent[0].id)
+  end
+
   private
 
   def send_welcome_email
