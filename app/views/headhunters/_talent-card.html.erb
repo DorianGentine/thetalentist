@@ -8,6 +8,12 @@
 
       <%= render 'headhunters/illu-card', talent: talent %>
 
+      <% if talent.job_is?("Data") %>
+        <p>Yes</p>
+        <% else %>
+        <p>nop</p>
+      <% end %>
+
       <div class="border">
 
         <div class="talent-job">
