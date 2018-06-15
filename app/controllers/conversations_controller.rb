@@ -70,7 +70,8 @@ class ConversationsController < ApplicationController
       @relationship = relationship[0]
     end
 
-
+    # diplay messages
+    @messages = @conversation.receipts_for(current_user).order("created_at ASC")
     # Partie création d'un message
     @message = Mailboxer::Message.new
   end
@@ -78,6 +79,7 @@ class ConversationsController < ApplicationController
   def update
     participant = @conversation.participants - [current_user]
     @participant = @conversation.participants - [current_user]
+    @participant = participant[0]
     user_relationship
     if @relationship.update(status:params[:commit])
       redirect_to conversation_path(@conversation)
