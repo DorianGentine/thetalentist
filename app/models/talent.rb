@@ -11,7 +11,7 @@ class Talent < ApplicationRecord
 
   validates_confirmation_of :password
 
-  after_create :send_welcome_email
+  # after_create :send_welcome_email
 
   # Tu devras ajouter les lignes has_many :xx through: :xx pour tous les champs que le talent devra remplir dans le questionnaire
   has_many :talent_sectors, dependent: :destroy
