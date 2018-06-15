@@ -1,9 +1,32 @@
-<% if talent_job = Data %>
-  <div class="illu-card" style="background-image: url(/assets/illu-data.png);"></div>
-<% elsif talent_job = Product %>
-  <div class="illu-card" style="background-image: url(/assets/illu-product.png);"></div>
-<% elsif talent_job = Sales %>
-  <div class="illu-card" style="background-image: url(/assets/illu-sales.png);"></div>
+<% if talentist_signed_in? && current_talentist %>
+
+  <% if talent.photo.present? %>
+
+    <div class="photo-profil illu-card" style="background-image: url('<%= cl_image_path talent.photo, :transformation=>[ :gravity=>"face"] %>');">
+      <div class="statut"></div>
+    </div>
+
+  <% else %>
+
+    <div class="photo-profil illu-card">
+      <div class="initiale">
+        <p><%= talent.firstname.split(//).first.upcase %><%= talent.name.split(//).first.upcase %></p>
+      </div>
+      <div class="statut"></div>
+    </div>
+
+  <% end %>
+
 <% else %>
-  <div class="illu-card" style="background-image: url(/assets/illu-market.png);"></div>
+
+  <% if talent_job = Data %>
+    <div class="illu-card" style="background-image: url(/assets/illu-data.png);"></div>
+  <% elsif talent_job = Product %>
+    <div class="illu-card" style="background-image: url(/assets/illu-product.png);"></div>
+  <% elsif talent_job = Sales %>
+    <div class="illu-card" style="background-image: url(/assets/illu-sales.png);"></div>
+  <% else %>
+    <div class="illu-card" style="background-image: url(/assets/illu-market.png);"></div>
+  <% end %>
+
 <% end %>

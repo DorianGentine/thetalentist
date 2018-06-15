@@ -1,60 +1,92 @@
-<div class="talent-card-placement">
-  <div class="talent-card">
-    <div class="card-title">
-      <p>LE TALENT</p>
-    </div>
+<% if talentist_signed_in? && current_talentist %>
 
-    <%= render 'illu-card' %>
-
-    <div class="border">
-
-      <div class="talent-job">
-        <h2><%= talent.experiences.last.position %></h2>
+  <div class="talent-card-placement placement-talentist">
+    <div class="talent-card">
+      <div class="card-title">
+        <p>LE TALENT</p>
       </div>
 
-      <div class="talent-info">
-        <div class="talent-info-item card-dispsition">
-          <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
-          <p><%= talent.city %></p>
+      <%= render 'headhunters/illu-card', talent: talent %>
+
+      <div class="border">
+
+        <div class="talent-job">
+          <h2><%= talent.firstname %> <%= talent.name %></h2>
         </div>
-        <div class="talent-info-item card-dispsition">
-          <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
-          <% if talent.btoc && talent.btob %>
-            <p> BtoB & BtoC</p>
-          <% elsif talent.btoc %>
-            <p>BtoB</p>
-          <% else %>
-            <p>BtoC</p>
-          <% end %>
+
+        <div class="talent-update card-dispsition">
+          <p class="icon"><i class="far fa-clock"></i></p>
+          <p>Mise à jour : <%= l(talent.updated_at, :locale => :fr) %> </p>
         </div>
-        <div class="talent-info-item card-dispsition">
-          <p class="icon icon-info"><i class="fas fa-briefcase"></i></p>
-          <p>CDI</p>
+
+        <div class="talent-more">
+            <p class= "modal-button" data-target= "modal_<%= talent.id %>">En savoir plus <i class="fas fa-angle-right"></i></p>
         </div>
-      </div>
-
-      <% talent.talent_formations.first(2).each do |formation| %>
-        <div class="talent-school-1 card-dispsition">
-          <p class="icon"><i class="fas fa-graduation-cap"></i></p>
-          <p><%= formation.formation.title %> - <%= formation.title %></p>
-          <!-- <p>HEC, Master entrepreneuriat - 2015</p> -->
-        </div>
-      <% end %>
-      <div class="talent-description hidden-xs">
-        <p><%= truncate(talent.overview, length: 250) %></p>
-      </div>
-
-
-
-
-      <div class="talent-update card-dispsition">
-        <p class="icon"><i class="far fa-clock"></i></p>
-        <p>Mise à jour le <%= l(talent.updated_at, :locale => :fr) %> </p>
-      </div>
-
-      <div class="talent-more">
-          <p class= "modal-button" data-target= "modal_<%= talent.id %>">En savoir plus <i class="fas fa-angle-right"></i></p>
       </div>
     </div>
   </div>
-</div>
+
+<% else %>
+
+  <div class="talent-card-placement">
+    <div class="talent-card">
+      <div class="card-title">
+        <p>LE TALENT</p>
+      </div>
+
+      <%= render 'headhunters/illu-card' %>
+
+      <div class="border">
+
+        <div class="talent-job">
+          <h2><%= talent.experiences.last.position %></h2>
+        </div>
+
+        <div class="talent-info">
+          <div class="talent-info-item card-dispsition">
+            <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
+            <p><%= talent.city %></p>
+          </div>
+          <div class="talent-info-item card-dispsition">
+            <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
+            <% if talent.btoc && talent.btob %>
+              <p> BtoB & BtoC</p>
+            <% elsif talent.btoc %>
+              <p>BtoB</p>
+            <% else %>
+              <p>BtoC</p>
+            <% end %>
+          </div>
+          <div class="talent-info-item card-dispsition">
+            <p class="icon icon-info"><i class="fas fa-briefcase"></i></p>
+            <p>CDI</p>
+          </div>
+        </div>
+
+        <% talent.talent_formations.first(2).each do |formation| %>
+          <div class="talent-school-1 card-dispsition">
+            <p class="icon"><i class="fas fa-graduation-cap"></i></p>
+            <p><%= formation.formation.title %> - <%= formation.title %></p>
+            <!-- <p>HEC, Master entrepreneuriat - 2015</p> -->
+          </div>
+        <% end %>
+        <div class="talent-description hidden-xs">
+          <p><%= truncate(talent.overview, length: 250) %></p>
+        </div>
+
+
+
+
+        <div class="talent-update card-dispsition">
+          <p class="icon"><i class="far fa-clock"></i></p>
+          <p>Mise à jour le <%= l(talent.updated_at, :locale => :fr) %> </p>
+        </div>
+
+        <div class="talent-more">
+            <p class= "modal-button" data-target= "modal_<%= talent.id %>">En savoir plus <i class="fas fa-angle-right"></i></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
