@@ -155,10 +155,27 @@
         height: 80px;
         h2{
           font-size: 16px;
+          text-transform: capitalize;
         }
       }
       .talent-update p{
         font-size: 10px
+      }
+    }
+    .illu-card{
+      height: 72px;
+      width: 72px;
+      position: absolute;
+      top: 10px;
+      right: 0;
+      border-radius: 5px;
+      overflow: hidden;
+      opacity: 0.7;
+      .initiale{
+        border-radius: unset;
+        p{
+          font-size: 40px;
+        }
       }
     }
   }
