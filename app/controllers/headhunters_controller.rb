@@ -1,6 +1,5 @@
 class HeadhuntersController < ApplicationController
 
-
   def repertory
     @headhunter = current_headhunter
     authorize @headhunter
@@ -14,6 +13,9 @@ class HeadhuntersController < ApplicationController
         @talents << Talent.find(job.talent_id)
       end
     end
+
+
+
     if params[:tag] == "Data"
       @titre = "DATA"
     elsif params[:tag] == "Sales"

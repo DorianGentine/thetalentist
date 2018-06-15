@@ -1,4 +1,5 @@
-<% if talent_job = Data %>
+
+<% if @talents_id.include?(talent.id) %>
   <div class="illu-card" style="background-image: url(/assets/illu-data.png);"></div>
 <% elsif talent_job = Product %>
   <div class="illu-card" style="background-image: url(/assets/illu-product.png);"></div>

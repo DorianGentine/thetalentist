@@ -1,10 +1,5 @@
 class ConversationsController < ApplicationController
   before_action :user_conversation, only: [ :show, :update ]
-  # before_action :user_conversations, only: [ :show, :update ]
-
-  def index
-
-  end
 
   def show
     # 1. Liste des conversations dont la relationship n'est pas acceptée = construire @pending_conversations
@@ -87,15 +82,6 @@ class ConversationsController < ApplicationController
       raise
     end
   end
-
-
-  # def create
-  #   if current_user == current_headhunter
-  #     recipient = Talent.find(params[:talet_id])
-  #     receipt = current_user.send_message(recipient, params[:body], params[:subject])
-  #     redirect_to conversation_path(receipt.conversation)
-  #   end
-  # end
 
   private
 
