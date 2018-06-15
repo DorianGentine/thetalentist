@@ -96,7 +96,7 @@
     <div class="conversation">
 
       <!-- div conversation -->
-      <% @conversation.receipts_for(current_user).reverse_each do |receipt| %>
+      <% @messages.each do |receipt| %>
 
         <!-- partie gauche -->
         <% if receipt.message.sender == @participant %>
