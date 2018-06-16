@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # le repertoire est la où on affiche tous les talents
 
   get 'repertoire', to: "headhunters#repertory"
+  put 'repertoire', to: "headhunters#update"
 
 
   devise_for :talents, path: 'talents', controllers: {

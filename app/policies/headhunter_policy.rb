@@ -34,6 +34,5 @@ class HeadhunterPolicy < ApplicationPolicy
 
   def repertory?
     user == record
-    true
   end
 end

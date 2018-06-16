@@ -37,14 +37,11 @@
         <% end %>
       <h3>CONTACTÉS</h3>
 
-      <br>
-      <%  @unread_conversations.reverse_each do |conversation| %>
+      <%  @unread_conversations.each do |conversation| %>
         <%= render 'conversation', :conversation => conversation %>
       <% end %>
 
-      <br>
-
-      <%  @read_accepted_conversations.reverse_each do |conversation| %>
+      <%  @read_accepted_conversations.each do |conversation| %>
         <%= render 'conversation', :conversation => conversation %>
       <% end %>
 
@@ -158,10 +155,6 @@
         <% end %>
 
     </div>
-
-
-
-
   </div>
 
   <div class="colonne col-droite hidden-xs hidden-sm">

@@ -6,6 +6,6 @@ class TalentistPolicy < ApplicationPolicy
   end
 
   def index?
-    scope.where(:id => record.id).exists? && user == record
+    # scope.where(:id => record.id).exists? && user == record
   end
 end

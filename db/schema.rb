@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_09_134735) do
+ActiveRecord::Schema.define(version: 2018_06_16_094825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,15 @@ ActiveRecord::Schema.define(version: 2018_06_09_134735) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "job_alertes", force: :cascade do |t|
+    t.bigint "headhunter_id"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["headhunter_id"], name: "index_job_alertes_on_headhunter_id"
+    t.index ["job_id"], name: "index_job_alertes_on_job_id"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -389,6 +398,8 @@ ActiveRecord::Schema.define(version: 2018_06_09_134735) do
   add_foreign_key "experiences", "talents"
   add_foreign_key "headhunter_messages", "headhunters"
   add_foreign_key "headhunter_messages", "relationships"
+  add_foreign_key "job_alertes", "headhunters"
+  add_foreign_key "job_alertes", "jobs"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"

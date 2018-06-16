@@ -21,7 +21,7 @@ class ConversationsController < ApplicationController
           @pending_conversations << conversation
         end
       end
-    else
+    elsif current_user.is_a?(Headhunter)
       pending_relationships = Relationship.where(headhunter_id: current_user.id).where(status: "pending")
       # Return un array des relationship avec le headhunter
       pending_ids = []
@@ -37,11 +37,16 @@ class ConversationsController < ApplicationController
           @pending_conversations << conversation
         end
       end
+    else
     end
 
 
 
     # 2. Liste les conversations avec nouveau message et les ordonner construire @unread_conversations
+    if current_user.is_a?(Talentist)
+      @pending_conversations = []
+    end
+
     conversations = current_user.mailbox.conversations - @pending_conversations
     @unread_conversations = []
     conversations.each do |conversation|
@@ -53,22 +58,26 @@ class ConversationsController < ApplicationController
     # 3. Lister les conversations lues et les ordonner = construire @read_conversations
     @read_accepted_conversations = conversations - @unread_conversations
 
-
     participant = @conversation.participants - [current_user]
     @participant = participant[0]
 
     if current_user.is_a?(Talent)
       @connexion = current_user.is_connected_to?(@participant)
       user_relationship
-    else current_user.is_a?(Headhunter)
+    elsif current_user.is_a?(Headhunter)
       relationship = Relationship.where("headhunter_id = ? AND talent_id = ?", current_user.id, @participant.id)
       @relationship = relationship[0]
+    else
     end
 
     # diplay messages
     @messages = @conversation.receipts_for(current_user).order("created_at ASC")
     # Partie création d'un message
     @message = Mailboxer::Message.new
+
+
+    # Au click la conversation passer de unread a read
+    @conversation.mark_as_read(current_user)
   end
 
   def update
@@ -78,7 +87,7 @@ class ConversationsController < ApplicationController
     user_relationship
     if @relationship.update(status:params[:commit])
       redirect_to conversation_path(@conversation)
-    else
+    elsif current_talentist
       raise
     end
   end

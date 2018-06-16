@@ -1,0 +1,3 @@
+<% if current_user.count_unread_message > 0 %>
+  <p id="notif"><%= current_user.count_unread_message %></p>
+<% end %>

@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   before_action :set_conversation
 
   def create
-    receipt = current_user.reply_to_conversation(
+    @receipt = current_user.reply_to_conversation(
       @conversation,
       params[:mailboxer_message][:body],
       nil,
@@ -12,8 +12,12 @@ class MessagesController < ApplicationController
       )
     # pour récupérer le fichier attaché :
     # receipt.message.attachment.url --> "http://res.cloudinary.com/da4nnrzbu/image/upload/v1528733299/jhwimkdrds6gs4pxhvyw.jpg"
+    participant = @conversation.participants - [current_user]
+    @participant = participant[0]
 
-    redirect_to conversation_path(receipt.conversation)
+    # TalentMailer.new_message(@receipt, @participant, current_user).deliver_now
+    redirect_to conversation_path(@receipt.conversation)
+
     authorize @conversation
   end
 
