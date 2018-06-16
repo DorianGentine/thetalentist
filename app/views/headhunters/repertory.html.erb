@@ -8,38 +8,46 @@
         <div class="dropdown">
           <i class="fas fa-angle-down" data-toggle="dropdown"></i>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-
-            <li><a href=""><i class="fas fa-search"></i> DATA</a></li>
-            <li><a href=""><i class="far fa-comments"></i> SALES</a></li>
-            <li><a href=""><i class="fas fa-tachometer-alt"></i> MARKET</a></li>
-            <li><a href=""><i class="fas fa-archive"></i> PRODUCT</a></li>
-            <li>
+            <li><%= link_to repertoire_path(tag: "Data") do %>
+              <i class="fas fa-search"></i> DATA
+            <% end %></li>
+            <li><%= link_to repertoire_path(tag: "Sales") do %>
+              <i class="far fa-comments"></i> SALES
+            <% end %></li>
+            <li><%= link_to repertoire_path(tag: "Market") do %>
+              <i class="fas fa-tachometer-alt"></i> MARKET
+            <% end %></li>
+            <li><%= link_to repertoire_path(tag: "Product") do %>
+              <i class="fas fa-archive"></i> PRODUCT
+            <% end %></li>
               <a href="">Créer une alerte <i class="fas fa-bell"></i></a>
             </li>
           </ul>
         </div>
       </div>
     </div>
-
-    <div class="filter-item hidden-xs hidden-sm">
-
-      <%= link_to repertoire_path(tag: "Data") do %>
-        <i class="fas fa-search"></i> DATA
-      <% end %>
-      <%= link_to repertoire_path(tag: "Sales") do %>
-        <i class="far fa-comments"></i> SALES
-      <% end %>
-      <%= link_to repertoire_path(tag: "Market") do %>
-        <i class="fas fa-tachometer-alt"></i> MARKET
-      <% end %>
-      <%= link_to repertoire_path(tag: "Product") do %>
-        <i class="fas fa-archive"></i> PRODUCT
-      <% end %>
-
-    </div>
+      <div class="filter-item hidden-xs hidden-sm">
+        <%= link_to repertoire_path(tag: "Data") do %>
+          <i class="fas fa-search"></i> DATA
+        <% end %>
+        <%= link_to repertoire_path(tag: "Sales") do %>
+          <i class="far fa-comments"></i> SALES
+        <% end %>
+        <%= link_to repertoire_path(tag: "Market") do %>
+          <i class="fas fa-tachometer-alt"></i> MARKET
+        <% end %>
+        <%= link_to repertoire_path(tag: "Product") do %>
+          <i class="fas fa-archive"></i> PRODUCT
+        <% end %>
+      </div>
 
     <div class="alert-creation hidden-xs hidden-sm">
       <a href="">Créer une alerte <i class="fas fa-bell"></i></a>
+  <!--     <#%= simple_form_for :current_user, method: :put do |f| %>
+        <#%= f.simple_fields_for @job_alert do |u|%>
+          <#%= u.submit "Créer une alerte" %>
+        <#% end %>
+      <#% end %> -->
     </div>
 
 

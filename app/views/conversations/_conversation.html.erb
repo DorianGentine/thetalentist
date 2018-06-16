@@ -2,14 +2,18 @@
   <div class="conversation-card">
     <div class="photo-profil">
       <div class="initiale">
-        <p><% parti = conversation.participants - [current_user] %><%= parti[0].firstname.split(//).first.upcase %></p>
+        <% if conversation.participants.count > 1 %>
+          <p><% parti = conversation.participants - [current_user] %><%= parti[0].firstname.split(//).first.upcase %></p>
+        <% end %>
       </div>
       <div class="statut"></div>
     </div>
 
-    <div class="conversation-text">
-      <p class="prenom-contact"><% parti = conversation.participants - [current_user] %><%= parti[0].firstname %></p>
-      <p class="apercu-message"><%= conversation.messages.last.body %></p>
+    <div class="conversation-text <%= "strong-color" if conversation.is_unread?(current_user) %>">
+      <% if conversation.participants.count > 1 %>
+        <p class="prenom-contact"><% parti = conversation.participants - [current_user] %><%= parti[0].firstname %></p>
+        <p class="apercu-message"><%= conversation.messages.last.body %></p>
+      <% end %>
     </div>
   </div>
 <% end %>

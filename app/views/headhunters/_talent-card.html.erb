@@ -30,7 +30,24 @@
       </div>
     </div>
   </div>
-
+    <div class="validation_part">
+      <%= simple_form_for talent, method: :put do |f| %>
+      <div class="<%= "green_validation" if talent.validated == true %>">
+        <%= f.submit "Accepter"%>
+      </div>
+      <div class="<%= "red_validation" if talent.validated === false %>">
+        <%= f.submit "Refuser" %>
+      </div>
+      <div class="<%= "green_validation" if talent.visible == true %>">
+        <%= f.submit "Visible"%>
+      </div>
+      <div class="<%= "red_validation" if talent.visible === false %>">
+        <%= f.submit "Invisible" %>
+      </div>
+      <% end %>
+    </div>
+    <%= link_to "Messages", conversation_path(talent.mailbox.conversations.last)%>
+    <%= link_to "Profil", talent_path(talent)%>
 <% else %>
 
   <div class="talent-card-placement">

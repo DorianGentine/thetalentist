@@ -27,4 +27,8 @@ class TalentPolicy < ApplicationPolicy
   def update?
     true # --> sert ici pour le test / a modifier pour reprendre la logique ci-dessus
   end
+
+  def repertory?
+    true
+  end
 end

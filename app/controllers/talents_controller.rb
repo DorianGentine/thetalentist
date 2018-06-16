@@ -4,27 +4,43 @@ class TalentsController < ApplicationController
     @talentist = current_talentist
     @talents = Talent.all
     @talents = policy_scope(Talent)
+
     if params[:tag].blank?
-      @talents = Talent.all.order(updated_at: :desc)
+      @talents = Talent.all.order(name: :asc)
     else
-      @talents = []
       # les talents dont le job est : params[:tag]
-      talent_jobs = TalentJob.joins(:job).where(:jobs => {:title => params[:tag]})
-      talent_jobs.each do |job|
-        @talents << Talent.find(job.talent_id)
+      if params[:tag] == "Tous"
+        @talents = Talent.all
+        @titre = "Tous"
+      elsif params[:tag] == "Valider"
+        @talents = Talent.where(:validated => true)
+        @titre = "Valider"
+      elsif params[:tag] == "Refuser"
+        @talents = Talent.where(:validated => false)
+        @titre = "Refuser"
+      elsif params[:tag] == "En attende"
+        @talents = Talent.where(:validated => nil)
+        @titre = "Visible"
+      elsif params[:tag] == "Visible"
+        @talents = Talent.where(:visible => true)
+        # envoyer un message quand un talent passe visible et le job a une alert
+
+      else params[:tag] == "Invisible"
+        @talents = Talent.where(:visible => false)
+        @titre = "Invisible"
       end
     end
-    if params[:tag] == "Data"
-      @titre = "DATA"
-    elsif params[:tag] == "Sales"
-      @titre = "SALES"
-    elsif params[:tag] == "Market"
-      @titre = "MARKET"
-    elsif params[:tag] == "Product"
-      @titre = "PRODUCT"
-    end
   end
+  def repertory
+    @talent = current_talent
+    relationships = Relationship.where(talent_id: current_user.id)
+    @headhunters = []
 
+    relationships.each do |relationship|
+      @headhunters << Headhunter.find(relationship.headhunter_id)
+    end
+    authorize @talent
+  end
 
   def show
     @talents = Talent.all
@@ -53,6 +69,36 @@ class TalentsController < ApplicationController
     # elsif current_talent.relationships.last.status == "pending"
 
     #   @relationship = Relationship.where("headhunter_id = ? AND talent_id = ?", @participant[0].id, current_user.id)
+    elsif current_talentist
+      @talent = Talent.find(params[:id])
+
+      if params[:commit] == "Accepter"
+        if @talent.validated == true
+          validated_action(nil)
+        elsif @talent.validated == false
+          validated_action(true)
+        else @talent.validated == nil
+          validated_action(true)
+        end
+      elsif params[:commit] == "Refuser"
+        if @talent.validated == false
+          validated_action(nil)
+        elsif @talent.validated == true
+          validated_action(false)
+        else @talent.validated == nil
+          validated_action(false)
+        end
+      elsif params[:commit] == "Visible"
+        if @talent.visible == false
+          visible_action(true)
+        end
+      else params[:commit] == "Invisible"
+        if @talent.visible == true
+          visible_action(false)
+        end
+      end
+      redirect_to talents_path
+      authorize @talent
     else
       @talent = Talent.find(params[:id])
       @talent.update_attributes(talent_params)
@@ -62,6 +108,17 @@ class TalentsController < ApplicationController
   end
 
 private
+
+  def visible_action(action)
+    @talent.visible = action
+    @talent.save
+  end
+
+  def validated_action(action)
+    @talent.validated = action
+    @talent.save
+
+  end
 
   def talent_params
     # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
