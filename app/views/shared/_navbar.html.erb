@@ -10,7 +10,9 @@
     <% if headhunter_signed_in? && current_headhunter %>
 
       <!-- Links when logged in -->
-      <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <% if  current_headhunter.validated? %>
+        <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <% end %>
 
       <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
       <!-- <#% if !@unread_conversations.blank? && @unread_conversations.count > 1 %> -->
@@ -81,7 +83,7 @@
       </div>
     <% elsif talentist_signed_in? && current_talentist %>
 
-      <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "START-UP", headhunters_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
       <%= link_to "TALENTS", talents_path, class: "navbar-wagon-item navbar-wagon-link" %>
 

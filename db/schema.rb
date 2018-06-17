@@ -10,10 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_094825) do
+ActiveRecord::Schema.define(version: 2018_06_17_083137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "company_types", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "credentials", force: :cascade do |t|
     t.string "firstname"
@@ -38,6 +75,8 @@ ActiveRecord::Schema.define(version: 2018_06_16_094825) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "starting"
+    t.bigint "company_type_id"
+    t.index ["company_type_id"], name: "index_experiences_on_company_type_id"
     t.index ["talent_id"], name: "index_experiences_on_talent_id"
   end
 
@@ -355,6 +394,7 @@ ActiveRecord::Schema.define(version: 2018_06_16_094825) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo"
+    t.boolean "admin", default: false, null: false
     t.index ["email"], name: "index_talentists_on_email", unique: true
     t.index ["reset_password_token"], name: "index_talentists_on_reset_password_token", unique: true
   end
@@ -395,6 +435,7 @@ ActiveRecord::Schema.define(version: 2018_06_16_094825) do
   end
 
   add_foreign_key "credentials", "talents"
+  add_foreign_key "experiences", "company_types"
   add_foreign_key "experiences", "talents"
   add_foreign_key "headhunter_messages", "headhunters"
   add_foreign_key "headhunter_messages", "relationships"

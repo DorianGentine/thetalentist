@@ -1,5 +1,4 @@
 <% if talentist_signed_in? && current_talentist %>
-
   <% if talent.photo.present? %>
 
     <div class="illu-card photo-profil" style="background-image: url('<%= cl_image_path talent.photo, :transformation=>[ :gravity=>"face"] %>');">
@@ -14,7 +13,7 @@
     </div>
 
   <% end %>
-<% else %>
+<% else current_headhunter || current_talent %>
 
   <% if talent.talent_jobs.blank? %>
 
