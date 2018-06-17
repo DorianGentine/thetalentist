@@ -56,3 +56,8 @@ gem "geocoder"
 
 # add for messagerie system
 gem 'mailboxer'
+
+# that for admin part
+gem 'activeadmin', github: 'activeadmin/activeadmin'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+

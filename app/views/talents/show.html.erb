@@ -133,6 +133,19 @@
           <hr class="barre-pointee hidden-xs">
           <div class="talent-experiences">
 
+              <div class="placement-point-barre">
+                <div>
+                  <div class="point-barre-pointee"></div>
+                </div>
+                <div class="placement-talent-experience">
+                  <p class="experience-post"><%= @currently.position %></p>
+                  <p class="experience-entreprise"><%= @currently.company_name %></p>
+                  <p class="experience-duree"><%= @currently.starting %> - <%= @currently.currently ? "Aujourd’hui" : @currently.years %></p>
+                  <p class="experience-desc"><%= @currently.overview %></p>
+                </div>
+              </div>
+
+
             <% @experiences.reverse_each do |experience| %>
               <div class="placement-point-barre">
                 <div>
@@ -140,7 +153,7 @@
                 </div>
                 <div class="placement-talent-experience">
                   <p class="experience-post"><%= experience.position %></p>
-                  <p class="experience-entreprise">GE TODO(Groupe international)</p>
+                  <p class="experience-entreprise"><%= experience.company_name %></p>
                   <p class="experience-duree"><%= experience.starting %> - <%= experience.currently ? "Aujourd’hui" : experience.years %></p>
                   <p class="experience-desc"><%= experience.overview %></p>
                 </div>

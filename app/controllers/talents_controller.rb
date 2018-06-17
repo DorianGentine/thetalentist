@@ -20,11 +20,11 @@ class TalentsController < ApplicationController
         @titre = "Refuser"
       elsif params[:tag] == "En attende"
         @talents = Talent.where(:validated => nil)
-        @titre = "Visible"
       elsif params[:tag] == "Visible"
+        @titre = "En attente"
         @talents = Talent.where(:visible => true)
+        @titre = "Visible"
         # envoyer un message quand un talent passe visible et le job a une alert
-
       else params[:tag] == "Invisible"
         @talents = Talent.where(:visible => false)
         @titre = "Invisible"
@@ -47,7 +47,10 @@ class TalentsController < ApplicationController
     @talent = Talent.find(params[:id])
     authorize @talent
 
-    @experiences = @talent.experiences.order(:years)
+    currently = @talent.experiences.where(currently: true)
+    @currently = currently[0]
+    @experiences = @talent.experiences.order(:years) - currently
+
     @talent_formations = @talent.talent_formations.order(:year)
     @sectors = @talent.next_aventures.last.next_aventure_sectors
     @credentials = @talent.credentials

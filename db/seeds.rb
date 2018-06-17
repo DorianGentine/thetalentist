@@ -53,19 +53,26 @@ nathan_from_agricool = Credential.create!(firstname: "nathan", company_name: "de
 florian_from_manomano = Credential.create!(firstname: "florian", company_name: "desbrasenplus", name: "martin", email: "florian@hotmail.fr", phone: "0786019941", talent: erwan)
 gregoire_from_agricool = Credential.create!(firstname: "gregoire", company_name: "desbrasenplus", name: "barbier", email: "gregoire@hotmail.fr", phone: "0786019941", talent: erwan)
 
+p "Creating company_type part"
+
+ge = CompanyType.create!(title: "Grande entreprise (GE)")
+eti = CompanyType.create!(title: "Entreprise de taille intermédiaire (ETI)")
+pme = CompanyType.create!(title: "Petite et moyenne entreprise (PME)")
+tpe = CompanyType.create!(title: "Micro entreprise (TPE)")
+
 p "Creating experiences"
 
-data_analyst = Experience.create!( position: "Data analyste", talent: luc, company_name: "valeo", link:"https://www.valeo.com/fr/", years:"2017", currently: false, starting: "2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
-data_scientist = Experience.create!( position: "data scientist", talent: donatien, company_name: "uber", link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
-data_owner = Experience.create!( position: "data owner", talent: dorian, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2012", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_owner = Experience.create!( position: "data owner", talent: erwan, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2014", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_analyst = Experience.create!( position: "Data analyste", talent: erwan, company_name: "valeo", link:"https://www.valeo.com/fr/", years:"2017", currently: false, starting: "2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
-data_scientist = Experience.create!( position: "data scientist", talent: dorian, company_name: "uber", link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
-data_owner = Experience.create!( position: "data owner", talent: donatien, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_owner = Experience.create!( position: "data owner", talent: luc, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_scientist = Experience.create!( position: "data scientist", talent: louis, company_name: "uber", link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
-data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_analyst = Experience.create!( position: "Data analyste", talent: luc, company_type_id: ge.id, company_name: "valeo", link:"https://www.valeo.com/fr/", years:"2017", currently: false, starting: "2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
+data_scientist = Experience.create!( position: "data scientist", talent: donatien, company_type_id: tpe.id, company_name: "uber", link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
+data_owner = Experience.create!( position: "data owner", talent: dorian, company_type_id: eti.id, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2012", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_owner = Experience.create!( position: "data owner", talent: erwan, company_type_id: ge.id, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2014", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_analyst = Experience.create!( position: "Data analyste", talent: erwan, company_type_id: pme.id, company_name: "valeo", link:"https://www.valeo.com/fr/", years:"2017", currently: false, starting: "2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
+data_scientist = Experience.create!( position: "data scientist", talent: dorian, company_type_id: tpe.id, company_name: "uber", link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
+data_owner = Experience.create!( position: "data owner", talent: donatien, company_type_id: ge.id, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_owner = Experience.create!( position: "data owner", talent: luc, company_type_id: eti.id, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_scientist = Experience.create!( position: "data scientist", talent: louis, company_type_id: pme.id, company_name: "uber", link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
+data_owner = Experience.create!( position: "data owner", talent: louis, company_type_id: pme.id, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_owner = Experience.create!( position: "data owner", talent: louis, company_type_id: ge.id, company_name: "blablacar", link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
 
 p "Creating formations"
 
@@ -271,9 +278,6 @@ justine = Headhunter.create!(email: "justine@hotmail.fr", password:"password", n
 loic = Headhunter.create!(email: "loic@hotmail.fr", password:"password", name: "Rideau", firstname: "loic", job:"rh for sales and product owner", validated: true, startup: doctolib)
 
 
-
-
-
 p "Creating The Talenist part"
 
 dimitri = Talentist.create!(email: "dimitri@hotmail.fr", password:"password", firstname: "dimitri", name:"mussat", super_admin: false)
@@ -292,3 +296,4 @@ dimitri.send_message(amelie, "Bonjour #{amelie.firstname}, Bienvenue sur notre p
 dimitri.send_message(justine, "Bonjour #{justine.firstname}, Bienvenue sur notre plateforme!", "#{justine.id}")
 dimitri.send_message(loic, "Bonjour #{loic.firstname}, Bienvenue sur notre plateforme!", "#{loic.id}")
 
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

@@ -38,6 +38,31 @@ class HeadhuntersController < ApplicationController
     end
   end
 
+  def index
+    @talentist = current_talentist
+    @headhunters = Headhunter.all
+    @headhunters = policy_scope(Headhunter)
+
+    if params[:tag].blank?
+      @headhunters = Headhunter.all.order(name: :asc)
+    else
+      # les headhunters dont le job est : params[:tag]
+      if params[:tag] == "Tous"
+        @headhunters = Headhunter.all
+        @titre = "Tous"
+      elsif params[:tag] == "Valider"
+        @headhunters = Headhunter.where(:validated => true)
+        @titre = "Valider"
+      elsif params[:tag] == "Refuser"
+        @headhunters = Headhunter.where(:validated => false)
+        @titre = "Refuser"
+      else params[:tag] == "En attende"
+        @headhunters = Headhunter.where(:validated => nil)
+        @titre = "En attente"
+      end
+    end
+  end
+
   def show
     @headhunter = Headhunter.find(params[:id])
     authorize @headhunter
@@ -45,11 +70,25 @@ class HeadhuntersController < ApplicationController
 
   def update
     raise
-  end
+    @headhunter = Headhunter.find(params[:id])
 
-  private
-  def params_job
-
+    if params[:commit] == "Accepter"
+      if @headhunter.validated == true
+        validated_action(nil)
+      elsif @headhunter.validated == false
+        validated_action(true)
+      else @headhunter.validated == nil
+        validated_action(true)
+      end
+    else params[:commit] == "Refuser"
+      if @headhunter.validated == false
+        validated_action(nil)
+      elsif @headhunter.validated == true
+        validated_action(false)
+      else @headhunter.validated == nil
+        validated_action(false)
+      end
+    end
   end
 end
 
