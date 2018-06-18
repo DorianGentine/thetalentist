@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
     participant = @conversation.participants - [current_user]
     @participant = participant[0]
 
-    # TalentMailer.new_message(@receipt, @participant, current_user).deliver_now
+    TalentMailer.new_message(@receipt, @participant, current_user).deliver_now
     redirect_to conversation_path(@receipt.conversation)
 
     authorize @conversation
