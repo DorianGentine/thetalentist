@@ -13,6 +13,7 @@ Techno.destroy_all
 Experience.destroy_all
 Credential.destroy_all
 NextAventure.destroy_all
+CompanyType.destroy_all
 
 TalentFormation.destroy_all
 TalentKnown.destroy_all
@@ -296,4 +297,4 @@ dimitri.send_message(amelie, "Bonjour #{amelie.firstname}, Bienvenue sur notre p
 dimitri.send_message(justine, "Bonjour #{justine.firstname}, Bienvenue sur notre plateforme!", "#{justine.id}")
 dimitri.send_message(loic, "Bonjour #{loic.firstname}, Bienvenue sur notre plateforme!", "#{loic.id}")
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
