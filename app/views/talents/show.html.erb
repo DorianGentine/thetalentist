@@ -132,7 +132,7 @@
         <div class="lower-body-item-content">
           <hr class="barre-pointee hidden-xs">
           <div class="talent-experiences">
-
+            <% unless @currently.nil?  %>
               <div class="placement-point-barre">
                 <div>
                   <div class="point-barre-pointee"></div>
@@ -144,6 +144,7 @@
                   <p class="experience-desc"><%= @currently.overview %></p>
                 </div>
               </div>
+            <% end %>
 
 
             <% @experiences.reverse_each do |experience| %>
