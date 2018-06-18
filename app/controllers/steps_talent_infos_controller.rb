@@ -31,13 +31,12 @@ class StepsTalentInfosController < ApplicationController
 
   private
 
-
+# cela ne suffit pas de déclarer current_user = @talent, il faut un sign_in
 
   def finish_wizard_path
-    current_user = @talent
+    sign_in(@talent)
     talent_path(@talent)
   end
-
   def find_talent
     @talent = Talent.find(session[:talent_id])
     authorize @talent
