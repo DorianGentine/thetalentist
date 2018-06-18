@@ -12,7 +12,7 @@
     <%= f.input :years, placeholder:"juin 2015 ou 2015", label: false  %>
     <% if @talent.next_aventures.present? %>
       <%= f.input :overview, label: false %>
-      <%= f.input :company_type, collection: CompanyType.all %>
+      <%= f.input :company_type_id, collection: CompanyType.all %>
     <% end %>
     <!-- TODO button -->
     <%= link_to_remove_association "remove expérience", f %>

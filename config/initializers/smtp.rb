@@ -1,9 +1,10 @@
+
 ActionMailer::Base.smtp_settings = {
-  address: "smtp.thetalentist.com",
+  user_name: ENV['SENDGRID_USERNAME'],
+  password: ENV['SENDGRID_PASSWORD'],
+  domain: 'thetalentist.herokuapp.com',
+  address: "smtp.sendgrid.net",
   port: 587,
-  domain: 'herokuapp.com',
-  user_name: ENV['SENDGRID_API_KEY'],
-  password: ENV['SENDGRID_API_KEY'],
   authentication: :login,
   enable_starttls_auto: true
 }
