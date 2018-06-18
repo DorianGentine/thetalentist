@@ -92,11 +92,11 @@ class TalentsController < ApplicationController
           validated_action(false)
         end
       elsif params[:commit] == "Visible"
-        if @talent.visible == false
+        if @talent.visible == false || @talent.visible == nil
           visible_action(true)
         end
       else params[:commit] == "Invisible"
-        if @talent.visible == true
+        if @talent.visible == true || @talent.visible == nil
           visible_action(false)
         end
       end
@@ -120,7 +120,6 @@ private
   def validated_action(action)
     @talent.validated = action
     @talent.save
-
   end
 
   def talent_params
@@ -128,9 +127,13 @@ private
      params.require(:talent).permit(
       :overview,
       :photo,
+      hobby_ids: [],
+      skill_ids: [],
+      techno_ids: [],
       experiences_attributes:[ :id, :company_name, :years, :starting, :overview, :position, :currently, :_destroy],
       talent_formations_attributes:[ :id, :title, :year, :level, :formation_id, :_destroy],
-      next_aventures_attributes:[ :id, :remuneration, :contrat, :overview, :city, :no_more, :_destroy, sector_ids: [] ]
+      next_aventures_attributes:[ :id, :remuneration, :contrat, :overview, :city, :no_more, :_destroy, sector_ids: [] ],
+      talent_languages_attributes: [ :id, :language_id ]
       )
   end
 

@@ -3,7 +3,9 @@
   <div class="modal-content">
 
     <div class="modal-header">
-      <h3><%= talent.experiences.last.position.capitalize %></h3>
+      <% if talent.experiences.present? && talent.experiences.last.position.present? %>
+        <h3><%= talent.experiences.last.position.capitalize %></h3>
+      <% end %>
       <% if current_user.is_a?(Headhunter) %>
         <% if talent.is_connected_to?(@headhunter) %>
           <div class="contact-btn en-relation">
@@ -50,7 +52,11 @@
             </div>
             <div class="talent-info-item card-dispsition">
               <p class="icon icon-info"><i class="far fa-compass"></i></p>
-              <p>Marketing (TODO)</p>
+              <% if talent.next_aventures.present? && talent.next_aventures.last.sectors.present? %>
+                <p><%= talent.next_aventures.last.sectors.first.title.capitalize %></p>
+              <% else %>
+                <p> A remplire</p>
+              <% end %>
             </div>
             <div class="talent-info-item card-dispsition">
               <p class="icon icon-info"><i class="far fa-calendar"></i></p>
@@ -86,6 +92,9 @@
           <div class="lower-body-item-content">
             <hr class="barre-pointee">
             <div class="talent-experiences">
+              <% if  %>
+
+              <% end %>
               <% talent.experiences.reverse_each do |experience| %>
                 <% if experience.currently %>
                   <div class="placement-point-barre">
@@ -93,7 +102,7 @@
                       <div class="point-barre-pointee"></div>
                     </div>
                     <div class="placement-talent-experience">
-                      <p class="experience-post"><%= experience.position.upcase %></p>
+                      <p class="experience-post"><%= experience.position.present? ? experience.position.upcase : false %></p>
                       <p class="experience-entreprise"><%= experience.company_type.title %></p>
                       <p class="experience-duree"><%= experience.starting %> - <%= experience.currently ? "Aujourd'hui" : experience.years %></p>
                     </div>
@@ -107,8 +116,8 @@
                       <div class="point-barre-pointee"></div>
                     </div>
                     <div class="placement-talent-experience">
-                      <p class="experience-post"><%= experience.position.upcase %></p>
-                      <p class="experience-entreprise"><%= experience.company_type.title %></p>
+                      <p class="experience-post"><%= experience.position.present? ? experience.position.upcase : false %></p>
+                      <p class="experience-entreprise"><%= experience.company_type.present? ? experience.company_type.title : false %></p>
                       <p class="experience-duree"><%= experience.starting %> - <%= experience.currently ? "Aujourd'hui" : experience.years %></p>
                     </div>
                   </div>

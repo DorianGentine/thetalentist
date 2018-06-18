@@ -11,6 +11,12 @@ class Headhunter < ApplicationRecord
   has_many :talents, through: :relationships
   has_many :talentists, through: :relationships
 
+  has_many :job_alerts, dependent: :destroy
+  has_many :jobs, through: :job_alerts
+  has_many :job_alerts, inverse_of: :headhunter
+  accepts_nested_attributes_for :job_alerts, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :jobs, allow_destroy: true, reject_if: :all_blank
+
   # for mailboxer
   acts_as_messageable
 

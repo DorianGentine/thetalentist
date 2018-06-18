@@ -30,7 +30,7 @@
             </div>
             <div class="form-line form-line-next-aventure form-secteur">
               <p class="form-label label-next_aventure requis">Environnement métier souhaité<em>(max: 5)</em></p>
-              <%= u.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label: false, input_html: { style: "width: 100%;" } %>
+              <%= u.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple", style: "width: 100%;"}, multiple: true, required: true, label: false %>
             </div>
           </div>
           <div class="bloc-next-aventure bloc-next-aventure-right">

@@ -56,7 +56,10 @@
           <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
           <p> <%= @participant.experiences.last.position.capitalize %> </p>
         <% else %>
-          <h2>Talent - <%= @participant.experiences.last.position.capitalize %></h2>
+          <% if @participant.experiences.present? && @participant.experiences.last.position.present? %>
+          <% else %>
+            <h2>Talent - Position à remplire</h2>
+          <% end %>
           <p>En attente ...</p>
         <% end %>
       <% elsif @participant.is_a?(Headhunter)%>

@@ -1,4 +1,5 @@
 <%= render "shared/navbar" %>
+<%= render 'create_alert' %>
 
 <div class="filter">
 
@@ -41,13 +42,9 @@
         <% end %>
       </div>
 
-    <div class="alert-creation hidden-xs hidden-sm">
+    <div class="alert-creation hidden-xs hidden-sm modal-button" data-target= "create_alert">
       <a href="">Créer une alerte <i class="fas fa-bell"></i></a>
-  <!--     <#%= simple_form_for :current_user, method: :put do |f| %>
-        <#%= f.simple_fields_for @job_alert do |u|%>
-          <#%= u.submit "Créer une alerte" %>
-        <#% end %>
-      <#% end %> -->
+
     </div>
 
 

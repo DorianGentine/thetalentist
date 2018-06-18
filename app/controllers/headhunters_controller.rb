@@ -26,7 +26,7 @@ class HeadhuntersController < ApplicationController
         end
       end
     end
-
+    @titre = "All"
     if params[:tag] == "Data"
       @titre = "DATA"
     elsif params[:tag] == "Sales"

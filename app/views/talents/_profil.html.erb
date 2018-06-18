@@ -9,12 +9,10 @@
       </span>
     </div>
 
+
     <%= simple_form_for @talent, method: :put do |f| %>
       <%= f.input :photo %>
       <%= f.input :photo_cache, as: :hidden %>
-    <% end %>
-
-    <%= simple_form_for @talent, method: :put do |f| %>
       <div class="form-line form-nom">
         <p class="form-label requis">Nom</p>
         <%= f.input :firstname, required: true, autofocus: true, placeholder: "Prénom", label: false, :input_html => { :class => "prenom"} %>
@@ -35,14 +33,10 @@
       <div class="form-line loisir-comp">
         <p class="form-label form-hobby">Loisir <em>(max.5)</em></p>
         <%= f.input :hobby_ids, collection: Hobby.all, input_html: { class:"select2", multiple: "multiple", style: "width: 100%;" }, include_blank: true, label: false %>
-        <!-- TODO button -->
-        <%= f.button :submit, 'Ajouter +', { :class => "form-hobby-add"} %>
       </div>
       <div class="form-line loisir-comp">
         <p class="form-label form-hobby">Compétences <em>(max.5)</em></p>
-        <%= f.simple_fields_for :talent_skills do |u| %>
-          <%= u.input :skill, collection: Skill.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 100%;" }  %>
-        <% end %>
+        <%= f.input :skill_ids, collection: Skill.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 100%;" }  %>
       </div>
 
       <div class="form-actions">
