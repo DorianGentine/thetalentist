@@ -65,30 +65,63 @@ class HeadhuntersController < ApplicationController
 
   def show
     @headhunter = Headhunter.find(params[:id])
+
+    @startup = @headhunter.startup
     authorize @headhunter
+
+    @markers = {
+        lat: @startup.latitude,
+        lng: @startup.longitude
+        #,
+        # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
+      }
+
   end
 
   def update
-    raise
     @headhunter = Headhunter.find(params[:id])
+    @startup = @headhunter.startup
+    if @headhunter.update_attributes(startup_params)
+      redirect_to headhunter_path(@headhunter)
+    end
 
-    if params[:commit] == "Accepter"
-      if @headhunter.validated == true
-        validated_action(nil)
-      elsif @headhunter.validated == false
-        validated_action(true)
-      else @headhunter.validated == nil
-        validated_action(true)
-      end
-    else params[:commit] == "Refuser"
-      if @headhunter.validated == false
-        validated_action(nil)
-      elsif @headhunter.validated == true
-        validated_action(false)
-      else @headhunter.validated == nil
-        validated_action(false)
+    if params[:commit] == "Accepter" || "Refuser"
+      if params[:commit] == "Accepter"
+        if @headhunter.validated == true
+          validated_action(nil)
+        elsif @headhunter.validated == false
+          validated_action(true)
+        else @headhunter.validated == nil
+          validated_action(true)
+        end
+      else params[:commit] == "Refuser"
+        if @headhunter.validated == false
+          validated_action(nil)
+        elsif @headhunter.validated == true
+          validated_action(false)
+        else @headhunter.validated == nil
+          validated_action(false)
+        end
+        authorize @headhunter
       end
     end
+
+  end
+
+
+  private
+
+  def validated_action(action)
+    @headhunter.validated = action
+    @headhunter.save
+  end
+
+  def startup_params
+    params.require(:headhunter).permit(
+      startup_attributes: [ :id, :name, :link, :logo, :address, :sector_ids, :btob, :btoc,
+      :average_age, :collaborators, :year_of_creation, :overview ],
+      word: []
+      )
   end
 end
 

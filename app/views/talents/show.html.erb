@@ -11,12 +11,11 @@
     <% if current_user.is_a?(Talent) %>
       <p data-target= "modal_profil" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
     <% end %>
-    <% if @talent.photo.present? %>
 
+    <% if @talent.photo.present? %>
       <div class="photo-profil" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
         <div class="statut"></div>
       </div>
-
     <% else %>
 
       <div class="photo-profil">

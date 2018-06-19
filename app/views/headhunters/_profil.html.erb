@@ -1,0 +1,29 @@
+<div id="modal_profil" class="modal">
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h3>Modifiez vos infos</h3>
+
+      <span class="close">
+        <p>&times;</p>
+      </span>
+    </div>
+    <div class="modal-body">
+      <br>
+      <%= simple_form_for @headhunter, method: :put do |f| %>
+        <%= f.simple_fields_for :startup do |u| %>
+          <%= u.input :logo %>
+          <%= u.input :name %>
+          <%= u.input :link %>
+          <%= u.input :address %>
+          <%= u.input :btoc, checked_value: true, unchecked_value: false %>
+          <%= u.input :btob, checked_value: true, unchecked_value: false %>
+          <%= u.input :sector_ids, collection: Sector.all %>
+        <% end %>
+        <%= f.submit "Terminer", class: "b-btn form-btn form-btn-suivant" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

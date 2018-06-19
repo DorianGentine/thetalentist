@@ -1,28 +1,53 @@
 <%= render "shared/navbar" %>
+<%= render 'profil' %>
+<%= render 'headhunters' %>
+<%= render 'figures' %>
+<%= render 'overview' %>
+<%= render 'pictures' %>
 
 <div class="container-show">
 
   <div class="talent-left">
-    <div class="photo-profil" style="background-image: url('/assets/logo.png');">
-      <div class="initiale"><p>M</p></div>
-      <div class="statut"></div>
-    </div>
+    <% if current_user.is_a?(Headhunter) %>
+      <p data-target= "modal_profil" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
+    <% end %>
+
+    <% if @startup.logo.present? %>
+
+      <div class="photo-profil" style="background-image: url('<%= cl_image_path @startup.logo, :transformation=>[ :gravity=>"face"] %>');">
+        <div class="statut"></div>
+      </div>
+
+    <% else %>
+
+      <div class="photo-profil">
+        <div class="initiale">
+          <p><%= @startup.name.split(//).first.upcase %><%= @startup.name.split(//).second.upcase %></p>
+        </div>
+        <div class="statut"></div>
+      </div>
+
+    <% end %>
+
+
+
     <div class="talent-name">
       <h1><%= @headhunter.startup.name %></h1>
-      <h2 class="talent-post">Chef de projet digital</h2>
+      <h2 class="talent-post"><%= @startup.link %></h2>
     </div>
     <div class="talent-info">
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
-        <p>Paris</p>
+        <p><%= @startup.address.present? ? @startup.address : "Ajouter votre localisation" %></p>
       </div>
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="far fa-compass"></i></p>
-        <p>Marketing (TODO)</p>
+        <!-- <p>Marketing (TODO)</p> -->
+        <p><%= @startup.sectors.last.present? ? @startup.sectors.last.title : "Ajouter votre localisation" %></p>
       </div>
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
-        <p> BtoB & BtoC</p>
+        <p> <%= @startup.btob ? "BtoB" : ""%> <%= @startup.btob && @startup.btoc ? "&" : "" %><%= @startup.btoc ? "BtoC" : ""%> <%= @startup.btoc || @startup.btob ? "" : "Ajouter votre secteur d'activité" %></p>
       </div>
     </div>
 
@@ -30,16 +55,26 @@
       <div class="lower-right-body-item hidden-xs">
         <h4><i class="fas fa-sliders-h"></i> Ce qui nous définit</h4>
         <div class="talent-competences">
-          <p>vidéos</p>
-          <p>cyclisme</p>
-          <p>basket</p>
+          <% if @startup.startup_words.present? %>
+            <% @startup.startup_words do |word| %>
+              <p><%= word.word.title %></p>
+            <% end %>
+          <% else %>
+            <p> + Ajouter se qui vous définit </p>
+          <% end %>
         </div>
       </div>
+      <!-- <#% if current_user.is_a?(Headhunter) %>
+        <p data-target= "modal_headhunters" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
+      <#% end %> -->
       <div class="lower-right-body-item hidden-xs">
-        <h4><i class="fas fa-search-plus"></i> Nous recherchons</h4>
+        <h4><i class="fas fa-search-plus"></i> Nos Headhunters</h4>
         <div class="talent-competences">
-          <p>Un business developper</p>
-          <p>Un data scientist</p>
+          <% if @startup.headhunters.present? %>
+            <% @startup.headhunters.each do |headhunter| %>
+              <p><%= headhunter.firstname.present? ? headhunter.firstname : "" %> <%= headhunter.name.present? ? headhunter.name : '' %></p>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -49,43 +84,60 @@
   <div class="talent-right">
 
     <div class="headhunter-right-up">
+     <!--  <#% if current_user.is_a?(Headhunter) %>
+        <p data-target= "modal_pictures" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
+      <#% end %> -->
       <h4 class="hidden-xs">Notre environnement de travail</h4>
       <div class="photos-environnement">
-        <div class="photo-env-item" style="background-image: url('/assets/illu-data.png');"></div>
-        <div class="photo-env-item hidden-xs" style="background-image: url('/assets/logo.png');"></div>
-        <div class="photo-env-item" style="background-image: url('/assets/illu-data.png');">
-          <div class="decouvrir-plus">
-            <p><strong>+10</strong><br>PHOTOS & VIDÉOS</p>
+        <% if @startup.pictures.first(3).present? %>
+          <% @startup.pictures.first(2).each do |photo| %>
+            <div class="photo-env-item" style="background-image: url('cl_image_tag @photo.photo.url');"></div>
+          <% end %>
+          <div class="photo-env-item" style="background-image: url('/assets/illu-data.png');">
+            <div class="decouvrir-plus">
+              <p><strong>+10</strong><br>PHOTOS & VIDÉOS</p>
+            </div>
           </div>
-        </div>
+        <% else %>
+          <p>Ajouter des photos, nos talents adorent ça!! </p>
+        <% end %>
       </div>
     </div>
 
+<!-- done  -->
     <div class="headhunter-right-down lower-body">
 
       <div class="lower-body-item lower-right-body hidden visible-xs">
         <div class="lower-right-body-item">
           <h4><i class="fas fa-sliders-h"></i> Ce qui nous définit</h4>
           <div class="talent-competences">
-            <p>vidéos</p>
-            <p>cyclisme</p>
-            <p>basket</p>
+            <% if @startup.startup_words.present? %>
+              <% @startup.startup_words do |word| %>
+                <p><%= word.word.title %></p>
+              <% end %>
+            <% else %>
+              <p> + Ajouter se qui vous définit </p>
+            <% end %>
           </div>
         </div>
       </div>
-
+      <% if current_user.is_a?(Headhunter) %>
+        <p data-target= "modal_firgures" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
+      <% end %>
       <div class="headhunter-chiffres">
         <div class="recherche-first-line">
           <div class="recherche-item bordure-droite">
-            <h5>2016</h5>
+            <h5><%= @startup.year_of_creation.present? ? @startup.year_of_creation : "2018 ?" %></h5>
             <p>CRÉATION</p>
           </div>
           <div class="recherche-item padding-left">
-            <h5>15</h5>
+            <h5><%= @startup.collaborators.present? ? @startup.collaborators : "? 1 ?" %></h5>
             <p>EMPLOYÉS</p>
           </div>
         </div>
-        <div class="recherche-middle-line bordure-haut-bas">
+        <div id="map" style="width: 100%; height: 200px;" data-markers="<%= @markers.to_json %>"
+          ></div>
+        <!-- <div class="recherche-middle-line bordure-haut-bas">
           <h5>Parité</h5>
           <div class="cercles recherche-first-line">
             <div class="cercle cercle-homme">
@@ -95,15 +147,15 @@
               <p>40%</p>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="recherche-first-line">
           <div class="recherche-item padding-top bordure-droite">
-            <h5>30</h5>
+            <h5><%= @startup.average_age.present? ? @startup.average_age : "?87 ans?" %></h5>
             <p>ÂGE MOYEN</p>
           </div>
           <div class="recherche-item padding-top padding-left">
             <h5>8%</h5>
-            <p>TURN OVER</p>
+            <p>TODO</p>
           </div>
         </div>
         <div class="recherche-map">
@@ -113,14 +165,20 @@
 
       <div class="lower-body-item lower-right-body hidden visible-xs">
         <div class="lower-right-body-item">
-          <h4><i class="fas fa-search-plus"></i> Nous recherchons</h4>
+          <h4><i class="fas fa-search-plus"></i> Nos Headhunters</h4>
           <div class="talent-competences">
-            <p>Un business developper</p>
-            <p>Un data scientist</p>
+            <% if @startup.headhunters.present? %>
+              <% @startup.headhunters.each do |headhunter| %>
+                <p><%= headhunter.firstname.present? ? headhunter.firstname : "" %> <%= headhunter.name.present? ? headhunter.name : '' %></p>
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>
 
+     <!--  <#% if current_user.is_a?(Headhunter) %>
+        <p data-target= "modal_overview" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
+      <#% end %> -->
       <div class="entreprise-quelques-mots">
         <h4><i class="far fa-id-badge"></i> L'entreprise en quelques mots</h4>
             <div class="lower-body-item-content lower-left-body">
@@ -130,19 +188,13 @@
               </div>
               <div>
                 <h5>Notre quotidien</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet.</p>
+                p><%= @startup.overview %></p>
               </div>
             </div>
       </div>
     </div>
 
   </div>
-
-
-
 </div>
 
 <%= render "shared/footer" %>
-
-
-<!-- <h2> Ici sera le profil de <%= @headhunter.firstname %> de <%= @headhunter.startup.name %></h2> -->
