@@ -11,19 +11,22 @@
 
 
     <%= simple_form_for @talent, method: :put do |f| %>
-      <%= f.input :photo %>
-      <%= f.input :photo_cache, as: :hidden %>
+      <div class="form-line remove-label">
+        <p class="form-label">Photo</p>
+        <%= f.input :photo %>
+        <%= f.input :photo_cache, as: :hidden %>
+      </div>
       <div class="form-line form-nom">
-        <p class="form-label requis">Nom</p>
+        <p class="form-label">Nom</p>
         <%= f.input :firstname, required: true, autofocus: true, placeholder: "Prénom", label: false, :input_html => { :class => "prenom"} %>
         <%= f.input :name, required: true, autofocus: true, placeholder: "Nom", label: false %>
       </div>
       <div class="form-line form-phone">
-        <p class="form-label requis">Téléphone</p>
+        <p class="form-label">Téléphone</p>
         <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: false %>
       </div>
       <div class="form-line form-ville">
-        <p class="form-label requis">Adresse</p>
+        <p class="form-label">Adresse</p>
         <%= f.input :city, required: true, autofocus: true, placeholder: "Ville", label: false %>
       </div>
       <div class="form-line">
