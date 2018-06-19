@@ -48,6 +48,15 @@
   text-decoration: none;
 }
 
+.lien-messagerie{
+  position: relative;
+  #notif{
+    position: absolute;
+    top: -5px;
+    right: -10px;
+  }
+}
+
 /* Dropdown menu */
 .navbar-wagon-dropdown-menu {
   margin-top: 15px;
