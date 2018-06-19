@@ -109,7 +109,7 @@
               <% end %>
             </div>
             <p class="x-commented"><%= receipt.message.sender.firstname %></p>
-            <p class="the-message"><%= simple_format(receipt.message.body) %></p>
+            <%= simple_format(receipt.message.body, class: 'the-message') %>
             <% if receipt.message.attachment.url.present? %>
               <p class="the-message"><%= link_to  "Document envoyé", receipt.message.attachment.url, target: "_blank" %></p>
             <% end %>
@@ -125,7 +125,7 @@
               <% end %>
             </div>
             <p class="x-commented"><%= receipt.message.sender.firstname %></p>
-            <p class="the-message"><%= simple_format(receipt.message.body) %></p>
+            <%= simple_format(receipt.message.body, class: 'the-message') %>
             <% if receipt.message.attachment.url.present? %>
               <p class="the-message"><%= link_to  "Document envoyé", receipt.message.attachment.url, target: "_blank" %></p>
             <% end %>

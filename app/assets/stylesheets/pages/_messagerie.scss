@@ -37,6 +37,8 @@
 }
 .index-talents{
   padding: 20px;
+  height: calc(100vh - 160px);
+  overflow: auto;
   a{
     text-decoration: none;
   }
