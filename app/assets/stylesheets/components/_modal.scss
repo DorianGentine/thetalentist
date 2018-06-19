@@ -298,6 +298,25 @@ h4{
   cursor: pointer;
 }
 
+// modal create_alert
+#create_alert .modal-content .modal-body{
+  form{
+    display: flex;
+    align-items: center;
+    .form-group{
+      width: 50%;
+    }
+    input{
+      background-color: white;
+      color: $green;
+      border-color: $green;
+      border-radius: 50px;
+      margin: 15px;
+      height: 30px;
+    }
+  }
+}
+
 @media screen and (max-width: 1095px) {
   .upper-body{
     .upper-left-body{
