@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_17_083137) do
+ActiveRecord::Schema.define(version: 2018_06_19_150817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -238,6 +238,15 @@ ActiveRecord::Schema.define(version: 2018_06_17_083137) do
     t.index ["talent_id"], name: "index_next_aventures_on_talent_id"
   end
 
+  create_table "pictures", force: :cascade do |t|
+    t.string "photo"
+    t.string "title"
+    t.bigint "startup_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["startup_id"], name: "index_pictures_on_startup_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.bigint "talent_id"
     t.bigint "headhunter_id"
@@ -263,6 +272,24 @@ ActiveRecord::Schema.define(version: 2018_06_17_083137) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "startup_sectors", force: :cascade do |t|
+    t.bigint "startup_id"
+    t.bigint "sector_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sector_id"], name: "index_startup_sectors_on_sector_id"
+    t.index ["startup_id"], name: "index_startup_sectors_on_startup_id"
+  end
+
+  create_table "startup_words", force: :cascade do |t|
+    t.bigint "startup_id"
+    t.bigint "word_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["startup_id"], name: "index_startup_words_on_startup_id"
+    t.index ["word_id"], name: "index_startup_words_on_word_id"
+  end
+
   create_table "startups", force: :cascade do |t|
     t.string "name"
     t.text "overview"
@@ -277,6 +304,11 @@ ActiveRecord::Schema.define(version: 2018_06_17_083137) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
+    t.string "photo"
+    t.string "logo"
+    t.boolean "btoc"
+    t.boolean "btob"
+    t.boolean "validated", default: false, null: false
   end
 
   create_table "talent_formations", force: :cascade do |t|
@@ -434,6 +466,12 @@ ActiveRecord::Schema.define(version: 2018_06_17_083137) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "words", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "credentials", "talents"
   add_foreign_key "experiences", "company_types"
   add_foreign_key "experiences", "talents"
@@ -447,9 +485,14 @@ ActiveRecord::Schema.define(version: 2018_06_17_083137) do
   add_foreign_key "next_aventure_sectors", "next_aventures"
   add_foreign_key "next_aventure_sectors", "sectors"
   add_foreign_key "next_aventures", "talents"
+  add_foreign_key "pictures", "startups"
   add_foreign_key "relationships", "headhunters"
   add_foreign_key "relationships", "talentists"
   add_foreign_key "relationships", "talents"
+  add_foreign_key "startup_sectors", "sectors"
+  add_foreign_key "startup_sectors", "startups"
+  add_foreign_key "startup_words", "startups"
+  add_foreign_key "startup_words", "words"
   add_foreign_key "talent_formations", "formations"
   add_foreign_key "talent_formations", "talents"
   add_foreign_key "talent_hobbies", "hobbies"

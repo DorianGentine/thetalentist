@@ -1,0 +1,25 @@
+<div id="modal_overview" class="modal">
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h3>Modifiez vos infos</h3>
+
+      <span class="close">
+        <p>&times;</p>
+      </span>
+
+    </div>
+    <div class="modal-body">
+      <%= simple_form_for @headhunter, method: :put do |f| %>
+
+        <%= f.simple_fields_for :startup do |u| %>
+          <%= u.input :overview %>
+        <% end %>
+        <div class="form-actions">
+          <%= f.submit "Terminer", class: "b-btn form-btn form-btn-suivant" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

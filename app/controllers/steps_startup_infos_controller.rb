@@ -16,7 +16,7 @@ class StepsStartupInfosController < ApplicationController
     @startup = Startup.new(startup_params)
     @startup.save
     if @headhunter.update(startup_id: @startup.id)
-      redirect_to repertoire_path
+      render_wizard @headhunter
     else
       render "steps_startup_infos/#{step}"
     end
@@ -27,6 +27,11 @@ private
   def find_headhunter
     @headhunter = Headhunter.find(session[:headhunter_id])
     authorize @headhunter
+  end
+
+  def finish_wizard_path
+    sign_in(@headhunter)
+    repertoire_path(@headhunter)
   end
 
   def startup_params

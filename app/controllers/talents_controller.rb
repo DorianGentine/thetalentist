@@ -7,6 +7,7 @@ class TalentsController < ApplicationController
 
     if params[:tag].blank?
       @talents = Talent.all.order(name: :asc)
+      @titre = 'All'
     else
       # les talents dont le job est : params[:tag]
       if params[:tag] == "Tous"
@@ -31,6 +32,7 @@ class TalentsController < ApplicationController
       end
     end
   end
+
   def repertory
     @talent = current_talent
     relationships = Relationship.where(talent_id: current_user.id)

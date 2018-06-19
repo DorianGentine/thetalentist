@@ -4,4 +4,24 @@
 
 <p>"<%= @message.message.body %>"</p>
 
+<div class="button_green">
+  <%= link_to root_url do %>
+    Viens sur la plateforme
+  <% end %>
+</div>
+
 <p>See ya!</p>
+
+
+
+<style>
+  .button_green {
+    padding: 5px;
+    background-color: green;
+    color: white;
+  }
+    a:hover {
+      opacity: 0.8;
+    }
+
+</style>
