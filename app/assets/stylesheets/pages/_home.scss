@@ -81,7 +81,7 @@
     display: flex;
     flex-direction: column;
     h1{
-      font-size: 85px;
+      font-size: 5.8vw;
       font-weight: 600;
       color: #191B26;
       z-index: 1;
@@ -106,7 +106,7 @@
       top: 120px;
       right: 0;
       height: 800px;
-      width: 837px;
+      width: 58.5vw;
       overflow: hidden;
       img{
         height: 127%;
@@ -396,7 +396,7 @@
 }
 
 
-@media screen and (max-width: 1430px) {
+@media screen and (max-width: 1000px) {
   .new_landing{
     .landing-top{
       margin: 0;
@@ -417,6 +417,9 @@
       .image-habillage{
         height: 200px;
         width: 61vw;
+        img{
+          width: 100%;
+        }
       }
       .fleche-bas{
         left: 50%;
@@ -550,28 +553,38 @@
 
 
 
-.btn-connexion a{
+.btn-connexion{
   width: 170px;
   height: 40px;
   border: 2px solid $green;
   font-weight: 600;
   font-size: 21px;
-  color: $green;
   border-radius: 25px;
   background-color: rgba(0,0,0,0);
   padding: 5px 10px;
+  a{
+    color: $green;
+    padding: 5px 10px;
+  }
 }
-.btn-connexion a:hover{
+.btn-connexion:hover{
   cursor: pointer;
   background-color: $green;
-  color: white;
   text-decoration: none;
   transition: 0.15s;
+  a{
+    color: white;
+    transition: 0.15s;
+  }
 }
-.blue-connexion a{
-  border: 2px solid $violet;
-  color: $violet;
+.blue-connexion{
+  border: 2px solid $violet !important;
+  min-width: 200px;
+  a{
+    color: $violet;
+  }
 }
+
 .blue-connexion a:hover{
   background-color: $violet;
   color: white;

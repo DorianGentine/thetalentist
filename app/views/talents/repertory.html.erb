@@ -51,8 +51,9 @@
 <section class="container" id="container-startup">
 
   <div class="cards-repertory">
-
-    <%= render "startup-card" %>
+    <% @headhunters.each do |headhunter| %>
+      <%= render 'talents/startup-card', headhunter: headhunter %>
+    <% end %>
   </div>
 
 </section>

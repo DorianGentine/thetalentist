@@ -50,6 +50,8 @@
 
 .lien-messagerie{
   position: relative;
+  display: flex;
+  align-items: center;
   #notif{
     position: absolute;
     top: -5px;

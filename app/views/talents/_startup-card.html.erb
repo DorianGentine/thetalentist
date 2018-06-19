@@ -1,11 +1,53 @@
-<div class="talent-card-placement">
-  <div class="talent-card startup-card">
+<% if talentist_signed_in? && current_talentist %>
+
+  <div class="talent-card-placement placement-talentist">
+    <div class="talent-card startup-card">
 
       <div class="border">
 
         <div class="talent-job">
-          <h2>ManoMano</h2>
+          <h2>@headhunter.firstnam</h2>
         </div>
+
+        <div class="background-img background-img-talentist">
+          <!-- <img src="assets/rawpixel-617400-unsplash.jpg" class="img-de-fond" alt=""> -->
+          <%= image_tag "rawpixel-617400-unsplash.jpg", class: "img-de-fond" %>
+        </div>
+
+        <div class="accepeter-talent accepeter-startup">
+          <%= simple_form_for headhunter, method: :put do |f| %>
+          <div class="btn-validate">
+            <div class="<%= "green_validation" if headhunter.validated == true %>">
+              <%= f.submit "Accepter"%>
+            </div>
+            <div class="<%= "red_validation" if headhunter.validated === false %>">
+              <%= f.submit "Refuser" %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+
+
+        <div class="lien-messagerie-profil">
+          <%= link_to "Messages", conversation_path(headhunter.mailbox.conversations.last)%>
+          <%= link_to "Profil", headhunter_path(headhunter)%>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<% else %>
+
+  <div class="talent-card-placement">
+    <div class="talent-card startup-card">
+
+      <div class="border">
+
+        <div class="talent-job">
+          <h2><%= headhunter.startup.name %></h2>
+        </div>
+
         <div class="background-img">
           <!-- <img src="assets/rawpixel-617400-unsplash.jpg" class="img-de-fond" alt=""> -->
           <%= image_tag "rawpixel-617400-unsplash.jpg", class: "img-de-fond" %>
@@ -14,29 +56,26 @@
         <div class="talent-info">
           <div class="talent-info-item card-dispsition">
             <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
-            <p>Paris</p>
+            <p><%= headhunter.startup.address %></p>
           </div>
           <div class="talent-info-item card-dispsition">
-            <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
-            <p> BtoB & BtoC</p>
-          </div>
-          <div class="talent-info-item card-dispsition">
-            <p class="icon icon-info"><i class="fas fa-briefcase"></i></p>
-            <p>CDI</p>
+            <p class="icon icon-info"><i class="fas fa-link"></i></p>
+            <p><a href="<%= headhunter.startup.link %>" target="_blank" >Voir le site</a></p>
           </div>
         </div>
 
         <div class="talent-description hidden-xs">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+          <p><%= headhunter.startup.overview %></p>
         </div>
 
 
         <!-- Lien vers le profil de la SU -->
-        <div class="talent-more">
-            <p>Voir le profil <i class="fas fa-angle-right"></i></p>
+        <div class="talent-more talent-more-startup">
+          <p><%= link_to "Voir le profil", headhunter_path(headhunter)%></p>
         </div>
 
-        </div>
       </div>
     </div>
-</div>
+  </div>
+
+<% end %>

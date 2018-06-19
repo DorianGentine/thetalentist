@@ -88,6 +88,7 @@
       font-weight: 900;
       margin: 0;
       letter-spacing: 2px;
+      text-transform: capitalize;
     }
   }
   p{
@@ -177,11 +178,19 @@
           color: $green;
           border-color: $green;
         }
-        .red_validation {
+        div:last-child {
           input {
             color: $red;
             border-color: $red;
           }
+        }
+        div:hover input{
+          color: white;
+          background-color: $green;
+          transition: 0.15s;
+        }
+        div:last-child:hover input{
+          background-color: $red;
         }
       }
     }

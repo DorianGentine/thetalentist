@@ -1,1 +1,66 @@
-<h1>Yes your are in the Start-up repo for Talentist</h1>
+<%= render "shared/navbar" %>
+
+<div class="filter filter-talentist">
+
+  <div class="filter-category">
+    <p><i class="fas fa-filter"></i> Filtrer par MÉTIER</p>
+    <div class="navbar-wagon-item hidden-md hidden-lg">
+      <div class="dropdown">
+        <i class="fas fa-angle-down" data-toggle="dropdown"></i>
+        <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+
+          <li><a href=""><i class="fas fa-search"></i> DATA</a></li>
+          <li><a href=""><i class="far fa-comments"></i> SALES</a></li>
+          <li><a href=""><i class="fas fa-tachometer-alt"></i> MARKET</a></li>
+          <li><a href=""><i class="fas fa-archive"></i> PRODUCT</a></li>
+ <!--          <li>
+            <a href="">Créer une alerte <i class="fas fa-bell"></i></a>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="filter-item hidden-xs hidden-sm">
+    <%= link_to talents_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
+      <p><i class="fas fa-infinity"></i> Tous</p>
+    <% end %>
+    <%= link_to talents_path(tag: "Valider") do %>
+      <p><i class="fas fa-check"></i> Validés</p>
+    <% end %>
+    <%= link_to talents_path(tag: "Refuser") do %>
+      <p><i class="fas fa-times"></i> Refusés</p>
+    <% end %>
+    <%= link_to talents_path(tag: "En attende") do %>
+      <p><i class="far fa-clock"></i> En attente</p>
+    <% end %>
+  </div>
+</div>
+
+
+<section class="container">
+
+  <!-- Division pour résultats de recherche -->
+  <div class="search-results">
+    <p><strong><%= @headhunters.count %> Profils</strong> correspondent à votre recherche '<em><%= @titre %></em>'</p>
+  </div>
+
+
+  <!-- Répertoire des talents -->
+  <div class="cards-repertory">
+
+    <% @headhunters.each do |headhunter| %>
+      <%= render 'talents/startup-card', headhunter: headhunter %>
+    <% end %>
+
+  </div>
+
+  <!-- Choix des pages -->
+  <div class="page-choice">
+    <p>Préc. <strong>1</strong> 2 3 Suiv.</p>
+  </div>
+</section>
+
+<%= render "shared/footer" %>
+

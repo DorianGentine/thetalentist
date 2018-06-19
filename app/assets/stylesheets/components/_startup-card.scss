@@ -17,12 +17,31 @@
   }
 }
 
+.background-img-talentist{
+  height: 80px;
+}
+
 .startup-card{
   height: 370px;
   .border{
     justify-content: flex-start;
     .talent-info{
       margin: 30px 0 17.5px;
+      .talent-info-item a:hover{
+        color: $green;
+      }
+    }
+    .talent-more-startup a{
+      color: $green;
+    }
+    .talent-more-startup a:hover{
+      color: $red;
+      transition: 0.15s;
     }
   }
 }
+
+.accepeter-startup{
+  margin: 40px 0;
+}
+

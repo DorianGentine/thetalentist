@@ -51,24 +51,6 @@
           color: $green;
           transition: color ease-in-out 0.15s;
         }
-        .btn-connexion {
-          width: 170px;
-          height: 40px;
-          border: 2px solid $green;
-          font-weight: 600;
-          font-size: 21px;
-          color: $green;
-          border-radius: 25px;
-          background-color: rgba(0,0,0,0);
-          padding: 5px 10px;
-        }
-        .btn-connexion:hover{
-          cursor: pointer;
-          background-color: $green;
-          color: white;
-          text-decoration: none;
-          transition: 0.15s;
-        }
       }
       .alternative-connexion{
         margin: 20px 0;
@@ -132,6 +114,24 @@
       transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
     }
   }
+}
+.btn-connexion {
+  width: 170px;
+  height: 40px;
+  border: 2px solid $green;
+  font-weight: 600;
+  font-size: 21px;
+  color: $green;
+  border-radius: 25px;
+  background-color: rgba(0,0,0,0);
+  padding: 5px 10px;
+}
+.btn-connexion:hover{
+  cursor: pointer;
+  background-color: $green;
+  color: white;
+  text-decoration: none;
+  transition: 0.15s;
 }
 
 @media screen and (max-width: 991px) {

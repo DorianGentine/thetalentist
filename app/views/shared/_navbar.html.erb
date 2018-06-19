@@ -10,9 +10,7 @@
     <% if headhunter_signed_in? && current_headhunter %>
 
       <!-- Links when logged in -->
-      <% if  current_headhunter.validated? %>
-        <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <% end %>
+      <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
       <div class="lien-messagerie">
         <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
