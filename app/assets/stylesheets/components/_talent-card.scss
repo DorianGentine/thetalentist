@@ -137,6 +137,13 @@
 
 
 // Aspect pour the Talentist
+.filter-talentist .filter-item a{
+  padding: 0 20px;
+  p{
+    margin: 0;
+  }
+}
+
 .placement-talentist{
   width: 20%;
   min-width: 220px;
@@ -150,7 +157,7 @@
       }
     }
     .border{
-      padding: 0 20px;
+      padding: 0 20px 30px;
       .talent-job{
         height: 80px;
         h2{
@@ -160,6 +167,22 @@
       }
       .talent-update p{
         font-size: 10px
+      }
+      .btn-validate{
+        display: flex;
+        justify-content: space-between;
+        div input{
+          border-radius: 50px;
+          font-size: 14px;
+          color: $green;
+          border-color: $green;
+        }
+        .red_validation {
+          input {
+            color: $red;
+            border-color: $red;
+          }
+        }
       }
     }
     .illu-card{
@@ -178,21 +201,27 @@
         }
       }
     }
+    .lien-messagerie-profil{
+      position: absolute;
+      bottom: 4px;
+      left: 4px;
+      right: 4px;
+      display: flex;
+      height: 26px;
+      a{
+        width: 50%;
+        text-align: center;
+        border-top: 1px solid $violet;
+        font-size: 14px;
+        padding: 5px 0;
+      }
+      a:first-child{
+        border-right: 1px solid $violet;
+      }
+    }
   }
 }
 
-// A modifié TODO
-
-.green_validation {
-  input {
-    background-color: green;
-  }
-}
-.red_validation {
-  input {
-    background-color: red;
-  }
-}
 
 
 

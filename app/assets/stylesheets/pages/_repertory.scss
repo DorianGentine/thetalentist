@@ -13,9 +13,9 @@
   height: 50px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 33px;
   border-bottom: 1px solid $gray;
+  position: relative;
   .filter-category{
     border-right: 1px solid $gray;
     height: 100%;
@@ -28,7 +28,6 @@
     }
   }
   .filter-item{
-    width: 50%;
     display: flex;
     justify-content: space-around;
     a{
@@ -39,7 +38,8 @@
     }
   }
   .alert-creation{
-    width: 50%;
+    position: absolute;
+    right: 33px;
     text-align: right;
     a{
       color: $red;
