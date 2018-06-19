@@ -1,4 +1,4 @@
-#modal_aventure, #modal_experience, #modal_formation, #modal_profil, #modal_photo, #modal_credentials{
+#modal_aventure, #modal_experience, #modal_formation, #modal_profil, #modal_photo, #modal_credentials, #create_alert{
   .modal-header{
     margin-bottom: 30px;
   }
@@ -25,5 +25,18 @@
 }
 .flex-vertical{
   flex-direction: column;
+}
+
+#modal_profil{
+  .remove-label .form-group {
+    label{
+      display: none;
+    }
+    input{
+      color: $green;
+      width: 100%;
+      display: flex;
+    }
+  }
 }
 

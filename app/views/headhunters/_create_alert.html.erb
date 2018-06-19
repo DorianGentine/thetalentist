@@ -1,16 +1,23 @@
 <div id="create_alert" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
-    <%= simple_form_for :current_user, method: :put do |f| %>
-      <%= f.simple_fields_for :job_alert do |u|%>
-        <%= u.input :job_ids, collection: Job.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 100%;" } %>
-        <%= u.submit "Créer une alerte" %>
+
+    <div class="modal-header">
+      <h3>Créez votre alerte</h3>
+
+      <span class="close">
+        <p>&times;</p>
+      </span>
+    </div>
+
+    <div class="modal-body">
+      <%= simple_form_for :current_user, method: :put do |f| %>
+        <%= f.simple_fields_for :job_alert do |u|%>
+          <%= u.input :job_ids, collection: Job.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 100%;" } %>
+          <%= u.submit "Créer une alerte" %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
-
-
-  <span class="close">
-    <p>&times;</p>
-  </span>
 </div>
+
