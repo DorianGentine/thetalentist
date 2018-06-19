@@ -14,9 +14,10 @@
         <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <% end %>
 
-      <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-      <!-- <#% if !@unread_conversations.blank? && @unread_conversations.count > 1 %> -->
-     <%= render "shared/notif_point" %>
+      <div class="lien-messagerie">
+        <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= render "shared/notif_point" %>
+      </div>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
@@ -51,8 +52,10 @@
 
       <%= link_to "START-UP", repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
-      <%= link_to "MESSAGERIE", conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= render "shared/notif_point" %>
+      <div class="lien-messagerie">
+        <%= link_to "MESSAGERIE", conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= render "shared/notif_point" %>
+      </div>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
@@ -87,8 +90,11 @@
 
       <%= link_to "TALENTS", talents_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
-      <%= link_to "MESSAGERIE", conversation_path(current_talentist.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= render "shared/notif_point" %>
+      <div class="lien-messagerie">
+        <%= link_to "MESSAGERIE", conversation_path(current_talentist.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= render "shared/notif_point" %>
+      </div>
+
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
         <div class="dropdown">

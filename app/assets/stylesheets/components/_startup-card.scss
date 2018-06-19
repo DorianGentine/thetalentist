@@ -1,0 +1,28 @@
+#container-startup{
+  min-height: calc(100vh - 240px);
+}
+
+.background-img{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 138px;
+  overflow: hidden;
+  opacity: 0.3;
+  .img-de-fond{
+    width: 100%;
+    margin-top: -50%;
+    transform: translateY(50%);
+  }
+}
+
+.startup-card{
+  height: 370px;
+  .border{
+    justify-content: flex-start;
+    .talent-info{
+      margin: 30px 0 17.5px;
+    }
+  }
+}
