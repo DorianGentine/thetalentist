@@ -1,6 +1,6 @@
 <%= render "shared/navbar" %>
 
-<div class="filter">
+<div class="filter filter-talentist">
 
     <div class="filter-category">
       <p><i class="fas fa-filter"></i> Filtrer par MÉTIER</p>
@@ -21,30 +21,28 @@
       </div>
     </div>
 
+
     <div class="filter-item hidden-xs hidden-sm">
-
-      <div class="filter-item hidden-xs hidden-sm">
-        <%= link_to talents_path(tag: "Tous") do %>
-          <i class="fas fa-archive"></i> Tous
-        <% end %>
-        <%= link_to talents_path(tag: "Valider") do %>
-          <i class="fas fa-search"></i> Valider
-        <% end %>
-        <%= link_to talents_path(tag: "Refuser") do %>
-          <i class="far fa-comments"></i> Refuser
-        <% end %>
-        <%= link_to talents_path(tag: "En attende") do %>
-          <i class="far fa-comments"></i> En attende
-        <% end %>
-        <%= link_to talents_path(tag: "Visible") do %>
-          <i class="fas fa-tachometer-alt"></i> Visible
-        <% end %>
-        <%= link_to talents_path(tag: "Invisible") do %>
-          <i class="fas fa-archive"></i> Invisible
-        <% end %>
-      </div>
-
+      <%= link_to talents_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
+        <p><i class="fas fa-archive"></i> Tous</p>
+      <% end %>
+      <%= link_to talents_path(tag: "Valider") do %>
+        <p><i class="fas fa-search"></i> Validés</p>
+      <% end %>
+      <%= link_to talents_path(tag: "Refuser") do %>
+        <p><i class="far fa-comments"></i> Refusés</p>
+      <% end %>
+      <%= link_to talents_path(tag: "En attende"), { :class=> "bordure-droite"} do %>
+        <p><i class="far fa-comments"></i> En attente</p>
+      <% end %>
+      <%= link_to talents_path(tag: "Visible") do %>
+        <p><i class="fas fa-tachometer-alt"></i> Visible</p>
+      <% end %>
+      <%= link_to talents_path(tag: "Invisible") do %>
+        <p><i class="fas fa-archive"></i> Invisible</p>
+      <% end %>
     </div>
+
 
     <div class="alert-creation hidden-xs hidden-sm">
       <a href="">Créer une alerte <i class="fas fa-bell"></i></a>
@@ -65,7 +63,6 @@
 
     <% @talents.each do |talent| %>
       <%= render 'headhunters/talent-card', talent: talent %>
-      <%= render 'shared/modal', talent: talent %>
     <% end %>
 
   </div>
