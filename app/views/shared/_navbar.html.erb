@@ -64,7 +64,7 @@
           <% else %>
             <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
               <div class="initiale">
-                <p style="font-size: 14px; font-weight: 400"><%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %></p>
+                <p style="font-size: 14px; font-weight: 400"><%= current_talent.firstname.split(//).first.upcase %><%= current_talent.name.split(//).first.upcase %></p>
               </div>
             </div>
           <% end %>

@@ -1,6 +1,5 @@
 p "Destroy Talent"
 
-Talent.destroy_all
 Formation.destroy_all
 Known.destroy_all
 Skill.destroy_all
@@ -9,6 +8,7 @@ Job.destroy_all
 Keyword.destroy_all
 Language.destroy_all
 Techno.destroy_all
+Talent.destroy_all
 
 Experience.destroy_all
 Credential.destroy_all
@@ -263,6 +263,19 @@ Hobby.create!(title: "Football")
 Hobby.create!(title: "ski")
 Hobby.create!(title: "Danse")
 
+p "Creating words"
+
+Word.create!(title: "Entrepreneuriat")
+Word.create!(title: "RSE")
+Word.create!(title: "Intraprenariat")
+Word.create!(title: "Innovation")
+Word.create!(title: "Esprit d’équipe")
+Word.create!(title: "Intégrité")
+Word.create!(title: "Respect")
+Word.create!(title: "Responsabilité")
+Word.create!(title: "Satisfaction Client")
+Word.create!(title: "Excellence")
+Word.create!(title: "Partage")
 
 
 p "Creating Startup part"

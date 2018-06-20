@@ -12,7 +12,6 @@ class Startup < ApplicationRecord
 
   has_many :startup_words, dependent: :destroy
   has_many :words, through: :startup_words
-  has_many :startup_words, inverse_of: :startup
   accepts_nested_attributes_for :startup_words, allow_destroy: true
   accepts_nested_attributes_for :words, allow_destroy: true
 
