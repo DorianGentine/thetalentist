@@ -28,6 +28,9 @@
       </div>
     </div>
       <div class="filter-item hidden-xs hidden-sm">
+        <%= link_to repertoire_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
+          <p><i class="fas fa-infinity"></i> Tous</p>
+        <% end %>
         <%= link_to repertoire_path(tag: "Data") do %>
           <i class="fas fa-search"></i> DATA
         <% end %>

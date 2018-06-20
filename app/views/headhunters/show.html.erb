@@ -64,9 +64,9 @@
           <% end %>
         </div>
       </div>
-      <!-- <#% if current_user.is_a?(Headhunter) %>
+      <% if current_user.is_a?(Headhunter) %>
         <p data-target= "modal_headhunters" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
-      <#% end %> -->
+      <% end %>
       <div class="lower-right-body-item hidden-xs">
         <h4><i class="fas fa-search-plus"></i> Nos Headhunters</h4>
         <div class="talent-competences">
@@ -84,9 +84,9 @@
   <div class="talent-right">
 
     <div class="headhunter-right-up">
-     <!--  <#% if current_user.is_a?(Headhunter) %>
+      <% if current_user.is_a?(Headhunter) %>
         <p data-target= "modal_pictures" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
-      <#% end %> -->
+      <% end %>
       <h4 class="hidden-xs">Notre environnement de travail</h4>
       <div class="photos-environnement">
         <% if @startup.pictures.first(3).present? %>
@@ -137,17 +137,6 @@
         </div>
         <div id="map" style="width: 100%; height: 200px;" data-markers="<%= @markers.to_json %>"
           ></div>
-        <!-- <div class="recherche-middle-line bordure-haut-bas">
-          <h5>Parité</h5>
-          <div class="cercles recherche-first-line">
-            <div class="cercle cercle-homme">
-              <p>60%</p>
-            </div>
-            <div class="cercle">
-              <p>40%</p>
-            </div>
-          </div>
-        </div> -->
         <div class="recherche-first-line">
           <div class="recherche-item padding-top bordure-droite">
             <h5><%= @startup.average_age.present? ? @startup.average_age : "?87 ans?" %></h5>
@@ -175,10 +164,16 @@
           </div>
         </div>
       </div>
+      <% if @startup.facebook.present? %>
+        <%= link_to 'Facebook', @startup.facebook, target: "_blank" %>
+      <% end %>
+      <% if @startup.linkedin.present? %>
+        <%= link_to 'Linkedin', @startup.linkedin, target: "_blank" %>
+      <% end %>
 
-     <!--  <#% if current_user.is_a?(Headhunter) %>
+      <% if current_user.is_a?(Headhunter) %>
         <p data-target= "modal_overview" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
-      <#% end %> -->
+      <% end %>
       <div class="entreprise-quelques-mots">
         <h4><i class="far fa-id-badge"></i> L'entreprise en quelques mots</h4>
             <div class="lower-body-item-content lower-left-body">

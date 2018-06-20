@@ -4,10 +4,10 @@ class HeadhuntersController < ApplicationController
     @headhunter = current_headhunter
     authorize @headhunter
 
-
+    @relationship = Relationship.new
     @job_alert = JobAlerte.new
 
-    if params[:tag].blank?
+    if params[:tag].blank? || params[:tag] == "Tous"
       talents = Talent.where(:visible => true).order(updated_at: :desc)
       @talents = []
       talents.each do |talent|
@@ -26,7 +26,7 @@ class HeadhuntersController < ApplicationController
         end
       end
     end
-    @titre = "All"
+    @titre = "Tous"
     if params[:tag] == "Data"
       @titre = "DATA"
     elsif params[:tag] == "Sales"
@@ -35,6 +35,8 @@ class HeadhuntersController < ApplicationController
       @titre = "MARKET"
     elsif params[:tag] == "Product"
       @titre = "PRODUCT"
+    elsif params[:tag] == "Tous"
+      @titre = "Tous"
     end
   end
 
