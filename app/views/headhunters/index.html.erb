@@ -23,16 +23,16 @@
 
 
   <div class="filter-item hidden-xs hidden-sm">
-    <%= link_to talents_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
+    <%= link_to headhunters_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
       <p><i class="fas fa-infinity"></i> Tous</p>
     <% end %>
-    <%= link_to talents_path(tag: "Valider") do %>
+    <%= link_to headhunters_path(tag: "Valider") do %>
       <p><i class="fas fa-check"></i> Validés</p>
     <% end %>
-    <%= link_to talents_path(tag: "Refuser") do %>
+    <%= link_to headhunters_path(tag: "Refuser") do %>
       <p><i class="fas fa-times"></i> Refusés</p>
     <% end %>
-    <%= link_to talents_path(tag: "En attende") do %>
+    <%= link_to headhunters_path(tag: "En attende") do %>
       <p><i class="far fa-clock"></i> En attente</p>
     <% end %>
   </div>

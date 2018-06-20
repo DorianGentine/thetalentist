@@ -41,6 +41,9 @@ class HeadhuntersController < ApplicationController
   def index
     @talentist = current_talentist
     @headhunters = Headhunter.all
+
+    @startups = Startup.all
+
     @headhunters = policy_scope(Headhunter)
 
     if params[:tag].blank?
@@ -81,9 +84,6 @@ class HeadhuntersController < ApplicationController
   def update
     @headhunter = Headhunter.find(params[:id])
     @startup = @headhunter.startup
-    if @headhunter.update_attributes(startup_params)
-      redirect_to headhunter_path(@headhunter)
-    end
 
     if params[:commit] == "Accepter" || "Refuser"
       if params[:commit] == "Accepter"
@@ -102,9 +102,15 @@ class HeadhuntersController < ApplicationController
         else @headhunter.validated == nil
           validated_action(false)
         end
-        authorize @headhunter
+      end
+      redirect_to headhunters_path
+    else
+      if @headhunter.update_attributes(startup_params)
+        redirect_to headhunter_path(@headhunter)
       end
     end
+
+    authorize @headhunter
 
   end
 
@@ -118,7 +124,7 @@ class HeadhuntersController < ApplicationController
 
   def startup_params
     params.require(:headhunter).permit(
-      startup_attributes: [ :id, :name, :link, :logo, :address, :sector_ids, :btob, :btoc,
+      startup_attributes: [ :id, :name, :link, :logo, :address, :sector_ids, :btob, :btoc, :validated,
       :average_age, :collaborators, :year_of_creation, :overview ],
       word: []
       )

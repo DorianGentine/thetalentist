@@ -10,7 +10,9 @@
     <% if headhunter_signed_in? && current_headhunter %>
 
       <!-- Links when logged in -->
-      <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <% if current_headhunter.validated %>
+        <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <% end %>
 
       <div class="lien-messagerie">
         <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
@@ -31,11 +33,6 @@
                 <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
               <% end %>
             </li>
-            <!-- <li>
-              <#%= link_to "#" do %>
-                <i class="fa fa-cog"></i>  <#%= t(".settings", default: "Settings") %>
-              <#% end %>
-            </li> -->
             <li>
               <%= link_to destroy_headhunter_session_path, method: :delete do %>
                 <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>

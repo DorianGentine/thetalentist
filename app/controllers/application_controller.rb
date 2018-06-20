@@ -55,7 +55,8 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.is_a?(Headhunter)
-      repertoire_path
+      sign_in(resource)
+      headhunter_path(resource)
     elsif resource.is_a?(Talent)
       talent_path(resource)
     elsif resource.is_a?(Talentist)
@@ -67,7 +68,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_up_path_for(resource)
     if resource.is_a?(Headhunter)
-      repertoire_path
+      headhunter_path(Headhunter)
     elsif resource.is_a?(Talent)
       talent_path(resource)
     elsif resource.is_a?(Talentist)
