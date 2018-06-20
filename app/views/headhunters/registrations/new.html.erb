@@ -9,24 +9,18 @@
 
     <div class="form-inputs">
       <div class="form-line">
-        <p class="form-label requis">Email</p>
-        <%= f.input :email, required: true, autofocus: true, label: false %>
-      </div>
-      <div class="form-line">
         <p class="form-label requis">Prénom</p>
         <%= f.input :firstname, required: true, autofocus: true, label: false %>
         <p class="form-label requis">Nom</p>
         <%= f.input :name, required: true, autofocus: true, label: false %>
       </div>
       <div class="form-line">
-        <p class="form-label requis">Poste</p>
-        <%= f.input :job, required: true, autofocus: true, label: false %>
+        <p class="form-label requis">Email</p>
+        <%= f.input :email, required: true, autofocus: true, label: false %>
       </div>
       <div class="form-line">
         <p class="form-label requis">Mot de passe</p>
         <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), label: false %>
-      </div>
-      <div class="form-line">
         <p class="form-label requis">Confirmation du mot de passe</p>
         <%= f.input :password_confirmation, required: true, label: false %>
       </div>
@@ -35,6 +29,8 @@
       <div class="form-line">
         <p class="form-label requis">Votre entreprise</p>
         <%= f.input :startup_id, collection: Startup.all, input_html: { class:"select2"}, :include_blank => "Autre", label:false %>
+        <p class="form-label requis">Poste</p>
+        <%= f.input :job, required: true, autofocus: true, label: false %>
       </div>
     </div>
 

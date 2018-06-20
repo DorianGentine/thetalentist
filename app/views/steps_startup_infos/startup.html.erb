@@ -1,17 +1,39 @@
-<h2>Renseigner votre entreprise ?</h2>
-<%= simple_form_for @startup, url: wizard_path, method: :put do |f| %>
+<%= render 'shared/navbar' %>
 
-  <%= f.input :name %>
-  <%= f.input :year_of_creation, collection: 2000..2018, prompt: "année de création", label: false  %>
-  <%= f.input :collaborators %>
-  <%= f.input :average_age, :input_html => { :type => "number" } %>
-  <%= f.input :link %>
-  <%= f.input :address, placeholder: '16 villa gaudelet 75011 paris'%>
+<div class="form-container">
 
+  <h2 class="form-titre-page" style="margin-top: 100px;"><i class="fas fa-briefcase"></i> Renseigner <strong>votre entreprise</strong> ?</h2>
 
-  <%= f.submit "Créer", class: "b-btn" %> <br>
-<% end %>
+  <%= simple_form_for @startup, url: wizard_path, method: :put do |f| %>
 
+    <div class="form-line">
+      <p class="form-label requis">Nom</p>
+      <%= f.input :name, required: true, label: false %>
+      <p class="form-label">Création</p>
+      <%= f.input :year_of_creation, collection: 2000..2018, prompt: "année de création", label: false  %>
+    </div>
 
-<%= link_to "Précedent", previous_wizard_path, class: "b-btn-link" %>
+    <div class="form-line">
+      <p class="form-label">Collaborateurs</p>
+      <%= f.input :collaborators, label: false %>
+      <p class="form-label">Moyenne d'âge</p>
+      <%= f.input :average_age, :input_html => { :type => "number" }, label: false %>
+    </div>
+
+    <div class="form-line">
+      <p class="form-label">Adresse</p>
+      <%= f.input :address, placeholder: '16 villa gaudelet 75011 paris', label: false%>
+      <p class="form-label">Site internet</p>
+      <%= f.input :link, label: false %>
+    </div>
+
+    <div class="form-actions">
+      <%= link_to "Précedent", previous_wizard_path, class: "b-btn-link form-btn form-btn-precedent" %>
+      <%= f.submit "Créer", class: "b-btn form-btn form-btn-suivant" %>
+    </div>
+  <% end %>
+
+</div>
+
+<%= render "shared/footer" %>
 
