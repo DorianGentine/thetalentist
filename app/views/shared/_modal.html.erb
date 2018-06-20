@@ -13,11 +13,12 @@
           </div>
         <% else %>
           <div class="contact-btn">
-            <%= simple_form_for talent, methode: :get do |f| %>
+            <%= simple_form_for @relationship do |f| %>
               <p>Contacter <i class="fas fa-location-arrow"></i></p>
-              <%= f.simple_fields_for :relationships do |u| %>
-                <%= u.button :submit, inline_label: "Contacter 2" %>
-              <% end %>
+                <%= f.input :talent_id, input_html: {value: talent.id }, as: :hidden %>
+                <%= f.input :headhunter_id, input_html: {value: @headhunter.id }, as: :hidden %>
+                <%= f.button :submit, inline_label: "Contacter 2" %>
+
             <% end %>
           </div>
         <% end %>

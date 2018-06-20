@@ -15,10 +15,10 @@
         </div>
 
         <div class="accepeter-talent">
-          <%= simple_form_for talent, method: :put do |f| %>
+          <%= simple_form_for talent , url: to_validate_talent_path(talent) do |f| %>
           <div class="btn-validate">
             <div class="<%= "green_validation" if talent.validated == true %>">
-              <%= f.submit "Accepter"%>
+              <%= f.submit "Accepter" %>
             </div>
             <div class="<%= "red_validation" if talent.validated === false %>">
               <%= f.submit "Refuser" %>

@@ -3,7 +3,6 @@ class StartupsController < ApplicationController
     @startup = Startup.find(params[:id])
     @startup.btob = false
     @startup.btoc = false
-    raise
     if @startup.update_attributes(startup_params)
 
       redirect_to headhunter_path(@current_headhunter)

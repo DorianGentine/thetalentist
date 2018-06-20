@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'startups/update'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -26,7 +25,12 @@ Rails.application.routes.draw do
     registrations: 'talents/registrations'
   }
 
-  resources :talents, only: [:show, :update, :index]
+  resources :relationships, only: [ :create ]
+
+  resources :talents, only: [:show, :update, :index] do
+    patch 'to_validate', :on => :member
+  end
+
 
   # resources :relationships, only: [:show, :index, :create] do
   #   resources :talent_message, only: [:create]

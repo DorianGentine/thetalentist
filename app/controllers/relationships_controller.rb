@@ -1,26 +1,27 @@
 class RelationshipsController < ApplicationController
 
-
-  # def index
-  #   @user = @current_user
-  #   @relationships = @user.relationships
-  #   @relationships = policy_scope(@user.relationships.all)
-  # end
-
-
-  # def show
-  #   @relationship = Relationship.find(params[:id])
-  #   authorize @relationship
-
-
-
-  # end
-
   def create
-    raise
-    # 1. Tu crées la relation
+    @relationship = Relationship.new
 
-    # 2. Tu initialises la conversation
+    @relationship = Relationship.create(relationship_params)
+    @relationship.status = "pending"
+    if @relationship.save
+      headhunter = @relationship.headhunter
+      talent = @relationship.talent
+      headhunter.send_message(talent, "#{headhunter.firstname}, souhaite rentrer en contact avec vous", "#{headhunter.firstname}")
+      flash[:success] = "Relationship was created!"
+      redirect_to repertoire_path
+    end
+    authorize @relationship
+  end
 
+  private
+
+  def relationship_params
+    params.require(:relationship).permit(:talent_id, :headhunter_id)
+  end
+
+  def headhunter_params
+    params.require(:relationship).permit(:headhunter_id)
   end
 end

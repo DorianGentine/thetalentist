@@ -31,4 +31,8 @@ class TalentPolicy < ApplicationPolicy
   def repertory?
     true
   end
+
+  def to_validate?
+    true
+  end
 end

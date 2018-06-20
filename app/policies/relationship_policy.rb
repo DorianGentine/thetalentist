@@ -5,11 +5,9 @@ class RelationshipPolicy < ApplicationPolicy
     end
   end
 
-  def index
-    # ??????????? TODO
-  end
 
-  def show?
+  def create?
+    # record
     true
   end
 end
