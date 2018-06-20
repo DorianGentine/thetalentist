@@ -63,10 +63,18 @@
   background-color: #4ECCA3 !important;
 }
 
+.alert{
+  background-color: $red;
+}
 
-.form-compte .form-group:nth-child(3){
-  position: relative;
-  top: 13px;
+.form-compte{
+  align-items: flex-start;
+  .form-label{
+    margin-top: 25px;
+  }
+  .alert{
+    display: none;
+  }
 }
 .form-label em{
   font-style: normal;
