@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_20_092203) do
+ActiveRecord::Schema.define(version: 2018_06_20_184105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -309,6 +309,9 @@ ActiveRecord::Schema.define(version: 2018_06_20_092203) do
     t.boolean "btoc"
     t.boolean "btob"
     t.boolean "validated", default: false, null: false
+    t.string "facebook"
+    t.string "linkedin"
+    t.string "mission"
   end
 
   create_table "talent_formations", force: :cascade do |t|

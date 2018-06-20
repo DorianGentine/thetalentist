@@ -5,6 +5,16 @@
     <div class="modal-header">
       <h3>Modifiez vos infos</h3>
 
+        <%= simple_form_for @startup do |f| %>
+          <%= f.simple_fields_for :pictures do |u| %>
+            <%= render 'photo_fields', :f => u %>
+
+          <% end %>
+          <div class='links'>
+            <%= link_to_add_association 'Ajouter une photo +', f, :pictures, :partial => 'photo_fields', :class => "form-hobby-add" %>
+          </div>
+        <% end %>
+
       <span class="close">
         <p>&times;</p>
       </span>

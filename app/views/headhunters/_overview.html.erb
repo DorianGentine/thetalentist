@@ -11,11 +11,9 @@
 
     </div>
     <div class="modal-body">
-      <%= simple_form_for @headhunter, method: :put do |f| %>
-
-        <%= f.simple_fields_for :startup do |u| %>
-          <%= u.input :overview %>
-        <% end %>
+      <%= simple_form_for @startup do |f| %>
+        <%= f.input :overview %>
+        <%= f.input :mission %>
         <div class="form-actions">
           <%= f.submit "Terminer", class: "b-btn form-btn form-btn-suivant" %>
         </div>

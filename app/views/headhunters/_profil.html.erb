@@ -15,6 +15,8 @@
         <%= f.input :name %>
         <%= f.input :link %>
         <%= f.input :address %>
+        <%= f.input :linkedin %>
+        <%= f.input :facebook %>
         <%= f.input :btoc, checked_value: true, unchecked_value: false %>
         <%= f.input :btob, checked_value: true, unchecked_value: false %>
         <%= f.input :sector_ids, collection: Sector.all %>

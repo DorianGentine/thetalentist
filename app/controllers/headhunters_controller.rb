@@ -68,18 +68,28 @@ class HeadhuntersController < ApplicationController
 
 
   def show
+
     @headhunter = Headhunter.find(params[:id])
 
     @startup = @headhunter.startup
+
+    @startup.pictures.build
+
     authorize @headhunter
 
-    @markers = {
+    # a changer!! TODO
+    # @flats = Startup.where.not(latitude: nil, longitude: nil)
+    @flats = []
+    @flats << @startup
+    @flats << @startup
+    @markers = @flats.map do |flat|
+         {
         lat: @startup.latitude,
         lng: @startup.longitude
         #,
         # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
       }
-
+      end
   end
 
   def update

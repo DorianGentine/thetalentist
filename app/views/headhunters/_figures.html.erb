@@ -11,13 +11,13 @@
 
     </div>
     <div class="modal-body">
-      <%= simple_form_for @headhunter, method: :put do |f| %>
 
-        <%= f.simple_fields_for :startup do |u| %>
-          <%= u.input :average_age %>
-          <%= u.input :collaborators %>
-          <%= u.input :year_of_creation %>
-        <% end %>
+      <%= simple_form_for @startup do |f| %>
+
+          <%= f.input :average_age %>
+          <%= f.input :collaborators %>
+          <%= f.input :year_of_creation %>
+
         <div class="form-actions">
           <%= f.submit "Terminer", class: "b-btn form-btn form-btn-suivant" %>
         </div>
