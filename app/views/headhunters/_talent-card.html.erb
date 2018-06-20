@@ -62,7 +62,11 @@
       <div class="border">
 
         <div class="talent-job">
-          <h2><%= talent.experiences.last.position %></h2>
+          <% if talent.experiences.last.present? && talent.experiences.last.position.present? %>
+            <h2><%= talent.experiences.last.position %></h2>
+          <% else %>
+            <h2> Rajouter une experience </h2>
+          <% end %>
         </div>
 
         <div class="talent-info">
