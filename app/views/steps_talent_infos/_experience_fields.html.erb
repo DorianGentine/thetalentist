@@ -11,10 +11,10 @@
     <p class="form-label" style="width: 0">À</p>
     <%= f.input :years, placeholder:"juin 2015 ou 2015", label: false  %>
     <% if @talent.next_aventures.present? %>
-      <%= f.input :overview, label: false %>
-      <%= f.input :company_type_id, collection: CompanyType.all %>
+      <%= f.input :overview, label: false, placeholder:"Vos missions" %>
+      <%= f.input :company_type_id, collection: CompanyType.all, label: false, placeholder:"Type d'entreprise" %>
     <% end %>
     <!-- TODO button -->
-    <%= link_to_remove_association "remove expérience", f %>
+    <%= link_to_remove_association "Supprimer", f %>
   </div>
 </div>

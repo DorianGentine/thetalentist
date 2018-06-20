@@ -229,6 +229,10 @@
 
 .headhunter-right-down{
   height: 330px;
+  position: relative;
+  .btn-edition{
+    top: -40px;
+  }
   .headhunter-chiffres{
     width: 250px;
     margin: 0 30px 0 0;
