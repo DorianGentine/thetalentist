@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'startups/update'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
     passwords: 'headhunters/passwords',
     registrations: 'headhunters/registrations'
   }
+  resources :startups, only: [ :update ]
   resources :headhunters, only: [:show, :update, :index]
   # show is to display the profil and update to edit it
   # le repertoire est la où on affiche tous les talents

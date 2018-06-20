@@ -10,17 +10,16 @@
       </span>
     </div>
     <div class="modal-body">
-      <br>
-      <%= simple_form_for @headhunter, method: :put do |f| %>
-        <%= f.simple_fields_for :startup do |u| %>
-          <%= u.input :logo %>
-          <%= u.input :name %>
-          <%= u.input :link %>
-          <%= u.input :address %>
-          <%= u.input :btoc, checked_value: true, unchecked_value: false %>
-          <%= u.input :btob, checked_value: true, unchecked_value: false %>
-          <%= u.input :sector_ids, collection: Sector.all %>
-        <% end %>
+      <%= simple_form_for @startup do |f| %>
+        <%= f.input :logo %>
+        <%= f.input :name %>
+        <%= f.input :link %>
+        <%= f.input :address %>
+        <%= f.input :btoc, checked_value: true, unchecked_value: false %>
+        <%= f.input :btob, checked_value: true, unchecked_value: false %>
+        <%= f.input :sector_ids, collection: Sector.all %>
+
+        <%= f.input :word_ids, collection: Word.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 300px"}, multiple: true, required: true  %>
         <%= f.submit "Terminer", class: "b-btn form-btn form-btn-suivant" %>
       <% end %>
     </div>

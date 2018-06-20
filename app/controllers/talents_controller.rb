@@ -59,7 +59,8 @@ class TalentsController < ApplicationController
   end
 
   def update
-    if @headhunter = current_headhunter
+    # repertoire
+    if current_headhunter
       @relationship = Relationship.new
       @talent = Talent.find(params[:id])
 
@@ -71,9 +72,6 @@ class TalentsController < ApplicationController
       end
       authorize @headhunter
 
-    # elsif current_talent.relationships.last.status == "pending"
-
-    #   @relationship = Relationship.where("headhunter_id = ? AND talent_id = ?", @participant[0].id, current_user.id)
     elsif current_talentist
       @talent = Talent.find(params[:id])
 
