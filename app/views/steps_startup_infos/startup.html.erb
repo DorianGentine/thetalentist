@@ -4,9 +4,7 @@
   <%= f.input :name %>
   <%= f.input :year_of_creation, collection: 2000..2018, prompt: "année de création", label: false  %>
   <%= f.input :collaborators %>
-  <%= f.input :parity, :input_html => { :type => "number" }%>
   <%= f.input :average_age, :input_html => { :type => "number" } %>
-  <%= f.input :turnover, placeholder: "200 k€ ou +5%", :input_html => { :type => "number" } %>
   <%= f.input :link %>
   <%= f.input :address, placeholder: '16 villa gaudelet 75011 paris'%>
 

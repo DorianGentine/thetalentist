@@ -3,8 +3,5 @@
   <%= f.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
   <%= f.input :title, placeholder: "Diplôme", label: false  %>
   <%= f.input :year, collection: 1992..2018, prompt: "Année d'obtention", label: false   %>
-  <% if @talent.next_aventures.present? %>
-    <%= f.input :level, collection: 0..5, prompt: "Année d'obtention", label: false   %>
-  <% end %>
   <%= link_to_remove_association "Supprimer", f %>
 </div>

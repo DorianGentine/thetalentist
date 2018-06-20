@@ -31,7 +31,7 @@ private
 
   def finish_wizard_path
     sign_in(@headhunter)
-    repertoire_path(@headhunter)
+    headhunter_path(@headhunter)
   end
 
   def startup_params
@@ -39,13 +39,10 @@ private
       :name,
       :year_of_creation,
       :collaborators,
-      :parity,
       :average_age,
-      :turnover,
       :link,
       :address
       )
-
   end
 
 end
