@@ -1,17 +1,10 @@
 <div class="new_landing">
 
-  <!-- <div class="top-menu">
-    <div class="little-square">
-      <hr class="first">
-      <hr class="second">
-      <hr class="third">
-    </div>
-    <h4 class="titre-menu">MENU</h4>
-  </div> -->
-
-  <!-- ca ne passe pas ca  -->
-    <!-- <img class="new-landing-logo-talentist" src="/assets/Logo The talentist-01.png" alt="logo The talentist"> -->
   <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
+
+  <div class="avatar-home">
+    <%= render "shared/avatar" %>
+  </div>
 
   <div class="landing-top">
 
@@ -25,7 +18,7 @@
         <% end %>
       </div>
       <div class="btn btn-primary btn-inscription">
-        <%= link_to new_headhunter_session_path do %>
+        <%= link_to welcome_headhunters_path do %>
           <i class="fas fa-user"></i>
           <a>Je suis une<br>start-up</a>
         <% end %>
@@ -74,6 +67,12 @@
 
 
 
+<div class="btn-inscription">
+  <%= link_to new_talentist_session_path do %>
+    <i class="fas fa-user"></i>
+    <p>Je suis THE<br>TALENTIST</p>
+  <% end %>
+</div>
 
 
 
@@ -104,49 +103,3 @@
 
 
 
-
-        <div class="btn-inscription">
-          <%= link_to new_talentist_session_path do %>
-            <i class="fas fa-user"></i>
-            <p>Je suis THE<br>TALENTIST</p>
-          <% end %>
-        </div>
-
-
-<!-- Old landing -->
-<!-- <#%= render "shared/navbar" %> -->
-
-<!-- <div class="home-container">
-
-  <div class="home-left">
-
-    <h2><strong>Bienvenue</strong> sur The Talentist !</h2>
-    <h2>When the most talented candidate meet providing startup.</h2>
-
-    <div class="home-connexion">
-
-      <div class="inscription-items">
-        <div class="btn btn-primary btn-inscription">
-          <%= link_to new_talent_session_path do  %>
-            <i class="fas fa-rocket"></i>
-            <a>Je suis un<br>talent</a>
-          <% end %>
-        </div>
-        <div class="btn btn-primary btn-inscription">
-          <%= link_to new_headhunter_session_path do %>
-            <i class="fas fa-user"></i>
-            <a>Je suis une<br>start-up</a>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-
-  <div class="home-right hidden-xs hidden-sm"></div>
-
-</div> -->
-
-
-<!-- <#%= render "shared/footer" %> -->

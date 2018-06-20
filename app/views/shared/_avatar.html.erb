@@ -1,0 +1,96 @@
+<% if headhunter_signed_in? && current_headhunter %>
+
+  <!-- Avatar with dropdown menu -->
+  <div class="navbar-wagon-item">
+    <div class="dropdown">
+      <% if current_headhunter.photo.present? %>
+        <%= cl_image_tag current_headhunter.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+      <% else %>
+        <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+          <div class="initiale">
+            <p style="font-size: 14px; font-weight: 400"><%= current_headhunter.firstname.split(//).first.upcase %><%= current_headhunter.name.split(//).first.upcase %></p>
+          </div>
+        </div>
+      <% end %>
+      <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+        <li>
+          <%= link_to headhunter_path(current_headhunter) do %>
+            <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_headhunter_session_path, method: :delete do %>
+            <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+<% elsif talent_signed_in? && current_talent %>
+
+  <!-- Avatar with dropdown menu -->
+  <div class="navbar-wagon-item">
+    <div class="dropdown">
+      <% if current_talent.photo.present? %>
+        <%= cl_image_tag current_talent.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+      <% else %>
+        <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+          <div class="initiale">
+            <p style="font-size: 14px; font-weight: 400"><%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %></p>
+          </div>
+        </div>
+      <% end %>
+      <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+        <li>
+          <%= link_to talent_path(current_talent) do %>
+            <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+          <% end %>
+        </li>
+        <!-- <li>
+          <#%= link_to "#" do %>
+            <i class="fa fa-cog"></i>  <#%= t(".settings", default: "Settings") %>
+          <#% end %>
+        </li> -->
+        <li>
+          <%= link_to destroy_talent_session_path, method: :delete do %>
+            <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+<% elsif talentist_signed_in? && current_talentist %>
+
+  <!-- Avatar with dropdown menu -->
+  <div class="navbar-wagon-item">
+    <div class="dropdown">
+      <% if current_talentist.photo.present? %>
+        <%= cl_image_tag current_talent.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+      <% else %>
+        <%= image_tag "http://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+      <% end %>
+      <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+        <!-- <li>
+          <#%= link_to talent_path(current_talent) do %>
+            <i class="fa fa-user"></i> <#%= t(".profile", default: "Profile") %>
+          <#% end %>
+        </li> -->
+        <!-- <li>
+          <#%= link_to "#" do %>
+            <i class="fa fa-cog"></i>  <#%= t(".settings", default: "Settings") %>
+          <#% end %>
+        </li> -->
+        <li>
+          <%= link_to destroy_talentist_session_path, method: :delete do %>
+            <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+<% else %>
+
+<% end %>
