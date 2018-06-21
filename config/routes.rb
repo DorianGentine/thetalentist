@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'repertoire', to: "headhunters#repertory"
   put 'repertoire', to: "headhunters#update"
 
+  get 'repertoire_startup', to: "talents#repertory"
 
   devise_for :talents, path: 'talents', controllers: {
     sessions: 'talents/sessions',
@@ -36,7 +37,6 @@ Rails.application.routes.draw do
   #   resources :headhunter_message, only: [:create]
   # end
 
-  get 'repertoire_startup', to: "talents#repertory"
 
 
   # pour la messagerie
