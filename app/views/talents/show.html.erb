@@ -93,17 +93,17 @@
       </div>
       <div class="right-up-item le-job-de-reve">
         <h4>Le job de rêve !</h4>
-        <p> <%= @talent.next_aventures.last.overview %></p>
+        <p> <%= @talent.next_aventures.first.overview %></p>
       </div>
       <div class="right-up-item je-recherche">
         <h4>Je recherche</h4>
         <div class="space-between-vertical">
           <div class="recherche-item">
-            <h5><%= @talent.next_aventures.last.contrat %></h5>
+            <h5><%= @talent.next_aventures.first.contrat %></h5>
             <p>CONTRAT</p>
           </div>
           <div class="recherche-item recherche-item-right">
-            <h5><%= @talent.next_aventures.last.remuneration %></h5>
+            <h5><%= @talent.next_aventures.first.remuneration %></h5>
             <p>SALAIRE (Annuel)</p>
           </div>
           <div class="recherche-item">
@@ -113,7 +113,7 @@
             <p>SECTEURS</p>
           </div>
           <div class="recherche-item recherche-item-right">
-            <h5><%= @talent.next_aventures.last.city %></h5>
+            <h5><%= @talent.next_aventures.first.city %></h5>
             <p>VILLE</p>
           </div>
         </div>

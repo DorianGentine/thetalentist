@@ -87,8 +87,6 @@ class ConversationsController < ApplicationController
     user_relationship
     if @relationship.update(status:params[:commit])
       redirect_to conversation_path(@conversation)
-    elsif current_talentist
-      raise
     end
   end
 

@@ -6,6 +6,6 @@ class StartupPolicy < ApplicationPolicy
   end
 
   def update?
-    raise
+    true
   end
 end
