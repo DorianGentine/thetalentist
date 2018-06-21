@@ -25,6 +25,7 @@ TalentTechno.destroy_all
 Startup.destroy_all
 Talentist.destroy_all
 Headhunter.destroy_all
+Picture.destroy_all
 
 p "Creating talents"
 
@@ -284,6 +285,45 @@ backmarket = Startup.create!(name: "backmarket", year_of_creation: 2015, collabo
 manomano = Startup.create!(name: "manomano", year_of_creation: 2015, collaborators: 9, parity: 69, average_age: 27, turnover: 9_000, link: "https://www.manomano.fr/", address: "152 bd Macdonald",overview: "Et velariis minutias ortu aut vel turpi vinariis certant fatiscunt tabernis sua pugnaciter reducto sole umbraculorum velariis aedilitate tabernis turba vinariis imitatus certant studiorum pernoctant omnium turpi imitatus concrepantes turpi.")
 doctolib = Startup.create!(name: "doctolib", year_of_creation: 2010, collaborators: 157, parity: 52, average_age: 31, turnover: 200_000, link: "https://www.doctolib.fr/", address: "32 Rue de Monceau",overview: "Et velariis minutias ortu aut vel turpi vinariis certant fatiscunt tabernis sua pugnaciter reducto sole umbraculorum velariis aedilitate tabernis turba vinariis imitatus certant studiorum pernoctant omnium turpi imitatus concrepantes turpi.")
 
+p "Creating Picture part"
+photo1 = Picture.new(title: "open-space", startup:backmarket )
+photo1.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540108/photo_startup_holidog_12.jpg"
+photo1.save
+
+photo2 = Picture.new(title: "open-space", startup:backmarket )
+photo2.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540162/open-space.png"
+photo2.save
+
+photo3 = Picture.new(title: "open-space", startup:backmarket )
+photo3.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540136/3025567-poster-p-1-how-to-fix-open-offices-bad-for-work-825x510.jpg"
+photo3.save
+
+photo1 = Picture.new(title: "open-space", startup:manomano )
+photo1.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540108/photo_startup_holidog_12.jpg"
+photo1.save
+
+photo2 = Picture.new(title: "open-space", startup:manomano )
+photo2.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540162/open-space.png"
+photo2.save
+
+photo3 = Picture.new(title: "open-space", startup:manomano )
+photo3.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540136/3025567-poster-p-1-how-to-fix-open-offices-bad-for-work-825x510.jpg"
+photo3.save
+
+photo1 = Picture.new(title: "open-space", startup:doctolib )
+photo1.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540108/photo_startup_holidog_12.jpg"
+photo1.save
+
+photo2 = Picture.new(title: "open-space", startup:doctolib )
+photo2.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540162/open-space.png"
+photo2.save
+
+photo3 = Picture.new(title: "open-space", startup:doctolib )
+photo3.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540136/3025567-poster-p-1-how-to-fix-open-offices-bad-for-work-825x510.jpg"
+photo3.save
+
+
+
 p "Creating Headhunter part"
 
 lucas = Headhunter.create!(email: "lucas@hotmail.fr", password:"password", name: "Rideau", firstname: "lucas", job:"HR", validated: true, startup: backmarket)
@@ -310,4 +350,4 @@ dimitri.send_message(amelie, "Bonjour #{amelie.firstname}, Bienvenue sur notre p
 dimitri.send_message(justine, "Bonjour #{justine.firstname}, Bienvenue sur notre plateforme!", "#{justine.id}")
 dimitri.send_message(loic, "Bonjour #{loic.firstname}, Bienvenue sur notre plateforme!", "#{loic.id}")
 
-# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# 
