@@ -61,7 +61,7 @@
             </div>
             <div class="talent-info-item card-dispsition">
               <p class="icon icon-info"><i class="far fa-calendar"></i></p>
-              <p>3 ans d'expérience (TODO)</p>
+              <p><%= 2018 - talent.experiences.last.starting.to_i %> ans d'expériences</p>
             </div>
           </div>
           <div class="talent-school">
@@ -70,7 +70,7 @@
           </div>
         </div>
         <div class="upper-right-body">
-          <p class="talent-metier"><i class="fas fa-search"></i> DATA</p>
+          <p class="talent-metier"><i class="fas fa-search"></i> <%= talent.jobs.first.title.upcase %></p>
           <div class="illu-card illu-modal"></div>
         </div>
       </div>
