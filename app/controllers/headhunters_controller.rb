@@ -8,22 +8,22 @@ class HeadhuntersController < ApplicationController
     @job_alert = JobAlerte.new
 
     if params[:tag].blank? || params[:tag] == "Tous"
-      talents = Talent.where(:visible => true).order(updated_at: :desc)
-      @talents = []
-      talents.each do |talent|
-        if !@headhunter.is_connected_to?(talent)
-          @talents << talent
-        end
-      end
+      @talents = Talent.where(:visible => true).order(updated_at: :desc)
+      # @talents = []
+      # talents.each do |talent|
+      #   if !@headhunter.is_connected_to?(talent)
+      #     @talents << talent
+      #   end
+      # end
     else
       @talents = []
       # les talents dont le job est : params[:tag]
       talent_jobs = TalentJob.joins(:job, :talent).where(:jobs => {:title => params[:tag]}, :talents => {:visible => true})
       talent_jobs.each do |job|
         talent = Talent.find(job.talent_id)
-        if !@headhunter.is_connected_to?(talent)
+        # if !@headhunter.is_connected_to?(talent)
           @talents << talent
-        end
+        # end
       end
     end
     @titre = "Tous"
