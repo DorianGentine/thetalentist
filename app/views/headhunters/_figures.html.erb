@@ -1,4 +1,4 @@
-<div id="modal_firgures" class="modal">
+<div id="modal_figures" class="modal">
 
   <div class="modal-content">
 
@@ -13,10 +13,16 @@
     <div class="modal-body">
 
       <%= simple_form_for @startup do |f| %>
-
-          <%= f.input :average_age %>
-          <%= f.input :collaborators %>
-          <%= f.input :year_of_creation %>
+        <div class="form-line">
+          <p class="form-label">Collaborateurs</p>
+          <%= f.input :collaborators, label: false %>
+          <p class="form-label">Moyenne d'âge</p>
+          <%= f.input :average_age, label: false %>
+        </div>
+        <div class="form-line">
+          <p class="form-label">Année de création</p>
+          <%= f.input :year_of_creation, label: false %>
+        </div>
 
         <div class="form-actions">
           <%= f.submit "Terminer", class: "b-btn form-btn form-btn-suivant" %>

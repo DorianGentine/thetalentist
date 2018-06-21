@@ -10,6 +10,7 @@ class Talents::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
+    raise
     super
     talent_path(resource)
   end
