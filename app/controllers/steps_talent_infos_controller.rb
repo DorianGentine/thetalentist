@@ -49,6 +49,7 @@ class StepsTalentInfosController < ApplicationController
      params.require(:talent).permit(
       :btoc,
       :btob,
+      :no_more,
       :sector_ids,
       job_ids: [],
       hobby_ids: [],
