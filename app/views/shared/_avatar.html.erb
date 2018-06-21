@@ -69,7 +69,11 @@
       <% if current_talentist.photo.present? %>
         <%= cl_image_tag current_talent.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
       <% else %>
-        <%= image_tag "http://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+        <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+          <div class="initiale">
+            <p style="font-size: 14px; font-weight: 400">DM</p>
+          </div>
+        </div>
       <% end %>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
         <!-- <li>

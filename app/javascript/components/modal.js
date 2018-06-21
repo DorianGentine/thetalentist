@@ -2,9 +2,10 @@ function revealModal() {
   const triggerModal = (event) => {
     let targetModalID = event.currentTarget.dataset.target
     let targetModal = document.getElementById(targetModalID)
-    const span = document.getElementsByClassName("close")[0];
 
     targetModal.style.display = "block";
+
+    const span = document.getElementsByClassName("close")[0];
 
     span.onclick = function() {
       targetModal.style.display = "none";

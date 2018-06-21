@@ -11,18 +11,43 @@
     </div>
     <div class="modal-body">
       <%= simple_form_for @startup do |f| %>
-        <%= f.input :logo %>
-        <%= f.input :name %>
-        <%= f.input :link %>
-        <%= f.input :address %>
-        <%= f.input :linkedin %>
-        <%= f.input :facebook %>
-        <%= f.input :btoc, checked_value: true, unchecked_value: false %>
-        <%= f.input :btob, checked_value: true, unchecked_value: false %>
-        <%= f.input :sector_ids, collection: Sector.all %>
 
-        <%= f.input :word_ids, collection: Word.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 300px"}, multiple: true, required: true  %>
-        <%= f.submit "Terminer", class: "b-btn form-btn form-btn-suivant" %>
+        <div class="form-line">
+          <p class="form-label">Votre logo</p>
+          <%= f.input :logo, required: false, label: false %>
+        </div>
+        <div class="form-line">
+          <p class="form-label">Dénomination</p>
+          <%= f.input :name, required: false, label: false %>
+          <p class="form-label">Adresse</p>
+          <%= f.input :address, required: false, label: false %>
+        </div>
+        <div class="form-line">
+          <p class="form-label">Site internet</p>
+          <%= f.input :link, required: false, label: false %>
+          <p class="form-label">Linkedin</p>
+          <%= f.input :linkedin, required: false, label: false %>
+        </div>
+        <div class="form-line">
+          <p class="form-label">Facebook</p>
+          <%= f.input :facebook, required: false, label: false %>
+        </div>
+        <div class="form-line">
+          <p class="form-label">BtoC</p>
+          <%= f.input :btoc, checked_value: true, unchecked_value: false, required: false, label: false %>
+          <p class="form-label">BtoB</p>
+          <%= f.input :btob, checked_value: true, unchecked_value: false, required: false, label: false %>
+        </div>
+        <div class="form-line">
+          <p class="form-label">Secteur</p>
+          <%= f.input :sector_ids, collection: Sector.all, required: false, label: false %>
+          <p class="form-label">Mots-clés</p>
+          <%= f.input :word_ids, collection: Word.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 300px"}, multiple: true, required: false  %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.submit "Terminer", class: "b-btn form-btn form-btn-suivant" %>
+        </div>
       <% end %>
     </div>
   </div>

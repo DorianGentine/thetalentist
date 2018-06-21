@@ -98,7 +98,7 @@
       font-size: 72px;
       margin: 10px;
     }
-    a{
+    p{
       text-transform: uppercase;
       font-size: 16px;
       font-weight: 900;
@@ -108,7 +108,7 @@
   .btn-inscription:hover{
     background-color: $green;
     transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
-    a{
+    p{
       color: white;
       text-decoration: none;
       transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;

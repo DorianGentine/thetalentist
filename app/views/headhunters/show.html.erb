@@ -64,10 +64,10 @@
           <% end %>
         </div>
       </div>
+      <div class="lower-right-body-item relative hidden-xs">
       <% if current_user.is_a?(Headhunter) %>
         <p data-target= "modal_headhunters" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
       <% end %>
-      <div class="lower-right-body-item hidden-xs">
         <h4><i class="fas fa-search-plus"></i> Nos Headhunters</h4>
         <div class="talent-competences">
           <% if @startup.headhunters.present? %>
@@ -100,17 +100,13 @@
             </div>
           </div>
         <% else %>
-          <p>Ajouter des photos, nos talents adorent ça!! </p>
+          <p>Ajouter des photos, nos talents adorent ça !! </p>
         <% end %>
       </div>
     </div>
 
-<!-- done  -->
     <div class="headhunter-right-down lower-body">
 
-      <% if current_user.is_a?(Headhunter) %>
-        <p data-target= "modal_firgures" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
-      <% end %>
       <div class="lower-body-item lower-right-body hidden visible-xs">
         <div class="lower-right-body-item">
           <h4><i class="fas fa-sliders-h"></i> Ce qui nous définit</h4>
@@ -120,12 +116,15 @@
                 <p><%= word.word.title %></p>
               <% end %>
             <% else %>
-              <p> + Ajouter se qui vous définit </p>
+              <p> + Ajouter ce qui vous définit </p>
             <% end %>
           </div>
         </div>
       </div>
-      <div class="headhunter-chiffres">
+      <div class="headhunter-chiffres relative">
+        <% if current_user.is_a?(Headhunter) %>
+          <p data-target= "modal_figures" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
+        <% end %>
         <div class="recherche-first-line">
           <div class="recherche-item bordure-droite">
             <h5><%= @startup.year_of_creation.present? ? @startup.year_of_creation : "2018 ?" %></h5>
@@ -136,7 +135,7 @@
             <p>EMPLOYÉS</p>
           </div>
         </div>
-        <div id="map" style="width: 100%; height: 200px;" data-markers="<%= @markers.to_json %>"
+        <div id="map" style="width: 100%; height: 100px;" data-markers="<%= @markers.to_json %>"
           ></div>
         <div class="recherche-first-line">
           <div class="recherche-item padding-top bordure-droite">

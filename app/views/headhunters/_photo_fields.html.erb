@@ -1,6 +1,8 @@
 <div class='nested-fields'>
-  <%= f.input :photo %>
-  <%= f.input :photo_cache, as: :hidden %>
+  <div class="form-line">
+    <%= f.input :photo %>
+    <%= f.input :photo_cache, as: :hidden %>
 
-  <%= link_to_remove_association "Supprimer", f %>
+    <%= link_to_remove_association "Supprimer", f %>
+  </div>
 </div>

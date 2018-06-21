@@ -58,6 +58,8 @@ class ApplicationController < ActionController::Base
       sign_in(resource)
       headhunter_path(resource)
     elsif resource.is_a?(Talent)
+      raise
+      sign_in(resource)
       talent_path(resource)
     elsif resource.is_a?(Talentist)
       talents_path
