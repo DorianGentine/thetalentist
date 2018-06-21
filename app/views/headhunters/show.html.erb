@@ -33,7 +33,7 @@
 
     <div class="talent-name">
       <h1><%= @headhunter.startup.name %></h1>
-      <h2 class="talent-post"><%= @startup.link %></h2>
+      <h2 class="talent-post"><%= @startup.link.present? ? @startup.link : "Ajouter votre site" %></h2>
     </div>
     <div class="talent-info">
       <div class="talent-info-item card-dispsition">
@@ -91,9 +91,10 @@
       <div class="photos-environnement">
         <% if @startup.pictures.first(3).present? %>
           <% @startup.pictures.first(2).each do |photo| %>
-            <div class="photo-env-item" style="background-image: url('cl_image_tag @photo.photo.url');"></div>
+            <div class="photo-env-item" style="background-image: url('<%= cl_image_path photo.photo  %>')"></div>
           <% end %>
-          <div class="photo-env-item" style="background-image: url('/assets/illu-data.png');">
+
+          <div class="photo-env-item" style="background-image: url('<%= cl_image_path @startup.pictures.third.photo  %>');">
             <div class="decouvrir-plus">
               <p><strong>+10</strong><br>PHOTOS & VIDÉOS</p>
             </div>
@@ -179,11 +180,11 @@
             <div class="lower-body-item-content lower-left-body">
               <div>
                 <h5>Nos missions ?</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet.</p>
+                <p><%= @startup.mission %></p>
               </div>
               <div>
                 <h5>Notre quotidien</h5>
-                p><%= @startup.overview %></p>
+                <p><%= @startup.overview %></p>
               </div>
             </div>
       </div>
