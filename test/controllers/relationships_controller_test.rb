@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class RelationshipsControllerTest < ActionDispatch::IntegrationTest
-  test "should get show" do
-    get relationships_show_url
+  test "should get create" do
+    get relationships_create_url
     assert_response :success
   end
 

@@ -28,6 +28,9 @@
       </div>
     </div>
       <div class="filter-item hidden-xs hidden-sm">
+        <%= link_to repertoire_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
+          <p><i class="fas fa-infinity"></i> Tous</p>
+        <% end %>
         <%= link_to repertoire_path(tag: "Data") do %>
           <i class="fas fa-search"></i> DATA
         <% end %>
@@ -43,8 +46,11 @@
       </div>
 
     <div class="alert-creation hidden-xs hidden-sm modal-button" data-target= "create_alert">
-      <a href="">Créer une alerte <i class="fas fa-bell"></i></a>
-
+      <% if @headhunter.job_alertes.first.present? %>
+        <p class= "modal-button">mes alertes <i class="fas fa-bell"></i></p>
+      <% else %>
+        <p class= "modal-button">Créer une alerte <i class="far fa-bell"></i></p>
+      <% end %>
     </div>
 
 

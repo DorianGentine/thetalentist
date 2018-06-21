@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'startups/update'
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-
   devise_for :talentists, path: 'talentists'
 
   devise_for :headhunters, path: 'headhunters', controllers: {
@@ -12,13 +8,16 @@ Rails.application.routes.draw do
     registrations: 'headhunters/registrations'
   }
   resources :startups, only: [ :update ]
-  resources :headhunters, only: [:show, :update, :index]
+  resources :headhunters, only: [:show, :update, :index] do
+    patch 'to_validate', :on => :member
+  end
   # show is to display the profil and update to edit it
   # le repertoire est la où on affiche tous les talents
 
   get 'repertoire', to: "headhunters#repertory"
   put 'repertoire', to: "headhunters#update"
 
+  get 'repertoire_startup', to: "talents#repertory"
 
   devise_for :talents, path: 'talents', controllers: {
     sessions: 'talents/sessions',
@@ -26,14 +25,18 @@ Rails.application.routes.draw do
     registrations: 'talents/registrations'
   }
 
-  resources :talents, only: [:show, :update, :index]
+  resources :relationships, only: [ :create ]
+
+  resources :talents, only: [:show, :update, :index] do
+    patch 'to_validate', :on => :member
+  end
+
 
   # resources :relationships, only: [:show, :index, :create] do
   #   resources :talent_message, only: [:create]
   #   resources :headhunter_message, only: [:create]
   # end
 
-  get 'repertoire_startup', to: "talents#repertory"
 
 
   # pour la messagerie

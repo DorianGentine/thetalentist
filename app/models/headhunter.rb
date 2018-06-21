@@ -13,7 +13,6 @@ class Headhunter < ApplicationRecord
 
   has_many :job_alertes, dependent: :destroy
   has_many :jobs, through: :job_alertes
-  has_many :job_alertes, inverse_of: :headhunter
   accepts_nested_attributes_for :job_alertes, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :jobs, allow_destroy: true, reject_if: :all_blank
 

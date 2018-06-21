@@ -2,20 +2,18 @@
   <!-- Modal content -->
   <div class="modal-content">
 
-    <div class="modal-header">
-      <h3>Créez votre alerte</h3>
-
       <span class="close">
         <p>&times;</p>
       </span>
-    </div>
 
+    <h2>Créer ou modifier vos alertes</h2>
+    <p> Séléctionner vos metriers sur lequel vous souhaiteriez être prévenu qu'un profil match avec vos recherches</p>
     <div class="modal-body">
-      <%= simple_form_for :current_user, method: :put do |f| %>
-        <%= f.simple_fields_for :job_alert do |u|%>
-          <%= u.input :job_ids, collection: Job.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 100%;" } %>
-          <%= u.submit "Créer une alerte" %>
-        <% end %>
+      <%= simple_form_for @headhunter do |f| %>
+
+        <%= f.input :job_ids, collection: Job.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 100%;" } %>
+        <%= f.submit "Créer une alerte" %>
+
       <% end %>
     </div>
   </div>

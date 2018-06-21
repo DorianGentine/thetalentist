@@ -1,60 +1,16 @@
 <%= render "shared/navbar" %>
-<%= render 'headhunters/create_alert' %>
 
-<div class="filter">
-
-  <div class="filter-category">
-    <p><i class="fas fa-filter"></i> Filtrer par MÉTIER</p>
-    <div class="navbar-wagon-item hidden-md hidden-lg">
-      <div class="dropdown">
-        <i class="fas fa-angle-down" data-toggle="dropdown"></i>
-        <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-          <li><%= link_to repertoire_path(tag: "Data") do %>
-            <i class="fas fa-search"></i> DATA
-          <% end %></li>
-          <li><%= link_to repertoire_path(tag: "Sales") do %>
-            <i class="far fa-comments"></i> SALES
-          <% end %></li>
-          <li><%= link_to repertoire_path(tag: "Market") do %>
-            <i class="fas fa-tachometer-alt"></i> MARKET
-          <% end %></li>
-          <li><%= link_to repertoire_path(tag: "Product") do %>
-            <i class="fas fa-archive"></i> PRODUCT
-          <% end %></li>
-            <a href="">Créer une alerte <i class="fas fa-bell"></i></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-    <div class="filter-item hidden-xs hidden-sm">
-      <%= link_to repertoire_path(tag: "Data") do %>
-        <i class="fas fa-search"></i> DATA
-      <% end %>
-      <%= link_to repertoire_path(tag: "Sales") do %>
-        <i class="far fa-comments"></i> SALES
-      <% end %>
-      <%= link_to repertoire_path(tag: "Market") do %>
-        <i class="fas fa-tachometer-alt"></i> MARKET
-      <% end %>
-      <%= link_to repertoire_path(tag: "Product") do %>
-        <i class="fas fa-archive"></i> PRODUCT
-      <% end %>
-    </div>
-
-  <div class="alert-creation hidden-xs hidden-sm modal-button" data-target= "create_alert">
-    <a href="">Créer une alerte <i class="fas fa-bell"></i></a>
-
-  </div>
-</div>
 
 <section class="container" id="container-startup">
-
-  <div class="cards-repertory">
-    <% @headhunters.each do |headhunter| %>
-      <%= render 'talents/startup-card', headhunter: headhunter %>
-    <% end %>
-  </div>
+  <% if @headhunters.count > 0 %>
+    <div class="cards-repertory">
+      <% @headhunters.each do |headhunter| %>
+        <%= render 'talents/startup-card', headhunter: headhunter %>
+      <% end %>
+    </div>
+  <% else %>
+    <p>Vous n'avez pas encore de match avec une startup</p>
+  <% end %>
 
 </section>
 

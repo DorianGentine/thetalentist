@@ -4,10 +4,10 @@ class HeadhuntersController < ApplicationController
     @headhunter = current_headhunter
     authorize @headhunter
 
-
+    @relationship = Relationship.new
     @job_alert = JobAlerte.new
 
-    if params[:tag].blank?
+    if params[:tag].blank? || params[:tag] == "Tous"
       talents = Talent.where(:visible => true).order(updated_at: :desc)
       @talents = []
       talents.each do |talent|
@@ -26,7 +26,7 @@ class HeadhuntersController < ApplicationController
         end
       end
     end
-    @titre = "All"
+    @titre = "Tous"
     if params[:tag] == "Data"
       @titre = "DATA"
     elsif params[:tag] == "Sales"
@@ -35,6 +35,8 @@ class HeadhuntersController < ApplicationController
       @titre = "MARKET"
     elsif params[:tag] == "Product"
       @titre = "PRODUCT"
+    elsif params[:tag] == "Tous"
+      @titre = "Tous"
     end
   end
 
@@ -68,13 +70,9 @@ class HeadhuntersController < ApplicationController
 
 
   def show
-
     @headhunter = Headhunter.find(params[:id])
-
     @startup = @headhunter.startup
-
     @startup.pictures.build
-
     authorize @headhunter
 
     # a changer!! TODO
@@ -94,37 +92,38 @@ class HeadhuntersController < ApplicationController
 
   def update
     @headhunter = Headhunter.find(params[:id])
-    @startup = @headhunter.startup
-
-    if params[:commit] == "Accepter" || "Refuser"
-      if params[:commit] == "Accepter"
-        if @headhunter.validated == true
-          validated_action(nil)
-        elsif @headhunter.validated == false
-          validated_action(true)
-        else @headhunter.validated == nil
-          validated_action(true)
-        end
-      else params[:commit] == "Refuser"
-        if @headhunter.validated == false
-          validated_action(nil)
-        elsif @headhunter.validated == true
-          validated_action(false)
-        else @headhunter.validated == nil
-          validated_action(false)
-        end
-      end
-      redirect_to headhunters_path
-    else
-      if @headhunter.update_attributes(startup_params)
+    if @headhunter.update_attributes(startup_params)
+      if params[:headhunter][:job_ids].present?
+        redirect_to repertoire_path
+      else
         redirect_to headhunter_path(@headhunter)
       end
     end
-
     authorize @headhunter
-
   end
 
+  def to_validate
+    @headhunter = Headhunter.find(params[:id])
+    if params[:commit] == "Accepter"
+      if @headhunter.validated == true
+        validated_action(nil)
+      elsif @headhunter.validated == false
+        validated_action(true)
+      else @headhunter.validated == nil
+        validated_action(true)
+      end
+    else params[:commit] == "Refuser"
+      if @headhunter.validated == false
+        validated_action(nil)
+      elsif @headhunter.validated == true
+        validated_action(false)
+      else @headhunter.validated == nil
+        validated_action(false)
+      end
+    end
+    redirect_to headhunters_path
+    authorize @headhunter
+  end
 
   private
 
@@ -137,7 +136,8 @@ class HeadhuntersController < ApplicationController
     params.require(:headhunter).permit(
       startup_attributes: [ :id, :name, :link, :logo, :address, :sector_ids, :btob, :btoc, :validated,
       :average_age, :collaborators, :year_of_creation, :overview ],
-      word: []
+      word: [],
+      job_ids: []
       )
   end
 end

@@ -20,12 +20,11 @@ class TalentsController < ApplicationController
         @talents = Talent.where(:validated => false)
         @titre = "Refuser"
       elsif params[:tag] == "En attende"
+        @titre = "En attente"
         @talents = Talent.where(:validated => nil)
       elsif params[:tag] == "Visible"
-        @titre = "En attente"
         @talents = Talent.where(:visible => true)
         @titre = "Visible"
-        # envoyer un message quand un talent passe visible et le job a une alert
       else params[:tag] == "Invisible"
         @talents = Talent.where(:visible => false)
         @titre = "Invisible"
@@ -35,12 +34,13 @@ class TalentsController < ApplicationController
 
   def repertory
     @talent = current_talent
-    relationships = Relationship.where(talent_id: current_user.id)
+    relationships = Relationship.where(talent_id: current_user.id).where(status: "Accepter")
     @headhunters = []
 
     relationships.each do |relationship|
       @headhunters << Headhunter.find(relationship.headhunter_id)
     end
+
     authorize @talent
   end
 
@@ -59,55 +59,51 @@ class TalentsController < ApplicationController
   end
 
   def update
-    # repertoire
-    if current_headhunter
-      @relationship = Relationship.new
-      @talent = Talent.find(params[:id])
+    @talent = Talent.find(params[:id])
+    @talent.update_attributes(talent_params)
+    redirect_to talent_path(@talent)
+    authorize @talent
+  end
 
-      @relationship = Relationship.create(headhunter_id:@headhunter.id, talent_id:@talent.id, status:"pending")
-      if @relationship.save
-        @headhunter.send_message(@talent, "#{@headhunter.firstname}, souhaite rentrer en contact avec vous", "#{@headhunter.firstname}")
-        flash[:success] = "Relationship was created!"
-        redirect_to repertoire_path
+  def to_validate
+    @talent = Talent.find(params[:id])
+    if params[:commit] == "Accepter"
+      if @talent.validated == true
+        validated_action(nil)
+      elsif @talent.validated == false
+        validated_action(true)
+      else @talent.validated == nil
+        validated_action(true)
       end
-      authorize @headhunter
-
-    elsif current_talentist
-      @talent = Talent.find(params[:id])
-
-      if params[:commit] == "Accepter"
-        if @talent.validated == true
-          validated_action(nil)
-        elsif @talent.validated == false
-          validated_action(true)
-        else @talent.validated == nil
-          validated_action(true)
-        end
-      elsif params[:commit] == "Refuser"
-        if @talent.validated == false
-          validated_action(nil)
-        elsif @talent.validated == true
-          validated_action(false)
-        else @talent.validated == nil
-          validated_action(false)
-        end
-      elsif params[:commit] == "Visible"
-        if @talent.visible == false || @talent.visible == nil
-          visible_action(true)
-        end
-      else params[:commit] == "Invisible"
-        if @talent.visible == true || @talent.visible == nil
-          visible_action(false)
+    elsif params[:commit] == "Refuser"
+      if @talent.validated == false
+        validated_action(nil)
+      elsif @talent.validated == true
+        validated_action(false)
+      else @talent.validated == nil
+        validated_action(false)
+      end
+    elsif params[:commit] == "Visible"
+      if @talent.visible == false || @talent.visible == nil
+        visible_action(true)
+        # envoyer un message quand un talent passe visible et le job a une alert
+        job = @talent.jobs.first.id
+        headhunters = []
+        job_alertes = JobAlerte.where(job_id: job)
+        if job_alertes.count > 0
+          job_alertes.each do |job_alerte|
+            headhunter = Headhunter.find(job_alerte.headhunter_id)
+            HeadhunterMailer.alerte(headhunter).deliver_now
+          end
         end
       end
-      redirect_to talents_path
-      authorize @talent
-    else
-      @talent = Talent.find(params[:id])
-      @talent.update_attributes(talent_params)
-      redirect_to talent_path(@talent)
-      authorize @talent
+    else params[:commit] == "Invisible"
+      if @talent.visible == true || @talent.visible == nil
+        visible_action(false)
+      end
     end
+    redirect_to talents_path
+    authorize @talent
   end
 
 private
