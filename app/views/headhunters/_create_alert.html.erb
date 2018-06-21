@@ -2,13 +2,17 @@
   <!-- Modal content -->
   <div class="modal-content">
 
+    <div class="modal-header">
+      <h3>Créez et modifiez vos alertes</h3>
+
       <span class="close">
         <p>&times;</p>
       </span>
 
-    <h2>Créer ou modifier vos alertes</h2>
-    <p> Séléctionner vos metriers sur lequel vous souhaiteriez être prévenu qu'un profil match avec vos recherches</p>
+    </div>
+
     <div class="modal-body">
+      <p> Séléctionnez vos métiers sur lesquel vous souhaiteriez être prévenu lorsqu'un profil matche avec vos recherches</p>
       <%= simple_form_for @headhunter do |f| %>
 
         <%= f.input :job_ids, collection: Job.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 100%;" } %>
