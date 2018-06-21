@@ -31,6 +31,9 @@ class HeadhunterPolicy < ApplicationPolicy
     # user.is_a?(Talent) && user.is_connected_to?(record) --> créer une méthode is_connected_to?(headhunter)
   end
 
+  def to_validate?
+    true
+  end
 
   def repertory?
     user == record

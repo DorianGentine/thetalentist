@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     registrations: 'headhunters/registrations'
   }
   resources :startups, only: [ :update ]
-  resources :headhunters, only: [:show, :update, :index]
+  resources :headhunters, only: [:show, :update, :index] do
+    patch 'to_validate', :on => :member
+  end
   # show is to display the profil and update to edit it
   # le repertoire est la où on affiche tous les talents
 

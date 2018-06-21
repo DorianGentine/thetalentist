@@ -20,12 +20,11 @@ class TalentsController < ApplicationController
         @talents = Talent.where(:validated => false)
         @titre = "Refuser"
       elsif params[:tag] == "En attende"
+        @titre = "En attente"
         @talents = Talent.where(:validated => nil)
       elsif params[:tag] == "Visible"
-        @titre = "En attente"
         @talents = Talent.where(:visible => true)
         @titre = "Visible"
-        # envoyer un message quand un talent passe visible et le job a une alert
       else params[:tag] == "Invisible"
         @talents = Talent.where(:visible => false)
         @titre = "Invisible"
@@ -87,6 +86,16 @@ class TalentsController < ApplicationController
     elsif params[:commit] == "Visible"
       if @talent.visible == false || @talent.visible == nil
         visible_action(true)
+        # envoyer un message quand un talent passe visible et le job a une alert
+        job = @talent.jobs.first.id
+        headhunters = []
+        job_alertes = JobAlerte.where(job_id: job)
+        if job_alertes.count > 0
+          job_alertes.each do |job_alerte|
+            headhunter = Headhunter.find(job_alerte.headhunter_id)
+            HeadhunterMailer.alerte(headhunter).deliver_now
+          end
+        end
       end
     else params[:commit] == "Invisible"
       if @talent.visible == true || @talent.visible == nil

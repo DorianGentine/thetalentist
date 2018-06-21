@@ -18,7 +18,7 @@
         </div>
 
         <div class="accepeter-talent accepeter-startup">
-          <%= simple_form_for headhunter, method: :put do |f| %>
+          <%= simple_form_for headhunter, url: to_validate_headhunter_path(headhunter) do |f| %>
           <div class="btn-validate">
             <div class="<%= "green_validation" if headhunter.validated == true %>">
               <%= f.submit "Accepter"%>
