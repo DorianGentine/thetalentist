@@ -89,7 +89,7 @@
       <% end %>
       <h4 class="hidden-xs">Notre environnement de travail</h4>
       <div class="photos-environnement">
-        <% if @startup.pictures.first(3).present? %>
+        <% if @startup.pictures.first.photo.present? %>
           <% @startup.pictures.first(2).each do |photo| %>
             <div class="photo-env-item" style="background-image: url('<%= cl_image_path photo.photo  %>')"></div>
           <% end %>
