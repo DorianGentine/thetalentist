@@ -176,11 +176,14 @@
       .btn-validate{
         display: flex;
         justify-content: space-between;
-        div input{
+        div{
           border-radius: 50px;
-          font-size: 14px;
-          color: $green;
-          border-color: $green;
+          input{
+            border-radius: 50px;
+            font-size: 14px;
+            color: $green;
+            border-color: $green;
+          }
         }
         div:last-child {
           input {

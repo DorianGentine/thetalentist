@@ -57,7 +57,7 @@
           <p> <%= @participant.experiences.last.position.capitalize %> </p>
         <% else %>
           <% if @participant.experiences.present? && @participant.experiences.last.position.present? %>
-            <%= @participant.experiences.last.position %>
+            <h2><%= @participant.experiences.last.position.capitalize %></h2>
           <% else %>
             <h2>Talent - Position à remplire</h2>
           <% end %>
