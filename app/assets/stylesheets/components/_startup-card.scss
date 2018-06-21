@@ -45,9 +45,11 @@
   margin: 40px 0;
 }
 
-.green_validation {
+.green_validation input {
   background-color: $green;
+  color: white !important;
 }
-.red_validation {
+.red_validation input {
   background-color: $red;
+  color: white !important;
 }

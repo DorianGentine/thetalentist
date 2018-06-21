@@ -34,6 +34,9 @@
     a{
       color: $black;
       padding: 0 20px;
+      p{
+        margin: 0;
+      }
     }
     a:active{
       color: $green;
@@ -43,8 +46,12 @@
     position: absolute;
     right: 33px;
     text-align: right;
-    a{
+    margin-top: 5px;
+    p{
       color: $red;
+    }
+    p:hover{
+      cursor: pointer;
     }
   }
 }
