@@ -70,7 +70,7 @@
           </div>
         </div>
         <div class="upper-right-body">
-          <p class="talent-metier"><i class="fas fa-search"></i> <%= talent.jobs.first.title.upcase %></p>
+          <p class="talent-metier"><i class="fas fa-search"></i> <%= talent.jobs.first.present? ? talent.jobs.first.title.upcase : "Full" %></p>
           <div class="illu-card illu-modal"></div>
         </div>
       </div>
