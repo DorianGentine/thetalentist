@@ -19,7 +19,6 @@ class MessagesController < ApplicationController
       TalentMailer.new_message(@receipt, @participant, current_user).deliver_now
       redirect_to conversation_path(@receipt.conversation)
     else
-      raise
       redirect_to conversation_path(@conversation)
     end
     authorize @conversation
