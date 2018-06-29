@@ -8,9 +8,6 @@
 <div class="container-show">
 
   <div class="talent-left">
-    <% if current_user.is_a?(Talent) %>
-      <p data-target= "modal_profil" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
-    <% end %>
 
     <% if @talent.photo.present? %>
       <div class="photo-profil" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
@@ -28,6 +25,9 @@
     <% end %>
 
     <div class="talent-name">
+      <% if current_user.is_a?(Talent) %>
+        <p data-target= "modal_profil" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
+      <% end %>
       <h1><%= @talent.firstname %> <%= @talent.name %></h1>
       <h2 class="talent-post"><%= @talent.experiences.last.position %></h2>
     </div>
@@ -66,7 +66,7 @@
         </div>
       </div>
       <div class="lower-right-body-item">
-        <h4><i class="fas fa-search-plus"></i> MES HOBBIES</h4>
+        <h4><i class="fas fa-search-plus"></i> LE PETIT +</h4>
         <div class="talent-competences">
           <% @talent.talent_hobbies.each do |hobby| %>
             <p><%= hobby.hobby.title %></p>
@@ -76,9 +76,6 @@
     </div>
 
     <!-- DORIAN TODO -->
-    <div class="credentials">
-      <p data-target= "modal_credentials"><i class="far fa-star"></i> Voir mes recommandations</p>
-    </div>
   </div>
 
 
@@ -104,7 +101,7 @@
           </div>
           <div class="recherche-item recherche-item-right">
             <h5><%= @talent.next_aventures.first.remuneration %></h5>
-            <p>SALAIRE (Annuel)</p>
+            <p>SALAIRE (k€ brut annuel)</p>
           </div>
           <div class="recherche-item">
             <% @sectors.each do |sector| %>
