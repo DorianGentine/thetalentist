@@ -38,12 +38,7 @@
     <div class="talent-info">
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
-        <p><%= @startup.address.present? ? @startup.address : "Ajouter votre localisation" %></p>
-      </div>
-      <div class="talent-info-item card-dispsition">
-        <p class="icon icon-info"><i class="far fa-compass"></i></p>
-        <!-- <p>Marketing (TODO)</p> -->
-        <p><%= @startup.sectors.last.present? ? @startup.sectors.last.title : "Ajouter votre localisation" %></p>
+        <p><%= @startup.address.present? ? @startup.address : "Ajouter votre adresse" %></p>
       </div>
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>

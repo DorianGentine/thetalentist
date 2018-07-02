@@ -106,6 +106,7 @@
     position: relative;
     margin: 0 0 140px 155px;
     width: calc(100vw - 155px);
+    height: 95vh;
     padding: 120px 50px 80px;
     display: flex;
     flex-direction: column;
@@ -127,21 +128,38 @@
       z-index: 1;
       .btn-inscription{
         width: 152px;
+        height: 160px;
         margin: 0 50px 0 0;
+        p{
+          margin: 0;
+        }
       }
     }
     .image-habillage{
       position: absolute;
       top: 120px;
       right: 0;
-      height: 800px;
+      height: calc(100vh - 120px);
       width: 58.5vw;
       overflow: hidden;
       img{
-        height: 127%;
+        height: calc(100vh - 120px);
         position: absolute;
         top: 0;
         right: 0;
+      }
+      .desc-service{
+        position: absolute;
+        bottom: 10vh;
+        left: 50%;
+        transform: translate(-50%);
+        font-size: 20px;
+        width: 80%;
+        color: #191B26;
+        text-align: center;
+        margin: 0;
+        background-color: rgba(200, 200, 200, 0.5);
+        border-radius: 5px;
       }
     }
 
@@ -169,12 +187,6 @@
       color: $green;
       text-transform: uppercase;
       margin-bottom: 30px;
-    }
-    .desc-service{
-      font-size: 28px;
-      color: #191B26;
-      text-align: center;
-      margin-bottom: 100px;
     }
     .service-steps{
       display: flex;
@@ -400,6 +412,34 @@
         font-weight: 600;
         margin: 0 20px;
         flex-grow: 1;
+      }
+    }
+    .ligne-client{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: rgba(3, 13, 89, 0.05);
+      border-radius: 5px;
+      padding: 20px 0;
+      margin-bottom: 80px;
+      .bloc-client{
+        width: 25%;
+        padding: 40px;
+        min-width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .client{
+          height: 200px;
+          width: 200px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: white;
+          .logo{
+            width: 180px;
+          }
+        }
       }
     }
   }
