@@ -86,17 +86,30 @@
     top: 35px;
     right: 70px;
     z-index: 5;
+    display: flex;
+    a:first-child{
+      margin-right: 20px;
+      p{
+        color: $green;
+      }
+    }
     p{
       font-size: 16px;
       font-weight: 600;
       color: $violet;
+      transition: 0.15s;
     }
   }
-  .connectez-vous:hover{
+  .connectez-vous a:first-child:hover{
+    text-decoration: none;
+    p{
+      color: $violet;
+    }
+  }
+  .connectez-vous a:last-child:hover{
     text-decoration: none;
     p{
       color: $green;
-      transition: 0.15s;
     }
   }
 
@@ -116,19 +129,24 @@
       color: #191B26;
       z-index: 1;
       margin-top: 75px;
+      position: absolute;
+      left: -27.5vw;
       strong{
         color: $green;
       }
     }
     .inscription-items{
       margin: 62.5px 0 0;
-      width: 450px;
+      width: 28vw;
       display: inline-flex;
       justify-content: flex-start;
       z-index: 1;
+      position: absolute;
+      left: -27.5vw;
+      top: 26vw;
       .btn-inscription{
-        width: 152px;
-        height: 160px;
+        width: 12vw;
+        height: 12.5vw;
         margin: 0 50px 0 0;
         p{
           margin: 0;
@@ -141,7 +159,13 @@
       right: 0;
       height: calc(100vh - 120px);
       width: 58.5vw;
-      overflow: hidden;
+      .compartiment-image{
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        position: absolute;
+      }
       img{
         height: calc(100vh - 120px);
         position: absolute;
@@ -224,7 +248,6 @@
       width: 365px;
     }
     .inscription-items{
-      width: calc(100% - 837px);
       justify-content: center;
     }
   }
@@ -450,9 +473,8 @@
     // left: 0;
     // z-index: 10;
     // -webkit-transform: translateZ(0);
-    width: 100vw;
-    margin: 40px 0 0 -20px;
-    display: flex !important;
+    margin: 40px 0 0;
+    display: flex;
     justify-content: center;
     .btn-connexion{
       // position: absolute;
@@ -472,23 +494,11 @@
       width: unset;
       padding: 120px 20px 80px;
       height: 100vh;
-      h1{
-        font-size: 7vw;
-      }
       .inscription-items{
-        width: unset;
-        justify-content: center;
         margin-top: 15vh;
-        .btn-inscription{
-          margin: 0 5vw;
-        }
       }
       .image-habillage{
-        height: 200px;
         width: 61vw;
-        img{
-          width: 100%;
-        }
       }
       .fleche-bas{
         left: 50%;

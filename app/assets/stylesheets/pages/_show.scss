@@ -97,6 +97,10 @@
         font-size: 14px;
         text-align: justify;
       }
+      .text-right-up-item{
+        height: 214px;
+        overflow: auto;
+      }
     }
     .recherche-item-right{
       align-self: flex-end;
@@ -174,14 +178,14 @@
 }
 .recherche-item{
   h5{
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 600;
     color: $green;
     text-transform: uppercase;
     margin: 0;
   }
   p{
-    font-size: 14px;
+    font-size: 12px !important;
     font-weight: 600;
     color: $black;
     text-transform: uppercase;
