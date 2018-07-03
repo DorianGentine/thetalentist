@@ -1,6 +1,6 @@
 <div class="new_landing" id="talent-landing">
 
-  <div class="top-menu">
+  <div class="top-menu hidden-xs">
     <div class="little-square">
       <hr class="first">
       <hr class="second">
@@ -12,34 +12,44 @@
 
   <!-- <img class="new-landing-logo-talentist" src="/assets/Logo The talentist-01.png" alt="logo The talentist">  -->
   <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
-
-  <%= link_to new_talent_session_path, { :class=>"connectez-vous hidden-xs" } do  %>
-    <p>SE CONNECTER</p>
-  <% end %>
+  <div class="connectez-vous">
+    <%= link_to new_talent_registration_path, { :class=>"hidden-xs" } do  %>
+      <p>S'INSCRIRE</p>
+    <% end %>
+    <%= link_to new_talent_session_path, { :class=>"hidden-xs" } do  %>
+      <p>SE CONNECTER</p>
+    <% end %>
+  </div>
 
   <div class="landing-top">
 
-    <h1>Je suis un <strong>talent</strong></h1>
 
-    <p class="top-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
 
-    <div class="actions-xs hidden visible-xs">
-      <div class="btn-connexion">
-        <%= link_to("S'inscrire", new_talent_registration_path)  %>
-      </div>
-      <div class="blue-connexion btn-connexion">
-        <%= link_to("Se connecter", new_talent_session_path) %>
-      </div>
-    </div>
-    <div class="inscription-items hidden-xs hidden-sm">
-      <div class="btn-connexion">
-        <%= link_to("S'inscrire", new_talent_registration_path)  %>
-      </div>
-    </div>
 
     <div class="image-habillage">
-      <img src="/assets/rawpixel-617400-unsplash.jpg" alt="image de fond">
-      <%= image_tag "rawpixel-617400-unsplash.jpg" %>
+
+      <h1>Je suis un <strong>talent</strong></h1>
+
+      <div class="compartiment-image">
+        <%= image_tag "rawpixel-617400-unsplash.jpg" %>
+      </div>
+
+      <div class="actions-xs hidden visible-xs">
+        <div class="btn-connexion">
+          <%= link_to("S'inscrire", new_talent_registration_path)  %>
+        </div>
+        <div class="blue-connexion btn-connexion">
+          <%= link_to("Se connecter", new_talent_session_path) %>
+        </div>
+      </div>
+      <div class="inscription-items hidden-xs hidden-sm">
+        <div class="btn-connexion">
+          <%= link_to("S'inscrire", new_talent_registration_path)  %>
+        </div>
+      </div>
+
+      <p class="desc-service">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+
     </div>
 
     <i class="fas fa-angle-double-down fleche-bas"></i>
