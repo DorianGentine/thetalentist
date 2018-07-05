@@ -58,6 +58,6 @@ gem "geocoder"
 gem 'mailboxer'
 
 # # that for admin part
-# gem 'activeadmin', github: 'activeadmin/activeadmin'
-# gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+gem 'activeadmin', github: 'activeadmin/activeadmin'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 

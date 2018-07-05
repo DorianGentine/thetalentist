@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  ActiveAdmin.routes(self)
   devise_for :talentists, path: 'talentists'
 
   devise_for :headhunters, path: 'headhunters', controllers: {

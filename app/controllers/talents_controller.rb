@@ -59,10 +59,19 @@ class TalentsController < ApplicationController
   end
 
   def update
-    @talent = Talent.find(params[:id])
-    @talent.update_attributes(talent_params)
-    redirect_to talent_path(@talent)
-    authorize @talent
+      if talent_params["talent_formations_attributes"]
+        talent_params["talent_formations_attributes"].each do |talent_formation|
+          if talent_formation[1]["id"]
+            t = TalentFormation.find(talent_formation[1]["id"].to_i)
+            t.update(title: talent_formation[1]["title"], year: talent_formation[1]["year"], formation_id: talent_formation[1]["formation_id"].to_i)
+          end
+        end
+      end
+
+      @talent = Talent.find(params[:id])
+      @talent.update_attributes(talent_params)
+      redirect_to talent_path(@talent)
+      authorize @talent
   end
 
   def to_validate
