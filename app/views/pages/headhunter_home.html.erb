@@ -17,28 +17,29 @@
 
     <div class="image-habillage">
 
-      <h1 style="font-size: 5.3vw">Je suis une <strong>start-up</strong></h1>
+      <div class="position-top">
+        <h1 style="font-size: 5.3vw">Je suis une <strong>start-up</strong></h1>
+
+        <p class="top-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+
+        <div class="actions-xs hidden visible-xs">
+          <div class="btn-connexion">
+            <%= link_to("S'inscrire", new_headhunter_registration_path)  %>
+          </div>
+          <div class="blue-connexion btn-connexion">
+            <%= link_to("Se connecter", new_headhunter_session_path) %>
+          </div>
+        </div>
+        <div class="inscription-items hidden-xs hidden-sm">
+          <div class="btn-connexion">
+            <%= link_to("S'inscrire", new_headhunter_registration_path)  %>
+          </div>
+        </div>
+      </div>
 
       <div class="compartiment-image">
         <%= image_tag "rawpixel-617400-unsplash.jpg" %>
       </div>
-
-      <div class="actions-xs hidden visible-xs">
-        <div class="btn-connexion">
-          <%= link_to("S'inscrire", new_headhunter_registration_path)  %>
-        </div>
-        <div class="blue-connexion btn-connexion">
-          <%= link_to("Se connecter", new_headhunter_session_path) %>
-        </div>
-      </div>
-      <div class="inscription-items hidden-xs hidden-sm">
-        <div class="btn-connexion">
-          <%= link_to("S'inscrire", new_headhunter_registration_path)  %>
-        </div>
-      </div>
-
-      <p class="desc-service">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-
 
     </div>
 
