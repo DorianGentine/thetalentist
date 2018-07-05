@@ -1,6 +1,6 @@
 // Specific CSS for your home-page
 .new_landing{
-  width: 100vw;
+  position: relative;
   .top-menu{
     position: absolute;
     display: inline-flex;
@@ -116,34 +116,33 @@
   .landing-top{
     background-color: rgba(3, 13, 89, 0.05);
     border-radius: 5px;
-    position: relative;
-    margin: 0 0 140px 155px;
+    position: absolute;
+    right: 0;
+    margin: 0 0 140px;
     width: calc(100vw - 155px);
     height: 95vh;
-    padding: 120px 50px 80px;
-    display: flex;
-    flex-direction: column;
+    .position-top{
+      position: absolute;
+      left: -27.5vw;
+      z-index: 1;
+      height: calc(93vh - 120px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
     h1{
       font-size: 5.8vw;
       font-weight: 600;
       color: #191B26;
-      z-index: 1;
-      margin-top: 75px;
-      position: absolute;
-      left: -27.5vw;
+      margin: 0;
       strong{
         color: $green;
       }
     }
     .inscription-items{
-      margin: 62.5px 0 0;
       width: 28vw;
       display: inline-flex;
       justify-content: flex-start;
-      z-index: 1;
-      position: absolute;
-      left: -27.5vw;
-      top: 26vw;
       .btn-inscription{
         width: 12vw;
         height: 12.5vw;
@@ -167,7 +166,9 @@
         position: absolute;
       }
       img{
-        height: calc(100vh - 120px);
+        min-height: calc(100vh - 120px);
+        width: 100%;
+        object-fit: cover;
         position: absolute;
         top: 0;
         right: 0;
@@ -203,7 +204,7 @@
   }
 
   .landing-main{
-    padding: 50px 150px;
+    padding: calc(100vh + 150px) 80px 0;
     h2{
       text-align: center;
       font-size: 22px;
@@ -240,19 +241,16 @@
 
 #talent-landing{
   .landing-top{
-    h1{
-      margin-bottom: 70px;
-    }
     .top-text{
       font-size: 20px;
-      width: 365px;
+      width: 26vw;
+      text-align: justify;
     }
     .inscription-items{
       justify-content: center;
     }
   }
   .landing-main{
-    padding: 150px 80px 0;
     h2{
       text-align: left;
       margin-bottom: 60px;
