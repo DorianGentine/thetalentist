@@ -7,7 +7,9 @@ class HeadhuntersController < ApplicationController
     @relationship = Relationship.new
     @job_alert = JobAlerte.new
 
-    if params[:tag].blank? || params[:tag] == "Tous"
+    @jobs = Job.all
+
+    if params[:jobs].blank? || params[:jobs] == "Tous"
       @talents = Talent.where(:visible => true).order(updated_at: :desc)
       # @talents = []
       # talents.each do |talent|
@@ -18,7 +20,10 @@ class HeadhuntersController < ApplicationController
     else
       @talents = []
       # les talents dont le job est : params[:tag]
-      talent_jobs = TalentJob.joins(:job, :talent).where(:jobs => {:title => params[:tag]}, :talents => {:visible => true})
+      talent_jobs = TalentJob.joins(:job, :talent).where(:jobs => {:title => params[:jobs]}, :talents => {:visible => true})
+      # talent_jobs = TalentJob.joins(:job, :talent).where(:jobs => ["title like ?", "%#{params[:search]}%"], :talents => {:visible => true})
+      # Book.where(["title like ?", "%#{params[:search]}%"])
+
       talent_jobs.each do |job|
         talent = Talent.find(job.talent_id)
         # if !@headhunter.is_connected_to?(talent)
@@ -26,17 +31,21 @@ class HeadhuntersController < ApplicationController
         # end
       end
     end
-    @titre = "Tous"
-    if params[:tag] == "Data"
+    if params[:jobs] == "Data"
       @titre = "DATA"
-    elsif params[:tag] == "Sales"
+    elsif params[:jobs] == "Sales"
       @titre = "SALES"
-    elsif params[:tag] == "Market"
+    elsif params[:jobs] == "Market"
       @titre = "MARKET"
-    elsif params[:tag] == "Product"
+    elsif params[:jobs] == "Product"
       @titre = "PRODUCT"
-    elsif params[:tag] == "Tous"
+    else
       @titre = "Tous"
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

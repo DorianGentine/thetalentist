@@ -31,17 +31,23 @@
   .filter-item{
     display: flex;
     justify-content: space-around;
-    a{
+    label{
       color: $black;
       padding: 0 20px;
       p{
         margin: 0;
       }
     }
-    a:active{
+    .category-choice:hover{
+      color: $green;
+      cursor: pointer;
+    }
+    .selected{
       color: $green;
     }
   }
+
+
   .alert-creation{
     position: absolute;
     right: 33px;
