@@ -15,7 +15,7 @@ private
     params.require(:startup).permit(
       :id, :name, :link, :logo, :address, :sector_ids, :btob, :btoc, :validated,
       :average_age, :collaborators, :year_of_creation, :overview,
-      :linkedin, :facebook, :mission, word_ids: []
+      :linkedin, :facebook, :mission, { pictures:[] }, word_ids: []
       )
   end
 end
