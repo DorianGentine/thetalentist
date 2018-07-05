@@ -28,20 +28,17 @@
       </div>
     </div>
       <div class="filter-item hidden-xs hidden-sm">
-        <%= link_to repertoire_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
-          <p><i class="fas fa-infinity"></i> Tous</p>
-        <% end %>
-        <%= link_to repertoire_path(tag: "Data") do %>
-          <i class="fas fa-search"></i> OPERATIONS
-        <% end %>
-        <%= link_to repertoire_path(tag: "Sales") do %>
-          <i class="far fa-comments"></i> SALES
-        <% end %>
-        <%= link_to repertoire_path(tag: "Market") do %>
-          <i class="fas fa-tachometer-alt"></i> MARKETING
-        <% end %>
-        <%= link_to repertoire_path(tag: "Product") do %>
-          <i class="fas fa-archive"></i> PRODUCT
+
+        <%= form_tag repertoire_path, :method => 'get', remote: true do %>
+            <input type="checkbox" name="jobs[]" id="data" value="Data" class="hidden">
+            <label class= "category-choice" for="data"><i class="fas fa-search"></i> OPERATIONS</label>
+            <input type="checkbox" name="jobs[]" id="sales" value="Sales" class="hidden">
+            <label class= "category-choice" for="sales"><i class="far fa-comments"></i> SALES</label>
+            <input type="checkbox" name="jobs[]" id="product" value="Product" class="hidden">
+            <label class= "category-choice" for="product"><i class="fas fa-archive"></i> PRODUCT</label>
+            <input type="checkbox" name="jobs[]" id="market" value="Market" class="hidden">
+            <label class= "category-choice" for="market"><i class="fas fa-tachometer-alt"></i> MARKETING</label>
+          <input type="submit" class="submit-filtre hidden" name="commit" value="Search" data-disable-with="Search">
         <% end %>
       </div>
 
@@ -56,27 +53,15 @@
 
 </div>
 
-<section class="container">
 
-  <!-- Division pour résultats de recherche -->
-  <div class="search-results">
-    <p><strong><%= @talents.count %> Profils</strong> correspondent à votre recherche '<em><%= @titre %></em>'</p>
-  </div>
 
-  <!-- Répertoire des talents -->
-  <div class="cards-repertory">
 
-    <% @talents.each do |talent| %>
-      <%= render 'talent-card', talent: talent %>
-      <%= render 'shared/modal', talent: talent %>
-    <% end %>
+<div id="all-talents">
 
-  </div>
+    <%= render 'section_talents'%>
 
-  <!-- Choix des pages -->
-<!--   <div class="page-choice">
-    <p>Préc. <strong>1</strong> 2 3 Suiv.</p>
-  </div> -->
-</section>
+</div>
+
+
 
 <%= render "shared/footer" %>

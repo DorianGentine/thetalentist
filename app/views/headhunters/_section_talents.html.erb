@@ -1,0 +1,26 @@
+<section class="container">
+
+  <!-- Division pour résultats de recherche -->
+  <div class="search-results">
+    <% if @talents.count > 1 %>
+      <p><strong><%= @talents.count %> Profils</strong> correspondent à votre recherche</p>
+    <% else %>
+      <p><strong><%= @talents.count %> Profil</strong> correspondent à votre recherche</p>
+    <% end %>
+  </div>
+
+  <!-- Répertoire des talents -->
+  <div class="cards-repertory">
+
+    <% @talents.each do |talent| %>
+      <%= render 'talent-card', talent: talent %>
+      <%= render 'shared/modal', talent: talent %>
+    <% end %>
+
+  </div>
+
+  <!-- Choix des pages -->
+<!--   <div class="page-choice">
+    <p>Préc. <strong>1</strong> 2 3 Suiv.</p>
+  </div> -->
+</section>
