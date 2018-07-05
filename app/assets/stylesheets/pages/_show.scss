@@ -101,6 +101,9 @@
         height: 214px;
         overflow: auto;
       }
+      .text-right-up-item::-webkit-scrollbar{
+        display: none;
+      }
     }
     .recherche-item-right{
       align-self: flex-end;
@@ -125,6 +128,9 @@
       display: block !important;
       overflow: auto;
       height: 200px;
+    }
+    .talent-experiences::-webkit-scrollbar{
+      display: none;
     }
     .placement-point-barre{
       margin-bottom: 30px;
