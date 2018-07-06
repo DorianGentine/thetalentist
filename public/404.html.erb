@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
+  <title>The page you were looking for doesn't exist (404)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-</head>
-
-<<body>
+<body>
   <!-- This file lives in public/404.html -->
 
   <div class="error-page">
-    <img src="assets/homme-bureau.png" alt="homme au bureau">
+    <%= image_tag "homme-bureau.png" %>
+    <!-- <img src="assets/homme-bureau.png" alt="homme au bureau"> -->
     <div class="double-text">
-      <h1 class="double-text-item">500</h1>
-      <p class="error-description">Desole, quelque chose c'est mal passe</p>
+      <h1 class="double-text-item">404</h1>
+      <p class="error-description">La page que vous cherchez n'existe pas</p>
     </div>
 
   </div>
@@ -22,7 +21,6 @@
 </body>
 </head>
 </html>
-
 
 <style>
 
