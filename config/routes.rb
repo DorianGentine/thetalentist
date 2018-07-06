@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  match "/404", :to => "http_errors#error_404", :via => :all
+  match "/422", :to => "http_errors#error_422", :via => :all
+  match "/500", :to => "http_errors#error_500", :via => :all
+
   ActiveAdmin.routes(self)
   devise_for :talentists, path: 'talentists'
 
