@@ -1,2 +1,48 @@
-<h1>HttpErrors#error_422</h1>
-<p>Find me in app/views/http_errors/error_422.html.erb</p>
+
+<div class="error-page">
+  <%= image_tag 'homme-bureau.png' %>
+  <!-- <img src="assets/homme-bureau.png" alt="homme au bureau"> -->
+   <div class="double-text">
+      <h1 class="double-text-item">422</h1>
+      <br>
+      <p class="error-description">Desole, <%= current_user.present? && current_user.firstname.present? ? current_user.firstname.capitalize : "" %> quelque chose c'est mal passe</p>
+     </div>
+   </div>
+
+  <% if current_user.is_a?(Talent) %>
+    <%= link_to("Mon profil", talent_path(current_talent))  %>
+  <% elsif current_user.is_a?(Headhunter) %>
+    <%= link_to("Mon profil", headhunter_path(current_headhunter))  %>
+  <% elsif current_user.is_a?(Talentist) %>
+    <%= link_to("Mon profil", talentist_path(current_talentist))  %>
+  <% else %>
+    <%= link_to("Page d'accueil", root_path)  %>
+  <% end %>
+
+<style>
+
+ @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Raleway:400,100,300,700,500");
+
+  .error-page{
+    text-align: center;
+    position: relative;
+  }
+  .double-text{
+    position: absolute;
+    top: -50px;
+    left: 50%;
+  }
+  .double-text-item{
+    font-family: "Avenir";
+    font-size: 250px;
+    margin: 0;
+    color: #000748;
+    text-shadow: -5px -5px 0 #4ECCA3;
+  }
+  .error-description{
+    font-family: "Avenir";
+    margin: -80px 0 0;
+    font-size: 23px;
+  }
+
+</style>
