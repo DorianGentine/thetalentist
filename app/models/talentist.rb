@@ -11,6 +11,8 @@ class Talentist < ApplicationRecord
   # for mailboxer
   acts_as_messageable
 
+  mount_uploader :photo, PhotoUploader
+
   def notif_of_unread
     conversations = self.mailbox.conversations
     @unread_conversations = []
