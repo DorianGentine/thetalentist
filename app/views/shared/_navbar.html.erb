@@ -88,6 +88,9 @@
         </div>
       </div>
     <% elsif talentist_signed_in? && current_talentist %>
+      <% if current_talentist.admin %>
+        <%= link_to "ADMIN", admin_root_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <% end %>
 
       <%= link_to "START-UP", headhunters_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
@@ -102,7 +105,7 @@
       <div class="navbar-wagon-item">
         <div class="dropdown">
           <% if current_talentist.photo.present? %>
-            <%= cl_image_tag current_talent.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+            <%= cl_image_tag current_talentist.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <% else %>
             <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
               <div class="initiale">
