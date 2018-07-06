@@ -19,10 +19,7 @@ class HeadhuntersController < ApplicationController
       # end
     else
       @talents = []
-      # les talents dont le job est : params[:tag]
       talent_jobs = TalentJob.joins(:job, :talent).where(:jobs => {:title => params[:jobs]}, :talents => {:visible => true})
-      # talent_jobs = TalentJob.joins(:job, :talent).where(:jobs => ["title like ?", "%#{params[:search]}%"], :talents => {:visible => true})
-      # Book.where(["title like ?", "%#{params[:search]}%"])
 
       talent_jobs.each do |job|
         talent = Talent.find(job.talent_id)
@@ -31,22 +28,11 @@ class HeadhuntersController < ApplicationController
         # end
       end
     end
-    if params[:jobs] == "Data"
-      @titre = "DATA"
-    elsif params[:jobs] == "Sales"
-      @titre = "SALES"
-    elsif params[:jobs] == "Market"
-      @titre = "MARKET"
-    elsif params[:jobs] == "Product"
-      @titre = "PRODUCT"
-    else
-      @titre = "Tous"
-    end
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end
   end
 
   def index
