@@ -1,13 +1,6 @@
 <div class="new_landing" id="talent-landing">
 
-  <div class="top-menu hidden-xs">
-    <div class="little-square">
-      <hr class="first">
-      <hr class="second">
-      <hr class="third">
-    </div>
-    <h4 class="titre-menu">MENU</h4>
-  </div>
+  <%= render "shared/top_menu" %>
 
 
   <!-- <img class="new-landing-logo-talentist" src="/assets/Logo The talentist-01.png" alt="logo The talentist">  -->
@@ -51,7 +44,7 @@
 
 
       <div class="compartiment-image">
-        <%= image_tag "rawpixel-617400-unsplash.jpg" %>
+        <%= image_tag "olu-eletu-134758-unsplash.jpg" %>
       </div>
 
     </div>
@@ -66,27 +59,24 @@
       <h2>Créez vos propres opportunités</h2>
       <div class="opportunites">
         <div class="opportunite">
-          <i class="fas fa-users"></i>
-          <h5>Accompagnement</h5>
+          <h5>Accompagnement<br>Personnalisé</h5>
           <p>Pour mieux te connaître, viens nous rencontrer.</p>
         </div>
         <div class="opportunite">
-          <i class="fas fa-bolt"></i>
-          <h5>Efficace</h5>
+          <h5>Visibilité<br>immédiate</h5>
           <p>Rends-toi visible auprès des start-ups les plus prometteuses.</p>
         </div>
         <div class="opportunite">
-          <i class="far fa-comments"></i>
-          <h5>Communauté</h5>
+          <h5>Créer une<br>communauté</h5>
           <p>Les plus belles rencontres font les plus belles histoires.</p>
         </div>
         <div class="opportunite">
-          <i class="far fa-flag"></i>
-          <h5>Nos métiers</h5>
+          <h5>Métiers<br>spécialisés</h5>
           <p>Le digital t’intéresse ? Marketing, Produit, Sales, Bizdev et Opérations sont nos spécialités.</p>
         </div>
       </div>
     </div>
+
 
     <div class="banniere-inscription hidden-xs" style="position: relative;">
       <p>Lorem ipsum dolor sit amet, consectetur</p>
@@ -97,46 +87,50 @@
         <%= link_to("Se connecter", new_talent_session_path) %>
       </div>
 
-      <div class="citation-Wilde">
+      <!-- <div class="citation-Wilde">
         <i class="fas fa-quote-left"></i>
         <div class="cit-OW">
           <p class="iladit">Soyez vous-<br>même,<br> les autres<br> sont déja<br> pris.</p>
           <p class="auteur">Oscar WILDE</p>
         </div>
-      </div>
+      </div> -->
     </div>
 
-    <div class="nos-chiffres">
-      <h2>Nos chiffres</h2>
-      <div class="chiffres">
-        <div class="chiffres-item">
-          <p class="chiffre">80</p>
-          <p class="desc-chiffre">Start-up<br>inscrites</p>
-        </div>
-        <div class="chiffres-item">
-          <p class="chiffre">24<em>H</em></p>
-          <p class="desc-chiffre">Pour faire<br>un retour</p>
-        </div>
-        <div class="chiffres-item">
-          <p class="chiffre">75<em>%</em></p>
-          <p class="desc-chiffre">sont des<br>anciens</p>
+    <div class="grid-chiffres-destine">
+      <div class="nos-chiffres">
+        <h2>Nos chiffres</h2>
+        <div class="chiffres">
+          <div class="chiffres-item">
+            <p class="chiffre">80</p>
+            <p class="desc-chiffre">Start-up<br>inscrites</p>
+          </div>
+          <div class="chiffres-item">
+            <p class="chiffre">24<em>H</em></p>
+            <p class="desc-chiffre">Pour faire<br>un retour</p>
+          </div>
+          <div class="chiffres-item">
+            <p class="chiffre">75<em>%</em></p>
+            <p class="desc-chiffre">sont des<br>anciens</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="destine">
-      <h2>À qui cela est destiné</h2>
-      <div class="opportunites">
-        <div class="opportunite">
-          <p><em>Motivé et ambitieux,</em> tu souhaites avoir de l’impact et faire bouger les lignes.</p>
-        </div>
-        <div class="opportunite">
-          <p><em>Think out of the box !</em> Ta proactivité te permet de dépasser tes objectifs.</p>
-        </div>
-        <div class="opportunite">
-          <p>Un projet est avant tout une aventure. <em>Ton esprit d’équipe</em> fait la différence !</p>
-        </div>
-        <div class="opportunite">
-          <p>Construire, bâtir & innover ! <em>L’entrepreneuriat est ta passion ?</em> Trouve ton prochain challenge!</p>
+      <img src="" class="hidden-xs">
+      <img src="" class="hidden-xs">
+      <div class="destine">
+        <h2>À qui cela est destiné</h2>
+        <div class="grid-container">
+          <div class="grid-item">
+            <p><em>Motivé et ambitieux,</em> tu souhaites avoir de l’impact et faire bouger les lignes.</p>
+          </div>
+          <div class="grid-item">
+            <p><em>Think out of the box !</em> Ta proactivité te permet de dépasser tes objectifs.</p>
+          </div>
+          <div class="grid-item">
+            <p>Un projet est avant tout une aventure. <em>Ton esprit d’équipe</em> fait la différence !</p>
+          </div>
+          <div class="grid-item">
+            <p>Construire, bâtir & innover ! <em>L’entrepreneuriat est ta passion ?</em> Trouve ton prochain challenge!</p>
+          </div>
         </div>
       </div>
     </div>
@@ -177,7 +171,7 @@
       </div>
     </div>
 
-    <div class="destine">
+    <div>
       <h2>Ils nous ont fait confiance</h2>
       <div class="ligne-client">
         <div class="bloc-client">

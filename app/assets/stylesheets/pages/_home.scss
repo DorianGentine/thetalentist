@@ -1,64 +1,6 @@
 // Specific CSS for your home-page
 .new_landing{
   position: relative;
-  .top-menu{
-    position: absolute;
-    display: inline-flex;
-    align-items: center;
-    top: 30px;
-    left: 30px;
-    transition: 0.5s;
-    .little-square{
-      height: 36px;
-      width: 36px;
-      background-color: $violet;
-      border-radius: 3px;
-      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
-      position: relative;
-      transition: 0.5s;
-      hr{
-        margin: 0;
-        height: 3px;
-        background-color: white;
-        border-top: 0px;
-        border-radius: 3px;
-        position: absolute;
-        left: 6px;
-        transition: 0.5s;
-      }
-      .first{
-        top: 8px;
-        width: 11.5px;
-      }
-      .second{
-        top: 16px;
-        width: 25px;
-      }
-      .third{
-        top: 24px;
-        width: 18.5px;
-      }
-    }
-    .titre-menu{
-      color: $violet;
-      font-size: 16px;
-      font-weight: 600;
-      margin: 0 20px;
-      transition: 0.5s;
-    }
-  }
-  .top-menu:hover{
-    .little-square{
-      background-color: $green;
-      cursor: pointer;
-      hr{
-        width: 25px;
-      }
-    }
-    .titre-menu{
-      color: $green;
-    }
-  }
 
   .new-landing-logo-talentist{
     position: absolute;
@@ -137,6 +79,7 @@
       margin: 0;
       strong{
         color: $green;
+        text-shadow: 2px 2px 5px rgba(78, 204, 163, 0.5);
       }
     }
     .inscription-items{
@@ -209,7 +152,7 @@
       text-align: center;
       font-size: 22px;
       font-weight: 900;
-      color: $green;
+      color: $violet;
       text-transform: uppercase;
       margin-bottom: 30px;
     }
@@ -269,15 +212,15 @@
           color: black;
         }
         h5{
-          width: 100%;
+          width: 107%;
           font-size: 18px;
           font-weight: 900;
           text-transform: uppercase;
           color: black;
-          padding: 10px 0 0 10px;
-          border-top: 4px solid $green;
-          border-left: 4px solid $green;
+          padding: 10px;
+          box-shadow: -4px -4px 0 $green;
           margin: 25px 0 40px;
+          background-color: rgba(3, 13, 89, 0.05);
         }
         p{
           font-size: 16px;
@@ -290,73 +233,77 @@
       }
     }
 
-    .nos-chiffres{
-      width: 700px;
-      margin-bottom: 80px;
-      > p{
-        margin-bottom: 40px;
-      }
+    .grid-chiffres-destine{
+      display: grid;
+      grid: auto auto / 50% 50%;
+      padding: 0px 70px;
+      grid-gap: 60px 0;
       .chiffres{
-        padding: 0 70px;
         display: flex;
         justify-content: space-between;
-        .chiffres-item{
-          width: 125px;
-          .chiffre{
-            font-size: 60px;
-            font-weight: 600;
-            color: $green;
-            margin-bottom: -20px;
-            em{
-              font-style: normal;
-              font-size: 30px;
-            }
+        .chiffre{
+          font-size: 60px;
+          font-weight: 600;
+          color: $green;
+          margin-bottom: -20px;
+          em{
+            font-style: normal;
+            font-size: 30px;
           }
-          .desc-chiffre{
-            font-size: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
-          }
+        }
+        .desc-chiffre{
+          font-size: 20px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+      }
+      .grid-container{
+        display: grid;
+        grid: auto auto / auto auto;
+        grid-gap: 50px;
+        em{
+          font-style: normal;
+          color: $green;
         }
       }
     }
 
-    .citation-Wilde{
-      height: 620px;
-      width: 440px;
-      background-color: #F2F3F6;
-      position: absolute;
-      top: -4px;
-      right: -80px;
-      padding: 246px 80px 80px;
-      z-index: -1;
-      display: flex;
-      i{
-        font-size: 60px;
-        color: $gray;
-        margin: -10px 5px 0 0;
-      }
-      .cit-OW{
-        .iladit{
-          font-size: 38px;
-          font-weight: 300;
-          color: black;
-          text-align: right;
-        }
-        .auteur{
-          font-size: 18px;
-          font-weight: 300;
-          color: black;
-          text-align: right;
-          margin-top: 30px;
-        }
-      }
-    }
 
-    .destine > p{
-      width: 700px;
-      margin-bottom: 40px;
-    }
+
+    // .citation-Wilde{
+    //   height: 620px;
+    //   width: 440px;
+    //   background-color: #F2F3F6;
+    //   position: absolute;
+    //   top: -4px;
+    //   right: -80px;
+    //   padding: 246px 80px 80px;
+    //   z-index: -1;
+    //   display: flex;
+    //   i{
+    //     font-size: 60px;
+    //     color: $gray;
+    //     margin: -10px 5px 0 0;
+    //   }
+    //   .cit-OW{
+    //     .iladit{
+    //       font-size: 38px;
+    //       font-weight: 300;
+    //       color: black;
+    //       text-align: right;
+    //     }
+    //     .auteur{
+    //       font-size: 18px;
+    //       font-weight: 300;
+    //       color: black;
+    //       text-align: right;
+    //       margin-top: 30px;
+    //     }
+    //   }
+    // }
+
+
+
     .fonctionnement{
       h2{
         margin-bottom: 100px;
@@ -414,7 +361,8 @@
       i{
         margin: -20px 80px 0 20px;
         font-size: 60px;
-        color: $gray;
+        color: $violet;
+        text-shadow: -3px -3px 0 $green;
       }
       .auteur-citation{
         text-align: right;
@@ -446,7 +394,7 @@
       .bloc-client{
         width: 25%;
         padding: 40px;
-        min-width: 300px;
+        min-width: 275px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -472,7 +420,6 @@
     // z-index: 10;
     // -webkit-transform: translateZ(0);
     margin: 40px 0 0;
-    display: flex;
     justify-content: center;
     .btn-connexion{
       // position: absolute;
@@ -487,23 +434,52 @@
 
 @media screen and (max-width: 1000px) {
   .new_landing{
+    .top-menu{
+      top: 15px;
+      left: 15px;
+    }
+    .new-landing-logo-talentist{
+      top: 15px;
+      right: 50%;
+      left: unset;
+      height: 40px;
+      transform: translate(50%);
+    }
     .landing-top{
       margin: 0;
-      width: unset;
-      padding: 120px 20px 80px;
+      width: 100%;
       height: 100vh;
       .inscription-items{
-        margin-top: 15vh;
+        width: unset;
+        justify-content: center;
+        .btn-inscription{
+          margin: 0 50px;
+          width: unset;
+          height: unset;
+          p{
+            font-size: 2vw;
+          }
+        }
       }
       .image-habillage{
-        width: 61vw;
+        width: 100vw;
+        .position-top{
+          left: 50%;
+          transform: translate(-50%);
+          width: 90vw;
+          .desc-service{
+            position: unset;
+            transform: translate(0%);
+            width: unset;
+          }
+        }
       }
       .fleche-bas{
         left: 50%;
       }
     }
     .landing-main{
-      padding: 0 50px;
+      padding: 100vh 20px 20px;
       h2{
         margin-top: 150px;
       }
@@ -525,20 +501,31 @@
   #talent-landing{
     .landing-top{
       h1{
-        margin-bottom: 130px;
+        font-size: 11vw;
       }
       .top-text{
         width: unset;
       }
     }
+    .actions-xs{
+      display: flex !important;
+      margin: 0;
+    }
     .landing-main{
-      padding: 20px;
       .opportunites{
         padding: unset;
         flex-direction: column;
         align-items: center;
         .opportunite{
           margin-bottom: 50px;
+        }
+      }
+      .grid-chiffres-destine{
+        grid: auto auto / 100%;
+        padding: 0;
+        .grid-container{
+          grid: auto / 100%;
+          padding: 0 60px;
         }
       }
       .nos-chiffres{
