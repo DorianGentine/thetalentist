@@ -1,13 +1,6 @@
 <div class="new_landing">
 
-  <div class="top-menu">
-    <div class="little-square">
-      <hr class="first">
-      <hr class="second">
-      <hr class="third">
-    </div>
-    <h4 class="titre-menu">MENU</h4>
-  </div>
+  <%= render "shared/top_menu" %>
 
 
   <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
@@ -25,6 +18,8 @@
       <div class="position-top">
         <h1>When the <strong>most talented</strong> <br>candidate <strong>meet providing</strong> <br>start-up.</h1>
 
+        <p class="desc-service hidden visible-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+
         <div class="inscription-items">
           <div class="btn btn-primary btn-inscription">
             <%= link_to welcome_talents_path do  %>
@@ -41,9 +36,9 @@
         </div>
       </div>
 
-      <div class="compartiment-image"><%= image_tag "rawpixel-617400-unsplash.jpg" %></div>
+      <div class="compartiment-image"><%= image_tag "olu-eletu-134758-unsplash.jpg" %></div>
 
-      <p class="desc-service">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+      <p class="desc-service hidden-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
 
     </div>
 

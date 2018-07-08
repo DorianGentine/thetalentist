@@ -2,7 +2,7 @@
 .home-container{
   display: flex;
   height: calc(100vh - 190px);
-  min-height: 550px;
+  min-height: 660px;
   .home-left{
     width: 50%;
     margin: 50px 0;
@@ -12,7 +12,7 @@
     justify-content: space-between;
     align-items: center;
     h1{
-      font-size: 40px;
+      font-size: 2.8vw;
       font-weight: 900;
       color: $black;
       strong{
@@ -80,7 +80,8 @@
     width: 50%;
     background-image: url("00_Icon.png");
     background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 }
 .inscription-items{

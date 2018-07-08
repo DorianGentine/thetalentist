@@ -1,5 +1,7 @@
 <div class="new_landing" id="talent-landing">
 
+  <%= render "shared/top_menu" %>
+
   <!-- <img class="new-landing-logo-talentist" src="/assets/Logo The talentist-01.png" alt="logo The talentist">  -->
   <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
 
@@ -18,7 +20,8 @@
     <div class="image-habillage">
 
       <div class="position-top">
-        <h1 style="font-size: 5.3vw">Je suis une <strong>start-up</strong></h1>
+        <h1 style="font-size: 5.3vw" class="hidden-xs">Je suis une <strong>start-up</strong></h1>
+        <h1 style="font-size: 9.5vw" class="hidden visible-xs">Je suis une <strong>start-up</strong></h1>
 
         <p class="top-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
 
@@ -38,7 +41,7 @@
       </div>
 
       <div class="compartiment-image">
-        <%= image_tag "rawpixel-617400-unsplash.jpg" %>
+        <%= image_tag "olu-eletu-134758-unsplash.jpg" %>
       </div>
 
     </div>
@@ -53,24 +56,16 @@
       <h2>Créez vos propres opportunités</h2>
       <div class="opportunites">
         <div class="opportunite">
-          <i class="fas fa-users"></i>
-          <h5>Accompagnement<br>Personnalisé</h5>
-          <p>Pour mieux te connaître, viens nous rencontrer.</p>
+          <h5>Des talents<br>uniques</h5>
+          <p>Venez à la rencontre des meilleurs talents de l’écosystème digital sélectionnés par nos soins.</p>
         </div>
         <div class="opportunite">
-          <i class="fas fa-bolt"></i>
-          <h5>Visibilité<br>immédiate</h5>
-          <p>Rends-toi visible auprès des start-ups les plus prometteuses.</p>
+          <h5>Recruter<br>facilement</h5>
+          <p>Rejoindre notre plateforme c’est recruter avec agilité, simplicité et au succès !</p>
         </div>
         <div class="opportunite">
-          <i class="far fa-comments"></i>
-          <h5>Créer une<br>communauté</h5>
-          <p>Les plus belles rencontres font les plus belles histoires.</p>
-        </div>
-        <div class="opportunite">
-          <i class="far fa-flag"></i>
-          <h5>Métiers<br>spécialisés</h5>
-          <p>Le digital t’intéresse ? Marketing, Produit, Sales, Bizdev et Opérations sont nos spécialités.</p>
+          <h5>Cibler une<br>recherche</h5>
+          <p>Anticipez vos besoins et dénichez votre prochaine perle rare.</p>
         </div>
       </div>
     </div>
@@ -84,51 +79,54 @@
         <%= link_to("Se connecter", new_headhunter_session_path) %>
       </div>
 
-      <div class="citation-Wilde">
+      <!-- <div class="citation-Wilde">
         <i class="fas fa-quote-left"></i>
         <div class="cit-OW">
           <p class="iladit">Soyez vous-<br>même,<br> les autres<br> sont déja<br> pris.</p>
           <p class="auteur">Oscar WILDE</p>
         </div>
+      </div> -->
+    </div>
+
+    <div class="grid-chiffres-destine">
+      <div class="nos-chiffres">
+        <h2>Nos chiffres</h2>
+        <div class="chiffres">
+          <div class="chiffres-item">
+            <p class="chiffre">80</p>
+            <p class="desc-chiffre">personnes<br>placées</p>
+          </div>
+          <div class="chiffres-item">
+            <p class="chiffre">24</p>
+            <p class="desc-chiffre">candidatures<br>en cours</p>
+          </div>
+          <div class="chiffres-item">
+            <p class="chiffre">75</p>
+            <p class="desc-chiffre">utilisateurs de<br>la plateforme</p>
+          </div>
+        </div>
+      </div>
+      <img src="" class="hidden-xs">
+      <img src="" class="hidden-xs">
+      <div class="destine">
+        <h2>À qui cela est destiné</h2>
+        <div class="grid-container">
+          <div class="grid-item">
+            <p><em>Digital</em></p>
+          </div>
+          <div class="grid-item">
+            <p><em>Croissance</em></p>
+          </div>
+          <div class="grid-item">
+            <p><em>Humain</em></p>
+          </div>
+          <div class="grid-item">
+            <p><em>Innovation</em></p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="nos-chiffres">
-      <h2>Nos chiffres</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-      <div class="chiffres">
-        <div class="chiffres-item">
-          <p class="chiffre">80</p>
-          <p class="desc-chiffre">Start-up<br>inscrites</p>
-        </div>
-        <div class="chiffres-item">
-          <p class="chiffre">24<em>H</em></p>
-          <p class="desc-chiffre">Pour faire<br>un retour</p>
-        </div>
-        <div class="chiffres-item">
-          <p class="chiffre">75<em>%</em></p>
-          <p class="desc-chiffre">sont des<br>anciens</p>
-        </div>
-      </div>
-    </div>
-    <div class="destine">
-      <h2>À qui cela est destiné</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-      <div class="opportunites">
-        <div class="opportunite">
-          <p><em>Motivé et ambitieux,</em> tu souhaites avoir de l’impact et faire bouger les lignes.</p>
-        </div>
-        <div class="opportunite">
-          <p><em>Think out of the box !</em> Ta proactivité te permet de dépasser tes objectifs.</p>
-        </div>
-        <div class="opportunite">
-          <p>Un projet est avant tout une aventure. <em>Ton esprit d’équipe</em> fait la différence !</p>
-        </div>
-        <div class="opportunite">
-          <p>Construire, bâtir & innover ! <em>L’entrepreneuriat est ta passion ?</em> Trouve ton prochain challenge!</p>
-        </div>
-      </div>
-    </div>
 
     <div class="banniere-inscription hidden-xs">
       <p>Lorem ipsum dolor sit amet, consectetur</p>
@@ -145,26 +143,22 @@
       <div class="placement-card">
         <div class="card-fonctionnement">
           <p class="numero">01</p>
-          <i class="far fa-flag"></i>
           <h5>Inscription</h5>
           <p class="desc-fonctionnement">Tu recherches ta prochaine aventure ? Inscris toi !</p>
         </div>
         <div class="card-fonctionnement">
           <p class="numero">02</p>
-          <i class="far fa-flag"></i>
-          <h5>Inscription</h5>
+          <h5>Connexion</h5>
           <p class="desc-fonctionnement">Pour te comprendre on veut te connaitre, parle-nous de toi! Une fois sélectionné, ton profil est visible auprès des plus belles startups.</p>
         </div>
         <div class="card-fonctionnement">
           <p class="numero">03</p>
-          <i class="far fa-flag"></i>
-          <h5>Inscription</h5>
+          <h5>Match</h5>
           <p class="desc-fonctionnement">Cette fois-ci, ce sont les startups qui demandent à échanger avec toi. Crée ta propre opportunité et décide qui rencontrer.</p>
         </div>
         <div class="card-fonctionnement">
           <p class="numero">04</p>
-          <i class="far fa-flag"></i>
-          <h5>Inscription</h5>
+          <h5>Succès</h5>
           <p class="desc-fonctionnement">Nous sommes concernés et impliqués dans ton parcours, et à tes côtés pour te conseiller.</p>
         </div>
       </div>
@@ -172,7 +166,68 @@
 
     <div class="destine">
       <h2>Ils nous ont fait confiance</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+      <div class="ligne-client">
+        <div class="bloc-client">
+          <a class="client" href="https://www.agriconomie.com/" target="_blank">
+            <img src="/assets/agriconomie-logo.jpg" class="logo">
+          </a>
+        </div>
+        <div class="bloc-client">
+          <a class="client" href="https://www.backmarket.fr/" target="_blank">
+            <img src="/assets/backmarket-logo.jpg" class="logo">
+          </a>
+        </div>
+        <div class="bloc-client">
+          <a class="client" href="https://www.doctolib.fr/" target="_blank">
+            <img src="/assets/doctolib-logo.png" class="logo">
+          </a>
+        </div>
+        <div class="bloc-client">
+          <a class="client" href="https://www.idecsi.com/fr/" target="_blank">
+            <img src="/assets/IDECSI-logo.jpg" class="logo">
+          </a>
+        </div>
+        <div class="bloc-client">
+          <a class="client" href="https://www.intuit.com/" target="_blank">
+            <img src="/assets/intuit-logo.png" class="logo">
+          </a>
+        </div>
+        <div class="bloc-client">
+          <a class="client" href="https://www.lafourchette.com/" target="_blank">
+            <img src="/assets/lafourchette-logo.jpg" class="logo">
+          </a>
+        </div>
+        <div class="bloc-client">
+          <a class="client" href="https://www.manomano.fr/" target="_blank">
+            <img src="/assets/manomano-logo.png" class="logo">
+          </a>
+        </div>
+        <div class="bloc-client">
+          <a class="client" href="https://myelefant.com/" target="_blank">
+            <img src="/assets/my-elefant-logo.png" class="logo">
+          </a>
+        </div>
+        <div class="bloc-client">
+          <a class="client" href="https://compte-nickel.fr/" target="_blank">
+            <img src="/assets/NICKEL-logo.png" class="logo">
+          </a>
+        </div>
+        <div class="bloc-client">
+          <a class="client" href="https://www.prestashop.com/fr" target="_blank">
+            <img src="/assets/Prestashop-logo.png" class="logo">
+          </a>
+        </div>
+        <div class="bloc-client">
+          <a class="client" href="https://fr.eatwith.com/?c=EUR" target="_blank">
+            <img src="/assets/vizeat_logo.png" class="logo">
+          </a>
+        </div>
+        <div class="bloc-client">
+          <a class="client" href="https://www.welcometothejungle.co/" target="_blank">
+            <img src="/assets/wtj-logo.png" class="logo">
+          </a>
+        </div>
+      </div>
     </div>
 
     <div class="citations">
