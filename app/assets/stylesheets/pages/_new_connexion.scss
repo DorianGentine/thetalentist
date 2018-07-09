@@ -136,11 +136,22 @@
 }
 
 @media screen and (max-width: 991px) {
-  .home-container .home-left{
-    width: 100%;
-    padding: 0;
-    .home-connexion .inscription-items .btn-inscription{
-      width: unset;
+  .home-container{
+    .home-left{
+      width: 100%;
+      padding: 0;
+      h1{
+        font-size: 6vw;
+      }
+      h2{
+        padding: 0 20px;
+      }
+      .home-connexion .inscription-items .btn-inscription{
+        width: unset;
+      }
+    }
+    .home-right{
+      display: none;
     }
   }
 }
