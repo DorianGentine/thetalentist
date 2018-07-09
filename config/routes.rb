@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :startups, only: [ :update ]
   resources :headhunters, only: [:show, :update, :index] do
     patch 'to_validate', :on => :member
+    resources :conversations, only: [ :show ]
   end
   # show is to display the profil and update to edit it
   # le repertoire est la où on affiche tous les talents
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
 
   resources :talents, only: [:show, :update, :index] do
     patch 'to_validate', :on => :member
+    resources :conversations, only: [ :show ]
   end
 
 
@@ -45,7 +47,7 @@ Rails.application.routes.draw do
 
 
   # pour la messagerie
-  resources :conversations, only: [ :show, :update, :create, :index] do
+  resources :conversations, only: [ :show, :update] do
     resources :messages, only: [ :create ]
   end
 

@@ -82,15 +82,25 @@
             <p>Visiter le profil > </p>
           <% end %>
         <% end %>
-      <% elsif current_user.is_a?(Headhunter)%>
+      <% elsif current_user.is_a?(Headhunter) %>
         <% if @relationship && @relationship.status == "Accepter" %>
           <%= link_to talent_path(@participant) do %>
             <p>Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
             <p>Visiter le profil > </p>
           <% end %>
         <% end %>
-      <% else %>
-
+      <% else params[:headhunter_id] || params[:talent_id] || current_user.is_a?(Talentist)%>
+        <% if @participant.is_a?(Headhunter) %>
+            <%= link_to headhunter_path(@participant) do %>
+              <p>Vous pouvez accéder au profil de <%= @participant.startup.name.capitalize %></p>
+              <p>Visiter le profil > </p>
+            <% end %>
+        <% else @participant.is_a?(Talent)%>
+          <%= link_to talent_path(@participant) do %>
+            <p>Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
+            <p>Visiter le profil > </p>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
 
@@ -119,10 +129,10 @@
         <% else %>
           <div class="message right">
             <div class="avatar">
-              <% if current_user.photo.present? %>
-                <%= cl_image_tag current_user.photo.url(:bright_face) %>
+              <% if @user.photo.present? %>
+                <%= cl_image_tag @user.photo.url(:bright_face) %>
               <% else %>
-                <p><%= current_user.firstname.split(//).first.upcase %>
+                <p><%= @user.firstname.split(//).first.upcase %>
               <% end %>
             </div>
             <p class="x-commented"><%= receipt.message.sender.firstname %></p>
@@ -144,7 +154,6 @@
       <% end %>
 
     <!-- div accepter la relation -->
-
         <% if current_user.is_a?(Talent) && @connexion %>
           <% if @relationship.status == "pending"  %>
             <div class="accept-relation">
@@ -156,6 +165,11 @@
               <% end %>
             </div>
           <% end %>
+        <% end %>
+        <% if params[:headhunter_id] || params[:talent_id] %>
+          <div class="accept-relation">
+            <p>Vous ne pouvez pas écrire de message sur cette conversation</p>
+          </div>
         <% end %>
 
     </div>

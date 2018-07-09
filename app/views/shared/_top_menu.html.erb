@@ -74,14 +74,19 @@
             <p><%= current_talentist.firstname.capitalize %> <%= current_talentist.name.capitalize %> :</p>
           <% end %>
         </li>
+        <% if current_talentist.admin %>
+          <li>
+            <%= link_to "Admin", admin_root_path %>
+          </li>
+        <% end %>
         <li>
-          <%= link_to "START-UP", headhunters_path %>
+          <%= link_to "Start-up", headhunters_path %>
         </li>
         <li>
-          <%= link_to "TALENTS", talents_path %>
+          <%= link_to "Talent", talents_path %>
         </li>
         <li>
-          <%= link_to "MESSAGERIE", conversation_path(current_talentist.mailbox.conversations.last) %>
+          <%= link_to "Messagerie", conversation_path(current_talentist.mailbox.conversations.last) %>
         </li>
         <!-- <li>
           <#%= link_to talent_path(current_talent) do %>

@@ -11,7 +11,7 @@
       <div class="border">
 
         <div class="talent-job">
-          <h2><%= talent.firstname %> <%= talent.name %></h2>
+          <h2><%= talent.firstname.present? ? talent.firstname : "No-info" %> <%= talent.name.present? ? talent.name : "No-info" %></h2>
         </div>
 
         <div class="accepeter-talent">
@@ -41,7 +41,7 @@
         </div>
 
         <div class="lien-messagerie-profil">
-          <%= link_to "Messages", conversation_path(talent.mailbox.conversations.last)%>
+          <%= link_to "Messages", talent_conversation_path(talent, talent.mailbox.conversations.last)%>
           <%= link_to "Profil", talent_path(talent)%>
         </div>
       </div>
