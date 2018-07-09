@@ -20,6 +20,8 @@ class Headhunter < ApplicationRecord
   acts_as_messageable
 
 
+  validates :email, presence: true
+  validates :name, presence: true
   validates :firstname, presence: true
   validates :job, presence: true
 

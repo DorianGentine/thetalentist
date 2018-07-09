@@ -45,6 +45,7 @@ class HeadhuntersController < ApplicationController
 
     if params[:tag].blank?
       @headhunters = Headhunter.all.order(name: :asc)
+      @titre = "Tous"
     else
       # les headhunters dont le job est : params[:tag]
       if params[:tag] == "Tous"
