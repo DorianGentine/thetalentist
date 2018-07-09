@@ -1,11 +1,11 @@
 .talent-card-placement{
   width: 33%;
-  min-width: 395px;
+  min-width: 340px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-  @media screen and (max-width: 1384px){
+  @media screen and (max-width: 1220px){
     .talent-card-placement{
       width: 50%;
     }
@@ -17,8 +17,8 @@
     }
 
 .talent-card{
-  width: 365px;
-  height: 398px;
+  width: 330px;
+  height: 400px;
   margin: 20px 0;
   position: relative
 }
@@ -56,13 +56,15 @@
 .illu-card{
   width: 131px;
   height: 138px;
-  // background-image: url("illu-data.png");
-  background-size: cover;
-  background-position: center;
-  // opacity: 0.59;
+  overflow: hidden;
   position: absolute;
   top: 0;
   right: 0;
+  img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
 }
 
 .border{
@@ -143,7 +145,7 @@
 
 .placement-talentist{
   width: 20%;
-  min-width: 220px;
+  min-width: 210px;
   .talent-card{
     width: 200px;
     height: 240px;

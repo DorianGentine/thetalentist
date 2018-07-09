@@ -14,7 +14,7 @@
 
     <% if @startup.logo.present? %>
 
-      <div class="photo-profil" style="background-image: url('<%= cl_image_path @startup.logo, :transformation=>[ :gravity=>"face"] %>');">
+      <div class="photo-profil" style="background-image: url('<%= cl_image_path @startup.logo, :transformation=>[ :gravity=>"face"] %>'); background-size: contain; background-repeat: no-repeat;">
         <div class="statut"></div>
       </div>
 
@@ -55,7 +55,8 @@
         <div class="talent-competences">
           <% if @startup.headhunters.present? %>
             <% @startup.headhunters.each do |headhunter| %>
-              <p><%= headhunter.firstname.present? ? headhunter.firstname : "" %> <%= headhunter.name.present? ? headhunter.name : '' %></p>
+              <p class= "modal-button" data-target= "modal_headhunter_<%= headhunter.id %>"><%= headhunter.firstname.present? ? headhunter.firstname : "" %> <%= headhunter.name.present? ? headhunter.name : '' %></p>
+              <%= render 'headhunters/modal_headhunter', headhunter: headhunter %>
             <% end %>
           <% end %>
         </div>

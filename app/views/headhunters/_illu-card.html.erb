@@ -20,15 +20,15 @@
   <% else %>
 
     <% if talent.job_is?("Data") %>
-      <div class="illu-card" style="background-image: url(/assets/illu-data.png);"></div>
+      <div class="illu-card"><%= image_tag "illu-data.png" %></div>
     <% elsif talent.job_is?("Product") %>
-      <div class="illu-card" style="background-image: url(/assets/illu-product.png);"></div>
+      <div class="illu-card"><%= image_tag "illu-product.png" %></div>
     <% elsif talent.job_is?("Sales") %>
-      <div class="illu-card" style="background-image: url(/assets/illu-sales.png);"></div>
+      <div class="illu-card"><%= image_tag "illu-sales.png" %></div>
     <% elsif talent.job_is?("Market") %>
-      <div class="illu-card" style="background-image: url(/assets/illu-market.png);"></div>
+      <div class="illu-card"><%= image_tag "illu-market.png" %></div>
     <% else %>
-      <div class="illu-card" style="background-image: url(/assets/illu-data2.png);"></div>
+      <div class="illu-card"><%= image_tag "illu-data2.png" %></div>
     <% end %>
 
   <% end %>

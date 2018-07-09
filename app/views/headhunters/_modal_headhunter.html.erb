@@ -1,0 +1,32 @@
+<div id="modal_headhunter_<%= headhunter.id %>" class="modal">
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+
+      <h3><%= headhunter.firstname.present? ? headhunter.firstname.capitalize : "" %> <%= headhunter.name.present? ? headhunter.name.capitalize : '' %></h3>
+
+      <span class="close" id="close_modal_headhunter_<%= headhunter.id %>" >
+        <p style="font-size: unset; background: none; padding: unset; margin: 0;">&times;</p>
+      </span>
+    </div>
+
+    <div class="modal-body modal-body-headhunter">
+
+      <p class="poste-hh"><%= headhunter.job.present? ? headhunter.job.capitalize : "" %> chez <%= headhunter.startup.present? ? headhunter.startup.name.capitalize : "" %></p>
+
+      <div class="body-headhunter-pp">
+        <% if current_headhunter.photo.present? %>
+          <%= cl_image_tag current_headhunter.photo, class: "avatar" %>
+        <% else %>
+          <div class="photo-profil">
+            <div class="initiale">
+              <p><%= current_headhunter.firstname.split(//).first.upcase %><%= current_headhunter.name.split(//).first.upcase %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
