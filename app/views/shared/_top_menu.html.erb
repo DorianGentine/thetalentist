@@ -13,9 +13,18 @@
       </div>
       <ul class="dropdown-menu dropdown-top-menu">
         <li>
+          <p><%= current_headhunter.firstname.capitalize %> <%= current_headhunter.name.capitalize %> :</p>
+        </li>
+        <li>
           <%= link_to headhunter_path(current_headhunter) do %>
             <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
           <% end %>
+        </li>
+        <li>
+          <%= link_to "Talents", repertoire_path %>
+        </li>
+        <li>
+          <%= link_to "Messagerie", conversation_path(current_headhunter.mailbox.conversations.last) %>
         </li>
         <li>
           <%= link_to destroy_headhunter_session_path, method: :delete do %>
@@ -41,9 +50,18 @@
       </div>
       <ul class="dropdown-menu dropdown-top-menu">
         <li>
+          <p><%= current_talent.firstname.capitalize %> <%= current_talent.name.capitalize %> :</p>
+        </li>
+        <li>
           <%= link_to talent_path(current_talent) do %>
             <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
           <% end %>
+        </li>
+        <li>
+          <%= link_to "Start-up", repertoire_startup_path %>
+        </li>
+        <li>
+          <%= link_to "Messagerie", conversation_path(current_talent.mailbox.conversations.last) %>
         </li>
         <!-- <li>
           <#%= link_to "#" do %>
@@ -73,6 +91,18 @@
         <h4 class="titre-menu hidden-xs">MENU</h4>
       </div>
       <ul class="dropdown-menu dropdown-top-menu">
+        <li>
+          <p><%= current_talentist.firstname.capitalize %> <%= current_talentist.name.capitalize %> :</p>
+        </li>
+        <li>
+          <%= link_to "START-UP", headhunters_path %>
+        </li>
+        <li>
+          <%= link_to "TALENTS", talents_path %>
+        </li>
+        <li>
+          <%= link_to "MESSAGERIE", conversation_path(current_talentist.mailbox.conversations.last) %>
+        </li>
         <!-- <li>
           <#%= link_to talent_path(current_talent) do %>
             <i class="fa fa-user"></i> <#%= t(".profile", default: "Profile") %>
@@ -94,13 +124,45 @@
 
 <% else %>
 
-<div class="top-menu dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
-  <div class="little-square">
-    <hr class="first">
-    <hr class="second">
-    <hr class="third">
+  <div class="navbar-wagon-item">
+    <div class="dropdown">
+      <div class="top-menu dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+        <div class="little-square">
+          <hr class="first">
+          <hr class="second">
+          <hr class="third">
+        </div>
+        <h4 class="titre-menu hidden-xs">MENU</h4>
+      </div>
+      <ul class="dropdown-menu dropdown-top-menu">
+        <li>
+          <p>Start-up :</p>
+        </li>
+        <li>
+          <%= link_to new_headhunter_registration_path do  %>
+            <p>S'inscrire</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_headhunter_session_path do  %>
+            <p>Se connecter</p>
+          <% end %>
+        </li>
+        <li>
+          <p>Talent :</p>
+        </li>
+        <li>
+          <%= link_to new_talent_registration_path do  %>
+            <p>S'inscrire</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_talent_session_path do  %>
+            <p>Se connecter</p>
+          <% end %>
+        </li>
+      </ul>
+    </div>
   </div>
-  <h4 class="titre-menu hidden-xs">MENU</h4>
-</div>
 
 <% end %>
