@@ -71,10 +71,38 @@
 
 .modal-body{
   padding: 0 30px;
+  position: relative;
   i{
     margin-right: 6px;
   }
 }
+.modal-body-headhunter{
+  .poste-hh{
+    font-size: 20px !important;
+    background-color: transparent !important;
+    padding: 30px !important;
+    margin: 0 !important;
+    color: black !important;
+  }
+  .body-headhunter-pp{
+    position: absolute;
+    top: 0;
+    right: 0;
+    .photo-profil{
+      height: 100px;
+      width: 100px;
+      border-radius: 0px;
+      .initiale{
+        border-radius:  0;
+        p{
+          background:  none;
+          font-size: 40px;
+        }
+      }
+    }
+  }
+}
+
 
 .upper-body{
   width: 100%;
