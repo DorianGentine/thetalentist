@@ -33,7 +33,7 @@
 
     <div class="talent-name">
       <h1><%= @headhunter.startup.name %></h1>
-      <h2 class="talent-post"><%= @startup.link.present? ? @startup.link : "Ajouter votre site" %></h2>
+      <h2 class="talent-post"><%= @startup.short_resume.present? ? @startup.short_resume : "Ajouter votre un petit résumé de votre entreprise" %></h2>
     </div>
     <div class="talent-info">
       <div class="talent-info-item card-dispsition">
@@ -70,6 +70,20 @@
             <% end %>
           <% else %>
             <p style="text-transform: unset"> + Ajouter ce qui vous définit </p>
+          <% end %>
+        </div>
+      </div>
+      <div class="lower-right-body-item hidden-xs">
+        <h4>Nous suivre</h4>
+        <div class="links-startup">
+          <%= link_to @startup.facebook, target: "_blank" do %>
+            <i class="fab fa-facebook-square"></i>
+          <% end %>
+          <%= link_to @startup.linkedin, target: "_blank" do %>
+            <i class="fab fa-linkedin"></i>
+          <% end %>
+          <%= link_to @startup.link, target: "_blank" do %>
+            <i class="fas fa-tv"></i>
           <% end %>
         </div>
       </div>
@@ -127,6 +141,7 @@
             <p>CRÉATION</p>
           </div>
           <div class="recherche-item padding-left">
+
             <h5><%= @startup.collaborators.present? ? @startup.collaborators : "? 1 ?" %></h5>
             <p>EMPLOYÉS</p>
           </div>
@@ -160,12 +175,6 @@
           </div>
         </div>
       </div>
-      <% if @startup.facebook.present? %>
-        <%= link_to 'Facebook', @startup.facebook, target: "_blank" %>
-      <% end %>
-      <% if @startup.linkedin.present? %>
-        <%= link_to 'Linkedin', @startup.linkedin, target: "_blank" %>
-      <% end %>
 
       <% if current_user.is_a?(Headhunter) %>
         <p data-target= "modal_overview" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
