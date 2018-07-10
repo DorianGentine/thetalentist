@@ -76,14 +76,20 @@
       <div class="lower-right-body-item hidden-xs">
         <h4>Nous suivre</h4>
         <div class="links-startup">
-          <%= link_to @startup.facebook, target: "_blank" do %>
-            <i class="fab fa-facebook-square"></i>
+          <% if @startup.facebook.present? %>
+            <%= link_to @startup.facebook, target: "_blank" do %>
+              <i class="fab fa-facebook-square"></i>
+            <% end %>
           <% end %>
-          <%= link_to @startup.linkedin, target: "_blank" do %>
-            <i class="fab fa-linkedin"></i>
+          <% if @startup.linkedin.present? %>
+            <%= link_to @startup.linkedin, target: "_blank" do %>
+              <i class="fab fa-linkedin"></i>
+            <% end %>
           <% end %>
-          <%= link_to @startup.link, target: "_blank" do %>
-            <i class="fas fa-tv"></i>
+          <% if @startup.link.present? %>
+            <%= link_to @startup.link, target: "_blank" do %>
+              <i class="fas fa-tv"></i>
+            <% end %>
           <% end %>
         </div>
       </div>
