@@ -1,7 +1,11 @@
 <div class="nested-fields form-line">
-  <p class="form-label requis">Formation(s)</p>
+  <p class="form-label requis">Diplôme(s)</p>
   <%= f.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
-  <%= f.input :title, placeholder: "Diplôme", label: false  %>
-  <%= f.input :year, collection: 1992..2018, prompt: "Année d'obtention", label: false   %>
+  <%= f.input :title, placeholder: "Formation", label: false  %>
+  <%= f.input :year, label: false do %>
+    <%= f.select :year, options_for_select((1980..2018.to_i).to_a.reverse), prompt: "Année d'obtention"   %>
+  <% end %>
   <%= link_to_remove_association "Supprimer", f %>
 </div>
+
+

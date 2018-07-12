@@ -12,26 +12,26 @@
     <div class="form-next_aventure">
       <div class="bloc-next-aventure">
         <div class="form-line form-line-next-aventure">
-          <p class="form-label label-next_aventure requis">Ville souhaitée</p>
-          <%= u.input :city, label: false, placeholder:"Paris" %>
+          <p class="form-label label-next_aventure requis">Mobilité</p>
+          <%= u.input :city, label: false, placeholder:"Paris", collection: [ "Ville actuelle", "France", "Europe", "Hors Europe" ] %>
         </div>
         <div class="form-line form-line-next-aventure">
           <p class="form-label label-next_aventure requis">Type de contrat</p>
-          <%= u.input :contrat, label: false, placeholder:"Freelance" %>
+          <%= u.input :contrat, label: false, placeholder:"Freelance", collection: [ "CDI", "CDD", "Freelance", "Stage" ] %>
         </div>
         <div class="form-line form-line-next-aventure">
-          <p class="form-label label-next_aventure requis">Rémunération</p>
-          <%= u.input :remuneration, label: false, placeholder: "100 000€" %>
+          <p class="form-label label-next_aventure requis">Attentes salariales (package K€ annuel brut)</p>
+          <%= u.input :remuneration, label: false, collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ] %>
         </div>
         <div class="form-line form-line-next-aventure form-secteur">
-          <p class="form-label label-next_aventure requis">Environnement métier souhaité<em>(max: 5)</em></p>
+          <p class="form-label label-next_aventure requis">Secteur</p>
           <%= u.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple", style: "width: 100%"}, include_blank: true, label: false %>
         </div>
       </div>
       <div class="bloc-next-aventure bloc-next-aventure-right">
-        <p class="form-label label-next_aventure-lg requis">Le job de vos rêves ? <em>(50 mots max)</em></p>
+        <p class="form-label label-next_aventure-lg requis">Le job de vos rêves ?</p>
         <%= u.input :overview, label: false, placeholder: "Descrpition", as: :text %>
-        <p class="form-label label-next_aventure-lg requis">Qui êtes-vous ? <em>(50 mots max)</em></p>
+        <p class="form-label label-next_aventure-lg requis">Qui êtes-vous ?</p>
         <%= u.input :no_more, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
       </div>
     </div>

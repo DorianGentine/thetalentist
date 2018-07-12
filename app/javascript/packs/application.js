@@ -1,8 +1,8 @@
 import "bootstrap";
 
-
 import '../components/select2';
 
+import '../components/datepicker';
 
 import { addFields } from "../components/addField";
 addFields();

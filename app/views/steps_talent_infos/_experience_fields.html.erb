@@ -1,15 +1,16 @@
 <div class='nested-fields'>
   <div class="form-line">
     <p class="form-label requis">Expérience</p>
-    <%= f.input :company_name, label: false, placeholder:"Nom de l'entreprise" %>
+    <%= f.input :company_name, label: false, placeholder:"Entreprise" %>
     <%= f.input :position, label: false, placeholder:"Intitulé du poste" %>
     <%= f.input :currently %>
   </div>
   <div class="form-line">
     <p class="form-label requis">De</p>
-    <%= f.input :starting, placeholder:"mai 2013 ou 2013", label: false %>
+    <%= f.input :starting, label: false, as: :string, input_html: {class: "datepicker1"} %>
+
     <p class="form-label" style="width: 0">À</p>
-    <%= f.input :years, placeholder:"juin 2015 ou 2015", label: false  %>
+    <%= f.input :years, label: false, as: :string, input_html: {class: "datepicker1"}  %>
     <% if @talent.next_aventures.present? %>
       <%= f.text_area :overview, label: false, placeholder:"Vos missions" %>
       <%= f.input :company_type_id, collection: CompanyType.all, label: false, placeholder:"Type d'entreprise" %>
@@ -18,3 +19,5 @@
     <%= link_to_remove_association "Supprimer", f %>
   </div>
 </div>
+
+
