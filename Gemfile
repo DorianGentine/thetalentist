@@ -61,7 +61,11 @@ gem 'mailboxer'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 
+# linkedin connect
+gem 'omniauth'
+gem 'omniauth-linkedin'
 
-
+#fixe cookie overflow
+gem 'activerecord-session_store'
 
 

@@ -22,7 +22,8 @@
         </div>
         <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
           <%= link_to "S'enregistrer", new_registration_path(resource_name) %><br />
-        <% end -%>
+        <% end %>
+        <%= link_to "Sign in with linkedin", talent_linkedin_omniauth_authorize_path %>
       <% end %>
     </div>
 

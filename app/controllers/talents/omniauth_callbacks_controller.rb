@@ -27,4 +27,22 @@ class Talents::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def after_omniauth_failure_path_for(scope)
   #   super(scope)
   # end
+
+  def linkedin
+    talent = Talent.find_for_linkedin_oauth(request.env['omniauth.auth'])
+    talentist = Talentist.find_by_email("dimitri@hotmail.fr")
+    if talent.persisted?
+      if talent.next_aventures.count > 0
+        sign_in_and_redirect talent, event: :authentication
+        set_flash_message(:notice, :success, kind: 'Linkedin') if is_navigational_format?
+      else
+        talentist.send_message(talent, "Bonjour #{talent.firstname}, Bienvenue sur notre plateforme!", "#{talent.id}")
+        session[:talent_id] = talent.id
+        redirect_to steps_talent_info_path(:formations)
+      end
+    else
+      # session['devise.linkedin_data'] = request.env['omniauth.auth']
+      redirect_to new_talent_registration_url
+    end
+  end
 end

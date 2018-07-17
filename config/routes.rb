@@ -25,7 +25,9 @@ Rails.application.routes.draw do
 
   get 'repertoire_startup', to: "talents#repertory"
 
+
   devise_for :talents, path: 'talents', controllers: {
+    omniauth_callbacks: 'talents/omniauth_callbacks',
     sessions: 'talents/sessions',
     passwords: 'talents/passwords',
     registrations: 'talents/registrations'
