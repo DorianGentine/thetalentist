@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_10_134122) do
+ActiveRecord::Schema.define(version: 2018_07_16_134331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 2018_07_10_134122) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "company_types", force: :cascade do |t|
@@ -218,6 +224,9 @@ ActiveRecord::Schema.define(version: 2018_07_10_134122) do
     t.bigint "talent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "btob", default: false, null: false
+    t.boolean "btoc", default: false, null: false
+    t.string "availability"
     t.index ["talent_id"], name: "index_next_aventures_on_talent_id"
   end
 
@@ -296,6 +305,15 @@ ActiveRecord::Schema.define(version: 2018_07_10_134122) do
     t.string "linkedin"
     t.string "mission"
     t.string "short_resume"
+  end
+
+  create_table "talent_cities", force: :cascade do |t|
+    t.bigint "talent_id"
+    t.bigint "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_talent_cities_on_city_id"
+    t.index ["talent_id"], name: "index_talent_cities_on_talent_id"
   end
 
   create_table "talent_formations", force: :cascade do |t|
@@ -443,6 +461,11 @@ ActiveRecord::Schema.define(version: 2018_07_10_134122) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo"
+    t.string "provider"
+    t.string "uid"
+    t.string "linkedin_picture_url"
+    t.string "token"
+    t.datetime "token_expiry"
     t.index ["email"], name: "index_talents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_talents_on_reset_password_token", unique: true
   end
@@ -480,6 +503,8 @@ ActiveRecord::Schema.define(version: 2018_07_10_134122) do
   add_foreign_key "startup_sectors", "startups"
   add_foreign_key "startup_words", "startups"
   add_foreign_key "startup_words", "words"
+  add_foreign_key "talent_cities", "cities"
+  add_foreign_key "talent_cities", "talents"
   add_foreign_key "talent_formations", "formations"
   add_foreign_key "talent_formations", "talents"
   add_foreign_key "talent_hobbies", "hobbies"
