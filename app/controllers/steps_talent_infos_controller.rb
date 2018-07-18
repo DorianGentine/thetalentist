@@ -11,6 +11,7 @@ class StepsTalentInfosController < ApplicationController
     1.times { @talent.talent_languages.build }
     1.times { @talent.experiences.build }
     1.times { @talent.next_aventures.build }
+    1.times { @talent.next_aventures.first.your_small_plus.build }
     render_wizard
   end
 
@@ -34,8 +35,12 @@ class StepsTalentInfosController < ApplicationController
 # cela ne suffit pas de déclarer current_user = @talent, il faut un sign_in
 
   def finish_wizard_path
-    sign_in(@talent)
-    talent_path(@talent)
+    if @talent.validated
+      sign_in(@talent)
+      talent_path(@talent)
+    else
+      waiting_for_validation_path
+    end
   end
   def find_talent
     @talent = Talent.find(session[:talent_id])
@@ -55,6 +60,7 @@ class StepsTalentInfosController < ApplicationController
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
       next_aventures_attributes: NextAventure.attribute_names.map(&:to_sym).push(:_destroy),
+      # next_aventures_attributes: [ your_small_plus_attributes: [:id, :description, :_destroy] ],
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       techno_ids: [],
@@ -62,3 +68,24 @@ class StepsTalentInfosController < ApplicationController
     )
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

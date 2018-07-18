@@ -31,11 +31,12 @@ Picture.destroy_all
 
 p "Creating talents"
 
-luc = Talent.create!(email: "luc@hotmail.fr", password: "password", firstname: "luc", name: "buisson", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: false, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
-donatien = Talent.create!(email: "donatien@hotmail.fr", password: "password", firstname: "donatien", name: "rolland", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
-dorian = Talent.create!(email: "dorian@hotmail.fr", password: "password", firstname: "dorian", name: "gentine", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:false, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
-erwan = Talent.create!(email: "erwan@hotmail.fr", password: "password", firstname: "erwan", name: "guillou", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
-louis = Talent.create!(email: "louis@hotmail.fr", password: "password", firstname: "louis", name: "dupont", phone:"0786013426", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:false, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
+
+luc = Talent.create!(city: "Paris", email: "luc@hotmail.fr", password: "password", firstname: "luc", name: "buisson", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: false, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
+donatien = Talent.create!(city: "Paris", email: "donatien@hotmail.fr", password: "password", firstname: "donatien", name: "rolland", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
+dorian = Talent.create!(city: "Paris", email: "dorian@hotmail.fr", password: "password", firstname: "dorian", name: "gentine", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:false, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
+erwan = Talent.create!(city: "Paris", email: "erwan@hotmail.fr", password: "password", firstname: "erwan", name: "guillou", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
+louis = Talent.create!(city: "Paris", email: "louis@hotmail.fr", password: "password", firstname: "louis", name: "dupont", phone:"0786013426", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:false, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
 
 dorian.photo = "https://media.licdn.com/dms/image/C4E03AQHlWPVF9-TZyg/profile-displayphoto-shrink_800_800/0?e=1533772800&v=beta&t=YtCazu0yDhrD2XJSokpVEVGjOaGKfo6TL7Eh2vjSJ80"
 donatien.photo = "https://user-images.githubusercontent.com/15248524/41149564-29301e18-6b0c-11e8-954c-e63b0ad8f4eb.png"
@@ -80,10 +81,12 @@ data_owner = Experience.create!( position: "data owner", talent: louis, company_
 
 p "Creating formations"
 
-csv_file   = File.join(__dir__, 'axis_school.csv')
+csv_file_school   = File.join(__dir__, 'axis_school.csv')
 
-CSV.foreach(csv_file) do |row|
-  Formation.create!({ title: row[1] })
+CSV.foreach(csv_file_school) do |row|
+  if row[1]
+    Formation.create!({ title: row[1].gsub("''", "@").gsub("'", "").gsub("@", "'") })
+  end
 end
 
 hec = Formation.create!( title: "HEC")
@@ -156,6 +159,15 @@ TalentKnown.create!(talent: erwan, known: twitter)
 TalentKnown.create!(talent: louis, known: evenement)
 
 p "Creating languages"
+
+csv_file_language   = File.join(__dir__, 'axis_languages.csv')
+
+CSV.foreach(csv_file_language) do |row|
+  if row[1]
+    Language.create!({ title: row[1].gsub("''", "@").gsub("'", "").gsub("@", "'") })
+  end
+end
+
 
 english = Language.create!(title: "anglais")
 francais = Language.create!(title: "français")
