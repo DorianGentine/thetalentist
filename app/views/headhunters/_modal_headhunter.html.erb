@@ -16,12 +16,12 @@
       <p class="poste-hh"><%= headhunter.job.present? ? headhunter.job.capitalize : "" %> chez <%= headhunter.startup.present? ? headhunter.startup.name.capitalize : "" %></p>
 
       <div class="body-headhunter-pp">
-        <% if current_headhunter.photo.present? %>
-          <%= cl_image_tag current_headhunter.photo, class: "avatar" %>
+        <% if headhunter.photo.present? %>
+          <%= cl_image_tag headhunter.photo, class: "avatar" %>
         <% else %>
           <div class="photo-profil">
             <div class="initiale">
-              <p><%= current_headhunter.firstname.split(//).first.upcase %><%= current_headhunter.name.split(//).first.upcase %></p>
+              <p><%= headhunter.firstname.present? ? headhunter.firstname.split(//).first.upcase : "" %><%= headhunter.name.present? ? headhunter.name.split(//).first.upcase : "" %></p>
             </div>
           </div>
         <% end %>

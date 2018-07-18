@@ -7,7 +7,8 @@ class Talent < ApplicationRecord
           :recoverable,
           :rememberable,
           :trackable,
-          :validatable
+          :validatable,
+          :omniauthable, omniauth_providers: [:linkedin]
 
   validates_confirmation_of :password
 
@@ -47,7 +48,7 @@ class Talent < ApplicationRecord
   has_many :talent_hobbies, dependent: :destroy
   has_many :talent_hobbies, inverse_of: :talent
   has_many :hobbies, through: :talent_hobbies
-  accepts_nested_attributes_for :hobbies, allow_destroy: true, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :hobbies, reject_if: :all_blank
 
   # relation one to many
   has_many :credentials, dependent: :destroy
@@ -109,6 +110,40 @@ class Talent < ApplicationRecord
     end
     unreads.count
   end
+
+
+
+  def self.find_for_linkedin_oauth(auth)
+    talent_params = auth.slice(:provider, :uid)
+    talent_params[:firstname] =  auth.info.first_name
+    talent_params[:name] =  auth.info.last_name
+    talent_params[:city] =  auth.info.location
+    talent_params[:phone] =  "to add"
+    talent_params[:linkedin] =  auth.info.urls.public_profile
+    talent_params.merge! auth.info.slice(:email)
+    talent_params[:photo] = auth.info.image
+    talent_params[:token] = auth.credentials.token
+    # talent_params[:token_expiry] = Time.at(auth.credentials.expires_at)
+    talent_params = talent_params.to_h
+
+    talent = Talent.find_by(provider: auth.provider, uid: auth.uid)
+    talent ||= Talent.find_by(email: auth.info.email) # talent did a regular sign up in the past.
+    if talent
+      talent.update(talent_params)
+    else
+      talent = Talent.new(talent_params)
+      talent.password = Devise.friendly_token[0,20]  # Fake password for validation
+      talent.save
+    end
+    return talent
+  end
+
+
+
+
+
+
+
 
   private
 

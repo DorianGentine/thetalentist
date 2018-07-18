@@ -6,10 +6,10 @@
       <div class="border">
 
         <div class="talent-job">
-          <h2><%= headhunter.firstname %> <%= headhunter.name %></h2>
+          <h2><%= headhunter.firstname.present? ? headhunter.firstname : "Pas infos" %> <%= headhunter.name.present? ? headhunter.name : 'Pas infos' %></h2>
         </div>
         <div class="talent-job">
-          <p>de <%= headhunter.startup.name %></p>
+          <p>de <%= headhunter.startup.name.present? ? headhunter.startup.name : "No-Name" %></p>
         </div>
 
         <div class="background-img background-img-talentist">
@@ -32,7 +32,7 @@
 
 
         <div class="lien-messagerie-profil">
-          <%= link_to "Messages", conversation_path(headhunter.mailbox.conversations.last)%>
+          <%= link_to "Messages", headhunter_conversation_path(headhunter.id, headhunter.mailbox.conversations.last)%>
           <%= link_to "Profil", headhunter_path(headhunter)%>
         </div>
 
@@ -48,7 +48,7 @@
       <div class="border">
 
         <div class="talent-job">
-          <h2><%= headhunter.startup.name %></h2>
+          <h2><%= headhunter.startup.name.present? ? headhunter.startup.name : "No-Name" %></h2>
         </div>
 
         <div class="background-img">
@@ -59,7 +59,7 @@
         <div class="talent-info">
           <div class="talent-info-item card-dispsition">
             <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
-            <p><%= headhunter.startup.address %></p>
+            <p><%= headhunter.startup.address.present? ? headhunter.startup.address : "Pas info" %></p>
           </div>
           <div class="talent-info-item card-dispsition">
             <p class="icon icon-info"><i class="fas fa-link"></i></p>
@@ -68,7 +68,7 @@
         </div>
 
         <div class="talent-description hidden-xs">
-          <p><%= headhunter.startup.overview %></p>
+          <p><%= headhunter.startup.overview.present? ? headhunter.startup.overview : "pas d'info" %></p>
         </div>
 
 

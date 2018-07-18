@@ -19,9 +19,7 @@ class Headhunter < ApplicationRecord
   # for mailboxer
   acts_as_messageable
 
-
-  validates :firstname, presence: true
-  validates :job, presence: true
+  validates :name, :firstname, :job, :email, presence: true
 
   def mailboxer_email(object)
    #return the model's email here

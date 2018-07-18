@@ -11,36 +11,34 @@
     <div class="form-inputs">
       <div class="form-inputs-1">
         <div class="form-line form-nom">
-          <p class="form-label requis">Nom</p>
+          <p class="form-label requis">Civilité</p>
           <%= f.input :firstname, required: true, autofocus: true, placeholder: "Prénom", label: false, :input_html => { :class => "prenom"} %>
           <%= f.input :name, required: true, autofocus: true, placeholder: "Nom", label: false %>
         </div>
         <div class="form-line form-compte">
-          <p class="form-label requis">Compte</p>
+          <p class="form-label requis">Identifiants</p>
           <%= f.input :email, required: true, autofocus: true, placeholder: "exemple@gmail.com", label: false  %>
           <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", label: false %><%= f.error_notification %>
           <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false %>
 
         </div>
         <div class="form-line form-phone">
-          <p class="form-label requis">Téléphone</p>
+          <p class="form-label requis">Tel.</p>
           <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: false %>
         </div>
         <div class="form-line form-ville">
-          <p class="form-label requis">Adresse</p>
+          <p class="form-label requis">Ville</p>
           <%= f.input :city, required: true, autofocus: true, placeholder: "Ville", label: false %>
         </div>
       </div>
       <div class="form-inputs-2">
         <div class="form-line">
-          <p class="form-label">Environnement métier</p>
+          <p class="form-label">Spécialité métier</p>
           <%= f.input :sector_ids, collection:Sector.all, label: false, placeholder:'Marketing'%>
         </div>
         <div class="form-line">
           <p class="form-label">Linkedin</p>
           <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: false %>
-          <p class="form-label form-hobby">Loisir <em>(max.5)</em></p>
-          <%= f.input :hobby_ids, collection: Hobby.all, input_html: { class:"select2", multiple: "multiple"}, include_blank: true, label: false %>
         </div>
       </div>
     </div>
@@ -50,10 +48,6 @@
       <%= f.button :submit, "Suivant", { :class => "form-btn form-btn-suivant"} %>
     </div>
   <% end %>
-  <!--
-      <#%= hobby.submit html: { id: :filldetails, onclick: "addFields()" } %>
-
-   -->
 </div>
 
 <%= render 'shared/footer' %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_03_155148) do
+ActiveRecord::Schema.define(version: 2018_07_17_195808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,21 +29,10 @@ ActiveRecord::Schema.define(version: 2018_07_03_155148) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "admin_users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet "current_sign_in_ip"
-    t.inet "last_sign_in_ip"
+  create_table "cities", force: :cascade do |t|
+    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_admin_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
   create_table "company_types", force: :cascade do |t|
@@ -235,6 +224,13 @@ ActiveRecord::Schema.define(version: 2018_07_03_155148) do
     t.bigint "talent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "btob", default: false, null: false
+    t.boolean "btoc", default: false, null: false
+    t.string "availability"
+    t.text "dream"
+    t.string "famous_person"
+    t.text "good_manager"
+    t.text "work_for_free"
     t.index ["talent_id"], name: "index_next_aventures_on_talent_id"
   end
 
@@ -312,6 +308,16 @@ ActiveRecord::Schema.define(version: 2018_07_03_155148) do
     t.string "facebook"
     t.string "linkedin"
     t.string "mission"
+    t.string "short_resume"
+  end
+
+  create_table "talent_cities", force: :cascade do |t|
+    t.bigint "talent_id"
+    t.bigint "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_talent_cities_on_city_id"
+    t.index ["talent_id"], name: "index_talent_cities_on_talent_id"
   end
 
   create_table "talent_formations", force: :cascade do |t|
@@ -459,6 +465,11 @@ ActiveRecord::Schema.define(version: 2018_07_03_155148) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo"
+    t.string "provider"
+    t.string "uid"
+    t.string "linkedin_picture_url"
+    t.string "token"
+    t.datetime "token_expiry"
     t.index ["email"], name: "index_talents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_talents_on_reset_password_token", unique: true
   end
@@ -473,6 +484,14 @@ ActiveRecord::Schema.define(version: 2018_07_03_155148) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "your_small_plus", force: :cascade do |t|
+    t.text "description"
+    t.bigint "next_aventure_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["next_aventure_id"], name: "index_your_small_plus_on_next_aventure_id"
   end
 
   add_foreign_key "credentials", "talents"
@@ -496,6 +515,8 @@ ActiveRecord::Schema.define(version: 2018_07_03_155148) do
   add_foreign_key "startup_sectors", "startups"
   add_foreign_key "startup_words", "startups"
   add_foreign_key "startup_words", "words"
+  add_foreign_key "talent_cities", "cities"
+  add_foreign_key "talent_cities", "talents"
   add_foreign_key "talent_formations", "formations"
   add_foreign_key "talent_formations", "talents"
   add_foreign_key "talent_hobbies", "hobbies"
@@ -516,4 +537,5 @@ ActiveRecord::Schema.define(version: 2018_07_03_155148) do
   add_foreign_key "talent_skills", "talents"
   add_foreign_key "talent_technos", "talents"
   add_foreign_key "talent_technos", "technos"
+  add_foreign_key "your_small_plus", "next_aventures"
 end

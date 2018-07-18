@@ -47,7 +47,7 @@
       </div>
 
 
-    <% elsif talent_signed_in? && current_talent %>
+    <% elsif talent_signed_in? && current_talent && current_talent.next_aventures.first %>
 
       <%= link_to "START-UP", repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" %>
 

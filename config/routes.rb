@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :startups, only: [ :update ]
   resources :headhunters, only: [:show, :update, :index] do
     patch 'to_validate', :on => :member
+    resources :conversations, only: [ :show ]
   end
   # show is to display the profil and update to edit it
   # le repertoire est la où on affiche tous les talents
@@ -24,7 +25,9 @@ Rails.application.routes.draw do
 
   get 'repertoire_startup', to: "talents#repertory"
 
+
   devise_for :talents, path: 'talents', controllers: {
+    omniauth_callbacks: 'talents/omniauth_callbacks',
     sessions: 'talents/sessions',
     passwords: 'talents/passwords',
     registrations: 'talents/registrations'
@@ -34,6 +37,7 @@ Rails.application.routes.draw do
 
   resources :talents, only: [:show, :update, :index] do
     patch 'to_validate', :on => :member
+    resources :conversations, only: [ :show ]
   end
 
 
@@ -45,7 +49,7 @@ Rails.application.routes.draw do
 
 
   # pour la messagerie
-  resources :conversations, only: [ :show, :update, :create, :index] do
+  resources :conversations, only: [ :show, :update] do
     resources :messages, only: [ :create ]
   end
 
@@ -53,6 +57,7 @@ Rails.application.routes.draw do
   resources :steps_talent_infos
   resources :steps_startup_infos
 
+  get 'waiting_for_validation', to: "pages#waiting_for_validation"
   get 'welcome_talents', to: "pages#talent_home"
   get 'welcome_headhunters', to: "pages#headhunter_home"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

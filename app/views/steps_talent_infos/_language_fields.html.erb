@@ -1,6 +1,6 @@
 <div class='nested-fields form-line'>
   <%= f.association :language, collection: Language.all, label: false, input_html: { class:"select2"}  %>
-  <%= f.input :level, collection: 0..5, prompt: "Niveau", label: false %>
+  <%= f.input :level, collection: ["Natif", "Bilingue", "Avancée", "lu parlé écrit", "Notions"], label: false %>
   <!-- TODO button -->
   <%= link_to_remove_association "Supprimer", f %>
 </div>

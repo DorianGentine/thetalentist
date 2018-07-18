@@ -1,19 +1,26 @@
-<% if headhunter_signed_in? && current_headhunter %>
-
-  <!-- Avatar with dropdown menu -->
-  <div class="navbar-wagon-item">
-    <div class="dropdown">
-      <div class="top-menu dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
-        <div class="little-square">
-          <hr class="first">
-          <hr class="second">
-          <hr class="third">
-        </div>
-        <h4 class="titre-menu hidden-xs">MENU</h4>
+<div class="navbar-wagon-item">
+  <div class="dropdown">
+    <div class="top-menu dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+      <div class="little-square">
+        <hr class="first">
+        <hr class="second">
+        <hr class="third">
       </div>
-      <ul class="dropdown-menu dropdown-top-menu">
+      <h4 class="titre-menu hidden-xs">MENU</h4>
+    </div>
+    <ul class="dropdown-menu dropdown-top-menu">
+      <div class="title-menu-link">
+        <li><%= link_to root_path do  %>
+              <p>Accueil</p>
+            <% end %>
+        </li>
+
+      </div>
+      <% if headhunter_signed_in? && current_headhunter %>
         <li>
-          <p><%= current_headhunter.firstname.capitalize %> <%= current_headhunter.name.capitalize %> :</p>
+          <% if current_headhunter.firstname.present? && current_headhunter.name.present? %>
+            <p><%= current_headhunter.firstname.capitalize %> <%= current_headhunter.name.capitalize %> :</p>
+          <% end %>
         </li>
         <li>
           <%= link_to headhunter_path(current_headhunter) do %>
@@ -31,26 +38,13 @@
             <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
         </li>
-      </ul>
-    </div>
-  </div>
-
-<% elsif talent_signed_in? && current_talent %>
+      <% elsif talent_signed_in? && current_talent %>
 
   <!-- Avatar with dropdown menu -->
-  <div class="navbar-wagon-item">
-    <div class="dropdown">
-      <div class="top-menu dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
-        <div class="little-square">
-          <hr class="first">
-          <hr class="second">
-          <hr class="third">
-        </div>
-        <h4 class="titre-menu hidden-xs">MENU</h4>
-      </div>
-      <ul class="dropdown-menu dropdown-top-menu">
         <li>
-          <p><%= current_talent.firstname.capitalize %> <%= current_talent.name.capitalize %> :</p>
+          <% if current_talent.firstname.present? && current_talent.name.present? %>
+            <p><%= current_talent.firstname.capitalize %> <%= current_talent.name.capitalize %> :</p>
+          <% end %>
         </li>
         <li>
           <%= link_to talent_path(current_talent) do %>
@@ -73,35 +67,26 @@
             <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
         </li>
-      </ul>
-    </div>
-  </div>
 
-<% elsif talentist_signed_in? && current_talentist %>
-
-  <!-- Avatar with dropdown menu -->
-  <div class="navbar-wagon-item">
-    <div class="dropdown">
-      <div class="top-menu dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
-        <div class="little-square">
-          <hr class="first">
-          <hr class="second">
-          <hr class="third">
-        </div>
-        <h4 class="titre-menu hidden-xs">MENU</h4>
-      </div>
-      <ul class="dropdown-menu dropdown-top-menu">
+      <% elsif talentist_signed_in? && current_talentist %>
         <li>
-          <p><%= current_talentist.firstname.capitalize %> <%= current_talentist.name.capitalize %> :</p>
+          <% if current_talentist.firstname.present? && current_talentist.name.present? %>
+            <p><%= current_talentist.firstname.capitalize %> <%= current_talentist.name.capitalize %> :</p>
+          <% end %>
+        </li>
+        <% if current_talentist.admin %>
+          <li>
+            <%= link_to "Admin", admin_root_path %>
+          </li>
+        <% end %>
+        <li>
+          <%= link_to "Start-up", headhunters_path %>
         </li>
         <li>
-          <%= link_to "START-UP", headhunters_path %>
+          <%= link_to "Talent", talents_path %>
         </li>
         <li>
-          <%= link_to "TALENTS", talents_path %>
-        </li>
-        <li>
-          <%= link_to "MESSAGERIE", conversation_path(current_talentist.mailbox.conversations.last) %>
+          <%= link_to "Messagerie", conversation_path(current_talentist.mailbox.conversations.last) %>
         </li>
         <!-- <li>
           <#%= link_to talent_path(current_talent) do %>
@@ -118,26 +103,15 @@
             <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
         </li>
-      </ul>
-    </div>
-  </div>
 
-<% else %>
-
-  <div class="navbar-wagon-item">
-    <div class="dropdown">
-      <div class="top-menu dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
-        <div class="little-square">
-          <hr class="first">
-          <hr class="second">
-          <hr class="third">
+      <% else %>
+        <div class="title-menu-link">
+          <li>
+            <%= link_to welcome_headhunters_path do  %>
+              <p>Start-up</p>
+            <% end %>
+          </li>
         </div>
-        <h4 class="titre-menu hidden-xs">MENU</h4>
-      </div>
-      <ul class="dropdown-menu dropdown-top-menu">
-        <li>
-          <p>Start-up :</p>
-        </li>
         <li>
           <%= link_to new_headhunter_registration_path do  %>
             <p>S'inscrire</p>
@@ -148,9 +122,13 @@
             <p>Se connecter</p>
           <% end %>
         </li>
-        <li>
-          <p>Talent :</p>
-        </li>
+        <div class="title-menu-link">
+          <li>
+            <%= link_to welcome_talents_path do  %>
+              <p>Talent</p>
+            <% end %>
+          </li>
+        </div>
         <li>
           <%= link_to new_talent_registration_path do  %>
             <p>S'inscrire</p>
@@ -161,8 +139,15 @@
             <p>Se connecter</p>
           <% end %>
         </li>
-      </ul>
-    </div>
+      <% end %>
+      <div class="title-menu-link">
+        <li>
+          <%= link_to root_path do  %>
+            <p>Mentions légales</p>
+          <% end %>
+        </li>
+      </div>
+    </ul>
   </div>
+</div>
 
-<% end %>
