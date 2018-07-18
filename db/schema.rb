@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_16_134331) do
+ActiveRecord::Schema.define(version: 2018_07_17_195808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,10 @@ ActiveRecord::Schema.define(version: 2018_07_16_134331) do
     t.boolean "btob", default: false, null: false
     t.boolean "btoc", default: false, null: false
     t.string "availability"
+    t.text "dream"
+    t.string "famous_person"
+    t.text "good_manager"
+    t.text "work_for_free"
     t.index ["talent_id"], name: "index_next_aventures_on_talent_id"
   end
 
@@ -482,6 +486,14 @@ ActiveRecord::Schema.define(version: 2018_07_16_134331) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "your_small_plus", force: :cascade do |t|
+    t.text "description"
+    t.bigint "next_aventure_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["next_aventure_id"], name: "index_your_small_plus_on_next_aventure_id"
+  end
+
   add_foreign_key "credentials", "talents"
   add_foreign_key "experiences", "company_types"
   add_foreign_key "experiences", "talents"
@@ -525,4 +537,5 @@ ActiveRecord::Schema.define(version: 2018_07_16_134331) do
   add_foreign_key "talent_skills", "talents"
   add_foreign_key "talent_technos", "talents"
   add_foreign_key "talent_technos", "technos"
+  add_foreign_key "your_small_plus", "next_aventures"
 end

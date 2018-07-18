@@ -12,11 +12,11 @@ class ApplicationController < ActionController::Base
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
   # Uncomment when you *really understand* Pundit!
-  # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  # def user_not_authorized
-  #   flash[:alert] = "You are not authorized to perform this action."
-  #   redirect_to(root_path)
-  # end
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(root_path)
+  end
 
   private
 
@@ -58,8 +58,17 @@ class ApplicationController < ActionController::Base
       sign_in(resource)
       headhunter_path(resource)
     elsif resource.is_a?(Talent)
-      sign_in(resource)
-      talent_path(resource)
+      if resource.next_aventures.first
+        if resource.validated
+          sign_in(resource)
+          talent_path(resource)
+        else
+          waiting_for_validation_path
+        end
+      else
+        session[:talent_id] = resource.id
+        steps_talent_info_path(:formations)
+      end
     elsif resource.is_a?(Talentist)
       talents_path
     else
@@ -71,7 +80,11 @@ class ApplicationController < ActionController::Base
     if resource.is_a?(Headhunter)
       headhunter_path(Headhunter)
     elsif resource.is_a?(Talent)
-      talent_path(resource)
+      if resource.validated
+        talent_path(resource)
+      else
+        waiting_for_validation_path
+      end
     elsif resource.is_a?(Talentist)
       talents_path
     else

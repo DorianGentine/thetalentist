@@ -36,12 +36,36 @@
           <p class="form-label label-next_aventure requis">Secteur</p>
           <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"] %>
         </div>
+        <div id="add-language" class="form-semi-line">
+          <p class="form-label label-next_aventure-lg requis">Vos petits + ?</p>
+          <%= u.simple_fields_for :your_small_plus do |e| %>
+            <%= render 'your_small_plu_fields', :f => e %>
+          <% end %>
+          <div class='links'>
+            <%= link_to_add_association 'Ajouter un +', u, :your_small_plus, :partial => 'your_small_plu_fields' %>
+          </div>
+        </div>
       </div>
       <div class="bloc-next-aventure bloc-next-aventure-right">
         <p class="form-label label-next_aventure-lg requis">Le job de vos rêves ?</p>
         <%= u.input :overview, label: false, placeholder: "Descrpition", as: :text %>
         <p class="form-label label-next_aventure-lg requis">Qui êtes-vous ?</p>
         <%= u.input :no_more, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+
+        <p class="form-label label-next_aventure-lg requis">Quel est le rêve que tu remets toujours à demain ?</p>
+        <%= u.input :dream, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+
+        <p class="form-label label-next_aventure-lg requis">Y a-t-il une personnalité qui t’inspire ?</p>
+        <%= u.input :famous_person, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+
+        <p class="form-label label-next_aventure-lg requis">Y a-t-il une personnalité qui t’inspire ?</p>
+        <%= u.input :famous_person, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+
+        <p class="form-label label-next_aventure-lg requis">Selon toi, qu’est-ce qu’un bon manager ?</p>
+        <%= u.input :good_manager, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+
+        <p class="form-label label-next_aventure-lg requis">Quel travail serais-tu prêt à effectuer gratuitement ?</p>
+        <%= u.input :work_for_free, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
       </div>
     </div>
     <% end %>

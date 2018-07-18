@@ -119,7 +119,7 @@ class Talent < ApplicationRecord
     talent_params[:name] =  auth.info.last_name
     talent_params[:city] =  auth.info.location
     talent_params[:phone] =  "to add"
-
+    talent_params[:linkedin] =  auth.info.urls.public_profile
     talent_params.merge! auth.info.slice(:email)
     talent_params[:photo] = auth.info.image
     talent_params[:token] = auth.credentials.token
@@ -135,7 +135,6 @@ class Talent < ApplicationRecord
       talent.password = Devise.friendly_token[0,20]  # Fake password for validation
       talent.save
     end
-
     return talent
   end
 

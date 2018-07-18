@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   resources :steps_talent_infos
   resources :steps_startup_infos
 
+  get 'waiting_for_validation', to: "pages#waiting_for_validation"
   get 'welcome_talents', to: "pages#talent_home"
   get 'welcome_headhunters', to: "pages#headhunter_home"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
