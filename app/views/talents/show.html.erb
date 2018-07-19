@@ -29,16 +29,20 @@
         <p data-target= "modal_profil" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
       <% end %>
       <h1><%= @talent.firstname %> <%= @talent.name %></h1>
-      <h2 class="talent-post"><%= @talent.experiences.last.position %></h2>
+      <% if @talent.experiences.last.present? && @talent.experiences.last.position.present? %>
+        <h2 class="talent-post"><%= @talent.experiences.last.position %></h2>
+      <% else %>
+        <h2 class="talent-post">Pas définit</h2>
+      <% end %>
     </div>
     <div class="talent-info">
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
-        <p><%= @talent.city %></p>
+        <p><%= @talent.city.present? ? @talent.city : "Pas définit" %></p>
       </div>
       <div class="talent-info-item card-dispsition">
         <p class="icon icon-info"><i class="far fa-compass"></i></p>
-        <% if @talent.sectors.present? %>
+        <% if @talent.sectors.last.present? && @talent.sectors.last.title.present? %>
           <p><%= @talent.sectors.last.title %></p>
         <% else %>
           <p> Ajoute ton secteur activité</p>
@@ -50,8 +54,9 @@
           <p> BtoB & BtoC</p>
         <% elsif @talent.btoc %>
           <p>BtoB</p>
-        <% else %>
+        <% elsif %>
           <p>BtoC</p>
+        <% else %>
         <% end %>
       </div>
     </div>
@@ -87,20 +92,26 @@
       <div class="right-up-item qui-suis-je">
         <h4>Qui suis-je ?</h4>
           <div class="text-right-up-item">
-            <p><%= @talent.next_aventures.first.no_more %></p>
+            <% if @talent.next_aventures.first.present? %>
+              <p><%= @talent.next_aventures.first.no_more %></p>
+            <% end %>
           </div>
       </div>
       <div class="right-up-item le-job-de-reve">
         <h4>Le job de rêve !</h4>
           <div class="text-right-up-item">
-            <p> <%= @talent.next_aventures.first.overview %></p>
+            <% if @talent.next_aventures.first.overview.present?  %>
+              <p> <%= @talent.next_aventures.first.overview %></p>
+            <% end %>
           </div>
       </div>
       <div class="right-up-item je-recherche">
         <h4>Je recherche</h4>
         <div class="space-between-vertical">
           <div class="recherche-item">
-            <h5><%= @talent.next_aventures.first.contrat %></h5>
+            <% if @talent.next_aventures.first.contrat.present? %>
+              <h5><%= @talent.next_aventures.first.contrat %></h5>
+            <% end %>
             <p>CONTRAT</p>
           </div>
           <div class="recherche-item recherche-item-right">
@@ -108,13 +119,17 @@
             <p>SALAIRE (k€ brut annuel)</p>
           </div>
           <div class="recherche-item">
-            <% @sectors.each do |sector| %>
-              <h5><%= sector.sector.title.capitalize %></h5>
+            <% if @sectors.count > 0 %>
+              <% @sectors.each do |sector| %>
+                <h5><%= sector.sector.title.capitalize %></h5>
+              <% end %>
             <% end %>
             <p>SECTEURS</p>
           </div>
           <div class="recherche-item recherche-item-right">
-            <h5><%= @talent.next_aventures.first.city %></h5>
+            <% if @talent.next_aventures.first.city.present?  %>
+              <h5><%= @talent.next_aventures.first.city %></h5>
+            <% end %>
             <p>VILLE</p>
           </div>
         </div>
