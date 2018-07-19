@@ -54,8 +54,9 @@ class TalentsController < ApplicationController
     @experiences = @talent.experiences.order(:years) - currently
 
     @talent_formations = @talent.talent_formations.order(:year)
-
-    @sectors = @talent.next_aventures.last.next_aventure_sectors
+    if @talent.next_aventures.last.present?
+      @sectors = @talent.next_aventures.last.next_aventure_sectors
+    end
     @credentials = @talent.credentials
   end
 
