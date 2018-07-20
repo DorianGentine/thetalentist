@@ -1,10 +1,9 @@
 // Old landing
 .home-container{
   display: flex;
-  height: calc(100vh - 190px);
-  min-height: 660px;
+  min-height: calc(100vh - 190px);
   .home-left{
-    width: 50%;
+    width: 49.5%;
     margin: 50px 0;
     padding: 0 60px;
     display: flex;
@@ -28,7 +27,7 @@
     .home-connexion{
       width: 80%;
       .connexion-item{
-        margin: 30px 0;
+        margin: 30px 0 15px;
         .form-group{
           width: calc(100% - 30px);
         }
@@ -41,7 +40,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 40px 0;
+        margin: 20px 0;
         a{
           font-weight: 600;
           font-size: 16px;
@@ -76,12 +75,48 @@
       }
     }
   }
+  .separation-connexion{
+    width: 10px;
+    border-radius: 50px;
+    background-color: $green;
+    align-self: center;
+    height: 50vh;
+    margin: 0;
+  }
   .home-right{
-    width: 50%;
-    background-image: url("00_Icon.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+    width: 49.5%;
+    margin: 50px 0;
+    padding: 0 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2{
+      font-size: 2.8vw;
+      font-weight: 900;
+      color: $black;
+      text-align: center;
+      strong{
+        color: $green;
+      }
+    }
+    a{
+      margin: 150px 0 0;
+      border: 3px solid $green;
+      border-radius: 50px;
+      padding: 10px 20px;
+      transition: 0.15s;
+      p{
+        color: $green;
+        margin: 0;
+        transition: 0.15s;
+      }
+    }
+    a:hover{
+      background-color: $green;
+      p{
+        color: white;
+      }
+    }
   }
 }
 .inscription-items{
@@ -137,6 +172,7 @@
 
 @media screen and (max-width: 991px) {
   .home-container{
+    flex-direction: column;
     .home-left{
       width: 100%;
       padding: 0;
@@ -150,8 +186,19 @@
         width: unset;
       }
     }
+    .separation-connexion{
+      width: 80%;
+      height: 3px;
+    }
     .home-right{
-      display: none;
+      width: unset;
+      padding: 0;
+      h2{
+        font-size: 6vw;
+      }
+      a{
+        margin: 30px 0;
+      }
     }
   }
 }

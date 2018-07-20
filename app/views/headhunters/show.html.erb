@@ -55,7 +55,7 @@
         <div class="talent-competences">
           <% if @startup.headhunters.present? %>
             <% @startup.headhunters.each do |headhunter| %>
-              <p class= "modal-button" data-target= "modal_headhunter_<%= headhunter.id %>"><%= headhunter.firstname.present? ? headhunter.firstname : "" %> <%= headhunter.name.present? ? headhunter.name : '' %></p>
+              <p class= "modal-button modal-hh" data-target= "modal_headhunter_<%= headhunter.id %>"><%= headhunter.firstname.present? ? headhunter.firstname : "" %> <%= headhunter.name.present? ? headhunter.name : '' %></p>
               <%= render 'headhunters/modal_headhunter', headhunter: headhunter %>
             <% end %>
           <% end %>
@@ -88,7 +88,7 @@
           <% end %>
           <% if @startup.link.present? %>
             <%= link_to @startup.link, target: "_blank" do %>
-              <i class="fas fa-tv"></i>
+              <i class="fas fa-link"></i>
             <% end %>
           <% end %>
         </div>
@@ -175,7 +175,7 @@
           <div class="talent-competences">
             <% if @startup.headhunters.present? %>
               <% @startup.headhunters.each do |headhunter| %>
-                <p><%= headhunter.firstname.present? ? headhunter.firstname : "" %> <%= headhunter.name.present? ? headhunter.name : '' %></p>
+                <p class="modal-button" data-target="modal_headhunter_<%= headhunter.id %>"><%= headhunter.firstname.present? ? headhunter.firstname : "" %> <%= headhunter.name.present? ? headhunter.name : '' %></p>
               <% end %>
             <% end %>
           </div>

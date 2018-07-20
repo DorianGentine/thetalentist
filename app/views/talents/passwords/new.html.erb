@@ -1,15 +1,24 @@
-<h2>Forgot your password?</h2>
+<%= render "shared/navbar" %>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
+<div class="forgot_password">
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+  <h2>Vous souhaitez <strong>réinitialiser</strong> votre mot de passe ?</h2>
+
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <div class="forgot_password_grid">
+      <%= f.error_notification %>
+
+      <%= f.input :email, required: true, autofocus: true %>
+
+      <%= f.button :submit, "Réinitialiser mon mot de passe", :class => "submit_forgot_password" %>
+
+    </div>
+  <% end %>
+
+  <div class="forgot_password_links">
+    <%= render "talents/shared/links" %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
-  </div>
-<% end %>
+</div>
 
-<%= render "talents/shared/links" %>
+<%= render "shared/footer" %>
