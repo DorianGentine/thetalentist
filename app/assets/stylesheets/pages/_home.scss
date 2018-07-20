@@ -113,7 +113,7 @@
         width: 30vw;
         h3{
           font-size: 1.7vw;
-          margin: 0 0 25px;
+          margin: 0;
         }
         .list-metiers{
           display: grid;
@@ -439,14 +439,47 @@
         justify-content: center;
         align-items: center;
         .client{
-          height: 200px;
-          width: 200px;
+          height: 210px;
+          width: 210px;
+          border-radius: 5px;
           display: flex;
           justify-content: center;
           align-items: center;
           background-color: white;
+          overflow: hidden;
+          position: relative;
+          .clientmask{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            overflow: hidden;
+            padding: 15px;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transform: translate(460px, -100px) rotate(180deg);
+            transition: all 0.2s ease-in-out;
+            background-color: rgba(0,0,0,0.8);
+            p{
+              font-size: 14px;
+              text-align: justify;
+              transform: translateX(300px) rotate(90deg);
+              transition: all 0.2s ease-in-out;
+              color: white;
+            }
+          }
           .logo{
             width: 180px;
+          }
+        }
+        .client:hover{
+          .clientmask{
+            opacity: 1;
+            transform: translate(0px, 0px);
+            p{
+              transform: translateX(0px) rotate(0deg);
+              transition-delay: 0.4s;
+            }
           }
         }
       }
@@ -486,6 +519,7 @@
         font-weight: 900;
         margin: 0;
         transition: 0.5s;
+        text-align: center;
       }
     }
     hr{
@@ -580,22 +614,28 @@
     }
     .landing-top{
       margin: 0;
-      width: 100%;
-      height: 100vh;
+      width: 68vw;
+      height: calc(100vh - 120px);
+      top: 120px;
       .inscription-items{
         width: unset;
         justify-content: center;
+        margin: 30vh 0 0;
         .btn-inscription{
-          margin: 0 50px;
+          margin: 0 40px;
           width: unset;
           height: unset;
           p{
-            font-size: 2vw;
+            font-size: 3vw;
+            i{
+              display: none;
+            }
           }
         }
       }
       .image-habillage{
         width: 100vw;
+        top: 0;
         .position-top{
           left: 50%;
           transform: translate(-50%);
@@ -606,9 +646,21 @@
             width: unset;
           }
         }
+        .quatre-metiers{
+          bottom: 30vh;
+          width: 50vw;
+          h3{
+            font-size: 12px;
+          }
+        }
+        .compartiment-image{
+          display: none;
+        }
       }
       .fleche-bas{
-        left: 50%;
+        left: unset;
+        right: 50vw;
+        transform: translate(50%);
       }
     }
     .landing-main{
@@ -635,6 +687,7 @@
     .landing-top{
       h1{
         font-size: 11vw;
+        margin: 50px 0 0;
       }
       .top-text{
         width: unset;
@@ -642,7 +695,7 @@
     }
     .actions-xs{
       display: flex !important;
-      margin: 0;
+      margin: 150px 0 0;
     }
     .landing-main{
       .opportunites{
@@ -699,6 +752,9 @@
         .citation{
           margin: 30px 20px;
         }
+      }
+      .inscription-grid{
+        padding: 50px 0;
       }
     }
   }
