@@ -80,6 +80,21 @@ class Talent < ApplicationRecord
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
   end
 
+  def witch_status?(headhunter)
+    re = Relationship.where(headhunter_id: headhunter.id, talent_id: self.id)
+    return re[0].status
+  end
+
+  def find_conversation(headhunter)
+    conversations = headhunter.mailbox.conversations
+    conversations.each do |conversation|
+      participant = (conversation.participants - [headhunter]).first
+      if participant == self
+        return conversation
+      end
+    end
+
+  end
   def job_is?(job)
     job_ids = []
     jobs = TalentJob.joins(:job).where(:jobs => {:title => job })
@@ -137,13 +152,6 @@ class Talent < ApplicationRecord
     end
     return talent
   end
-
-
-
-
-
-
-
 
   private
 
