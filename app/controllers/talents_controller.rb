@@ -1,5 +1,3 @@
-require_relative 'scraping'
-
 class TalentsController < ApplicationController
 
   def index
