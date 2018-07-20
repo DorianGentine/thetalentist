@@ -122,6 +122,7 @@ class Talent < ApplicationRecord
     talent_params[:linkedin] =  auth.info.urls.public_profile
     talent_params.merge! auth.info.slice(:email)
     talent_params[:photo] = auth.info.image
+    raise
     talent_params[:token] = auth.credentials.token
     # talent_params[:token_expiry] = Time.at(auth.credentials.expires_at)
     talent_params = talent_params.to_h
