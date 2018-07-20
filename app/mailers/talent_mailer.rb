@@ -15,4 +15,5 @@ class TalentMailer < ApplicationMailer
 
     mail(to: @receveur.email, subject: 'Vous avez reçu un nouveau message de #{@envoyeur.firstname.capitalize}!')
   end
+
 end

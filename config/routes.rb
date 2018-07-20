@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  # get 'contact_forms/create'
   match "/404", :to => "http_errors#error_404", :via => :all
   match "/422", :to => "http_errors#error_422", :via => :all
   match "/500", :to => "http_errors#error_500", :via => :all
@@ -40,12 +41,7 @@ Rails.application.routes.draw do
     resources :conversations, only: [ :show ]
   end
 
-
-  # resources :relationships, only: [:show, :index, :create] do
-  #   resources :talent_message, only: [:create]
-  #   resources :headhunter_message, only: [:create]
-  # end
-
+  resources :contact_forms, only: [ :create ]
 
 
   # pour la messagerie

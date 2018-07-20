@@ -136,6 +136,7 @@ GEM
     geocoder (1.4.9)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    gmaps4rails (2.1.2)
     has_scope (0.7.2)
       actionpack (>= 4.1)
       activesupport (>= 4.1)
@@ -366,6 +367,7 @@ DEPENDENCIES
   figaro
   font-awesome-sass (~> 5.0.9)
   geocoder
+  gmaps4rails
   inherited_resources!
   jbuilder (~> 2.0)
   jquery-rails

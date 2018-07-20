@@ -1,18 +1,15 @@
 
 
-<!--
-<%#= simple_form_for(@contact) do |f| %>
-  <%#= f.input :name, placeholder: "Nom", label: false, :wrapper_html => { :class => 'small-width-input' } %>
-  <%#= f.input :email, placeholder: "Email", label: false, :wrapper_html => { :class => 'small-width-input' } %>
-  <%#= f.input :phone, placeholder: "Téléphone", label: false, :wrapper_html => { :class => 'small-width-input' }  %>
-  <%#= f.input :objet, placeholder: "Nature de prise de contact", as: :select , collection: [ "Demande de devis", "Nous connaitre", "Prise de contact", "Autre"], label: false, :wrapper_html => { :class => 'small-width-input lastchild' } %>
-  <%#= f.input :message, as: :text, :input_html => { :style => 'width: 100%', :rows => 3 }, placeholder: "Message", label: false, :wrapper_html => { :class => 'large-width-input' }  %>
-  <div class="hidden">
-    <%#= f.label :nickname %>
-    <%#= f.input :nickname, hint: 'leave this fiel blank' %>
-  </div>
-  <%#= f.submit "Envoyer", class: "btn btn-primary btn-exercise btn-exercise-important"%>
-<#% end %>
- -->
+<%= simple_form_for @contact do |f| %>
+  <%= f.input :email, placeholder: "Votre email", label: false, :wrapper_html => { :class => 'small-width-input' } %>
+  <%= f.input :name, placeholder: "Votre nom", label: false, :wrapper_html => { :class => 'small-width-input' } %>
+  <%= f.input :phone, placeholder: "Votre téléphone", label: false, :wrapper_html => { :class => 'small-width-input' }  %>
+  <%= f.input :subject, placeholder: "En savoir plus sur cet outil", label: false, :wrapper_html => { :class => 'small-width-input lastchild' } %>
+  <%= f.input :message, as: :text, :input_html => { :style => 'width: 100%', :rows => 3 }, placeholder: "Message", label: false, :wrapper_html => { :class => 'large-width-input' }  %>
+  <%= f.submit "Envoyer", class: "btn btn-primary btn-exercise btn-exercise-important"%>
+<% end %>
 
 
+
+<div id="map_for_contact" style="width: 100%; height: 100px;" data-markers="<#%= @markers.to_json %>"
+          ></div>

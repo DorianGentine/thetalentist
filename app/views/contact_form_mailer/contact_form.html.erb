@@ -1,0 +1,17 @@
+<p>Bonjour The Talentist,</p>
+
+<% if @subject.present? %>
+  <p>Je me premts de vous contacté pour: <%= @subject %></p>
+<% end %>
+
+<p>
+  <%= @message %>
+</p>
+<br>
+<p>
+  Voici mes coordonnées: <br>
+  <%= @phone.present? ? @phone : "Pas de téléphone" %> <br>
+  <%= @email %>
+</p>
+
+<%= @name.capitalize %>

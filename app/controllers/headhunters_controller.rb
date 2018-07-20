@@ -11,12 +11,6 @@ class HeadhuntersController < ApplicationController
 
     if params[:jobs].blank? || params[:jobs] == "Tous"
       @talents = Talent.where(:visible => true).order(updated_at: :desc)
-      # @talents = []
-      # talents.each do |talent|
-      #   if !@headhunter.is_connected_to?(talent)
-      #     @talents << talent
-      #   end
-      # end
     else
       @talents = []
       talent_jobs = TalentJob.joins(:job, :talent).where(:jobs => {:title => params[:jobs]}, :talents => {:visible => true})
@@ -83,7 +77,7 @@ class HeadhuntersController < ApplicationController
         #,
         # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
       }
-      end
+    end
   end
 
   def update
