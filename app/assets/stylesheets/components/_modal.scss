@@ -267,9 +267,26 @@ h4{
       border-radius: 20px;
       text-transform: capitalize;
     }
+    .modal-hh:hover{
+      cursor: pointer;
+      background-color: $green;
+    }
   }
   .links-startup {
     display: flex;
+    a{
+      margin: 0;
+      color: $green;
+      border: 1px solid $green;
+      border-radius: 50px;
+      padding: 7px 10px;
+      font-size: 14px;
+      transition: 0.15s;
+    }
+    a:hover{
+      background-color: $green;
+      color: white;
+    }
   }
 }
 

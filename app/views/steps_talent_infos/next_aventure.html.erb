@@ -29,28 +29,31 @@
         </div>
         <div class="form-line form-line-next-aventure form-secteur">
           <p class="form-label label-next_aventure requis">Secteur</p>
-          <%= u.input :btoc %>
-          <%= u.input :btob %>
+          <div style="display: flex; width: 80%">
+            <%= u.input :btoc %>
+            <%= u.input :btob %>
+          </div>
         </div>
         <div class="form-line form-line-next-aventure form-secteur">
-          <p class="form-label label-next_aventure requis">Secteur</p>
-          <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"] %>
+          <p class="form-label label-next_aventure requis">Disponibilité</p>
+          <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"], label: false %>
         </div>
-        <div id="add-language" class="form-semi-line">
-          <p class="form-label label-next_aventure-lg requis">Vos petits + ?</p>
+        <div id="add-language" class="form-semi-line" style="display: grid; grid: auto auto / auto auto;">
+          <p class="form-label label-next_aventure requis" style="width: 100%; align-self: center;">Vos petits + ?</p>
           <%= u.simple_fields_for :your_small_plus do |e| %>
             <%= render 'your_small_plu_fields', :f => e %>
           <% end %>
+          <div></div>
           <div class='links'>
             <%= link_to_add_association 'Ajouter un +', u, :your_small_plus, :partial => 'your_small_plu_fields' %>
           </div>
         </div>
       </div>
       <div class="bloc-next-aventure bloc-next-aventure-right">
-        <p class="form-label label-next_aventure-lg requis">Le job de vos rêves ?</p>
-        <%= u.input :overview, label: false, placeholder: "Descrpition", as: :text %>
+        <!-- <p class="form-label label-next_aventure-lg requis">Le job de vos rêves ?</p>
+        <#%= u.input :overview, label: false, placeholder: "Descrpition", as: :text %>
         <p class="form-label label-next_aventure-lg requis">Qui êtes-vous ?</p>
-        <%= u.input :no_more, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+        <#%= u.input :no_more, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %> -->
 
         <p class="form-label label-next_aventure-lg requis">Quel est le rêve que tu remets toujours à demain ?</p>
         <%= u.input :dream, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
