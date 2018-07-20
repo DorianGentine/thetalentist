@@ -68,8 +68,5 @@ gem 'omniauth-linkedin'
 #fixe cookie overflow
 gem 'activerecord-session_store'
 
-# scraping element
-gem 'linkedin-scraper'
-
 # map for contact form
 gem "gmaps4rails"

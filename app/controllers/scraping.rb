@@ -1,6 +1,5 @@
 require 'open-uri'
 require 'nokogiri'
-require 'linkedin_scraper'
 # class Scraping
 
 #   def scraping_linkedin(talent)
