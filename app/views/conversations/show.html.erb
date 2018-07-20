@@ -154,23 +154,33 @@
       <% end %>
 
     <!-- div accepter la relation -->
-        <% if current_user.is_a?(Talent) && @connexion %>
-          <% if @relationship.status == "pending"  %>
-            <div class="accept-relation">
-              <%= simple_form_for :current_user, method: :put do |f| %>
-                <%= f.simple_fields_for @relationship do |u| %>
-                  <%= u.submit "Accepter" %>
-                  <%= u.submit "Refuser" %>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-        <% if params[:headhunter_id] || params[:talent_id] %>
+      <% if current_user.is_a?(Talent) && @connexion %>
+        <% if @relationship.status == "pending"  %>
           <div class="accept-relation">
-            <p>Vous ne pouvez pas écrire de message sur cette conversation</p>
+            <%= simple_form_for :current_user, method: :put do |f| %>
+              <%= f.simple_fields_for @relationship do |u| %>
+                <%= u.submit "Accepter" %>
+                <%= u.submit "Refuser" %>
+              <% end %>
+            <% end %>
           </div>
         <% end %>
+      <% end %>
+      <% if params[:headhunter_id] || params[:talent_id] %>
+        <div class="accept-relation center-text">
+          <p>Vous ne pouvez pas écrire de message sur cette conversation</p>
+        </div>
+      <% end %>
+      <% if current_user.is_a?(Talent) && !current_user.visible && !@participant.is_a?(Talentist) %>
+        <div class="accept-relation center-text">
+          <p>Vous ne pouvez plus écrire de message, car votre profil n'est plus visible. Si vous souhaitez changer votre status contactez <%= Talentist.where(admin: true).first.firstname.capitalize %> via la plateforme</p>
+        </div>
+      <% end %>
+      <% if @participant.is_a?(Talent) && !@participant.visible %>
+        <div class="accept-relation center-text">
+          <p>Vous ne pouvez pas écrire de message sur cette conversation, car <%= @participant.name %> n'a plus son profil actif</p>
+        </div>
+      <% end %>
 
     </div>
   </div>

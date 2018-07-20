@@ -4,9 +4,13 @@
 <%= render 'formation' %>
 <%= render 'profil' %>
 <%= render 'credentials' %>
+  <% if !@talent.visible %>
+  <div class="bandeau-visible">
+    <p>Votre profil n'est pas encore rendu public. Pour cela il faut que toutes les rubrique soient complétées</p>
+  </div>
+  <% end %>
 
 <div class="container-show">
-
   <div class="talent-left">
 
     <% if @talent.photo.present? %>
