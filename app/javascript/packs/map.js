@@ -4,6 +4,7 @@ const mapElement = document.getElementById('map');
 if (mapElement) { // don't try to build a map if there's no div#map to inject in
   const map = new GMaps({ el: '#map', lat: 0, lng: 0 });
   const markers = JSON.parse(mapElement.dataset.markers);
+  console.log(markers)
   map.addMarkers(markers);
   if (markers.length === 0) {
     map.setZoom(12);
@@ -16,4 +17,27 @@ if (mapElement) { // don't try to build a map if there's no div#map to inject in
     map.setZoom(14);
 
   }
+}
+
+
+
+
+const map = document.getElementById("map_for_contact");
+
+if (map) {
+  $(document).ready(function() {
+    console.log("coucou")
+    var uluru = {lat: 48.870129, lng: 48.870129};
+    handler = Gmaps.build('Google');
+    handler.buildMap({ internal: { id: 'map_for_contact' }}, function(){
+      markers = handler.addMarkers({
+          position: uluru
+        });
+    console.log(markers)
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(13);
+    })
+  })
+
 }
