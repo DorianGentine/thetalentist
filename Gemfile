@@ -68,4 +68,6 @@ gem 'omniauth-linkedin'
 #fixe cookie overflow
 gem 'activerecord-session_store'
 
+# scraping element
+gem 'linkedin-scraper'
 
