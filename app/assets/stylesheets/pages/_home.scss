@@ -63,25 +63,6 @@
     margin: 0 0 140px;
     width: calc(100vw - 155px);
     height: 95vh;
-    .position-top{
-      position: absolute;
-      left: -27.5vw;
-      z-index: 1;
-      height: calc(93vh - 120px);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-    }
-    h1{
-      font-size: 5.8vw;
-      font-weight: 600;
-      color: #191B26;
-      margin: 0;
-      strong{
-        color: $green;
-        text-shadow: 2px 2px 5px rgba(78, 204, 163, 0.5);
-      }
-    }
     .inscription-items{
       width: 28vw;
       display: inline-flex;
@@ -101,6 +82,54 @@
       right: 0;
       height: calc(100vh - 120px);
       width: 58.5vw;
+      .position-top{
+        position: absolute;
+        left: -27.5vw;
+        z-index: 1;
+        height: calc(93vh - 120px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+      h1{
+        font-size: 5.8vw;
+        font-weight: 600;
+        color: #191B26;
+        margin: 0;
+        strong{
+          color: $green;
+          text-shadow: 2px 2px 5px rgba(78, 204, 163, 0.5);
+        }
+      }
+      .quatre-metiers{
+        position: absolute;
+        right: 50px;
+        bottom: 20vh;
+        z-index: 1;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 9px -9px $green;
+        padding: 15px;
+        width: 30vw;
+        h3{
+          font-size: 1.7vw;
+          margin: 0 0 25px;
+        }
+        .list-metiers{
+          display: grid;
+          grid: 30px 30px / auto auto auto auto;
+          i{
+            color: black;
+            font-size: 2.5vw;
+            justify-self: center;
+          }
+          p{
+            font-size: 1.16vw;
+            justify-self: center;
+            margin: 10px 0 0;
+          }
+        }
+      }
       .compartiment-image{
         overflow: hidden;
         width: 100%;
@@ -245,7 +274,7 @@
           font-size: 60px;
           font-weight: 600;
           color: $green;
-          margin-bottom: -20px;
+          margin: 0;
           em{
             font-style: normal;
             font-size: 30px;
@@ -256,6 +285,17 @@
           font-weight: 600;
           text-transform: uppercase;
         }
+      }
+      img{
+        object-fit: contain;
+        width: 80%;
+        box-shadow: -6px 1px 18px rgba(0,0,0,0.2);
+        align-self: center;
+      }
+      .image-home1{
+        justify-self: end;
+      }
+      .image-home2{
       }
       .grid-container{
         display: grid;
@@ -318,7 +358,7 @@
           border-radius: 5px;
           margin: 0 17.5px;
           width: 300px;
-          height: 450px;
+          height: 415px;
           position: relative;
           display: flex;
           flex-direction: column;
@@ -412,6 +452,59 @@
       }
     }
   }
+  .vous-prenez-decision{
+    font-size: 22px;
+    color: $violet;
+    text-align: center;
+    margin-top: 100px;
+  }
+  .text-vous-prenez-decision{
+    font-size: 18px;
+    text-align: center;
+  }
+  .inscription-grid{
+    padding: 50px 100px;
+    display: grid;
+    grid: auto / auto 1px auto;
+    justify-items: center;
+    transition: 0.5s;
+    .inscription-grid-item{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      border-radius: 5px;
+      transition: 0.5s;
+      i{
+        font-size: 55px;
+        color: $green;
+        margin: 0 0 10px;
+        transition: 0.5s;
+      }
+      p{
+        font-size: 16px;
+        font-weight: 900;
+        margin: 0;
+        transition: 0.5s;
+      }
+    }
+    hr{
+      height: 80%;
+      width: 1px;
+      background-color: gray;
+      margin: 0;
+    }
+  }
+  .inscription-grid-item:hover{
+    background-color: $green;
+    i{
+      color: white;
+    }
+    p{
+      color: white;
+    }
+  }
+
   .actions-xs{
     // position: fixed;
     // top: calc( 100vh - 100px);

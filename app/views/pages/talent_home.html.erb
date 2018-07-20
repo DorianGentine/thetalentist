@@ -27,7 +27,6 @@
       <div class="position-top">
         <h1>Je suis un <strong>talent</strong></h1>
 
-        <p class="top-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
 
         <div class="actions-xs hidden visible-xs">
           <div class="btn-connexion">
@@ -44,7 +43,13 @@
         </div>
       </div>
 
-
+      <div class="quatre-metiers">
+        <h3>
+          Tu recherches ta prochaine aventure? <br>
+          Tu es spécialisé en Marketing, Produit, Sales ou Operations ? <br>
+          Ici, ce sont les entreprises qui viennent à toi ! Inscris toi !
+        </h3>
+      </div>
 
       <div class="compartiment-image">
         <%= image_tag "olu-eletu-134758-unsplash.jpg" %>
@@ -70,7 +75,7 @@
           <p>Rends-toi visible auprès des start-ups les plus prometteuses.</p>
         </div>
         <div class="opportunite">
-          <h5>Créer une<br>communauté</h5>
+          <h5>Communauté</h5>
           <p>Les plus belles rencontres font les plus belles histoires.</p>
         </div>
         <div class="opportunite">
@@ -82,7 +87,7 @@
 
 
     <div class="banniere-inscription hidden-xs" style="position: relative;">
-      <p>Lorem ipsum dolor sit amet, consectetur</p>
+      <p>Are you a Talentist ?</p>
       <div class="btn-connexion">
         <%= link_to("S'inscrire", new_talent_registration_path)  %>
       </div>
@@ -100,27 +105,8 @@
     </div>
 
     <div class="grid-chiffres-destine">
-      <div class="nos-chiffres">
-        <h2>Nos chiffres</h2>
-        <div class="chiffres">
-          <div class="chiffres-item">
-            <p class="chiffre">80</p>
-            <p class="desc-chiffre">Start-up<br>inscrites</p>
-          </div>
-          <div class="chiffres-item">
-            <p class="chiffre">24<em>H</em></p>
-            <p class="desc-chiffre">Pour faire<br>un retour</p>
-          </div>
-          <div class="chiffres-item">
-            <p class="chiffre">75<em>%</em></p>
-            <p class="desc-chiffre">sont des<br>anciens</p>
-          </div>
-        </div>
-      </div>
-      <img src="" class="hidden-xs">
-      <img src="" class="hidden-xs">
       <div class="destine">
-        <h2>À qui cela est destiné</h2>
+        <h2>*** VISUEL A CHANGER ***</h2>
         <div class="grid-container">
           <div class="grid-item">
             <p><em>Motivé et ambitieux,</em> tu souhaites avoir de l’impact et faire bouger les lignes.</p>
@@ -136,10 +122,29 @@
           </div>
         </div>
       </div>
+      <%= image_tag "image-home1.png", class: "hidden-xs image-home1" %>
+      <%= image_tag "image-home1.png", class: "hidden-xs image-home2" %>
+      <div class="nos-chiffres">
+        <h2>Nos chiffres</h2>
+        <div class="chiffres">
+          <div class="chiffres-item">
+            <p class="chiffre">80</p>
+            <p class="desc-chiffre">Start-up nous<br>font confiance</p>
+          </div>
+          <div class="chiffres-item">
+            <p class="chiffre">24<em>H</em></p>
+            <p class="desc-chiffre">Pour vous faire<br>un retour</p>
+          </div>
+          <div class="chiffres-item">
+            <p class="chiffre">75<em>%</em></p>
+            <p class="desc-chiffre">de nos clients sont<br>d'anciens candidats</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="banniere-inscription hidden-xs">
-      <p>Lorem ipsum dolor sit amet, consectetur</p>
+      <p>"Soyez vous-même, les autres sont déjà pris" Oscar Wilde</p>
       <div class="btn-connexion">
         <%= link_to("S'inscrire", new_talent_registration_path)  %>
       </div>
@@ -249,15 +254,24 @@
       <p class="citation">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
     </div>
 
-    <div class="banniere-inscription hidden-xs">
-      <p>Trouve ton prochain job !</p>
-      <div class="btn-connexion">
-        <%= link_to("S'inscrire", new_talent_registration_path)  %>
-      </div>
-      <div class="btn-connexion">
-        <%= link_to("Se connecter", new_talent_session_path) %>
-      </div>
+    <h3 class="vous-prenez-decision">IL NE TIENT QU’A VOUS DE PRENDRE LA DECISION</h3>
+    <p class="text-vous-prenez-decision">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+    <div class="inscription-grid">
+      <%= link_to new_headhunter_registration_path do  %>
+        <div class="inscription-grid-item">
+          <i class="fas fa-user"></i>
+          <p>JE VEUX RECRUTER</p>
+        </div>
+      <% end %>
+      <hr>
+      <%= link_to new_talent_registration_path do  %>
+        <div class="inscription-grid-item">
+          <i class="fas fa-rocket"></i>
+          <p>JE VEUX ETRE EMBAUCHÉ</p>
+        </div>
+      <% end %>
     </div>
+
   </div>
 
 

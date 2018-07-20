@@ -116,23 +116,19 @@
     flex-direction: column;
     justify-content: space-between;
     .talent-school{
-      width: 100%;
-      height: 56px;
-      border: 2px solid $violet;
       display: flex;
       justify-content: space-between;
       .talent-school-item{
-        margin: 0;
-        height: 100%;
+        padding: 10px;
+        margin: 0 10px 0 0;
+        border-radius: 5px;
         font-size: 1.2vw;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-grow: 1;
-      }
-      .blue-background{
-        color: white;
-        background-color: rgba(1, 10, 80, 0.55);
+        background-color: rgba(1, 10, 80, 0.05);
+        box-shadow: 3px 6px 8px rgba(0,0,0,0.06)
       }
     }
   }
@@ -274,7 +270,6 @@ h4{
   }
   .links-startup {
     display: flex;
-    justify-content: space-evenly;
   }
 }
 

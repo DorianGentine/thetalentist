@@ -14,6 +14,7 @@
               <p>Accueil</p>
             <% end %>
         </li>
+        <hr class="top-menu-separation">
 
       </div>
       <% if headhunter_signed_in? && current_headhunter %>
@@ -38,9 +39,10 @@
             <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
         </li>
+        <hr class="top-menu-separation">
+
       <% elsif talent_signed_in? && current_talent %>
 
-  <!-- Avatar with dropdown menu -->
         <li>
           <% if current_talent.firstname.present? && current_talent.name.present? %>
             <p><%= current_talent.firstname.capitalize %> <%= current_talent.name.capitalize %> :</p>
@@ -67,6 +69,7 @@
             <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
         </li>
+        <hr class="top-menu-separation">
 
       <% elsif talentist_signed_in? && current_talentist %>
         <li>
@@ -103,6 +106,7 @@
             <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
         </li>
+        <hr class="top-menu-separation">
 
       <% else %>
         <div class="title-menu-link">
@@ -122,6 +126,7 @@
             <p>Se connecter</p>
           <% end %>
         </li>
+        <hr class="top-menu-separation">
         <div class="title-menu-link">
           <li>
             <%= link_to welcome_talents_path do  %>
@@ -139,6 +144,7 @@
             <p>Se connecter</p>
           <% end %>
         </li>
+        <hr class="top-menu-separation">
       <% end %>
       <div class="title-menu-link">
         <li>
