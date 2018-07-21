@@ -7,7 +7,6 @@ class RelationshipPolicy < ApplicationPolicy
 
 
   def create?
-    # record
-    true
+    record.headhunter_id = user.id
   end
 end

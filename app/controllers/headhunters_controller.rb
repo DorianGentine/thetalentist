@@ -35,7 +35,15 @@ class HeadhuntersController < ApplicationController
 
     @startups = Startup.all
 
-    @headhunters = policy_scope(Headhunter)
+    if !@headhunters = policy_scope(Headhunter)
+      if current_user.is_a?(Talent)
+        redirect_to talent_path(current_user)
+      elsif current_user.is_a?(Headhunter)
+        redirect_to headhunter_path(current_user)
+      else
+        redirect_to root_path
+      end
+    end
 
     if params[:tag].blank?
       @headhunters = Headhunter.all.order(name: :asc)

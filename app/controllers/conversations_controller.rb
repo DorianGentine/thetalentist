@@ -5,9 +5,7 @@ class ConversationsController < ApplicationController
     # 1. Liste des conversations dont la relationship n'est pas acceptée = construire @pending_conversations
     # Les messages des recruteurs avec lesquels j'ai une relationship "pending"
     # user = current_user
-
     good_user
-
 
     if @user.is_a?(Talent)
       pending_relationships = Relationship.where(talent_id: @user.id).where(status: "pending")
@@ -83,6 +81,7 @@ class ConversationsController < ApplicationController
     if !params[:headhunter_id].present? && !params[:talent_id].present?
       @conversation.mark_as_read(@user)
     end
+    authorize @user
   end
 
   def update
@@ -110,6 +109,8 @@ class ConversationsController < ApplicationController
       else
         @user = current_user
       end
+    else
+      false
     end
   end
 

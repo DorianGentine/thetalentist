@@ -57,8 +57,10 @@ class ApplicationController < ActionController::Base
       @current_talent
     elsif current_talentist
       @current_talentist
-    else
+    elsif current_headhunter
       @current_headhunter
+    else
+      false
     end
   end
   helper_method :current_user

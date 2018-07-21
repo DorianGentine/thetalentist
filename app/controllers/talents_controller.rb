@@ -3,7 +3,16 @@ class TalentsController < ApplicationController
   def index
     @talentist = current_talentist
     @talents = Talent.all
-    @talents = policy_scope(Talent)
+
+    if !@talents = policy_scope(Talent)
+      if current_user.is_a?(Talent)
+        redirect_to talent_path(current_user)
+      elsif current_user.is_a?(Headhunter)
+        redirect_to headhunter_path(current_user)
+      else
+        redirect_to root_path
+      end
+    end
 
     if params[:tag].blank?
       @talents = Talent.all.order(name: :asc)
@@ -132,6 +141,10 @@ private
   def talent_params
     # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
      params.require(:talent).permit(
+      :name,
+      :firstname,
+      :phone,
+      :city,
       :overview,
       :photo,
       hobby_ids: [],

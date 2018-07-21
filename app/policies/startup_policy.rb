@@ -5,7 +5,7 @@ class StartupPolicy < ApplicationPolicy
     end
   end
 
-  def update?
-    true
-  end
+  # def update?
+  #   false
+  # end
 end

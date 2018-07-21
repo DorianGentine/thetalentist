@@ -1,29 +1,37 @@
 class HeadhunterPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      if user.is_a?(Talentist)
+        scope.all
+      elsif user.is_a?(Headhunter)
+        false
+      end
     end
   end
 
-  # def index?
-  #   user == record
-  #   true
-  # end
-
   def new?
-    true
+    create?
   end
 
   def create?
     true
   end
+
   def update?
     user == record
-    true
   end
 
   def show?
-    true
+    if user.is_a?(Talent)
+      Relationship.where(talent_id: user.id).where(headhunter_id: record.id).where(status: "accepted").first
+      true
+    elsif user.is_a?(Headhunter)
+      user == record
+    elsif user.is_a?(Talentist)
+      true
+    else
+      false
+    end
     # user = l'utilisateur connecté : soit un talent / soit un headhunter / soit un talentist
     # record = un headhunter
     # si le talent est connecté au headhunter alors on veut afficher la page du headhunter
@@ -32,7 +40,11 @@ class HeadhunterPolicy < ApplicationPolicy
   end
 
   def to_validate?
-    true
+    if user.is_a?(Talentist)
+      true
+    else
+      false
+    end
   end
 
   def repertory?
