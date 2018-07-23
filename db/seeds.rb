@@ -16,7 +16,7 @@ Experience.destroy_all
 Credential.destroy_all
 NextAventure.destroy_all
 CompanyType.destroy_all
-# CompanyName.destroy_all
+CompanyName.destroy_all
 
 TalentFormation.destroy_all
 TalentKnown.destroy_all
@@ -59,16 +59,16 @@ nathan_from_agricool = Credential.create!(firstname: "nathan", company_name: "de
 florian_from_manomano = Credential.create!(firstname: "florian", company_name: "desbrasenplus", name: "martin", email: "florian@hotmail.fr", phone: "0786019941", talent: erwan)
 gregoire_from_agricool = Credential.create!(firstname: "gregoire", company_name: "desbrasenplus", name: "barbier", email: "gregoire@hotmail.fr", phone: "0786019941", talent: erwan)
 
-# p "Creating Company_names"
+p "Creating Company_names"
 
-# csv_file_entreprise   = File.join(__dir__, 'entreprises.csv')
+csv_file_entreprise   = File.join(__dir__, 'entreprises.csv')
 
-# CSV.foreach(csv_file_entreprise) do |row|
-#   if row[0]
-#     entre = CompanyName.new({ title: row[0].gsub( "'", "" ) })
-#     entre.save
-#   end
-# end
+CSV.foreach(csv_file_entreprise) do |row|
+  if row[0]
+    entre = CompanyName.new({ title: row[0].gsub( "'", "" ) })
+    entre.save
+  end
+end
 
 p "Creating company_type part"
 
