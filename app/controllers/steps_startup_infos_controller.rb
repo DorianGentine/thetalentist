@@ -3,6 +3,7 @@ class StepsStartupInfosController < ApplicationController
   steps :startup
 
   before_action :find_headhunter, only: [:show, :update]
+  skip_after_action :verify_authorized
   # skip_before_action :authenticate!
   # skip_before_action :current_user
 
@@ -13,6 +14,7 @@ class StepsStartupInfosController < ApplicationController
   end
 
   def update
+    raise
     @startup = Startup.new(startup_params)
     @startup.save
     if @headhunter.update(startup_id: @startup.id)
@@ -26,7 +28,7 @@ private
 
   def find_headhunter
     @headhunter = Headhunter.find(session[:headhunter_id])
-    authorize @headhunter
+    # authorize @headhunter
   end
 
   def finish_wizard_path

@@ -1,5 +1,18 @@
 <p>Hi <%= @user.firstname %>,</p>
 
-<p>Today we'll talk about SMTP and Postmark!</p>
+<p>Binvenue sur notre plateforme!</p>
+
+<% if @user.is_a?(Talent) %>
+  <%= link_to talent_url(@user) do %>
+    <p>Complète ton profil</p>
+  <% end %>
+<% else %>
+  <%= link_to headhunter_url(@user) do %>
+    <p>Complète ton profil</p>
+  <% end %>
+<% end %>
+  <p> Ou notre site </p>
+
+  <p>Merci pour ton interet</p>
 
 <p>See ya!</p>

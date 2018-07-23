@@ -10,6 +10,7 @@
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
 
     <div id="formations">
+      <p class="form-label requis">Diplôme(s)</p> <br>
       <%= f.simple_fields_for :talent_formations do |u| %>
         <%= render 'formation_fields', :f => u %>
       <% end %>

@@ -164,7 +164,7 @@ csv_file_language   = File.join(__dir__, 'axis_languages.csv')
 
 CSV.foreach(csv_file_language) do |row|
   if row[1]
-    Language.create!({ title: row[1].gsub("''", "@").gsub("'", "").gsub("@", "'") })
+    Language.create!({ title: row[1].sub(")", "") })
   end
 end
 

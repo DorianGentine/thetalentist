@@ -7,14 +7,14 @@
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= f.error_notification %>
 
-    <div class="form-inputs">
+    <div class="form-inputs" id= "registration-headhunter">
       <div class="form-line">
         <p class="form-label requis">Prénom</p>
         <%= f.input :firstname, required: true, autofocus: true, label: false %>
         <p class="form-label requis">Nom</p>
         <%= f.input :name, required: true, autofocus: true, label: false %>
       </div>
-      <div class="form-line">
+      <div class="form-line" id= "email-registration">
         <p class="form-label requis">Email</p>
         <%= f.input :email, required: true, autofocus: true, label: false %>
 

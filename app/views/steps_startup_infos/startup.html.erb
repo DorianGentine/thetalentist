@@ -22,7 +22,7 @@
 
     <div class="form-line">
       <p class="form-label">Adresse</p>
-      <%= f.input :address, placeholder: '16 villa gaudelet 75011 paris', label: false%>
+      <%= f.input :address, placeholder: '16 villa gaudelet 75011 paris', :input_html => { :id => "startup_address" }, label: false%>
       <p class="form-label">Site internet</p>
       <%= f.input :link, label: false %>
     </div>

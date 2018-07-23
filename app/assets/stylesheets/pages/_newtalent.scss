@@ -18,8 +18,12 @@
   align-items: center;
 }
 
+#diplome-form {
+  margin-left: -15px;
+}
+
 .form-label {
-  width: 10%;
+  // width: 100% !important;
   font-weight: 600;
   font-size: 15px;
   text-align: right;
@@ -32,7 +36,7 @@
 
 .form-group {
   margin: 15px;
-  width: 25%;
+  width: 25% !important;
 }
 .form-control{
   color: black;
@@ -299,5 +303,20 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 
-
+#registration-headhunter {
+  width: 70%;
+  margin: auto;
+  .form-label {
+    width: 10% !important;
+  }
+  .form-line {
+    justify-content: space-between;
+  }
+  #email-registration {
+    justify-content: flex-start;
+    .form-label {
+      width: 17% !important;
+    }
+  }
+}
 

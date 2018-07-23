@@ -1,5 +1,4 @@
-<div class="nested-fields form-line">
-  <p class="form-label requis">Diplôme(s)</p>
+<div class="nested-fields form-line" id= "diplome-form">
   <%= f.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
   <%= f.input :title, placeholder: "Formation", label: false  %>
   <%= f.input :year, label: false do %>

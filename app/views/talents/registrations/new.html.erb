@@ -28,13 +28,13 @@
         </div>
         <div class="form-line form-ville">
           <p class="form-label requis">Ville</p>
-          <%= f.input :city, required: true, autofocus: true, placeholder: "Ville", label: false %>
+          <%= f.input :city, placeholder: 'Nantes, France', :input_html => { :id => "talent_city" }, label: false%>
         </div>
       </div>
       <div class="form-inputs-2">
         <div class="form-line">
           <p class="form-label">Spécialité métier</p>
-          <%= f.input :sector_ids, collection:Sector.all, label: false, placeholder:'Marketing'%>
+          <%= f.input :job_ids, collection:Job.all, label: false, placeholder:'Marketing'%>
         </div>
         <div class="form-line">
           <p class="form-label">Linkedin</p>
