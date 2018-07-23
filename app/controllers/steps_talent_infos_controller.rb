@@ -3,6 +3,7 @@ class StepsTalentInfosController < ApplicationController
   steps :formations, :experiences, :next_aventure
 
   before_action :find_talent, only: [:show, :update]
+  skip_after_action :verify_authorized
   skip_before_action :authenticate!
   skip_before_action :current_user
 
@@ -44,7 +45,7 @@ class StepsTalentInfosController < ApplicationController
   end
   def find_talent
     @talent = Talent.find(session[:talent_id])
-    authorize @talent
+    # authorize @talent
     # va chercher l'autorisation dans talent_policy.rb dans show? ou dans update? (pas besoin de méthode find_talent?)
 
   end
