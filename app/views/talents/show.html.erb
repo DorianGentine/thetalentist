@@ -158,7 +158,7 @@
                 </div>
                 <div class="placement-talent-experience">
                   <p class="experience-post"><%= @currently.position %></p>
-                  <p class="experience-entreprise"><%= @currently.company_name %></p>
+                  <p class="experience-entreprise"><%= @currently.company_name.title %></p>
                   <p class="experience-duree"><%= @currently.starting %> - <%= @currently.currently ? "Aujourd’hui" : @currently.years %></p>
                   <p class="experience-desc"><%= @currently.overview %></p>
                 </div>
@@ -173,7 +173,7 @@
                 </div>
                 <div class="placement-talent-experience">
                   <p class="experience-post"><%= experience.position %></p>
-                  <p class="experience-entreprise"><%= experience.company_name %></p>
+                  <p class="experience-entreprise"><%= experience.company_name.title %></p>
                   <p class="experience-duree"><%= experience.starting %> - <%= experience.currently ? "Aujourd’hui" : experience.years %></p>
                   <p class="experience-desc"><%= experience.overview %></p>
                 </div>
