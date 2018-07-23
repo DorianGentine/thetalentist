@@ -1,4 +1,4 @@
-class CompanyType < ApplicationRecord
+class CompanyName < ApplicationRecord
 
   has_many :experiences, dependent: :destroy
   has_many :talents, through: :experiences
