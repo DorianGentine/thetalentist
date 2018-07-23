@@ -14,7 +14,6 @@ class StepsStartupInfosController < ApplicationController
   end
 
   def update
-    raise
     @startup = Startup.new(startup_params)
     @startup.save
     if @headhunter.update(startup_id: @startup.id)
