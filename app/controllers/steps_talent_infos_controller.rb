@@ -1,6 +1,6 @@
 class StepsTalentInfosController < ApplicationController
   include Wicked::Wizard
-  steps :formations, :experiences, :next_aventure
+  steps :user_informations, :formations, :experiences, :next_aventure
 
   before_action :find_talent, only: [:show, :update]
   skip_after_action :verify_authorized
@@ -8,11 +8,31 @@ class StepsTalentInfosController < ApplicationController
   skip_before_action :current_user
 
   def show
-    1.times { @talent.talent_formations.build }
-    1.times { @talent.talent_languages.build }
-    1.times { @talent.experiences.build }
-    1.times { @talent.next_aventures.build }
-    1.times { @talent.next_aventures.first.your_small_plus.build }
+    if @talent.talent_formations.count == 0
+      1.times { @talent.talent_formations.build }
+    else
+      0.times { @talent.talent_formations.build }
+    end
+    if @talent.talent_languages.count == 0
+      1.times { @talent.talent_languages.build }
+    else
+      0.times { @talent.talent_languages.build }
+    end
+    if @talent.experiences.count == 0
+      1.times { @talent.experiences.build }
+    else
+      0.times { @talent.experiences.build }
+    end
+    if @talent.next_aventures.count == 0
+      1.times { @talent.next_aventures.build }
+    else
+      0.times { @talent.next_aventures.build }
+    end
+    if @talent.next_aventures.first.your_small_plus.count == 0
+      1.times { @talent.next_aventures.first.your_small_plus.build }
+    else
+      0.times { @talent.next_aventures.first.your_small_plus.build }
+    end
     render_wizard
   end
 
@@ -44,7 +64,12 @@ class StepsTalentInfosController < ApplicationController
     end
   end
   def find_talent
-    @talent = Talent.find(session[:talent_id])
+
+    if session[:talent_id]
+      @talent = Talent.find(session[:talent_id])
+    else
+      @talent = current_talent
+    end
     # authorize @talent
     # va chercher l'autorisation dans talent_policy.rb dans show? ou dans update? (pas besoin de méthode find_talent?)
 
@@ -53,19 +78,24 @@ class StepsTalentInfosController < ApplicationController
   def talent_params
     # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
      params.require(:talent).permit(
+      :name,
+      :firstname,
+      :phone,
+      :linkedin,
+      :city,
+      :job_ids,
       :btoc,
       :btob,
       :no_more,
-      :sector_ids,
-      job_ids: [],
+      sector_ids:[],
       hobby_ids: [],
-      experiences_attributes: [ :id, :company_name_id, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
+      experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
       next_aventures_attributes: NextAventure.attribute_names.map(&:to_sym).push(:_destroy),
       # next_aventures_attributes: [ your_small_plus_attributes: [:id, :description, :_destroy] ],
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       techno_ids: [],
-      sector_ids: []
+      # your_small_plus_attributes: [:id, :description, :_destroy]
     )
   end
 end

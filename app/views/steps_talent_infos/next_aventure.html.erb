@@ -11,34 +11,39 @@
     <%= f.simple_fields_for :next_aventures do |u| %>
     <div class="form-next_aventure">
       <div class="bloc-next-aventure">
-        <div class="form-line form-line-next-aventure">
-          <p class="form-label label-next_aventure requis">Mobilité</p>
-          <%= u.input :city, label: false, placeholder:"Paris", collection: [ "Ville actuelle", "France", "Europe", "Hors Europe" ] %>
-        </div>
-        <div class="form-line form-line-next-aventure">
-          <p class="form-label label-next_aventure requis">Type de contrat</p>
-          <%= u.input :contrat, label: false, placeholder:"Freelance", collection: [ "CDI", "CDD", "Freelance", "Stage" ] %>
-        </div>
-        <div class="form-line form-line-next-aventure">
-          <p class="form-label label-next_aventure requis">Attentes salariales (package K€ annuel brut)</p>
-          <%= u.input :remuneration, label: false, collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ] %>
-        </div>
-        <div class="form-line form-line-next-aventure form-secteur">
-          <p class="form-label label-next_aventure requis">Secteur</p>
-          <%= u.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple", style: "width: 100%"}, include_blank: true, label: false %>
-        </div>
-        <div class="form-line form-line-next-aventure form-secteur">
-          <p class="form-label label-next_aventure requis">Secteur</p>
-          <div style="display: flex; width: 80%">
-            <%= u.input :btoc %>
-            <%= u.input :btob %>
+        <div class="blue-background">
+          <div class="form-line form-line-next-aventure">
+            <p class="form-label label-next_aventure requis">Mobilité</p>
+            <%= u.input :city, label: false, placeholder:"Paris", collection: [ "Ville actuelle", "France", "Europe", "Hors Europe" ] %>
+          </div>
+          <div class="form-line form-line-next-aventure">
+            <p class="form-label label-next_aventure requis">Type de contrat</p>
+            <%= u.input :contrat, label: false, placeholder:"Freelance", collection: [ "CDI", "CDD", "Freelance", "Stage" ] %>
+          </div>
+          <div class="form-line form-line-next-aventure">
+            <p class="form-label label-next_aventure requis">Attentes salariales (package K€ annuel brut)</p>
+            <%= u.input :remuneration, label: false, collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ] %>
+          </div>
+          <div class="form-line form-line-next-aventure form-secteur">
+            <p class="form-label label-next_aventure requis">Secteur</p>
+            <%= f.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple", style: "width: 100%"}, include_blank: true, label: false %>
+          </div>
+          <div class="form-line form-line-next-aventure form-secteur">
+            <p class="form-label label-next_aventure requis">Canal</p>
+            <div style="display: flex; width: 80%">
+              <%= u.input :btoc %>
+              <%= u.input :btob %>
+            </div>
+          </div>
+          <div class="form-line form-line-next-aventure form-secteur">
+            <p class="form-label label-next_aventure requis">Disponibilité</p>
+            <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"], label: false %>
           </div>
         </div>
-        <div class="form-line form-line-next-aventure form-secteur">
-          <p class="form-label label-next_aventure requis">Disponibilité</p>
-          <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"], label: false %>
-        </div>
-        <div id="add-language" class="form-semi-line" style="display: grid; grid: auto auto / auto auto;">
+
+
+
+        <div id="add-language" class="form-semi-line blue-background" style="display: grid; grid: auto auto / auto auto;">
           <p class="form-label label-next_aventure requis" style="width: 100%; align-self: center;">Vos petits + ?</p>
           <%= u.simple_fields_for :your_small_plus do |e| %>
             <%= render 'your_small_plu_fields', :f => e %>
@@ -49,7 +54,7 @@
           </div>
         </div>
       </div>
-      <div class="bloc-next-aventure bloc-next-aventure-right">
+      <div class="bloc-next-aventure bloc-next-aventure-right blue-background">
         <!-- <p class="form-label label-next_aventure-lg requis">Le job de vos rêves ?</p>
         <#%= u.input :overview, label: false, placeholder: "Descrpition", as: :text %>
         <p class="form-label label-next_aventure-lg requis">Qui êtes-vous ?</p>

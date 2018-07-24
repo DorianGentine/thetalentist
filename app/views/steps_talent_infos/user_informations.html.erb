@@ -1,0 +1,49 @@
+<%= render 'shared/navbar' %>
+
+<div class="form-container" data-page="1">
+
+  <%= render 'shared/formprogression' %>
+
+  <h2 class="form-titre-page"><i class="far fa-id-badge"></i> Qui se cache derrière <strong>ce Talent</strong> ?</h2>
+
+  <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <div class="blue-background">
+        <div class="form-line form-nom">
+          <p class="form-label requis">Civilité</p>
+          <%= f.input :firstname, required: true, autofocus: true, placeholder: "Prénom", label: false, :input_html => { :class => "prenom"} %>
+          <%= f.input :name, required: true, autofocus: true, placeholder: "Nom", label: false %>
+        </div>
+        <div class="form-line form-phone">
+          <p class="form-label requis">Tel.</p>
+          <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: false %>
+        </div>
+        <div class="form-line form-ville">
+          <p class="form-label requis">Ville</p>
+          <%= f.input :city, placeholder: 'Nantes, France', :input_html => { :id => "talent_city_step" }, label: false%>
+        </div>
+      </div>
+      <div class="blue-background margin-top-background">
+        <div class="form-line">
+          <p class="form-label">Spécialité métier</p>
+          <%= f.input :job_ids, collection:Job.all, label: false, placeholder:'Marketing'%>
+        </div>
+        <div class="form-line">
+          <p class="form-label">Linkedin</p>
+          <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: false %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= link_to 'Précédent', root_path, { :class => "form-btn form-btn-precedent"} %>
+      <%= f.button :submit, "Suivant", { :class => "form-btn form-btn-suivant"} %>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'shared/footer' %>
+
+
+

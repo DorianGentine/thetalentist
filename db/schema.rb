@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_23_111440) do
+ActiveRecord::Schema.define(version: 2018_07_24_102348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,12 +30,6 @@ ActiveRecord::Schema.define(version: 2018_07_23_111440) do
   end
 
   create_table "cities", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "company_names", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -80,8 +74,7 @@ ActiveRecord::Schema.define(version: 2018_07_23_111440) do
     t.datetime "updated_at", null: false
     t.string "starting"
     t.bigint "company_type_id"
-    t.bigint "company_name_id"
-    t.index ["company_name_id"], name: "index_experiences_on_company_name_id"
+    t.string "company_name"
     t.index ["company_type_id"], name: "index_experiences_on_company_type_id"
     t.index ["talent_id"], name: "index_experiences_on_talent_id"
   end
@@ -512,7 +505,6 @@ ActiveRecord::Schema.define(version: 2018_07_23_111440) do
   end
 
   add_foreign_key "credentials", "talents"
-  add_foreign_key "experiences", "company_names"
   add_foreign_key "experiences", "company_types"
   add_foreign_key "experiences", "talents"
   add_foreign_key "headhunter_messages", "headhunters"
