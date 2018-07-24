@@ -16,7 +16,6 @@ Experience.destroy_all
 Credential.destroy_all
 NextAventure.destroy_all
 CompanyType.destroy_all
-CompanyName.destroy_all
 
 TalentFormation.destroy_all
 TalentKnown.destroy_all
@@ -61,14 +60,14 @@ gregoire_from_agricool = Credential.create!(firstname: "gregoire", company_name:
 
 p "Creating Company_names"
 
-csv_file_entreprise   = File.join(__dir__, 'entreprises.csv')
+# csv_file_entreprise   = File.join(__dir__, 'entreprises.csv')
 
-CSV.foreach(csv_file_entreprise) do |row|
-  if row[0]
-    entre = CompanyName.new({ title: row[0].gsub( "'", "" ) })
-    entre.save
-  end
-end
+# CSV.foreach(csv_file_entreprise) do |row|
+#   if row[0]
+#     entre = CompanyName.new({ title: row[0].gsub( "'", "" ) })
+#     entre.save
+#   end
+# end
 
 p "Creating company_type part"
 
@@ -79,17 +78,17 @@ tpe = CompanyType.create!(title: "Micro entreprise (TPE)")
 
 p "Creating experiences"
 
-data_analyst = Experience.create!( position: "Data analyste", talent: luc, company_name: CompanyName.first, company_type_id: ge.id, link:"https://www.valeo.com/fr/", years:"2017", currently: false, starting: "2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
-data_scientist = Experience.create!( position: "data scientist", talent: donatien, company_name: CompanyName.first, company_type_id: tpe.id, link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
-data_owner = Experience.create!( position: "data owner", talent: dorian, company_name: CompanyName.first, company_type_id: eti.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2012", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_owner = Experience.create!( position: "data owner", talent: erwan, company_name: CompanyName.first, company_type_id: ge.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2014", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_analyst = Experience.create!( position: "Data analyste", talent: erwan, company_name: CompanyName.first, company_type_id: pme.id, link:"https://www.valeo.com/fr/", years:"2017", currently: false, starting: "2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
-data_scientist = Experience.create!( position: "data scientist", talent: dorian, company_name: CompanyName.first, company_type_id: tpe.id, link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
-data_owner = Experience.create!( position: "data owner", talent: donatien, company_name: CompanyName.first, company_type_id: ge.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_owner = Experience.create!( position: "data owner", talent: luc, company_name: CompanyName.first, company_type_id: eti.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_scientist = Experience.create!( position: "data scientist", talent: louis, company_name: CompanyName.first, company_type_id: pme.id, link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
-data_owner = Experience.create!( position: "data owner", talent: louis, company_name: CompanyName.first, company_type_id: pme.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_owner = Experience.create!( position: "data owner", talent: louis, company_name: CompanyName.first, company_type_id: ge.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_analyst = Experience.create!( position: "Data analyste", talent: luc, company_name: "Total", company_type_id: ge.id, link:"https://www.valeo.com/fr/", years:"2017", currently: false, starting: "2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
+data_scientist = Experience.create!( position: "data scientist", talent: donatien, company_name: "Total", company_type_id: tpe.id, link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
+data_owner = Experience.create!( position: "data owner", talent: dorian, company_name: "Total", company_type_id: eti.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2012", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_owner = Experience.create!( position: "data owner", talent: erwan, company_name: "Total", company_type_id: ge.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2014", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_analyst = Experience.create!( position: "Data analyste", talent: erwan, company_name: "Total", company_type_id: pme.id, link:"https://www.valeo.com/fr/", years:"2017", currently: false, starting: "2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
+data_scientist = Experience.create!( position: "data scientist", talent: dorian, company_name: "Total", company_type_id: tpe.id, link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
+data_owner = Experience.create!( position: "data owner", talent: donatien, company_name: "Total", company_type_id: ge.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_owner = Experience.create!( position: "data owner", talent: luc, company_name: "Total", company_type_id: eti.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_scientist = Experience.create!( position: "data scientist", talent: louis, company_name: "Total", company_type_id: pme.id, link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
+data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "Total", company_type_id: pme.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "Total", company_type_id: ge.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
 
 p "Creating formations"
 

@@ -84,7 +84,8 @@ class ApplicationController < ActionController::Base
         end
       else
         session[:talent_id] = resource.id
-        steps_talent_info_path(:formations)
+        # steps_talent_info_path(:formations)
+        steps_talent_info_path(:user_informations)
       end
     elsif resource.is_a?(Talentist)
       talents_path

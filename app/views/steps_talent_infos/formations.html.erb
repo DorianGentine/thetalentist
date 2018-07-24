@@ -9,7 +9,7 @@
 
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
 
-    <div id="formations">
+    <div id="formations" class="blue-background">
       <p class="form-label requis">Diplôme(s)</p> <br>
       <%= f.simple_fields_for :talent_formations do |u| %>
         <%= render 'formation_fields', :f => u %>
@@ -19,13 +19,13 @@
       </div>
     </div>
 
-    <div id="form-p2-comp" class="p-relative">
-      <div class="form-semi-line">
+    <div id="form-p2-comp" class="p-relative margin-top-background">
+      <div class="form-semi-line blue-background">
         <p class="form-label form-label-semi-line requis">Compétences techniques</p>
         <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 300px"}, multiple: true, required: true %>
       </div>
 
-      <div id="add-language" class="form-semi-line">
+      <div id="add-language" class="form-semi-line blue-background">
         <p class="form-label form-label-semi-line requis">Compétences linguistiques</p>
         <div class="add-language-line">
           <%= f.simple_fields_for :talent_languages do |u| %>

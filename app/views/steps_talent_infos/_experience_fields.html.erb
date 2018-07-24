@@ -1,7 +1,7 @@
 <div class='nested-fields'>
   <div class="form-line">
     <p class="form-label requis">Expérience</p>
-    <%= f.association :company_name, collection: CompanyName.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
+    <%= f.input :company_name, label: false, placeholder:"le nom de l'entreprise" %>
     <%= f.input :position, label: false, placeholder:"Intitulé du poste" %>
     <%= f.input :currently %>
   </div>
