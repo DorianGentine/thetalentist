@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_24_102348) do
+ActiveRecord::Schema.define(version: 2018_07_25_083411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -241,6 +241,11 @@ ActiveRecord::Schema.define(version: 2018_07_24_102348) do
     t.string "famous_person"
     t.text "good_manager"
     t.text "work_for_free"
+    t.string "waiting_for_one"
+    t.string "waiting_for_two"
+    t.string "waiting_for_three"
+    t.integer "hunter_or_breeder"
+    t.integer "creative_or_pragmatic"
     t.index ["talent_id"], name: "index_next_aventures_on_talent_id"
   end
 

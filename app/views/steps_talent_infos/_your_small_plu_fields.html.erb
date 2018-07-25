@@ -1,5 +1,9 @@
-<div class='nested-fields form-line'>
-  <%= f.input :description, label: false %>
+<div class='nested-fields row'>
+  <div class="col-xs-12 col-lg-9">
+    <%= f.input :description, label: false %>
+  </div>
   <!-- TODO button -->
-  <%= link_to_remove_association "-", f %>
+  <div class="col-xs-12 col-lg-3" id="supp-words">
+    <%= link_to_remove_association "Supprimer", f %>
+  </div>
 </div>

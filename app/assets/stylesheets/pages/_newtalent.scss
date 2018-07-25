@@ -2,17 +2,6 @@
   padding: 0 190px;
 }
 
-.form-titre-page{
-  font-weight: 900;
-  font-size: 39px;
-  padding-bottom: 20px;
-  border-bottom: 3px solid $violet;
-  margin-bottom: 80px;
-  strong{
-    color: $green;
-  }
-}
-
 .form-line{
   display: flex;
   align-items: center;
@@ -24,27 +13,47 @@
 
 .form-label {
   width: 10%;
-  font-weight: 600;
-  font-size: 15px;
-  text-align: right;
-  margin: 0;
 }
 .requis:after{
   content: " *";
   color: $red;
 }
+#linkedin-size .form-group {
+  width: 70%;
+}
+#linkedin-size p {
+  width: 20%;
+}
+
+@media screen and (max-width: 770px) {
+  #linkedin-size .form-group {
+    width: 100%;
+  }
+}
+
+#metier-size .form-group {
+  width: 130px;
+}
 
 .form-group {
   margin: 15px;
-  width: 25%;
+  // width: 25%;
 }
-.form-control{
-  color: black;
+
+
+#diplome-form{
+  .select span {
+    width: 100% !important;
+  }
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    width: 25px !important;
+  }
 }
-.form-control:focus {
-  border-color: #4ECCA3;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(78, 204, 163, 0.6);
-}
+
+
+
+
+
 .invalid-feedback {
   color: $red;
   font-size: 14px;
@@ -73,6 +82,7 @@
 
 .form-compte{
   align-items: flex-start;
+  margin-bottom: -20px;
   .form-label{
     margin-top: 25px;
   }
@@ -105,45 +115,66 @@
   color: $green;
   text-decoration: none;
 }
-
-.form-actions{
-  margin: 80px;
-  display: flex;
-  justify-content: center;
-  .form-btn{
-    height: 40px;
-    width: 170px;
-    border-radius: 25px;
-    border: 2px solid $green;
-    padding: 0;
-    margin: 0 30px;
-  }
-  .form-btn-precedent{
+.talent_password small {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: $green;
+    justify-content: flex-end;
   }
-  .form-btn-suivant{
-    background-color: $green;
-    color: white;
+
+#new-talent {
+  .display-flex {
+    display: flex;
+    justify-content: space-around;
   }
 }
-
-
 .p-relative{
   position: relative;
 }
 
 /*CSS formations.html.erb */
 #formations{
-  .form-label{
-    width: unset;
-  }
+
   .form-group{
     width: unset;
   }
 }
+
+#align-sup-btn {
+  margin-top: 17px;
+}
+
+@media screen and (min-width: 771px) {
+  #text_area-experience {
+    margin: 15px;
+  }
+  #supp-words {
+    margin: 30px 0;
+  }
+  #formations{
+    .form-label{
+      width: 7%;
+    }
+    .links {
+      margin: 0 calc(7% + 9px);
+    }
+  }
+  .margin-competence {
+    padding: 11px 0;
+  }
+  #next_aventure-form {
+    .form-group {
+      margin: 15px;
+      width: 60%;
+    }
+  }
+}
+#info-question-next_aventure {
+  font-size: 12px;
+  text-align: center;
+  color: gray;
+  margin: 0;
+}
+
+
 .nested-fields a{
   padding: 0 10px;
   color: $red;
@@ -166,8 +197,8 @@
     }
   }
   .form-semi-line:first-child{
-    position: absolute;
-    top: 0;
+    // position: absolute;
+    // top: 0;
     .form-label{
       margin-bottom: 15px;
     }
@@ -206,7 +237,14 @@
   transition: 0.15s;
 }
 
-
+#text_area-experience {
+  .form-label-font-size {
+    text-align: left;
+  }
+  textarea {
+    width: 100%;
+  }
+}
 /* CSS checkboxes */
 input[type="radio"], input[type="checkbox"] {
   margin: 4px 15px;
@@ -220,24 +258,29 @@ input[type="radio"], input[type="checkbox"] {
   width: 100%;
   text-align: left;
 }
-.form-next_aventure{
-  display: flex;
-}
-.bloc-next-aventure{
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  .form-group{
-    width: 60%;
-  }
-}
-.bloc-next-aventure-right{
-  .form-group{
-    width: calc(100% - 15px);
-  }
-}
+// .form-next_aventure{
+//   display: flex;
+// }
+// .bloc-next-aventure{
+//   width: 50%;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   .form-group{
+//     width: 60%;
+//   }
+// }
+// .bloc-next-aventure-right{
+//   .form-group{
+//     width: calc(100% - 15px);
+//   }
+// }
 
+#competence-form{
+  .form-group{
+    margin: 15px 0;
+  }
+}
 @media screen and (max-width: 770px) {
   .form-container{
     padding: 0 40px;
@@ -300,7 +343,9 @@ input[type="radio"], input[type="checkbox"] {
     }
   }
 }
-
+#font-input-currently label {
+  font-size: 12px;
+}
 
 #registration-headhunter {
   width: 70%;

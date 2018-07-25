@@ -1,3 +1,4 @@
+<% choices = ["Ambiance", "International", "Produit", "Rémunération", "Sens", "Valeurs", "Mission", "Management", "Worklife balance", "Impact"]  %>
 <%= render 'shared/navbar' %>
 
 <div class="form-container" data-page="4">
@@ -9,70 +10,109 @@
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
 
     <%= f.simple_fields_for :next_aventures do |u| %>
-    <div class="form-next_aventure">
-      <div class="bloc-next-aventure">
-        <div class="blue-background">
-          <div class="form-line form-line-next-aventure">
-            <p class="form-label label-next_aventure requis">Mobilité</p>
-            <%= u.input :city, label: false, placeholder:"Paris", collection: [ "Ville actuelle", "France", "Europe", "Hors Europe" ] %>
-          </div>
-          <div class="form-line form-line-next-aventure">
-            <p class="form-label label-next_aventure requis">Type de contrat</p>
-            <%= u.input :contrat, label: false, placeholder:"Freelance", collection: [ "CDI", "CDD", "Freelance", "Stage" ] %>
-          </div>
-          <div class="form-line form-line-next-aventure">
-            <p class="form-label label-next_aventure requis">Attentes salariales (package K€ annuel brut)</p>
-            <%= u.input :remuneration, label: false, collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ] %>
-          </div>
-          <div class="form-line form-line-next-aventure form-secteur">
-            <p class="form-label label-next_aventure requis">Secteur</p>
-            <%= f.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple", style: "width: 100%"}, include_blank: true, label: false %>
-          </div>
-          <div class="form-line form-line-next-aventure form-secteur">
-            <p class="form-label label-next_aventure requis">Canal</p>
-            <div style="display: flex; width: 80%">
-              <%= u.input :btoc %>
-              <%= u.input :btob %>
+      <div class="blue-background" id="next_aventure-form">
+
+        <div class="row">
+          <div class="col-xs-12 col-lg-6">
+            <div class="form-line form-line-next-aventure">
+              <p class="form-label form-label-font-size label-next_aventure requis">Mobilité</p>
+              <%= u.input :city, label: false, placeholder:"Paris", collection: [ "Ville actuelle", "France", "Europe", "Hors Europe" ] %>
             </div>
           </div>
-          <div class="form-line form-line-next-aventure form-secteur">
-            <p class="form-label label-next_aventure requis">Disponibilité</p>
-            <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"], label: false %>
+          <div class="col-xs-12 col-lg-6">
+            <div class="form-line form-line-next-aventure form-secteur">
+              <p class="form-label form-label-font-size label-next_aventure requis">Secteur</p>
+              <%= f.input :sector_ids, collection: Sector.all, input_html: { class:"select2", multiple: "multiple", style: "width: 100%"}, include_blank: true, label: false %>
+            </div>
           </div>
         </div>
-
-
-
-        <div id="add-language" class="form-semi-line blue-background" style="display: grid; grid: auto auto / auto auto;">
-          <p class="form-label label-next_aventure requis" style="width: 100%; align-self: center;">Vos petits + ?</p>
-          <%= u.simple_fields_for :your_small_plus do |e| %>
-            <%= render 'your_small_plu_fields', :f => e %>
-          <% end %>
-          <div></div>
-          <div class='links'>
-            <%= link_to_add_association 'Ajouter un +', u, :your_small_plus, :partial => 'your_small_plu_fields' %>
+        <div class="row">
+          <div class="col-xs-12 col-lg-6">
+            <div class="form-line form-line-next-aventure">
+              <p class="form-label form-label-font-size label-next_aventure requis">Type de contrat</p>
+              <%= u.input :contrat, label: false, placeholder:"Freelance", collection: [ "CDI", "CDD", "Freelance", "Stage" ] %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-lg-6">
+            <div class="form-line form-line-next-aventure form-secteur">
+              <p class="form-label form-label-font-size label-next_aventure requis">Canal</p>
+              <div style="display: flex; width: 80%">
+                <%= u.input :btoc %>
+                <%= u.input :btob %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-lg-6">
+            <div class="form-line form-line-next-aventure">
+              <p class="form-label form-label-font-size label-next_aventure requis">Attentes salariales</p>
+              <%= u.input :remuneration, label: false, hint: "package K€ annuel brut", collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ] %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-lg-6">
+            <div class="form-line form-line-next-aventure form-secteur">
+              <p class="form-label form-label-font-size label-next_aventure requis">Disponibilité</p>
+              <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"], label: false %>
+            </div>
           </div>
         </div>
       </div>
-      <div class="bloc-next-aventure bloc-next-aventure-right blue-background">
-        <!-- <p class="form-label label-next_aventure-lg requis">Le job de vos rêves ?</p>
-        <#%= u.input :overview, label: false, placeholder: "Descrpition", as: :text %>
-        <p class="form-label label-next_aventure-lg requis">Qui êtes-vous ?</p>
-        <#%= u.input :no_more, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %> -->
 
-        <p class="form-label label-next_aventure-lg requis">Quel est le rêve que tu remets toujours à demain ?</p>
-        <%= u.input :dream, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
 
-        <p class="form-label label-next_aventure-lg requis">Y a-t-il une personnalité qui t’inspire ?</p>
-        <%= u.input :famous_person, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
-
-        <p class="form-label label-next_aventure-lg requis">Selon toi, qu’est-ce qu’un bon manager ?</p>
-        <%= u.input :good_manager, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
-
-        <p class="form-label label-next_aventure-lg requis">Quel travail serais-tu prêt à effectuer gratuitement ?</p>
-        <%= u.input :work_for_free, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+      <div class="row">
+        <div class="col-xs-12 col-lg-6">
+          <div id="add-language" class="form-semi-line blue-background margin-top-background margin-right-background ">
+            <div class="form-line">
+              <p class="form-label form-label-font-size label-next_aventure requis">Vos petits + ?</p>
+              <%= u.simple_fields_for :your_small_plus do |e| %>
+                <%= render 'your_small_plu_fields', :f => e %>
+              <% end %>
+            </div>
+            <div class='links'>
+              <%= link_to_add_association 'Ajouter un +', u, :your_small_plus, :partial => 'your_small_plu_fields' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+          <div class="form-line form-line-next-aventure blue-background margin-top-background margin-left-background">
+            <p class="form-label form-label-font-size label-next_aventure requis">
+            Qu’attends-tu de ta prochaine aventure ?</p>
+            <div>
+              <p id="info-question-next_aventure">Sélectionne les 3 critères les plus importants à tes yeux et classe-les par ordre d’importance</p>
+              <div class="form-line">
+                <%= u.input :waiting_for_one, label: false, hint:"Choix n°1", collection: choices %>
+                <%= u.input :waiting_for_two, label: false, hint:"Choix n°2", collection: choices %>
+                <%= u.input :waiting_for_three, label: false, hint:"Choix n°3", collection: choices %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+
+      <div class="bloc-next-aventure blue-background margin-top-background">
+        <div class="row">
+          <div class="col-xs-12 col-lg-6">
+            <p class="form-label-font-size label-next_aventure-lg requis">Quel est le rêve que tu remets toujours à demain ?</p>
+            <%= u.input :dream, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+          </div>
+          <div class="col-xs-12 col-lg-6">
+            <p class="form-label form-label-font-size label-next_aventure-lg requis">Y a-t-il une personnalité qui t’inspire ? Pourquoi ?</p>
+            <%= u.input :famous_person, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-lg-6">
+            <p class="form-label form-label-font-size label-next_aventure-lg requis">Selon toi, qu’est-ce qu’un bon manager ?</p>
+            <%= u.input :good_manager, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+          </div>
+          <div class="col-xs-12 col-lg-6">
+            <p class="form-label form-label-font-size label-next_aventure-lg requis">Quel travail serais-tu prêt à effectuer gratuitement ?</p>
+            <%= u.input :work_for_free, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+          </div>
+        </div>
+      </div>
     <% end %>
 
 

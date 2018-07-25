@@ -1,10 +1,21 @@
 <div class="nested-fields form-line" id= "diplome-form">
-  <%= f.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
-  <%= f.input :title, placeholder: "Formation", label: false  %>
-  <%= f.input :year, label: false do %>
-    <%= f.select :year, options_for_select((1980..2018.to_i).to_a.reverse), prompt: "Année d'obtention"   %>
-  <% end %>
-  <%= link_to_remove_association "Supprimer", f %>
+  <p class="form-label form-label-font-size requis">Diplôme</p>
+  <div class="row">
+    <div class="col-xs-12 col-lg-4">
+      <%= f.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { class:"select2"}  %>
+    </div>
+    <div class="col-xs-12 col-lg-4">
+      <%= f.input :title, placeholder: "Formation", label: false  %>
+    </div>
+    <div class="col-xs-12 col-lg-2">
+      <%= f.input :year, label: false do %>
+        <%= f.select :year, options_for_select((1980..2018.to_i).to_a.reverse), prompt: "Année d'obtention"   %>
+      <% end %>
+    </div>
+    <div class="col-xs-12 col-lg-2" id="align-sup-btn">
+      <%= link_to_remove_association "Supprimer", f %>
+    </div>
+  </div>
 </div>
 
 

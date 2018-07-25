@@ -1,6 +1,6 @@
 <%= render 'shared/navbar' %>
 
-<div class="form-container" data-page="1">
+<div class="form-container" data-page="1" id="new-talent">
 
   <%= render 'shared/formprogression' %>
 
@@ -9,36 +9,37 @@
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= f.error_notification %>
     <div class="form-inputs">
-      <div class="form-inputs-1">
+      <div class="blue-background">
         <div class="form-line form-nom">
-          <p class="form-label requis">Civilité</p>
+          <p class="form-label form-label-font-size requis">Civilité</p>
           <%= f.input :firstname, required: true, autofocus: true, placeholder: "Prénom", label: false, :input_html => { :class => "prenom"} %>
           <%= f.input :name, required: true, autofocus: true, placeholder: "Nom", label: false %>
         </div>
         <div class="form-line form-compte">
-          <p class="form-label requis">Identifiants</p>
+          <p class="form-label form-label-font-size requis">Identifiants</p>
           <%= f.input :email, required: true, autofocus: true, placeholder: "exemple@gmail.com", label: false  %>
-          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", label: false %><%= f.error_notification %>
+
+          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", :input_html => { id: "margin-bottom-mdp"}, label: false %><%= f.error_notification %>
           <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false %>
 
         </div>
         <div class="form-line form-phone">
-          <p class="form-label requis">Tel.</p>
+          <p class="form-label form-label-font-size requis">Tel.</p>
           <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: false %>
         </div>
         <div class="form-line form-ville">
-          <p class="form-label requis">Ville</p>
+          <p class="form-label form-label-font-size requis">Ville</p>
           <%= f.input :city, placeholder: 'Nantes, France', :input_html => { :id => "talent_city" }, label: false%>
         </div>
       </div>
-      <div class="form-inputs-2">
-        <div class="form-line">
-          <p class="form-label">Spécialité métier</p>
-          <%= f.input :job_ids, collection:Job.all, label: false, placeholder:'Marketing'%>
-        </div>
-        <div class="form-line">
-          <p class="form-label">Linkedin</p>
+      <div class="blue-background margin-top-background row">
+        <div class="col-xs-12 col-lg-6 form-line" id="linkedin-size">
+          <p class="form-label-font-size">Linkedin</p>
           <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: false %>
+        </div>
+        <div class="col-xs-12 col-lg-6 form-line" id="metier-size">
+          <p class="form-label-font-size">Spécialité métier</p>
+          <%= f.input :job_ids, collection:Job.all, label: false, placeholder:'Marketing'%>
         </div>
       </div>
     </div>
