@@ -1,6 +1,12 @@
-<div class='nested-fields form-line'>
-  <%= f.association :language, collection: Language.all, label: false, input_html: { class:"select2"}  %>
-  <%= f.input :level, collection: ["Natif", "Bilingue", "Avancée", "lu parlé écrit", "Notions"], label: false %>
+<div class='nested-fields form-line row'>
+  <div class="col-xs-12 col-lg-4">
+    <%= f.association :language, collection: Language.all, label: false, input_html: { class:"select2"}  %>
+  </div>
+  <div class="col-xs-12 col-lg-4">
+    <%= f.input :level, collection: ["Natif", "Bilingue", "Avancée", "lu parlé écrit", "Notions"], label: false %>
+  </div>
+  <div class="col-xs-12 col-lg-4">
   <!-- TODO button -->
-  <%= link_to_remove_association "Supprimer", f %>
+    <%= link_to_remove_association "Supprimer", f %>
+  </div>
 </div>

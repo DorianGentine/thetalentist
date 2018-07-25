@@ -34,6 +34,7 @@ class StepsTalentInfosController < ApplicationController
       0.times { @talent.next_aventures.first.your_small_plus.build }
     end
     render_wizard
+
   end
 
   def update
@@ -41,6 +42,7 @@ class StepsTalentInfosController < ApplicationController
     # Si tu as un problème de validation pour créer talent
     # @talent.status = step.to_s
     # @talent.status = 'active' if step == steps.last
+    # raise
     if @talent.update(talent_params)
       # @talent = current_user
       render_wizard @talent

@@ -1,20 +1,38 @@
 <div class='nested-fields'>
   <div class="form-line">
-    <p class="form-label requis">Expérience</p>
-    <%= f.input :company_name, label: false, placeholder:"le nom de l'entreprise" %>
-    <%= f.input :position, label: false, placeholder:"Intitulé du poste" %>
-    <%= f.input :currently %>
+    <p class="form-label requis form-label-font-size">Expérience</p>
+    <div class="row">
+      <div class="col-xs-12 col-lg-3">
+        <%= f.input :company_name, label: false, placeholder:"le nom de l'entreprise" %>
+        <%= f.input :position, label: false, placeholder:"Intitulé du poste" %>
+        <%= f.input :company_type_id, collection: CompanyType.all, label: false, placeholder:"Type d'entreprise" %>
+      </div>
+      <div class="col-xs-12 col-lg-3">
+        <div class="form-line">
+        <p class="form-label requis form-label-font-size">De</p>
+        <%= f.input :starting, label: false, as: :string, input_html: {class: "datepicker1"} %>
+      </div>
+      </div>
+      <div class="col-xs-12 col-lg-3">
+        <div class="form-line">
+        <p class="form-label form-label-font-size" style="width: 0">À</p>
+        <%= f.input :years, label: false, as: :string, input_html: {class: "datepicker1"}  %>
+      </div>
+      </div>
+      <div class="col-xs-12 col-lg-3" id="font-input-currently">
+        <%= f.input :currently, label: "Poste actuel" %>
+      </div>
+    </div>
   </div>
-  <div class="form-line">
-    <p class="form-label requis">De</p>
-    <%= f.input :starting, label: false, as: :string, input_html: {class: "datepicker1"} %>
+  <div class="form-line row">
+    <div class="col-xs-12 col-lg-2">
 
-    <p class="form-label" style="width: 0">À</p>
-    <%= f.input :years, label: false, as: :string, input_html: {class: "datepicker1"}  %>
-    <% if @talent.next_aventures.present? %>
+
+    </div>
+    <div class="col-xs-12 col-lg-8" id="text_area-experience">
+      <p class="form-label-font-size">Description de la mission:</p>
       <%= f.text_area :overview, label: false, placeholder:"Vos missions" %>
-      <%= f.input :company_type_id, collection: CompanyType.all, label: false, placeholder:"Type d'entreprise" %>
-    <% end %>
+    </div>
     <!-- TODO button -->
     <%= link_to_remove_association "Supprimer", f %>
   </div>
