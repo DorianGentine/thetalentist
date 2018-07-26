@@ -11,7 +11,7 @@
       <%= f.simple_fields_for :experiences do |u| %>
        <%= render 'experience_fields', :f => u %>
       <% end %>
-      <div class='links'>
+      <div class='links' id="add-experience-grid">
         <%= link_to_add_association 'Ajouter une expérience +', f, :experiences, :partial => 'experience_fields', :class => "form-hobby-add" %>
       </div>
     </div>

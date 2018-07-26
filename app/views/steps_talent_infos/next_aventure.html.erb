@@ -37,8 +37,8 @@
             <div class="form-line form-line-next-aventure form-secteur">
               <p class="form-label form-label-font-size label-next_aventure requis">Canal</p>
               <div style="display: flex; width: 80%">
-                <%= u.input :btoc %>
-                <%= u.input :btob %>
+                <%= u.input :btoc, label: "BTOC" %>
+                <%= u.input :btob, label: "BTOB" %>
               </div>
             </div>
           </div>
@@ -63,13 +63,13 @@
       <div class="row">
         <div class="col-xs-12 col-lg-6">
           <div id="add-language" class="form-semi-line blue-background margin-top-background margin-right-background ">
+              <p class="form-label form-label-font-size label-next_aventure requis" id="add-words">Vos petits + ?</p>
             <div class="form-line">
-              <p class="form-label form-label-font-size label-next_aventure requis">Vos petits + ?</p>
               <%= u.simple_fields_for :your_small_plus do |e| %>
                 <%= render 'your_small_plu_fields', :f => e %>
               <% end %>
             </div>
-            <div class='links'>
+            <div class='links' id="add-margin-left">
               <%= link_to_add_association 'Ajouter un +', u, :your_small_plus, :partial => 'your_small_plu_fields' %>
             </div>
           </div>
@@ -85,6 +85,27 @@
                 <%= u.input :waiting_for_two, label: false, hint:"Choix n°2", collection: choices %>
                 <%= u.input :waiting_for_three, label: false, hint:"Choix n°3", collection: choices %>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="blue-background margin-top-background">
+        <div class="row">
+          <p class="form-label-font-size requis left-p">Es-tu plutôt:</p>
+          <div class="col-xs-12 col-lg-6 ">
+            <div class="width-rang align-items-form">
+              <p>Chasseur</p>
+              <input class="numeric integer optional" step="1" name="talent[next_aventures_attributes][0][hunter_or_breeder]" id="talent_next_aventures_attributes_0_hunter_or_breeder" type="range" min="1" max="100" value="50">
+              <p>Éleveur</p>
+            </div>
+          </div>
+          <div class="col-xs-12 col-lg-6">
+            <div class="width-rang align-items-form">
+              <!-- <p class="form-label-font-size requis">Es-tu plutôt:</p> -->
+              <p>Créatif</p>
+              <input class="numeric integer optional" step="1" name="talent[next_aventures_attributes][0][creative_or_pragmatic]" id="talent_next_aventures_attributes_0_creative_or_pragmatic" type="range" min="1" max="100" value="50">
+              <p>Pragmatique</p>
             </div>
           </div>
         </div>

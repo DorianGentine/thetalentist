@@ -42,7 +42,6 @@ class StepsTalentInfosController < ApplicationController
     # Si tu as un problème de validation pour créer talent
     # @talent.status = step.to_s
     # @talent.status = 'active' if step == steps.last
-    # raise
     if @talent.update(talent_params)
       # @talent = current_user
       render_wizard @talent
@@ -89,6 +88,11 @@ class StepsTalentInfosController < ApplicationController
       :btoc,
       :btob,
       :no_more,
+      :waiting_for_one,
+      :waiting_for_two,
+      :waiting_for_three,
+      :creative_or_pragmatic,
+      :hunter_or_breeder,
       sector_ids:[],
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],

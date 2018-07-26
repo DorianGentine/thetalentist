@@ -51,7 +51,10 @@
 }
 
 
-
+.margin-auto-new-talent {
+  width: 85%;
+  margin: auto;
+}
 
 
 .invalid-feedback {
@@ -144,10 +147,10 @@
 
 @media screen and (min-width: 771px) {
   #text_area-experience {
-    margin: 15px;
+    margin: 0 15px 15px 12px;
   }
   #supp-words {
-    margin: 30px 0;
+    margin: 20px 0;
   }
   #formations{
     .form-label{
@@ -240,9 +243,11 @@
 #text_area-experience {
   .form-label-font-size {
     text-align: left;
+    margin-bottom: 5px;
   }
   textarea {
     width: 100%;
+    height: 75%;
   }
 }
 /* CSS checkboxes */
@@ -361,6 +366,124 @@ input[type="radio"], input[type="checkbox"] {
     .form-label {
       width: 17% !important;
     }
+  }
+}
+
+@media screen and (min-width: 771px) {
+  .width-rang {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    p {
+      margin-right: 20px;
+    }
+    input {
+      width: 90%;
+    }
+  }
+  #add-words {
+    margin-left: 15px;
+  }
+  #add-margin-left {
+    margin-left: 15px;
+  }
+}
+
+#add-words {
+    text-align: left;
+  }
+.width-rang {
+  p {
+    margin: 13px;
+    color: $green;
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+.left-p {
+  text-align: left;
+}
+
+.align-items-form {
+  display: flex;
+  align-items: center;
+}
+
+
+// grid pour experience
+#experience-grid {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.experience-title-grid {
+  grid-row: 1 / span 3;
+  grid-column: 1 / span 1;
+  margin: auto;
+  .form-label-font-size {
+    text-align: center !important;
+  }
+}
+
+.company-name-grid {
+  grid-row: 1 / span 1;
+  grid-column: 2 / span 1;
+}
+
+.position-grid {
+  grid-row: 2 / span 1;
+  grid-column: 2 / span 1;
+}
+
+.company-type-grid {
+  grid-row: 3 / span 1;
+  grid-column: 2 / span 1;
+}
+
+.starting-grid {
+  display: flex;
+  align-items: center;
+  grid-row: 1 / span 1;
+  grid-column: 3 / span 1;
+
+}
+
+.ending-grid {
+  display: flex;
+  align-items: center;
+  grid-row: 1 / span 1;
+  grid-column: 4 / span 1;
+}
+.margin-date-picker {
+  p {
+    width: 15%;
+    margin-right: 15px;
+  }
+}
+.currently-grid {
+  text-align: center;
+  grid-row: 1 / span 1;
+  grid-column: 5 / span 1;
+}
+#text_area-experience {
+  grid-row: 2 / span 2;
+  grid-column: 3 / span 2;
+}
+.supp-grid-experience {
+  grid-row: 2 / span 1;
+  grid-column: 5 / span 1;
+  text-align: center;
+  margin-top: 7%;
+}
+#add-experience-grid {
+  text-align: center;
+  margin-top: 15px;
+}
+@media screen and (max-width: 770px) {
+  #experience-grid {
+    display: block;
+    padding: 20px 0;
   }
 }
 

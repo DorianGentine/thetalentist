@@ -1,41 +1,35 @@
-<div class='nested-fields'>
-  <div class="form-line">
-    <p class="form-label requis form-label-font-size">Expérience</p>
-    <div class="row">
-      <div class="col-xs-12 col-lg-3">
-        <%= f.input :company_name, label: false, placeholder:"le nom de l'entreprise" %>
-        <%= f.input :position, label: false, placeholder:"Intitulé du poste" %>
-        <%= f.input :company_type_id, collection: CompanyType.all, label: false, placeholder:"Type d'entreprise" %>
-      </div>
-      <div class="col-xs-12 col-lg-3">
-        <div class="form-line">
-        <p class="form-label requis form-label-font-size">De</p>
-        <%= f.input :starting, label: false, as: :string, input_html: {class: "datepicker1"} %>
-      </div>
-      </div>
-      <div class="col-xs-12 col-lg-3">
-        <div class="form-line">
-        <p class="form-label form-label-font-size" style="width: 0">À</p>
-        <%= f.input :years, label: false, as: :string, input_html: {class: "datepicker1"}  %>
-      </div>
-      </div>
-      <div class="col-xs-12 col-lg-3" id="font-input-currently">
-        <%= f.input :currently, label: "Poste actuel" %>
-      </div>
+<div class='nested-fields' id="experience-grid">
+    <div class="experience-title-grid">
+      <p class="requis form-label-font-size">Expérience</p>
     </div>
-  </div>
-  <div class="form-line row">
-    <div class="col-xs-12 col-lg-2">
-
-
+    <div class="company-name-grid">
+      <%= f.input :company_name, label: false, placeholder:"le nom de l'entreprise" %>
     </div>
-    <div class="col-xs-12 col-lg-8" id="text_area-experience">
+    <div class="position-grid">
+      <%= f.input :position, label: false, placeholder:"Intitulé du poste" %>
+    </div>
+    <div class="company-type-grid">
+      <%= f.input :company_type_id, collection: CompanyType.all, label: false, placeholder:"Type d'entreprise" %>
+    </div>
+    <div id="text_area-experience">
       <p class="form-label-font-size">Description de la mission:</p>
       <%= f.text_area :overview, label: false, placeholder:"Vos missions" %>
     </div>
+    <div class="starting-grid margin-date-picker">
+      <p class="requis form-label-font-size">De</p>
+      <%= f.input :starting, label: false, as: :string, input_html: {class: "datepicker1"} %>
+    </div>
+    <div class="ending-grid margin-date-picker">
+      <p class="form-label-font-size">À</p>
+      <%= f.input :years, label: false, as: :string, input_html: {class: "datepicker1"}  %>
+    </div>
+    <div id="font-input-currently" class="currently-grid">
+      <%= f.input :currently, label: "Poste actuel" %>
+    </div>
     <!-- TODO button -->
-    <%= link_to_remove_association "Supprimer", f %>
-  </div>
+    <div class="supp-grid-experience">
+      <%= link_to_remove_association "Supprimer", f %>
+    </div>
 </div>
 
 
