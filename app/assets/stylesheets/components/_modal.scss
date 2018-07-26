@@ -4,9 +4,9 @@
   padding: 2% 4%; /* Location of the box */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-.active {
-  display: block !important;
+  .active {
+    display: block !important;
+  }
 }
 
 /* Modal Content */
