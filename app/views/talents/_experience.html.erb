@@ -12,11 +12,13 @@
 
     <div class="modal-body">
       <%= simple_form_for @talent, method: :put do |f| %>
-        <%= f.simple_fields_for :experiences do |u| %>
-          <%= render 'steps_talent_infos/experience_fields', :f => u %>
-        <% end %>
-        <div class='links'>
-          <%= link_to_add_association 'Ajouter une expérience +', f, :experiences, :partial => 'steps_talent_infos/experience_fields', :class => "form-hobby-add" %>
+        <div class="blue-background">
+          <%= f.simple_fields_for :experiences do |u| %>
+            <%= render 'steps_talent_infos/experience_fields', :f => u %>
+          <% end %>
+          <div class='links'>
+            <%= link_to_add_association 'Ajouter une expérience +', f, :experiences, :partial => 'steps_talent_infos/experience_fields', :class => "form-hobby-add" %>
+          </div>
         </div>
         <div class="form-actions">
           <%= f.submit "Continuer", class: "b-btn form-btn form-btn-suivant" %>
