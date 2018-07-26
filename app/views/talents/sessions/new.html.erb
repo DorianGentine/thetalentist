@@ -1,42 +1,65 @@
 <%= render "shared/navbar" %>
 
-<div class="home-container">
+<div class="home-container ">
+  <div class="row">
+    <div class="home-left col-xs-12 col-sm-6 col-lg-6">
+      <div class="margin-auto-talent">
+        <h1><strong>Bienvenue</strong> sur The Talentist !</h1>
+        <h2>Quelque soit votre talent, vous réussirez à intégrer la start-up qui vous correspond et dans laquelle vous vous épanouirez.</h2>
 
-  <div class="home-left">
+        <div class="home-connexion">
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="connexion-item" id="icon-input">
+              <div class="input-group">
+                <input class="form-control string email optional" autofocus="autofocus" placeholder="exemple@gmail.com" type="email" value="" name="talent[email]" id="talent_email">
+                <div class="input-group-addon">
+                  <i class='fas fa-envelope'></i>
+                </div>
+              </div>
 
-    <h1><strong>Bienvenue</strong> sur The Talentist !</h1>
-    <h2>Quelque soit votre talent, vous réussirez à intégrer la start-up qui vous correspond et dans laquelle vous vous épanouirez.</h2>
+              <div class="input-group">
 
-    <div class="home-connexion">
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="connexion-item">
-          <%= f.input :email, required: false, autofocus: true %>
-          <%= f.input :password, required: false %>
-          <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+              <input class="form-control password optional" placeholder="*********" type="password" name="talent[password]" id="talent_password">
+                <div class="input-group-addon">
+                  <i class="fas fa-key"></i>
+                </div>
+              </div>
+            </div>
+            <div class="connexion-btns btn-aline">
+              <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+                <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %>
+              <% end -%>
+            <div class="form-actions">
+              <%= f.button :submit, "Se connecter", { :class => "btn form-btn form-btn-suivant"} %>
+            </div>
+            </div>
+
+            <div class="choice-connexion margin-top-bottom-btn">
+              <hr>
+              <p>OU</p>
+            </div>
+            <div class="btn-aline margin-top-bottom-btn">
+              <div class="linkedin-btn">
+                <%= link_to talent_linkedin_omniauth_authorize_path, :class => "button-linkedin" do %>
+                  <p><i class="fab fa-linkedin"></i> Connect with Linkedin</p>
+                <% end %>
+              </div>
+              <div class="form-actions" id="regrister-talent-btn">
+                <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+                  <%= link_to "S'inscrire normalement", new_talent_registration_path, :class => "form-btn form-btn-precedent"  %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
         </div>
-        <div class="connexion-btns">
-          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-            <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %>
-          <% end -%>
-          <%= f.button :submit, "Se connecter", { :class => "btn-connexion"} %>
-        </div>
-        <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-          <%= link_to "S'enregistrer", new_registration_path(resource_name) %><br />
-        <% end %>
-      <% end %>
+      </div>
     </div>
+    <div class="col-lg-6 hidden-xs col-sm-6">
+      <div class="image-register" style="background-image: url('<%= image_path "olu-eletu-134758-unsplash.jpg" %>');">
 
+      </div>
+    </div>
   </div>
-
-  <hr class="separation-connexion">
-
-  <div class="home-right">
-    <h2>Tu peux aussi t'enregistrer avec <strong>Linkedin</strong></h2>
-    <%= link_to talent_linkedin_omniauth_authorize_path do %>
-      <p><i class="fab fa-linkedin"></i> Se connecter avec Linkedin</p>
-    <% end %>
-  </div>
-
 </div>
 
 
