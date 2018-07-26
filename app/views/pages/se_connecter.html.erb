@@ -1,0 +1,20 @@
+<%= render "shared/navbar" %>
+
+<div class="home-container se_connecter-container">
+
+  <div class="btn-aline margin-top-bottom-btn">
+    <div class="linkedin-btn">
+      <%= link_to talent_linkedin_omniauth_authorize_path, :class => "button-linkedin" do %>
+        <p><i class="fab fa-linkedin"></i> Connect with Linkedin</p>
+      <% end %>
+    </div>
+    <div class="form-actions">
+        <%= link_to "S'inscrire normalement", new_talent_registration_path, :class => "form-btn form-btn-precedent"  %>
+    </div>
+  </div>
+
+
+</div>
+
+
+<%= render "shared/footer" %>

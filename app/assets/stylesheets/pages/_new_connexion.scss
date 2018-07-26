@@ -6,8 +6,8 @@
 }
 .margin-auto-talent {
   width: 70%;
-  margin: auto;
-  margin-top: 7%;
+  margin-left: 27%;
+  margin-top: 76px;
 }
 .home-connexion {
   width: 90%;
@@ -209,5 +209,8 @@
     .home-connexion .inscription-items .btn-inscription{
       width: unset;
     }
+  }
+  .margin-auto-talent {
+    margin: auto;
   }
 }

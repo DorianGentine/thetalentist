@@ -857,7 +857,20 @@
   }
 }
 
-
+ .se_connecter-container {
+    height: calc(100vh - 220px);
+    width: 40%;
+    margin: auto;
+    .form-actions {
+      margin: 0;
+    }
+    .form-actions .form-btn {
+      width: 237px;
+    }
+    .margin-top-bottom-btn {
+      padding-top: 25%;
+    }
+  }
 // Faire un parcours generale des text-align:
 h1 {
   color: $black
