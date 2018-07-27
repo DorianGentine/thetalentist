@@ -9,7 +9,7 @@
   <!-- <img class="new-landing-logo-talentist" src="/assets/Logo The talentist-01.png" alt="logo The talentist">  -->
   <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
   <div class="connectez-vous">
-    <%= link_to se_connecter_path, { :class=>"hidden-xs" } do  %>
+    <%= link_to new_talent_registration_path, { :class=>"hidden-xs" } do  %>
       <p>S'INSCRIRE</p>
     <% end %>
     <%= link_to new_talent_session_path, { :class=>"hidden-xs" } do  %>
@@ -30,7 +30,7 @@
 
         <div class="actions-xs hidden visible-xs">
           <div class="btn-connexion">
-            <%= link_to("S'inscrire", se_connecter_path)  %>
+            <%= link_to("S'inscrire", new_talent_registration_path)  %>
           </div>
           <div class="blue-connexion btn-connexion">
             <%= link_to("Se connecter", new_talent_session_path) %>
@@ -38,7 +38,7 @@
         </div>
         <div class="inscription-items hidden-xs hidden-sm">
           <div class="btn-connexion">
-            <%= link_to("S'inscrire", se_connecter_path)  %>
+            <%= link_to("S'inscrire", new_talent_registration_path)  %>
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@
     <div class="banniere-inscription hidden-xs" style="position: relative;">
       <p>Are you a Talentist ?</p>
       <div class="btn-connexion">
-        <%= link_to("S'inscrire", se_connecter_path)  %>
+        <%= link_to("S'inscrire", new_talent_registration_path)  %>
       </div>
       <div class="btn-connexion">
         <%= link_to("Se connecter", new_talent_session_path) %>
@@ -146,7 +146,7 @@
     <div class="banniere-inscription hidden-xs">
       <p>"Soyez vous-même, les autres sont déjà pris" Oscar Wilde</p>
       <div class="btn-connexion">
-        <%= link_to("S'inscrire", se_connecter_path)  %>
+        <%= link_to("S'inscrire", new_talent_registration_path)  %>
       </div>
       <div class="btn-connexion">
         <%= link_to("Se connecter", new_talent_session_path) %>
@@ -342,7 +342,7 @@
         </div>
       <% end %>
       <hr>
-      <%= link_to se_connecter_path do  %>
+      <%= link_to new_talent_registration_path do  %>
         <div class="inscription-grid-item">
           <i class="fas fa-rocket"></i>
           <p>JE VEUX ETRE EMBAUCHÉ</p>

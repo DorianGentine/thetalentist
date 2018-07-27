@@ -138,6 +138,8 @@
         height: 100%;
         border-radius: 5px;
         position: absolute;
+        background-size: cover !important;
+        background-position: center;
       }
       img{
         min-height: calc(100vh - 120px);

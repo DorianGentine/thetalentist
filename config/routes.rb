@@ -55,7 +55,7 @@ Rails.application.routes.draw do
 
   get 'waiting_for_validation', to: "pages#waiting_for_validation"
   get 'welcome_talents', to: "pages#talent_home"
-  get 'se_connecter', to: "pages#se_connecter"
+  # get 'se_connecter', to: "pages#se_connecter"
   get 'welcome_headhunters', to: "pages#headhunter_home"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
