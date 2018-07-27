@@ -11,15 +11,15 @@
           <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <div class="connexion-item" id="icon-input">
               <div class="input-group">
-                <input class="form-control string email optional" autofocus="autofocus" placeholder="exemple@gmail.com" type="email" value="" name="talent[email]" id="talent_email">
+                <input class="form-control string email optional" autofocus="autofocus" placeholder="exemple@gmail.com" type="email" value="" name="headhunter[email]" id="headhunter_email">
                 <div class="input-group-addon">
                   <i class='fas fa-envelope'></i>
                 </div>
               </div>
 
-              <div class="input-group">
 
-              <input class="form-control password optional" placeholder="*********" type="password" name="talent[password]" id="talent_password">
+              <div class="input-group">
+              <input class="form-control password optional" placeholder="*********" type="password" name="headhunter[password]" id="headhunter_password">
                 <div class="input-group-addon">
                   <i class="fas fa-key"></i>
                 </div>

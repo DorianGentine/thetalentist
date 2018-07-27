@@ -1,5 +1,6 @@
 class StartupsController < ApplicationController
   def update
+    # raise
     @startup = Startup.find(params[:id])
     @startup.btob = false
     @startup.btoc = false
@@ -15,7 +16,8 @@ private
     params.require(:startup).permit(
       :id, :name, :link, :logo, :address, :sector_ids, :btob, :btoc, :validated, :short_resume,
       :average_age, :collaborators, :year_of_creation, :overview,
-      :linkedin, :facebook, :mission, { pictures:[] }, word_ids: []
+      :linkedin, :facebook, :mission, { pictures:[] }, word_ids: [],
+      pictures_attributes: [ :id, :photo ]
       )
   end
 end

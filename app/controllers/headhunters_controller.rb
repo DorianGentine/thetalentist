@@ -70,7 +70,14 @@ class HeadhuntersController < ApplicationController
   def show
     @headhunter = Headhunter.find(params[:id])
     @startup = @headhunter.startup
-    @startup.pictures.build
+
+    if @startup.pictures.count == 0
+      1.times { @startup.pictures.build }
+    else
+      0.times { @startup.pictures.build }
+    end
+
+
     authorize @headhunter
 
     # a changer!! TODO

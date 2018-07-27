@@ -3,11 +3,33 @@
   <div class="modal-content">
 
     <div class="modal-header">
-      <h3>Modifiez vos infos</h3>
+      <h3>Bonjour <%= @headhunter.firstname.present? ? @headhunter.firstname.capitalize : "" %></h3>
 
       <span class="close" id="close_modal_headhunters">
         <p>&times;</p>
       </span>
+    </div>
+    <div class="modal-body modal-body-headhunter">
+      <%= simple_form_for @headhunter do |f| %>
+        <div class="form-inputs" id= "registration-headhunter">
+          <div class="form-line">
+            <p class="form-label requis">Prénom</p>
+            <%= f.input :firstname, required: true, autofocus: true, label: false %>
+            <p class="form-label requis">Nom</p>
+            <%= f.input :name, required: true, autofocus: true, label: false %>
+          </div>
+
+          <!-- add table belong -->
+          <div class="form-line">
+            <p class="form-label requis">Poste</p>
+            <%= f.input :job, required: true, autofocus: true, label: false %>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Terminer", :class => 'btn-connexion' %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

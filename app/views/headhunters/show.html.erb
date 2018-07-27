@@ -105,14 +105,18 @@
       <% end %>
       <h4 class="hidden-xs">Notre environnement de travail</h4>
       <div class="photos-environnement">
-        <% if @startup.pictures.first.photo.present? %>
+        <% if @startup.pictures.first.photo.present? && @startup.pictures.second.photo.present? %>
           <% @startup.pictures.first(2).each do |photo| %>
             <div class="photo-env-item" style="background-image: url('<%= cl_image_path photo.photo  %>')"></div>
           <% end %>
+          <% if @startup.pictures.third.photo.present? %>
+            <div class="photo-env-item" style="background-image: url('<%= cl_image_path @startup.pictures.third.photo  %>');">
+          <% else %>
+            <div class="photo-env-item" style="background-image: url('<%= image_path "olu-eletu-134758-unsplash.jpg" %>');">
 
-          <div class="photo-env-item" style="background-image: url('<%= cl_image_path @startup.pictures.third.photo  %>');">
+          <% end %>
             <div class="decouvrir-plus">
-              <p><strong>+10</strong><br>PHOTOS & VIDÉOS</p>
+              <p><strong>+<%= @startup.pictures.count %></strong><br>PHOTOS & VIDÉOS</p>
             </div>
           </div>
         <% else %>

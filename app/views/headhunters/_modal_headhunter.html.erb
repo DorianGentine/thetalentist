@@ -1,32 +1,41 @@
+
+
+
+
+
+
 <div id="modal_headhunter_<%= headhunter.id %>" class="modal">
 
-  <div class="modal-content">
 
-    <div class="modal-header">
 
-      <h3><%= headhunter.firstname.present? ? headhunter.firstname.capitalize : "" %> <%= headhunter.name.present? ? headhunter.name.capitalize : '' %></h3>
+    <div class="modal-content">
 
-      <span class="close" id="close_modal_headhunter_<%= headhunter.id %>" >
-        <p style="font-size: unset; background: none; padding: unset; margin: 0;">&times;</p>
-      </span>
-    </div>
+      <div class="modal-header">
 
-    <div class="modal-body modal-body-headhunter">
+        <h3><%= headhunter.firstname.present? ? headhunter.firstname.capitalize : "" %> <%= headhunter.name.present? ? headhunter.name.capitalize : '' %></h3>
 
-      <p class="poste-hh"><%= headhunter.job.present? ? headhunter.job.capitalize : "" %> chez <%= headhunter.startup.present? ? headhunter.startup.name.capitalize : "" %></p>
-
-      <div class="body-headhunter-pp">
-        <% if headhunter.photo.present? %>
-          <%= cl_image_tag headhunter.photo, class: "avatar" %>
-        <% else %>
-          <div class="photo-profil">
-            <div class="initiale">
-              <p><%= headhunter.firstname.present? ? headhunter.firstname.split(//).first.upcase : "" %><%= headhunter.name.present? ? headhunter.name.split(//).first.upcase : "" %></p>
-            </div>
-          </div>
-        <% end %>
+        <span class="close" id="close_modal_headhunter_<%= headhunter.id %>" >
+          <p style="font-size: unset; background: none; padding: unset; margin: 0;">&times;</p>
+        </span>
       </div>
 
+      <div class="modal-body modal-body-headhunter">
+
+        <p class="poste-hh"><%= headhunter.job.present? ? headhunter.job.capitalize : "" %> chez <%= headhunter.startup.present? ? headhunter.startup.name.capitalize : "" %></p>
+
+        <div class="body-headhunter-pp">
+          <% if headhunter.photo.present? %>
+            <%= cl_image_tag headhunter.photo, class: "avatar" %>
+          <% else %>
+            <div class="photo-profil">
+              <div class="initiale">
+                <p><%= headhunter.firstname.present? ? headhunter.firstname.split(//).first.upcase : "" %><%= headhunter.name.present? ? headhunter.name.split(//).first.upcase : "" %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
     </div>
-  </div>
+
 </div>
