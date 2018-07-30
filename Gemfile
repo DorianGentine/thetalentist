@@ -70,3 +70,6 @@ gem 'activerecord-session_store'
 
 # map for contact form
 gem "gmaps4rails"
+
+# for google analytics API
+gem 'google-api-client', '~> 0.11'

@@ -18,7 +18,6 @@
 
 /* Right section */
 .navbar-talentist-right {
-  width: 25vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,7 +25,8 @@
 
 /* Basic navbar item */
 .navbar-wagon-item {
-  // cursor: pointer;
+  cursor: pointer;
+  padding: 0 20px;
 }
 
 #notif {
@@ -55,8 +55,8 @@
   align-items: center;
   #notif{
     position: absolute;
-    top: -5px;
-    right: -10px;
+    top: -8px;
+    right: 6px;
   }
 }
 
