@@ -48,6 +48,7 @@ class TalentPolicy < ApplicationPolicy
     user = record
   end
 
+
   def to_validate?
     if user.is_a?(Talentist)
       true

@@ -70,19 +70,27 @@ class TalentsController < ApplicationController
   end
 
   def update
-      if talent_params["talent_formations_attributes"]
-        talent_params["talent_formations_attributes"].each do |talent_formation|
-          if talent_formation[1]["id"]
-            t = TalentFormation.find(talent_formation[1]["id"].to_i)
-            t.update(title: talent_formation[1]["title"], year: talent_formation[1]["year"], formation_id: talent_formation[1]["formation_id"].to_i)
-          end
+    @talent = Talent.find(params[:id])
+    raise
+    if talent_params["talent_formations_attributes"]
+      talent_params["talent_formations_attributes"].each do |talent_formation|
+        if talent_formation[1]["id"]
+          t = TalentFormation.find(talent_formation[1]["id"].to_i)
+          t.update(title: talent_formation[1]["title"], year: talent_formation[1]["year"], formation_id: talent_formation[1]["formation_id"].to_i)
         end
       end
+    end
+    if @talent.valid_password?(talent_password_old)
 
-      @talent = Talent.find(params[:id])
-      @talent.update_attributes(talent_params)
-      redirect_to talent_path(@talent)
-      authorize @talent
+    end
+    @talent.update_attributes(talent_params)
+    redirect_to talent_path(@talent)
+    authorize @talent
+  end
+
+  def edit
+    @talent = Talent.find(params[:id])
+    authorize @talent
   end
 
   def to_validate
@@ -136,6 +144,15 @@ private
   def validated_action(action)
     @talent.validated = action
     @talent.save
+  end
+
+  def talent_password_old
+    old = params.require(:talent).permit(:password_old)
+    return old[:password_old]
+  end
+
+  def talent_password
+    params.require(:talent).permit(:password, :password_confirmation )
   end
 
   def talent_params

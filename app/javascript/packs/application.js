@@ -21,3 +21,6 @@ dynamicFormBar();
 
 import { scrollToBottom } from "../components/scrollToBottom";
 scrollToBottom();
+
+import { checkBox } from "../components/check_box";
+checkBox();
