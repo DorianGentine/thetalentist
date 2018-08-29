@@ -21,10 +21,10 @@
     </div>
     <div class="ending-grid margin-date-picker">
       <p class="form-label-font-size">À</p>
-      <%= f.input :years, label: false, as: :string, input_html: {class: "datepicker1"}  %>
+      <%= f.input :years, label: false, as: :string, input_html: {class: "datepicker1", id:"to_experience"}  %>
     </div>
     <div id="font-input-currently" class="currently-grid">
-      <%= f.input :currently, label: "Poste actuel" %>
+      <%= f.input :currently, label: "Poste actuel", input_html: {id: "currently_checked"} %>
     </div>
     <!-- TODO button -->
     <div class="supp-grid-experience">

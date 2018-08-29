@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
   resources :relationships, only: [ :create ]
 
-  resources :talents, only: [:show, :update, :index] do
+  resources :talents, only: [:show, :update, :index, :edit] do
     patch 'to_validate', :on => :member
     resources :conversations, only: [ :show ]
   end

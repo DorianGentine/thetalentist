@@ -175,15 +175,15 @@ csv_file_language   = File.join(__dir__, 'axis_languages.csv')
 
 CSV.foreach(csv_file_language) do |row|
   if row[1]
-    Language.create!({ title: row[1].sub(")", "") })
+    Language.create!({ title: row[1].gsub(" ","").gsub("'","") })
   end
 end
 
 
-english = Language.create!(title: "anglais")
-francais = Language.create!(title: "français")
-spanish = Language.create!(title: "espagnol")
-german = Language.create!(title: "allemand")
+english = Language.first
+francais = Language.second
+spanish = Language.last
+german = Language.first
 
 
 p "Creating talent_languages"

@@ -253,6 +253,11 @@
     height: 75%;
   }
 }
+.checked_boxe {
+  background-color: $gray !important;
+  opacity: 0.5 !important;
+  cursor: none !important;
+}
 /* CSS checkboxes */
 input[type="radio"], input[type="checkbox"] {
   margin: 4px 15px;

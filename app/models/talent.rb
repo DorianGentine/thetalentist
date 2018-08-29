@@ -155,6 +155,10 @@ class Talent < ApplicationRecord
 
   private
 
+  def normalize_name_firstname
+    self.firstname = self.firstname.capitalize
+  end
+
   def send_welcome_email
     TalentMailer.welcome(self).deliver_now
   end
