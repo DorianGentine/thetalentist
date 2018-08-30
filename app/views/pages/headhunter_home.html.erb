@@ -7,8 +7,9 @@
   <% end %>
 
   <!-- <img class="new-landing-logo-talentist" src="/assets/Logo The talentist-01.png" alt="logo The talentist">  -->
-  <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
-
+  <%= link_to root_path do %>
+    <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
+  <% end %>
   <div class="connectez-vous">
     <%= link_to new_headhunter_registration_path, { :class=>"hidden-xs" } do  %>
       <p>S'INSCRIRE</p>
@@ -37,7 +38,7 @@
           </div>
         </div>
         <div class="inscription-items hidden-xs hidden-sm">
-          <div class="btn-connexion">
+          <div class="btn-connexion" style="margin-bottom: 80px;">
             <%= link_to("S'inscrire", new_headhunter_registration_path)  %>
           </div>
         </div>
@@ -53,13 +54,13 @@
 
     </div>
 
-    <i class="fas fa-angle-double-down fleche-bas"></i>
+    <a href="#landing-main"><i class="fas fa-angle-double-down fleche-bas"></i></a>
 
   </div>
 
   <div class="landing-main">
 
-    <div>
+    <div id="landing-main" style="padding-top: 25px;">
       <h2>Une plateforme qui répond à vos besoins !</h2>
       <div class="opportunites">
         <div class="opportunite">
@@ -273,7 +274,7 @@
       </div>
     </div>
 
-    <div class="citations">
+    <div class="citations" style="min-height: 620px;">
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -288,10 +289,10 @@
             <div class="item-display">
               <i class="fas fa-quote-left"></i>
               <div class="auteur-citation">
-                <p class="nom">Patrick DUPONT</p>
-                <p class="titre">Data scientist</p>
+                <p class="nom">ALEX</p>
+                <p class="titre">UX DESIGNER <br>@BACK MARKET</p>
               </div>
-              <p class="citation">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+              <p class="citation">“J’ai vraiment apprécié l’entretien individuel pour bien comprendre mon profil et ce que je recherchais. Toutes les propositions d’entretien qui m’ont été communiquées correspondaient totalement à mes attentes. J’attends maintenant avec impatience de commencer mon nouveau job et je remercie Ineva !”</p>
             </div>
           </div>
 
@@ -299,10 +300,10 @@
             <div class="item-display">
               <i class="fas fa-quote-left"></i>
               <div class="auteur-citation">
-                <p class="nom">Patrick DUPONT</p>
-                <p class="titre">Data scientist</p>
+                <p class="nom">NICOLAS</p>
+                <p class="titre">HEAD OF SALES <br>@SEZANE</p>
               </div>
-              <p class="citation">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+              <p class="citation">“A l’écoute et disponible, Ineva a su évaluer mon profil, mes compétences et mes envies. Le processus de recrutement s’est déroulé dans les meilleures conditions. Quand changer de job et accepter un nouveau challenge devient un véritable plaisir! Merci Ineva.”</p>
             </div>
           </div>
 
@@ -310,10 +311,10 @@
            <div class="item-display">
               <i class="fas fa-quote-left"></i>
               <div class="auteur-citation">
-                <p class="nom">Patrick DUPONT</p>
-                <p class="titre">Data scientist</p>
+                <p class="nom">ALEXANDRE</p>
+                <p class="titre">HEAD OF PRODUCT <br>@PRESTASHOP</p>
               </div>
-              <p class="citation">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+              <p class="citation">“Ineva possède la particularité très appréciable de ne pas simplement pourvoir des postes, mais de pourvoir le poste qui convient à ses candidats. Une connaissance précise de leurs métiers et un suivi régulier permettent aux candidats d’être accompagnés du premier rendez-vous au nouveau poste.”</p>
             </div>
           </div>
         </div>
