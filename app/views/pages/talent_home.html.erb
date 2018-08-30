@@ -7,7 +7,9 @@
   <% end %>
 
   <!-- <img class="new-landing-logo-talentist" src="/assets/Logo The talentist-01.png" alt="logo The talentist">  -->
-  <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
+  <%= link_to root_path do %>
+    <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
+  <% end %>
   <div class="connectez-vous">
     <%= link_to new_talent_registration_path, { :class=>"hidden-xs" } do  %>
       <p>S'INSCRIRE</p>
@@ -37,7 +39,7 @@
           </div>
         </div>
         <div class="inscription-items hidden-xs hidden-sm">
-          <div class="btn-connexion">
+          <div class="btn-connexion" style="margin-bottom: 80px">
             <%= link_to("S'inscrire", new_talent_registration_path)  %>
           </div>
         </div>
@@ -57,13 +59,13 @@
 
     </div>
 
-    <i class="fas fa-angle-double-down fleche-bas"></i>
+    <a href="#landing-main"><i class="fas fa-angle-double-down fleche-bas"></i></a>
 
   </div>
 
   <div class="landing-main">
 
-    <div>
+    <div id="landing-main" style="padding-top: 25px;">
       <h2>Créez vos propres opportunités</h2>
       <div class="opportunites">
         <div class="opportunite">
@@ -297,10 +299,10 @@
             <div class="item-display">
               <i class="fas fa-quote-left"></i>
               <div class="auteur-citation">
-                <p class="nom">Patrick DUPONT</p>
-                <p class="titre">Data scientist</p>
+                <p class="nom">Philippe de Chanville</p>
+                <p class="titre">Fondateur et CEO de Manomano</p>
               </div>
-              <p class="citation">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+              <p class="citation">Ces experts du digital ont une capacité extraordinaire pour les compétences interpersonnelles d’un candidat pour que son intégration soit un succès au-delà de sa simple expertise.</p>
             </div>
           </div>
 
@@ -308,10 +310,10 @@
             <div class="item-display">
               <i class="fas fa-quote-left"></i>
               <div class="auteur-citation">
-                <p class="nom">Patrick DUPONT</p>
-                <p class="titre">Data scientist</p>
+                <p class="nom">Bertrands Jelensperger</p>
+                <p class="titre">Fondateur de La Fourchette</p>
               </div>
-              <p class="citation">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+              <p class="citation">Ils nous ont aidé à trouver des rockstars qui travaillent toujours chez La Fourchette.</p>
             </div>
           </div>
 
@@ -319,10 +321,10 @@
            <div class="item-display">
               <i class="fas fa-quote-left"></i>
               <div class="auteur-citation">
-                <p class="nom">Patrick DUPONT</p>
-                <p class="titre">Data scientist</p>
+                <p class="nom">Corentin Petit</p>
+                <p class="titre">Associé et management director chez Sézane</p>
               </div>
-              <p class="citation">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+              <p class="citation">L’équipe du Talentist nous a accompagné pour définir nos besoins, non seulement pour trouver les bonnes personnes mais aussi pour améliorer notre organisation interne.</p>
             </div>
           </div>
         </div>

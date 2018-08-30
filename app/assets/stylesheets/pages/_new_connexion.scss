@@ -116,11 +116,12 @@
   }
   .btn-inscription:hover{
     background-color: $green;
-    transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
+    animation: none !important;
+    transition: ease-in-out 0.15s;
     p{
       color: white;
       text-decoration: none;
-      transition: background-color ease-in-out 0.15s, color ease-in-out 0.15s;
+      transition: ease-in-out 0.15s;
     }
   }
 }
