@@ -35,7 +35,7 @@
           </div>
           <div class="col-xs-12 col-lg-6">
             <div class="form-line form-line-next-aventure form-secteur">
-              <p class="form-label form-label-font-size label-next_aventure requis">Canal</p>
+              <p class="form-label form-label-font-size label-next_aventure"></p>
               <div style="display: flex; width: 80%">
                 <%= u.input :btoc, label: "BTOC" %>
                 <%= u.input :btob, label: "BTOB" %>
@@ -46,7 +46,7 @@
         <div class="row">
           <div class="col-xs-12 col-lg-6">
             <div class="form-line form-line-next-aventure">
-              <p class="form-label form-label-font-size label-next_aventure requis">Attentes salariales</p>
+              <p class="form-label form-label-font-size label-next_aventure requis" style="margin-left: -2%; width: 28%">Attentes salariales</p>
               <%= u.input :remuneration, label: false, hint: "package K€ annuel brut", collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ] %>
             </div>
           </div>
@@ -116,21 +116,21 @@
         <div class="row">
           <div class="col-xs-12 col-lg-6">
             <p class="form-label-font-size label-next_aventure-lg requis">Quel est le rêve que tu remets toujours à demain ?</p>
-            <%= u.input :dream, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+            <%= u.input :dream, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
           </div>
           <div class="col-xs-12 col-lg-6">
             <p class="form-label form-label-font-size label-next_aventure-lg requis">Y a-t-il une personnalité qui t’inspire ? Pourquoi ?</p>
-            <%= u.input :famous_person, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+            <%= u.input :famous_person, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-12 col-lg-6">
             <p class="form-label form-label-font-size label-next_aventure-lg requis">Selon toi, qu’est-ce qu’un bon manager ?</p>
-            <%= u.input :good_manager, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+            <%= u.input :good_manager, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
           </div>
           <div class="col-xs-12 col-lg-6">
             <p class="form-label form-label-font-size label-next_aventure-lg requis">Quel travail serais-tu prêt à effectuer gratuitement ?</p>
-            <%= u.input :work_for_free, label: false, placeholder: "Descrpition", as: :text, input_html: {rows: '4'} %>
+            <%= u.input :work_for_free, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
           </div>
         </div>
       </div>

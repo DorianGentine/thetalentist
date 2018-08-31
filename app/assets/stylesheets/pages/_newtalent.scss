@@ -156,9 +156,6 @@
     margin: 20px 0;
   }
   #formations{
-    .form-label{
-      width: 7%;
-    }
     .links {
       margin: 0 calc(7% + 9px);
     }
@@ -377,6 +374,23 @@ input[type="radio"], input[type="checkbox"] {
   }
 }
 
+.form-grid{
+  display: grid;
+  grid: auto / 17% 33% 17% 33%;
+  align-items: center;
+  .form-label{
+    width: unset;
+    min-width: 153px;
+    margin: 0;
+  }
+}
+@media screen and (min-width: 1140px) {
+  .form-grid{
+    grid: auto / auto;
+  }
+}
+
+
 @media screen and (min-width: 771px) {
   .width-rang {
     width: 80%;
@@ -465,8 +479,8 @@ input[type="radio"], input[type="checkbox"] {
 }
 .margin-date-picker {
   p {
-    width: 15%;
-    margin-right: 15px;
+    width: 20%;
+    margin-right: 10px;
   }
 }
 .currently-grid {

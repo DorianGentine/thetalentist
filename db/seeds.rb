@@ -231,7 +231,7 @@ TalentSector.create!(sector: saas, year: 10, talent: louis)
 
 p "Creating jobs"
 
-data = Job.create!(title: "Data")
+data = Job.create!(title: "Opérations")
 sales = Job.create!(title: "Sales")
 product = Job.create!(title: "Product")
 market = Job.create!(title: "Market")
