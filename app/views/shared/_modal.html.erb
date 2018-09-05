@@ -2,38 +2,19 @@
   <!-- Modal content -->
   <div class="modal-content">
 
-    <div class="modal-header">
+    <div class="modal-header" id="relation">
       <% if talent.experiences.present? && talent.experiences.last.position.present? %>
         <h3><%= talent.experiences.last.position.capitalize %></h3>
       <% end %>
+      <div id="relation_<%= talent.id %>">
       <% if current_user.is_a?(Headhunter) %>
         <% if talent.is_connected_to?(@headhunter) %>
-          <% if talent.witch_status?(@headhunter) == "pending" %>
-            <div class="contact-btn en-relation">
-              <%= link_to conversation_path(talent.find_conversation(@headhunter)) do %>
-                <p> Votre demande à été envoyé </p>
-              <% end %>
-            </div>
-          <% else %>
-            <div class="contact-btn en-relation">
-              <%= link_to conversation_path(talent.find_conversation(@headhunter)) do %>
-                <p> Vous êtes déjà en relation </p>
-              <% end %>
-            </div>
-          <% end %>
+          <%= render 'headhunters/relationship', headhunter: @headhunter, talent: talent %>
         <% else %>
-          <div class="contact-btn">
-            <%= simple_form_for @relationship do |f| %>
-              <p>Contacter <i class="fas fa-location-arrow"></i></p>
-                <%= f.input :talent_id, input_html: {value: talent.id }, as: :hidden %>
-                <%= f.input :headhunter_id, input_html: {value: @headhunter.id }, as: :hidden %>
-                <%= f.button :submit, inline_label: "Contacter 2" %>
-
-            <% end %>
-          </div>
+          <%= render 'relationships/form', headhunter: @headhunter, talent: talent %>
         <% end %>
       <% end %>
-
+      </div>
       <span class="close" id="close_modal_<%= talent.id %>">
         <p>&times;</p>
       </span>
@@ -168,7 +149,7 @@
               <%= simple_form_for talent, methode: :get do |f| %>
                 <p>Contacter <i class="fas fa-location-arrow"></i></p>
                 <%= f.simple_fields_for :relationships do |u| %>
-                  <%= u.button :submit, inline_label: "Contacter 2" %>
+                  <%= u.button :submit, inline_label: "Contacter" %>
                 <% end %>
               <% end %>
             </div>

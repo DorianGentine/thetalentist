@@ -2,6 +2,8 @@ import "bootstrap";
 
 import '../components/select2';
 
+import "../components/equalHeight"
+
 import '../components/datepicker';
 
 import { addFields } from "../components/addField";
@@ -24,3 +26,4 @@ scrollToBottom();
 
 import { checkBox } from "../components/check_box";
 checkBox();
+
