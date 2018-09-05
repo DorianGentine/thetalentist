@@ -109,7 +109,7 @@
           <% @startup.pictures.first(2).each do |photo| %>
             <div class="photo-env-item" style="background-image: url('<%= cl_image_path photo.photo  %>')"></div>
           <% end %>
-          <% if @startup.pictures.third.photo.present? %>
+          <% if @startup.pictures.count > 2 && @startup.pictures.third.photo.present? %>
             <div class="photo-env-item" style="background-image: url('<%= cl_image_path @startup.pictures.third.photo  %>');">
           <% else %>
             <div class="photo-env-item" style="background-image: url('<%= image_path "olu-eletu-134758-unsplash.jpg" %>');">

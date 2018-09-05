@@ -1,0 +1,13 @@
+function removeRelation() {
+  const relation = document.getElementById('relation_#{@talent.id}');
+  relation.innerHTML = "";
+}
+
+function refreshForm(innerHTML) {
+  const newRelationForm = document.getElementById("relation_#{@talent.id}");
+  newRelationForm.innerHTML = innerHTML;
+}
+
+removeRelation();
+refreshForm('<%= j render "headhunters/relationship", headhunter: @headhunter, talent: talent %>');
+

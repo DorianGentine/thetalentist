@@ -1,0 +1,13 @@
+<% if talent.witch_status?(@headhunter) == "pending" %>
+  <div class="contact-btn en-relation">
+    <%= link_to conversation_path(talent.find_conversation(@headhunter)) do %>
+      <p> Votre demande à été envoyé </p>
+    <% end %>
+  </div>
+<% else %>
+  <div class="contact-btn en-relation">
+    <%= link_to conversation_path(talent.find_conversation(@headhunter)) do %>
+      <p> Vous êtes déjà en relation </p>
+    <% end %>
+  </div>
+<% end %>
