@@ -71,7 +71,6 @@ class TalentsController < ApplicationController
 
   def update
     @talent = Talent.find(params[:id])
-    raise
     if talent_params["talent_formations_attributes"]
       talent_params["talent_formations_attributes"].each do |talent_formation|
         if talent_formation[1]["id"]
@@ -80,10 +79,9 @@ class TalentsController < ApplicationController
         end
       end
     end
-    if @talent.valid_password?(talent_password_old)
-
-    end
-    @talent.update_attributes(talent_params)
+    @talent.update_password_with_password(talent_password)
+    # raise
+    # @talent.update_attributes(talent_params)
     redirect_to talent_path(@talent)
     authorize @talent
   end
@@ -152,7 +150,7 @@ private
   end
 
   def talent_password
-    params.require(:talent).permit(:password, :password_confirmation )
+    params.require(:talent).permit(:password_old, :password, :password_confirmation )
   end
 
   def talent_params

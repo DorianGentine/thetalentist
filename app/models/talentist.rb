@@ -10,6 +10,7 @@ class Talentist < ApplicationRecord
 
   # for mailboxer
   acts_as_messageable
+  before_destroy { Mailboxer::Conversation.destroy_all }
 
   mount_uploader :photo, PhotoUploader
 

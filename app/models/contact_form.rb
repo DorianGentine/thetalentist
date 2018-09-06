@@ -2,6 +2,7 @@ class ContactForm < ApplicationRecord
   validates :name, :email, presence: true
   acts_as_messageable
 
+
   after_create :send_contact_form
 
   private

@@ -18,6 +18,7 @@ class Headhunter < ApplicationRecord
 
   # for mailboxer
   acts_as_messageable
+  before_destroy { Mailboxer::Conversation.destroy_all }
 
   validates :name, :firstname, :job, :email, presence: true
 

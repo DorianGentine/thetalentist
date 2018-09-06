@@ -71,6 +71,7 @@ class Talent < ApplicationRecord
 
   # for mailboxer
   acts_as_messageable
+  before_destroy { Mailboxer::Conversation.destroy_all }
 
   # link with pdf_uploader
   mount_uploader :cv, PdfUploader
@@ -153,6 +154,21 @@ class Talent < ApplicationRecord
     return talent
   end
 
+  def update_password_with_password(params, *options)
+    current_password = params.delete(:current_password)
+    # raise
+    result = if valid_password?(current_password)
+               update_attributes(params, *options)
+             else
+               self.assign_attributes(params, *options)
+               self.valid?
+               self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+               false
+             end
+
+    clean_up_passwords
+    result
+  end
   private
 
   def normalize_name_firstname
@@ -162,5 +178,6 @@ class Talent < ApplicationRecord
   def send_welcome_email
     TalentMailer.welcome(self).deliver_now
   end
+
 
 end
