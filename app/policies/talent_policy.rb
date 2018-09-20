@@ -30,7 +30,7 @@ class TalentPolicy < ApplicationPolicy
 
   def show?
     if user.is_a?(Headhunter)
-      Relationship.where(talent_id: record.id).where(headhunter_id: user.id).where(status: "accepted").first
+      Relationship.where(talent: record).where(headhunter: user).where(status: "Accepter").first.present?
     elsif user.is_a?(Talent)
       user == record
     elsif user.is_a?(Talentist)

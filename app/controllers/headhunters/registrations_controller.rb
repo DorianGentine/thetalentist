@@ -45,7 +45,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
     end
 
     def headhunter_params
-      params.require(:headhunter).permit(:firstname, :name, :job, :email, :password, :startup_id)
+      params.require(:headhunter).permit(:firstname, :name, :job, :email, :password, :password_confirmation, :startup_id)
     end
 
 end
