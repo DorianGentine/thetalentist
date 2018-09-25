@@ -1,5 +1,5 @@
 .form-container{
-  padding: 0 190px;
+  padding: 60px 190px 0;
 }
 
 .form-line{
@@ -15,7 +15,7 @@
   width: 10%;
 }
 .requis:after{
-  content: " *";
+  content: "*";
   color: $red;
 }
 #linkedin-size .form-group {
@@ -138,6 +138,11 @@
 
   .form-group{
     width: unset;
+    select{
+      width: 100%;
+      color: gray;
+      background-color: white;
+    }
   }
 }
 
@@ -157,7 +162,7 @@
   }
   #formations{
     .links {
-      margin: 0 calc(7% + 9px);
+      margin: 0 calc(10% + 15px);
     }
   }
   .margin-competence {
@@ -387,6 +392,12 @@ input[type="radio"], input[type="checkbox"] {
 @media screen and (max-width: 1140px) {
   .form-grid{
     grid: auto / auto;
+  }
+}
+@media screen and (min-width: 1141px) {
+  .form-grid .form-label-right-grid {
+    min-width: unset;
+    margin: 0 0 0 25px;
   }
 }
 

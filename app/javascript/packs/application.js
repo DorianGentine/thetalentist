@@ -6,9 +6,6 @@ import "../components/equalHeight"
 
 import '../components/datepicker';
 
-import { addFields } from "../components/addField";
-addFields();
-
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 
