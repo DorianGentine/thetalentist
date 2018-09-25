@@ -21,7 +21,7 @@
     <div id="form-p2-comp" class=" row">
       <div class="col-xs-12 col-lg-6">
         <div id="add-language" class="blue-background margin-right-background margin-top-background">
-          <p class="form-label form-label-font-size form-label-semi-line requis">Compétences linguistiques</p>
+          <p class="form-label-font-size form-label-semi-line requis">Compétences linguistiques</p>
           <div class="add-language-line">
             <%= f.simple_fields_for :talent_languages do |u| %>
               <%= render 'language_fields', :f => u %>
@@ -35,7 +35,7 @@
       <div class="col-xs-12 col-lg-6">
         <div class="blue-background margin-left-background margin-top-background" id="competence-form">
           <div class="margin-competence">
-            <p class="form-label form-label-font-size form-label-semi-line requis">Compétences techniques</p>
+            <p class="form-label-font-size form-label-semi-line requis">Compétences techniques</p>
             <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 294px"}, multiple: true, required: true %>
           </div>
         </div>

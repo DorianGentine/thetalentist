@@ -6,24 +6,21 @@
 
   <%= simple_form_for @startup, url: wizard_path, method: :put do |f| %>
 
-    <div class="form-line">
-      <p class="form-label requis">Nom</p>
+    <div class="form-grid blue-background">
+      <p class="form-label form-label-font-size requis">Nom</p>
       <%= f.input :name, required: true, label: false %>
-      <p class="form-label">Création</p>
+      <p class="form-label form-label-font-size form-label-right-grid">Création</p>
       <%= f.input :year_of_creation, collection: 2000..2018, prompt: "année de création", label: false  %>
     </div>
 
-    <div class="form-line">
-      <p class="form-label">Collaborateurs</p>
+    <div class="form-grid blue-background margin-top-background">
+      <p class="form-label form-label-font-size">Collaborateurs</p>
       <%= f.input :collaborators, label: false %>
-      <p class="form-label">Moyenne d'âge</p>
+      <p class="form-label form-label-font-size form-label-right-grid">Moyenne d'âge</p>
       <%= f.input :average_age, :input_html => { :type => "number" }, label: false %>
-    </div>
-
-    <div class="form-line">
-      <p class="form-label">Adresse</p>
+      <p class="form-label form-label-font-size">Adresse</p>
       <%= f.input :address, placeholder: '16 villa gaudelet 75011 paris', :input_html => { :id => "startup_address" }, label: false%>
-      <p class="form-label">Site internet</p>
+      <p class="form-label form-label-font-size form-label-right-grid">Site internet</p>
       <%= f.input :link, label: false %>
     </div>
 

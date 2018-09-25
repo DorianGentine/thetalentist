@@ -9,13 +9,13 @@
 
     <div class="form-grid blue-background">
       <!-- Line 1 -->
-      <p class="form-label requis">Prénom</p>
+      <p class="form-label form-label-font-size requis">Prénom</p>
       <%= f.input :firstname, required: true, autofocus: true, label: false %>
-      <p class="form-label requis">Nom</p>
+      <p class="form-label form-label-font-size form-label-right-grid requis">Nom</p>
       <%= f.input :name, required: true, autofocus: true, label: false %>
 
       <!-- Line 2 -->
-      <p class="form-label requis">Email</p>
+      <p class="form-label form-label-font-size requis">Email</p>
       <%= f.input :email, required: true, autofocus: true, label: false %>
       <div></div>
       <div></div>
@@ -23,18 +23,18 @@
 
     <div class="form-grid blue-background margin-top-background">
       <!-- Line 3 -->
-      <p class="form-label requis">Mot de passe</p>
+      <p class="form-label form-label-font-size requis">Mot de passe</p>
       <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), label: false %>
-      <!-- <p class="form-label requis">Confirmation du mot de passe</p> -->
+      <!-- <p class="form-label form-label-font-size requis">Confirmation du mot de passe</p> -->
       <div></div>
       <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false %>
     </div>
 
     <div class="form-grid blue-background margin-top-background">
       <!-- Line 4 -->
-      <p class="form-label requis">Votre entreprise</p>
+      <p class="form-label form-label-font-size requis">Votre entreprise</p>
       <%= f.input :startup_id, collection: Startup.all, input_html: { class:"select2"}, :include_blank => "Autre", label:false %>
-      <p class="form-label requis">Poste</p>
+      <p class="form-label form-label-font-size form-label-right-grid requis">Poste</p>
       <%= f.input :job, required: true, autofocus: true, label: false %>
     </div>
 
