@@ -6,6 +6,8 @@ import "../components/equalHeight"
 
 import '../components/datepicker';
 
+import '../components/showFileTitle';
+
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 

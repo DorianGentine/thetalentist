@@ -117,7 +117,7 @@
 }
 
 .conversation{
-  height: calc(100% - 265px);
+  height: calc(100% - 280px);
   padding: 10px 50px 0;
   position: relative;
   overflow: auto;
@@ -204,23 +204,41 @@ textarea{
     border-left: 0px;
     padding: 10px;
   }
-  i{
-    color: black;
-    font-size: 24px;
-    margin: 0 20px;
-  }
-  input{
-    background-color: $green;
-    border-radius: 20px;
-    padding: 0px 24px;
-    color: white;
-    border: 0px;
-    box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.17);
-    position: absolute;
-    right: 50px;
-  }
-  input:hover{
-    box-shadow: none;
+  .send-bar{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    .label-file-mailboxer{
+      padding: 0 20px;
+      i{
+        color: black;
+        font-size: 24px;
+      }
+    }
+    .label-file-mailboxer:hover{
+      cursor: pointer;
+      i{
+        color: $green;
+        transition: 0.15s;
+      }
+    }
+    .btn-envoyer{
+      background-color: $green;
+      border-radius: 20px;
+      padding: 0px 24px;
+      color: white;
+      border: 0px;
+      box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.17);
+      margin-right: 50px;
+      transition: 0.15s;
+    }
+    .btn-envoyer:hover{
+      box-shadow: none;
+    }
+    #uploadFile{
+      border: none;
+      flex-grow: 1;
+    }
   }
   .accept-relation{
     position: absolute;
@@ -246,18 +264,18 @@ textarea{
     text-align: center;
   }
   #mailboxer_message_attachment{
-    height: 24px;
-    width: 24px;
+    // height: 24px;
+    // width: 24px;
     left: 20px;
-    opacity: 0;
+    // opacity: 0;
   }
-  #mailboxer_message_attachment:hover{
-    cursor: pointer;
-    .fa-paperclip{
-      color: $green;
-      transition: 0.15s;
-    }
-  }
+  // #mailboxer_message_attachment:hover{
+  //   cursor: pointer;
+  //   .fa-paperclip{
+  //     color: $green;
+  //     transition: 0.15s;
+  //   }
+  // }
 }
 
 .doc-echanges{
