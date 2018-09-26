@@ -5,19 +5,20 @@
   <h2>Vous souhaitez <strong>réinitialiser</strong> votre mot de passe ?</h2>
 
   <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-    <div class="forgot_password_grid">
+    <div class="forgot_password_grid blue-background">
       <%= f.error_notification %>
 
-      <%= f.input :email, required: true, autofocus: true %>
+      <p class="form-label-font-size requis">Email</p>
+      <%= f.input :email, required: true, autofocus: true, label: false %>
 
       <%= f.button :submit, "Envoyer", :class => "submit_forgot_password" %>
 
     </div>
   <% end %>
 
-  <div class="forgot_password_links">
-    <%= render "talents/shared/links" %>
-  </div>
+  <!-- <div class="forgot_password_links blue-background margin-top-background">
+    <#%= render "talents/shared/links" %>
+  </div> -->
 
 </div>
 

@@ -19,7 +19,9 @@
   <div class="footer-right footer-small-case">
     <a href="http://www.ineva-partners.com/equipe/" target="_blank">Équipe</a>
     <a class="modal-button" data-target= "modal_contact">Contact</a>
-    <a href="http://www.ineva-partners.com/mention-legales/" target="_blank">Mentions légales</a>
+    <%= link_to mentions_legales_path do  %>
+      <p>Mentions légales</p>
+    <% end %>
 
 <!--     <a href="">CGU</a>
     <a href="">FAQ</a>

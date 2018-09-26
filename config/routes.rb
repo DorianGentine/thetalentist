@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   get 'waiting_for_validation', to: "pages#waiting_for_validation"
   get 'welcome_talents', to: "pages#talent_home"
   get 'welcome_startups', to: "pages#headhunter_home", as: "welcome_headhunters"
+  get 'legal_informations', to: "pages#legal_informations", as: "mentions_legales"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
 
