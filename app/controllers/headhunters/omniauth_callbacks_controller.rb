@@ -2,7 +2,7 @@
 
 class Headhunters::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should configure your model like this:
-  devise :omniauthable, omniauth_providers: [:linkedin]
+  # devise :omniauthable, omniauth_providers: [:linkedin]
 
   # You should also create an action method in this controller like this:
   # def twitter
