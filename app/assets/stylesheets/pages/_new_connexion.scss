@@ -96,62 +96,13 @@
 .inscription-items{
   display: flex;
   justify-content: space-around;
-  .btn-inscription{
-    width: 30%;
-    border: 2px solid $green;
-    border-radius: 4px;
-    background-color: rgba(0,0,0,0);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    i{
-      font-size: 5.6vw;
-      margin: 10px;
-    }
-    p{
-      text-transform: uppercase;
-      font-size: 1.2vw;
-      font-weight: 900;
-      color: $green;
-    }
-  }
-  .btn-inscription:hover{
-    background-color: $green;
-    animation: none !important;
-    transition: ease-in-out 0.15s;
-    p{
-      color: white;
-      text-decoration: none;
-      transition: ease-in-out 0.15s;
-    }
-  }
-}
-.linkedin-btn a p {
-  width: 235px;
-  color: #fff;
-  background-color: #007bb6;
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  i {
-    margin-right: 5px;
-  }
 }
 
 .home-left .form-actions {
   margin: 0;
 }
-.btn-aline {
-  display: flex;
-  justify-content: space-between;
-}
-@media screen and (max-width: 770px) {
-  .btn-aline {
-    display: block;
-  }
-}
+
+
 
 .margin-top-bottom-btn {
   margin-bottom: 30px;
@@ -177,28 +128,6 @@
     right: 37%;
   }
 }
-.btn-connexion {
-  width: 170px;
-  height: 40px;
-  border: 2px solid $green;
-  font-weight: 600;
-  font-size: 21px;
-  color: $green;
-  border-radius: 25px;
-  background-color: rgba(0,0,0,0);
-  padding: 5px 10px;
-}
-.btn-connexion:hover{
-  cursor: pointer;
-  background-color: $green;
-  color: white;
-  text-decoration: none;
-  transition: 0.15s;
-}
-.margin-auto-talent .form-btn {
-  width: 210px;
-  margin: 0;
-}
 
 @media screen and (max-width: 991px) {
   .home-left{
@@ -207,9 +136,6 @@
     }
     h2{
       padding: 0 20px;
-    }
-    .home-connexion .inscription-items .btn-inscription{
-      width: unset;
     }
   }
   .margin-auto-talent {

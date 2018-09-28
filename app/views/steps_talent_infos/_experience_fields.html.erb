@@ -9,7 +9,7 @@
       <%= f.input :position, label: false, placeholder:"Intitulé du poste" %>
     </div>
     <div class="company-type-grid">
-      <%= f.input :company_type_id, collection: CompanyType.all, label: false, placeholder:"Type d'entreprise" %>
+      <%= f.input :company_type_id, collection: CompanyType.all, label: false, prompt:"Type d'entreprise", :input_html => { :class => 'select2' } %>
     </div>
     <div id="text_area-experience">
       <p class="form-label-font-size">Description de la mission:</p>

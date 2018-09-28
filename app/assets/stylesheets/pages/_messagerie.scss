@@ -222,19 +222,6 @@ textarea{
         transition: 0.15s;
       }
     }
-    .btn-envoyer{
-      background-color: $green;
-      border-radius: 20px;
-      padding: 0px 24px;
-      color: white;
-      border: 0px;
-      box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.17);
-      margin-right: 50px;
-      transition: 0.15s;
-    }
-    .btn-envoyer:hover{
-      box-shadow: none;
-    }
     #uploadFile{
       border: none;
       flex-grow: 1;
