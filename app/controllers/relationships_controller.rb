@@ -11,6 +11,7 @@ class RelationshipsController < ApplicationController
       @headhunter.send_message(@talent, "#{@headhunter.firstname}, souhaite rentrer en contact avec vous", "#{@headhunter.firstname}")
       flash[:success] = "Relationship was created!"
       # redirect_to repertoire_path, flash: {notice: "Vous êtes maintenant en relation avec ce Talent."}
+      TalentMailer.invited(@talent, @headhunter).deliver_now
       respond_to do |format|
         format.html { redirect_to repertoire_path }
         format.js  # <-- will render `app/views/reviews/create.js.erb`

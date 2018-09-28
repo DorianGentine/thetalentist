@@ -139,22 +139,22 @@
 
 
         <!-- C'est utile ? -->
-        <% if current_user.is_a?(Headhunter) %>
-          <% if talent.is_connected_to?(@headhunter) %>
+        <!-- <#% if current_user.is_a?(Headhunter) %>
+          <#% if talent.is_connected_to?(@headhunter) %>
             <div class="contact-btn en-relation">
               <p>Vous êtes déjà en relation</p>
             </div>
-          <% else %>
+          <#% else %>
             <div class="contact-btn">
-              <%= simple_form_for talent, methode: :get do |f| %>
+              <#%= simple_form_for talent, methode: :get do |f| %>
                 <p>Contacter <i class="fas fa-location-arrow"></i></p>
-                <%= f.simple_fields_for :relationships do |u| %>
-                  <%= u.button :submit, inline_label: "Contacter" %>
-                <% end %>
-              <% end %>
+                <#%= f.simple_fields_for :relationships do |u| %>
+                  <#%= u.button :submit, inline_label: "Contacter" %>
+                <#% end %>
+              <#% end %>
             </div>
-          <% end %>
-        <% end %>
+          <#% end %>
+        <#% end %> -->
       </div>
     </div>
   </div>

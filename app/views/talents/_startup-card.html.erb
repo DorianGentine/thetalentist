@@ -32,7 +32,11 @@
 
 
         <div class="lien-messagerie-profil">
-          <%= link_to "Messages", headhunter_conversation_path(headhunter.id, headhunter.mailbox.conversations.last)%>
+          <% if Mailboxer::Conversation.participant(headhunter).count > 0 %>
+            <%= link_to "Messages", headhunter_conversation_path(headhunter.id, headhunter.mailbox.conversations.last)%>
+          <% else %>
+            <p>Aucun message</p>
+          <% end %>
           <%= link_to "Profil", headhunter_path(headhunter)%>
         </div>
 

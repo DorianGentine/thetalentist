@@ -1,7 +1,10 @@
-// var cards = document.querySelector("#all-talents")
-// cards.innerHTML = ""
+
+function filtering(talents){
+  const cards = document.querySelector("#all-talents")
+  cards.innerHTML = ""
+  cards.innerHTML = talents;
+
+}
 
 
-//   cards.insertAdjacentHTML("beforeend", "<%= j render 'section_talents'%>")
-
-// x
+filtering('<%= j render "section_talents"%>')

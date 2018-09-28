@@ -233,6 +233,7 @@ GEM
     orm_adapter (0.5.0)
     os (0.9.6)
     pdf-core (0.7.0)
+    pdfkit (0.8.2)
     pg (0.21.0)
     polyamorous (1.3.3)
       activerecord (>= 3.0)
@@ -379,6 +380,7 @@ GEM
     websocket-extensions (0.1.3)
     wicked (1.3.2)
       railties (>= 3.0.7)
+    wkhtmltopdf-binary (0.12.4)
 
 PLATFORMS
   ruby
@@ -408,6 +410,7 @@ DEPENDENCIES
   mailboxer
   omniauth
   omniauth-linkedin
+  pdfkit
   pg (~> 0.21)
   prawn-rails
   pry-byebug
@@ -425,6 +428,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webpacker
   wicked
+  wkhtmltopdf-binary
 
 RUBY VERSION
    ruby 2.4.1p111

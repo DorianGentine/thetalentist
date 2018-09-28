@@ -19,14 +19,14 @@ class HeadhuntersController < ApplicationController
         talent = Talent.find(job.talent_id)
         # if !@headhunter.is_connected_to?(talent)
           @talents << talent
+          respond_to do |format|
+            format.html
+            format.js
+          end
         # end
       end
     end
 
-    # respond_to do |format|
-    #   format.html
-    #   format.js
-    # end
   end
 
   def index
@@ -108,12 +108,21 @@ class HeadhuntersController < ApplicationController
   end
 
   def to_validate
+    @talentist = Talentist.find_by_email("dimitri@hotmail.fr")
     @headhunter = Headhunter.find(params[:id])
     if params[:commit] == "Accepter"
       if @headhunter.validated == true
         validated_action(nil)
       elsif @headhunter.validated == false
         validated_action(true)
+        # find the conversation between two user
+        conversations = Mailboxer::Conversation.participant(@talentist).participant(@headhunter)
+        if conversations.size > 0
+          @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@headhunter.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
+        else
+          # @talentist.send_message(@headhunter, "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme!", "#{@headhunter.id}")
+          # HeadhunterMailer.accepted(@headhunter).deliver_now
+        end
       else @headhunter.validated == nil
         validated_action(true)
       end

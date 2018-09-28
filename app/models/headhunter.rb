@@ -4,7 +4,7 @@ class Headhunter < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  belongs_to :startup
+  belongs_to :startup, optional: true
   accepts_nested_attributes_for :startup
 
   has_many :relationships, dependent: :destroy
@@ -47,6 +47,14 @@ class Headhunter < ApplicationRecord
         @unread_conversations << conversation
       end
     end
+  end
+
+  def send_welcome_email
+    ApplicationMailer.welcome(self).deliver_now
+  end
+
+  def new_message(message, receveur)
+    ApplicationMailer.new_message(message, receveur, self).deliver_now
   end
 
   def count_unread_message

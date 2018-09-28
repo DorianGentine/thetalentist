@@ -77,3 +77,4 @@ gem 'google-api-client', '~> 0.11'
 # to pdf
 gem 'prawn-rails'
 gem "pdfkit"
+gem "wkhtmltopdf-binary"

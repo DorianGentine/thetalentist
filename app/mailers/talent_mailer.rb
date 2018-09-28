@@ -1,40 +1,31 @@
 class TalentMailer < ApplicationMailer
 
-
-  def welcome(user)
-    @user = user  # Instance variable => available in view
-
+  def candidate(user)
+    @user = user
+    # @pdf = pdf
     mail(
       to: @user.email,
-      subject: "Bienvenue sur The Talentist!")
-    # This will render a view in `app/views/talent_mailer`!
-  end
-
-  def new_message(message, receveur, envoyeur)
-    @receveur = receveur
-    @envoyeur = envoyeur
-    @message = message
-
-    mail(
-      to:       @receveur.email,
-      subject:  "Vous avez reçu un nouveau message de #{@envoyeur.firstname}!"
+      subject: "Bonjour #{@user.firstname}, candidature !"
       )
   end
 
-  def inscription(user, pdf)
+  def invited(user, headhunter)
     @user = user
-    @pdf = pdf
+    @headhunter = headhunter
+
+    mail(
+      to: @user.email,
+      subject: "Vous avez été invité"
+      )
   end
 
   def accepted(user)
     @user = user
-    @descritpion = descritpion
 
     mail(
       to: @user.email,
       subject: "Profil accepté :)"
       )
-
   end
 
   def refused(user, descritpion)

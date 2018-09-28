@@ -4,8 +4,8 @@ class StepsStartupInfosController < ApplicationController
 
   before_action :find_headhunter, only: [:show, :update]
   skip_after_action :verify_authorized
-  # skip_before_action :authenticate!
-  # skip_before_action :current_user
+  skip_before_action :authenticate!
+  skip_before_action :current_user
 
 
   def show
@@ -20,9 +20,10 @@ class StepsStartupInfosController < ApplicationController
     if @startup.save
       @headhunter.update(startup_id: @startup.id)
       @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
+      HeadhunterMailer.accepted(@headhunter).deliver_now
       render_wizard @headhunter
     else
-        render "steps_startup_infos/#{step}"
+      render "steps_startup_infos/#{step}"
     end
   end
 
@@ -34,6 +35,7 @@ private
   end
 
   def finish_wizard_path
+
     sign_in(@headhunter)
     headhunter_path(@headhunter)
   end

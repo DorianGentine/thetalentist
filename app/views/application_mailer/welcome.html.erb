@@ -76,6 +76,10 @@
 
 
 <p>
-  <%= link_to "Ton profil (PDF)", talent_url(@user, format: 'pdf') %>
+  <% if @user.is_a?(Talent) %>
+    <%= link_to "Ton profil (PDF)", talent_url(@user, format: 'pdf') %>
+  <% else %>
+    <%= link_to "Ton profil (PDF)", headhunter_url(@user, format: 'pdf')  %>
+  <% end %>
 </p>
 

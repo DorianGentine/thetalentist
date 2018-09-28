@@ -5,16 +5,16 @@ function init_select2(){
 };
 
 function addSelect2(){
-  const formation = document.getElementById('formations')
-  const btn = formation.querySelectorAll(".form-hobby-add")
+  // const formation = document.getElementById('formations')
+  // const btn = formation.querySelectorAll(".form-hobby-add")
 
-  console.log(btn[0])
-    btn[0].addEventListener('click', function(){
-    let formation2 = document.getElementById('formations')
-    let nesteds = formation2.querySelectorAll(".nested-fields")
+  // console.log(btn[0])
+  //   btn[0].addEventListener('click', function(){
+  //   let formation2 = document.getElementById('formations')
+  //   let nesteds = formation2.querySelectorAll(".nested-fields")
 
 
-    })
+  //   })
 
 
 }

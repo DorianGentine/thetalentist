@@ -1,0 +1,433 @@
+.bandeau-visible {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #f97567;
+  p {
+    margin: 0;
+    color: white;
+  }
+}
+
+
+.container-show{
+  padding: 60px;
+  display: inline-flex;
+  width: 100vw;
+}
+
+.talent-left{
+  width: 340px;
+  display: inline-block;
+  margin: 0 90px 0 0;
+  position: relative;
+  > div{
+    margin-bottom: 30px;
+  }
+  .talent-name{
+    position: relative;
+    h1{
+      font-size: 38px;
+      font-weight: 600;
+      text-transform: capitalize;
+      margin: 0;
+    }
+    .talent-post{
+      font-size: 24px;
+      color: $gray;
+      margin: 0;
+      font-weight: 100;
+    }
+  }
+  .credentials{
+    background-color: $green;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    p{
+      color: white;
+      margin: 0;
+      font-size: 18px;
+      font-weight: 100;
+    }
+  }
+  .credentials:hover{
+    cursor: pointer;
+  }
+}
+
+.photo-profil{
+  width: 192px;
+  height: 192px;
+  border-radius: 100px;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  .initiale{
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    background-color: $gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p{
+      font-size: 100px;
+      font-weight: 900;
+      margin: 0;
+      color: white;
+    }
+  }
+  .statut{
+    width: 48px;
+    height: 48px;
+    background-color: $green;
+    border-radius: 30px;
+    border: 4px solid white;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+  }
+}
+
+
+.talent-right{
+  width: 70%;
+  display: inline-block;
+  .talent-right-up{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(3, 13, 88, 0.05);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    .right-up-item{
+      width: 30%;
+      margin: 0 10px;
+      p{
+        font-size: 14px;
+        text-align: justify;
+      }
+      .text-right-up-item{
+        height: 214px;
+        overflow: auto;
+      }
+      .text-right-up-item::-webkit-scrollbar{
+        display: none;
+      }
+    }
+    .recherche-item-right{
+      align-self: flex-end;
+      h5, p{
+        text-align: right;
+      }
+    }
+  }
+  .talent-right-down{
+    .lower-middle-body{
+      position: relative;
+      flex-grow: 1;
+      min-width: 300px;
+      .barre-pointee{
+        height: 195px;
+      }
+    }
+    .lower-middle-body:first-child{
+      margin-right: 20px;
+    }
+    .talent-experiences{
+      display: block !important;
+      overflow: auto;
+      height: 200px;
+    }
+    .talent-experiences::-webkit-scrollbar{
+      display: none;
+    }
+    .placement-point-barre{
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.btn-edition{
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  color: $green;
+  border: 1px solid $green;
+  transition: 0.5s;
+  span{
+    font-size: 14px;
+    position: relative;
+    display: inline-block;
+    padding: 0 7px;
+  }
+  span:after{
+    content: 'Modifier';
+    font-size: 14px;
+    margin-left: 10px;
+    color: white;
+    display: none;
+    opacity: 0;
+    position: absolute;
+  }
+}
+.btn-edition:hover{
+  background-color: $green;
+  color: white;
+  width: 95px;
+  transition: all 0.5s;
+  span:after{
+    opacity: 1;
+    display: inline-block;
+    transition: all 0.5s;
+  }
+}
+
+
+.recherche-first-line{
+  display: flex;
+  justify-content: space-between;
+}
+.recherche-item{
+  h5{
+    font-size: 22px;
+    font-weight: 600;
+    color: $green;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  p{
+    font-size: 12px !important;
+    font-weight: 600;
+    color: $black;
+    text-transform: uppercase;
+  }
+}
+
+.relative{
+  position: relative
+}
+
+.headhunter-right-up{
+  width: 100%;
+  height: 318px;
+  margin-bottom: 90px;
+  position: relative;
+  .photos-environnement{
+    width: 100%;
+    height: calc(100% - 68px);
+    display: flex;
+    justify-content: space-between;
+  }
+  .photo-env-item{
+    height: 250px;
+    width: 250px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+  }
+  .decouvrir-plus{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(78, 204, 163, 0.7);
+    border-radius: 8px;
+    padding: 60px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    strong{
+      font-size: 55px;
+      font-weight: 900;
+    }
+  }
+  .photo-env-item:last-child:hover{
+    .decouvrir-plus{
+      display: flex;
+      cursor: pointer;
+    }
+  }
+}
+
+.headhunter-right-down{
+  height: 330px;
+  position: relative;
+  .btn-edition{
+    top: -40px;
+  }
+  .headhunter-chiffres{
+    width: 250px;
+    margin: 0 30px 0 0;
+  }
+  .entreprise-quelques-mots{
+    width: 65%;
+  }
+  .recherche-item{
+    width: 50%;
+  }
+  .recherche-middle-line{
+    text-align: center;
+    padding: 10px;
+    h5{
+      margin: 0;
+      font-size: 14px;
+      color: $black;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.bordure-droite{
+  border-right: 1px solid $gray;
+}
+.bordure-haut-bas{
+  border-top: 1px solid $gray;
+  border-bottom: 1px solid $gray;
+}
+.padding-left{
+  padding-left: 20px;
+}
+.padding-top{
+  padding-top: 12.5px;
+}
+
+.cercle{
+  width: 53px;
+  height: 53px;
+  border: 4px solid #2F9EE1;
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0);
+  position: relative;
+  p{
+    font-size: 14px;
+    background-color: white;
+    position: absolute;
+    top: 3px;
+    left: -8px;
+  }
+}
+.cercle-homme{
+  border-color: #D33FE4;
+}
+
+.space-between-vertical{
+  height: calc(100% - 68px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 991px) {
+  .container-show{
+    padding: 20px;
+    display: block;
+    .talent-left, .talent-right{
+      display: block;
+    }
+    .talent-left{
+      width: unset;
+      margin: 0;
+    }
+    .talent-right{
+      width: 100%;
+      .talent-right-up{
+        flex-direction: column;
+        margin: 20px 0;
+        .right-up-item{
+          width: unset;
+          margin: 20px 10px;
+          h4{
+            margin-bottom: 20px;
+          }
+        }
+      }
+      .talent-right-down{
+        margin: 20px 0;
+        .lower-middle-body{
+          width: unset;
+          margin: 60px 0;
+          .talent-experiences{
+            height: unset;
+            overflow: initial;
+          }
+        }
+      }
+    }
+  }
+
+  .headhunter-right-up{
+    height: unset;
+    margin-bottom: 40px;
+    .photos-environnement{
+      flex-direction: column;
+      .photo-env-item{
+        height: 85vw;
+        width: unset;
+        margin: 10px 0;
+      }
+      .photo-env-item:last-child .decouvrir-plus{
+        display: flex;
+      }
+    }
+  }
+  .headhunter-right-down{
+    height: unset;
+    h4{
+      margin-bottom: 20px;
+    }
+    .headhunter-chiffres{
+      margin: 40px auto;
+    }
+    .entreprise-quelques-mots{
+      width: unset;
+      margin: 40px auto;
+      .lower-left-body p{
+        text-align: justify;
+      }
+    }
+    .lower-body-item{
+      padding: 0;
+      .lower-right-body-item{
+        padding: 0;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

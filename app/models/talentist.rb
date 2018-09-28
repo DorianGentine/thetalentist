@@ -12,7 +12,6 @@ class Talentist < ApplicationRecord
   acts_as_messageable
   before_destroy { Mailboxer::Conversation.destroy_all }
 
-  after_create :send_welcome_email
   before_save :capitalize_name_firstname
 
   mount_uploader :photo, PhotoUploader
@@ -22,6 +21,9 @@ class Talentist < ApplicationRecord
     self.firstname = self.firstname.capitalize if self.firstname && !self.firstname.blank?
   end
 
+  def new_message(message, receveur)
+    ApplicationMailer.new_message(message, receveur, self).deliver_now
+  end
 
   def notif_of_unread
     conversations = self.mailbox.conversations
