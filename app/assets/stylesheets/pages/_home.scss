@@ -68,22 +68,6 @@
       width: 34vw;
       display: inline-flex;
       justify-content: flex-end;
-      .btn-inscription{
-        max-width: 12vw;
-        height: 12.5vw;
-        margin: 0 50px 0 0;
-        animation: anim-bouton 2s ease-out infinite;
-        p{
-          margin: 0;
-        }
-      }
-      @keyframes anim-bouton {
-        0% {box-shadow: 1px 1px 2px $green;}
-        25% {box-shadow: 3px 3px 2px $green;}
-        50% {box-shadow: 1px 1px 2px $green;}
-        75% {box-shadow: 1px 1px 2px $green;}
-        100% {box-shadow: 1px 1px 2px $green;}
-      }
     }
     #image-habillage-hp{
       width: 50.5vw;
@@ -582,13 +566,6 @@
     // -webkit-transform: translateZ(0);
     margin: 40px 0 0;
     justify-content: center;
-    .btn-connexion{
-      // position: absolute;
-      margin: 0 7.5px;
-      a{
-        // background-color: white;
-      }
-    }
   }
 
   .switch-button{
@@ -640,12 +617,10 @@
       left: 15px;
     }
     .new-landing-logo-talentist{
-      top: 15px;
-      right: 50%;
+      right: 15px;
       left: unset;
       height: 40px;
-      transform: translate(50%);
-      z-index: 2;
+      transform: unset;
     }
     .landing-top{
       margin: 0;
@@ -656,19 +631,6 @@
         width: unset;
         justify-content: center;
         margin: 30vh 0 0;
-        .btn-inscription{
-          margin: 0 40px;
-          width: unset;
-          height: unset;
-          max-width: unset;
-          background-color: white;
-          p{
-            font-size: 3vw;
-            i{
-              display: none;
-            }
-          }
-        }
       }
       #image-habillage-hp{
         width: 100vw;
@@ -855,46 +817,6 @@
 
 
 
-.btn-connexion{
-  width: 170px;
-  height: 40px;
-  border: 2px solid $green;
-  font-weight: 600;
-  font-size: 21px;
-  border-radius: 25px;
-  background-color: rgba(0,0,0,0);
-  padding: 5px 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 10px;
-  a{
-    color: $green;
-  }
-}
-.btn-connexion:hover{
-  cursor: pointer;
-  background-color: $green;
-  text-decoration: none;
-  transition: 0.15s;
-  a{
-    color: white;
-    transition: 0.15s;
-  }
-}
-.blue-connexion{
-  border: 2px solid $violet !important;
-  min-width: 200px;
-  a{
-    color: $violet;
-  }
-}
-
-.blue-connexion a:hover{
-  background-color: $violet;
-  color: white;
-}
-
 @media screen and (min-width: 768px){
   .carousel-indicators {
     bottom: -44px;
@@ -904,20 +826,24 @@
   }
 }
 
- .se_connecter-container {
-    height: calc(100vh - 220px);
-    width: 40%;
-    margin: auto;
-    .form-actions {
-      margin: 0;
-    }
-    .form-actions .form-btn {
-      width: 237px;
-    }
-    .margin-top-bottom-btn {
-      padding-top: 25%;
-    }
+.se_connecter-container {
+  height: calc(100vh - 220px);
+  width: 40%;
+  margin: auto;
+  .form-actions {
+    margin: 0;
   }
+  .form-actions .form-btn {
+    width: 237px;
+  }
+  .margin-top-bottom-btn {
+    padding-top: 25%;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  html {}
+}
 // Faire un parcours generale des text-align:
 h1 {
   color: $black

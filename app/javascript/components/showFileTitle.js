@@ -5,7 +5,6 @@ if (input != null) {
   var infoArea = document.getElementById( 'uploadFile' );
 
   input.addEventListener( 'change', showFileName );
-
 }
 function showFileName( event ) {
 

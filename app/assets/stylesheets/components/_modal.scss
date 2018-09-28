@@ -39,26 +39,6 @@
     font-size: 35px;
     font-weight: 900;
   }
-  .contact-btn{
-    width: 140px;
-    height: 40px;
-    margin-right: 40px;
-    background-color: $green;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    .btn{
-      opacity: 0;
-      width: 140px;
-      height: 40px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
   .en-relation{
     width: 240px;
     background-color: rgba(0, 0, 0, 0);
@@ -217,30 +197,6 @@ h4{
           text-align: justify;
         }
       }
-    }
-  }
-  .contact-btn{
-    display: none;
-    width: 140px;
-    height: 40px;
-    background-color: $green;
-    border-radius: 25px;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    position: relative;
-    p{
-      color: white;
-      margin: 0;
-    }
-    .btn{
-      opacity: 0;
-      width: 140px;
-      height: 40px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
     }
   }
   .en-relation{
