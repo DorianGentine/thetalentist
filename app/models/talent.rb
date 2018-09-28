@@ -2,8 +2,6 @@ class Talent < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
-
-
   devise  :database_authenticatable,
           :registerable,
           :recoverable,
@@ -99,6 +97,7 @@ class Talent < ApplicationRecord
     end
 
   end
+
   def job_is?(job)
     job_ids = []
     jobs = TalentJob.joins(:job).where(:jobs => {:title => job })
@@ -175,6 +174,15 @@ class Talent < ApplicationRecord
     clean_up_passwords
     result
   end
+
+  def new_message(message, receveur)
+    ApplicationMailer.new_message(message, receveur, self).deliver_now
+  end
+
+  def send_candidate
+    TalentMailer.candidate(self).deliver_now
+  end
+
   private
 
   def normalize_name_firstname
@@ -182,7 +190,7 @@ class Talent < ApplicationRecord
   end
 
   def send_welcome_email
-    TalentMailer.welcome(self).deliver_now
+    ApplicationMailer.welcome(self).deliver_now
   end
 
 

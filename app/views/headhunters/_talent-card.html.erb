@@ -16,23 +16,23 @@
 
         <div class="accepeter-talent">
           <%= simple_form_for talent , url: to_validate_talent_path(talent) do |f| %>
-          <div class="btn-validate">
-            <div class="<%= "green_validation" if talent.validated == true %>">
-              <%= f.submit "Accepter" %>
+            <div class="btn-validate">
+              <div class="<%= "green_validation" if talent.validated == true %>">
+                <%= f.submit "Accepter" %>
+              </div>
+              <div class="<%= "red_validation" if talent.validated === false %>">
+                <%= f.submit "Refuser" %>
+              </div>
             </div>
-            <div class="<%= "red_validation" if talent.validated === false %>">
-              <%= f.submit "Refuser" %>
+            <div class="btn-validate">
+              <div class="<%= "green_validation" if talent.visible == true %>">
+                <%= f.submit "Visible"%>
+              </div>
+              <div class="<%= "red_validation" if talent.visible === false %>">
+                <%= f.submit "Invisible" %>
+              </div>
             </div>
-          </div>
-          <div class="btn-validate">
-            <div class="<%= "green_validation" if talent.visible == true %>">
-              <%= f.submit "Visible"%>
-            </div>
-            <div class="<%= "red_validation" if talent.visible === false %>">
-              <%= f.submit "Invisible" %>
-            </div>
-            <% end %>
-          </div>
+          <% end %>
         </div>
 
         <div class="talent-update card-dispsition">
@@ -41,7 +41,12 @@
         </div>
 
         <div class="lien-messagerie-profil">
-          <%= link_to "Messages", talent_conversation_path(talent, talent.mailbox.conversations.last)%>
+
+          <% if Mailboxer::Conversation.participant(talent).count > 0 %>
+            <%= link_to "Messages", talent_conversation_path(talent, talent.mailbox.conversations.last)%>
+          <% else %>
+            <p>Aucun message</p>
+          <% end %>
           <%= link_to "Profil", talent_path(talent)%>
         </div>
       </div>
@@ -110,7 +115,7 @@
         </div>
 
         <div class="talent-more">
-            <p class= "modal-button" data-target= "modal_<%= talent.id %>">En savoir plus <i class="fas fa-angle-right"></i></p>
+            <p data-target= "modal_<%= talent.id %>">En savoir plus <i class="fas fa-angle-right"></i></p>
         </div>
       </div>
     </div>

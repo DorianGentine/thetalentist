@@ -1,3 +1,4 @@
+
 var input = document.getElementById( 'mailboxer_message_attachment' );
 
 if (input != null) {
@@ -5,7 +6,6 @@ if (input != null) {
 
   input.addEventListener( 'change', showFileName );
 }
-
 function showFileName( event ) {
 
   // the change event gives us the input it occurred in

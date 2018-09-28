@@ -1,16 +1,14 @@
-console.log("hello")
+$(document).ready(function() {
+
   let i = "relation_" + <%= @talent.id %>
-function removeRelation() {
-  const relation = document.getElementById(i);
-  console.log(relation)
-  relation.innerHTML = "";
-}
 
-function refreshForm(innerHTML) {
-  const newRelationForm = document.getElementById(i);
-  newRelationForm.innerHTML = innerHTML;
-}
+  function refreshForm(innerHTML) {
+    let newRelationForm = document.getElementById(i);
+    newRelationForm.innerHTML = "";
+    newRelationForm.innerHTML = innerHTML;
+  }
 
-removeRelation();
-refreshForm('<%= j render "headhunters/relationship", headhunter: @headhunter, talent: @talent %>');
+  refreshForm('<%= j render "headhunters/relationship", headhunter: @headhunter, talent: @talent %>');
 
+
+});

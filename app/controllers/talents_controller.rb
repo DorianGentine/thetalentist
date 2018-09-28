@@ -70,20 +70,20 @@ class TalentsController < ApplicationController
 
 
     respond_to do |format|
-      format.html { render :show }
+      format.html { render :template => "talents/show" }
+      format.pdf {
+        html = render_to_string(:layout => false , :action => "show.html.erb") # your view erb files goes to :action
 
-      format.pdf do
-        pdf = Prawn::Document.new
-        pdf.image "#{Rails.root}/app/assets/images/Logo The talentist-01.png", height: 30
-        pdf.text "Bonjour #{@talent.firstname}", size: 14, style: :bold_italic, align: :center
-        pdf.text ""
-        send_data pdf.render,
-          filename: "The Talentist - #{@talent.firstname}",
-          type: 'application/pdf',
-          disposition: 'inline'
-      end
+        kit = PDFKit.new(html)
+        kit.stylesheets << "#{Rails.root}/app/assets/stylesheets/components/pdf.css"
+        send_data(kit.to_pdf, :cv=>"#{@talent.id}.pdf", :type => 'application/pdf', :disposition => 'inline')
+      }
     end
 
+    if @talent.remote_cv_url.nil?
+      @talent.remote_cv_url = talent_url(@talent, format: 'pdf')
+      @talent.save
+    end
 
 
   end
@@ -111,12 +111,21 @@ class TalentsController < ApplicationController
   end
 
   def to_validate
+    @talentist = Talentist.find_by_email("dimitri@hotmail.fr")
     @talent = Talent.find(params[:id])
     if params[:commit] == "Accepter"
       if @talent.validated == true
         validated_action(nil)
       elsif @talent.validated == false
         validated_action(true)
+
+        conversations = Mailboxer::Conversation.participant(@talentist).participant(@talent)
+        if conversations.size > 0
+          @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@talent.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
+        else
+          @talentist.send_message(@talent, "Bonjour #{@talent.firstname}, Bienvenue sur notre plateforme!", "#{@talent.id}")
+          TalentMailer.accepted(@talent).deliver_now
+        end
       else @talent.validated == nil
         validated_action(true)
       end

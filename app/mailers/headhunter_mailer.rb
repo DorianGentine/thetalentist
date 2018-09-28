@@ -5,6 +5,15 @@ class HeadhunterMailer < ApplicationMailer
   #
   #   en.headhunter_mailer.alerte.subject
   #
+  def accepted(user)
+    @user = user
+
+    mail(
+      to: @user.email,
+      subject: "Profil accepté :)"
+      )
+  end
+
 
   def inscription_startup()
 
