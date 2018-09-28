@@ -1,191 +1,52 @@
-<div class="navbar-wagon">
-  <!-- Logo -->
-  <%= link_to root_path, class: "navbar-talentist-logo" do %>
-    <%= image_tag "Logo The talentist-02.png", height: 50 %>
-  <% end %>
+<% if params[:action] != "home" && params[:action] != "talent_home" && params[:action] != "headhunter_home"%>
 
-  <!-- Right Navigation -->
-  <div class="navbar-talentist-right hidden-xs hidden-sm">
-
-    <% if headhunter_signed_in? && current_headhunter %>
-
-      <!-- Links when logged in -->
-      <% if current_headhunter.validated %>
-        <%= link_to repertoire_path, class: "navbar-wagon-item navbar-wagon-link" do %>
-          <i class="fas fa-user-friends"></i> TALENTS
-        <% end %>
-      <% end %>
-
-      <div class="lien-messagerie">
-        <%= link_to conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
-          <i class="fas fa-envelope"></i> MESSAGERIE
-          <%= render "shared/notif_point" %>
-        <% end %>
-      </div>
-
-      <% if current_headhunter.validated %>
-        <%= link_to headhunter_path(current_headhunter), class:"navbar-wagon-item navbar-wagon-link" do %>
-          <i class="fa fa-user"></i> PROFILE
-        <% end %>
-      <% end %>
-
-      <!-- Avatar with dropdown menu -->
-      <div class="navbar-wagon-item">
-        <div class="dropdown">
-          <% if current_headhunter.photo.present? %>
-            <%= cl_image_tag current_headhunter.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
-          <% else %>
-            <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
-              <div class="initiale">
-                <p style="font-size: 14px; font-weight: 400"><%= current_headhunter.firstname.split(//).first.upcase %><%= current_headhunter.name.split(//).first.upcase %></p>
-              </div>
-            </div>
-          <% end %>
-          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <li>
-              <%= link_to headhunter_path(current_headhunter) do %>
-                <i class="fas fa-sliders-h"></i> <%= t(".profile", default: "Mon compte") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to destroy_headhunter_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-
-    <% elsif talent_signed_in? && current_talent.validated %>
-
-      <%= link_to repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" do %>
-        <i class="fas fa-rocket"></i> Mes START-UP
-      <% end %>
-      <div class="lien-messagerie">
-        <%= link_to conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
-          <i class="fas fa-envelope"></i> MESSAGERIE
-          <%= render "shared/notif_point" %>
-        <% end %>
-      </div>
-      <% if current_talent.validated %>
-        <%= link_to talent_path(current_talent), class:"navbar-wagon-item navbar-wagon-link" do %>
-          <i class="fa fa-user"></i> PROFILE
-        <% end %>
-      <% end %>
-      <!-- Avatar with dropdown menu -->
-      <div class="navbar-wagon-item">
-        <div class="dropdown">
-          <% if current_talent.photo.present? %>
-            <%= cl_image_tag current_talent.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
-          <% else %>
-            <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
-              <div class="initiale">
-                <p style="font-size: 14px; font-weight: 400"><%= current_talent.firstname.split(//).first.upcase %><%= current_talent.name.split(//).first.upcase %></p>
-              </div>
-            </div>
-          <% end %>
-          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <li>
-              <%= link_to edit_talent_path(current_talent) do %>
-                <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
-              <% end %>
-            </li>
-            <!-- <li>
-              <#%= link_to "#" do %>
-                <i class="fa fa-cog"></i>  <#%= t(".settings", default: "Settings") %>
-              <#% end %>
-            </li> -->
-            <li>
-              <%= link_to destroy_talent_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
-    <% elsif talentist_signed_in? && current_talentist %>
-      <% if current_talentist.admin %>
-        <%= link_to "ADMIN", admin_root_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <% end %>
-
-      <%= link_to "START-UP", headhunters_path, class: "navbar-wagon-item navbar-wagon-link" %>
-
-      <%= link_to "TALENTS", talents_path, class: "navbar-wagon-item navbar-wagon-link" %>
-
-      <div class="lien-messagerie">
-        <%= link_to "MESSAGERIE", conversation_path(current_talentist.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-        <%= render "shared/notif_point" %>
-      </div>
-
-      <!-- Avatar with dropdown menu -->
-      <div class="navbar-wagon-item">
-        <div class="dropdown">
-          <% if current_talentist.photo.present? %>
-            <%= cl_image_tag current_talentist.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
-          <% else %>
-            <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
-              <div class="initiale">
-                <p style="font-size: 14px; font-weight: 400">DM</p>
-              </div>
-            </div>
-          <% end %>
-          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <!-- <li>
-              <#%= link_to talent_path(current_talent) do %>
-                <i class="fa fa-user"></i> <#%= t(".profile", default: "Profile") %>
-              <#% end %>
-            </li> -->
-            <!-- <li>
-              <#%= link_to "#" do %>
-                <i class="fa fa-cog"></i>  <#%= t(".settings", default: "Settings") %>
-              <#% end %>
-            </li> -->
-            <li>
-              <%= link_to destroy_talentist_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-    <% else %>
-      <%= link_to "REVENIR  À LA PAGE DE CONNEXION", root_path, class: "navbar-wagon-item navbar-wagon-link" %>
+  <div class="navbar-wagon">
+    <!-- Logo -->
+    <%= link_to root_path, class: "navbar-talentist-logo" do %>
+      <%= image_tag "Logo The talentist-02.png", height: 50 %>
     <% end %>
-  </div>
 
-  <!-- Dropdown list appearing on mobile only -->
-  <div class="navbar-wagon-item hidden-450px hidden-md hidden-lg">
-    <div class="dropdown">
-      <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
-      <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-        <li><a href="#">Some mobile link</a></li>
-        <li><a href="#">Other one</a></li>
-        <li><a href="#">Other one</a></li>
-      </ul>
-    </div>
-  </div>
+    <!-- Right Navigation -->
+    <div class="navbar-talentist-right hidden-xs hidden-sm">
 
-  <!-- Menu appearing at page bottom -->
-  <div class="bottom-menu">
-    <% if headhunter_signed_in? %>
+      <% if headhunter_signed_in? && current_headhunter %>
 
-      <!-- Links when logged in -->
-      <div class="bottom-menu-item">
-        <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      </div>
-      <div class="bottom-menu-item">
-        <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-      </div>
-      <div class="bottom-menu-item">
+        <!-- Links when logged in -->
+        <% if current_headhunter.validated %>
+          <%= link_to repertoire_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+            <i class="fas fa-user-friends"></i> TALENTS
+          <% end %>
+        <% end %>
+
+        <div class="lien-messagerie">
+          <%= link_to conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
+            <i class="fas fa-envelope"></i> MESSAGERIE
+            <%= render "shared/notif_point" %>
+          <% end %>
+        </div>
+
+        <% if current_headhunter.validated %>
+          <%= link_to headhunter_path(current_headhunter), class:"navbar-wagon-item navbar-wagon-link" do %>
+            <i class="fa fa-user"></i> PROFILE
+          <% end %>
+        <% end %>
+
+        <!-- Avatar with dropdown menu -->
         <div class="navbar-wagon-item">
           <div class="dropdown">
-            <i class="fa fa-bars dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown"></i>
+            <% if current_headhunter.photo.present? %>
+              <%= cl_image_tag current_headhunter.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+            <% else %>
+              <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+                <div class="initiale">
+                  <p style="font-size: 14px; font-weight: 400"><%= current_headhunter.firstname.split(//).first.upcase %><%= current_headhunter.name.split(//).first.upcase %></p>
+                </div>
+              </div>
+            <% end %>
             <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
               <li>
                 <%= link_to headhunter_path(current_headhunter) do %>
-                  <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+                  <i class="fas fa-sliders-h"></i> <%= t(".profile", default: "Mon compte") %>
                 <% end %>
               </li>
               <li>
@@ -196,26 +57,47 @@
             </ul>
           </div>
         </div>
-      </div>
 
-    <% elsif talent_signed_in? %>
 
-      <div class="bottom-menu-item">
-        <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
-      </div>
-      <div class="bottom-menu-item">
-        <%= link_to "MESSAGERIE", conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-      </div>
-      <div class="bottom-menu-item">
+      <% elsif talent_signed_in? && current_talent.validated %>
+
+        <%= link_to repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+          <i class="fas fa-rocket"></i> Mes START-UP
+        <% end %>
+        <div class="lien-messagerie">
+          <%= link_to conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
+            <i class="fas fa-envelope"></i> MESSAGERIE
+            <%= render "shared/notif_point" %>
+          <% end %>
+        </div>
+        <% if current_talent.validated %>
+          <%= link_to talent_path(current_talent), class:"navbar-wagon-item navbar-wagon-link" do %>
+            <i class="fa fa-user"></i> PROFILE
+          <% end %>
+        <% end %>
+        <!-- Avatar with dropdown menu -->
         <div class="navbar-wagon-item">
           <div class="dropdown">
-            <i class="fa fa-bars dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown"></i>
+            <% if current_talent.photo.present? %>
+              <%= cl_image_tag current_talent.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+            <% else %>
+              <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+                <div class="initiale">
+                  <p style="font-size: 14px; font-weight: 400"><%= current_talent.firstname.split(//).first.upcase %><%= current_talent.name.split(//).first.upcase %></p>
+                </div>
+              </div>
+            <% end %>
             <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
               <li>
-                <%= link_to talent_path(current_talent) do %>
+                <%= link_to edit_talent_path(current_talent) do %>
                   <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
                 <% end %>
               </li>
+              <!-- <li>
+                <#%= link_to "#" do %>
+                  <i class="fa fa-cog"></i>  <#%= t(".settings", default: "Settings") %>
+                <#% end %>
+              </li> -->
               <li>
                 <%= link_to destroy_talent_session_path, method: :delete do %>
                   <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
@@ -224,18 +106,138 @@
             </ul>
           </div>
         </div>
+      <% elsif talentist_signed_in? && current_talentist %>
+        <% if current_talentist.admin %>
+          <%= link_to "ADMIN", admin_root_path, class: "navbar-wagon-item navbar-wagon-link" %>
+        <% end %>
+
+        <%= link_to "START-UP", headhunters_path, class: "navbar-wagon-item navbar-wagon-link" %>
+
+        <%= link_to "TALENTS", talents_path, class: "navbar-wagon-item navbar-wagon-link" %>
+
+        <div class="lien-messagerie">
+          <%= link_to "MESSAGERIE", conversation_path(current_talentist.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
+          <%= render "shared/notif_point" %>
+        </div>
+
+        <!-- Avatar with dropdown menu -->
+        <div class="navbar-wagon-item">
+          <div class="dropdown">
+            <% if current_talentist.photo.present? %>
+              <%= cl_image_tag current_talentist.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+            <% else %>
+              <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+                <div class="initiale">
+                  <p style="font-size: 14px; font-weight: 400">DM</p>
+                </div>
+              </div>
+            <% end %>
+            <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+              <!-- <li>
+                <#%= link_to talent_path(current_talent) do %>
+                  <i class="fa fa-user"></i> <#%= t(".profile", default: "Profile") %>
+                <#% end %>
+              </li> -->
+              <!-- <li>
+                <#%= link_to "#" do %>
+                  <i class="fa fa-cog"></i>  <#%= t(".settings", default: "Settings") %>
+                <#% end %>
+              </li> -->
+              <li>
+                <%= link_to destroy_talentist_session_path, method: :delete do %>
+                  <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      <% else %>
+        <%= link_to "REVENIR  À LA PAGE DE CONNEXION", root_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <% end %>
+    </div>
+
+    <!-- Dropdown list appearing on mobile only -->
+    <div class="navbar-wagon-item hidden-450px hidden-md hidden-lg">
+      <div class="dropdown">
+        <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+        <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+          <li><a href="#">Some mobile link</a></li>
+          <li><a href="#">Other one</a></li>
+          <li><a href="#">Other one</a></li>
+        </ul>
       </div>
+    </div>
 
-    <% end %>
+    <!-- Menu appearing at page bottom -->
+    <div class="bottom-menu">
+      <% if headhunter_signed_in? %>
+
+        <!-- Links when logged in -->
+        <div class="bottom-menu-item">
+          <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
+        </div>
+        <div class="bottom-menu-item">
+          <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
+        </div>
+        <div class="bottom-menu-item">
+          <div class="navbar-wagon-item">
+            <div class="dropdown">
+              <i class="fa fa-bars dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown"></i>
+              <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+                <li>
+                  <%= link_to headhunter_path(current_headhunter) do %>
+                    <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_headhunter_session_path, method: :delete do %>
+                    <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      <% elsif talent_signed_in? %>
+
+        <div class="bottom-menu-item">
+          <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+        </div>
+        <div class="bottom-menu-item">
+          <%= link_to "MESSAGERIE", conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
+        </div>
+        <div class="bottom-menu-item">
+          <div class="navbar-wagon-item">
+            <div class="dropdown">
+              <i class="fa fa-bars dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown"></i>
+              <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+                <li>
+                  <%= link_to talent_path(current_talent) do %>
+                    <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_talent_session_path, method: :delete do %>
+                    <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
 
 
+    </div>
   </div>
-</div>
 
-<div class="navbar-wagon-margin" style="margin-top: 70px"></div>
-
+  <div class="navbar-wagon-margin" style="margin-top: 70px"></div>
 
 
+<% end %>
 
 
 

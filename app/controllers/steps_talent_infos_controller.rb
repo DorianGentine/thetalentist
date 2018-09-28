@@ -58,6 +58,8 @@ class StepsTalentInfosController < ApplicationController
 
   def finish_wizard_path
     if @talent.validated
+      @talentist = Talentist.find_by_email("dimitri@hotmail.fr")
+      @talentist.send_message(@talent, "Bonjour #{@talent.firstname}, Bienvenue sur notre plateforme!", "#{@talent.id}")
       sign_in(@talent)
       talent_path(@talent)
     else

@@ -67,6 +67,25 @@ class TalentsController < ApplicationController
       @sectors = @talent.next_aventures.last.next_aventure_sectors
     end
     @credentials = @talent.credentials
+
+
+    respond_to do |format|
+      format.html { render :show }
+
+      format.pdf do
+        pdf = Prawn::Document.new
+        pdf.image "#{Rails.root}/app/assets/images/Logo The talentist-01.png", height: 30
+        pdf.text "Bonjour #{@talent.firstname}", size: 14, style: :bold_italic, align: :center
+        pdf.text ""
+        send_data pdf.render,
+          filename: "The Talentist - #{@talent.firstname}",
+          type: 'application/pdf',
+          disposition: 'inline'
+      end
+    end
+
+
+
   end
 
   def update

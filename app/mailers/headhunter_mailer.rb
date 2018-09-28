@@ -5,6 +5,11 @@ class HeadhunterMailer < ApplicationMailer
   #
   #   en.headhunter_mailer.alerte.subject
   #
+
+  def inscription_startup()
+
+  end
+
   def alerte(user)
     @user = user
     mail( to: user.email , subject: "Un nouveau talent pourrait t'intéresser")

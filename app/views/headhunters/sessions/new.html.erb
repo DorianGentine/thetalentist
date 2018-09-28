@@ -1,4 +1,4 @@
-<%= render "shared/navbar" %>
+
 
 <div class="home-container ">
   <div class="row">
@@ -19,11 +19,12 @@
 
 
               <div class="input-group">
-              <input class="form-control password optional" placeholder="*********" type="password" name="headhunter[password]" id="headhunter_password">
+                <input class="form-control password optional" placeholder="*********" type="password" name="headhunter[password]" id="headhunter_password">
                 <div class="input-group-addon">
                   <i class="fas fa-key"></i>
                 </div>
               </div>
+              <%= content_tag(:div, flash[:alert], :id => "flash_alert ", :style => "color: red; margin-left: 10%;") if flash[:alert] %>
             </div>
             <div class="connexion-btns btn-aline">
               <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
@@ -58,4 +59,4 @@
 </div>
 
 
-<%= render "shared/footer" %>
+
