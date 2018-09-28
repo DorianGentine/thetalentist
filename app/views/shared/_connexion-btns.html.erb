@@ -1,0 +1,34 @@
+
+<div class="connectez-vous hidden-xs">
+  <% if current_user  %>
+    <% if current_talent %>
+      <%= link_to destroy_talent_session_path, method: :delete do  %>
+        <p>SE DECONNECTER</p>
+      <% end %>
+    <% elsif current_headhunter %>
+      <%= link_to destroy_headhunter_session_path, method: :delete do  %>
+        <p>SE DECONNECTER</p>
+      <% end %>
+    <% else %>
+      <%= link_to destroy_talentist_session_path, method: :delete do  %>
+        <p>SE DECONNECTER</p>
+      <% end %>
+    <% end %>
+  <% else %>
+    <% if params[:action] == "headhunter_home" %>
+      <%= link_to new_headhunter_registration_path do  %>
+        <p>S'INSCRIRE</p>
+      <% end %>
+      <%= link_to new_headhunter_session_path do  %>
+        <p>SE CONNECTER</p>
+      <% end %>
+    <% else %>
+      <%= link_to new_talent_registration_path do  %>
+        <p>S'INSCRIRE</p>
+      <% end %>
+      <%= link_to new_talent_session_path do  %>
+        <p>SE CONNECTER</p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

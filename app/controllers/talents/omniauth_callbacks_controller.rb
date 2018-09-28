@@ -2,7 +2,7 @@
 
 class Talents::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should configure your model like this:
-  # devise :omniauthable, omniauth_providers: [:twitter]
+  # devise :omniauthable, omniauth_providers: [:linkedin]
 
   # You should also create an action method in this controller like this:
   # def twitter
@@ -30,13 +30,11 @@ class Talents::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def linkedin
     talent = Talent.find_for_linkedin_oauth(request.env['omniauth.auth'])
-    talentist = Talentist.find_by_email("dimitri@hotmail.fr")
     if talent.persisted?
       if talent.next_aventures.count > 0
         sign_in_and_redirect talent, event: :authentication
         set_flash_message(:notice, :success, kind: 'Linkedin') if is_navigational_format?
       else
-        talentist.send_message(talent, "Bonjour #{talent.firstname}, Bienvenue sur notre plateforme!", "#{talent.id}")
         session[:talent_id] = talent.id
         redirect_to steps_talent_info_path(:formations)
       end

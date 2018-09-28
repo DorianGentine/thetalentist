@@ -73,3 +73,7 @@ gem "gmaps4rails"
 
 # for google analytics API
 gem 'google-api-client', '~> 0.11'
+
+# to pdf
+gem 'prawn-rails'
+gem "pdfkit"

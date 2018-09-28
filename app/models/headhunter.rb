@@ -22,6 +22,9 @@ class Headhunter < ApplicationRecord
 
   validates :name, :firstname, :job, :email, presence: true
 
+  after_create :send_welcome_email
+  before_save :capitalize_name_firstname
+
   def mailboxer_email(object)
    #return the model's email here
   end
@@ -29,6 +32,12 @@ class Headhunter < ApplicationRecord
   def is_connected_to?(talent)
     Relationship.where("headhunter_id = ? AND talent_id = ?", self.id, talent.id).size > 0
   end
+
+  def capitalize_name_firstname
+    self.name = self.name.capitalize if self.name && !self.name.blank?
+    self.firstname = self.firstname.capitalize if self.firstname && !self.firstname.blank?
+  end
+
 
   def notif_of_unread
     conversations = self.mailbox.conversations
