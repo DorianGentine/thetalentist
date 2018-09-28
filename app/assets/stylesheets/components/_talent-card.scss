@@ -174,33 +174,6 @@
       .talent-update p{
         font-size: 10px
       }
-      .btn-validate{
-        display: flex;
-        justify-content: space-between;
-        div{
-          border-radius: 50px;
-          input{
-            border-radius: 50px;
-            font-size: 14px;
-            color: $green;
-            border-color: $green;
-          }
-        }
-        div:last-child {
-          input {
-            color: $red;
-            border-color: $red;
-          }
-        }
-        div:hover input{
-          color: white;
-          background-color: $green;
-          transition: 0.15s;
-        }
-        div:last-child:hover input{
-          background-color: $red;
-        }
-      }
     }
     .illu-card{
       height: 72px;
