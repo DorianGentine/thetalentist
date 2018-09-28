@@ -1,5 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'donatien@rollandmail.com'
+  # TODO changer le mail
+  default from: 'erwan.guillou@gmail.com'
   layout 'mailer'
 
 

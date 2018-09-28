@@ -1,7 +1,11 @@
 var input = document.getElementById( 'mailboxer_message_attachment' );
-var infoArea = document.getElementById( 'uploadFile' );
 
-input.addEventListener( 'change', showFileName );
+if (input != null) {
+  var infoArea = document.getElementById( 'uploadFile' );
+
+  input.addEventListener( 'change', showFileName );
+
+}
 
 function showFileName( event ) {
 

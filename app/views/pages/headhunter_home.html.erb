@@ -10,14 +10,7 @@
   <%= link_to root_path do %>
     <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
   <% end %>
-  <div class="connectez-vous">
-    <%= link_to new_headhunter_registration_path, { :class=>"hidden-xs" } do  %>
-      <p>S'INSCRIRE</p>
-    <% end %>
-    <%= link_to new_headhunter_session_path, { :class=>"hidden-xs" } do  %>
-      <p>SE CONNECTER</p>
-    <% end %>
-  </div>
+  <%= render "shared/connexion-btns" %>
 
   <div class="landing-top">
 
@@ -354,6 +347,4 @@
 </div>
 
 
-
-<%= render "shared/footer" %>
 

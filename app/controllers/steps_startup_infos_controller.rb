@@ -15,11 +15,14 @@ class StepsStartupInfosController < ApplicationController
 
   def update
     @startup = Startup.new(startup_params)
-    @startup.save
-    if @headhunter.update(startup_id: @startup.id)
+    @talentist = Talentist.find_by_email("dimitri@hotmail.fr")
+    message = "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
+    if @startup.save
+      @headhunter.update(startup_id: @startup.id)
+      @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
       render_wizard @headhunter
     else
-      render "steps_startup_infos/#{step}"
+        render "steps_startup_infos/#{step}"
     end
   end
 

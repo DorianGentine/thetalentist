@@ -10,11 +10,10 @@ class Talents::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    @talentist = Talentist.find_by_email("dimitri@hotmail.fr")
+    # TODO envoyer un email de bienvenue
     @talent = Talent.new(talent_params)
     authorize @talent
     if @talent.save
-      @talentist.send_message(@talent, "Bonjour #{@talent.firstname}, Bienvenue sur notre plateforme!", "#{@talent.id}")
       session[:talent_id] = @talent.id
       redirect_to steps_talent_info_path(:formations)
     else

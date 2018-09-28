@@ -11,6 +11,10 @@ import '../components/showFileTitle';
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 
+import { init_select2, addSelect2 } from '../components/addSelect2';
+init_select2();
+addSelect2();
+
 import { revealModal } from "../components/modal";
 revealModal();
 
