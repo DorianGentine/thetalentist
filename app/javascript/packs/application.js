@@ -8,6 +8,9 @@ import '../components/datepicker';
 
 import '../components/showFileTitle';
 
+import '../components/blockRotation';
+
+
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 
