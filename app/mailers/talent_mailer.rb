@@ -28,9 +28,8 @@ class TalentMailer < ApplicationMailer
       )
   end
 
-  def refused(user, descritpion)
+  def refused(user)
     @user = user
-    @descritpion = descritpion
 
     mail(
       to: @user.email,

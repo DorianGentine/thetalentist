@@ -73,12 +73,12 @@ class TalentsController < ApplicationController
       format.html { render :template => "talents/show" }
       format.pdf {
         html = render_to_string(
-        layout: false,
-        action: "show.pdf.erb"
+        layout: "pdf.html.erb",
+        action: "show_pdf.html.erb"
         ) # your view erb files goes to :action
 
         kit = PDFKit.new(html)
-        # send_data(kit.to_pdf, :filename=>"#{@talent.firstname}_#{@talent.name}.pdf", :type => 'application/pdf', :disposition => 'inline')
+        send_data(kit.to_pdf, :filename=>"#{@talent.firstname}_#{@talent.name}.pdf", :type => 'application/pdf', :disposition => 'inline')
         # kit.to_file(Rails.root + "#{@talent.firstname}_#{@talent.name}.pdf")
       }
     end
@@ -96,10 +96,11 @@ class TalentsController < ApplicationController
         end
       end
     end
-    @talent.update_password_with_password(talent_password)
-    # raise
-    # @talent.update_attributes(talent_params)
-    redirect_to talent_path(@talent)
+    if @talent.update(talent_params)
+      redirect_to talent_path(@talent)
+    else
+      render :edit
+    end
     authorize @talent
   end
 
@@ -115,6 +116,7 @@ class TalentsController < ApplicationController
       if @talent.validated == true
         validated_action(nil)
       elsif @talent.validated == false
+        @talent.declined = nil
         validated_action(true)
 
         conversations = Mailboxer::Conversation.participant(@talentist).participant(@talent)
@@ -130,9 +132,9 @@ class TalentsController < ApplicationController
     elsif params[:commit] == "Refuser"
       if @talent.validated == false
         validated_action(nil)
-      elsif @talent.validated == true
-        validated_action(false)
-      else @talent.validated == nil
+      elsif @talent.validated == true || @talent.validated == nil
+        @talent.update(declined_params)
+        @talent.send_refused
         validated_action(false)
       end
     elsif params[:commit] == "Visible"
@@ -177,6 +179,10 @@ private
 
   def talent_password
     params.require(:talent).permit(:password_old, :password, :password_confirmation )
+  end
+
+  def declined_params
+    params.require(:talent).permit(:declined)
   end
 
   def talent_params

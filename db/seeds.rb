@@ -238,11 +238,11 @@ market = Job.create!(title: "Market")
 
 p "Creating talent_jobs"
 
-luc_job = TalentJob.create!(talent: luc , job: data)
-donatien_job = TalentJob.create!(talent: donatien, job: data)
-dorian_job = TalentJob.create!(talent: dorian, job: market)
-TalentJob.create!(talent: erwan, job: sales)
-TalentJob.create!(talent: louis, job: product)
+luc_job = TalentJob.create!(talent: luc , job: data, year: 2)
+donatien_job = TalentJob.create!(talent: donatien, job: data, year: 3)
+dorian_job = TalentJob.create!(talent: dorian, job: market, year: 2)
+TalentJob.create!(talent: erwan, job: sales, year: 9)
+TalentJob.create!(talent: louis, job: product, year: 12)
 
 p "Creating skills"
 

@@ -1,4 +1,4 @@
- <% if @talent.photo.present? %>
+    <% if @talent.photo.present? %>
       <div class="photo-profil" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
         <div class="statut"></div>
       </div>
@@ -12,5 +12,3 @@
       </div>
 
     <% end %>
-
-
