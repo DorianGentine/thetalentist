@@ -7,7 +7,6 @@ function revealModal() {
 
     let close = "close_" + targetModalID
     let span = document.getElementById(close);
-
     span.onclick = function() {
       targetModal.style.display = "none";
     }

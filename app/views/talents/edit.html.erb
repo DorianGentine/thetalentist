@@ -6,10 +6,6 @@
 <%= simple_form_for @talent do |f| %>
   <%= f.input :firstname %>
   <%= f.input :name %>
-  <%= f.input :email %>
-  <%= f.input :current_password, label: "Mot de passe actuel" %>
-  <%= f.input :password, label: "Nouveau mot de passe", autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-  <%= f.input :password_confirmation, label: "Confirmation du mot de passe" %>
   <%= f.button :submit, "Sauvegarder", :class => "submit_forgot_password" %>
 <% end %>
 
