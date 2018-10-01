@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <style>
+      .pdf-body{
+        margin: 0 20px;
+      }
+      .pdf-content {
+        color : #FA360A;
+        font-family: "Source Sans Pro", "sans-serif";
+        text-align: center;
+        margin-right: 20px;
+        margin-left: 20px;
+      }
+      .pdf-title {
+        margin: 15px;
+        font-size: 39px;
+        color : #FA360A;
+      }
+      .pdf-date {
+        font-weight: lighter;
+        color : #FA360A;
+      }
+      .pdf-trip-comments {
+        text-align:justify;
+        border: 2px solid #FA360A;
+        padding: 10px 30px;
+        color: #FA360A;
+        background: rgba(250, 250, 250, 0.2);
+      }
+      .pdf-trip-comments p {
+        font-size: 18px;
+        color: #FA360A;
+      }
+      .pdf-trip-summary-content {
+        display: flex;
+        justify-content: space-between;
+      }
+      .pdf-trip-summary {
+        flex: 1;
+        padding: 10px 10px;
+        margin-bottom: 10px;
+        width: 100%;
+      }
+      .pdf-trip-host {
+        color : #FA360A;
+        text-align: center;
+      }
+      .pdf-content-photos {
+        display: flex;
+        justify-content: space-between;
+      }
+      .pdf-trip-activity {
+        flex: 0 0 5%;
+        color: #FA360A;
+      }
+      .pdf-trip-photo {
+        flex: 0 0 33.33%;
+      }
+      .pdf-trip-activity img {
+        object-fit: cover;
+        height: 200px;
+      }
+      .pdf-trip-activity h5 {
+        font-size: 10px;
+        font-weight: lighter;
+        text-align: center;
+        margin-top: -5px;
+        margin-bottom: 15px;
+      }
+      .pdf-trip-activity h6 {
+        font-size: 12px;
+        font-weight: lighter;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .pdf-map {
+        border: 2px solid #FA360A;
+        background: rgba(250, 250, 250, 0.2);
+        position: relative;
+        margin-top: 20px;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <h1>Coucou</h1>
+      <%= yield %>
+    </div>
+  </body>
+</html>

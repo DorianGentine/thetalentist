@@ -1,6 +1,7 @@
 require_relative 'boot'
 
 require 'rails/all'
+require 'pdfkit'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -22,6 +23,7 @@ module TheTalentist
     # test pour les pages erreurs
     config.exceptions_app = self.routes
 
+    config.middleware.use PDFKit::Middleware
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
