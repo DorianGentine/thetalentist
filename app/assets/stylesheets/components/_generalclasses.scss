@@ -1,0 +1,52 @@
+// Text
+  .capitalize{
+    text-transform: capitalize;
+  }
+
+  .uppercase{
+    text-transform: uppercase;
+  }
+
+// Color
+  .red{
+    color: $red;
+  }
+  .red-background{
+    background-color: $red !important;
+  }
+
+// Flex
+  .flex{
+    display: flex;
+  }
+
+  .space-between{
+    justify-content: space-between;
+  }
+
+  .space-between-vertical{
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+// Float
+  .float-left{
+    float: left;
+  }
+
+  .float-right{
+    float: right;
+  }
+
+// Grid
+  .grid{
+    display: grid;
+  }
+  .grid-column{
+    grid-auto-flow: column;
+  }
+
+
+input[type="range"]{
+  width: unset;
+}
