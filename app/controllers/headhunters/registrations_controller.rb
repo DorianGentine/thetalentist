@@ -13,25 +13,18 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
     @headhunter = Headhunter.new(headhunter_params)
     authorize @headhunter
     message = "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
-    if @headhunter.startup == nil
-      if @headhunter.save(validate: false)
+    if @headhunter.save
+      if @headhunter.startup == nil
         session[:headhunter_id] = @headhunter.id
         redirect_to steps_startup_info_path(:startup)
       else
-        render :new
-      end
-
-    else
-
-      if @headhunter.save
         @talentist = Talentist.find_by_email("dimitri@hotmail.fr")
         @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
         session[:headhunter_id] = @headhunter.id
         sign_up(resource)
-      else
-        render :new
       end
-
+    else
+      render :new
     end
   end
 

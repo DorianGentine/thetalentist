@@ -1,0 +1,14 @@
+    <% if @talent.photo.present? %>
+      <div class="photo-profil" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
+        <div class="statut"></div>
+      </div>
+    <% else %>
+
+      <div class="photo-profil">
+        <div class="initiale">
+          <p><%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %></p>
+        </div>
+        <div class="statut"></div>
+      </div>
+
+    <% end %>

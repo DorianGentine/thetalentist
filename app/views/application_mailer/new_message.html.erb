@@ -2,7 +2,7 @@
 
 <p>Vous avez reçu un message de <%= @envoyeur.firstname %></p>
 
-<p>"<%= @message.message.body %>"</p>
+<p><%= truncate( @message.message.body, length: 20) %></p>
 
 <div class="button_green">
   <%= link_to root_url do %>

@@ -1,5 +1,5 @@
 function revealModal() {
-  const triggerModal = (event) => {
+  let triggerModal = (event) => {
     let targetModalID = event.currentTarget.dataset.target
     let targetModal = document.getElementById(targetModalID)
 
@@ -7,7 +7,6 @@ function revealModal() {
 
     let close = "close_" + targetModalID
     let span = document.getElementById(close);
-
     span.onclick = function() {
       targetModal.style.display = "none";
     }
@@ -19,7 +18,7 @@ function revealModal() {
     }
   }
 
-  const modalButtonsList = document.querySelectorAll('.modal-button')
+  let modalButtonsList = document.querySelectorAll('.modal-button')
   modalButtonsList.forEach((button) => {
     button.addEventListener("click", triggerModal);
   })

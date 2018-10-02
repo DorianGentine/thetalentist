@@ -2,8 +2,9 @@ class MessagesController < ApplicationController
   before_action :set_conversation
 
   def create
+    @user = current_user
     if params[:mailboxer_message][:body].present?
-      @receipt = current_user.reply_to_conversation(
+      @receipt = @user.reply_to_conversation(
         @conversation,
         params[:mailboxer_message][:body],
         nil,
@@ -16,9 +17,13 @@ class MessagesController < ApplicationController
       participant = @conversation.participants - [current_user]
       @participant = participant[0]
 
-      TalentMailer.new_message(@receipt, @participant, current_user).deliver_now
+      # send email only for new messages but not for the first one beacause it will be welcome_in_our_plateforme
+      if Mailboxer::Conversation.participant(@participant).count > 0
+        @user.new_message(@receipt, @participant)
+      end
       redirect_to conversation_path(@receipt.conversation)
     else
+      flash[:notice] = "Attention, vous n'avez pas de text"
       redirect_to conversation_path(@conversation)
     end
     authorize @conversation

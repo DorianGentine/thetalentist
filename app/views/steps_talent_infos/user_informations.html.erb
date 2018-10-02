@@ -26,13 +26,23 @@
           </div>
         </div>
         <div class="blue-background margin-top-background row">
+          <div class="col-xs-12 col-lg-12 form-line row" id="metier-size">
+
+              <%= f.simple_fields_for :talent_jobs do |u| %>
+                <div class="col-lg-4 col-xs-12 form-line" style="padding:0px;">
+                  <p class="form-label-font-size">Spécialité métier</p>
+                  <%= u.input :job_id, collection: Job.all, label: false %>
+                </div>
+                <div class="col-lg-6 col-xs-12 form-line">
+                  <p class="form-label-font-size">Depuis combien de temps ?</p>
+                  <%= u.input :year, label: false %>
+                </div>
+              <% end %>
+
+          </div>
           <div class="col-xs-12 col-lg-6 form-line" id="linkedin-size">
             <p class="form-label-font-size">Linkedin</p>
             <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: false %>
-          </div>
-          <div class="col-xs-12 col-lg-6 form-line" id="metier-size">
-            <p class="form-label-font-size">Spécialité métier</p>
-            <%= f.input :job_ids, collection:Job.all, label: false, placeholder:'Marketing'%>
           </div>
         </div>
       </div>

@@ -5,8 +5,9 @@ class Talents::RegistrationsController < Devise::RegistrationsController
   def new
     @talent = Talent.new
     authorize @talent
-    @talent_hobby = TalentHobby.new
-    @talent.talent_hobbies.build.build_hobby
+
+    @talent.talent_jobs.build
+
   end
 
   def create
@@ -38,7 +39,8 @@ class Talents::RegistrationsController < Devise::RegistrationsController
       :cv,
       :linkedin,
       :job_ids,
-      hobby_ids: []
+      hobby_ids: [],
+      talent_jobs_attributes: [ :id, :job_id, :year]
       )
   end
 end

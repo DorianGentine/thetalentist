@@ -33,7 +33,7 @@ p "Creating talents"
 
 
 luc = Talent.create!(city: "Paris", email: "luc@hotmail.fr", password: "password", firstname: "luc", name: "buisson", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: false, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
-donatien = Talent.create!(city: "Paris", email: "donatien@hotmail.fr", password: "password", firstname: "donatien", name: "rolland", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
+donatien = Talent.create!(city: "Paris", email: "donatien@rollandmail.com", password: "password", firstname: "donatien", name: "rolland", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
 dorian = Talent.create!(city: "Paris", email: "dorian@hotmail.fr", password: "password", firstname: "dorian", name: "gentine", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:false, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
 erwan = Talent.create!(city: "Paris", email: "erwan@hotmail.fr", password: "password", firstname: "erwan", name: "guillou", phone:"0786019941", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:true, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
 louis = Talent.create!(city: "Paris", email: "louis@hotmail.fr", password: "password", firstname: "louis", name: "dupont", phone:"0786013426", linkedin:"https://www.linkedin.com/feed/?trk=hb_signin", cv:"", btoc: true, btob:false, validated: false, visible:false ,overview:"Ausus negotiis defensantem iam eos praeerat eos adoritur in praeerat iustissimus rector rector et abrupto Paulum minui rector exitio adhuc instabat defensantem potuit sortem mucronem inpegit ut imperatoris casus levare cognomentum sortem ille vicarium Paulus iam conplicandis dextera praeerat eos eundem ausus conplicandis negotiis abrupto mucronem dextera miserabiles cum minui.")
@@ -238,11 +238,11 @@ market = Job.create!(title: "Market")
 
 p "Creating talent_jobs"
 
-luc_job = TalentJob.create!(talent: luc , job: data)
-donatien_job = TalentJob.create!(talent: donatien, job: data)
-dorian_job = TalentJob.create!(talent: dorian, job: market)
-TalentJob.create!(talent: erwan, job: sales)
-TalentJob.create!(talent: louis, job: product)
+luc_job = TalentJob.create!(talent: luc , job: data, year: 2)
+donatien_job = TalentJob.create!(talent: donatien, job: data, year: 3)
+dorian_job = TalentJob.create!(talent: dorian, job: market, year: 2)
+TalentJob.create!(talent: erwan, job: sales, year: 9)
+TalentJob.create!(talent: louis, job: product, year: 12)
 
 p "Creating skills"
 
@@ -357,7 +357,7 @@ photo3.save
 
 p "Creating Headhunter part"
 
-lucas = Headhunter.create!(email: "lucas@hotmail.fr", password:"password", name: "Rideau", firstname: "lucas", job:"HR", validated: true, startup: backmarket)
+lucas = Headhunter.create!(email: "donatien.rolland@mail.novancia.fr", password:"password", name: "Rideau", firstname: "lucas", job:"HR", validated: true, startup: backmarket)
 amelie = Headhunter.create!(email: "amelie@hotmail.fr", password:"password", name: "Rideau", firstname: "amelie", job:"HR data_analyst", validated: false, startup: manomano)
 justine = Headhunter.create!(email: "justine@hotmail.fr", password:"password", name: "Rideau", firstname: "justine", job:"drh", validated: true, startup: doctolib)
 loic = Headhunter.create!(email: "loic@hotmail.fr", password:"password", name: "Rideau", firstname: "loic", job:"rh for sales and product owner", validated: true, startup: doctolib)
@@ -365,20 +365,12 @@ loic = Headhunter.create!(email: "loic@hotmail.fr", password:"password", name: "
 
 p "Creating The Talenist part"
 
-dimitri = Talentist.create!(email: "dimitri@hotmail.fr", password:"password", firstname: "dimitri", name:"mussat", super_admin: false)
+dimitri = Talentist.create!(email: "dimitri@hotmail.fr", password:"password", firstname: "dimitri", name:"mussat", super_admin: true)
 magdalena = Talentist.create!(email: "magdalena@hotmail.fr", password:"password", firstname: "MAGDALENA", name:"mussat", super_admin: true)
 
-p "Creating Messages"
-
-dimitri.send_message(luc, "Bonjour #{luc.firstname}, Bienvenue sur notre plateforme!", "#{luc.id}")
-dimitri.send_message(dorian, "Bonjour #{dorian.firstname}, Bienvenue sur notre plateforme!", "#{dorian.id}")
-dimitri.send_message(donatien, "Bonjour #{donatien.firstname}, Bienvenue sur notre plateforme!", "#{donatien.id}")
-dimitri.send_message(erwan, "Bonjour #{erwan.firstname}, Bienvenue sur notre plateforme!", "#{erwan.id}")
-dimitri.send_message(louis, "Bonjour #{louis.firstname}, Bienvenue sur notre plateforme!", "#{louis.id}")
 
 dimitri.send_message(lucas, "Bonjour #{lucas.firstname}, Bienvenue sur notre plateforme!", "#{lucas.id}")
 dimitri.send_message(amelie, "Bonjour #{amelie.firstname}, Bienvenue sur notre plateforme!", "#{amelie.id}")
 dimitri.send_message(justine, "Bonjour #{justine.firstname}, Bienvenue sur notre plateforme!", "#{justine.id}")
 dimitri.send_message(loic, "Bonjour #{loic.firstname}, Bienvenue sur notre plateforme!", "#{loic.id}")
-
 

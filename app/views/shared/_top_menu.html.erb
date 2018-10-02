@@ -32,7 +32,9 @@
           <%= link_to "Talents", repertoire_path %>
         </li>
         <li>
+          <% if current_headhunter.mailbox.conversations.count > 0 %>
           <%= link_to "Messagerie", conversation_path(current_headhunter.mailbox.conversations.last) %>
+          <% end %>
         </li>
         <li>
           <%= link_to destroy_headhunter_session_path, method: :delete do %>

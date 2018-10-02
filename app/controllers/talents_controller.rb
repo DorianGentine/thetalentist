@@ -70,20 +70,18 @@ class TalentsController < ApplicationController
 
 
     respond_to do |format|
-      format.html { render :show }
+      format.html { render :template => "talents/show" }
+      format.pdf {
+        html = render_to_string(
+        layout: "pdf.html.erb",
+        action: "show_pdf.html.erb"
+        ) # your view erb files goes to :action
 
-      format.pdf do
-        pdf = Prawn::Document.new
-        pdf.image "#{Rails.root}/app/assets/images/Logo The talentist-01.png", height: 30
-        pdf.text "Bonjour #{@talent.firstname}", size: 14, style: :bold_italic, align: :center
-        pdf.text ""
-        send_data pdf.render,
-          filename: "The Talentist - #{@talent.firstname}",
-          type: 'application/pdf',
-          disposition: 'inline'
-      end
+        kit = PDFKit.new(html)
+        send_data(kit.to_pdf, :filename=>"#{@talent.firstname}_#{@talent.name}.pdf", :type => 'application/pdf', :disposition => 'inline')
+        # kit.to_file(Rails.root + "#{@talent.firstname}_#{@talent.name}.pdf")
+      }
     end
-
 
 
   end
@@ -98,10 +96,11 @@ class TalentsController < ApplicationController
         end
       end
     end
-    @talent.update_password_with_password(talent_password)
-    # raise
-    # @talent.update_attributes(talent_params)
-    redirect_to talent_path(@talent)
+    if @talent.update(talent_params)
+      redirect_to talent_path(@talent)
+    else
+      render :edit
+    end
     authorize @talent
   end
 
@@ -111,21 +110,31 @@ class TalentsController < ApplicationController
   end
 
   def to_validate
+    @talentist = Talentist.find_by_email("dimitri@hotmail.fr")
     @talent = Talent.find(params[:id])
     if params[:commit] == "Accepter"
       if @talent.validated == true
         validated_action(nil)
       elsif @talent.validated == false
+        @talent.declined = nil
         validated_action(true)
+
+        conversations = Mailboxer::Conversation.participant(@talentist).participant(@talent)
+        if conversations.size > 0
+          @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@talent.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
+        else
+          @talentist.send_message(@talent, "Bonjour #{@talent.firstname}, Bienvenue sur notre plateforme!", "#{@talent.id}")
+          TalentMailer.accepted(@talent).deliver_now
+        end
       else @talent.validated == nil
         validated_action(true)
       end
     elsif params[:commit] == "Refuser"
       if @talent.validated == false
         validated_action(nil)
-      elsif @talent.validated == true
-        validated_action(false)
-      else @talent.validated == nil
+      elsif @talent.validated == true || @talent.validated == nil
+        @talent.update(declined_params)
+        @talent.send_refused
         validated_action(false)
       end
     elsif params[:commit] == "Visible"
@@ -170,6 +179,10 @@ private
 
   def talent_password
     params.require(:talent).permit(:password_old, :password, :password_confirmation )
+  end
+
+  def declined_params
+    params.require(:talent).permit(:declined)
   end
 
   def talent_params
