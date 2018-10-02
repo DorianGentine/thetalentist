@@ -25,11 +25,11 @@
         <div class="upper-left-body">
           <div class="talent-info">
             <div class="talent-info-item card-dispsition">
-              <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
+              <p class="icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
               <p><%= talent.city %></p>
             </div>
             <div class="talent-info-item card-dispsition">
-              <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
+              <p class="icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
               <% if talent.btoc && talent.btob %>
                 <p> BtoB & BtoC</p>
               <% elsif talent.btoc %>
@@ -39,11 +39,11 @@
               <% end %>
             </div>
             <div class="talent-info-item card-dispsition">
-              <p class="icon icon-info"><i class="fas fa-briefcase"></i></p>
+              <p class="icon-margin-right icon-green-color"><i class="fas fa-briefcase"></i></p>
               <p>CDI</p>
             </div>
             <div class="talent-info-item card-dispsition">
-              <p class="icon icon-info"><i class="far fa-compass"></i></p>
+              <p class="icon-margin-right icon-green-color"><i class="far fa-compass"></i></p>
               <% if talent.next_aventures.present? && talent.next_aventures.last.sectors.present? %>
                 <p><%= talent.next_aventures.last.sectors.first.title.capitalize %></p>
               <% else %>
@@ -51,7 +51,7 @@
               <% end %>
             </div>
             <div class="talent-info-item card-dispsition">
-              <p class="icon icon-info"><i class="far fa-calendar"></i></p>
+              <p class="icon-margin-right icon-green-color"><i class="far fa-calendar"></i></p>
               <p><%= 2018 - talent.experiences.last.starting.to_i %> ans d'expériences</p>
             </div>
           </div>

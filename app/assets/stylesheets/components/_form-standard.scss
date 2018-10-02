@@ -2,6 +2,8 @@
 .blue-background {
   background-color: $blue-background;
   padding: 30px;
+  border-radius: 2px;
+  box-shadow: -1px 1px 2px 1px rgba(0,0,0,0.1);
 }
 
 .margin-top-background {
@@ -49,9 +51,6 @@
   border-bottom: 3px solid $violet;
   margin-bottom: 45px;
   margin-top: 0px;
-  strong{
-    color: $green;
-  }
 }
 
 .form-actions{

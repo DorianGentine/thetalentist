@@ -1,0 +1,22 @@
+// readMoreText
+  .morecontent span {
+      display: none;
+  }
+  .morelink, .morelink:focus {
+    display: block;
+    color: $green;
+    text-decoration: none;
+    transition: 0.15s;
+  }
+  .morelink:hover {
+    color: $gray;
+  }
+
+// Read more
+  .read-more-content{
+    display: none;
+  }
+  .read-more:hover{
+    cursor: pointer;
+  }
+

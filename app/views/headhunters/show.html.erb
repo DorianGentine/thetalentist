@@ -22,7 +22,7 @@
 
       <div class="photo-profil">
         <div class="initiale">
-          <p><%= @startup.name.split(//).first.upcase %><%= @startup.name.split(//).second.upcase %></p>
+          <%= @startup.name.split(//).first.upcase %><%= @startup.name.split(//).second.upcase %>
         </div>
         <div class="statut"></div>
       </div>
@@ -37,11 +37,11 @@
     </div>
     <div class="talent-info">
       <div class="talent-info-item card-dispsition">
-        <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
+        <p class="icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
         <p><%= @startup.address.present? ? @startup.address : "Ajouter votre adresse" %></p>
       </div>
       <div class="talent-info-item card-dispsition">
-        <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
+        <p class="icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
         <p> <%= @startup.btob ? "BtoB" : ""%> <%= @startup.btob && @startup.btoc ? "&" : "" %><%= @startup.btoc ? "BtoC" : ""%> <%= @startup.btoc || @startup.btob ? "" : "Ajouter votre secteur d'activité" %></p>
       </div>
     </div>
