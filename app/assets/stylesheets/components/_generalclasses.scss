@@ -1,13 +1,7 @@
-// Text
-  .capitalize{
-    text-transform: capitalize;
-  }
-
-  .uppercase{
-    text-transform: uppercase;
-  }
-
 // Color
+  .green{
+    color: $green;
+  }
   .red{
     color: $red;
   }
@@ -44,6 +38,57 @@
   }
   .grid-column{
     grid-auto-flow: column;
+  }
+  .grid-col-span-2{
+    grid-column: span 2;
+  }
+
+// Ligne
+  .ligne-vertircal{
+    border: none;
+    width: 1px;
+    height: 100%;
+    background-color: $gray;
+  }
+  .ligne-horizontal{
+    border: none;
+    background-color: $gray;
+    height: 1px;
+    width: 100%
+  }
+
+// Margin
+  .no-margin{
+    margin: 0 !important;
+  }
+  .margin-bottom-30{
+    margin-bottom: 30px
+  }
+  .margin-top-30{
+    margin-top: 30px
+  }
+  .margin-left-30{
+    margin-left: 30px
+  }
+  .margin-right-30{
+    margin-right: 30px
+  }
+
+// Position
+  .relative{
+    position: relative;
+  }
+  .absolute{
+    position: absolute;
+  }
+
+// Text
+  .capitalize{
+    text-transform: capitalize;
+  }
+
+  .uppercase{
+    text-transform: uppercase;
   }
 
 

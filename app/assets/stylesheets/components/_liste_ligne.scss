@@ -1,0 +1,39 @@
+// Liste avec ligne
+  .list-ligne::before{ //dessine la ligne
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: calc(100% - 5px);
+    width: 1px;
+    background-color: $gray;
+  }
+  .list-ligne{
+    position: relative;
+    padding: 0 0 0 24px;
+    list-style: none;
+    list-style-image: none;
+  }
+  .list-ligne > li:first-child{
+    margin-top: 0;
+  }
+  .list-ligne > li{
+    position: relative;
+    margin-top: 20px;
+  }
+  .list-ligne > li:first-child::before{
+    background-color: $green;
+  }
+  .list-ligne > li:before { // dessine les points
+    color: rgba(0,0,0,0);
+    background-color: $gray;
+    border: 2px solid $blue-background;
+    border-radius: 20px;
+    position: absolute;
+    left: -25px;
+    top: 4px;
+    width: 13px;
+    height: 13px;
+    content: "\2022";
+    line-height: 13px;
+  }

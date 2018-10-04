@@ -14,76 +14,108 @@
 <div class="container-show grid-show">
 
   <div class="first-column">
-    <div class="blue-background">
+    <!-- Présentation profil -->
+      <div class="blue-background">
 
-      <!-- Photo de profil -->
-        <% if @talent.photo.present? %>
-          <div class="photo-profil" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
-            <div class="statut"></div>
-          </div>
-        <% else %>
-
-          <div class="photo-profil">
-            <div class="initiale">
-              <%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %>
+        <!-- Photo de profil -->
+          <% if @talent.photo.present? %>
+            <div class="photo-profil" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
+              <div class="statut"></div>
             </div>
-            <div class="statut"></div>
-          </div>
-        <% end %>
-
-      <!-- Nom talent -->
-      <h1 class="titre-profil"><%= @talent.firstname %> <%= @talent.name %></h1>
-
-      <!-- Poste -->
-          <% if @talent.experiences.last.present? && @talent.experiences.last.position.present? %>
-            <h2 class="talent-post"><%= @talent.experiences.last.position %></h2>
           <% else %>
-            <h2 class="talent-post">Pas définit</h2>
+
+            <div class="photo-profil">
+              <div class="initiale">
+                <%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %>
+              </div>
+              <div class="statut"></div>
+            </div>
           <% end %>
 
-      <hr class="separateur-show">
+        <!-- Nom talent -->
+          <h1 class="titre-profil"><%= @talent.firstname %> <%= @talent.name %></h1>
 
-      <!-- Secteur d'activité -->
-        <div class="info-grid-1">
-          <p class="titre-info-1">Spécialité métier</p>
-          <p class="text-info-1 icon-margin-right icon-green-color"><i class="far fa-compass"></i></p>
-          <% if @talent.sectors.last.present? && @talent.sectors.last.title.present? %>
-            <p class="text-info-1"><%= @talent.sectors.last.title %></p>
-          <% else %>
-            <p class="text-info-1"> Ajoute ton secteur activité</p>
-          <% end %>
-        </div>
-
-      <!-- Téléphone (BACK TODO) @Donatien -->
-        <div class="info-grid-1">
-          <p class="titre-info-1">Téléphone TODO</p>
-          <% if @talent.btoc || @talent.btob %>
-            <p class=" text-info-1 icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
-            <% if @talent.btoc && @talent.btob %>
-              <p class="text-info-1"> BtoB & BtoC</p>
-            <% elsif @talent.btob %>
-              <p class="text-info-1">BtoB</p>
-            <% else%>
-              <p class="text-info-1">BtoC</p>
+        <!-- Poste -->
+            <% if @talent.experiences.last.present? && @talent.experiences.last.position.present? %>
+              <h2 class="sous-titre-profil"><%= @talent.experiences.last.position %></h2>
+            <% else %>
+              <h2 class="sous-titre-profil">Pas définit</h2>
             <% end %>
-          <% else %>
-            <p class=" text-info-1 icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
-            <p class="text-info-1">Pas définit</p>
+
+        <hr class="separateur-show ligne-horizontal">
+
+        <!-- Secteur d'activité -->
+          <div class="info-grid-1">
+            <p class="titre-rubrique-1 grid-col-span-2">Spécialité métier</p>
+            <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="far fa-compass"></i></p>
+            <% if @talent.sectors.last.present? && @talent.sectors.last.title.present? %>
+              <p class="titre-rubrique-3 no-margin"><%= @talent.sectors.last.title %></p>
+            <% else %>
+              <p class="titre-rubrique-3 no-margin"> Ajoute ton secteur activité</p>
+            <% end %>
+          </div>
+
+        <!-- Téléphone -->
+          <div class="info-grid-1">
+            <p class="titre-rubrique-1 grid-col-span-2">Téléphone</p>
+            <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
+            <% if @talent.phone.present? %>
+              <p class="titre-rubrique-3 no-margin"> <%= @talent.phone %> </p>
+            <% else%>
+              <p class="titre-rubrique-3 no-margin">Ajoute ton numéro de téléphone</p>
+            <% end %>
+          </div>
+
+        <!-- Ville -->
+          <div class="info-grid-1">
+            <p class="titre-rubrique-1 grid-col-span-2">Ville</p>
+            <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
+            <p class="titre-rubrique-3 no-margin"><%= @talent.city.present? ? @talent.city : "Pas définit" %></p>
+          </div>
+      </div>
+
+    <!-- Mes compétences linguistiques -->
+      <div class="blue-background margin-top-background">
+        <div class="grid" style="grid: auto / auto auto;">
+          <p class="titre-rubrique-3 margin-bottom-30" style="grid-column: 1 / span 2;">Mes compétences linguistiques :</p>
+
+          <% @talent.talent_languages.each do |langue| %>
+            <p class="texte-rubrique-3b no-margin"><%= langue.language.title %></p>
+            <div class="notation-etoile">
+              <% for i in 1..langue.level %>
+                <span class="fas fa-circle etoile checked"></span>
+              <% end %>
+              <% for i in 1..(5-langue.level) %>
+                <span class="fas fa-circle etoile"></span>
+              <% end %>
+            </div>
           <% end %>
         </div>
+      </div>
 
-      <!-- Ville -->
-        <p class="titre-info-1">Ville</p>
-        <div class="info-grid-1">
-          <p class="text-info-1 icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
-          <p class="text-info-1"><%= @talent.city.present? ? @talent.city : "Pas définit" %></p>
+    <!-- Mes compétences techniques -->
+      <div class="blue-background margin-top-background">
+        <p class="titre-rubrique-3 margin-bottom-30">Mes compétences techniques :</p>
+
+        <div class="talent-competences">
+          <% @talent.technos.each do |techno| %>
+            <p><%= techno.title %></p>
+          <% end %>
         </div>
+      </div>
 
+    <!-- Me suivre sur -->
+      <div class="blue-background margin-top-background">
+        <p class="titre-rubrique-3 margin-bottom-30">Me suivre sur :</p>
 
-    </div>
+        <a class="social-media-link" href="<%= @talent.linkedin %>" target="_blank"><i class="social-media-link-icon fab fa-linkedin-in"></i></a>
+
+      </div>
+
   </div>
 
   <div class="second-column">
+
     <div class="blue-background">
 
       <!-- Titre section -->
@@ -91,7 +123,7 @@
         <h2 class="titre-section">Ma prochaine <strong>aventure</strong></h2>
 
       <!-- Mes petits plus -->
-        <h3 class="sous-titre-section" style="float: left;">Mes petits plus:</h3>
+        <h3 class="titre-rubrique-2" style="float: left;">Mes petits plus:</h3>
 
         <div class="talent-competences">
           <% @talent.next_aventures.last.your_small_plus.first(5).each do |hobby| %>
@@ -109,9 +141,9 @@
         <div class="flex space-between">
           <!-- Mobilité Back TODO : @Donatien -->
             <div class="info-grid-1">
-              <p class="titre-info-1">Mobilité</p>
+              <p class="titre-rubrique-1 grid-col-span-2">Mobilité</p>
               <% if @talent.city.present? %>
-                <p class="text-info-1 uppercase"><%= @talent.city %></p>
+                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @talent.city %></p>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -119,9 +151,9 @@
 
           <!-- Type de contrat -->
             <div class="info-grid-1">
-              <p class="titre-info-1">Type de contrat</p>
+              <p class="titre-rubrique-1 grid-col-span-2">Type de contrat</p>
               <% if @talent.next_aventures.first.contrat.present? %>
-                <p class="text-info-1 uppercase"><%= @talent.next_aventures.first.contrat %></p>
+                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @talent.next_aventures.first.contrat %></p>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -129,9 +161,9 @@
 
           <!-- Attentes salariales -->
             <div class="info-grid-1">
-              <p class="titre-info-1">Attentes salariales</p>
+              <p class="titre-rubrique-1 grid-col-span-2">Attentes salariales</p>
               <% if @talent.next_aventures.first.remuneration.present? %>
-                <p class="text-info-1 uppercase"><%= @talent.next_aventures.first.remuneration %></p>
+                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @talent.next_aventures.first.remuneration %></p>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -139,9 +171,9 @@
 
           <!-- Secteur -->
             <div class="info-grid-1">
-              <p class="titre-info-1">Secteur</p>
+              <p class="titre-rubrique-1 grid-col-span-2">Secteur</p>
               <% if @talent.next_aventures.first.present? %>
-                <p class="text-info-1 uppercase"><%= @sectors.first.sector.title %></p>
+                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @sectors.first.sector.title %></p>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -149,14 +181,14 @@
 
           <!-- Branche -->
             <div class="info-grid-1">
-              <p class="titre-info-1">Branche</p>
+              <p class="titre-rubrique-1 grid-col-span-2">Branche</p>
               <% if @talent.btoc || @talent.btob %>
                 <% if @talent.btoc && @talent.btob %>
-                  <p class="text-info-1 uppercase"> BtoB & BtoC</p>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"> BtoB & BtoC</p>
                 <% elsif @talent.btob %>
-                  <p class="text-info-1 uppercase">BtoB</p>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2">BtoB</p>
                 <% else%>
-                  <p class="text-info-1 uppercase">BtoC</p>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2">BtoC</p>
                 <% end %>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
@@ -165,249 +197,139 @@
 
           <!-- Disponibilité -->
             <div class="info-grid-1">
-              <p class="titre-info-1">Disponibilité</p>
+              <p class="titre-rubrique-1 grid-col-span-2">Disponibilité</p>
               <% if @talent.next_aventures.first.availability.present? %>
-                <p class="text-info-1 uppercase"><%= @talent.next_aventures.first.availability %></p>
+                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @talent.next_aventures.first.availability %></p>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
             </div>
         </div>
 
-      <hr class="separateur-show">
+      <hr class="separateur-show ligne-horizontal">
 
       <!-- Ligne texte -->
         <div class="grid space-between" id="grid-ligne-texte">
 
           <!-- Rêve remis à demain -->
             <div>
-              <h4 class="titre-info-2">Le rêve que je remets à demain</h4>
+              <h4 class="titre-rubrique-3">Le rêve que je remets à demain</h4>
               <% if @talent.next_aventures.first.overview.present?  %>
-                <p class="text-info-2 more"> <%= @talent.next_aventures.first.overview %></p>
+                <p class="texte-rubrique-3 more"> <%= @talent.next_aventures.first.overview %></p>
               <% else %>
-                <p class="text-info-2">À compléter</p>
+                <p class="texte-rubrique-3">À compléter</p>
               <% end %>
             </div>
 
           <!-- La personnalité qui m'inspire -->
             <div>
-              <h4 class="titre-info-2">La personnalité qui m'inspire</h4>
+              <h4 class="titre-rubrique-3">La personnalité qui m'inspire</h4>
               <% if @talent.next_aventures.first.overview.present?  %>
-                <p class="text-info-2 more"> <%= @talent.next_aventures.first.overview %></p>
+                <p class="texte-rubrique-3 more"> <%= @talent.next_aventures.first.overview %></p>
               <% else %>
-                <p class="text-info-2">À compléter</p>
+                <p class="texte-rubrique-3">À compléter</p>
               <% end %>
             </div>
 
           <!-- Un bon manager, c'est -->
             <div>
-              <h4 class="titre-info-2">Un bon manager, c'est</h4>
+              <h4 class="titre-rubrique-3" style="min-height: 44px">Un bon manager, c'est</h4>
               <% if @talent.next_aventures.first.overview.present?  %>
-                <p class="text-info-2 more"> <%= @talent.next_aventures.first.overview %></p>
+                <p class="texte-rubrique-3 more"> <%= @talent.next_aventures.first.overview %></p>
               <% else %>
-                <p class="text-info-2">À compléter</p>
+                <p class="texte-rubrique-3">À compléter</p>
               <% end %>
             </div>
 
           <!-- Le travail effectué gratuitement serait -->
             <div>
-              <h4 class="titre-info-2">Le travail effectué gratuitement serait</h4>
+              <h4 class="titre-rubrique-3">Le travail effectué gratuitement serait</h4>
               <% if @talent.next_aventures.first.overview.present?  %>
-                <p class="text-info-2 more"> <%= @talent.next_aventures.first.overview %></p>
+                <p class="texte-rubrique-3 more"> <%= @talent.next_aventures.first.overview %></p>
               <% else %>
-                <p class="text-info-2">À compléter</p>
+                <p class="texte-rubrique-3">À compléter</p>
               <% end %>
             </div>
 
         </div>
 
-      <hr class="separateur-show">
+      <hr class="separateur-show ligne-horizontal">
 
       <div class="grid space-between" style="grid: auto auto / calc(70% - 25px) calc(30% - 25px); grid-auto-flow: column;">
         <!-- Je suis plutôt -->
-          <h3 class="sous-titre-section">Je suis plutôt:</h3>
+          <h3 class="titre-rubrique-2">Je suis plutôt:</h3>
 
           <div class="grid space-between je-suis-plutot-grid">
             <!-- Chasseur / Eleveur -->
               <div class="slidecontainer grid slidecontainer-grid">
-                <p class="titre-info-slider float-left">Chasseur</p>
-                <input type="range" min="1" max="100" value="50" class="slider range-slider">
-                <p class="titre-info-slider float-right">Éleveur</p>
+                <p class="texte-rubrique-2b">Chasseur</p>
+                <input type="range" min="1" max="100" value="<%= @talent.next_aventures.last.hunter_or_breeder %>" class="slider range-slider">
+                <p class="texte-rubrique-2b">Éleveur</p>
               </div>
 
             <!-- Créatif / pragmatique -->
               <div class="slidecontainer grid slidecontainer-grid">
-                <p class="titre-info-slider float-left">Créatif</p>
-                <input type="range" min="1" max="100" value="50" class="slider range-slider">
-                <p class="titre-info-slider float-right">Pragmatique</p>
+                <p class="texte-rubrique-2b">Créatif</p>
+                <input type="range" min="1" max="100" value="<%= @talent.next_aventures.last.creative_or_pragmatic %>" class="slider range-slider">
+                <p class="texte-rubrique-2b">Pragmatique</p>
               </div>
           </div>
 
         <!-- Je priorise -->
-          <h3 class="sous-titre-section">Je priorise:</h3>
+          <h3 class="titre-rubrique-2">Je priorise:</h3>
 
           <ol class="priority-list">
-            <li class="priority-list-item">Les missions</li>
-            <li class="priority-list-item">l'international</li>
-            <li class="priority-list-item">L'ambiance</li>
+            <li class="priority-list-item texte-rubrique-2b">Les missions</li>
+            <li class="priority-list-item texte-rubrique-2b">l'international</li>
+            <li class="priority-list-item texte-rubrique-2b">L'ambiance</li>
           </ol>
       </div>
-
-    </div>
-  </div>
-</div>
-
-<div class="container-show">
-  <div class="talent-left">
-
-
-
-    <div class="talent-info">
     </div>
 
-    <div class="lower-body-item lower-right-body">
-      <div class="lower-right-body-item">
-        <h4><i class="fas fa-sliders-h"></i> MES COMPÉTENCES</h4>
-        <div class="talent-competences">
-          <% @talent.talent_skills.each do |skill| %>
-            <p><%= skill.skill.title %></p>
-          <% end %>
-        </div>
-      </div>
-      <div class="lower-right-body-item">
-        <h4><i class="fas fa-search-plus"></i> LE PETIT +</h4>
-        <div class="talent-competences">
-          <% @talent.talent_hobbies.each do |hobby| %>
-            <p><%= hobby.hobby.title %></p>
-          <% end %>
-        </div>
-      </div>
-    </div>
+    <!-- SECTION Formations -->
+      <div class="blue-background margin-top-background">
 
+        <!-- Titre section -->
+          <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-graduation-cap"></i></div>
+          <h2 class="titre-section">Formations <strong>scolaires</strong></h2>
 
-  </div>
-
-  <div class="talent-right">
-    <div class="talent-right-up">
-      <% if current_user.is_a?(Talent) %>
-        <p data-target= "modal_aventure" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
-      <% end %>
-      <div class="right-up-item qui-suis-je">
-        <h4>Qui suis-je ?</h4>
-          <div class="text-right-up-item">
-            <% if @talent.next_aventures.first && @talent.next_aventures.first.present? %>
-              <p><%= @talent.next_aventures.first.no_more %></p>
-            <% end %>
-          </div>
-      </div>
-      <div class="right-up-item le-job-de-reve">
-        <h4>Le job de rêve !</h4>
-          <div class="text-right-up-item">
-            <% if @talent.next_aventures.first.overview.present?  %>
-              <p> <%= @talent.next_aventures.first.overview %></p>
-            <% end %>
-          </div>
-      </div>
-      <div class="right-up-item je-recherche">
-        <h4>Je recherche</h4>
-        <div class="space-between-vertical" style="height: calc(100% - 68px);">
-          <div class="recherche-item">
-            <% if @talent.next_aventures.first && @talent.next_aventures.first.contrat.present? %>
-              <h5><%= @talent.next_aventures.first.contrat %></h5>
-            <% end %>
-            <p>CONTRAT</p>
-          </div>
-          <div class="recherche-item recherche-item-right">
-            <h5><%= @talent.next_aventures.first && @talent.next_aventures.first.remuneration %></h5>
-            <p>SALAIRE (k€ brut annuel)</p>
-          </div>
-          <div class="recherche-item">
-            <% if @talent.next_aventures.first && @sectors.count > 0 %>
-              <% @sectors.each do |sector| %>
-                <h5><%= sector.sector.title.capitalize %></h5>
-              <% end %>
-            <% end %>
-            <p>SECTEURS</p>
-          </div>
-          <div class="recherche-item recherche-item-right">
-            <% if @talent.next_aventures.first && @talent.next_aventures.first.city.present?  %>
-              <h5><%= @talent.next_aventures.first.city %></h5>
-            <% end %>
-            <p>VILLE</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="talent-right-down lower-body">
-      <div class="lower-middle-body">
-        <h4><i class="far fa-file-alt"></i> EXPÉRIENCES</h4>
-        <% if current_user.is_a?(Talent) %>
-          <p data-target= "modal_experience" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
-        <% end %>
-
-        <div class="lower-body-item-content">
-          <hr class="barre-pointee hidden-xs">
-          <div class="talent-experiences">
-            <% unless @currently.nil?  %>
-              <div class="placement-point-barre">
-                <div>
-                  <div class="point-barre-pointee"></div>
-                </div>
-                <div class="placement-talent-experience">
-                  <p class="experience-post"><%= @currently.position %></p>
-                  <p class="experience-entreprise"><%= @currently.company_name %></p>
-                  <p class="experience-duree"><%= @currently.starting %> - <%= @currently.currently ? "Aujourd’hui" : @currently.years %></p>
-                  <p class="experience-desc"><%= @currently.overview %></p>
-                </div>
-              </div>
-            <% end %>
-
-
-            <% @experiences.reverse_each do |experience| %>
-              <div class="placement-point-barre">
-                <div>
-                  <div class="point-barre-pointee"></div>
-                </div>
-                <div class="placement-talent-experience">
-                  <p class="experience-post"><%= experience.position %></p>
-                  <p class="experience-entreprise"><%= experience.company_name %></p>
-                  <p class="experience-duree"><%= experience.starting %> - <%= experience.currently ? "Aujourd’hui" : experience.years %></p>
-                  <p class="experience-desc"><%= experience.overview %></p>
-                </div>
-              </div>
-            <% end %>
-
-          </div>
-        </div>
-      </div>
-      <div class="lower-middle-body">
-        <h4><i class="fas fa-graduation-cap"></i> FORMATIONS</h4>
-        <% if current_user.is_a?(Talent) %>
-          <p data-target= "modal_formation" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
-        <% end %>
-        <div class="lower-body-item-content">
-          <hr class="barre-pointee hidden-xs">
-          <div class="talent-experiences">
-
+        <!-- Liste avec ligne verte -->
+          <ul class="list-ligne">
             <% @talent_formations.reverse_each do |formation| %>
-              <div class="placement-point-barre">
-                <div>
-                  <div class="point-barre-pointee"></div>
-                </div>
-                <div class="placement-talent-experience">
-                  <p class="experience-post"><%= formation.title %></p>
-                  <p class="experience-entreprise"><%= formation.formation.title %></p>
-                  <p class="experience-duree"><%= formation.year %></p>
-                </div>
-              </div>
+              <li>
+                <p class="titre-rubrique-3" style="margin-bottom: 6px"><%= formation.title %></p>
+                <p class="texte-rubrique-3b float-left no-margin"><%= formation.formation.title %></p>
+                <p class="float-left" style="margin: 0 5px; font-size: 14px; line-height: 18px">&bull;</p>
+                <p class="texte-annee-formation green no-margin"><%= formation.year %></p>
+              </li>
             <% end %>
+          </ul>
 
-          </div>
-        </div>
+
       </div>
-    </div>
+
+    <!-- SECTION Expériences -->
+      <div class="blue-background margin-top-background">
+
+        <!-- Titre section -->
+          <div class="titre-section-icon"><i class="titre-section-icon-illu far fa-file-alt"></i></div>
+          <h2 class="titre-section">Expériences <strong>professionnelles</strong></h2>
+
+        <!-- Liste avec ligne verte -->
+          <ul class="list-ligne">
+            <% @experiences.reverse_each do |experience| %>
+              <li>
+                <p class="titre-rubrique-3" style="margin-bottom: 6px"><%= experience.position %></p>
+                <p class="texte-rubrique-3b float-left no-margin"><%= experience.company_name %></p>
+                <p class="float-left" style="margin: 0 5px; font-size: 14px; line-height: 18px">&bull;</p>
+                <p class="texte-annee-formation green no-margin"><%= experience.starting %> - <%= experience.currently ? "Aujourd’hui" : experience.years %></p>
+                <p class="texte-rubrique-3"><%= experience.overview %></p>
+              </li>
+            <% end %>
+          </ul>
+      </div>
+
+
   </div>
 </div>
-
 
