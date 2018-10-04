@@ -179,19 +179,22 @@ class Talent < ApplicationRecord
     ApplicationMailer.new_message(message, receveur, self).deliver_now
   end
 
+  def send_invitation(headhunter)
+    TalentMailer.invited(self, headhunter).deliver_now
+  end
   def send_candidate
     TalentMailer.candidate(self).deliver_now
   end
 
+  def send_welcome_email
+    ApplicationMailer.welcome(self).deliver_now
+  end
   private
 
   def normalize_name_firstname
     self.firstname = self.firstname.capitalize
   end
 
-  def send_welcome_email
-    ApplicationMailer.welcome(self).deliver_now
-  end
 
 
 end
