@@ -85,11 +85,15 @@ class ConversationsController < ApplicationController
   end
 
   def update
+    # mise a jour du status par le talent (accepter our refuser)
     participant = @conversation.participants - [current_user]
     @participant = @conversation.participants - [current_user]
     @participant = participant[0]
     user_relationship
     if @relationship.update(status:params[:commit])
+      status = @relationship.status
+      @participant.send_relation(current_user, status)
+
       redirect_to conversation_path(@conversation)
     end
   end
