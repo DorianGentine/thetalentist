@@ -11,9 +11,10 @@
 
     <%= simple_form_for talent, url: to_validate_talent_path(talent)  do |f| %>
        <p><%= f.object.firstname %> <%= f.object.name %></p>
-       <%= f.input :declined, placeholder: "En effet, malgré .... et ..., le ... est un critère extrêmement important pour nous."  %>
+      <%= f.input :declined, placeholder: "En effet, malgré .... et ..., le ... est un critère extrêmement important pour nous."  %>
       <%= f.submit "Refuser" %>
     <% end %>
+   </div>
+
 
   </div>
-</div>

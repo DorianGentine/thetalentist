@@ -1,7 +1,4 @@
 
-
-
-
 <!-- BODY MAIL BLOC -->
   <table style="border-radius: 2px;" align="center"; bgcolor="#F5F7FA" width="75%" border="0" cellpadding="0" cellspacing="0">
   <tbody>
@@ -12,56 +9,53 @@
     <tr>
       <td>
         <table  align="center" width="590" border="0" cellpadding="0" cellspacing="0">
-<!-- Merci de votre inscription -->
+<!-- Bonjour Talent -->
           <tr>
-            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; text-align: left; font-size: 24px; color: #191B26; mso-line-height-rule: exactly; line-height: 24px; font-weight: bolder;">
-              Bonjour <%= @user.firstname %>, merci d'avoir complété <strong style="color: #4ECCA3;">notre formulaire !</strong>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; text-align: left; font-size: 24px; color: #191B26; mso-line-height-rule: exactly; line-height: 30px; font-weight: bolder;">
+              Bonjour <%= @user.firstname.present? ? @user.firstname : "" %>,<br> merci de ton inscription
             </td>
           </tr>
 <!-- Desciption du mail -->
           <tr>
-            <td height="20" style="font-size: 20px; line-height: 20px;"> &nbsp; </td>
+            <td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp; </td>
           </tr>
           <tr>
-            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #A8AAB3; mso-line-height-rule: exactly; line-height: 22px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet…</td>
-          </tr>
-<!-- Espace fin de la ligne  -->
-          <tr>
-            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
-          </tr>
-<!-- Image Processus -->
-          <tr>
-            <td style="text-align: center; padding:0px 40px 0px 40px;">
-              <a href="https://google.fr">
-                <img src="https://user-images.githubusercontent.com/15248524/45945238-07a78500-c017-11e8-920d-646f1dd0e9d5.png" width="520" border="0" alt="Image Processus TALENTIST">
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Nous avons bien pris en compte la création de ton compte sur The Talentist et nous t’en remercions !<br><br>Pour rappel, ton identifiant est le suivant : <a href="mailto:erwan.guillou@gmail.com" style="font-size: 14px; font-weight: bold; font-family: Avenir, sans-serifs; color: #191B26; text-align: center; text-decoration: none; mso-line-height-rule: exactly; line-height: 24px;">
+                      <%= @user.email %>
               </a>
             </td>
           </tr>
 <!-- Espace fin de la ligne -->
           <tr>
-            <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
           </tr>
 <!-- Bouton Accèder à mon profil -->
           <tr>
-            <td align="center">
-            <table align="center" width="230" cellspacing="0" cellpadding="0">
-              <tbody>
-                <td height="40" align="center" bgcolor="#4ECCA3" style="border-radius: 50px; text-align: center;" valign="middle">
+            <td align="center" height="40">
+              <table align="center" width="270" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <td align="center" bgcolor="#4ECCA3" style="border-radius: 2px; text-align: center;" valign="middle">
 
                     <% if @user.is_a?(Talent) %>
-                      <%= link_to talent_url(@user), { :style => "font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;"} do %>
-                        <p>Accèder à mon profil</p>
+                      <%= link_to talent_url(@user), { :style => "font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; font-weight: bold; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;"} do %>
+                        <p style="margin:0">Compléter mon formulaire</p>
                       <% end %>
                     <% else %>
-                      <%= link_to headhunter_url(@user) do %>
-                        <p>Accèder à mon profil</p>
+                      <%= link_to headhunter_url(@user), { :style => "font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; font-weight: bold; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;"} do %>
+                        <p style="margin:0">Accèder à mon profil</p>
                       <% end %>
                     <% end %>
-
-                </td>
-              </tbody>
-            </table>
+                  </td>
+                </tbody>
+              </table>
             </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Si tu ne l’as pas encore fait, nous t'invitons à compléter ton profil/ questionnaire. Si tu as la moindre question, nous restons bien sûr à ta disposition.<br><br><em>À très vite,<br>Magdalena et Dimitri</em></td>
           </tr>
 <!-- Espace entre les lignes -->
           <tr>
@@ -75,11 +69,9 @@
   </table>
 
 
-<p>
-  <% if @user.is_a?(Talent) %>
-    <%= link_to "Ton profil (PDF)", talent_url(@user, format: 'pdf') %>
-  <% else %>
-    <%= link_to "Ton profil (PDF)", headhunter_url(@user, format: 'pdf')  %>
-  <% end %>
+<!-- <p>
+  <#% if @user.is_a?(Talent) %>
+    <#%= link_to "Ton profil (PDF)", talent_url(@user, format: 'pdf', blank: true) %>
+  <#% end %>
 </p>
-
+ -->

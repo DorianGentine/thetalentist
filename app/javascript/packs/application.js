@@ -34,8 +34,12 @@ scrollToBottom();
 import { checkBox } from "../components/check_box";
 checkBox();
 
+import { scrollMessagesIntoView } from "../components/check_box";
+scrollMessagesIntoView();
+
 import { readMore } from '../components/readMore';
 readMore();
 
 import { readMoreText } from '../components/readMoreText';
 readMoreText();
+

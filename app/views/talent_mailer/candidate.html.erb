@@ -1,15 +1,145 @@
-<p>Hi <%= @user.firstname %>,</p>
-
-
-<h1> Ok Canditature done!</h1>
 
 
 
-<div class="button_green">
-  <%= link_to root_url do %>
-    Viens sur la plateforme
-  <% end %>
-</div>
 
+<!-- BODY MAIL BLOC -->
+  <table style="border-radius: 2px;" align="center"; bgcolor="#F5F7FA" width="75%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+<!-- Espace début de la ligne -->
+    <tr>
+      <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+    </tr>
+    <tr>
+      <td>
+        <table  align="center" width="590" border="0" cellpadding="0" cellspacing="0">
+<!-- Bonjour Talent -->
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; text-align: left; font-size: 24px; color: #191B26; mso-line-height-rule: exactly; line-height: 30px; font-weight: bolder;">
+              Bonjour <%= @user.firstname %>,<br> bienvenue chez The Talentist !
+            </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Nous avons bien reçu ta candidature et nous t’en remercions !<br>L’équipe va maintenant étudier attentivement ton profil et revenir vers toi dans les plus brefs délais. En attendant, voici un rappel des objectifs du talentist :</td>
+          </tr>
+<!-- Espace fin de la ligne  -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
 
+          <tr>
+            <td>
+
+<!-- Paragraphe COLONNE 1 -->
+            <table width="170" align="left" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+<!-- Image colonne 1 -->
+                  <td align="left" style="padding:0px 0px 0px 40px;">
+                    <img src="https://res.cloudinary.com/da4nnrzbu/image/upload/v1538544158/Numbers_Plan_de_travail_1.png" alt="User" width="35">
+                  </td>
+                </tr>
+<!-- Etapes ligne colonne 1 -->
+                <tr>
+                  <td height="20" style="font-size: 20px; line-height: 20px;"> &nbsp; </td>
+                </tr>
+                <tr>
+                  <td align="left" style="padding:0px 0px 0px 40px; font-family: Avenir, sans-serifs; font-weight: lighter; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 18px;">Mettre en avant ton profil auprès des <strong>plus belles startups</strong></td>
+                </tr>
+              </tbody>
+            </table>
+<!-- Espace colonnes paragraphes 1 & 2 -->
+            <table align="left" width="40" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp; </td>
+                </tr>
+              </tbody>
+            </table>
+
+<!-- Paragraphe COLONNE 2 -->
+            <table width="170" align="left" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+<!-- Image colonne 2 -->
+                  <td align="left" style="padding:0px 20px 0px 20px;">
+                    <img src="https://res.cloudinary.com/da4nnrzbu/image/upload/v1538544159/Numbers_Plan_de_travail_1_copie.png" alt="User" width="35">
+                  </td>
+                </tr>
+<!-- Etapes ligne colonne 2 -->
+                <tr>
+                  <td height="20" style="font-size: 20px; line-height: 20px;"> &nbsp; </td>
+                </tr>
+                <tr>
+                  <td align="left" style="padding:0px 20px 0px 20px; font-family: Avenir, sans-serifs; font-weight: lighter; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 18px;"><strong>Être accompagné</strong> tout au long de la recherche de ta future opportunité</td>
+                </tr>
+              </tbody>
+            </table>
+<!-- Espace colonnes paragraphes 2 & 3 -->
+            <table align="left" width="40" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp; </td>
+                </tr>
+              </tbody>
+            </table>
+
+<!-- Paragraphe COLONNE 3 -->
+            <table width="170" align="left" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+<!-- Image colonne 3 -->
+                  <td align="left" style="padding:0px 40px 0px 0px;">
+                    <img src="https://res.cloudinary.com/da4nnrzbu/image/upload/v1538544190/Numbers_Plan_de_travail_1_copie_2.png" alt="User" width="35">
+                  </td>
+                </tr>
+<!-- Etapes ligne colonne 3 -->
+                <tr>
+                  <td height="20" style="font-size: 20px; line-height: 20px;"> &nbsp; </td>
+                </tr>
+                <tr>
+                  <td align="left" style="padding:0px 40px 0px 0px; font-family: Avenir, sans-serifs; font-weight: lighter; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 18px;">Faire partie d’une communauté de <strong>talents du digital</strong></td>
+                </tr>
+              </tbody>
+            </table>
+            </td>
+          </tr>
+<!-- Espace fin de la ligne -->
+          <tr>
+            <td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp; </td>
+          </tr>
+<!-- Bouton Accèder à mon profil -->
+          <tr>
+            <td align="center">
+            <table align="center" width="270" cellspacing="0" cellpadding="0">
+              <tbody>
+                <td height="40" align="center" bgcolor="#4ECCA3" style="border-radius: 2px; text-align: center;" valign="middle">
+                  <%= link_to talent_url(@user), { :style => "font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; font-weight: bold; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;"} do %>
+                    <p style="margin:0">Compléter mon formulaire</p>
+                  <% end %>
+                </td>
+              </tbody>
+            </table>
+            </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Tu trouveras en pièce jointe toutes les informations que tu as communiquées pour te créer le plus beau profil possible. Si tu as la moindre question, nous sommes là pour t’éclairer !<br><br><em>À très vite,<br>Magdalena et Dimitri</em></td>
+          </tr>
+<!-- Espace entre les lignes -->
+          <tr>
+            <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </tbody>
+  </table>
 

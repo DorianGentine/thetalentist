@@ -14,3 +14,82 @@
 
 
 
+
+
+
+<!-- BODY MAIL BLOC -->
+  <table style="border-radius: 2px;" align="center"; bgcolor="#F5F7FA" width="75%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+<!-- Espace début de la ligne -->
+    <tr>
+      <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+    </tr>
+    <tr>
+      <td>
+        <table  align="center" width="590" border="0" cellpadding="0" cellspacing="0">
+<!-- Bonjour Talent -->
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; text-align: left; font-size: 24px; color: #191B26; mso-line-height-rule: exactly; line-height: 30px; font-weight: bolder;">
+              Hello <%= @receveur.firstname %>, <br> tu as reçu un nouveau message !
+            </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp; </td>
+          </tr>
+          <% if @receveur.is_a?(Talent) %>
+            <tr>
+              <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Tu as un nouveau message de la part de <%= @envoyeur.firstname %> de <strong><%= @envoyeur.startup.name.capitalize %></strong>:</td>
+            </tr>
+          <% else %>
+            <tr>
+              <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Tu as un nouveau message de la part de <strong><%= @envoyeur.firstname %></strong>:</td>
+            </tr>
+          <% end %>
+<!-- Message du mail -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #A8AAB3; mso-line-height-rule: exactly; line-height: 22px;">
+            <p><%= truncate( @message.message.body, length: 50) %></p>
+          </td>
+          </tr>
+          </tr>
+<!-- Espace fin de la ligne -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
+<!-- Bouton Voir et répondre -->
+          <tr>
+            <td align="center">
+            <table align="center" width="270" cellspacing="0" cellpadding="0">
+              <tbody>
+                <td height="40" align="center" bgcolor="#4ECCA3" style="border-radius: 2px; text-align: center;" valign="middle">
+                    <a href="https://thetalentist.herokuapp.com/" style="font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; font-weight: bold; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;">
+                      Voir et répondre au message
+                    </a>
+                </td>
+              </tbody>
+            </table>
+            </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;"><em>À très bientôt,<br>L'équipe de The Talentist</em></td>
+          </tr>
+<!-- Espace entre les lignes -->
+          <tr>
+            <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </tbody>
+  </table>
+
+

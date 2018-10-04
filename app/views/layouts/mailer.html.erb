@@ -3,13 +3,19 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-      /* Email styles need to be inline */
+      .container {
+        align: center;
+        width: 80%;
+        border: 0;
+        margin: auto;
+      }
     </style>
   </head>
 
   <body>
+    <div class="container" style="background-color: #fff;">
     <!-- LOGO TALENTIST (GRAND) BLOC -->
-    <table align="center"; bgcolor="#fff" width="80%" border="0" cellpadding="0" cellspacing="0">
+
       <tbody>
     <!-- Espace début de la lignes -->
         <tr>
@@ -22,7 +28,7 @@
               <tr>
                 <td style="text-align: center;">
                   <%= link_to root_url do %>
-                     <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist", style:'width:350px; border:0;' %>
+                    <img src="https://res.cloudinary.com/da4nnrzbu/image/upload/v1538637025/The_talentist_new_-01.png", class: "new-landing-logo-talentist" width="350" border="0" alt="Logo TALENTIST">
                   <% end %>
                 </td>
               </tr>
@@ -34,12 +40,14 @@
           </td>
         </tr>
       </tbody>
-    </table>
+
 
     <%= yield %>
 
+
+
 <!-- FOOTER BLOC -->
-    <table align="center"; bgcolor="#fff" width="80%" border="0" cellpadding="0" cellspacing="0">
+
       <tbody>
         <tr>
           <td>
@@ -93,7 +101,7 @@
               <tr>
                 <td style="text-align: center;">
                   <%= link_to root_url do %>
-                    <%= image_tag "logoT.png", class: "new-landing-logo-talentist", style:'width:30px; border:0;' %>
+                    <img src="https://res.cloudinary.com/da4nnrzbu/image/upload/v1538637024/00_Logo4-01.png" width="30" border="0" alt="Logo Talentist">
                   <% end %>
                 </td>
               </tr>
@@ -105,6 +113,6 @@
           </td>
         </tr>
       </tbody>
-    </table>
+    </div>
   </body>
 </html>
