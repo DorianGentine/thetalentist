@@ -21,6 +21,7 @@ class Talent < ApplicationRecord
 
   has_many :talent_jobs, dependent: :destroy
   has_many :jobs, through: :talent_jobs
+  accepts_nested_attributes_for :talent_jobs, allow_destroy: true, reject_if: :all_blank
 
   has_many :talent_skills, dependent: :destroy
   has_many :skills, through: :talent_skills
@@ -189,6 +190,12 @@ class Talent < ApplicationRecord
   def send_welcome_email
     ApplicationMailer.welcome(self).deliver_now
   end
+
+  def send_refused
+    TalentMailer.refused(self).deliver_now
+  end
+
+
   private
 
   def normalize_name_firstname

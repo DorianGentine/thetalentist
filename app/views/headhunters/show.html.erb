@@ -5,43 +5,89 @@
 <%= render 'overview' %>
 <%= render 'pictures' %>
 
+<div class="container-show grid-show">
+
+  <div class="first-column">
+    <!-- Présentation profil -->
+      <div class="blue-background">
+
+        <!-- Photo de profil -->
+          <% if @startup.logo.present? %>
+
+            <div class="photo-profil" style="background-image: url('<%= cl_image_path @startup.logo, :transformation=>[ :gravity=>"face"] %>'); background-size: contain; background-repeat: no-repeat;">
+              <div class="statut"></div>
+            </div>
+          <% else %>
+
+            <div class="photo-profil">
+              <div class="initiale">
+                <%= @startup.name.split(//).first.upcase %><%= @startup.name.split(//).second.upcase %>
+              </div>
+              <div class="statut"></div>
+            </div>
+          <% end %>
+
+        <!-- Nom Start-up -->
+          <h1 class="titre-profil"><%= @headhunter.startup.name %></h1>
+
+        <!-- description entreprise -->
+          <h2 class="sous-titre-profil"><%= @startup.short_resume.present? ? @startup.short_resume : "Ajoutez un petit résumé de votre entreprise" %></h2>
+
+        <hr class="separateur-show ligne-horizontal">
+
+        <!-- Site internet -->
+          <div class="info-grid-1">
+            <p class="titre-rubrique-1 grid-col-span-2">Site internet</p>
+            <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="far fa-compass"></i></p>
+            <p class="titre-rubrique-3 no-margin"><%= @startup.link.present? ? @startup.link : "Ajoutez votre site internet" %></p>
+          </div>
+
+        <!-- Adresse -->
+          <div class="info-grid-1">
+            <p class="titre-rubrique-1 grid-col-span-2">Adresse</p>
+            <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
+            <p class="titre-rubrique-3 no-margin"><%= @startup.address.present? ? @startup.address : "Ajoutez votre adresse" %></p>
+          </div>
+      </div>
+
+    <!-- Mes compétences linguistiques -->
+      <div class="blue-background margin-top-background">
+        <div class="grid" style="grid: auto / auto auto;">
+          <p class="titre-rubrique-3 margin-bottom-30" style="grid-column: 1 / span 2;">Nos collaborateurs :</p>
+
+          <% @startup.headhunters.each do |headhunter| %>
+            <% if headhunter.photo.present? %>
+              <div class="photo-profil" style="background-image: url('<%= cl_image_path headhunter.photo, :transformation=>[ :gravity=>"face"] %>');">
+              </div>
+            <% else %>
+
+              <div class="photo-profil">
+                <div class="initiale">
+                  <%= headhunter.firstname.split(//).first.upcase %><%= headhunter.name.split(//).first.upcase %>
+                </div>
+              </div>
+            <% end %>
+            <div>
+              <p class="texte-rubrique-3b"><%= headhunter.firstname %> <%= headhunter.name %></p>
+              <p class="titre-rubrique-1"><%= headhunter.job %></p>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+
+
+  </div>
+
+</div>
+
+
 <div class="container-show">
 
   <div class="talent-left">
-    <% if current_user.is_a?(Headhunter) %>
-      <p data-target= "modal_profil" class= "modal-button btn-edition"><span> <i class="far fa-edit"></i></span></p>
-    <% end %>
-
-    <% if @startup.logo.present? %>
-
-      <div class="photo-profil" style="background-image: url('<%= cl_image_path @startup.logo, :transformation=>[ :gravity=>"face"] %>'); background-size: contain; background-repeat: no-repeat;">
-        <div class="statut"></div>
-      </div>
-
-    <% else %>
-
-      <div class="photo-profil">
-        <div class="initiale">
-          <p><%= @startup.name.split(//).first.upcase %><%= @startup.name.split(//).second.upcase %></p>
-        </div>
-        <div class="statut"></div>
-      </div>
-
-    <% end %>
-
-
-
-    <div class="talent-name">
-      <h1><%= @headhunter.startup.name %></h1>
-      <h2 class="talent-post"><%= @startup.short_resume.present? ? @startup.short_resume : "Ajouter votre un petit résumé de votre entreprise" %></h2>
-    </div>
     <div class="talent-info">
       <div class="talent-info-item card-dispsition">
-        <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
-        <p><%= @startup.address.present? ? @startup.address : "Ajouter votre adresse" %></p>
-      </div>
-      <div class="talent-info-item card-dispsition">
-        <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
+        <p class="icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
         <p> <%= @startup.btob ? "BtoB" : ""%> <%= @startup.btob && @startup.btoc ? "&" : "" %><%= @startup.btoc ? "BtoC" : ""%> <%= @startup.btoc || @startup.btob ? "" : "Ajouter votre secteur d'activité" %></p>
       </div>
     </div>

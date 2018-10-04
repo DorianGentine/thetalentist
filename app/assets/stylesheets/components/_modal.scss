@@ -205,29 +205,29 @@ h4{
     border: 2px solid white;
   }
 }
+.talent-competences{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+  p{
+    font-size: 14px;
+    color: white;
+    background-color: #73789E;
+    padding: 2px 20px;
+    margin: 0 10px 20px 10px;
+    border-radius: 20px;
+    text-transform: capitalize;
+  }
+  .modal-hh:hover{
+    cursor: pointer;
+    background-color: $green;
+  }
+}
 .lower-right-body{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 10px;
-  .talent-competences{
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -10px;
-    p{
-      font-size: 14px;
-      color: white;
-      background-color: #73789E;
-      padding: 2px 20px;
-      margin: 0 10px 20px 10px;
-      border-radius: 20px;
-      text-transform: capitalize;
-    }
-    .modal-hh:hover{
-      cursor: pointer;
-      background-color: $green;
-    }
-  }
   .links-startup {
     display: flex;
     a{
@@ -345,25 +345,6 @@ h4{
       flex-direction: row;
       .lower-right-body-item{
         width: 45%;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 916px) {
-  .modal-header .contact-btn {
-    display: none;
-  }
-  .lower-body{
-   .contact-btn {
-      display: flex
-    }
-    .en-relation{
-      width: 240px;
-      background-color: rgba(0, 0, 0, 0);
-      border: 2px solid $violet;
-      p{
-        color: $violet;
       }
     }
   }

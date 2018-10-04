@@ -12,9 +12,121 @@
 
 .container-show{
   padding: 60px;
-  display: inline-flex;
   min-height: calc(100vh - 190px);
 }
+.grid-show{
+  display: grid;
+  grid-template-columns: calc(30% - 30px) calc(70% - 30px);
+  justify-content: space-between;
+}
+
+// Separateur
+  .separateur-show{
+    width: calc(100% + 20px);
+    margin: 25px -10px;
+  }
+
+// Photo de profil
+  .photo-profil{
+    width: 170px;
+    height: 170px;
+    border-radius: 100px;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    margin: auto;
+  }
+  .initiale{
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    background-color: $gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    font-weight: 900;
+    margin: 0;
+    color: white;
+  }
+  .statut{
+    width: 48px;
+    height: 48px;
+    background-color: $green;
+    border-radius: 30px;
+    border: 4px solid white;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+  }
+
+// Component info-1
+  .info-grid-1{
+    margin-bottom: 15px;
+    display: grid;
+    grid: auto auto / 20px auto;
+  }
+
+// Je suis plutôt
+  .je-suis-plutot-grid{
+    grid: auto / auto auto;
+  }
+  .slidecontainer-grid{
+    grid: auto / auto auto auto;
+  }
+  .titre-info-slider{
+    margin: 0;
+    color: $black;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 18px;
+  }
+  .range-slider{
+    margin: 0 10px;
+    min-width: 126px;
+  }
+
+// Je priorise
+  .priority-list{
+    list-style: none;
+    counter-reset: li;
+    padding: 0 0 0 16px;
+    margin: unset;
+  }
+  .priority-list-item::before {
+    content: counter(li);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 16px;
+    text-align: center;
+    color: white;
+    background-color: $green;
+    border-radius: 10px;
+    display: inline-block;
+    width: 16px;
+    margin: 0 5px 0 -16px;
+  }
+  .priority-list-item {
+    counter-increment: li;
+  }
+  .priority-list-item:nth-child(2){
+    margin: 5px 0;
+  }
+
+
+
+
+
+
+#grid-ligne-texte{
+  grid: auto / calc(25% - 30px) calc(25% - 30px) calc(25% - 30px) calc(25% - 30px);
+}
+
+
+
+
+
+
 
 .talent-left{
   width: 340px;
@@ -56,39 +168,6 @@
   }
 }
 
-.photo-profil{
-  width: 192px;
-  height: 192px;
-  border-radius: 100px;
-  background-position: center;
-  background-size: cover;
-  position: relative;
-  .initiale{
-    height: 100%;
-    width: 100%;
-    border-radius: 100px;
-    background-color: $gray;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    p{
-      font-size: 100px;
-      font-weight: 900;
-      margin: 0;
-      color: white;
-    }
-  }
-  .statut{
-    width: 48px;
-    height: 48px;
-    background-color: $green;
-    border-radius: 30px;
-    border: 4px solid white;
-    position: absolute;
-    bottom: 0;
-    z-index: 1;
-  }
-}
 
 
 .talent-right{
@@ -275,12 +354,6 @@
   border-color: #D33FE4;
 }
 
-.space-between-vertical{
-  height: calc(100% - 68px);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 
 
 

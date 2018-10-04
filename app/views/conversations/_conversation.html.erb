@@ -5,7 +5,7 @@
       <div class="photo-profil">
         <div class="initiale">
           <% if conversation.participants.count > 1 %>
-            <p><% parti = conversation.participants - [Talent.find(params[:talent_id])] %><%= parti[0].firstname.split(//).first.upcase %></p>
+            <% parti = conversation.participants - [Talent.find(params[:talent_id])] %><%= parti[0].firstname.split(//).first.upcase %>
           <% end %>
         </div>
         <div class="statut"></div>
@@ -26,7 +26,7 @@
       <div class="photo-profil">
         <div class="initiale">
           <% if conversation.participants.count > 1 %>
-            <p><% parti = conversation.participants - [Headhunter.find(params[:headhunter_id])] %><%= parti[0].firstname.split(//).first.upcase %></p>
+            <% parti = conversation.participants - [Headhunter.find(params[:headhunter_id])] %><%= parti[0].firstname.split(//).first.upcase %>
           <% end %>
         </div>
         <div class="statut"></div>
@@ -47,7 +47,7 @@
       <div class="photo-profil">
         <div class="initiale">
           <% if conversation.participants.count > 1 %>
-            <p><% parti = conversation.participants - [current_user] %><%= parti[0].firstname.split(//).first.upcase %></p>
+            <% parti = conversation.participants - [current_user] %><%= parti[0].firstname.split(//).first.upcase %>
           <% end %>
         </div>
         <div class="statut"></div>

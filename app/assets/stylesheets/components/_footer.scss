@@ -16,9 +16,6 @@
   flex-direction: column;
   justify-content: space-around;
   flex-grow: 1;
-  .social-media-link a{
-    margin-right: 2vw;
-  }
 }
 
 .footer-small-case {
@@ -39,16 +36,6 @@
     cursor: pointer;
     text-decoration: none;
     transition: 0.15s;
-  }
-}
-
-/* color of social media link */
-.social-media-link{
-  a {
-    color: $gray;
-  }
-  a:hover {
-    color: $red;
   }
 }
 

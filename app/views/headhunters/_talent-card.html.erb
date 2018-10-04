@@ -38,7 +38,7 @@
         </div>
 
         <div class="talent-update card-dispsition">
-          <p class="icon"><i class="far fa-clock"></i></p>
+          <p class="icon-margin-right"><i class="far fa-clock"></i></p>
           <p>Mise à jour : <%= l(talent.updated_at, :locale => :fr) %> </p>
         </div>
 
@@ -78,11 +78,11 @@
 
         <div class="talent-info">
           <div class="talent-info-item card-dispsition">
-            <p class="icon icon-info"><i class="fas fa-map-marker-alt"></i></p>
+            <p class="icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
             <p><%= talent.city %></p>
           </div>
           <div class="talent-info-item card-dispsition">
-            <p class="icon icon-info"><i class="fas fa-code-branch"></i></p>
+            <p class="icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
             <% if talent.btoc && talent.btob %>
               <p> BtoB & BtoC</p>
             <% elsif talent.btoc %>
@@ -92,14 +92,14 @@
             <% end %>
           </div>
           <div class="talent-info-item card-dispsition">
-            <p class="icon icon-info"><i class="fas fa-briefcase"></i></p>
+            <p class="icon-margin-right icon-green-color"><i class="fas fa-briefcase"></i></p>
             <p>CDI</p>
           </div>
         </div>
 
         <% talent.talent_formations.first(2).each do |formation| %>
           <div class="talent-school-1 card-dispsition">
-            <p class="icon"><i class="fas fa-graduation-cap"></i></p>
+            <p class="icon-margin-right"><i class="fas fa-graduation-cap"></i></p>
             <p><%= formation.formation.title %> - <%= formation.title %></p>
             <!-- <p>HEC, Master entrepreneuriat - 2015</p> -->
           </div>
@@ -112,7 +112,7 @@
 
 
         <div class="talent-update card-dispsition">
-          <p class="icon"><i class="far fa-clock"></i></p>
+          <p class="icon-margin-right"><i class="far fa-clock"></i></p>
           <p>Mise à jour le <%= l(talent.updated_at, :locale => :fr) %> </p>
         </div>
 

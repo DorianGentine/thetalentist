@@ -1,12 +1,9 @@
-// btn-edition, contact-btn, btn, btn-validate, btn-inscription,
-// btn-connexion btn-envoyer, btn-aline
-
 // btn-edition
   .btn-edition{
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 25;
+    z-index: 5;
     cursor: pointer;
     height: 30px;
     width: 30px;
@@ -43,179 +40,164 @@
   }
 
 // contact-btn
-  .modal-header{
-    .contact-btn{
+  .contact-btn{
+    width: 140px;
+    height: 40px;
+    border-radius: 25px;
+    background-color: $green;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    .btn{
+      opacity: 0;
       width: 140px;
       height: 40px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .modal-header{
+    .contact-btn{
       margin-right: 40px;
-      background-color: $green;
-      border-radius: 25px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      .btn{
-        opacity: 0;
-        width: 140px;
-        height: 40px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
     }
   }
 
   .lower-body{
     .contact-btn{
       display: none;
-      width: 140px;
-      height: 40px;
-      background-color: $green;
-      border-radius: 25px;
-      align-items: center;
-      justify-content: center;
       margin: auto;
-      position: relative;
       p{
         color: white;
         margin: 0;
       }
-      .btn{
-        opacity: 0;
-        width: 140px;
-        height: 40px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    }
+  }
+
+  @media screen and (max-width: 916px) {
+    .modal-header .contact-btn {
+      display: none;
+    }
+    .lower-body{
+     .contact-btn {
+        display: flex !important;
+      }
+      .en-relation{
+        width: 240px;
+        background-color: rgba(0, 0, 0, 0);
+        border: 2px solid $violet;
+        p{
+          color: $violet;
+        }
       }
     }
   }
 
 // btn-validate
-  .placement-talentist .talent-card .border {
-    .btn-validate{
-      display: flex;
-      justify-content: space-between;
-      div{
+  .btn-validate{
+    display: flex;
+    justify-content: space-between;
+    div{
+      border-radius: 50px;
+      input{
         border-radius: 50px;
-        input{
-          border-radius: 50px;
-          font-size: 14px;
-          color: $green;
-          border-color: $green;
-        }
+        font-size: 14px;
+        color: $green;
+        border-color: $green;
       }
-      div:last-child {
-        input {
-          color: $red;
-          border-color: $red;
-        }
+    }
+    div:last-child {
+      input {
+        color: $red;
+        border-color: $red;
       }
-      div:hover input{
-        color: white;
-        background-color: $green;
-        transition: 0.15s;
-      }
-      div:last-child:hover input{
-        background-color: $red;
-      }
+    }
+    div:hover input{
+      color: white;
+      background-color: $green;
+      transition: 0.15s;
+    }
+    div:last-child:hover input{
+      background-color: $red;
     }
   }
 
 // btn-inscription
-  .landing-top .inscription-items{
-    .btn-inscription{
-      max-width: 12vw;
-      height: 12.5vw;
-      margin: 0 50px 0 0;
-      animation: anim-bouton 2s ease-out infinite;
-      p{
-        margin: 0;
-      }
+  .btn-inscription{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    max-width: 12vw;
+    height: 12.5vw;
+    border: 2px solid $green;
+    border-radius: 4px;
+    margin: 0 50px 0 0;
+    background-color: rgba(0,0,0,0);
+    animation: anim-bouton 2s ease-out infinite;
+    transition: 0.15s;
+    i{
+      font-size: 5.6vw;
+      margin: 10px;
     }
-    @keyframes anim-bouton {
-      0% {box-shadow: 1px 1px 2px $green;}
-      25% {box-shadow: 3px 3px 2px $green;}
-      50% {box-shadow: 1px 1px 2px $green;}
-      75% {box-shadow: 1px 1px 2px $green;}
-      100% {box-shadow: 1px 1px 2px $green;}
+    p{
+      margin: 0;
+      text-transform: uppercase;
+      font-size: 1.2vw;
+      font-weight: 900;
+      color: $green;
+      transition: 0.15s;
     }
   }
+  .btn-inscription:hover{
+    background-color: $green;
+    animation: none !important;
+    p{
+      color: white;
+      text-decoration: none;
+    }
+  }
+
+
+  @keyframes anim-bouton {
+    0% {box-shadow: 1px 1px 2px $green;}
+    25% {box-shadow: 3px 3px 2px $green;}
+    50% {box-shadow: 1px 1px 2px $green;}
+    75% {box-shadow: 1px 1px 2px $green;}
+    100% {box-shadow: 1px 1px 2px $green;}
+  }
   @media screen and (max-width: 1000px) {
-    .new_landing .landing-top .inscription-items{
-      .btn-inscription{
-        margin: 0 40px;
-        width: unset;
-        height: unset;
-        max-width: unset;
-        background-color: white;
-        p{
-          font-size: 3vw;
-          i{
-            display: none;
-          }
+    .btn-inscription{
+      margin: 0 40px;
+      width: unset;
+      height: unset;
+      max-width: unset;
+      background-color: white;
+      p{
+        font-size: 3vw;
+        i{
+          display: none;
         }
       }
     }
   }
-  .inscription-items{
-    .btn-inscription{
-      width: 30%;
-      border: 2px solid $green;
-      border-radius: 4px;
-      background-color: rgba(0,0,0,0);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      i{
-        font-size: 5.6vw;
-        margin: 10px;
-      }
-      p{
-        text-transform: uppercase;
-        font-size: 1.2vw;
-        font-weight: 900;
-        color: $green;
-      }
-    }
-    .btn-inscription:hover{
-      background-color: $green;
-      animation: none !important;
-      transition: ease-in-out 0.15s;
-      p{
-        color: white;
-        text-decoration: none;
-        transition: ease-in-out 0.15s;
-      }
-    }
-  }
-  @media screen and (max-width: 991px) {
-    .home-left .home-connexion .inscription-items .btn-inscription{
-      width: unset;
-    }
-  }
 
 // btn-connexion
-  #talent-landing .actions-xs{
-    .btn-connexion{
-      margin: 0 7.5px;
-    }
-  }
   .btn-connexion{
-    width: 170px;
     height: 40px;
     border: 2px solid $green;
     font-weight: 600;
     font-size: 21px;
     border-radius: 25px;
-    background-color: rgba(0,0,0,0);
-    padding: 5px 10px;
+    padding: 5px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 10px;
+    color: $green; // garder pour pouvoir réutiliser plus facilement
     a{
       color: $green;
     }
@@ -223,7 +205,7 @@
   .btn-connexion:hover{
     cursor: pointer;
     background-color: $green;
-    text-decoration: none;
+    color: white; // garder pour pouvoir réutiliser plus facilement
     transition: 0.15s;
     a{
       color: white;
@@ -232,49 +214,32 @@
   }
   .blue-connexion{
     border: 2px solid $violet !important;
-    min-width: 200px;
+    // min-width: 200px;
     a{
       color: $violet;
     }
   }
-  .blue-connexion a:hover{
-    background-color: $violet;
-    color: white;
-  }
-  .btn-connexion {
-    width: 170px;
-    height: 40px;
-    border: 2px solid $green;
-    font-weight: 600;
-    font-size: 21px;
-    color: $green;
-    border-radius: 25px;
-    background-color: rgba(0,0,0,0);
-    padding: 5px 10px;
-  }
-  .btn-connexion:hover{
-    cursor: pointer;
-    background-color: $green;
-    color: white;
-    text-decoration: none;
-    transition: 0.15s;
+  .actions-xs{
+    .btn-connexion{
+      margin: unset;
+      background-color: white;
+      box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+    }
   }
 
 // btn-envoyer
-  .boite-envoi .send-bar{
-    .btn-envoyer{
-      background-color: $green;
-      border-radius: 20px;
-      padding: 0px 24px;
-      color: white;
-      border: 0px;
-      box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.17);
-      margin-right: 50px;
-      transition: 0.15s;
-    }
-    .btn-envoyer:hover{
-      box-shadow: none;
-    }
+  .btn-envoyer{
+    background-color: $green;
+    border-radius: 20px;
+    padding: 0px 24px;
+    color: white;
+    border: 0px;
+    box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.17);
+    margin-right: 50px;
+    transition: 0.15s;
+  }
+  .btn-envoyer:hover{
+    box-shadow: none;
   }
 
 // Linkedin-btn
@@ -309,6 +274,16 @@
     margin: 0;
   }
 
-
-
-
+// Social-media-link
+  .social-media-link{
+    margin-right: 2vw;
+    color: $black;
+  }
+  .social-media-link:hover {
+    color: $green;
+  }
+  .social-media-link-icon{
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgba(168, 170, 179, 0.32);
+  }

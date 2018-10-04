@@ -99,7 +99,6 @@
         color: #191B26;
         margin: 0;
         strong{
-          color: $green;
           text-shadow: 2px 2px 5px rgba(78, 204, 163, 0.5);
         }
       }
@@ -558,12 +557,6 @@
   }
 
   .actions-xs{
-    // position: fixed;
-    // top: calc( 100vh - 100px);
-    // bottom: 0px;
-    // left: 0;
-    // z-index: 10;
-    // -webkit-transform: translateZ(0);
     margin: 40px 0 0;
     justify-content: center;
   }
@@ -692,7 +685,7 @@
   }
 
 
-  #talent-landing{
+  #talent-landing{ //ne sert à rien
     .landing-top{
       h1{
         font-size: 11vw;
@@ -703,8 +696,9 @@
       }
     }
     .actions-xs{
-      display: flex !important;
       margin: 150px 0 0;
+      display: flex !important;
+      justify-content: space-around;
     }
     .landing-main{
       .opportunites{
@@ -843,36 +837,4 @@
 
 @media screen and (orientation: landscape) {
   html {}
-}
-// Faire un parcours generale des text-align:
-h1 {
-  color: $black
-}
-h2 {
-  color: $black
-}
-h3 {
-  color: $black
-}
-h4 {
-  color: $black
-}
-h5 {
-  color: $black
-}
-p {
-  color: $black
-}
-a {
-  color: $black
-}
-label {
-  color: $black;
-  margin: 0;
-}
-input {
-  color: $black
-}
-select {
-  color: $black
 }
