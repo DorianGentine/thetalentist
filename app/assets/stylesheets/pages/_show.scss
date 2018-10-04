@@ -22,9 +22,6 @@
 
 // Separateur
   .separateur-show{
-    border: none;
-    background-color: #CCCDD4;
-    height: 1px;
     width: calc(100% + 20px);
     margin: 25px -10px;
   }
@@ -63,99 +60,11 @@
     z-index: 1;
   }
 
-// Titre du profil
-  .titre-profil{
-    text-transform: capitalize;
-    color: $black;
-    font-size: 18px;
-    font-weight: 900;
-    line-height: 25px;
-    text-align: center;
-    margin: 18px 0 0 0;
-  }
-
-// Poste
-  .talent-post{
-    text-transform: capitalize;
-    color: $gray;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 22px;
-    text-align: center;
-    margin: 0;
-  }
-
-// Titre section
-  .titre-section-icon{
-    height: 30px;
-    width: 30px;
-    border-radius: 30px;
-    background-color: rgba(3,13,88,0.06);
-    box-shadow: -2px 2px 2px 0 rgba(0,0,0,0.1);
-    display: grid;
-    place-items: center;
-    float: left;
-    margin-right: 20px;
-  }
-  .titre-section-icon-illu{
-    color: $green;
-    font-size: 15px;
-  }
-  .titre-section{
-    font-size: 20px;
-    font-weight: 900;
-    line-height: 30px;
-    margin: 0 0 25px;
-  }
-
-// Sous-titre section
-  .sous-titre-section{
-      color: $gray;
-      font-size: 16px;
-      font-weight: 900;
-      line-height: 22px;
-      margin: 0 0 15px;
-  }
-
 // Component info-1
   .info-grid-1{
     margin-bottom: 15px;
     display: grid;
     grid: auto auto / 20px auto;
-  }
-  .titre-info-1{
-    color: $gray;
-    font-family: Avenir;
-    font-size: 8px;
-    font-weight: 900;
-    line-height: 11px;
-    margin-bottom: 2px;
-    grid-column: 1 / span 2;
-  }
-  .text-info-1{
-    margin: 0;
-    font-family: Avenir;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 22px;
-  }
-
-// Component info-2
-  .titre-info-2{
-    color: $black;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 18px;
-    margin: 0 0 20px;
-    min-height: 36px;
-  }
-  .text-info-2{
-    color: $gray;
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: 0.2px;
-    line-height: 18px;
-    text-align: justify;
   }
 
 // Je suis plutôt
@@ -182,7 +91,6 @@
     list-style: none;
     counter-reset: li;
     padding: 0 0 0 16px;
-    color: $black;
     margin: unset;
   }
   .priority-list-item::before {
@@ -199,8 +107,16 @@
     margin: 0 5px 0 -16px;
   }
   .priority-list-item {
-    counter-increment: li
+    counter-increment: li;
   }
+  .priority-list-item:nth-child(2){
+    margin: 5px 0;
+  }
+
+
+
+
+
 
 #grid-ligne-texte{
   grid: auto / calc(25% - 30px) calc(25% - 30px) calc(25% - 30px) calc(25% - 30px);
