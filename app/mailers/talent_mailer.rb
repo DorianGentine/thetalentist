@@ -5,6 +5,7 @@ class TalentMailer < ApplicationMailer
     # @pdf = pdf
     mail(
       to: @user.email,
+      cci:Talentist.first.email,
       subject: "Bonjour #{@user.firstname}, candidature !"
       )
   end
@@ -15,6 +16,7 @@ class TalentMailer < ApplicationMailer
 
     mail(
       to: @user.email,
+      cci:Talentist.first.email,
       subject: "Vous avez été invité"
       )
   end
@@ -24,7 +26,8 @@ class TalentMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      subject: "Profil accepté :)"
+      cci:Talentist.first.email,
+      subject: "#{@user.firstname}, ton profil a été accpeté :D"
       )
   end
 
@@ -33,7 +36,8 @@ class TalentMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      subject: "Profil refusé"
+      cci:Talentist.first.email,
+      subject: "#{@user.firstname}, ton profil a été refusé"
       )
 
   end

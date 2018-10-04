@@ -1,16 +1,39 @@
-<h1><%= @user.firstname %>,</h1>
 
-<p>Bonjour <%= @user.firstname %>, nous avons bien reçu ta demande de candidature sur The Talentist et nous t’en remercions. Ton profil a bien retenu notre attention. Cependant, après avoir étudié celui-ci, nous sommes au regret de ne pouvoir retenir ce dernier.</p>
-<br>
-<%= @user.declined %>
-<br>
-<p>Nous gardons pour autant précieusement ton profil en tête et n’hésiterons pas si la moindre opportunité qui pourrait te correspondre se présente.</p>
-<br>
-<p>
-Toute l’équipe du Talentist te souhaite beaucoup de réussite dans tes recherches et reste à ta disposition !</p>
-<br>
-<p>
-A très vite,
+<!-- BODY MAIL BLOC -->
+  <table style="border-radius: 2px;" align="center"; bgcolor="#F5F7FA" width="75%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+<!-- Espace début de la ligne -->
+    <tr>
+      <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+    </tr>
+    <tr>
+      <td>
+        <table  align="center" width="590" border="0" cellpadding="0" cellspacing="0">
+<!-- Bonjour Talent -->
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; text-align: left; font-size: 24px; color: #191B26; mso-line-height-rule: exactly; line-height: 30px; font-weight: bolder;">
+              Bonjour <%= @user.firstname %>,<br>
+            </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Nous avons bien reçu ta demande de candidature sur The Talentist et nous t’en remercions. Ton profil a bien retenu notre attention. Cependant, après avoir étudié celui-ci, nous sommes au regret de ne pouvoir retenir ce dernier.
+              <br><br>
+                <%= @user.declined %>
+              <br><br>
+              Nous gardons pour autant précieusement ton profil en tête et n’hésiterons pas si la moindre opportunité qui pourrait te correspondre se présente. Toute l’équipe du Talentist te souhaite beaucoup de réussite dans tes recherches et reste à ta disposition !<br><br><em>À très vite,<br>Magdalena et Dimitri</em>
+            </td>
+          </tr>
+<!-- Espace entre les lignes -->
+          <tr>
+            <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+          </tr>
 
-Magdalena & Dimitri
-</p>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+  </table>

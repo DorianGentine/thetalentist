@@ -22,7 +22,7 @@ class Headhunter < ApplicationRecord
 
   validates :name, :firstname, :job, :email, presence: true
 
-  after_create :send_welcome_email
+  after_create :send_welcome_email, :send_new_user_to_talentist
   before_save :capitalize_name_firstname
 
   def mailboxer_email(object)
@@ -47,6 +47,15 @@ class Headhunter < ApplicationRecord
         @unread_conversations << conversation
       end
     end
+  end
+
+
+  def send_new_user_to_talentist
+    ApplicationMailer.new_user(self).deliver_now
+  end
+
+  def send_relation(talent, status)
+    HeadhunterMailer.in_relation(self, talent, status).deliver_now
   end
 
   def send_welcome_email
