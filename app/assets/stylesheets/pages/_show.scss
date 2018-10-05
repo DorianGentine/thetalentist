@@ -69,16 +69,25 @@
   .slidecontainer-grid{
     grid: auto / auto auto auto;
   }
-  .titre-info-slider{
-    margin: 0;
-    color: $black;
-    font-size: 12px;
-    font-weight: 900;
-    line-height: 18px;
-  }
   .range-slider{
+    position: relative;
     margin: 0 10px;
     min-width: 126px;
+    height: 18px; /* Specified height */
+    background: $gray; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    transition: opacity .2s;
+  }
+  .range-slider:hover{
+    opacity: 1;
+  }
+  .range-slider-cursor{
+    position: absolute;
+    width: 18px; /* Set a specific slider handle width */
+    height: 18px; /* Slider handle height */
+    background: $green; /* Green background */
+    transform: translateX(-50%);
   }
 
 // Je priorise

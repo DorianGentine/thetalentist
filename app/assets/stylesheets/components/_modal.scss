@@ -9,6 +9,10 @@
   }
 }
 
+.modal-button{
+  cursor: pointer;
+}
+
 /* Modal Content */
 .modal-content {
   position: relative;
@@ -214,7 +218,7 @@ h4{
     color: white;
     background-color: #73789E;
     padding: 2px 20px;
-    margin: 0 10px 20px 10px;
+    margin: 0 10px 20px;
     border-radius: 20px;
     text-transform: capitalize;
   }
