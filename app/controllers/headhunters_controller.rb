@@ -86,11 +86,11 @@ class HeadhuntersController < ApplicationController
     @flats << @startup
     @flats << @startup
     @markers = @flats.map do |flat|
-         {
+      {
         lat: @startup.latitude,
         lng: @startup.longitude
-        #,
-        # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
+      #,
+      # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
       }
     end
   end

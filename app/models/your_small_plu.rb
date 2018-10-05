@@ -1,7 +1,7 @@
 class YourSmallPlu < ApplicationRecord
-  belongs_to :next_aventure
+  belongs_to :talent
   before_save :capitalize_description
-  accepts_nested_attributes_for :next_aventure, :reject_if => :all_blank
+  accepts_nested_attributes_for :talent, :reject_if => :all_blank
 
 
   def capitalize_description

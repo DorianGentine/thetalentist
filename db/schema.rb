@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_01_110258) do
+ActiveRecord::Schema.define(version: 2018_10_05_105009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 2018_10_01_110258) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "cgus", force: :cascade do |t|
+    t.boolean "validate", default: false, null: false
+    t.bigint "talent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["talent_id"], name: "index_cgus_on_talent_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -510,9 +518,12 @@ ActiveRecord::Schema.define(version: 2018_10_01_110258) do
     t.bigint "next_aventure_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "talent_id"
     t.index ["next_aventure_id"], name: "index_your_small_plus_on_next_aventure_id"
+    t.index ["talent_id"], name: "index_your_small_plus_on_talent_id"
   end
 
+  add_foreign_key "cgus", "talents"
   add_foreign_key "credentials", "talents"
   add_foreign_key "experiences", "company_types"
   add_foreign_key "experiences", "talents"
@@ -556,5 +567,5 @@ ActiveRecord::Schema.define(version: 2018_10_01_110258) do
   add_foreign_key "talent_skills", "talents"
   add_foreign_key "talent_technos", "talents"
   add_foreign_key "talent_technos", "technos"
-  add_foreign_key "your_small_plus", "next_aventures"
+  add_foreign_key "your_small_plus", "talents"
 end

@@ -33,10 +33,10 @@ class StepsTalentInfosController < ApplicationController
     else
       0.times { @talent.next_aventures.build }
     end
-    if @talent.next_aventures.first.your_small_plus.count == 0
-      1.times { @talent.next_aventures.first.your_small_plus.build }
+    if @talent.your_small_plus.count == 0
+      1.times { @talent.your_small_plus.build }
     else
-      0.times { @talent.next_aventures.first.your_small_plus.build }
+      0.times { @talent.your_small_plus.build }
     end
 
 
@@ -51,7 +51,7 @@ class StepsTalentInfosController < ApplicationController
     # @talent.status = 'active' if step == steps.last
     case step
     when :next_aventure
-      @talent.update(talent_params)
+      @talent.update_attributes(talent_params)
       if !@talent.terms_of_condition
         flash[:notice] = "N'oubliez pas de accepter les conditions générale"
         render "steps_talent_infos/#{step}"
@@ -91,7 +91,6 @@ class StepsTalentInfosController < ApplicationController
   end
 
   def find_talent
-
     if session[:talent_id]
       @talent = Talent.find(session[:talent_id])
     else
@@ -115,34 +114,18 @@ class StepsTalentInfosController < ApplicationController
       :btob,
       :terms_of_condition,
       :no_more,
-      :waiting_for_one,
-      :waiting_for_two,
-      :waiting_for_three,
-      :creative_or_pragmatic,
-      :hunter_or_breeder,
-      sector_ids:[],
+      :sector_ids,
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
       next_aventures_attributes: NextAventure.attribute_names.map(&:to_sym).push(:_destroy),
       # next_aventures_attributes: [ your_small_plus_attributes: [:id, :description, :_destroy] ],
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
+      your_small_plus_attributes: [:id, :description, :_destroy],
       techno_ids: []
-      # your_small_plus_attributes: [:id, :description, :_destroy]
     )
   end
 end
-
-
-
-
-
-
-
-
-
-
-
 
 
 
