@@ -72,6 +72,7 @@
             <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
             <p class="titre-rubrique-3 no-margin"><%= @talent.city.present? ? @talent.city : "Pas définit" %></p>
           </div>
+          <div id="map" data-markers="<%= @markers.to_json %>"></div>
       </div>
 
     <!-- Mes compétences linguistiques -->

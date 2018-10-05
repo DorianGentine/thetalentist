@@ -22,4 +22,9 @@ class Startup < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   mount_uploader :logo, PhotoUploader
+  def there_is_no_social_network?
+    if self.facebook.nil? && self.linkedin.nil?
+      return true
+    end
+  end
 end
