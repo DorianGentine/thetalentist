@@ -24,14 +24,17 @@ class ApplicationController < ActionController::Base
   def authenticate!
    :authenticate_talent! || :authenticate_headhunter! || :authenticate_talentist!
     # @current_user = talent_signed_in? ? current_talent : current_headhunter
+    # raise
     if talent_signed_in?
       @current_user = current_talent
     elsif talentist_signed_in?
       @current_user = current_talentist
-    else
+    elsif headhunter_signed_in?
       @current_user = current_headhunter
     end
   end
+
+
 
   # def current_user
   #   @current_user

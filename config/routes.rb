@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   match "/422", :to => "http_errors#error_422", :via => :all
   match "/500", :to => "http_errors#error_500", :via => :all
 
+
+  root to: 'pages#home'
+
   ActiveAdmin.routes(self)
   devise_for :talentists, path: 'talentists'
 
@@ -49,7 +52,6 @@ Rails.application.routes.draw do
     resources :messages, only: [ :create ]
   end
 
-  root to: 'pages#home'
   resources :steps_talent_infos
   resources :steps_startup_infos
 

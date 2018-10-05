@@ -26,7 +26,7 @@ class TalentMailer < ApplicationMailer
     # attachments["#{@user.firstname}_#{Time.now.strftime("%m%d_%Y")}.pdf"] = pdf_file
     mail(
       to: @user.email,
-      cci:Talentist.first.email,
+      cci: Talentist.first.email,
       subject: "#{@user.firstname}, ton profil a été accpeté :D"
       )
   end
