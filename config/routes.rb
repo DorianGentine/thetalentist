@@ -40,6 +40,10 @@ Rails.application.routes.draw do
   resources :relationships, only: [ :create ]
 
   resources :talents, only: [:show, :update, :index, :edit] do
+    put 'update_profile', :on => :member
+    put 'update_formation_and_skill', :on => :member
+    put 'update_experience', :on => :member
+    put 'update_next_aventure', :on => :member
     patch 'to_validate', :on => :member
     resources :conversations, only: [ :show ]
   end

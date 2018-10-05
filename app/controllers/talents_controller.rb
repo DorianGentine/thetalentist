@@ -1,4 +1,5 @@
 class TalentsController < ApplicationController
+  before_action :set_talent, only: [ :show, :edit, :update_profile, :update_experience, :update_next_aventure, :update_formation_and_skill, :update, :to_validate ]
 
   def index
     @talentist = current_talentist
@@ -55,9 +56,6 @@ class TalentsController < ApplicationController
 
   def show
     @talents = Talent.all
-    @talent = Talent.find(params[:id])
-    authorize @talent
-
     currently = @talent.experiences.where(currently: true)
     @currently = currently[0]
     @experiences = @talent.experiences.order(:years) - currently
@@ -105,7 +103,6 @@ class TalentsController < ApplicationController
   end
 
   def update
-    @talent = Talent.find(params[:id])
     if talent_params["talent_formations_attributes"]
       talent_params["talent_formations_attributes"].each do |talent_formation|
         if talent_formation[1]["id"]
@@ -118,17 +115,64 @@ class TalentsController < ApplicationController
     # raise
     # @talent.update_attributes(talent_params)
     redirect_to talent_path(@talent)
-    authorize @talent
   end
 
+  # edit general
   def edit
-    @talent = Talent.find(params[:id])
-    authorize @talent
+     if @talent.talent_formations.count == 0
+      1.times { @talent.talent_formations.build }
+    else
+      0.times { @talent.talent_formations.build }
+    end
+    if @talent.talent_jobs.count == 0
+      1.times { @talent.talent_jobs.build }
+    else
+      0.times { @talent.talent_jobs.build }
+    end
+    if @talent.talent_languages.count == 0
+      1.times { @talent.talent_languages.build }
+    else
+      0.times { @talent.talent_languages.build }
+    end
+    if @talent.experiences.count == 0
+      1.times { @talent.experiences.build }
+    else
+      0.times { @talent.experiences.build }
+    end
+    if @talent.next_aventures.count == 0
+      1.times { @talent.next_aventures.build }
+    else
+      0.times { @talent.next_aventures.build }
+    end
+    if @talent.your_small_plus.count == 0
+      1.times { @talent.your_small_plus.build }
+    else
+      0.times { @talent.your_small_plus.build }
+    end
+
   end
+
+  def update_profile
+    raise
+  end
+
+  def update_formation_and_skill
+    if @talent.update(talent_params)
+      redirect_to { edit_talent_path(@talent) }
+    end
+  end
+
+  def update_experience
+    raise
+  end
+
+  def update_next_aventure
+    raise
+  end
+
 
   def to_validate
     @talentist = current_talentist
-    @talent = Talent.find(params[:id])
     if params[:commit] == "Accepter"
       if @talent.validated == true
         validated_action(nil)
@@ -177,10 +221,15 @@ class TalentsController < ApplicationController
       end
     end
     redirect_to talents_path
-    authorize @talent
   end
 
 private
+
+
+  def set_talent
+    @talent = Talent.find(params[:id])
+    authorize @talent
+  end
   def declined_params
     params.require(:talent).permit(:declined)
   end
@@ -210,17 +259,22 @@ private
       :name,
       :firstname,
       :phone,
+      :linkedin,
       :city,
-      :overview,
-      :photo,
+      :job_ids,
+      :btoc,
+      :btob,
+      :terms_of_condition,
+      :no_more,
+      :sector_ids,
       hobby_ids: [],
-      skill_ids: [],
-      techno_ids: [],
-      experiences_attributes:[ :id, :company_name, :years, :starting, :overview, :position, :currently, :_destroy],
-      talent_formations_attributes:[ :id, :title, :year, :level, :formation_id, :_destroy],
-      next_aventures_attributes:[ :id, :remuneration, :contrat, :overview, :city, :no_more, :_destroy, sector_ids: [] ],
-      talent_languages_attributes: [ :id, :language_id ]
-      )
+      experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
+      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), :sector_ids],
+      talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
+      talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
+      your_small_plus_attributes: [:id, :description, :_destroy],
+      techno_ids: []
+    )
   end
 
 end

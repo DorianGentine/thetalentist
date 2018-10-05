@@ -38,10 +38,7 @@ class StepsTalentInfosController < ApplicationController
     else
       0.times { @talent.your_small_plus.build }
     end
-
-
     render_wizard
-
   end
 
   def update

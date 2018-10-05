@@ -44,6 +44,22 @@ class TalentPolicy < ApplicationPolicy
     user = record
   end
 
+  def update_profile?
+    update?
+  end
+
+  def update_experience?
+    update?
+  end
+
+  def update_next_aventure?
+    update?
+  end
+
+  def update_formation_and_skill?
+    update?
+  end
+
   def repertory?
     user = record
   end
