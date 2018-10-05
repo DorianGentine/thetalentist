@@ -17,13 +17,14 @@
             <i class="fas fa-user-friends"></i> TALENTS
           <% end %>
         <% end %>
-
-        <div class="lien-messagerie">
-          <%= link_to conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
-            <i class="fas fa-envelope"></i> MESSAGERIE
-            <%= render "shared/notif_point" %>
-          <% end %>
-        </div>
+        <% if current_headhunter.mailbox.conversations.count > 0 %>
+          <div class="lien-messagerie">
+            <%= link_to conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
+              <i class="fas fa-envelope"></i> MESSAGERIE
+              <%= render "shared/notif_point" %>
+            <% end %>
+          </div>
+        <% end %>
 
         <% if current_headhunter.validated %>
           <%= link_to headhunter_path(current_headhunter), class:"navbar-wagon-item navbar-wagon-link" do %>
@@ -64,12 +65,14 @@
         <%= link_to repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" do %>
           <i class="fas fa-rocket"></i> Mes START-UP
         <% end %>
-        <div class="lien-messagerie">
-          <%= link_to conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
-            <i class="fas fa-envelope"></i> MESSAGERIE
-            <%= render "shared/notif_point" %>
-          <% end %>
-        </div>
+        <% if current_talent.mailbox.conversations.count > 0 %>
+          <div class="lien-messagerie">
+            <%= link_to conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
+              <i class="fas fa-envelope"></i> MESSAGERIE
+              <%= render "shared/notif_point" %>
+            <% end %>
+          </div>
+        <% end %>
         <% if current_talent.validated %>
           <%= link_to talent_path(current_talent), class:"navbar-wagon-item navbar-wagon-link" do %>
             <i class="fa fa-user"></i> PROFILE
@@ -183,9 +186,11 @@
             <div class="bottom-menu-item">
               <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
             </div>
-            <div class="bottom-menu-item">
-              <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-            </div>
+            <% if current_headhunter.mailbox.conversations.count > 0 %>
+              <div class="bottom-menu-item">
+                <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
+              </div>
+            <% end %>
             <div class="bottom-menu-item">
               <div class="navbar-wagon-item">
                 <div class="dropdown">
@@ -211,10 +216,11 @@
             <div class="bottom-menu-item">
               <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
             </div>
-
-            <div class="bottom-menu-item">
-              <%= link_to "MESSAGERIE", conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-            </div>
+            <% if current_talent.mailbox.conversations.count > 0 %>
+              <div class="bottom-menu-item">
+                <%= link_to "MESSAGERIE", conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
+              </div>
+            <% end %>
             <div class="bottom-menu-item">
               <div class="navbar-wagon-item">
                 <div class="dropdown">
