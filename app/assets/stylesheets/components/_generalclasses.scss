@@ -58,6 +58,9 @@
   }
 
 // Margin
+  .margin-auto{
+    margin: auto;
+  }
   .no-margin{
     margin: 0 !important;
   }
@@ -89,6 +92,11 @@
 
   .uppercase{
     text-transform: uppercase;
+  }
+
+  .center-text{
+    display: grid;
+    place-items: center center;
   }
 
 

@@ -277,13 +277,14 @@
 // Social-media-link
   .social-media-link{
     margin-right: 2vw;
-    color: $black;
+    color: #191B26;
+    height: 40px;
+    width: 40px;
+    display: grid;
+    place-items: center center;
+    background-color: rgba(168, 170, 179, 0.32);
+    border-radius: 100%;
   }
   .social-media-link:hover {
     color: $green;
-  }
-  .social-media-link-icon{
-    padding: 10px;
-    border-radius: 20px;
-    background-color: rgba(168, 170, 179, 0.32);
   }

@@ -14,12 +14,12 @@
         <!-- Photo de profil -->
           <% if @startup.logo.present? %>
 
-            <div class="photo-profil" style="background-image: url('<%= cl_image_path @startup.logo, :transformation=>[ :gravity=>"face"] %>'); background-size: contain; background-repeat: no-repeat;">
+            <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @startup.logo, :transformation=>[ :gravity=>"face"] %>'); background-size: contain; background-repeat: no-repeat;">
               <div class="statut"></div>
             </div>
           <% else %>
 
-            <div class="photo-profil">
+            <div class="photo-profil margin-auto">
               <div class="initiale">
                 <%= @startup.name.split(//).first.upcase %><%= @startup.name.split(//).second.upcase %>
               </div>
@@ -50,33 +50,56 @@
           </div>
       </div>
 
-    <!-- Mes compétences linguistiques -->
+    <!-- Nos collaborateurs -->
       <div class="blue-background margin-top-background">
-        <div class="grid" style="grid: auto / auto auto;">
-          <p class="titre-rubrique-3 margin-bottom-30" style="grid-column: 1 / span 2;">Nos collaborateurs :</p>
+        <div class="grid" style="grid: auto / 20% auto; align-items: center; grid-row-gap: 15px;">
+          <p class="titre-rubrique-3" style="grid-column: 1 / span 2;">Nos collaborateurs :</p>
 
           <% @startup.headhunters.each do |headhunter| %>
             <% if headhunter.photo.present? %>
-              <div class="photo-profil" style="background-image: url('<%= cl_image_path headhunter.photo, :transformation=>[ :gravity=>"face"] %>');">
+              <div class="photo-profil profil-collaborateur" style="background-image: url('<%= cl_image_path headhunter.photo, :transformation=>[ :gravity=>"face"] %>');">
               </div>
             <% else %>
 
-              <div class="photo-profil">
+              <div class="photo-profil profil-collaborateur">
                 <div class="initiale">
                   <%= headhunter.firstname.split(//).first.upcase %><%= headhunter.name.split(//).first.upcase %>
                 </div>
               </div>
             <% end %>
             <div>
-              <p class="texte-rubrique-3b"><%= headhunter.firstname %> <%= headhunter.name %></p>
-              <p class="titre-rubrique-1"><%= headhunter.job %></p>
+              <p class="texte-rubrique-3b no-margin"><%= headhunter.firstname %> <%= headhunter.name %></p>
+              <p class="titre-rubrique-1 no-margin"><%= headhunter.job %></p>
             </div>
           <% end %>
 
         </div>
       </div>
 
+    <!-- Me suivre sur -->
+      <div class="blue-background margin-top-background">
+        <p class="titre-rubrique-3 margin-bottom-30">Me suivre sur :</p>
 
+      <div class="flex">
+        <a class="social-media-link" href="<%= @startup.linkedin %>" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a class="social-media-link" href="<%= @startup.linkedin %>" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      </div>
+
+      </div>
+  </div>
+
+  <div class="second-column">
+    <div class="blue-background">
+
+      <!-- Titre section -->
+        <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+        <h2 class="titre-section">Notre environnement <strong>en photos</strong></h2>
+
+      <!-- Photos entreprise -->
+
+          <%= render 'component_avem/modal_image' %>
+
+    </div>
   </div>
 
 </div>
