@@ -203,13 +203,10 @@ class Talent < ApplicationRecord
     TalentMailer.accepted(self).deliver_now
   end
 
-
   private
 
   def normalize_name_firstname
     self.firstname = self.firstname.capitalize
   end
-
-
 
 end
