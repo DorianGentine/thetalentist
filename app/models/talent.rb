@@ -179,6 +179,7 @@ class Talent < ApplicationRecord
     result
   end
 
+
   def send_new_user_to_talentist
     ApplicationMailer.new_user(self).deliver_now
   end
