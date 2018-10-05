@@ -24,8 +24,8 @@
           </div>
           <div class="col-xs-12 col-lg-6">
             <div class="form-line form-line-next-aventure form-secteur">
-              <p class="form-label form-label-font-size label-next_aventure requis">Secteur</p>
-              <%= f.input :sector_ids, collection: Sector.all, input_html: { class:"select2", style: "width: 100%"}, include_blank: true, label: false %>
+              <p class="form-label form-label-font-size label-next_aventure requis">Prochain secteur</p>
+              <%= u.input :sector_ids, collection: Sector.all, input_html: { class:"select2", style: "width: 100%"}, include_blank: true, label: false %>
             </div>
           </div>
         </div>
