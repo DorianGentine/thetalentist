@@ -36,10 +36,7 @@ class Talents::RegistrationsController < Devise::RegistrationsController
       :email,
       :password,
       :password_confirmation,
-      :cv,
       :linkedin,
-      :job_ids,
-      hobby_ids: [],
       talent_jobs_attributes: [ :id, :job_id, :year]
       )
   end

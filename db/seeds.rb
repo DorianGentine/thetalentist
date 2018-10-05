@@ -79,7 +79,6 @@ p "Creating company_type part"
 
 ge = CompanyType.create!(title: "Grande entreprise (GE)")
 eti = CompanyType.create!(title: "Entreprise de taille intermédiaire (ETI)")
-pme = CompanyType.create!(title: "Petite et moyenne entreprise (PME)")
 tpe = CompanyType.create!(title: "Micro entreprise (TPE)")
 
 p "Creating experiences"

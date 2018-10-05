@@ -125,7 +125,7 @@ class TalentsController < ApplicationController
   end
 
   def to_validate
-    @talentist = Talentist.find_by_email("dimitri@hotmail.fr")
+    @talentist = current_talentist
     @talent = Talent.find(params[:id])
     if params[:commit] == "Accepter"
       if @talent.validated == true

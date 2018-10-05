@@ -19,6 +19,9 @@ class Talent < ApplicationRecord
   has_many :talent_sectors, dependent: :destroy
   has_many :sectors, through: :talent_sectors
 
+  has_many :your_small_plus, dependent: :destroy
+  accepts_nested_attributes_for :your_small_plus, allow_destroy: true, reject_if: :all_blank
+
   has_many :talent_jobs, dependent: :destroy
   has_many :jobs, through: :talent_jobs
   accepts_nested_attributes_for :talent_jobs, allow_destroy: true, reject_if: :all_blank

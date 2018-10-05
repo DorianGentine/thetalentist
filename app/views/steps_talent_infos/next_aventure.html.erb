@@ -67,13 +67,13 @@
         <div class="col-xs-12 col-lg-6">
           <div id="add-language" class="form-semi-line blue-background margin-top-background margin-right-background ">
               <p class="form-label form-label-font-size label-next_aventure requis" id="add-words">Vos petits + ?</p>
-            <div class="form-line">
-              <%= u.simple_fields_for :your_small_plus do |e| %>
+
+              <%= f.simple_fields_for :your_small_plus do |e| %>
                 <%= render 'your_small_plu_fields', :f => e %>
               <% end %>
-            </div>
+
             <div class='links' id="add-margin-left">
-              <%= link_to_add_association 'Ajouter un +', u, :your_small_plus, :partial => 'your_small_plu_fields' %>
+              <%= link_to_add_association 'Ajouter un +', f, :your_small_plus, :partial => 'your_small_plu_fields' %>
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@
           <div class="col-xs-12 col-lg-6 ">
             <div class="width-rang align-items-form">
               <p>Chasseur</p>
-              <input class="numeric integer optional" step="1" name="talent[next_aventures_attributes][0][hunter_or_breeder]" id="talent_next_aventures_attributes_0_hunter_or_breeder" type="range" min="1" max="100">
+              <%= u.input :hunter_or_breeder, as: :range, input_html: { min: 0, max: 100, class:"slider", style:"width:100%;", id:"level_value_activity" }, label: false, wrapper: false %>
               <p>Éleveur</p>
             </div>
           </div>
@@ -107,7 +107,7 @@
             <div class="width-rang align-items-form">
               <!-- <p class="form-label-font-size requis">Es-tu plutôt:</p> -->
               <p>Créatif</p>
-              <input class="numeric integer optional" step="1" name="talent[next_aventures_attributes][0][creative_or_pragmatic]" id="talent_next_aventures_attributes_0_creative_or_pragmatic" type="range" min="1" max="100">
+              <%= u.input :creative_or_pragmatic, as: :range, input_html: { min: 0, max: 100, class:"slider", style:"width:100%;", id:"level_value_activity" }, label: false, wrapper: false %>
               <p>Pragmatique</p>
             </div>
           </div>
@@ -142,7 +142,7 @@
     <div class="bloc-next-aventure blue-background margin-top-background row">
       <div class="col-lg-5 col-lg-offset-4 form-line">
         <%= f.input :terms_of_condition, as: :boolean, label: false, required: true, autofocus: true%>
-        <%= link_to 'Accpeter vous les conditions générale', mentions_legales_path %>
+        <%= link_to 'Acceptez vous les conditions générale', mentions_legales_path %>
       </div>
     </div>
 
