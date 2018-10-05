@@ -1,0 +1,12 @@
+<!-- The Modal -->
+<div id="modal_image_<%= photo.id %>" class="modal_image">
+
+  <!-- The Close Button -->
+  <span id="close_modal_image_<%= photo.id %>" class="close_image">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal_image-content" src="<%= cl_image_path photo.photo  %>">
+
+  <!-- Modal Caption (Image Text) -->
+  <!-- <div id="caption_image"></div> -->
+</div>

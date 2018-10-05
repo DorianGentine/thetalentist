@@ -13,12 +13,12 @@
 }
 
 /* User Avatar */
-.navbar-wagon-item .avatar {
-  height: 35px;
-  width: 35px;
-  border-radius: 50%;
-  cursor: pointer;
-}
+  .avatar {
+    height: 35px !important;
+    width: 35px !important;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 
 /* Right section */
 .navbar-talentist-right {

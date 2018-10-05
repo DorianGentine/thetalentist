@@ -19,12 +19,12 @@
 
         <!-- Photo de profil -->
           <% if @talent.photo.present? %>
-            <div class="photo-profil" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
+            <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
               <div class="statut"></div>
             </div>
           <% else %>
 
-            <div class="photo-profil">
+            <div class="photo-profil margin-auto">
               <div class="initiale">
                 <%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %>
               </div>
@@ -72,6 +72,7 @@
             <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
             <p class="titre-rubrique-3 no-margin"><%= @talent.city.present? ? @talent.city : "Pas définit" %></p>
           </div>
+          <div id="map" data-markers="<%= @markers.to_json %>"></div>
       </div>
 
     <!-- Mes compétences linguistiques -->
