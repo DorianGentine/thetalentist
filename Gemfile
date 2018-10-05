@@ -78,3 +78,4 @@ gem 'google-api-client', '~> 0.11'
 # gem 'prawn-rails'
 gem "pdfkit"
 gem "wkhtmltopdf-binary"
+gem 'wicked_pdf'

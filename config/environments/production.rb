@@ -7,12 +7,9 @@ Rails.application.configure do
   config.cache_classes = true
 
 
-
-
   # TODO when we have a hosting
   # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.action_mailer.delivery_method     = :smtp
   config.action_mailer.default_url_options = { host: "thetalentist.herokuapp.com" }
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers

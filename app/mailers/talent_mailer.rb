@@ -23,7 +23,7 @@ class TalentMailer < ApplicationMailer
 
   def accepted(user)
     @user = user
-
+    # attachments["#{@user.firstname}_#{Time.now.strftime("%m%d_%Y")}.pdf"] = pdf_file
     mail(
       to: @user.email,
       cci:Talentist.first.email,
