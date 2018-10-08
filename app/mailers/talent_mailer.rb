@@ -2,7 +2,8 @@ class TalentMailer < ApplicationMailer
 
   def candidate(user)
     @user = user
-    # @pdf = pdf
+    pdf = UserInfoPdf.new(@user)
+    attachments["#{@user.firstname}_#{@user.name}.pdf"] = { :mime_type => 'application/pdf', :content => pdf.render }
     mail(
       to: @user.email,
       cci:Talentist.first.email,
@@ -23,7 +24,6 @@ class TalentMailer < ApplicationMailer
 
   def accepted(user)
     @user = user
-    # attachments["#{@user.firstname}_#{Time.now.strftime("%m%d_%Y")}.pdf"] = pdf_file
     mail(
       to: @user.email,
       cci: Talentist.first.email,
