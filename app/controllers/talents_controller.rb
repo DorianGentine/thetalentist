@@ -149,7 +149,7 @@ class TalentsController < ApplicationController
     else
       0.times { @talent.your_small_plus.build }
     end
-
+    @choices = ["Ambiance", "International", "Produit", "Rémunération", "Sens", "Valeurs", "Mission", "Management", "Worklife balance", "Impact"]
   end
 
   def update_profile
