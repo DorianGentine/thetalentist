@@ -31,3 +31,9 @@
     color: white;
   }
 }
+
+@media screen and (max-width: 770px) {
+  .waiting_for_validation{
+    padding: 0 5vw;
+  }
+}

@@ -18,12 +18,6 @@
   content: "*";
   color: $red;
 }
-#linkedin-size .form-group {
-  width: 70%;
-}
-#linkedin-size p {
-  width: 20%;
-}
 
 @media screen and (max-width: 770px) {
   #linkedin-size .form-group {
@@ -96,27 +90,6 @@
   font-style: normal;
   color: $red;
 }
-.form-hobby-add{
-  height: 39px;
-  min-height: 32px;
-  border: 1px solid $green;
-  border-radius: 4px;
-  color: $green;
-  padding: 0 15px;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-}
-.form-hobby-add:hover{
-  color: white;
-  background-color: $green;
-  text-decoration: none;
-  transition: 0.15s
-}
-.form-hobby-add:focus{
-  color: $green;
-  text-decoration: none;
-}
 .talent_password small {
     display: flex;
     justify-content: flex-end;
@@ -132,45 +105,15 @@
   position: relative;
 }
 
-/*CSS formations.html.erb */
-#formations{
-
-  .form-group{
-    width: unset;
-    select{
-      width: 100%;
-      color: gray;
-      background-color: white;
-    }
-  }
-}
 
 
 @media screen and (min-width: 771px) {
   .padding-center {
     padding-left: 39%
   }
-  #text_area-experience {
-    margin: 0 15px 15px 12px;
-  }
-  #supp-words {
-    margin: 20px 0;
-  }
   .margin-competence {
     padding: 11px 0;
   }
-  #next_aventure-form {
-    .form-group {
-      margin: 15px;
-      width: 60%;
-    }
-  }
-}
-#info-question-next_aventure {
-  font-size: 12px;
-  text-align: center;
-  color: gray;
-  margin: 0;
 }
 
 
@@ -178,60 +121,13 @@
   padding: 0 10px;
   color: $red;
 }
-#form-p2-comp{
-  .form-semi-line{
-    display: inline-block;
-    .form-group{
-      margin: 0;
-      width: unset;
-    }
-  }
-  .form-semi-line:first-child{
-    // position: absolute;
-    // top: 0;
-    .form-label{
-      margin-bottom: 15px;
-    }
-  }
-  .form-semi-line:last-child{
-    margin-left: 50%;
-    .form-label{
-      margin-bottom: 7px;
-    }
-  }
-}
+
 .form-label-semi-line{
   width: unset;
   text-align: left;
 }
 
-#add-language{
-  .add-language-line .nested-fields .form-group{
-    margin: 8px 15px 8px 0;
-  }
-}
-#add-language .links{
-  margin-top: 15px;
-  a{
-    padding: 0 10px;
-    color: $green;
-    border: 1px solid $green;
-    text-decoration: none;
-    border-radius: 5px;
-  }
-}
-#add-language .links a:hover{
-  color: white;
-  background-color: $green;
-  text-decoration: none;
-  transition: 0.15s;
-}
-
 #text_area-experience {
-  .form-label-font-size {
-    text-align: left;
-    margin-bottom: 5px;
-  }
   textarea {
     width: 100%;
     height: 75%;
@@ -255,29 +151,21 @@ input[type="radio"], input[type="checkbox"] {
   width: 100%;
   text-align: left;
 }
-// .form-next_aventure{
-//   display: flex;
-// }
-// .bloc-next-aventure{
-//   width: 50%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   .form-group{
-//     width: 60%;
-//   }
-// }
-// .bloc-next-aventure-right{
-//   .form-group{
-//     width: calc(100% - 15px);
-//   }
-// }
 
-#competence-form{
-  .form-group{
-    margin: 15px 0;
-  }
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+  background-color: white !important;
+  border: 1px solid $green !important;
+  color: $green !important;
+  margin-right: 10px !important;
+  padding: 5px 10px !important;
 }
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+  color: $green !important;
+  font-weight: 500 !important;
+  margin-right: 5px !important;
+}
+
 @media screen and (max-width: 770px) {
   .form-container{
     padding: 0 40px;
@@ -290,10 +178,6 @@ input[type="radio"], input[type="checkbox"] {
   .form-label{
     width: unset;
   }
-  .form-group{
-    margin: 15px 0;
-    width: 100%;
-  }
   .form-actions{
     margin: 40px 0;
     .form-btn{
@@ -301,12 +185,6 @@ input[type="radio"], input[type="checkbox"] {
     }
   }
 
-
-  #formations{
-    .form-group{
-      width: 100%;
-    }
-  }
   #form-p2-comp{
     .form-semi-line{
       display: block;
@@ -322,22 +200,9 @@ input[type="radio"], input[type="checkbox"] {
     .form-semi-line:last-child{
       margin-left: 0;
     }
-    #add-language .add-language-line .nested-fields .form-group {
-      margin: 15px 0;
-    }
   }
   .nested-fields a{
     margin: 0;
-  }
-
-  .form-next_aventure{
-    flex-direction: column;
-    .bloc-next-aventure{
-      width: unset;
-      .form-group{
-        width: 100%;
-      }
-    }
   }
 }
 #font-input-currently label {
@@ -396,29 +261,10 @@ input[type="radio"], input[type="checkbox"] {
       width: 90%;
     }
   }
-  #add-words {
-    margin-left: 15px;
-  }
   #add-margin-left {
     margin-left: 15px;
   }
 }
-
-#add-words {
-    text-align: left;
-  }
-.width-rang {
-  p {
-    margin: 13px;
-    color: $green;
-    font-size: 16px;
-    font-weight: 500;
-  }
-}
-.left-p {
-  text-align: left;
-}
-
 .align-items-form {
   display: flex;
   align-items: center;
@@ -428,47 +274,32 @@ input[type="radio"], input[type="checkbox"] {
 // grid pour experience
 #experience-grid {
   display: grid;
-  grid-template-columns: 100px 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid: auto / calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px);
+  justify-content: space-between;
+  grid-row-gap: 15px;
 }
 
-.experience-title-grid {
-  grid-row: 1 / span 3;
-  grid-column: 1 / span 1;
-  margin: auto;
-  .form-label-font-size {
-    text-align: center !important;
-  }
-}
+// .experience-title-grid {
+//   grid-row: 1 / span 3;
+//   grid-column: 1 / span 1;
+//   margin: auto;
+//   .form-label-font-size {
+//     text-align: center !important;
+//   }
+// }
 
 .company-name-grid {
-  grid-row: 1 / span 1;
-  grid-column: 2 / span 1;
+  grid-column: 1 / span 2;
 }
 
 .position-grid {
-  grid-row: 2 / span 1;
-  grid-column: 2 / span 1;
+  grid-column: 3 / span 2;
 }
-
-.company-type-grid {
-  grid-row: 3 / span 1;
-  grid-column: 2 / span 1;
-}
-
 .starting-grid {
-  display: flex;
-  align-items: center;
-  grid-row: 1 / span 1;
-  grid-column: 3 / span 1;
-
+  grid-column: 5 / span 1;
 }
-
 .ending-grid {
-  display: flex;
-  align-items: center;
-  grid-row: 1 / span 1;
-  grid-column: 4 / span 1;
+  grid-column: 6 / span 1;
 }
 .margin-date-picker {
   p {
@@ -478,27 +309,73 @@ input[type="radio"], input[type="checkbox"] {
 }
 .currently-grid {
   text-align: center;
-  grid-row: 1 / span 1;
-  grid-column: 5 / span 1;
+  grid-column: 7 / span 1;
 }
+
+
 #text_area-experience {
   grid-row: 2 / span 2;
-  grid-column: 3 / span 2;
+  grid-column: 1 / span 4;
 }
-.supp-grid-experience {
+
+.company-type-grid {
   grid-row: 2 / span 1;
   grid-column: 5 / span 1;
-  text-align: center;
-  margin-top: 7%;
 }
-#add-experience-grid {
-  text-align: center;
-  margin-top: 15px;
+.supp-grid-experience {
+  grid-row: 1 / span 3;
+  grid-column: 8 / span 1;
 }
 @media screen and (max-width: 770px) {
   #experience-grid {
-    display: block;
-    padding: 20px 0;
+    margin-bottom: 20px;
+    grid: auto / auto;
+    justify-content: unset;
+    > div{
+      width: 100%;
+    }
+  }
+  .company-name-grid {
+    grid-column: 1 / span 1;
+    grid-row: 1;
+  }
+  .position-grid {
+    grid-column: 1 / span 1;
+    grid-row: 2;
+  }
+  .starting-grid {
+    grid-column: 1 / span 1;
+    grid-row: 3;
+    .form-control{
+      width: 100%;
+    }
+  }
+  .ending-grid {
+    grid-column: 1 / span 1;
+    grid-row: 4;
+    .form-control{
+      width: 100%;
+    }
+  }
+  .currently-grid {
+    text-align: center;
+    grid-column: 1 / span 1;
+    grid-row: 5;
+  }
+  #text_area-experience {
+    grid-row: 2 / span 2;
+    grid-column: 1 / span 1;
+    grid-row: 6;
+  }
+
+  .company-type-grid {
+    grid-row: 2 / span 1;
+    grid-column: 1 / span 1;
+    grid-row: 7;
+  }
+  .supp-grid-experience {
+    grid-row: 1 / span 3;
+    grid-column: 1 / span 1;
+    grid-row: 8;
   }
 }
-

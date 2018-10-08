@@ -305,3 +305,29 @@
   }
   .remove_fields{
   }
+
+// Form-hobby-add
+  .form-hobby-add{
+    height: 39px;
+    min-height: 32px;
+    border: 1px solid $green;
+    border-radius: 4px;
+    color: $green;
+    padding: 0 15px;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+  }
+  .form-hobby-add:hover{
+    color: white;
+    background-color: $green;
+    text-decoration: none;
+    transition: 0.15s;
+    a{
+      color: white;
+    }
+  }
+  .form-hobby-add:focus{
+    color: $green;
+    text-decoration: none;
+  }

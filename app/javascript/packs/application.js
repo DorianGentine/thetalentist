@@ -10,6 +10,8 @@ import '../components/showFileTitle';
 
 import '../components/blockRotation';
 
+import '../components/dynamicLineHeight';
+
 
 
 import { autocomplete } from '../components/autocomplete';
