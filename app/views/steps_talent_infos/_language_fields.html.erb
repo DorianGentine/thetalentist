@@ -1,9 +1,9 @@
-<div class='nested-fields form-line row'>
-  <div class="col-xs-12 col-lg-4">
-    <%= f.association :language, collection: Language.all, prompt: "Langue", label: false, input_html: { class:"select2"}  %>
+<div class='nested-fields form-line row margin-bottom-15'>
+  <div class="col-xs-12 col-lg-4 margin-right-15">
+    <%= f.association :language, collection: Language.all, prompt: "Langue", label: false, input_html: { :class => "select2", style: "width: 100%" }  %>
   </div>
-  <div class="col-xs-12 col-lg-4">
-    <%= f.input :level, collection: ["Natif", "Bilingue", "Avancée", "lu parlé écrit", "Notions"], prompt:"Niveau", label: false, :input_html => { :class => 'select2' } %>
+  <div class="col-xs-12 col-lg-4 margin-right-15">
+    <%= f.input :level, collection: ["Natif", "Bilingue", "Avancée", "lu parlé écrit", "Notions"], prompt:"Niveau", label: false, :input_html => { :class => 'select2', style: "width: 100%" } %>
   </div>
   <div class="col-xs-12 col-lg-4">
   <!-- TODO button -->

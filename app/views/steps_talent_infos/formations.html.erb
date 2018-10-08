@@ -9,7 +9,7 @@
 
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
 
-    <div id="formations" class="blue-background">
+    <div class="blue-background">
       <%= f.simple_fields_for :talent_formations do |u| %>
         <%= render 'formation_fields', :f => u %>
       <% end %>
@@ -18,26 +18,24 @@
       </div>
     </div>
 
-    <div id="form-p2-comp" class=" row">
+    <div class=" row">
       <div class="col-xs-12 col-lg-6">
         <div id="add-language" class="blue-background margin-right-background margin-top-background">
-          <p class="form-label-font-size form-label-semi-line requis">Compétences linguistiques</p>
+          <p class="label-edit no-margin requis">Compétences linguistiques</p>
           <div class="add-language-line">
             <%= f.simple_fields_for :talent_languages do |u| %>
               <%= render 'language_fields', :f => u %>
             <% end %>
             <div class='links'>
-              <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'language_fields' %>
+              <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'language_fields', :class => "form-hobby-add" %>
             </div>
           </div>
         </div>
       </div>
       <div class="col-xs-12 col-lg-6">
-        <div class="blue-background margin-left-background margin-top-background" id="competence-form">
-          <div class="margin-competence">
-            <p class="form-label-font-size form-label-semi-line requis">Compétences techniques</p>
-            <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 294px"}, multiple: true, required: true %>
-          </div>
+        <div class="blue-background margin-left-background margin-top-background" style="min-height: 147px">
+          <p class="label-edit no-margin requis">Compétences techniques</p>
+          <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { :class => "select2", multiple: "multiple", style: "width: 100%"}, multiple: true, required: true %>
         </div>
       </div>
     </div>

@@ -1,9 +1,11 @@
-<div class='nested-fields row'>
-  <div class="col-xs-12 col-lg-9">
-    <%= f.input :description, label: false, as: :text, input_html: {rows: '1'} %>
+<div class='nested-fields row margin-top-15-xs'>
+  <div class="col-xs-10 col-lg-9 no-padding">
+    <%= f.input :description, label: false, as: :text, input_html: {rows: '1', style: "width: 100%"} %>
   </div>
   <!-- TODO button -->
-  <div class="col-xs-12 col-lg-3" id="supp-words">
-    <%= link_to_remove_association "Supprimer", f %>
+  <div class="col-xs-2 col-lg-2 line-height-center">
+    <%= link_to_remove_association f do %>
+      <i class="fas fa-trash-alt no-padding"></i>
+    <% end %>
   </div>
 </div>

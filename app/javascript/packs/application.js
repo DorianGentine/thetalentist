@@ -10,7 +10,7 @@ import '../components/showFileTitle';
 
 import '../components/blockRotation';
 
-import '../components/toggableVerticalTabs';
+import '../components/dynamicLineHeight';
 
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
