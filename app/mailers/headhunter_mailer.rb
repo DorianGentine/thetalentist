@@ -10,7 +10,7 @@ class HeadhunterMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      cci:Talentist.first.email,
+      cci: "bienvenue@thetalentist.com",
       subject: "Profil accepté :)"
       )
   end
@@ -31,7 +31,7 @@ class HeadhunterMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      cci:Talentist.first.email,
+      cci: "bienvenue@thetalentist.com",
       subject: "#{@firstname} a #{status.capitalize} ton inviation"
       )
   end

@@ -82,6 +82,7 @@ class Talent < ApplicationRecord
   mount_uploader :cv, PdfUploader
   mount_uploader :photo, PhotoUploader
 
+
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
   end
@@ -178,7 +179,6 @@ class Talent < ApplicationRecord
     clean_up_passwords
     result
   end
-
 
   def send_new_user_to_talentist
     ApplicationMailer.new_user(self).deliver_now

@@ -1,5 +1,5 @@
 class TalentsController < ApplicationController
-  before_action :set_talent, only: [ :show, :edit, :update_profile, :update_experience, :update_next_aventure, :update_formation_and_skill, :update, :to_validate ]
+  before_action :set_talent, only: [ :show, :edit, :update_profile, :update_experience, :update_next_aventure, :update_formation_and_skill, :update, :to_validate, :info_pdf ]
 
   def index
     @talentist = current_talentist
@@ -67,40 +67,19 @@ class TalentsController < ApplicationController
       @sectors = @talent.next_aventures.last.next_aventure_sectors
     end
     @credentials = @talent.credentials
-
-    # pdf = WickedPdf.new.pdf_from_string(
-    #   render_to_string(
-    #   layout: true,
-    #   template: "talents/show.html.erb"
-    # ))
-
-    # savepath = Rails.root.join('pdfs','filename.pdf')
-    # File.open(savepath, 'wb') do |file|
-    #   file << pdf
-    # end
-    # @talent.cv = file
-    # @talent.save
-
-    respond_to do |format|
-      format.html { render :template => "talents/show" }
-      format.pdf {
-        html = render_to_string(
-        layout: true,
-        template: "talents/show.html.erb"
-        # action: "show.html.erb"
-        ) # your view erb files goes to :action
-
-        @kit = PDFKit.new(html)
-        send_data(@kit.to_pdf, :filename=>"#{@talent.firstname}_#{@talent.name}.pdf", :type => 'application/pdf', :disposition => 'inline')
-        # kit.to_file(Rails.root + "#{@talent.firstname}_#{@talent.name}.pdf")
-
-        # TalentMailer.accepted(@talent, @kit.to_pdf).deliver_now
-      }
-    end
-
-
-
   end
+
+  # def info_pdf
+  #   respond_to do |format|
+  #     format.html
+  #     format.pdf do
+  #       pdf = UserInfoPdf.new(@talent)
+  #       send_data pdf.render, filename: "#{@talent.firstname}_#{@talent.name}.pdf",
+  #                             type: "application/pdf",
+  #                             disposition: 'inline'
+  #     end
+  #   end
+  # end
 
   def update
     if talent_params["talent_formations_attributes"]
@@ -149,7 +128,7 @@ class TalentsController < ApplicationController
     else
       0.times { @talent.your_small_plus.build }
     end
-
+    @choices = ["Ambiance", "International", "Produit", "Rémunération", "Sens", "Valeurs", "Mission", "Management", "Worklife balance", "Impact"]
   end
 
   def update_profile

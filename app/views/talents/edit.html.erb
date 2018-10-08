@@ -1,15 +1,16 @@
+
 <div class="container-show">
   <div class="blue-background">
 
     <!-- !!!!!!!!!!!!!faire render de chaque parties !!!!!!!!!!! -->
 
     <div class="row">
-      <div class="col-lg-3 no-padding">
-        <p class="tablinks titre-rubrique-3 active" onclick="openOnglet(event, 'informations_generales')">Informations générales</p>
-        <p class="tablinks titre-rubrique-3" onclick="openOnglet(event, 'formations_et_competences')">Formations et compétences</p>
-        <p class="tablinks titre-rubrique-3" onclick="openOnglet(event, 'experiences_professionnelles')">Expériences professionnelles</p>
-        <p class="tablinks titre-rubrique-3" onclick="openOnglet(event, 'ma_prochaine_aventure')">Ma prochaine aventure</p>
-        <p class="tablinks titre-rubrique-3" onclick="openOnglet(event, 'modifier_mon_compte')">Modifier mon compte</p>
+      <div class="col-lg-3 no-padding tablinksAll " id='tabs-edit'>
+        <p class="tablinks titre-rubrique-3 active" data-idTab='informations_generales'>Informations générales</p>
+        <p class="tablinks titre-rubrique-3" data-idTab='formations_et_competences'>Formations et compétences</p>
+        <p class="tablinks titre-rubrique-3" data-idTab='experiences_professionnelles'>Expériences professionnelles</p>
+        <p class="tablinks titre-rubrique-3" data-idTab='ma_prochaine_aventure'>Ma prochaine aventure</p>
+        <p class="tablinks titre-rubrique-3" data-idTab='modifier_mon_compte'>Modifier mon compte</p>
       </div>
       <hr class="ligne-vertical col-lg-1 no-padding" style="min-height: 392.5px; margin: 0 30px;">
       <!-- info générale sur le profil -->
@@ -40,41 +41,25 @@
 
 
 
-
-
     </div>
     </div>
   </div>
 </div>
 
-<script>
-  function openOnglet(evt, cityName) {
-    // Declare all variables
-    var i, tabcontent, tablinks;
-
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-
-    // Show the current tab, and add an "active" class to the link that opened the tab
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-  }
-</script>
       <!-- formulaire -->
         <%= simple_form_for @talent, url: update_profile_talent_path(@talent), method: :patch, remote: false  do |f|%>
-          <%= f.input :firstname %>
+          <%= f.input :photo %>
+          <%= f.input :photo_cache, as: :hidden %>
+          <%= f.input :firstname, label: false %>
           <%= f.input :name %>
+          <%= f.simple_fields_for :talent_jobs do |u| %>
+            <%= u.input :job_id, collection: Job.all, label: false %>
+            <%= u.input :year, label: false %>
+          <% end %>
+          <%= f.input :phone, placeholder: "06 01 02 03 05", label: false %>
+          <%= f.input :city, placeholder: 'Nantes, France', :input_html => { :id => "talent_city" }, label: false%>
+          <%= f.input :linkedin, autofocus: true, label: false %>
           <%= f.button :submit, "Sauvegarder", :class => "submit_forgot_password" %>
-
         <% end %>
 
 
@@ -89,32 +74,17 @@
               <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'steps_talent_infos/formation_fields', class: "form-hobby-add" %>
             </div>
           </div>
-          <div id="form-p2-comp" class=" row">
-            <div class="col-xs-12 col-lg-6">
-              <div class="blue-background margin-left-background margin-top-background" id="competence-form">
-                <div class="margin-competence">
-                  <p class="form-label-font-size form-label-semi-line requis">Compétences techniques</p>
-                  <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 294px"}, multiple: true, required: true %>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-lg-6">
-              <div id="add-language" class="blue-background margin-right-background margin-top-background">
-                <p class="form-label-font-size form-label-semi-line requis">Compétences linguistiques</p>
-                <div class="add-language-line">
-                  <%= f.simple_fields_for :talent_languages do |u| %>
-                    <%= render 'steps_talent_infos/language_fields', :f => u %>
-                  <% end %>
-                  <div class='links'>
-                    <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields' %>
-                  </div>
-                </div>
-              </div>
+          <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 294px"}, multiple: true, required: true %>
+          <div id="add-language">
+            <%= f.simple_fields_for :talent_languages do |u| %>
+              <!-- obliger de faire un render (soit garder, soit prendre l'ancien) -->
+              <%= render 'steps_talent_infos/language_fields', :f => u %>
+            <% end %>
+            <div class='links'>
+              <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields' %>
             </div>
           </div>
-          <div class="form-actions">
-            <%= f.submit "Continuer", class: "b-btn form-btn form-btn-suivant" %>
-          </div>
+          <%= f.submit "Continuer" %>
         <% end %>
 
 
@@ -122,7 +92,14 @@
 
         <!-- info les experiences -->
         <%= simple_form_for @talent, url: update_experience_talent_path(@talent), method: :patch, remote: false  do |f|%>
-
+          <%= f.simple_fields_for :experiences do |u| %>
+            <!-- obliger de faire un render (soit garder, soit prendre l'ancien) -->
+            <%= render 'steps_talent_infos/experience_fields', :f => u %>
+          <% end %>
+          <div class='links'>
+            <%= link_to_add_association 'Ajouter une expérience +', f, :experiences, :partial => 'steps_talent_infos/experience_fields', :class => "form-hobby-add" %>
+          </div>
+          <%= f.submit "Continuer" %>
         <% end %>
 
 
@@ -131,8 +108,90 @@
 
         <!-- info sur la prochaine aventure -->
         <%= simple_form_for @talent, url: update_next_aventure_talent_path(@talent), method: :patch, remote: false  do |f|%>
-
-
+          <%= f.simple_fields_for :next_aventures do |u| %>
+            <div class="row">
+              <div class="col-xs-12 col-lg-6">
+                <p>Mobilité</p>
+                <%= u.input :city, label: false, prompt:"ex: Paris", collection: [ "Ville actuelle", "Paris", "France", "Europe", "Hors Europe" ], :input_html => { :class => 'select2' } %>
+              </div>
+              <div class="col-xs-12 col-lg-6">
+                <p>Prochain secteur</p>
+                <%= u.input :sector_ids, collection: Sector.all, input_html: { class:"select2", style: "width: 100%"}, include_blank: true, label: false %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-lg-6">
+                <p>Type de contrat</p>
+                <%= u.input :contrat, label: false, prompt:"ex: Freelance", collection: [ "CDI", "CDD", "Freelance", "Stage" ], :input_html => { :class => 'select2' } %>
+              </div>
+              <div class="col-xs-12 col-lg-6">
+                <%= u.input :btoc, label: "BTOC" %>
+                <%= u.input :btob, label: "BTOB" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-lg-6">
+                <p>Attentes salariales</p>
+                <%= u.input :remuneration, label: false, hint: "package K€ annuel brut", collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ], :input_html => { :class => 'select2' } %>
+              </div>
+              <div class="col-xs-12 col-lg-6">
+                <p>Disponibilité</p>
+                <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"], label: false, :input_html => { :class => 'select2' } %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-lg-6">
+                <p>Vos petits + ?</p>
+                <%= f.simple_fields_for :your_small_plus do |e| %>
+                  <%= render 'steps_talent_infos/your_small_plu_fields', :f => e %>
+                <% end %>
+                <div class='links'>
+                  <%= link_to_add_association 'Ajouter un +', f, :your_small_plus, :partial => 'steps_talent_infos/your_small_plu_fields' %>
+                </div>
+              </div>
+              <div class="col-xs-12 col-lg-6">
+                <p>Qu’attends-tu de ta prochaine aventure ?</p>
+                <p>Sélectionne les 3 critères les plus importants à tes yeux et classe-les par ordre d’importance</p>
+                <div class="form-line">
+                  <%= u.input :waiting_for_one, label: false, hint:"Choix n°1", collection: @choices, :input_html => { :class => 'select2' } %>
+                  <%= u.input :waiting_for_two, label: false, hint:"Choix n°2", collection: @choices, :input_html => { :class => 'select2' } %>
+                  <%= u.input :waiting_for_three, label: false, hint:"Choix n°3", collection: @choices, :input_html => { :class => 'select2' } %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-lg-6 ">
+                <p>Chasseur</p>
+                <%= u.input :hunter_or_breeder, as: :range, input_html: { min: 0, max: 100, class:"slider", style:"width:100%;", id:"level_value_activity" }, label: false, wrapper: false %>
+                <p>Éleveur</p>
+              </div>
+              <div class="col-xs-12 col-lg-6">
+                <p>Créatif</p>
+                <%= u.input :creative_or_pragmatic, as: :range, input_html: { min: 0, max: 100, class:"slider", style:"width:100%;", id:"level_value_activity" }, label: false, wrapper: false %>
+                <p>Pragmatique</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-lg-6">
+                <p>Quel est le rêve que tu remets toujours à demain ?</p>
+                <%= u.input :dream, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
+              </div>
+              <div class="col-xs-12 col-lg-6">
+                <p>Y a-t-il une personnalité qui t’inspire ? Pourquoi ?</p>
+                <%= u.input :famous_person, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-lg-6">
+                <p>Selon toi, qu’est-ce qu’un bon manager ?</p>
+                <%= u.input :good_manager, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
+              </div>
+                <p>Quel travail serais-tu prêt à effectuer gratuitement ?</p>
+                <%= u.input :work_for_free, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
+              </div>
+            </div>
+          <% end %>
+          <%= f.submit "Terminer" %>
         <% end %>
 
 

@@ -2,10 +2,11 @@ class TalentMailer < ApplicationMailer
 
   def candidate(user)
     @user = user
-    # @pdf = pdf
+    pdf = UserInfoPdf.new(@user)
+    attachments["#{@user.firstname}_#{@user.name}.pdf"] = { :mime_type => 'application/pdf', :content => pdf.render }
     mail(
       to: @user.email,
-      cci:Talentist.first.email,
+      cci: "bienvenue@thetalentist.com",
       subject: "Bonjour #{@user.firstname}, candidature !"
       )
   end
@@ -16,17 +17,16 @@ class TalentMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      cci:Talentist.first.email,
+      cci: "bienvenue@thetalentist.com",
       subject: "Vous avez été invité"
       )
   end
 
   def accepted(user)
     @user = user
-    # attachments["#{@user.firstname}_#{Time.now.strftime("%m%d_%Y")}.pdf"] = pdf_file
     mail(
       to: @user.email,
-      cci: Talentist.first.email,
+      cci: "bienvenue@thetalentist.com",
       subject: "#{@user.firstname}, ton profil a été accpeté :D"
       )
   end
@@ -36,7 +36,7 @@ class TalentMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      cci:Talentist.first.email,
+      cci:"bienvenue@thetalentist.com",
       subject: "#{@user.firstname}, ton profil a été refusé"
       )
 
