@@ -1,0 +1,68 @@
+<!-- Titre section -->
+  <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section">Remplissez votre <strong>profil</strong></h2>
+
+  <%= simple_form_for @talent, url: update_profile_talent_path(@talent), method: :patch, remote: false  do |f|%>
+    <div class="row">
+      <label for="talent_photo" class="col-lg-1 margin-right-15 no-padding">
+        <div class="cercle gray-background center-text" style="height: 70px; width: 70px; cursor: pointer;">
+          <i class="fas fa-edit white" style="font-size: 25px"></i>
+        </div>
+      </label>
+      <%= f.input :photo, input_html: { style: "display: none" }, label: false %>
+      <%= f.input :photo_cache, as: :hidden %>
+      <label for="talent_photo" class="label-edit col-lg-10 no-margin" style="line-height: 70px; cursor: pointer;">Modifier mon avatar</label>
+      <!-- <a href="#" id="uploadFile">Aucun fichier</a> -->
+    </div>
+
+    <div class="row margin-top-30">
+      <p class="label-edit requis">Civilité</p>
+      <div class="col-lg-4 no-padding margin-right-15">
+        <%= f.input :firstname, label: false %>
+      </div>
+      <div class="col-lg-4 no-padding">
+        <%= f.input :name, label: false %>
+      </div>
+    </div>
+
+    <div class="row margin-top-30">
+      <div class="col-lg-4 no-padding margin-right-15">
+        <p class="label-edit requis">Téléphone</p>
+        <%= f.input :phone, label: false %>
+      </div>
+      <div class="col-lg-4 no-padding">
+        <p class="label-edit requis">Ville actuelle</p>
+        <%= f.input :city, label: false %>
+      </div>
+    </div>
+
+    <div class="row margin-top-30">
+      <div class="col-lg-4 no-padding margin-right-15">
+        <p class="label-edit requis">Sélectionner mon métier</p>
+        <%#= f.input :talent_sector, label: false %>
+        <p>TO DO</p>
+      </div>
+    </div>
+
+<!-- Titre section -->
+  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-30">Me suivre <strong>sur :</strong></h2>
+
+    <div class="row margin-top-30">
+      <div class="col-lg-4 no-padding margin-right-15">
+        <p class="label-edit requis">Sélectionner un réseau</p>
+        <%#= f.input :phone, label: false %>
+        <p>TO DO</p>
+      </div>
+      <div class="col-lg-4 no-padding">
+        <p class="label-edit requis">Copier votre lien</p>
+        <%= f.input :linkedin, label: false %>
+      </div>
+    </div>
+
+<%= render 'edit_validations_buttons', f: f %>
+
+<% end %>
+
+
+

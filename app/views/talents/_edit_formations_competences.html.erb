@@ -1,0 +1,52 @@
+<!-- Titre section -->
+  <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section">Décrivez votre <strong>parcours scolaire</strong></h2>
+
+<!-- info sur les formations et compétence -->
+  <%= simple_form_for @talent, url: update_formation_and_skill_talent_path(@talent), method: :put, remote: false  do |f|%>
+    <div id="formations">
+      <%= f.simple_fields_for :talent_formations do |u| %>
+        <%= render 'steps_talent_infos/formation_fields', :f => u %>
+      <% end %>
+      <div class='links'>
+        <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'steps_talent_infos/formation_fields', class: "form-hobby-add col-lg-offset-2" %>
+      </div>
+    </div>
+
+<!-- Titre section -->
+  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-30">Mes compétences <strong>techniques</strong></h2>
+
+
+  <div class="row">
+    <div class="col-xs-12 col-lg-6" id="competence-form">
+      <div class="margin-competence">
+        <p class="label-edit requis">Compétences techniques</p>
+        <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class: "select2", multiple: "multiple", style: "width: 294px"}, multiple: true, required: true %>
+      </div>
+    </div>
+  </div>
+
+<!-- Titre section -->
+  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-30">Mes compétences <strong>linguistiques</strong></h2>
+
+  <div class="row">
+    <div id="add-language" class="col-xs-12 col-lg-6">
+      <p class="label-edit requis">Compétences linguistiques</p>
+      <div class="add-language-line">
+        <%= f.simple_fields_for :talent_languages do |u| %>
+          <%= render 'steps_talent_infos/language_fields', :f => u %>
+        <% end %>
+        <div class='links'>
+          <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%= render 'edit_validations_buttons', f: f %>
+<% end %>
+
+
+

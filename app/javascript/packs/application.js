@@ -40,3 +40,6 @@ readMore();
 import { readMoreText } from '../components/readMoreText';
 readMoreText();
 
+import { openCity } from '../components/toggableVerticalTabs';
+// openCity();
+

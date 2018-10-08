@@ -288,3 +288,20 @@
   .social-media-link:hover {
     color: $green;
   }
+
+// btn-edit
+  .btn-edit{
+    border: 0.5px solid $green;
+    border-radius: 30px;
+    background: rgba(0,0,0,0);
+    color: $green;
+    padding: 3px 30px;
+    cursor: pointer;
+  }
+
+// remove_fields
+  .remove_fields::before{
+    content: "<i class="fas fa-trash-alt"></i>"
+  }
+  .remove_fields{
+  }
