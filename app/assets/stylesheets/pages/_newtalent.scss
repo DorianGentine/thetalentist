@@ -36,8 +36,7 @@
 }
 
 .form-group {
-  margin: 15px;
-  // width: 25%;
+  margin: unset;
 }
 
 
@@ -146,9 +145,6 @@
   }
 }
 
-#align-sup-btn {
-  margin-top: 17px;
-}
 
 @media screen and (min-width: 771px) {
   .padding-center {
@@ -159,11 +155,6 @@
   }
   #supp-words {
     margin: 20px 0;
-  }
-  #formations{
-    .links {
-      margin: 0 calc(10% + 15px);
-    }
   }
   .margin-competence {
     padding: 11px 0;
@@ -186,15 +177,6 @@
 .nested-fields a{
   padding: 0 10px;
   color: $red;
-  border: 1px solid $red;
-  border-radius: 5px;
-  margin: 0 15px;
-}
-.nested-fields a:hover{
-  color: white;
-  background-color: $red;
-  text-decoration: none;
-  transition: 0.15s;
 }
 #form-p2-comp{
   .form-semi-line{

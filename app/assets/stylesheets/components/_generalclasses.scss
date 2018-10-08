@@ -1,12 +1,48 @@
+// Bordure
+  .bordure-droite{
+    border-right: 1px solid $gray;
+  }
+  .bordure-haut-bas{
+    border-top: 1px solid $gray;
+    border-bottom: 1px solid $gray;
+  }
+  .padding-left{
+    padding-left: 20px;
+  }
+  .padding-top{
+    padding-top: 12.5px;
+  }
+
+
+// Cercle
+  .cercle{
+    border-radius: 100%;
+  }
+
 // Color
+  .gray{
+    color: $gray;
+  }
+  .gray-background{
+    background-color: $gray !important;
+  }
   .green{
     color: $green;
+  }
+  .green-background{
+    background-color: $green !important;
   }
   .red{
     color: $red;
   }
   .red-background{
     background-color: $red !important;
+  }
+  .red-border{
+    border-color: $red !important;
+  }
+  .white{
+    color: white;
   }
 
 // Flex
@@ -44,7 +80,7 @@
   }
 
 // Ligne
-  .ligne-vertircal{
+  .ligne-vertical{
     border: none;
     width: 1px;
     height: 100%;
@@ -65,16 +101,33 @@
     margin: 0 !important;
   }
   .margin-bottom-30{
-    margin-bottom: 30px
+    margin-bottom: 30px !important
   }
   .margin-top-30{
-    margin-top: 30px
+    margin-top: 30px !important
   }
   .margin-left-30{
-    margin-left: 30px
+    margin-left: 30px !important
   }
   .margin-right-30{
-    margin-right: 30px
+    margin-right: 30px !important
+  }
+  .margin-bottom-15{
+    margin-bottom: 15px !important
+  }
+  .margin-top-15{
+    margin-top: 15px !important
+  }
+  .margin-left-15{
+    margin-left: 15px !important
+  }
+  .margin-right-15{
+    margin-right: 15px !important
+  }
+
+// Padding
+  .no-padding{
+    padding: unset !important;
   }
 
 // Position
@@ -98,6 +151,10 @@
     display: grid;
     place-items: center center;
   }
+
+
+
+
 
 
 input[type="range"]{

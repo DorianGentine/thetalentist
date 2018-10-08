@@ -145,8 +145,9 @@
         <h2 class="titre-section">Ma prochaine <strong>aventure</strong></h2>
 
       <!-- Mes petits plus -->
-        <% if @talent.your_small_plus.present? && !current_user.is_a?(Headhunter) %>
-          <h3 class="titre-rubrique-2" style="float: left;">Mes petits plus:</h3>
+        <% if !@talent.your_small_plus.present? && current_user.is_a?(Headhunter) %>
+        <% else %>
+          <h3 class="titre-rubrique-2" style="float: left;">Mes petits plus: </h3>
 
           <div class="talent-competences">
             <% if !@talent.your_small_plus.present? %>

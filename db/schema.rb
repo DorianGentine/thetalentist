@@ -29,14 +29,6 @@ ActiveRecord::Schema.define(version: 2018_10_05_105009) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "cgus", force: :cascade do |t|
-    t.boolean "validate", default: false, null: false
-    t.bigint "talent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["talent_id"], name: "index_cgus_on_talent_id"
-  end
-
   create_table "cities", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -523,7 +515,6 @@ ActiveRecord::Schema.define(version: 2018_10_05_105009) do
     t.index ["talent_id"], name: "index_your_small_plus_on_talent_id"
   end
 
-  add_foreign_key "cgus", "talents"
   add_foreign_key "credentials", "talents"
   add_foreign_key "experiences", "company_types"
   add_foreign_key "experiences", "talents"

@@ -1,73 +1,140 @@
-<!-- !!!!!!!!!!!!!faire render de chaque parties !!!!!!!!!!! -->
+<div class="container-show">
+  <div class="blue-background">
 
-<div class="row">
-<div class="col-lg-3"></div>
-<!-- info générale sur le profil -->
-<div class="col-lg-9">
-  <%= simple_form_for @talent, url: update_profile_talent_path(@talent), method: :patch, remote: false  do |f|%>
-    <%= f.input :firstname %>
-    <%= f.input :name %>
-    <%= f.button :submit, "Sauvegarder", :class => "submit_forgot_password" %>
+    <!-- !!!!!!!!!!!!!faire render de chaque parties !!!!!!!!!!! -->
 
-  <% end %>
-
-
-
-  <!-- info sur les formations et compétence -->
-  <%= simple_form_for @talent, url: update_formation_and_skill_talent_path(@talent), method: :put, remote: false  do |f|%>
-    <div id="formations" class="blue-background">
-      <%= f.simple_fields_for :talent_formations do |u| %>
-        <%= render 'steps_talent_infos/formation_fields', :f => u %>
-      <% end %>
-      <div class='links'>
-        <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'steps_talent_infos/formation_fields', class: "form-hobby-add" %>
+    <div class="row">
+      <div class="col-lg-3 no-padding">
+        <p class="tablinks titre-rubrique-3 active" onclick="openOnglet(event, 'informations_generales')">Informations générales</p>
+        <p class="tablinks titre-rubrique-3" onclick="openOnglet(event, 'formations_et_competences')">Formations et compétences</p>
+        <p class="tablinks titre-rubrique-3" onclick="openOnglet(event, 'experiences_professionnelles')">Expériences professionnelles</p>
+        <p class="tablinks titre-rubrique-3" onclick="openOnglet(event, 'ma_prochaine_aventure')">Ma prochaine aventure</p>
+        <p class="tablinks titre-rubrique-3" onclick="openOnglet(event, 'modifier_mon_compte')">Modifier mon compte</p>
       </div>
+      <hr class="ligne-vertical col-lg-1 no-padding" style="min-height: 392.5px; margin: 0 30px;">
+      <!-- info générale sur le profil -->
+      <div class="col-lg-8 no-padding">
+        <!-- test -->
+          <div id="informations_generales" class="tabcontent" style="display: none;">
+            <%= render 'edit_informations_generales' %>
+          </div>
+
+          <div id="formations_et_competences" class="tabcontent" style="display: block;">
+            <%= render 'edit_formations_competences' %>
+          </div>
+
+          <div id="experiences_professionnelles" class="tabcontent" style="display: none;">
+            <h3>experiences_professionnelles</h3>
+            <p>experiences_professionnelles is the capital of Japan.</p>
+          </div>
+
+          <div id="ma_prochaine_aventure" class="tabcontent" style="display: none;">
+            <h3>ma_prochaine_aventure</h3>
+            <p>ma_prochaine_aventure is the capital of Japan.</p>
+          </div>
+
+          <div id="modifier_mon_compte" class="tabcontent" style="display: none;">
+            <h3>modifier_mon_compte</h3>
+            <p>modifier_mon_compte is the capital of Japan.</p>
+          </div>
+
+
+
+
+
+
     </div>
-    <div id="form-p2-comp" class=" row">
-      <div class="col-xs-12 col-lg-6">
-        <div id="add-language" class="blue-background margin-right-background margin-top-background">
-          <p class="form-label-font-size form-label-semi-line requis">Compétences linguistiques</p>
-          <div class="add-language-line">
-            <%= f.simple_fields_for :talent_languages do |u| %>
-              <%= render 'steps_talent_infos/language_fields', :f => u %>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openOnglet(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+</script>
+      <!-- formulaire -->
+        <%= simple_form_for @talent, url: update_profile_talent_path(@talent), method: :patch, remote: false  do |f|%>
+          <%= f.input :firstname %>
+          <%= f.input :name %>
+          <%= f.button :submit, "Sauvegarder", :class => "submit_forgot_password" %>
+
+        <% end %>
+
+
+
+        <!-- info sur les formations et compétence -->
+        <%= simple_form_for @talent, url: update_formation_and_skill_talent_path(@talent), method: :put, remote: false  do |f|%>
+          <div id="formations">
+            <%= f.simple_fields_for :talent_formations do |u| %>
+              <%= render 'steps_talent_infos/formation_fields', :f => u %>
             <% end %>
             <div class='links'>
-              <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields' %>
+              <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'steps_talent_infos/formation_fields', class: "form-hobby-add" %>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-lg-6">
-        <div class="blue-background margin-left-background margin-top-background" id="competence-form">
-          <div class="margin-competence">
-            <p class="form-label-font-size form-label-semi-line requis">Compétences techniques</p>
-            <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 294px"}, multiple: true, required: true %>
+          <div id="form-p2-comp" class=" row">
+            <div class="col-xs-12 col-lg-6">
+              <div class="blue-background margin-left-background margin-top-background" id="competence-form">
+                <div class="margin-competence">
+                  <p class="form-label-font-size form-label-semi-line requis">Compétences techniques</p>
+                  <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 294px"}, multiple: true, required: true %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-lg-6">
+              <div id="add-language" class="blue-background margin-right-background margin-top-background">
+                <p class="form-label-font-size form-label-semi-line requis">Compétences linguistiques</p>
+                <div class="add-language-line">
+                  <%= f.simple_fields_for :talent_languages do |u| %>
+                    <%= render 'steps_talent_infos/language_fields', :f => u %>
+                  <% end %>
+                  <div class='links'>
+                    <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields' %>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="form-actions">
-      <%= f.submit "Continuer", class: "b-btn form-btn form-btn-suivant" %>
-    </div>
-  <% end %>
+          <div class="form-actions">
+            <%= f.submit "Continuer", class: "b-btn form-btn form-btn-suivant" %>
+          </div>
+        <% end %>
 
 
 
 
-  <!-- info les experiences -->
-  <%= simple_form_for @talent, url: update_experience_talent_path(@talent), method: :patch, remote: false  do |f|%>
+        <!-- info les experiences -->
+        <%= simple_form_for @talent, url: update_experience_talent_path(@talent), method: :patch, remote: false  do |f|%>
 
-  <% end %>
+        <% end %>
 
 
 
 
 
-  <!-- info sur la prochaine aventure -->
-  <%= simple_form_for @talent, url: update_next_aventure_talent_path(@talent), method: :patch, remote: false  do |f|%>
+        <!-- info sur la prochaine aventure -->
+        <%= simple_form_for @talent, url: update_next_aventure_talent_path(@talent), method: :patch, remote: false  do |f|%>
 
 
-  <% end %>
+        <% end %>
 
 
 
@@ -75,12 +142,7 @@
 
 
 
-  <!-- info sur le compte  -->
-  <%= simple_form_for @talent do |f| %>
+        <!-- info sur le compte  -->
+        <%= simple_form_for @talent do |f| %>
 
-  <% end %>
-
-
-
-</div>
-</div>
+        <% end %>
