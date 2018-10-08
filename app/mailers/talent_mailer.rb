@@ -6,7 +6,7 @@ class TalentMailer < ApplicationMailer
     attachments["#{@user.firstname}_#{@user.name}.pdf"] = { :mime_type => 'application/pdf', :content => pdf.render }
     mail(
       to: @user.email,
-      cci:Talentist.first.email,
+      cci: "bienvenue@thetalentist.com",
       subject: "Bonjour #{@user.firstname}, candidature !"
       )
   end
@@ -17,7 +17,7 @@ class TalentMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      cci:Talentist.first.email,
+      cci: "bienvenue@thetalentist.com",
       subject: "Vous avez été invité"
       )
   end
@@ -26,7 +26,7 @@ class TalentMailer < ApplicationMailer
     @user = user
     mail(
       to: @user.email,
-      cci: Talentist.first.email,
+      cci: "bienvenue@thetalentist.com",
       subject: "#{@user.firstname}, ton profil a été accpeté :D"
       )
   end
@@ -36,7 +36,7 @@ class TalentMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      cci:Talentist.first.email,
+      cci:"bienvenue@thetalentist.com",
       subject: "#{@user.firstname}, ton profil a été refusé"
       )
 
