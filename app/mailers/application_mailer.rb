@@ -1,6 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
   # TODO changer le mail
-  default from: 'donatien@rollandmail.com'
+  default from: 'bienvenue@thetalentist.com'
   layout 'mailer'
 
   def welcome(user)
@@ -8,7 +8,7 @@ class ApplicationMailer < ActionMailer::Base
 
     mail(
       to: @user.email,
-      cci:Talentist.first.email,
+      cci: "bienvenue@thetalentist.com",
       subject: "Bienvenue sur The Talentist!")
     # This will render a view in `app/views/talent_mailer`!
   end
@@ -43,7 +43,7 @@ class ApplicationMailer < ActionMailer::Base
 
     mail(
       to:       @receveur.email,
-      cci: Talentist.first.email,
+      cci: "bienvenue@thetalentist.com",
       subject:  "Vous avez reçu un nouveau message de #{@envoyeur.firstname}!"
       )
   end
