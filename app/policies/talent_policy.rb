@@ -40,6 +40,10 @@ class TalentPolicy < ApplicationPolicy
     end
   end
 
+  def info_pdf?
+    true
+  end
+
   def update?
     user = record
   end
