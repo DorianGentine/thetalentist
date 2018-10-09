@@ -56,10 +56,7 @@ class TalentsController < ApplicationController
 
   def show
     @talents = Talent.all
-    currently = @talent.experiences.where(currently: true)
-    @currently = currently[0]
-    @experiences = @talent.experiences.order(:years) - currently
-
+    @experiences = @talent.experiences.where(currently: true) + @talent.experiences.where.not(currently: true).order(years: :asc)
     @next_aventures = @talent.next_aventures.last
 
     @talent_formations = @talent.talent_formations.order(:year)
@@ -68,18 +65,6 @@ class TalentsController < ApplicationController
     end
     @credentials = @talent.credentials
   end
-
-  # def info_pdf
-  #   respond_to do |format|
-  #     format.html
-  #     format.pdf do
-  #       pdf = UserInfoPdf.new(@talent)
-  #       send_data pdf.render, filename: "#{@talent.firstname}_#{@talent.name}.pdf",
-  #                             type: "application/pdf",
-  #                             disposition: 'inline'
-  #     end
-  #   end
-  # end
 
   def update
     if talent_params["talent_formations_attributes"]
@@ -132,21 +117,39 @@ class TalentsController < ApplicationController
   end
 
   def update_profile
-    raise
+    if @talent.update(talent_params)
+      respond_to do |format|
+        format.html { render 'points/edit' }
+        format.js
+      end
+    end
   end
 
   def update_formation_and_skill
     if @talent.update(talent_params)
-      redirect_to { edit_talent_path(@talent) }
+      respond_to do |format|
+        format.html { render 'points/edit' }
+        format.js
+      end
     end
   end
 
   def update_experience
-    raise
+    if @talent.update(talent_params)
+      respond_to do |format|
+        format.html { render 'points/edit' }
+        format.js
+      end
+    end
   end
 
   def update_next_aventure
-    raise
+    if @talent.update(talent_params)
+      respond_to do |format|
+        format.html { render 'points/edit' }
+        format.js
+      end
+    end
   end
 
 
@@ -252,7 +255,7 @@ private
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       your_small_plus_attributes: [:id, :description, :_destroy],
-      techno_ids: []
+      skill_ids: []
     )
   end
 

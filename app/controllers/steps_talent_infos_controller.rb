@@ -119,7 +119,7 @@ class StepsTalentInfosController < ApplicationController
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       your_small_plus_attributes: [:id, :description, :_destroy],
-      techno_ids: []
+      skill_ids: []
     )
   end
 end
