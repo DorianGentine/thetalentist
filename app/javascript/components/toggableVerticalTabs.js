@@ -22,7 +22,7 @@
       let idtab = event.currentTarget.dataset.idtab
       let tab = document.getElementById(idtab)
       tab.style.display = "block";
-      event.classList += " active";
+      event.currentTarget.classList.add("active");
     }
     // Get the good div clicked
     let tablinkAll = document.querySelectorAll(".tablinks");

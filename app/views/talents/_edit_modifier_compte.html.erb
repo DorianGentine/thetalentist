@@ -1,0 +1,38 @@
+<!-- Titre section -->
+  <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section">Modifier <strong>mon compte</strong></h2>
+
+<!-- info sur le compte  -->
+  <%= simple_form_for @talent do |f| %>
+
+    <div class="row">
+      <div class="col-lg-6 col-xs-12">
+        <p class="label-edit no-margin">Mot de passe actuel</p>
+        <div class="margin-right-15 no-margin-xs">
+          <%= f.input :current_password, label: false, :input_html => { style: "width: 100%" } %>
+        </div>
+      </div>
+    </div>
+    <div class="row margin-top-15">
+      <div class="col-lg-6 col-xs-12">
+        <p class="label-edit no-margin requis">Nouveau mot de passe</p>
+        <div class="margin-right-15 no-margin-xs">
+          <%= f.input :password, label: false, required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), :input_html => { style: "width: 100%" } %>
+        </div>
+      </div>
+      <div class="col-lg-6 col-xs-12 margin-top-15-xs">
+        <p class="label-edit no-margin requis">Confirmation mot de passe</p>
+        <%= f.input :password_confirmation, label: false, required: true, :input_html => { style: "width: 100%" } %>
+      </div>
+    </div>
+
+    <div class="margin-top-30">
+      <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+      <h2 class="titre-section">Supprimer <strong>mon compte</strong></h2>
+    </div>
+
+
+
+
+    <%= render 'edit_validations_buttons', f: f %>
+  <% end %>
