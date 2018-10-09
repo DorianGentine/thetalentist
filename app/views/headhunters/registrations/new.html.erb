@@ -7,43 +7,59 @@
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= f.error_notification %>
 
-    <div class="form-grid blue-background">
-      <!-- Line 1 -->
-      <p class="form-label form-label-font-size requis">Prénom</p>
-      <%= f.input :firstname, required: true, autofocus: true, label: false %>
-      <p class="form-label form-label-font-size form-label-right-grid requis">Nom</p>
-      <%= f.input :name, required: true, autofocus: true, label: false %>
+  <!-- Line 1 -->
+    <div class="blue-background">
+      <div class="row">
+        <p class="label-edit line-height-center no-margin requis col-lg-2 col-xs-12">Prénom</p>
+        <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs">
+          <%= f.input :firstname, required: true, autofocus: true, label: false, input_html: { style: "width: 100%" } %>
+        </div>
+        <p class="label-edit line-height-center no-margin col-lg-3 col-xs-12 requis margin-top-15-xs">Nom</p>
+        <div class="col-lg-3 col-xs-12">
+          <%= f.input :name, required: true, autofocus: true, label: false, input_html: { style: "width: 100%" } %>
+        </div>
+      </div>
 
-      <!-- Line 2 -->
-      <p class="form-label form-label-font-size requis">Email</p>
-      <%= f.input :email, required: true, autofocus: true, label: false %>
-      <div></div>
-      <div></div>
+  <!-- Line 2 -->
+      <div class="row margin-top-15">
+        <p class="label-edit line-height-center no-margin requis col-lg-2 col-xs-12">Email</p>
+        <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs">
+          <%= f.input :email, required: true, autofocus: true, label: false, input_html: { style: "width: 100%" } %>
+        </div>
+      </div>
     </div>
 
-    <div class="form-grid blue-background margin-top-background">
-      <!-- Line 3 -->
-      <p class="form-label form-label-font-size requis">Mot de passe</p>
-      <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), label: false %>
-      <!-- <p class="form-label form-label-font-size requis">Confirmation du mot de passe</p> -->
-      <div></div>
-      <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false %>
+  <!-- Line 3 -->
+    <div class="blue-background margin-top-background">
+      <div class="row">
+        <p class="label-edit line-height-center no-margin requis col-lg-2 col-xs-12">Mot de passe</p>
+        <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs">
+          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), label: false, input_html: { style: "width: 100%" } %>
+        </div>
+        <div class="col-lg-3 col-xs-12 margin-top-15-xs">
+          <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, input_html: { style: "width: 100%" } %>
+        </div>
+      </div>
     </div>
 
-    <div class="form-grid blue-background margin-top-background">
-      <!-- Line 4 -->
-      <p class="form-label form-label-font-size requis">Votre entreprise</p>
-      <%= f.input :startup_id, collection: Startup.all, input_html: { class:"select2"}, :include_blank => "Autre", label:false %>
-      <p class="form-label form-label-font-size form-label-right-grid requis">Poste</p>
-      <%= f.input :job, required: true, autofocus: true, label: false %>
+  <!-- Line 4 -->
+    <div class="blue-background margin-top-background">
+      <div class="row">
+        <p class="label-edit line-height-center no-margin requis col-lg-2 col-xs-12">Votre entreprise</p>
+        <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs">
+          <%= f.input :startup_id, collection: Startup.all, input_html: { class:"select2"}, :include_blank => "Autre", label:false, input_html: { style: "width: 100%" } %>
+        </div>
+        <p class="label-edit line-height-center no-margin requis col-lg-3 col-xs-12 margin-top-15-xs">Poste</p>
+        <div class="col-lg-3 col-xs-12">
+          <%= f.input :job, required: true, autofocus: true, label: false, input_html: { style: "width: 100%" } %>
+        </div>
+      </div>
     </div>
 
+  <!-- Boutons -->
     <div class="form-actions">
       <%= f.button :submit, "S'enregistrer", :class => 'btn-connexion' %>
     </div>
   <% end %>
 </div>
 
-
-
-<%= render 'shared/footer' %>
