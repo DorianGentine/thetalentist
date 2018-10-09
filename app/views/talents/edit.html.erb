@@ -24,13 +24,12 @@
             <%= render 'edit_formations_competences' %>
           </div>
 
-          <div id="experiences_professionnelles" class="tabcontent" style="display: block;">
+          <div id="experiences_professionnelles" class="tabcontent" style="display: none;">
             <%= render 'edit_experiences_professionnelles' %>
           </div>
 
-          <div id="ma_prochaine_aventure" class="tabcontent" style="display: none;">
-            <h3>ma_prochaine_aventure</h3>
-            <p>ma_prochaine_aventure is the capital of Japan.</p>
+          <div id="ma_prochaine_aventure" class="tabcontent" style="display: block;">
+            <%= render 'edit_prochaine_aventure' %>
           </div>
 
           <div id="modifier_mon_compte" class="tabcontent" style="display: none;">
@@ -45,24 +44,6 @@
     </div>
   </div>
 </div>
-
-      <!-- formulaire -->
-        <%= simple_form_for @talent, url: update_profile_talent_path(@talent), method: :patch, remote: false  do |f|%>
-          <%= f.input :photo %>
-          <%= f.input :photo_cache, as: :hidden %>
-          <%= f.input :firstname, label: false %>
-          <%= f.input :name %>
-          <%= f.simple_fields_for :talent_jobs do |u| %>
-            <%= u.input :job_id, collection: Job.all, label: false %>
-            <%= u.input :year, label: false %>
-          <% end %>
-          <%= f.input :phone, placeholder: "06 01 02 03 05", label: false %>
-          <%= f.input :city, placeholder: 'Nantes, France', :input_html => { :id => "talent_city" }, label: false%>
-          <%= f.input :linkedin, autofocus: true, label: false %>
-          <%= f.button :submit, "Sauvegarder", :class => "submit_forgot_password" %>
-        <% end %>
-
-
 
         <!-- info sur les formations et compétence -->
         <%= simple_form_for @talent, url: update_formation_and_skill_talent_path(@talent), method: :put, remote: false  do |f|%>
@@ -87,20 +68,6 @@
           <%= f.submit "Continuer" %>
         <% end %>
 
-
-
-
-        <!-- info les experiences -->
-        <%= simple_form_for @talent, url: update_experience_talent_path(@talent), method: :patch, remote: false  do |f|%>
-          <%= f.simple_fields_for :experiences do |u| %>
-            <!-- obliger de faire un render (soit garder, soit prendre l'ancien) -->
-            <%= render 'steps_talent_infos/experience_fields', :f => u %>
-          <% end %>
-          <div class='links'>
-            <%= link_to_add_association 'Ajouter une expérience +', f, :experiences, :partial => 'steps_talent_infos/experience_fields', :class => "form-hobby-add" %>
-          </div>
-          <%= f.submit "Continuer" %>
-        <% end %>
 
 
 

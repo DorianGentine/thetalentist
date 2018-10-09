@@ -1,4 +1,6 @@
 <div class="form-actions">
-  <div class="btn-edit red-border red margin-right-30">Annuler</div>
+  <%= link_to talent_path(current_talent), class:"btn-edit red-border red margin-right-30" do %>
+    Annuler
+  <% end %>
   <%= f.submit "Valider", class: "btn-edit" %>
 </div>

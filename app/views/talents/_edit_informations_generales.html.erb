@@ -18,30 +18,35 @@
     <div class="row margin-top-30">
       <p class="label-edit requis">Civilité</p>
       <div class="col-lg-4 no-padding margin-right-15">
-        <%= f.input :firstname, label: false %>
+        <%= f.input :firstname, label: false, :input_html => { style: "width: 100%" } %>
       </div>
       <div class="col-lg-4 no-padding">
-        <%= f.input :name, label: false %>
+        <%= f.input :name, label: false, :input_html => { style: "width: 100%" } %>
       </div>
     </div>
 
     <div class="row margin-top-30">
       <div class="col-lg-4 no-padding margin-right-15">
         <p class="label-edit requis">Téléphone</p>
-        <%= f.input :phone, label: false %>
+        <%= f.input :phone, label: false, :input_html => { style: "width: 100%" } %>
       </div>
       <div class="col-lg-4 no-padding">
         <p class="label-edit requis">Ville actuelle</p>
-        <%= f.input :city, label: false %>
+        <%= f.input :city, label: false, :input_html => { style: "width: 100%" } %>
       </div>
     </div>
 
     <div class="row margin-top-30">
-      <div class="col-lg-4 no-padding margin-right-15">
-        <p class="label-edit requis">Sélectionner mon métier</p>
-        <%#= f.input :talent_sector, label: false %>
-        <p>TO DO</p>
-      </div>
+      <%= f.simple_fields_for :talent_jobs do |u| %>
+        <div class="col-lg-4 no-padding margin-right-15 no-margin-xs">
+          <p class="label-edit requis">Sélectionner mon domaine d'activité</p>
+          <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%" } %>
+        </div>
+        <div class="col-lg-4 no-padding margin-top-15-xs">
+          <p class="label-edit requis">Ancienneté (en années)</p>
+          <%= u.input :year, label: false, :input_html => { style: "width: 100%" } %>
+        </div>
+      <% end %>
     </div>
 
 <!-- Titre section -->
@@ -50,13 +55,8 @@
 
     <div class="row margin-top-30">
       <div class="col-lg-4 no-padding margin-right-15">
-        <p class="label-edit requis">Sélectionner un réseau</p>
-        <%#= f.input :phone, label: false %>
-        <p>TO DO</p>
-      </div>
-      <div class="col-lg-4 no-padding">
-        <p class="label-edit requis">Copier votre lien</p>
-        <%= f.input :linkedin, label: false %>
+        <p class="label-edit">Linkedin</p>
+        <%= f.input :linkedin, label: false, :input_html => { style: "width: 100%" } %>
       </div>
     </div>
 

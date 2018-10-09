@@ -9,7 +9,7 @@
           <%= render 'steps_talent_infos/formation_fields', :f => u %>
         <% end %>
         <div class='links'>
-          <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'steps_talent_infos/formation_fields', class: "form-hobby-add col-lg-offset-2" %>
+          <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'steps_talent_infos/formation_fields', class: "form-hobby-add" %>
         </div>
       </div>
 
@@ -39,7 +39,7 @@
           <%= render 'steps_talent_infos/language_fields', :f => u %>
         <% end %>
         <div class='links'>
-          <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields' %>
+          <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields', class: "form-hobby-add" %>
         </div>
       </div>
     </div>
