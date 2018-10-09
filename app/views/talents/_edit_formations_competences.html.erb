@@ -8,7 +8,7 @@
         <%= f.simple_fields_for :talent_formations do |u| %>
           <%= render 'steps_talent_infos/formation_fields', :f => u %>
         <% end %>
-        <div class='links'>
+        <div class='links margin-top-30-xs'>
           <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'steps_talent_infos/formation_fields', class: "form-hobby-add" %>
         </div>
       </div>
@@ -22,7 +22,7 @@
     <div class="col-xs-12 col-lg-6" id="competence-form">
       <div class="margin-competence">
         <p class="label-edit requis">Compétences techniques</p>
-        <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class: "select2", multiple: "multiple", style: "width: 294px"}, multiple: true, required: true %>
+        <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class: "select2", multiple: "multiple", style: "width: 100%"}, multiple: true, required: true %>
       </div>
     </div>
   </div>

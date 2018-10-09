@@ -1,22 +1,42 @@
 <div class="nested-fields margin-bottom-15" id="diplome-form">
-  <p class="label-edit requis no-margin">Diplôme</p>
-  <div class="row">
-    <div class="col-xs-12 col-lg-3 margin-right-15">
-      <%= f.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { :class => "select2", style: "width: 100%" } %>
+  <div class="row margin-top-30-xs">
+
+    <div class="col-lg-2 col-xs-10 no-padding line-height-center">
+      <p class="label-edit requis no-margin-xs margin-right-15">Diplôme</p>
     </div>
-    <div class="col-xs-12 col-lg-3 margin-right-15">
-      <%= f.input :title, placeholder: "Formation", label: false, input_html: { style: "width: 100%" } %>
-    </div>
-    <div class="col-xs-12 col-lg-3 margin-right-15">
-      <%= f.input :year, label: false do %>
-        <%= f.input :year, collection: (1980..2018.to_i).to_a.reverse,  label: false, prompt:"Année d'obtention", input_html: { :class => "select2", style: "width: 100%" } %>
+
+    <div class="visible-xs col-xs-2" id="align-sup-btn">
+      <%= link_to_remove_association f do %>
+        <i class="fas fa-trash-alt"></i>
       <% end %>
     </div>
-    <div class="col-xs-12 col-lg-1" id="align-sup-btn">
+
+    <div class="col-xs-12 col-lg-3">
+      <div class="margin-right-15 no-margin-xs">
+        <%= f.association :formation, collection: Formation.all, prompt:"Établissement", label: false, input_html: { :class => "select2", style: "width: 100%" } %>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-3 margin-top-15-xs">
+      <div class="margin-right-15 no-margin-xs">
+        <%= f.input :title, placeholder: "Formation", label: false, input_html: { style: "width: 100%" } %>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-3 margin-top-15-xs">
+      <div class="margin-right-15 no-margin-xs">
+        <%= f.input :year, label: false do %>
+          <%= f.input :year, collection: (1980..2018.to_i).to_a.reverse,  label: false, prompt:"Année d'obtention", input_html: { :class => "select2", style: "width: 100%" } %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-1 hidden-xs" id="align-sup-btn">
       <%= link_to_remove_association f do %>
        <i class="fas fa-trash-alt"></i>
       <% end %>
     </div>
+
   </div>
 </div>
 
