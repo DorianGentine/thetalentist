@@ -1,16 +1,7 @@
-<!-- <#%= render 'experience' %>
-<#%= render 'aventure' %>
-<#%= render 'formation' %>
-<#%= render 'profil' %>
-<#%= render 'credentials' %> -->
-  <% if !@talent.visible %>
-  <div class="bandeau-visible">
-    <p>Votre profil n'est pas encore rendu public. Pour cela il faut que toutes les rubrique soient complétées</p>
-  </div>
-<% end %>
-<%= link_to "View in PDF", info_pdf_talent_path(@talent, format: :pdf), {target: :_blank, style: 'border: 3px solid #FA360A; border-radius: 4px; padding: 10px; background-color: #f7f7f7;cursor: pointer; color: #FA360A; font-family: Source Sans Pro, sans-serif; font-size: 16px; text-decoration: none !important; font-weight:400;'} %>
+
 <%= link_to "Edit your profil", edit_talent_path(@talent), {style: 'border: 3px solid #FA360A; border-radius: 4px; padding: 10px; background-color: #f7f7f7;cursor: pointer; color: #FA360A; font-family: Source Sans Pro, sans-serif; font-size: 16px; text-decoration: none !important; font-weight:400;'} %>
 
+<p class="float-right <%= @talent.completed_totaly > 90 ? "ADD CLASS GREEN" : "ADD CLASS RED"  %>" > Profil complété à <strong><%= @talent.completed_totaly %> %</strong></p>
 <div class="container-show grid-show">
 
   <div class="first-column">
@@ -20,7 +11,7 @@
         <!-- Photo de profil -->
           <% if @talent.photo.present? %>
             <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
-              <div class="statut"></div>
+              <div class="statut tooltip <%= @talent.visible ? 'green-background' : 'red-background' %>"></div>
             </div>
           <% else %>
 
@@ -28,7 +19,9 @@
               <div class="initiale">
                 <%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %>
               </div>
-              <div class="statut"></div>
+              <div class="statut tooltip <%= @talent.visible ? 'green-background' : 'red-background' %>">
+                <span class="tooltiptext"><%= @talent.visible ? 'Profil visible' : "Profil pas visible" %></span>
+              </div>
             </div>
           <% end %>
 
@@ -104,15 +97,15 @@
       <% end %>
 
     <!-- Mes compétences techniques -->
-      <% if @talent.technos.nil? && current_user.is_a?(Headhunter) %>
+      <% if @talent.skills.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
         <div class="blue-background margin-top-background">
           <p class="titre-rubrique-3 margin-bottom-30">Mes compétences techniques :</p>
 
-          <% if @talent.technos.present? %>
+          <% if @talent.skills.present? %>
             <div class="talent-competences">
-              <% @talent.technos.each do |techno| %>
-                <p><%= techno.title %></p>
+              <% @talent.skills.each do |skill| %>
+                <p><%= skill.title %></p>
               <% end %>
             </div>
           <% else %>
@@ -391,7 +384,7 @@
               <p><i class="red fas fa-exclamation-triangle"></i> Ajoutez vos expériences professionnelles <i class="red fas fa-exclamation-triangle"></i></p>
             <% else %>
               <ul class="list-ligne">
-                <% @experiences.reverse_each do |experience| %>
+                <% @experiences.each do |experience| %>
                   <li>
                     <p class="titre-rubrique-3" style="margin-bottom: 6px"><%= experience.position %></p>
                     <p class="texte-rubrique-3b float-left no-margin"><%= experience.company_name %></p>
