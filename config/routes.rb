@@ -17,8 +17,11 @@ Rails.application.routes.draw do
     registrations: 'headhunters/registrations'
   }
   resources :startups, only: [ :update ]
-  resources :headhunters, only: [:show, :update, :index] do
+  resources :headhunters, only: [:show, :update, :index, :edit] do
     patch 'to_validate', :on => :member
+    patch 'update_profile', :on => :member
+    patch 'update_photos', :on => :member
+    patch 'update_startup', :on => :member
     resources :conversations, only: [ :show ]
   end
   # show is to display the profil and update to edit it
@@ -41,10 +44,10 @@ Rails.application.routes.draw do
 
   resources :talents, only: [:show, :update, :index, :edit] do
     get 'info_pdf', on: :member
-    put 'update_profile', :on => :member
-    put 'update_formation_and_skill', :on => :member
-    put 'update_experience', :on => :member
-    put 'update_next_aventure', :on => :member
+    patch 'update_profile', :on => :member
+    patch 'update_formation_and_skill', :on => :member
+    patch 'update_experience', :on => :member
+    patch 'update_next_aventure', :on => :member
     patch 'to_validate', :on => :member
     resources :conversations, only: [ :show ]
   end

@@ -1,5 +1,5 @@
 class HeadhuntersController < ApplicationController
-
+  before_action :set_headhunter, only: [ :show, :to_validate, :update, :update_profile, :update_startup, :update_photos, :edit]
   def repertory
     @headhunter = current_headhunter
     authorize @headhunter
@@ -68,18 +68,7 @@ class HeadhuntersController < ApplicationController
 
 
   def show
-    @headhunter = Headhunter.find(params[:id])
     @startup = @headhunter.startup
-
-    if @startup.pictures.count == 0
-      1.times { @startup.pictures.build }
-    else
-      0.times { @startup.pictures.build }
-    end
-
-
-    authorize @headhunter
-
     # a changer!! TODO
     # @flats = Startup.where.not(latitude: nil, longitude: nil)
     @flats = []
@@ -96,7 +85,6 @@ class HeadhuntersController < ApplicationController
   end
 
   def update
-    @headhunter = Headhunter.find(params[:id])
     if @headhunter.update_attributes(startup_params)
       if params[:headhunter][:job_ids].present?
         redirect_to repertoire_path
@@ -104,12 +92,35 @@ class HeadhuntersController < ApplicationController
         redirect_to headhunter_path(@headhunter)
       end
     end
-    authorize @headhunter
+  end
+
+  def edit
+    @startup = @headhunter.startup
+
+    # Add 5 fiels for pictures
+    count_picture = @startup.pictures.count
+    for i in count_picture..4 do
+      @startup.pictures.build
+    end
+    @other_headhunters = @startup.headhunters
+    @startup.startup_words.build
+
+  end
+
+  def update_profile
+
+  end
+
+  def update_photos
+
+  end
+
+  def update_startup
+
   end
 
   def to_validate
     @talentist = Talentist.find_by_email("dimitri@hotmail.fr")
-    @headhunter = Headhunter.find(params[:id])
     if params[:commit] == "Accepter"
       if @headhunter.validated == true
         validated_action(nil)
@@ -136,10 +147,15 @@ class HeadhuntersController < ApplicationController
       end
     end
     redirect_to headhunters_path
-    authorize @headhunter
+
   end
 
   private
+
+  def set_headhunter
+    @headhunter = Headhunter.find(params[:id])
+    authorize @headhunter
+  end
 
   def validated_action(action)
     @headhunter.validated = action

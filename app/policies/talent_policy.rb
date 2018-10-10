@@ -48,6 +48,10 @@ class TalentPolicy < ApplicationPolicy
     user = record
   end
 
+  def update_photo?
+    update?
+  end
+
   def update_profile?
     update?
   end

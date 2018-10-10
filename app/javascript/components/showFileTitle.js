@@ -17,3 +17,25 @@ function showFileName( event ) {
   // use fileName however fits your app best, i.e. add it into a div
   infoArea.textContent = fileName;
 }
+
+
+$(function() {
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#img_prev').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#avatar-upload").change(function(){
+    console.log($("#avatar-upload"))
+    $('#no_img').addClass('hidden');
+    $('#div_img_prev').removeClass('hidden');
+    console.log(this)
+    readURL(this);
+  });
+});
