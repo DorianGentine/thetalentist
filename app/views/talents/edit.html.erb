@@ -5,21 +5,21 @@
     <!-- !!!!!!!!!!!!!faire render de chaque parties !!!!!!!!!!! -->
 
     <div class="row">
-      <div class="col-lg-3 no-padding tablinksAll " id='tabs-edit'>
+      <div class="col-lg-3 col-xs-12 no-padding tablinksAll" id='tabs-edit'>
         <p class="tablinks titre-rubrique-3 active" data-idTab='informations_generales'>Informations générales</p>
         <p class="tablinks titre-rubrique-3" data-idTab='formations_et_competences'>Formations et compétences</p>
         <p class="tablinks titre-rubrique-3" data-idTab='experiences_professionnelles'>Expériences professionnelles</p>
         <p class="tablinks titre-rubrique-3" data-idTab='ma_prochaine_aventure'>Ma prochaine aventure</p>
         <p class="tablinks titre-rubrique-3" data-idTab='modifier_mon_compte'>Modifier mon compte</p>
       </div>
-      <hr class="ligne-vertical col-lg-1 no-padding" style="min-height: 392.5px; margin: 0 30px;">
+      <hr class="ligne-vertical col-lg-1 no-padding" id="ligne-edit">
       <!-- info générale sur le profil -->
       <div class="col-lg-8 no-padding">
           <div id="informations_generales" class="tabcontent" style="display: block;">
             <%= render 'edit_informations_generales' %>
           </div>
 
-          <div id="formations_et_competences" class="tabcontent" style="display: none;">
+          <div id="formations_et_competences" class="tabcontent" style="display: block;">
             <%= render 'edit_formations_competences' %>
           </div>
 
@@ -32,8 +32,7 @@
           </div>
 
           <div id="modifier_mon_compte" class="tabcontent" style="display: none;">
-            <h3>modifier_mon_compte</h3>
-            <p>modifier_mon_compte is the capital of Japan.</p>
+            <%= render 'edit_modifier_compte' %>
           </div>
 
 
@@ -43,130 +42,3 @@
     </div>
   </div>
 </div>
-
-        <!-- info sur les formations et compétence -->
-        <%= simple_form_for @talent, url: update_formation_and_skill_talent_path(@talent), method: :put, remote: false  do |f|%>
-          <div id="formations">
-            <%= f.simple_fields_for :talent_formations do |u| %>
-              <%= render 'steps_talent_infos/formation_fields', :f => u %>
-            <% end %>
-            <div class='links'>
-              <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'steps_talent_infos/formation_fields', class: "form-hobby-add" %>
-            </div>
-          </div>
-          <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class:"select2", multiple: "multiple", style: "width: 294px"}, multiple: true, required: true %>
-          <div id="add-language">
-            <%= f.simple_fields_for :talent_languages do |u| %>
-              <!-- obliger de faire un render (soit garder, soit prendre l'ancien) -->
-              <%= render 'steps_talent_infos/language_fields', :f => u %>
-            <% end %>
-            <div class='links'>
-              <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields' %>
-            </div>
-          </div>
-          <%= f.submit "Continuer" %>
-        <% end %>
-
-
-
-
-
-
-        <!-- info sur la prochaine aventure -->
-        <%= simple_form_for @talent, url: update_next_aventure_talent_path(@talent), method: :patch, remote: false  do |f|%>
-          <%= f.simple_fields_for :next_aventures do |u| %>
-            <div class="row">
-              <div class="col-xs-12 col-lg-6">
-                <p>Mobilité</p>
-                <%= u.input :city, label: false, prompt:"ex: Paris", collection: [ "Ville actuelle", "Paris", "France", "Europe", "Hors Europe" ], :input_html => { :class => 'select2' } %>
-              </div>
-              <div class="col-xs-12 col-lg-6">
-                <p>Prochain secteur</p>
-                <%= u.input :sector_ids, collection: Sector.all, input_html: { class:"select2", style: "width: 100%"}, include_blank: true, label: false %>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 col-lg-6">
-                <p>Type de contrat</p>
-                <%= u.input :contrat, label: false, prompt:"ex: Freelance", collection: [ "CDI", "CDD", "Freelance", "Stage" ], :input_html => { :class => 'select2' } %>
-              </div>
-              <div class="col-xs-12 col-lg-6">
-                <%= u.input :btoc, label: "BTOC" %>
-                <%= u.input :btob, label: "BTOB" %>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 col-lg-6">
-                <p>Attentes salariales</p>
-                <%= u.input :remuneration, label: false, hint: "package K€ annuel brut", collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ], :input_html => { :class => 'select2' } %>
-              </div>
-              <div class="col-xs-12 col-lg-6">
-                <p>Disponibilité</p>
-                <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"], label: false, :input_html => { :class => 'select2' } %>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 col-lg-6">
-                <p>Vos petits + ?</p>
-                <%= f.simple_fields_for :your_small_plus do |e| %>
-                  <%= render 'steps_talent_infos/your_small_plu_fields', :f => e %>
-                <% end %>
-                <div class='links'>
-                  <%= link_to_add_association 'Ajouter un +', f, :your_small_plus, :partial => 'steps_talent_infos/your_small_plu_fields' %>
-                </div>
-              </div>
-              <div class="col-xs-12 col-lg-6">
-                <p>Qu’attends-tu de ta prochaine aventure ?</p>
-                <p>Sélectionne les 3 critères les plus importants à tes yeux et classe-les par ordre d’importance</p>
-                <div class="form-line">
-                  <%= u.input :waiting_for_one, label: false, hint:"Choix n°1", collection: @choices, :input_html => { :class => 'select2' } %>
-                  <%= u.input :waiting_for_two, label: false, hint:"Choix n°2", collection: @choices, :input_html => { :class => 'select2' } %>
-                  <%= u.input :waiting_for_three, label: false, hint:"Choix n°3", collection: @choices, :input_html => { :class => 'select2' } %>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 col-lg-6 ">
-                <p>Chasseur</p>
-                <%= u.input :hunter_or_breeder, as: :range, input_html: { min: 0, max: 100, class:"slider", style:"width:100%;", id:"level_value_activity" }, label: false, wrapper: false %>
-                <p>Éleveur</p>
-              </div>
-              <div class="col-xs-12 col-lg-6">
-                <p>Créatif</p>
-                <%= u.input :creative_or_pragmatic, as: :range, input_html: { min: 0, max: 100, class:"slider", style:"width:100%;", id:"level_value_activity" }, label: false, wrapper: false %>
-                <p>Pragmatique</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 col-lg-6">
-                <p>Quel est le rêve que tu remets toujours à demain ?</p>
-                <%= u.input :dream, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
-              </div>
-              <div class="col-xs-12 col-lg-6">
-                <p>Y a-t-il une personnalité qui t’inspire ? Pourquoi ?</p>
-                <%= u.input :famous_person, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 col-lg-6">
-                <p>Selon toi, qu’est-ce qu’un bon manager ?</p>
-                <%= u.input :good_manager, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
-              </div>
-                <p>Quel travail serais-tu prêt à effectuer gratuitement ?</p>
-                <%= u.input :work_for_free, label: false, placeholder: "Description", as: :text, input_html: {rows: '4'} %>
-              </div>
-            </div>
-          <% end %>
-          <%= f.submit "Terminer" %>
-        <% end %>
-
-
-
-
-
-
-
-        <!-- info sur le compte  -->
-        <%= simple_form_for @talent do |f| %>
-
-        <% end %>

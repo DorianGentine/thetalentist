@@ -2,5 +2,16 @@
   display: none;
 }
 
+#ligne-edit{
+  margin: 0 30px;
+  height: 392px;
+}
 
+@media screen and (max-width: 770px) {
+  #ligne-edit{
+    margin: 30px 0;
+    height: 1px !important;
+    width: 100%;
+  }
+}
 

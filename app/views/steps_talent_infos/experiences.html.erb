@@ -8,12 +8,14 @@
 
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
     <div class="blue-background">
-      <%= f.simple_fields_for :experiences do |u| %>
-        <%= render 'experience_fields', :f => u %>
-      <% end %>
-      <div class="links margin-top-30">
-        <%= link_to_add_association 'Ajouter une expérience +', f, :experiences, :partial => 'experience_fields', :class => "form-hobby-add" %>
-      </div>
+      <ol class="priority-list experience-list">
+        <%= f.simple_fields_for :experiences do |u| %>
+          <%= render 'experience_fields', :f => u %>
+        <% end %>
+        <div class="links margin-top-30">
+          <%= link_to_add_association 'Ajouter une expérience +', f, :experiences, :partial => 'experience_fields', :class => "form-hobby-add" %>
+        </div>
+      </ol>
     </div>
       <div class="form-actions">
         <%= link_to "Précedent", previous_wizard_path, class: "b-btn-link form-btn form-btn-precedent" %>
