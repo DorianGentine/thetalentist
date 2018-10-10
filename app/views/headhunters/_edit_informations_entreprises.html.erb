@@ -1,23 +1,110 @@
+<!-- Titre section -->
+  <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section">Découvrir notre <strong>entreprise</strong></h2>
+
 <!-- formulaire startup -->
 
 <%= simple_form_for @startup, url: update_startup_headhunter_path(@headhunter), method: :patch, remote: true  do |f| %>
-  <p>Création</p>
-  <%= f.input :year_of_creation, collection: 2000..2018, prompt: "année de création", label: false, input_html: { style: "width: 100%" }  %>
-  <p>Collaborateurs</p>
-  <%= f.input :collaborators, label: false, input_html: { style: "width: 100%" } %>
-  <p>Moyenne d'âge</p>
-  <%= f.input :average_age, :input_html => { :type => "number" }, label: false, input_html: { style: "width: 100%" } %>
 
-  <%= f.simple_fields_for :startup_words do |u| %>
-    <%= render 'start_up_words_fields', :f => u %>
-    <div class="links">
-      <%= link_to_add_association 'Ajouter un +', f, :startup_words, :partial => 'start_up_words_fields' %>
+  <div class="row margin-top-30">
+    <div class="col-lg-6 col-xs-12 no-padding">
+      <p class="label-edit requis">Création</p>
+      <div class="no-padding margin-right-15 no-margin-xs">
+        <%= f.input :year_of_creation, collection: 2000..2018, prompt: "année de création", label: false, input_html: { style: "width: 100%" }  %>
+      </div>
     </div>
-  <% end %>
+    <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
+      <p class="label-edit requis">Domaine d'acivité</p>
+      <div class="no-padding">
+        <%= f.input :sector_ids, collection: Sector.all, label: false, :input_html => { style: "width: 100%" } %>
+      </div>
+    </div>
+  </div>
 
-  <p>Description</p>
-  <%= f.input :overview, label: false %>
-  <p>Les missions</p>
-  <%= f.input :mission, label: false %>
-  <%= f.submit %>
+  <div class="row margin-top-15">
+    <div class="col-lg-6 col-xs-12 no-padding">
+      <p class="label-edit requis">Nombre d'employés</p>
+      <div class="no-padding margin-right-15 no-margin-xs">
+        <%= f.input :collaborators, as: :integer, label: false, input_html: { style: "width: 100%" } %>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
+      <p class="label-edit requis">Branche</p>
+      <div class="no-padding">
+        <div class="col-xs-6">
+          <%= f.input :btoc, label: "BTOC" %>
+        </div>
+        <div class="col-xs-6">
+          <%= f.input :btob, label: "BTOB" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row margin-top-15">
+    <div class="col-lg-6 col-xs-12 no-padding">
+      <p class="label-edit requis">Âge moyen</p>
+      <div class="no-padding margin-right-15 no-margin-xs">
+        <%= f.input :average_age, label: false, :input_html => { :type => "number", style: "width: 100%" } %>
+      </div>
+    </div>
+  </div>
+
+<!-- Titre section -->
+  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-30">Les <strong>atouts</strong></h2>
+
+
+  <div class="row margin-top-15">
+    <div class="col-lg-6 col-xs-12 no-padding">
+      <p class="label-edit requis">Ce qui vous définit</p>
+      <div class="no-padding margin-right-15 no-margin-xs row">
+        <%= f.simple_fields_for :startup_words do |u| %>
+          <div class="flex" style="align-items: center">
+            <%= render 'start_up_words_fields', :f => u %>
+          </div>
+          <div class="links">
+            <%= link_to_add_association 'Ajouter un +', f, :startup_words, :partial => 'start_up_words_fields', :class => "form-hobby-add" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Titre section -->
+  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-30">Description & <strong>missions</strong></h2>
+
+  <div class="row margin-top-30">
+    <div class="col-lg-6 col-xs-12 no-padding">
+      <p class="label-edit requis">Description</p>
+      <div class="no-padding margin-right-15 no-margin-xs">
+        <%= f.input :overview, label: false, input_html: { style: "width: 100%", rows: 4 }  %>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
+      <p class="label-edit requis">Les missions</p>
+      <div class="no-padding">
+        <%= f.input :mission, label: false, :input_html => { style: "width: 100%", rows: 4 } %>
+      </div>
+    </div>
+  </div>
+
+
+  <%= render '/talents/edit_validations_buttons', f: f %>
 <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
