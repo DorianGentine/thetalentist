@@ -5,7 +5,14 @@
 <%#= render 'overview' %>
 <%#= render 'pictures' %> a supprimer -->
 
-<%= link_to "Edit your profil", edit_headhunter_path(@headhunter), {style: 'border: 3px solid #FA360A; border-radius: 4px; padding: 10px; background-color: #f7f7f7;cursor: pointer; color: #FA360A; font-family: Source Sans Pro, sans-serif; font-size: 16px; text-decoration: none !important; font-weight:400;'} %>
+<%= link_to edit_headhunter_path(@headhunter) do %>
+  <div class="btn-edition-container">
+    <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à 90%</p>
+    <div class="btn-edition">
+      <span><i class="fas fa-edit"></i></span>
+    </div>
+  </div>
+<% end %>
 
 
 <div class="container-show grid-show">

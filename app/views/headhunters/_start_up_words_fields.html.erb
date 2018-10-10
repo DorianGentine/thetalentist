@@ -1,8 +1,10 @@
 
-<%= f.association :word, collection: Word.all, prompt: "Ambiance", label: false, input_html: { :class => "select2", style: "width: 100%" }  %>
+<div class="col-xs-10 no-padding margin-bottom-15">
+  <%= f.association :word, collection: Word.all, prompt: "Ambiance", label: false, input_html: { :class => "select2", style: "width: 100%" }  %>
+</div>
 
 <!-- TODO button -->
 <%= link_to_remove_association f do %>
-  <i class="fas fa-trash-alt"></i>
+  <i class="fas fa-trash-alt red margin-bottom-15 col-xs-2"></i>
 <% end %>
 
