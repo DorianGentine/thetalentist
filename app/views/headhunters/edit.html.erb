@@ -1,0 +1,65 @@
+<!-- info general -->
+<%= simple_form_for @headhunter, url: update_profile_headhunter_path(@headhunter), method: :patch, remote: true   do |f| %>
+  <%= f.simple_fields_for :startup do |u| %>
+    <p>Logo</p>
+    <%= u.input :logo, label: false %>
+    <p>Nom de l'entreprise</p>
+    <%= u.input :name, label: false %>
+    <p>Rapide descriptif</p>
+    <%= u.input :short_resume, label: false %>
+    <p>Site internet</p>
+    <%= u.input :link, label: false %>
+    <p>Adresse</p>
+    <%= u.input :address, :input_html => { :id => "startup_address" }, label: false %>
+    <p>Prénom</p>
+    <%= f.input :firstname, required: true, autofocus: true, label: false %>
+    <p>Nom</p>
+    <%= f.input :name, required: true, autofocus: true, label: false %>
+    <p>Poste</p>
+    <%= f.input :job, required: true, autofocus: true, label: false %>
+    <% @other_headhunters.each do |headhunter| %>
+      <%= headhunter.firstname %>
+      <%= headhunter.name %>
+    <% end %>
+    <p>Nous suivre</p>
+    <%= u.input :linkedin, label: false %>
+    <%= u.input :facebook, label: false %>
+  <% end %>
+
+  <%= f.submit%>
+<% end %>
+
+
+<!-- modifier photos -->
+
+<%= simple_form_for @startup, url: update_photos_headhunter_path(@headhunter), method: :patch, remote: true  do |f| %>
+  <%= f.simple_fields_for :pictures do |u| %>
+    <%= u.input :photo %>
+    <%= u.input :photo_cache, as: :hidden %>
+  <% end %>
+  <%= f.submit %>
+<% end %>
+
+<!-- formulaire startup -->
+
+<%= simple_form_for @startup, url: update_startup_headhunter_path(@headhunter), method: :patch, remote: true  do |f| %>
+  <p>Création</p>
+  <%= f.input :year_of_creation, collection: 2000..2018, prompt: "année de création", label: false, input_html: { style: "width: 100%" }  %>
+  <p>Collaborateurs</p>
+  <%= f.input :collaborators, label: false, input_html: { style: "width: 100%" } %>
+  <p>Moyenne d'âge</p>
+  <%= f.input :average_age, :input_html => { :type => "number" }, label: false, input_html: { style: "width: 100%" } %>
+
+  <%= f.simple_fields_for :startup_words do |u| %>
+    <%= render 'start_up_words_fields', :f => u %>
+    <div class="links">
+      <%= link_to_add_association 'Ajouter un +', f, :startup_words, :partial => 'start_up_words_fields' %>
+    </div>
+  <% end %>
+
+  <p>Description</p>
+  <%= f.input :overview, label: false %>
+  <p>Les missions</p>
+  <%= f.input :mission, label: false %>
+  <%= f.submit %>
+<% end %>

@@ -21,6 +21,22 @@ class HeadhunterPolicy < ApplicationPolicy
     user == record
   end
 
+  def edit?
+    user == record
+  end
+
+  def update_profile?
+    update?
+  end
+
+  def update_photos?
+    update?
+  end
+
+  def update_startup?
+    update?
+  end
+
   def show?
     if user.is_a?(Talent)
       Relationship.where(talent_id: user.id).where(headhunter_id: record.id).where(status: "accepted").first

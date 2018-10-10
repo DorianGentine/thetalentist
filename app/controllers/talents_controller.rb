@@ -1,5 +1,7 @@
 class TalentsController < ApplicationController
-  before_action :set_talent, only: [ :show, :edit, :update_profile, :update_experience, :update_next_aventure, :update_formation_and_skill, :update, :to_validate, :info_pdf ]
+  before_action :set_talent, only: [ :show, :edit, :update_profile,
+    :update_experience, :update_next_aventure, :update_formation_and_skill,
+    :update, :to_validate, :info_pdf, :update_photo ]
 
   def index
     @talentist = current_talentist
@@ -119,8 +121,13 @@ class TalentsController < ApplicationController
   def update_profile
     if @talent.update(talent_params)
       respond_to do |format|
-        format.html { render 'points/edit' }
+        format.html { redirect_to edit_talent_path(@talent) }
         format.js
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to edit_talent_path(@talent) }
+        format.js  # <-- idem
       end
     end
   end
@@ -246,6 +253,7 @@ private
       :job_ids,
       :btoc,
       :btob,
+      :photo,
       :terms_of_condition,
       :no_more,
       :sector_ids,
