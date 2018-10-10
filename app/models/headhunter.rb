@@ -25,6 +25,8 @@ class Headhunter < ApplicationRecord
   after_create :send_welcome_email, :send_new_user_to_talentist
   before_save :capitalize_name_firstname
 
+  mount_uploader :photo, PhotoUploader
+
   def mailboxer_email(object)
    #return the model's email here
   end

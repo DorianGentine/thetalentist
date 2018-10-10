@@ -20,22 +20,35 @@ function showFileName( event ) {
 
 
 $(function() {
-  function readURL(input) {
+  function readURL(input, target) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
+      let idImg = document.getElementById("img_prev" + target)
+      console.log(idImg)
 
       reader.onload = function (e) {
-        $('#img_prev').attr('src', e.target.result);
+        $(idImg).attr('src', e.target.result);
       }
       reader.readAsDataURL(input.files[0]);
     }
   }
-
-  $("#avatar-upload").change(function(){
-    console.log($("#avatar-upload"))
-    $('#no_img').addClass('hidden');
-    $('#div_img_prev').removeClass('hidden');
+  function triggerAvatar(event){
+    let targetAvatar = event.currentTarget.dataset.target
+    let idAvatar = document.getElementById("avatar-upload" + targetAvatar)
+    let idImgAvatar = document.getElementById("no_img" + targetAvatar)
+    let idPrevAvatar = document.getElementById("div_img_prev" + targetAvatar)
+  $(idAvatar).change(function(){
+    $(idImgAvatar).addClass('hidden');
+    $(idPrevAvatar).removeClass('hidden');
     console.log(this)
-    readURL(this);
+    console.log(idAvatar)
+    readURL(this, targetAvatar);
   });
+
+  }
+
+  const btnAvatars = document.querySelectorAll('.btn-avatar')
+  btnAvatars.forEach((btn) => {
+    btn.addEventListener('click', triggerAvatar)
+  })
 });

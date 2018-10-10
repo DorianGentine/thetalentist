@@ -1,0 +1,38 @@
+<div class="row input-none">
+  <label for="avatar-upload<%= f.object.name %>" class="col-lg-1 margin-right-15 no-padding btn-avatar" data-target="<%= f.object.name %>" id="edit-photo">
+    <div class="cercle relative hidden" id="div_img_prev<%= f.object.name %>" style="height: 70px; width: 70px; cursor: pointer;">
+      <img id="img_prev<%= f.object.name %>" width=70 height=70 src="#" alt="your image" class=" cercle "/>
+      <i class="fas fa-edit white absolute-center" style="font-size: 25px"></i>
+    </div>
+    <div id="no_img<%= f.object.name %>">
+      <% if f.object.is_a?(Startup) %>
+        <% if f.object.photo? || f.object.logo? %>
+          <%= render 'edit-photo', f: f.object %>
+        <% else %>
+          <div class="cercle gray-background center-text" style="height: 70px; width: 70px; cursor: pointer;">
+            <i class="fas fa-edit white" style="font-size: 25px"></i>
+          </div>
+        <% end %>
+      <% else %>
+        <% if f.object.photo? %>
+          <%= render 'edit-photo', f: f.object %>
+        <% else %>
+          <div class="cercle gray-background center-text" style="height: 70px; width: 70px; cursor: pointer;">
+            <i class="fas fa-edit white" style="font-size: 25px"></i>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </label>
+
+  <% if f.object.is_a?(Startup) %>
+    <%= f.file_field :logo, id:"avatar-upload#{f.object.name}" %>
+    <%= f.hidden_field :logo_cache, as: :hidden %>
+  <% else %>
+    <%= f.file_field :photo, id:"avatar-upload#{f.object.name}" %>
+    <%= f.hidden_field :photo_cache, as: :hidden %>
+  <% end %>
+
+
+  <label for="avatar-upload<%= f.object.name %>" class="label-edit no-margin btn-avatar" data-target="p<%= f.object.name %>" style="line-height: 70px; cursor: pointer;">Modifier mon avatar</label>
+</div>

@@ -1,0 +1,65 @@
+<!-- Titre section -->
+  <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section">Remplissez votre <strong>profil</strong></h2>
+
+<!-- info general -->
+<%= simple_form_for @headhunter, url: update_profile_headhunter_path(@headhunter), method: :patch, remote: true   do |f| %>
+  <%= f.simple_fields_for :startup do |u| %>
+
+    <%= render "/shared/change_photo", f: u %>
+
+    <div class="row margin-top-30">
+      <div class="col-lg-6 col-xs-12 no-padding">
+        <p class="label-edit requis">Nom de l'entreprise</p>
+        <div class="no-padding margin-right-15 no-margin-xs">
+          <%= u.input :name, label: false, :input_html => { style: "width: 100%" } %>
+        </div>
+      </div>
+      <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
+        <p class="label-edit requis">Site internet</p>
+        <div class="no-padding">
+          <%= u.input :link, label: false, :input_html => { style: "width: 100%" } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row margin-top-15">
+      <div class="col-lg-6 col-xs-12 no-padding">
+        <p class="label-edit requis">Adresse</p>
+        <div class="no-padding margin-right-15 no-margin-xs">
+          <%= u.input :address, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
+        </div>
+      </div>
+      <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
+        <p class="label-edit requis">Rapide descriptif</p>
+        <div class="no-padding">
+          <%= u.input :short_resume, label: false, :input_html => { style: "width: 100%" } %>
+        </div>
+      </div>
+    </div>
+
+
+<!-- Titre section -->
+  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-30">Vos <strong>informations</strong></h2>
+
+  <%= render "/shared/change_photo", f: f %>
+
+    <p>Prénom</p>
+    <%= f.input :firstname, required: true, autofocus: true, label: false %>
+    <p>Nom</p>
+    <%= f.input :name, required: true, autofocus: true, label: false %>
+    <p>Poste</p>
+    <%= f.input :job, required: true, autofocus: true, label: false %>
+    <% @other_headhunters.each do |headhunter| %>
+      <%= headhunter.firstname %>
+      <%= headhunter.name %>
+    <% end %>
+    <p>Nous suivre</p>
+    <%= u.input :linkedin, label: false %>
+    <%= u.input :facebook, label: false %>
+  <% end %>
+
+  <%= f.submit%>
+<% end %>
+

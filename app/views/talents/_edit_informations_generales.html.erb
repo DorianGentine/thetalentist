@@ -3,29 +3,8 @@
   <h2 class="titre-section">Remplissez votre <strong>profil</strong></h2>
 
   <%= simple_form_for @talent, url: update_profile_talent_path(@talent), method: :patch, remote: true  do |f|%>
-    <div class="row input-none">
 
-
-      <label for="avatar-upload" class="col-lg-1 margin-right-15 no-padding" id="edit-photo">
-        <div class="cercle center-text hidden" id="div_img_prev" style="height: 70px; width: 70px; cursor: pointer;">
-          <img id="img_prev" width=70 height=70 src="#" alt="your image" class=" cercle "/> <br/>
-          <i class="fas fa-edit white" style="font-size: 25px"></i>
-        </div>
-        <div id="no_img">
-          <% if f.object.photo? %>
-            <%= render 'edit-photo', f: f.object %>
-          <% else %>
-            <div class="cercle gray-background center-text" style="height: 70px; width: 70px; cursor: pointer;">
-              <i class="fas fa-edit white" style="font-size: 25px"></i>
-            </div>
-          <% end %>
-        </div>
-      </label>
-      <%= f.file_field :photo, id:"avatar-upload" %>
-      <%= f.hidden_field :photo_cache, as: :hidden %>
-      <label for="avatar-upload" class="label-edit no-margin" style="line-height: 70px; cursor: pointer;">Modifier mon avatar</label>
-      <!-- <a href="#" id="uploadFile">Aucun fichier</a> -->
-    </div>
+    <%= render '/shared/change_photo' %>
 
     <div class="row margin-top-30">
       <p class="label-edit requis">Civilité</p>

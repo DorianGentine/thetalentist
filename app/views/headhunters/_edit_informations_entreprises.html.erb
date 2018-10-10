@@ -1,0 +1,23 @@
+<!-- formulaire startup -->
+
+<%= simple_form_for @startup, url: update_startup_headhunter_path(@headhunter), method: :patch, remote: true  do |f| %>
+  <p>Création</p>
+  <%= f.input :year_of_creation, collection: 2000..2018, prompt: "année de création", label: false, input_html: { style: "width: 100%" }  %>
+  <p>Collaborateurs</p>
+  <%= f.input :collaborators, label: false, input_html: { style: "width: 100%" } %>
+  <p>Moyenne d'âge</p>
+  <%= f.input :average_age, :input_html => { :type => "number" }, label: false, input_html: { style: "width: 100%" } %>
+
+  <%= f.simple_fields_for :startup_words do |u| %>
+    <%= render 'start_up_words_fields', :f => u %>
+    <div class="links">
+      <%= link_to_add_association 'Ajouter un +', f, :startup_words, :partial => 'start_up_words_fields' %>
+    </div>
+  <% end %>
+
+  <p>Description</p>
+  <%= f.input :overview, label: false %>
+  <p>Les missions</p>
+  <%= f.input :mission, label: false %>
+  <%= f.submit %>
+<% end %>
