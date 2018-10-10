@@ -1,4 +1,3 @@
-
 <div class="container-show">
   <div class="blue-background">
 
@@ -23,7 +22,7 @@
             <%= render 'edit_formations_competences' %>
           </div>
 
-          <div id="experiences_professionnelles" class="tabcontent" style="display: block;">
+          <div id="experiences_professionnelles" class="tabcontent" style="display: none;">
             <%= render 'edit_experiences_professionnelles' %>
           </div>
 
@@ -32,7 +31,7 @@
           </div>
 
           <div id="modifier_mon_compte" class="tabcontent" style="display: none;">
-            <%= render 'edit_modifier_compte' %>
+            <%= render 'edit_modifier_compte', user: @talent %>
           </div>
 
 

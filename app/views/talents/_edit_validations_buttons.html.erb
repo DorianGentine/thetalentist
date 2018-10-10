@@ -1,6 +1,12 @@
 <div class="form-actions">
-  <%= link_to talent_path(current_talent), class:"btn-edit red-border red margin-right-30" do %>
-    Annuler
+  <% if f.is_a?(Talent) %>
+    <%= link_to talent_path(current_talent), class:"btn-edit red-border red margin-right-30" do %>
+      Annuler
+    <% end %>
+  <% else %>
+    <%= link_to headhunter_path(current_headhunter), class:"btn-edit red-border red margin-right-30" do %>
+      Annuler
+    <% end %>
   <% end %>
   <%= f.submit "Valider", class: "btn-edit" %>
 </div>

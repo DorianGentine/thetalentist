@@ -3,7 +3,9 @@
   <h2 class="titre-section">Modifier <strong>mon compte</strong></h2>
 
 <!-- info sur le compte  -->
-  <%= simple_form_for @talent do |f| %>
+  <%= simple_form_for user do |f| %>
+
+  re
 
     <div class="row">
       <div class="col-lg-6 col-xs-12">
@@ -34,5 +36,5 @@
 
 
 
-    <%= render 'edit_validations_buttons', f: f %>
+    <%= render '/talents/edit_validations_buttons', f: f %>
   <% end %>
