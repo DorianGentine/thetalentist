@@ -103,7 +103,7 @@
   <div class="second-column">
 
     <!-- Section photos -->
-      <div class="blue-background">
+      <div class="blue-background margin-top-30-xs">
 
         <!-- Titre section -->
           <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
@@ -121,9 +121,9 @@
           <h2 class="titre-section">Découvrir notre <strong>entreprise</strong></h2>
 
       <!-- Ligne description -->
-        <div class="flex space-between">
+        <div class="row">
           <!-- Création -->
-            <div class="info-grid-1">
+            <div class="info-grid-1 col-lg-3 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Création</p>
               <% if @startup.year_of_creation.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @startup.year_of_creation %></p>
@@ -133,7 +133,7 @@
             </div>
 
           <!-- Nombre d'employés -->
-            <div class="info-grid-1">
+            <div class="info-grid-1 col-lg-3 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Nombre d'employés</p>
               <% if @startup.collaborators.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @startup.collaborators %></p>
@@ -143,7 +143,7 @@
             </div>
 
           <!-- Âge moyen -->
-            <div class="info-grid-1">
+            <div class="info-grid-1 col-lg-3 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Âge moyen</p>
               <% if @startup.average_age.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @startup.average_age %></p>
@@ -153,7 +153,7 @@
             </div>
 
           <!-- Branche -->
-            <div class="info-grid-1">
+            <div class="info-grid-1 col-lg-3 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Branche</p>
               <% if @startup.btoc || @startup.btob %>
                 <% if @startup.btoc && @startup.btob %>
@@ -173,20 +173,20 @@
       <hr class="separateur-show ligne-horizontal">
 
       <!-- Ligne texte -->
-        <div class="grid space-between" style="grid: auto / calc(50% - 30px) calc(50% - 30px);">
+        <div class="row">
 
           <!-- Les missions que nous réalisons -->
-            <div>
+            <div class="col-lg-6 col-xs-12">
               <h4 class="titre-rubrique-3">Les missions que nous réalisons</h4>
               <% if @startup.overview.present?  %>
-                <p class="texte-rubrique-3"> <%= @startup.overview %></p>
+                <p class="texte-rubrique-3 margin-right-15 no-margin-xs"> <%= @startup.overview %></p>
               <% else %>
-                <p class="texte-rubrique-3">À compléter</p>
+                <p class="texte-rubrique-3 margin-right-15 no-margin-xs">À compléter</p>
               <% end %>
             </div>
 
           <!-- Description de notre entreprise -->
-            <div>
+            <div class="col-lg-6 col-xs-12 margin-top-30-xs">
               <h4 class="titre-rubrique-3">Description de notre entreprise</h4>
               <% if @startup.overview.present?  %>
                 <p class="texte-rubrique-3"> <%= @startup.overview %></p>

@@ -131,7 +131,7 @@
 
   <div class="second-column">
 
-    <div class="blue-background">
+    <div class="blue-background margin-top-30-xs">
 
       <!-- Titre section -->
         <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
@@ -160,9 +160,8 @@
         <% end %>
 
       <!-- Ligne souhaits -->
-        <div class="flex space-between">
-          <!-- Mobilité Back TODO : @Donatien -->
-            <div class="info-grid-1">
+        <div class="row margin-top-30">
+            <div class="info-grid-1 no-padding col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Mobilité</p>
               <% if @talent.city.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @talent.city %></p>
@@ -174,7 +173,7 @@
             </div>
 
           <!-- Type de contrat -->
-            <div class="info-grid-1">
+            <div class="info-grid-1 no-padding col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Type de contrat</p>
               <% if @next_aventures.contrat.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.contrat %></p>
@@ -186,7 +185,7 @@
             </div>
 
           <!-- Attentes salariales -->
-            <div class="info-grid-1">
+            <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Attentes salariales</p>
               <% if @next_aventures.remuneration.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.remuneration %></p>
@@ -198,7 +197,7 @@
             </div>
 
           <!-- Secteur -->
-            <div class="info-grid-1">
+            <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Secteur</p>
               <% if @sectors.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @sectors.first.sector.title %></p>
@@ -210,7 +209,7 @@
             </div>
 
           <!-- Branche -->
-            <div class="info-grid-1">
+            <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Branche</p>
               <% if @next_aventures.btoc || @next_aventures.btob %>
                 <% if @next_aventures.btoc && @next_aventures.btob %>
@@ -228,7 +227,7 @@
             </div>
 
           <!-- Disponibilité -->
-            <div class="info-grid-1">
+            <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Disponibilité</p>
               <% if @next_aventures.availability.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.availability %></p>
@@ -243,53 +242,53 @@
       <hr class="separateur-show ligne-horizontal">
 
       <!-- Ligne texte -->
-        <div class="grid space-between" id="grid-ligne-texte">
+        <div class="row">
 
           <!-- Rêve remis à demain -->
-            <div>
-              <h4 class="titre-rubrique-3">Le rêve que je remets à demain</h4>
+            <div class="col-lg-3 col-xs-12">
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">Le rêve que je remets à demain</h4>
               <% if @next_aventures.dream.present?  %>
-                <p class="texte-rubrique-3 more"> <%= @next_aventures.dream %></p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.dream %></p>
               <% elsif !@next_aventures.overview.present? && current_user.is_a?(Headhunter) %>
-                <p class="texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
               <% else %>
-                <p class="texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
             </div>
 
           <!-- La personnalité qui m'inspire -->
-            <div>
-              <h4 class="titre-rubrique-3">La personnalité qui m'inspire</h4>
+            <div class="col-lg-3 col-xs-12 margin-top-30-xs">
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">La personnalité qui m'inspire</h4>
               <% if @next_aventures.famous_person.present?  %>
-                <p class="texte-rubrique-3 more"> <%= @next_aventures.famous_person %></p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.famous_person %></p>
               <% elsif !@next_aventures.famous_person.present? && current_user.is_a?(Headhunter) %>
-                <p class="texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
               <% else %>
-                <p class="texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
             </div>
 
           <!-- Un bon manager, c'est -->
-            <div>
-              <h4 class="titre-rubrique-3" style="min-height: 44px">Un bon manager, c'est</h4>
+            <div class="col-lg-3 col-xs-12 margin-top-30-xs">
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" style="min-height: 44px">Un bon manager, c'est</h4>
               <% if @next_aventures.good_manager.present?  %>
-                <p class="texte-rubrique-3 more"> <%= @next_aventures.good_manager %></p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.good_manager %></p>
               <% elsif !@next_aventures.good_manager.present? && current_user.is_a?(Headhunter) %>
-                <p class="texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
               <% else %>
-                <p class="texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
             </div>
 
           <!-- Le travail effectué gratuitement serait -->
-            <div>
-              <h4 class="titre-rubrique-3">Le travail effectué gratuitement serait</h4>
+            <div class="col-lg-3 col-xs-12 margin-top-30-xs">
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">Le travail effectué gratuitement serait</h4>
               <% if @next_aventures.work_for_free.present?  %>
-                <p class="texte-rubrique-3 more"> <%= @next_aventures.work_for_free %></p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.work_for_free %></p>
               <% elsif !@next_aventures.work_for_free.present? && current_user.is_a?(Headhunter) %>
-                <p class="texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
               <% else %>
-                <p class="texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
             </div>
 
@@ -297,46 +296,50 @@
 
       <hr class="separateur-show ligne-horizontal">
 
-      <div class="grid space-between" style="grid: auto auto / calc(70% - 25px) calc(30% - 25px); grid-auto-flow: column;">
+      <div class="row">
         <!-- Je suis plutôt -->
-          <h3 class="titre-rubrique-2">Je suis plutôt:</h3>
+          <div class="col-lg-8 col-xs-12">
+            <h3 class="titre-rubrique-2">Je suis plutôt:</h3>
 
-          <div class="grid space-between je-suis-plutot-grid">
             <!-- Chasseur / Eleveur -->
-              <div class="slidecontainer grid slidecontainer-grid">
-                <p class="texte-rubrique-2b">Chasseur</p>
-                  <div class="range-slider">
-                    <% if @next_aventures.hunter_or_breeder.nil? && !current_user.is_a?(Headhunter) %>
-                      <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
-                    <% else %>
-                      <div class="range-slider-cursor" style="left: <%= @next_aventures.hunter_or_breeder.nil? ? "50" : @next_aventures.hunter_or_breeder %>%"></div>
-                    <% end %>
-                  </div>
-                <p class="texte-rubrique-2b">Éleveur</p>
+              <div class="row margin-top-15-xs margin-right-15 no-margin-xs">
+                <p class="texte-rubrique-2b no-margin no-padding col-lg-2 col-xs-6">Chasseur</p>
+                <p class="visible-xs texte-rubrique-2b no-margin no-padding col-xs-6" style="text-align: right;">Éleveur</p>
+                <div class="range-slider col-lg-7 no-padding col-xs-12 no-margin-xs">
+                  <% if @next_aventures.hunter_or_breeder.nil? && !current_user.is_a?(Headhunter) %>
+                    <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
+                  <% else %>
+                    <div class="range-slider-cursor" style="left: <%= @next_aventures.hunter_or_breeder.nil? ? "50" : @next_aventures.hunter_or_breeder %>%"></div>
+                  <% end %>
+                </div>
+                <p class="hidden-xs texte-rubrique-2b no-margin no-padding col-lg-2">Éleveur</p>
               </div>
 
             <!-- Créatif / pragmatique -->
-              <div class="slidecontainer grid slidecontainer-grid">
-                <p class="texte-rubrique-2b">Créatif</p>
-                  <div class="range-slider">
-                    <% if @next_aventures.creative_or_pragmatic.nil? && !current_user.is_a?(Headhunter) %>
-                      <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
-                    <% else %>
-                      <div class="range-slider-cursor" style="left: <%= @next_aventures.creative_or_pragmatic.nil? ? "50" : @next_aventures.creative_or_pragmatic %>%"></div>
-                    <% end %>
-                  </div>
-                <p class="texte-rubrique-2b">Pragmatique</p>
+              <div class="row margin-top-15 margin-top-15-xs margin-right-15 no-margin-xs">
+                <p class="texte-rubrique-2b no-margin no-padding col-lg-2 col-xs-6">Créatif</p>
+                <p class="visible-xs texte-rubrique-2b no-margin no-padding col-xs-6" style="text-align: right;">Pragmatique</p>
+                <div class="range-slider col-lg-7 no-padding col-xs-12 no-margin-xs">
+                  <% if @next_aventures.creative_or_pragmatic.nil? && !current_user.is_a?(Headhunter) %>
+                    <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
+                  <% else %>
+                    <div class="range-slider-cursor" style="left: <%= @next_aventures.creative_or_pragmatic.nil? ? "50" : @next_aventures.creative_or_pragmatic %>%"></div>
+                  <% end %>
+                </div>
+                <p class="hidden-xs texte-rubrique-2b no-margin no-padding col-lg-2">Pragmatique</p>
               </div>
           </div>
 
         <!-- Je priorise -->
-          <h3 class="titre-rubrique-2">Je priorise:</h3>
+          <div class="col-lg-4 col-xs-12 margin-top-30-xs">
+            <h3 class="titre-rubrique-2">Je priorise:</h3>
 
-          <ol class="priority-list">
-            <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_one.nil? ? "À définir" : @next_aventures.waiting_for_one %></li>
-            <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_two.nil? ? "À définir" : @next_aventures.waiting_for_two %></li>
-            <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_three.nil? ? "À définir" : @next_aventures.waiting_for_three %></li>
-          </ol>
+            <ol class="priority-list text-align-center-xs">
+              <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_one.nil? ? "À définir" : @next_aventures.waiting_for_one %></li>
+              <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_two.nil? ? "À définir" : @next_aventures.waiting_for_two %></li>
+              <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_three.nil? ? "À définir" : @next_aventures.waiting_for_three %></li>
+            </ol>
+          </div>
       </div>
     </div>
 
