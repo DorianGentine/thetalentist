@@ -105,29 +105,7 @@
   position: relative;
 }
 
-.experience-list{
-  padding-left: 70px !important;
-}
-.experience-list-item::before{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: -70px !important;
-  font-size: 18px !important;
-  line-height: 26px !important;
-  width: 26px !important;
-}
-.nested-fields-exp-edit::before {
-    content: "";
-    height: 100px;
-    width: 1px;
-    background-color: $green;
-    margin: 0 20px 0 0;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: -22px;
-}
+
 
 
 @media screen and (min-width: 771px) {

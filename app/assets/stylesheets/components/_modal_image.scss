@@ -29,30 +29,18 @@
 }
 
 /* Modal Content (Image) */
-.modal_image-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-}
-
-/* Caption of Modal Image (Image Text) - Same Width as the Image */
-// #caption_image {
-//     margin: auto;
-//     display: block;
-//     width: 80%;
-//     max-width: 700px;
-//     text-align: center;
-//     color: #ccc;
-//     padding: 10px 0;
-//     height: 150px;
-// }
+  .modal_image-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+  }
 
 /* Add Animation - Zoom in the Modal */
-.modal_image-content, #caption {
-    animation-name: zoom;
-    animation-duration: 0.6s;
-}
+  .modal_image-content, #caption {
+      animation-name: zoom;
+      animation-duration: 0.6s;
+  }
 
 @keyframes zoom {
     from {transform:scale(0)}
@@ -60,7 +48,7 @@
 }
 
 /* The Close Button */
-.close_image {
+  .close_image {
     position: absolute;
     top: 15px;
     right: 35px;
@@ -68,7 +56,7 @@
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
-}
+  }
 
 .close_image:hover,
 .close_image:focus {
@@ -79,7 +67,19 @@
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px){
-    .modal-content {
-        width: 100%;
-    }
+  .modal-content {
+      width: 100%;
+  }
+  .tab_gallery-grid{
+    grid: 25vh 15vh 15vh / calc(50% - 20px) calc(50% - 20px);
+    grid-gap: 20px;
+  }
+  .tab_gallery-grid div{
+    background-size: cover;
+    background-position: center;
+  }
+  .tab_gallery-grid div:first-child{
+    grid-column: span 2;
+    grid-row: span 1;
+  }
 }
