@@ -4,7 +4,7 @@
 
 <!-- modifier photos -->
 
-<%= simple_form_for @startup, url: update_photos_headhunter_path(@headhunter), method: :patch, remote: true  do |f| %>
+<%= simple_form_for @startup, url: update_photos_headhunter_path(@headhunter), method: :patch, remote: false  do |f| %>
 
   <div class="row">
     <%= f.simple_fields_for :pictures do |u| %>

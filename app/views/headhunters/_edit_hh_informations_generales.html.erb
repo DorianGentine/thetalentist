@@ -3,7 +3,7 @@
   <h2 class="titre-section">Remplissez votre <strong>profil</strong></h2>
 
 <!-- info general -->
-<%= simple_form_for @headhunter, url: update_profile_headhunter_path(@headhunter), method: :patch, remote: true   do |f| %>
+<%= simple_form_for @headhunter, url: update_profile_headhunter_path(@headhunter), method: :patch, remote: false   do |f| %>
   <%= f.simple_fields_for :startup do |u| %>
 
     <%= render "/shared/change_photo", f: u %>
