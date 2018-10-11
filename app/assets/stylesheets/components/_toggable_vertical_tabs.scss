@@ -8,6 +8,10 @@
   text-align: left;
   cursor: pointer;
   transition: 0.15s;
+  margin-bottom: 15px;
+  p {
+    margin: unset;
+  }
 }
 
 /* Change background color of buttons on hover */

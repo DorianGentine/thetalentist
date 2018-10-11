@@ -1,7 +1,7 @@
 
 <%= link_to edit_talent_path(@talent) do %>
   <div class="btn-edition-container">
-    <p class="no-margin margin-right-15 label-edit align-center hidden-xs <%= @talent.completed_totaly > 90 ? "ADD CLASS GREEN" : "ADD CLASS RED"  %>"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong><%= @talent.completed_totaly %>%</strong></p>
+    <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong class=" <%= @talent.completed_totaly > 85 ? "green" : "red"  %>"><%= @talent.completed_totaly %>%</strong></p>
     <div class="btn-edition">
       <span><i class="fas fa-edit"></i></span>
     </div>
@@ -17,7 +17,9 @@
         <!-- Photo de profil -->
           <% if @talent.photo? %>
             <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
-              <div class="statut tooltip <%= @talent.visible ? 'green-background' : 'red-background' %>"></div>
+              <div class="statut tooltip <%= @talent.visible ? 'green-background' : 'red-background' %>">
+                <span class="tooltiptext"><%= @talent.visible ? 'Profil visible' : "Profil pas visible" %></span>
+              </div>
             </div>
           <% else %>
 

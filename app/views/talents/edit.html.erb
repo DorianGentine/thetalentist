@@ -5,11 +5,27 @@
 
     <div class="row">
       <div class="col-lg-3 col-xs-12 no-padding tablinksAll" id='tabs-edit'>
-        <p class="tablinks titre-rubrique-3 active" data-idTab='informations_generales'>Informations générales</p>
-        <p class="tablinks titre-rubrique-3" data-idTab='formations_et_competences'>Formations et compétences</p>
-        <p class="tablinks titre-rubrique-3" data-idTab='experiences_professionnelles'>Expériences professionnelles</p>
-        <p class="tablinks titre-rubrique-3" data-idTab='ma_prochaine_aventure'>Ma prochaine aventure</p>
-        <p class="tablinks titre-rubrique-3" data-idTab='modifier_mon_compte'>Modifier mon compte</p>
+        <div class="tablinks flex space-between active" data-idTab='informations_generales' style="align-items: center;">
+          <p class="titre-rubrique-3">
+          Informations générales  </p>
+          <p class="cercle <%= @talent.completed_profil < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+        </div>
+        <div class="tablinks flex space-between" data-idTab='formations_et_competences' style="align-items: center;">
+          <p class="titre-rubrique-3">Formations et compétences</p>
+          <p class="cercle <%= @talent.completed_formation_skill_language < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+        </div>
+        <div class="tablinks flex space-between" data-idTab='experiences_professionnelles' style="align-items: center;">
+          <p class="titre-rubrique-3">Expériences professionnelles</p>
+          <p class="cercle <%= @talent.completed_experience < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+        </div>
+        <div class="tablinks flex space-between" data-idTab='ma_prochaine_aventure' style="align-items: center;">
+          <p class="titre-rubrique-3">Ma prochaine aventure</p>
+          <p class="cercle <%= @talent.completed_next_aventures < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+        </div>
+        <div class="tablinks flex space-between hidden" data-idTab='modifier_mon_compte' style="align-items: center;">
+          <p class="titre-rubrique-3" data-idTab='modifier_mon_compte'>Modifier mon compte</p>
+          <p class="cercle <%= @talent.completed_profil < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+        </div>
       </div>
       <hr class="ligne-vertical col-lg-1 no-padding" id="ligne-edit">
       <!-- info générale sur le profil -->
