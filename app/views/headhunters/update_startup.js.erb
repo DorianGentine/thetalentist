@@ -1,0 +1,29 @@
+
+function refreshForm(innerHTML) {
+  const editProfilForm = document.getElementById('informations_entreprises');
+  editProfilForm.innerHTML = innerHTML;
+}
+
+function addComment(textHTML){
+  const editProfilForm = document.getElementById('informations_entreprises');
+  editProfilForm.insertAdjacentHTML('beforebegin', textHTML);
+}
+
+function refreshNavBar(innerHTML) {
+  const navbarId = document.getElementById('navbar');
+  navbarId.innerHTML = "";
+  navbarId.innerHTML = innerHTML;
+}
+
+
+
+<% if @headhunter.errors.any? %>
+  addComment('<p style="color: red; text-align: center; margin-bottom: 20px;">Un problème est survenu, relancez la page et ressayez</p>');
+<% else %>
+  refreshForm('<%= j render "edit_informations_entreprises" %>');
+  addComment('<p style="color: red; text-align: center; margin-bottom: 20px;">Votre profil a bien été modifié</p>');
+<% end %>
+
+<% if @headhunter.mailbox.conversations.count == 1 %>
+  refreshNavBar('<%= j render "shared/navbar" %>');
+<% end %>

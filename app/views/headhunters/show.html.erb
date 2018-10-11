@@ -22,10 +22,12 @@
       <div class="blue-background">
 
         <!-- Photo de profil -->
-          <% if @startup.logo.present? %>
+          <% if @startup.logo? %>
 
             <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @startup.logo, :transformation=>[ :gravity=>"face"] %>'); background-size: contain; background-repeat: no-repeat;">
-              <div class="statut"></div>
+              <div class="statut tooltip <%= @headhunter.validated ? 'green-background' : 'red-background' %>">
+                <span class="tooltiptext"><%= @headhunter.validated ? 'Profil validé' : "Profil pas validé" %></span>
+              </div>
             </div>
           <% else %>
 
@@ -33,7 +35,9 @@
               <div class="initiale">
                 <%= @startup.name.split(//).first.upcase %><%= @startup.name.split(//).second.upcase %>
               </div>
-              <div class="statut"></div>
+              <div class="statut tooltip <%= @headhunter.validated ? 'green-background' : 'red-background' %>">
+                <span class="tooltiptext"><%= @headhunter.validated ? 'Profil validé' : "Profil pas validé" %></span>
+              </div>
             </div>
           <% end %>
 
@@ -126,6 +130,12 @@
         <!-- Titre section -->
           <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
           <h2 class="titre-section">Découvrir notre <strong>entreprise</strong></h2>
+
+
+            <!-- TODO add start_up_words -->
+
+
+
 
       <!-- Ligne description -->
         <div class="row">

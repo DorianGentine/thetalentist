@@ -1,9 +1,9 @@
-<!-- Titre section -->
+
   <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
   <h2 class="titre-section">Décrivez votre <strong>parcours scolaire</strong></h2>
 
   <!-- info sur les formations et compétence -->
-    <%= simple_form_for @talent, url: update_formation_and_skill_talent_path(@talent), method: :put, remote: false  do |f|%>
+    <%= simple_form_for @talent, url: update_formation_and_skill_talent_path(@talent), method: :patch, remote: true  do |f|%>
       <div id="formations">
         <%= f.simple_fields_for :talent_formations do |u| %>
           <%= render 'steps_talent_infos/formation_fields', :f => u %>
@@ -47,6 +47,5 @@
 
 <%= render 'edit_validations_buttons', f: f %>
 <% end %>
-
 
 

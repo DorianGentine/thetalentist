@@ -119,44 +119,20 @@ class TalentsController < ApplicationController
   end
 
   def update_profile
-    if @talent.update(talent_params)
-      respond_to do |format|
-        format.html { redirect_to edit_talent_path(@talent) }
-        format.js
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to edit_talent_path(@talent) }
-        format.js  # <-- idem
-      end
-    end
+    update_edit(@talent, talent_params)
   end
 
   def update_formation_and_skill
-    if @talent.update(talent_params)
-      respond_to do |format|
-        format.html { render 'points/edit' }
-        format.js
-      end
-    end
+    # raise
+    update_edit(@talent, talent_params)
   end
 
   def update_experience
-    if @talent.update(talent_params)
-      respond_to do |format|
-        format.html { render 'points/edit' }
-        format.js
-      end
-    end
+    update_edit(@talent, talent_params)
   end
 
   def update_next_aventure
-    if @talent.update(talent_params)
-      respond_to do |format|
-        format.html { render 'points/edit' }
-        format.js
-      end
-    end
+    update_edit(@talent, talent_params)
   end
 
 
@@ -214,6 +190,20 @@ class TalentsController < ApplicationController
 
 private
 
+  def update_edit(talent, talent_params)
+    if talent.update_attributes(talent_params)
+      respond_to do |format|
+        format.html { redirect_to edit_talent_path(talent) }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to edit_talent_path(talent) }
+        format.js  # <-- idem
+      end
+    end
+  end
+
 
   def set_talent
     @talent = Talent.find(params[:id])
@@ -257,11 +247,12 @@ private
       :terms_of_condition,
       :no_more,
       :sector_ids,
+      techno_ids: [],
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
       next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), :sector_ids],
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
-      talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
+      talent_languages_attributes: [ :id, :level, :language_id],
       your_small_plus_attributes: [:id, :description, :_destroy],
       skill_ids: []
     )

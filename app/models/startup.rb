@@ -1,4 +1,6 @@
 class Startup < ApplicationRecord
+  before_save :capitalize_name
+
   has_many :headhunters, dependent: :destroy
   accepts_nested_attributes_for :headhunters, allow_destroy: true
 
@@ -26,5 +28,9 @@ class Startup < ApplicationRecord
     if self.facebook.nil? && self.linkedin.nil?
       return true
     end
+  end
+
+  def capitalize_name
+    self.name = self.name.capitalize if self.name && !self.name.blank?
   end
 end
