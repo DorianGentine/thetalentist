@@ -12,7 +12,10 @@
 
   <% if count < 5 && current_user.is_a?(Headhunter) %>
     <% for i in 1..(5-count) %>
-      <div class="center-text" style="background-color: gray; padding: 15px;">Ajoutez encore une photo</div>
+      <% if current_user.is_a?(Talent) %>
+      <% else %>
+        <div class="center-text" style="background-color: gray; padding: 15px;">Ajoutez encore une photo</div>
+      <% end %>
     <% end %>
   <% end %>
 </div>
