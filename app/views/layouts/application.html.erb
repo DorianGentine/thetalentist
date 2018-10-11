@@ -32,7 +32,9 @@
     </script>
   </head>
   <body>
-    <%= render "shared/navbar" %>
+    <div id="navbar">
+      <%= render "shared/navbar" %>
+    </div>
       <%= yield %>
     <%= render "shared/footer" %>
     <%= javascript_include_tag 'application' %>

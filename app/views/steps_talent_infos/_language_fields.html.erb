@@ -3,7 +3,9 @@
     <%= f.association :language, collection: Language.all, prompt: "Langue", label: false, input_html: { :class => "select2", style: "width: 100%" }  %>
   </div>
   <div class="col-xs-4 col-lg-4 margin-right-15 no-padding">
-    <%= f.input :level, collection: ["Natif", "Bilingue", "Avancée", "lu parlé écrit", "Notions"], prompt:"Niveau", label: false, :input_html => { :class => 'select2', style: "width: 100%" } %>
+    <%= f.input :level, collection: TalentLanguage.levels.map { |key, value| [key.humanize, key] }, prompt:"Niveau", label: false, :input_html => { :class => 'select2', style: "width: 100%" } %>
+
+    <!-- <#%= f.input :level, collection: ["Natif", "Bilingue", "Avancée", "lu parlé écrit", "Notions"], prompt:"Niveau", label: false, :input_html => { :class => 'select2', style: "width: 100%" } %> -->
   </div>
   <div class="col-xs-2 col-lg-4 no-padding">
     <%= link_to_remove_association f do %>

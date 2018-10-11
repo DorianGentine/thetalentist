@@ -1,0 +1,16 @@
+function refreshForm(innerHTML) {
+  const editProfilForm = document.getElementById('informations_generales');
+  editProfilForm.innerHTML = innerHTML;
+}
+
+function addComment(textHTML){
+  const editProfilForm = document.getElementById('informations_generales');
+  editProfilForm.insertAdjacentHTML('beforebegin', textHTML);
+}
+
+<% if @headhunter.errors.any? %>
+  addComment('<p style="color: red; text-align: center; margin-bottom: 20px;">Un problème est survenu, relancez la page et ressayez</p>');
+<% else %>
+  refreshForm('<%= j render "edit_hh_informations_generales" %>');
+  addComment('<p style="color: red; text-align: center; margin-bottom: 20px;">Votre profil a bien été modifié</p>');
+<% end %>

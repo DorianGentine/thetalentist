@@ -15,7 +15,7 @@
       <div class="blue-background">
 
         <!-- Photo de profil -->
-          <% if @talent.photo.present? %>
+          <% if @talent.photo? %>
             <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
               <div class="statut tooltip <%= @talent.visible ? 'green-background' : 'red-background' %>"></div>
             </div>
@@ -87,10 +87,10 @@
               <% @talent.talent_languages.each do |langue| %>
                 <p class="texte-rubrique-3b no-margin"><%= langue.language.title %></p>
                 <div class="notation-etoile">
-                  <% for i in 1..langue.level %>
+                  <% for i in 1..TalentLanguage.levels[langue.level] %>
                     <span class="fas fa-circle etoile checked"></span>
                   <% end %>
-                  <% for i in 1..(5-langue.level) %>
+                  <% for i in 1..(5-TalentLanguage.levels[langue.level]) %>
                     <span class="fas fa-circle etoile"></span>
                   <% end %>
                 </div>

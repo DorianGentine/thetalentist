@@ -4,7 +4,7 @@
 
   <%= simple_form_for @talent, url: update_profile_talent_path(@talent), method: :patch, remote: true  do |f|%>
 
-    <%= render '/shared/change_photo' %>
+    <%= render 'shared/change_photo', f: f %>
 
     <div class="row margin-top-30">
       <p class="label-edit requis">Civilité</p>

@@ -33,7 +33,6 @@ class Talent < ApplicationRecord
 
   has_many :talent_formations, dependent: :destroy
   has_many :formations, through: :talent_formations
-  has_many :talent_formations, inverse_of: :talent
   accepts_nested_attributes_for :talent_formations, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :formations, allow_destroy: true, reject_if: :all_blank
 
@@ -49,9 +48,9 @@ class Talent < ApplicationRecord
 
   has_many :talent_technos, dependent: :destroy
   has_many :technos, through: :talent_technos
+  accepts_nested_attributes_for :technos, allow_destroy: true, reject_if: :all_blank
 
   has_many :talent_hobbies, dependent: :destroy
-  has_many :talent_hobbies, inverse_of: :talent
   has_many :hobbies, through: :talent_hobbies
   accepts_nested_attributes_for :hobbies, reject_if: :all_blank
 
