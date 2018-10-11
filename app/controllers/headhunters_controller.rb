@@ -119,7 +119,8 @@ class HeadhuntersController < ApplicationController
 
   def update_startup
     @startup = @headhunter.startup
-    update_edit_startup(@startup, startup_params, @headhunter)
+    update_edit(@headhunter, headhunter_params)
+    # update_edit_startup(@startup, startup_params, @headhunter)
   end
 
   def to_validate
@@ -196,10 +197,11 @@ class HeadhuntersController < ApplicationController
   def headhunter_params
     params.require(:headhunter).permit(
       :photo, :name, :firstname, :job,
-      startup_attributes: [ :id, :name, :link, :logo, :address,
+      startup_attributes: [ :id, :name, :link, :logo, :address, :mission,
       :sector_ids, :btob, :btoc, :validated, :short_resume, :linkedin, :facebook,
-      :average_age, :collaborators, :year_of_creation, :overview ],
-      pictures_attributes: [ :id, :photo],
+      :average_age, :collaborators, :year_of_creation, :overview, word_ids: [],
+      pictures_attributes: [ :id, :photo, :_destroy],
+      startup_words_attributes: [ :id, :word_id, :_destroy]],
       word: [],
       job_ids: []
       )
@@ -207,10 +209,10 @@ class HeadhuntersController < ApplicationController
   def startup_params
     params.require(:startup).permit(
       :name, :link, :logo, :address,
-      :sector_ids, :btob, :btoc, :validated, :short_resume, :linkedin, :facebook,
-      :average_age, :collaborators, :year_of_creation, :overview,
-      pictures_attributes: [ :id, :photo],
-      startup_words_attributes: [ :id, :word_id ],
+      :sector_ids, :btob, :btoc, :validated, :short_resume, :mission, :linkedin, :facebook,
+      :average_age, :collaborators, :year_of_creation, :overview, word_ids: [],
+      pictures_attributes: [ :id, :photo, :_destroy],
+      startup_words_attributes: [ :id, :word_id, :_destroy ],
       job_ids: []
       )
   end
