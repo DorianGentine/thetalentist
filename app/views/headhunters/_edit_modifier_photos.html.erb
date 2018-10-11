@@ -1,9 +1,41 @@
+<!-- Titre section -->
+  <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section">Votre environnement <strong>en photos</strong></h2>
+
 <!-- modifier photos -->
 
-<%= simple_form_for @startup, url: update_photos_headhunter_path(@headhunter), method: :patch, remote: false  do |f| %>
-  <%= f.simple_fields_for :pictures do |u| %>
-    <%= u.input :photo %>
-    <%= u.input :photo_cache, as: :hidden %>
-  <% end %>
-  <%= f.submit %>
+<%= simple_form_for @startup, url: update_photos_headhunter_path(@headhunter), method: :patch, remote: true  do |f| %>
+
+  <div class="row">
+    <%= f.simple_fields_for :pictures do |u| %>
+      <div class="col-lg-4 col-xs-12 margin-top-30">
+        <div class="margin-right-15 no-margin-xs input-none">
+          <label for="avatar-upload<%= u.object.title %>" class="btn-avatar" data-target="<%= u.object.title %>" id="edit-photo" style="width: 100%">
+            <div class="relative hidden pointer" id="div_img_prev<%= u.object.title %>" style="height: 200px;">
+              <img id="img_prev<%= u.object.title %>" src="#" alt="votre image" style="object-fit: cover; height: 100%; width: 100%;"/>
+              <i class="fas fa-edit white absolute-center" style="font-size: 25px"></i>
+            </div>
+            <div id="no_img<%= u.object.title %>">
+              <% if u.object.photo? %>
+                <div class="center-text" style="background-image: url('<%= cl_image_path u.object.photo  %>'); background-size: cover;  height: 200px; cursor: pointer;">
+                  <i class="fas fa-edit white" style="font-size: 25px; opacity: 0.5;"></i>
+                </div>
+                <%#= render 'edit-photo', f: u.object %>
+              <% else %>
+                <div class="gray-background center-text" style="height: 200px; cursor: pointer;">
+                  <i class="fas fa-edit white" style="font-size: 25px"></i>
+                </div>
+              <% end %>
+            </div>
+          </label>
+          <label for="avatar-upload<%= u.object.title %>" class="pointer"><i class="fas fa-edit float-left black margin-top-15 margin-left-15" style="font-size: 25px"></i></label>
+          <i class="fas fa-trash-alt float-right black margin-top-15 margin-right-15" style="font-size: 25px"></i>
+          <%= u.file_field :photo, id:"avatar-upload#{u.object.title}", as: :hidden %>
+          <%= u.hidden_field :photo_cache, as: :hidden %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render '/talents/edit_validations_buttons', f: f %>
 <% end %>

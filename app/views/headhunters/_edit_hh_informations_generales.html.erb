@@ -45,21 +45,76 @@
 
   <%= render "/shared/change_photo", f: f %>
 
-    <p>Prénom</p>
-    <%= f.input :firstname, required: true, autofocus: true, label: false %>
-    <p>Nom</p>
-    <%= f.input :name, required: true, autofocus: true, label: false %>
-    <p>Poste</p>
-    <%= f.input :job, required: true, autofocus: true, label: false %>
+  <div class="row margin-top-15">
+    <div class="col-lg-8 col-xs-12 no-padding">
+      <p class="label-edit requis">Civilité</p>
+      <div class="col-lg-6 col-xs-12">
+        <div class="margin-right-15 no-margin-xs">
+          <%= f.input :firstname, required: true, autofocus: true, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
+        </div>
+      </div>
+      <div class="col-lg-6 col-xs-12 margin-top-15-xs">
+        <div class="margin-right-15 no-margin-xs">
+          <%= f.input :name, required: true, autofocus: true, label: false, :input_html => { style: "width: 100%" } %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-xs-12 margin-top-15-xs">
+      <p class="label-edit requis">Poste actuel</p>
+      <div class="no-padding">
+        <%= f.input :job, required: true, autofocus: true, label: false, :input_html => { style: "width: 100%" } %>
+      </div>
+    </div>
+  </div>
+
+<!-- Titre section -->
+  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-30">Vos <strong>collaborateurs</strong></h2>
+
+  <div class="row">
     <% @other_headhunters.each do |headhunter| %>
-      <%= headhunter.firstname %>
-      <%= headhunter.name %>
+      <div class="col-xs-12 col-lg-4 margin-bottom-15 flex">
+
+        <% if headhunter.photo.present? %>
+          <div class="margin-right-15 photo-profil profil-collaborateur" style="background-image: url('<%= cl_image_path headhunter.photo, :transformation=>[ :gravity=>"face"] %>');">
+          </div>
+        <% else %>
+          <div class="margin-right-15 photo-profil profil-collaborateur">
+            <div class="initiale">
+              <%= headhunter.firstname.split(//).first.upcase %><%= headhunter.name.split(//).first.upcase %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="margin-right-15 no-margin-xs align-center">
+          <p class="texte-rubrique-3b no-margin"><%= headhunter.firstname %> <%= headhunter.name %></p>
+          <p class="titre-rubrique-1 no-margin"><%= headhunter.job %></p>
+        </div>
+      </div>
     <% end %>
-    <p>Nous suivre</p>
-    <%= u.input :linkedin, label: false %>
-    <%= u.input :facebook, label: false %>
+  </div>
+
+<!-- Titre section -->
+  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-30">Nous <strong>suivre</strong></h2>
+
+  <div class="row margin-top-15">
+    <div class="col-lg-6 col-xs-12 no-padding">
+      <p class="label-edit requis">Linkedin</p>
+      <div class="no-padding margin-right-15 no-margin-xs">
+        <%= u.input :linkedin, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
+      <p class="label-edit requis">Facebook</p>
+      <div class="no-padding">
+        <%= u.input :facebook, label: false, :input_html => { style: "width: 100%" } %>
+      </div>
+    </div>
+  </div>
+
   <% end %>
 
-  <%= f.submit%>
+  <%= render '/talents/edit_validations_buttons', f: f %>
 <% end %>
 
