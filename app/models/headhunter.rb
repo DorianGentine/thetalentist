@@ -95,7 +95,7 @@ class Headhunter < ApplicationRecord
     self.startup.collaborators.present? ? count += value_input : count
     self.startup.btoc || self.startup.btob ? count += value_input : count
     self.startup.average_age.present? ? count += value_input : count
-    self.startup.startup_words.first.word.present? ? count += value_input : count
+    self.startup.words.present? ? count += value_input : count
     self.startup.overview.present? ? count += value_input : count
     self.startup.mission.present? ? count += value_input : count
 
