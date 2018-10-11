@@ -50,49 +50,51 @@
       <p class="label-edit requis">Civilité</p>
       <div class="col-lg-6 col-xs-12">
         <div class="margin-right-15 no-margin-xs">
-          <%= f.input :firstname, required: true, autofocus: true, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
+          <%= f.input :firstname, required: true, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
         </div>
       </div>
       <div class="col-lg-6 col-xs-12 margin-top-15-xs">
         <div class="margin-right-15 no-margin-xs">
-          <%= f.input :name, required: true, autofocus: true, label: false, :input_html => { style: "width: 100%" } %>
+          <%= f.input :name, required: true, label: false, :input_html => { style: "width: 100%" } %>
         </div>
       </div>
     </div>
     <div class="col-lg-4 col-xs-12 margin-top-15-xs">
       <p class="label-edit requis">Poste actuel</p>
       <div class="no-padding">
-        <%= f.input :job, required: true, autofocus: true, label: false, :input_html => { style: "width: 100%" } %>
+        <%= f.input :job, required: true, label: false, :input_html => { style: "width: 100%" } %>
       </div>
     </div>
   </div>
 
 <!-- Titre section -->
-  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
-  <h2 class="titre-section margin-top-30">Vos <strong>collaborateurs</strong></h2>
+  <% if @other_headhunters.length > 0 %>
+    <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+    <h2 class="titre-section margin-top-30">Vos <strong>collaborateurs</strong></h2>
 
-  <div class="row">
-    <% @other_headhunters.each do |headhunter| %>
-      <div class="col-xs-12 col-lg-4 margin-bottom-15 flex">
+    <div class="row">
+      <% @other_headhunters.each do |headhunter| %>
+        <div class="col-xs-12 col-lg-4 margin-bottom-15 flex">
 
-        <% if headhunter.photo.present? %>
-          <div class="margin-right-15 photo-profil profil-collaborateur" style="background-image: url('<%= cl_image_path headhunter.photo, :transformation=>[ :gravity=>"face"] %>');">
-          </div>
-        <% else %>
-          <div class="margin-right-15 photo-profil profil-collaborateur">
-            <div class="initiale">
-              <%= headhunter.firstname.split(//).first.upcase %><%= headhunter.name.split(//).first.upcase %>
+          <% if headhunter.photo.present? %>
+            <div class="margin-right-15 photo-profil profil-collaborateur" style="background-image: url('<%= cl_image_path headhunter.photo, :transformation=>[ :gravity=>"face"] %>');">
             </div>
-          </div>
-        <% end %>
+          <% else %>
+            <div class="margin-right-15 photo-profil profil-collaborateur">
+              <div class="initiale">
+                <%= headhunter.firstname.split(//).first.upcase %><%= headhunter.name.split(//).first.upcase %>
+              </div>
+            </div>
+          <% end %>
 
-        <div class="margin-right-15 no-margin-xs align-center">
-          <p class="texte-rubrique-3b no-margin"><%= headhunter.firstname %> <%= headhunter.name %></p>
-          <p class="titre-rubrique-1 no-margin"><%= headhunter.job %></p>
+          <div class="margin-right-15 no-margin-xs align-center">
+            <p class="texte-rubrique-3b no-margin"><%= headhunter.firstname %> <%= headhunter.name %></p>
+            <p class="titre-rubrique-1 no-margin"><%= headhunter.job %></p>
+          </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
 
 <!-- Titre section -->
   <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
