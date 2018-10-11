@@ -19,7 +19,7 @@ class HeadhunterMailer < ApplicationMailer
     @user = user
     @talent = talent
 
-    if status == "Accepté"
+    if status == "Accepter"
       @connected = true
       @status = "accepté"
       @firstname = @talent.firstname
@@ -32,7 +32,7 @@ class HeadhunterMailer < ApplicationMailer
     mail(
       to: @user.email,
       cc: "bienvenue@thetalentist.com",
-      subject: "#{@firstname} a #{status.capitalize} ton inviation"
+      subject: "#{@firstname} a #{@status} ton inviation"
       )
   end
 
