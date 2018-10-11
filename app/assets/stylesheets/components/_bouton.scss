@@ -121,26 +121,40 @@
     justify-content: space-between;
     div{
       border-radius: 50px;
-      input{
+      input, p{
         border-radius: 50px;
         font-size: 14px;
         color: $green;
-        border-color: $green;
+        border: 1px solid $green;
+        background-color: rgba(0,0,0,0);
+        padding: 1px 7px 2px;
+        transition: 0.15s;
       }
     }
     div:last-child {
-      input {
+      input, p {
         color: $red;
         border-color: $red;
       }
     }
-    div:hover input{
+    div:hover input, p{
       color: white;
       background-color: $green;
-      transition: 0.15s;
     }
-    div:last-child:hover input{
+    div:last-child:hover input, p{
       background-color: $red;
+    }
+    .green_validation {
+      input, p{
+        color: white !important;
+        background-color: $green !important;
+      }
+    }
+    .red_validation {
+      input, p{
+        color: white !important;
+        background-color: $red !important;
+      }
     }
   }
 
@@ -278,14 +292,24 @@
   }
 
 // btn-aline
+  .btn-aline {
+    display: grid;
+    grid: auto / auto auto;
+    justify-content: space-between;
+  }
   @media screen and (max-width: 770px) {
     .btn-aline {
-      display: block;
+      grid: auto auto / auto;
+      justify-content: center;
+      justify-items: center;
+      grid-gap: 15px;
+      :first-child{
+        grid-row: 2 / 3;
+      }
+      :last-child{
+        grid-row: 1 / 2;
+      }
     }
-  }
-  .btn-aline {
-    display: flex;
-    justify-content: space-between;
   }
 
 // form-btn

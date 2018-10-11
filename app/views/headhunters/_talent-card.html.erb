@@ -15,15 +15,15 @@
           <h2><%= talent.firstname.present? ? talent.firstname : "No-info" %> <%= talent.name.present? ? talent.name : "No-info" %></h2>
         </div>
 
-        <div class="accepeter-talent">
+        <div class="accepter-talent">
           <%= simple_form_for talent , url: to_validate_talent_path(talent) do |f| %>
-            <div class="btn-validate">
-              <div class="<%= "green_validation" if talent.validated == true %>">
+            <div class="btn-validate margin-bottom-15">
+              <div class="<%= "green_validation" if talent.validated === true %>">
                 <%= f.submit "Accepter" %>
               </div>
               <div class="<%= "red_validation" if talent.validated === false %>">
                 <!-- <#%= f.submit "Refuser" %> -->
-                <p class="modal-button"  data-target= "modal_declined_<%= talent.id %>" >Refuser</p>
+                <p class="modal-button no-margin"  data-target= "modal_declined_<%= talent.id %>" >Refuser</p>
               </div>
             </div>
             <div class="btn-validate">
@@ -47,7 +47,7 @@
           <% if Mailboxer::Conversation.participant(talent).count > 0 %>
             <%= link_to "Messages", talent_conversation_path(talent, talent.mailbox.conversations.last)%>
           <% else %>
-            <p>Aucun message</p>
+            <a style="font-size: 12px;">Aucun message</a>
           <% end %>
           <%= link_to "Profil", talent_path(talent)%>
         </div>

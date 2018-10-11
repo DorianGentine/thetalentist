@@ -3,16 +3,26 @@
   <div class="modal-content">
 
     <div class="modal-header">
-      <span id="close_modal_declined_<%= talent.id %>">
+      <h3>WHY &#128557; ????</h3>
+
+      <span class="close" id="close_modal_declined_<%= talent.id %>">
         <p>&times;</p>
       </span>
 
     </div>
 
     <%= simple_form_for talent, url: to_validate_talent_path(talent)  do |f| %>
-       <p><%= f.object.firstname %> <%= f.object.name %></p>
-      <%= f.input :declined, placeholder: "En effet, malgré .... et ..., le ... est un critère extrêmement important pour nous."  %>
-      <%= f.submit "Refuser" %>
+      <div style="padding: 30px">
+
+        <h4><%= f.object.firstname %> <%= f.object.name %></h4>
+
+        <div class="row">
+          <%= f.text_area :declined, placeholder: "En effet, malgré .... et ..., le ... est un critère extrêmement important pour nous.", label: false, :input_html => { rows: 2 }, style: "width: 100%;" %>
+        </div>
+
+        <%= f.submit "Refuser", class: "btn-edit red-border red margin-top-30" %>
+
+      </div>
     <% end %>
    </div>
 
