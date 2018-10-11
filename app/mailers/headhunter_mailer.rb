@@ -10,7 +10,7 @@ class HeadhunterMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      cci: "bienvenue@thetalentist.com",
+      cc: "bienvenue@thetalentist.com",
       subject: "Profil accepté :)"
       )
   end
@@ -31,7 +31,7 @@ class HeadhunterMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      cci: "bienvenue@thetalentist.com",
+      cc: "bienvenue@thetalentist.com",
       subject: "#{@firstname} a #{status.capitalize} ton inviation"
       )
   end
@@ -43,6 +43,6 @@ class HeadhunterMailer < ApplicationMailer
   def alerte(user)
     @user = user,
 
-    mail( to: user.email ,cci:Talentist.first.email, subject: "Un nouveau talent pourrait t'intéresser")
+    mail( to: user.email ,cc: "bienvenue@thetalentist.com", subject: "Un nouveau talent pourrait t'intéresser")
   end
 end

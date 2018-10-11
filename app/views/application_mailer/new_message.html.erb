@@ -22,7 +22,7 @@
           </tr>
           <% if @receveur.is_a?(Talent) %>
             <tr>
-              <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Tu as un nouveau message de la part de <%= @envoyeur.firstname %> de <strong><%= @envoyeur.startup.name.capitalize %></strong>:</td>
+              <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Tu as un nouveau message de la part de <%= @envoyeur.firstname %> de <strong><%= @envoyeur.is_a?(Headhunter) ? @envoyeur.startup.name.capitalize : "" %></strong>:</td>
             </tr>
           <% else %>
             <tr>

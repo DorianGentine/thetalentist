@@ -50,14 +50,15 @@
                 <p> A remplire</p>
               <% end %>
             </div>
-            <div class="talent-info-item card-dispsition">
+            <div class="card-dispsition">
               <p class="icon-margin-right icon-green-color"><i class="far fa-calendar"></i></p>
-              <p><%= 2018 - talent.experiences.last.starting.to_i %> ans d'expériences</p>
+              <p><%= talent.talent_jobs.last.year %> ans d'expériences</p>
             </div>
           </div>
           <div class="talent-school">
-            <p class="blue-background talent-school-item"><i class="fas fa-graduation-cap"></i><%= talent.talent_formations.last.formation.title %>,<%= talent.talent_formations.last.title %> - <%= talent.talent_formations.last.year %></p>
-            <p class="white-background talent-school-item"><i class="fas fa-graduation-cap"></i><%= talent.talent_formations.first.formation.title %>,<%= talent.talent_formations.first.title %> - <%= talent.talent_formations.first.year %></p>
+            <% talent.talent_formations.first(2).each do |talent_formation| %>
+              <p class="blue-background talent-school-item"><i class="fas fa-graduation-cap"></i><%= talent_formation.type_of_formation.present? ? talent_formation.type_of_formation : "" %>, <%=talent_formation.title %> - <%= talent_formation.year %></p>
+            <% end %>
           </div>
         </div>
         <div class="upper-right-body">
@@ -128,10 +129,10 @@
             </div>
           </div>
           <div class="lower-right-body-item">
-            <h4><i class="fas fa-search-plus"></i> HOBBIES</h4>
+            <h4><i class="fas fa-search-plus"></i> MES +</h4>
             <div class="talent-competences">
-              <% talent.talent_hobbies.each do |hobby| %>
-                <p><%= hobby.hobby.title %></p>
+              <% talent.your_small_plus.each do |your_small_plu| %>
+                <p><%= your_small_plu.description %></p>
               <% end %>
             </div>
           </div>
