@@ -26,12 +26,12 @@
         <div class="margin-date-picker col-lg-2 col-xs-12 margin-top-15-xs">
           <p class="label-edit requis no-margin">À</p>
           <div class="margin-right-15 no-margin-xs">
-            <%= f.input :years, label: false, as: :string, input_html: {:class => "datepicker1", id:"to_experience", style: "width: 100%"}  %>
+            <%= f.input :years, label: false, as: :string, input_html: {:class => "datepicker1 to_experience #{f.object.currently ? 'checked_boxe' : 'false'}", style: "width: 100%"}  %>
           </div>
         </div>
         <div id="font-input-currently" class="col-lg-2 col-xs-12 margin-top-15-xs">
           <p class="label-edit no-margin">Poste actuel</p>
-          <%= f.input :currently, label: false, input_html: {id: "currently_checked"} %>
+          <%= f.input :currently, label: false, input_html: {class: "currently_checked"},data: { target: "#to_experience" } %>
         </div>
         <div class="col-lg-5 col-lg-offset-1 col-xs-12 margin-top-15-xs">
           <p class="label-edit requis no-margin">Type d'entreprise</p>

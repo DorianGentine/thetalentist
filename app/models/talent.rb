@@ -219,6 +219,7 @@ class Talent < ApplicationRecord
     value_input = stat(8)
     self.firstname.present? ? count += value_input : count
     self.name.present? ? count += value_input : count
+    self.photo? ? count += value_input : count
     self.phone.present? ? count += value_input : count
     self.city.present? ? count += value_input : count
     self.linkedin.present? ? count += value_input : count

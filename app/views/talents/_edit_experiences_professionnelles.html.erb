@@ -4,7 +4,7 @@
 
 
 <!-- info sur experiences -->
-  <%= simple_form_for @talent, url: update_experience_talent_path(@talent), method: :patch, remote: false  do |f|%>
+  <%= simple_form_for @talent, url: update_experience_talent_path(@talent), method: :patch, remote: true  do |f|%>
       <!-- obliger de faire un render (soit garder, soit prendre l'ancien) -->
     <ol class="priority-list experience-list">
       <%= f.simple_fields_for :experiences do |u| %>
