@@ -1,11 +1,13 @@
-
-<%= link_to edit_talent_path(@talent) do %>
-  <div class="btn-edition-container">
-    <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong class=" <%= @talent.completed_totaly > 85 ? "green" : "red"  %>"><%= @talent.completed_totaly %>%</strong></p>
-    <div class="btn-edition">
-      <span><i class="fas fa-edit"></i></span>
+<% if !current_user.is_a?(Headhunter) %>
+<% else %>
+  <%= link_to edit_talent_path(@talent) do %>
+    <div class="btn-edition-container">
+      <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong class=" <%= @talent.completed_totaly > 85 ? "green" : "red"  %>"><%= @talent.completed_totaly %>%</strong></p>
+      <div class="btn-edition">
+        <span><i class="fas fa-edit"></i></span>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
 
 
@@ -259,7 +261,7 @@
               <% if @next_aventures.dream.present?  %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.dream %></p>
               <% elsif !@next_aventures.overview.present? && current_user.is_a?(Headhunter) %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
               <% else %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>

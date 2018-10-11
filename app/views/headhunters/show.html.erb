@@ -5,13 +5,18 @@
 <%#= render 'overview' %>
 <%#= render 'pictures' %> a supprimer -->
 
-<%= link_to edit_headhunter_path(@headhunter) do %>
-  <div class="btn-edition-container ">
-    <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong class=" <%= @headhunter.completed_totaly > 85 ? "green" : "red"  %>"><%= @headhunter.completed_totaly %>%</strong></p>
-    <div class="btn-edition">
-      <span><i class="fas fa-edit"></i></span>
+
+
+<% if !current_user.is_a?(Headhunter) %>
+<% else %>
+  <%= link_to edit_headhunter_path(@headhunter) do %>
+    <div class="btn-edition-container">
+      <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong class=" <%= @headhunter.completed_totaly > 85 ? "green" : "red"  %>"><%= @headhunter.completed_totaly %>%</strong></p>
+      <div class="btn-edition">
+        <span><i class="fas fa-edit"></i></span>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
 
 
@@ -62,8 +67,9 @@
             <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
             <p class="titre-rubrique-3 no-margin"><%= @startup.address.present? ? @startup.address : "Ajoutez votre adresse" %></p>
           </div>
-          <div id="map" data-markers="<%= @markers.to_json %>"
-          ></div>
+          <% if @startup.address.present? %>
+            <div id="map" data-markers="<%= @markers.to_json %>"></div>
+          <% end %>
       </div>
 
     <!-- Nos collaborateurs -->
@@ -93,27 +99,32 @@
       </div>
 
     <!-- Me suivre sur -->
-      <div class="blue-background margin-top-background">
-        <p class="titre-rubrique-3 margin-bottom-30">Me suivre sur :</p>
+      <% if !@startup.linkedin.present? && current_user.is_a?(Talent) %>
+      <% else %>
+        <div class="blue-background margin-top-background">
+          <p class="titre-rubrique-3 margin-bottom-30">Me suivre sur :</p>
 
-      <div class="flex" id="testDorian">
-        <% if @startup.linkedin.present? %>
-          <a class="social-media-link" href="<%= @startup.linkedin %>" target="_blank"><i class='fab fa-linkedin-in'></i></a>
-        <% end %>
-        <% if @startup.facebook.present? %>
-          <a class="social-media-link" href="<%= @startup.facebook %>" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <% end %>
-        <% if @startup.there_is_no_social_network? %>
-          <p>Ajoutez vos réseaux sociaux</p>
-        <% end %>
-      </div>
+          <div class="flex" style="flex-wrap: wrap;">
+            <% if @startup.linkedin.present? %>
+              <a class="social-media-link" href="<%= @startup.linkedin %>" target="_blank"><i class='fab fa-linkedin-in'></i></a>
+            <% end %>
+            <% if @startup.facebook.present? %>
+              <a class="social-media-link" href="<%= @startup.facebook %>" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <% end %>
+            <% if @startup.there_is_no_social_network? %>
+              <p>Ajoutez vos réseaux sociaux</p>
+            <% end %>
+          </div>
+        </div>
 
-      </div>
+      <% end %>
   </div>
 
   <div class="second-column">
 
     <!-- Section photos -->
+    <% if !@startup.pictures.present? && current_user.is_a?(Talent) %>
+    <% else %>
       <div class="blue-background margin-top-30-xs">
 
         <!-- Titre section -->
@@ -123,6 +134,7 @@
         <!-- Photos entreprise -->
           <%= render 'component_avem/modal_image' %>
       </div>
+    <% end %>
 
     <!-- Section découverte de l'entreprise -->
       <div class="blue-background margin-top-background">
@@ -144,6 +156,8 @@
               <p class="titre-rubrique-1 grid-col-span-2">Création</p>
               <% if @startup.year_of_creation.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @startup.year_of_creation %></p>
+              <% elsif !@startup.year_of_creation.present? && current_user.is_a?(Talent) %>
+                <i class="far fa-question-circle green"></i>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -154,6 +168,8 @@
               <p class="titre-rubrique-1 grid-col-span-2">Nombre d'employés</p>
               <% if @startup.collaborators.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @startup.collaborators %></p>
+              <% elsif !@startup.collaborators.present? && current_user.is_a?(Talent) %>
+                <i class="far fa-question-circle green"></i>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -164,6 +180,8 @@
               <p class="titre-rubrique-1 grid-col-span-2">Âge moyen</p>
               <% if @startup.average_age.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @startup.average_age %></p>
+              <% elsif !@startup.average_age.present? && current_user.is_a?(Talent) %>
+                <i class="far fa-question-circle green"></i>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -180,6 +198,8 @@
                 <% else%>
                   <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2">BtoC</p>
                 <% end %>
+              <% elsif !@startup.btoc && !@startup.btob && current_user.is_a?(Talent) %>
+                <i class="far fa-question-circle green"></i>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -195,10 +215,12 @@
           <!-- Les missions que nous réalisons -->
             <div class="col-lg-6 col-xs-12">
               <h4 class="titre-rubrique-3">Les missions que nous réalisons</h4>
-              <% if @startup.overview.present?  %>
-                <p class="texte-rubrique-3 margin-right-15 no-margin-xs"> <%= @startup.overview %></p>
+              <% if @startup.mission.present?  %>
+                <p class="texte-rubrique-3 margin-right-15 no-margin-xs"> <%= @startup.mission %></p>
+              <% elsif !@startup.mission.present? && current_user.is_a?(Talent) %>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @startup.name.capitalize %> n'a pas souhaité répondre à cette question.</p>
               <% else %>
-                <p class="texte-rubrique-3 margin-right-15 no-margin-xs">À compléter</p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
             </div>
 
@@ -207,8 +229,10 @@
               <h4 class="titre-rubrique-3">Description de notre entreprise</h4>
               <% if @startup.overview.present?  %>
                 <p class="texte-rubrique-3"> <%= @startup.overview %></p>
+              <% elsif !@startup.overview.present? && current_user.is_a?(Talent) %>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @startup.name.capitalize %> n'a pas souhaité répondre à cette question.</p>
               <% else %>
-                <p class="texte-rubrique-3">À compléter</p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
             </div>
         </div>

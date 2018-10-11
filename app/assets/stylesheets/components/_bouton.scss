@@ -30,7 +30,7 @@
       position: absolute;
     }
   }
-  .btn-edition:hover{
+  .btn-edition-container:hover .btn-edition{
     background-color: $green;
     color: white;
     width: 95px;
