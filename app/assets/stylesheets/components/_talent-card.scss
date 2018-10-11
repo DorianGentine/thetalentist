@@ -186,9 +186,7 @@
       opacity: 0.7;
       .initiale{
         border-radius: unset;
-        p{
-          font-size: 40px;
-        }
+        font-size: 40px;
       }
     }
     .lien-messagerie-profil{
@@ -204,9 +202,13 @@
         border-top: 1px solid $violet;
         font-size: 14px;
         padding: 5px 0;
+        transition: 0.15s;
       }
       a:first-child{
         border-right: 1px solid $violet;
+      }
+      a:hover{
+        color: $green;
       }
     }
   }

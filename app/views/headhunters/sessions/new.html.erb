@@ -29,10 +29,10 @@
             <div class="connexion-btns btn-aline">
               <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
                 <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %>
-              <% end -%>
-            <div class="form-actions">
-              <%= f.button :submit, "Se connecter", { :class => "btn form-btn form-btn-suivant"} %>
-            </div>
+              <% end %>
+              <div class="form-actions">
+                <%= f.button :submit, "Se connecter", { :class => "btn form-btn form-btn-suivant"} %>
+              </div>
             </div>
 
             <div class="choice-connexion margin-top-bottom-btn">
