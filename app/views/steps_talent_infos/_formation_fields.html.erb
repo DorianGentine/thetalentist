@@ -1,7 +1,6 @@
 <div class="nested-fields margin-bottom-15" id="diplome-form">
-  <div class="row margin-top-30-xs">
 
-    <div class="col-lg-2 col-xs-10 no-padding line-height-center">
+    <div class="col-xs-10 no-padding line-height-center">
       <p class="label-edit requis no-margin-xs margin-right-15">Diplôme</p>
     </div>
 
@@ -10,6 +9,7 @@
         <i class="fas fa-trash-alt"></i>
       <% end %>
     </div>
+  <div class="row margin-top-30-xs">
 
     <div class="col-xs-12 col-lg-3">
       <div class="margin-right-15 no-margin-xs">
@@ -22,8 +22,20 @@
         <%= f.input :title, placeholder: "Formation", label: false, input_html: { style: "width: 100%" } %>
       </div>
     </div>
+    <% if @talent.validated %>
+      <div class="col-xs-12 col-lg-3 margin-top-15-xs relative">
+        <div class="margin-right-15 no-margin-xs">
+          <%= f.input :type_of_formation, label: false, placeholder:"Classement de l'école ou Type d'école", input_html: { style: "width: 100%" } %>
+        </div>
+        <% text_formation = "Dans un premier temps, le recruteur n'aura pas accès au nom de votre formation. Une fois que vous avez accèpté de rentrer en contact avec lui, le recruteur pourra avoir accès à votre profil. Renseignez donc votre formation selon le classement, le domaine, ou autre." %>
+        <div class="absolute" style="top: -11px; right: 11px; color: black;">
+        <%= render 'shared/question-mark', text: text_formation %>
+        </div>
+      </div>
 
-    <div class="col-xs-12 col-lg-3 margin-top-15-xs">
+    <% end %>
+
+    <div class="col-xs-12 col-lg-2 margin-top-15-xs">
       <div class="margin-right-15 no-margin-xs">
         <%= f.input :year, label: false do %>
           <%= f.input :year, collection: (1980..2018.to_i).to_a.reverse,  label: false, prompt:"Année d'obtention", input_html: { :class => "select2", style: "width: 100%" } %>

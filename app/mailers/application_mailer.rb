@@ -8,7 +8,7 @@ class ApplicationMailer < ActionMailer::Base
 
     mail(
       to: @user.email,
-      cci: "bienvenue@thetalentist.com",
+      cc: "bienvenue@thetalentist.com",
       subject: "Bienvenue sur The Talentist!")
     # This will render a view in `app/views/talent_mailer`!
   end
@@ -43,7 +43,7 @@ class ApplicationMailer < ActionMailer::Base
 
     mail(
       to:       @receveur.email,
-      cci: "bienvenue@thetalentist.com",
+      cc: "bienvenue@thetalentist.com",
       subject:  "Vous avez reçu un nouveau message de #{@envoyeur.firstname}!"
       )
   end

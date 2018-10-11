@@ -97,15 +97,16 @@
           </div>
         </div>
 
-        <% talent.talent_formations.first(2).each do |formation| %>
+        <% talent.talent_formations.first(2).each do |talent_formation| %>
           <div class="talent-school-1 card-dispsition">
             <p class="icon-margin-right"><i class="fas fa-graduation-cap"></i></p>
-            <p><%= formation.formation.title %> - <%= formation.title %></p>
+            <p>
+              <%= talent_formation.type_of_formation.present? ? talent_formation.type_of_formation : "" %>, <%=talent_formation.title %></p>
             <!-- <p>HEC, Master entrepreneuriat - 2015</p> -->
           </div>
         <% end %>
         <div class="talent-description hidden-xs">
-          <p><%= truncate(talent.overview, length: 250) %></p>
+          <p><%= truncate(talent.overview, length: 180) %></p>
         </div>
 
 
