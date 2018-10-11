@@ -4,8 +4,8 @@
 
 <!-- formulaire startup -->
 
-<%= simple_form_for @startup, url: update_startup_headhunter_path(@headhunter), method: :patch, remote: true  do |f| %>
-
+<%= simple_form_for @headhunter, url: update_startup_headhunter_path(@headhunter), method: :patch, remote: false  do |u| %>
+  <%= u.simple_fields_for :startup do |f| %>
   <div class="row margin-top-30">
     <div class="col-lg-6 col-xs-12 no-padding">
       <p class="label-edit requis">Création</p>
@@ -58,15 +58,8 @@
   <div class="row margin-top-15">
     <div class="col-lg-6 col-xs-12 no-padding">
       <p class="label-edit requis">Ce qui vous définit</p>
-      <div class="no-padding margin-right-15 no-margin-xs row">
-        <%= f.simple_fields_for :startup_words do |u| %>
-          <div class="flex" style="align-items: center">
-            <%= render 'start_up_words_fields', :f => u %>
-          </div>
-          <div class="links">
-            <%= link_to_add_association 'Ajouter un +', f, :startup_words, :partial => 'start_up_words_fields', :class => "form-hobby-add" %>
-          </div>
-        <% end %>
+      <div class="no-padding margin-right-15 no-margin-xs row" id="startup_words">
+        <%= f.input :word_ids, collection: Word.all, input_html: { :class => "select2", multiple: "multiple", style: "width: 100%"}, include_blank: true, label: false %>
       </div>
     </div>
   </div>
@@ -92,7 +85,8 @@
   </div>
 
 
-  <%= render '/talents/edit_validations_buttons', f: f %>
+  <% end %>
+  <%= render '/talents/edit_validations_buttons', f: u %>
 <% end %>
 
 

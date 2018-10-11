@@ -5,10 +5,30 @@
 
     <div class="row">
       <div class="col-lg-3 col-xs-12 no-padding tablinksAll" id='tabs-edit'>
-        <p class="tablinks titre-rubrique-3 active" data-idTab='informations_generales'>Informations générales</p>
-        <p class="tablinks titre-rubrique-3" data-idTab='modifier_photos'>Modifier les photos</p>
-        <p class="tablinks titre-rubrique-3" data-idTab='informations_entreprises'>Informations d'entreprises</p>
-        <p class="tablinks titre-rubrique-3" data-idTab='modifier_mon_compte'>Modifier mon compte</p>
+        <div class="tablinks flex space-between active" data-idTab='informations_generales' style="align-items: center;">
+          <p class="titre-rubrique-3">
+          Informations générales  </p>
+          <p class="cercle <%= @headhunter.completed_profil < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+        </div>
+        <div class="tablinks flex space-between" data-idTab='modifier_photos' style="align-items: center;">
+          <p class="titre-rubrique-3">Modifier les photos</p>
+          <p class="cercle <%= @headhunter.completed_pictures < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+        </div>
+        <div class="tablinks flex space-between" data-idTab='informations_entreprises' style="align-items: center;">
+          <p class="titre-rubrique-3">Informations d'entreprises</p>
+          <p class="cercle <%= @headhunter.completed_startup < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+        </div>
+
+        <div class="tablinks flex space-between hidden" data-idTab='modifier_mon_compte' style="align-items: center;">
+          <p class="titre-rubrique-3" data-idTab='modifier_mon_compte'>Modifier mon compte</p>
+          <p class="cercle <%= @headhunter.completed_profil < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+        </div>
+
+
+
+
+
+
       </div>
       <hr class="ligne-vertical col-lg-1 no-padding" id="ligne-edit">
       <!-- info générale sur le profil -->
@@ -26,7 +46,7 @@
           </div>
 
           <div id="modifier_mon_compte" class="tabcontent" style="display: none;">
-            <%= render '/talents/edit_modifier_compte', user: @headhunter %>
+            <%= render 'talents/edit_modifier_compte', user: @headhunter %>
           </div>
 
 
