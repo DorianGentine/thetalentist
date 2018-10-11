@@ -52,11 +52,10 @@
       <div class="border">
 
         <div class="talent-job">
-          <h2><%= headhunter.startup.name.present? ? headhunter.startup.name : "No-Name" %></h2>
+          <h2 style="text-transform: unset;"><%= headhunter.startup.name.present? && headhunter.firstname.present? ? "#{headhunter.firstname.capitalize} de #{headhunter.startup.name.capitalize}" : "No-Name" %></h2>
         </div>
 
         <div class="background-img">
-          <!-- <img src="assets/rawpixel-617400-unsplash.jpg" class="img-de-fond" alt=""> -->
           <%= image_tag "rawpixel-617400-unsplash.jpg", class: "img-de-fond" %>
         </div>
 
