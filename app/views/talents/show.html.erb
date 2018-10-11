@@ -272,7 +272,7 @@
               <% if @next_aventures.famous_person.present?  %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.famous_person %></p>
               <% elsif !@next_aventures.famous_person.present? && current_user.is_a?(Headhunter) %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> répondre à cette question.</p>
               <% else %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
@@ -284,7 +284,7 @@
               <% if @next_aventures.good_manager.present?  %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.good_manager %></p>
               <% elsif !@next_aventures.good_manager.present? && current_user.is_a?(Headhunter) %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> répondre à cette question.</p>
               <% else %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
@@ -296,7 +296,7 @@
               <% if @next_aventures.work_for_free.present?  %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.work_for_free %></p>
               <% elsif !@next_aventures.work_for_free.present? && current_user.is_a?(Headhunter) %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> répondre à cette question.</p>
               <% else %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
