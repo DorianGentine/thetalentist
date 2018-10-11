@@ -85,7 +85,7 @@ class HeadhuntersController < ApplicationController
   end
 
   def update
-    if @headhunter.update_attributes(startup_params)
+    if @headhunter.update_attributes(headhunter_params)
       if params[:headhunter][:job_ids].present?
         redirect_to repertoire_path
       else
@@ -102,21 +102,24 @@ class HeadhuntersController < ApplicationController
     for i in count_picture..4 do
       @startup.pictures.build
     end
-    @other_headhunters = @startup.headhunters
+    @other_headhunters = @startup.headhunters - [@headhunter]
     @startup.startup_words.build
-
   end
 
   def update_profile
-
+    @startup = @headhunter.startup
+    @other_headhunters = @startup.headhunters - [@headhunter]
+    update_edit(@headhunter, headhunter_params)
   end
 
   def update_photos
-
+    @startup = @headhunter.startup
+    update_edit_startup(@startup, startup_params, @headhunter)
   end
 
   def update_startup
-
+    @startup = @headhunter.startup
+    update_edit_startup(@startup, startup_params, @headhunter)
   end
 
   def to_validate
@@ -152,6 +155,34 @@ class HeadhuntersController < ApplicationController
 
   private
 
+  def update_edit(headhunter, headhunter_params)
+    if headhunter.update_attributes(headhunter_params)
+      respond_to do |format|
+        format.html { redirect_to edit_headhunter_path(headhunter) }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to edit_headhunter_path(headhunter) }
+        format.js  # <-- idem
+      end
+    end
+  end
+
+  def update_edit_startup(startup, startup_params, headhunter)
+    if startup.update_attributes(startup_params)
+      respond_to do |format|
+        format.html { redirect_to edit_headhunter_path(headhunter) }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to edit_headhunter_path(headhunter) }
+        format.js  # <-- idem
+      end
+    end
+  end
+
   def set_headhunter
     @headhunter = Headhunter.find(params[:id])
     authorize @headhunter
@@ -162,11 +193,24 @@ class HeadhuntersController < ApplicationController
     @headhunter.save
   end
 
-  def startup_params
+  def headhunter_params
     params.require(:headhunter).permit(
-      startup_attributes: [ :id, :name, :link, :logo, :address, :sector_ids, :btob, :btoc, :validated,
+      :photo, :name, :firstname, :job,
+      startup_attributes: [ :id, :name, :link, :logo, :address,
+      :sector_ids, :btob, :btoc, :validated, :short_resume, :linkedin, :facebook,
       :average_age, :collaborators, :year_of_creation, :overview ],
+      pictures_attributes: [ :id, :photo],
       word: [],
+      job_ids: []
+      )
+  end
+  def startup_params
+    params.require(:startup).permit(
+      :name, :link, :logo, :address,
+      :sector_ids, :btob, :btoc, :validated, :short_resume, :linkedin, :facebook,
+      :average_age, :collaborators, :year_of_creation, :overview,
+      pictures_attributes: [ :id, :photo],
+      startup_words_attributes: [ :id, :word_id ],
       job_ids: []
       )
   end

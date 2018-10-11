@@ -17,6 +17,10 @@ function revealModal() {
       }
     }
   }
+  let modalButtonsList = document.querySelectorAll('.modal-button')
+  modalButtonsList.forEach((button) => {
+    button.addEventListener("click", triggerModal);
+  })
 }
 
 

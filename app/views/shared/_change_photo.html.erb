@@ -6,8 +6,8 @@
     </div>
     <div id="no_img<%= f.object.name %>">
       <% if f.object.is_a?(Startup) %>
-        <% if f.object.photo? || f.object.logo? %>
-          <%= render 'edit-photo', f: f.object %>
+        <% if f.object.logo? %>
+          <%= render 'talents/edit-photo', f: f.object %>
         <% else %>
           <div class="cercle gray-background center-text" style="height: 70px; width: 70px; cursor: pointer;">
             <i class="fas fa-edit white" style="font-size: 25px"></i>
@@ -15,7 +15,7 @@
         <% end %>
       <% else %>
         <% if f.object.photo? %>
-          <%= render 'edit-photo', f: f.object %>
+          <%= render 'talents/edit-photo', f: f.object %>
         <% else %>
           <div class="cercle gray-background center-text" style="height: 70px; width: 70px; cursor: pointer;">
             <i class="fas fa-edit white" style="font-size: 25px"></i>
