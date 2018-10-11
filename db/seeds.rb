@@ -323,39 +323,39 @@ doctolib = Startup.create!(name: "doctolib", year_of_creation: 2010, collaborato
 
 p "Creating Picture part"
 photo1 = Picture.new(title: "open-space", startup:backmarket )
-photo1.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540108/photo_startup_holidog_12.jpg"
+photo1.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258542/Ces-startups-qui-inventent-l-equipement-de-bureau-de-demain.jpg"
 photo1.save
 
 photo2 = Picture.new(title: "open-space", startup:backmarket )
-photo2.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540162/open-space.png"
+photo2.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258542/tencent-open-space.png"
 photo2.save
 
 photo3 = Picture.new(title: "open-space", startup:backmarket )
-photo3.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540136/3025567-poster-p-1-how-to-fix-open-offices-bad-for-work-825x510.jpg"
+photo3.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258541/open-space.png"
 photo3.save
 
 photo1 = Picture.new(title: "open-space", startup:manomano )
-photo1.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540108/photo_startup_holidog_12.jpg"
+photo1.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258541/photo_startup_holidog_12.jpg"
 photo1.save
 
 photo2 = Picture.new(title: "open-space", startup:manomano )
-photo2.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540162/open-space.png"
+photo2.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258541/3025567-poster-p-1-how-to-fix-open-offices-bad-for-work-825x510.jpg"
 photo2.save
 
 photo3 = Picture.new(title: "open-space", startup:manomano )
-photo3.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540136/3025567-poster-p-1-how-to-fix-open-offices-bad-for-work-825x510.jpg"
+photo3.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258540/240_F_109957412_Po0p0h1Rz6lg0SOt8msSVnW2rp5w6i3L.jpg"
 photo3.save
 
 photo1 = Picture.new(title: "open-space", startup:doctolib )
-photo1.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540108/photo_startup_holidog_12.jpg"
+photo1.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258541/photo_startup_holidog_12.jpg"
 photo1.save
 
 photo2 = Picture.new(title: "open-space", startup:doctolib )
-photo2.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540162/open-space.png"
+photo2.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258542/Ces-startups-qui-inventent-l-equipement-de-bureau-de-demain.jpg"
 photo2.save
 
 photo3 = Picture.new(title: "open-space", startup:doctolib )
-photo3.remote_photo_url = "http://res.cloudinary.com/da4nnrzbu/image/upload/v1529540136/3025567-poster-p-1-how-to-fix-open-offices-bad-for-work-825x510.jpg"
+photo3.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258541/open-space.png"
 photo3.save
 
 
