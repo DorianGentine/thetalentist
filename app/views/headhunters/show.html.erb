@@ -7,8 +7,7 @@
 
 
 
-<% if !current_user.is_a?(Headhunter) %>
-<% else %>
+<% if current_user.is_a?(Headhunter) %>
   <%= link_to edit_headhunter_path(@headhunter) do %>
     <div class="btn-edition-container">
       <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong class=" <%= @headhunter.completed_totaly > 85 ? "green" : "red"  %>"><%= @headhunter.completed_totaly %>%</strong></p>
