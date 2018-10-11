@@ -1,50 +1,20 @@
 
 
-<div class="fenetre-ecran">
-
+<div class="fenetre-ecran relative">
+  <div class="colonne bordure-droite modal" id="modal_conversations" style="padding: 0% 22% 0% 0%;">
+    <span class="close" id="close_modal_conversations">
+        <p>&times;</p>
+      </span>
+    <div class="modal-content" style="padding: 0; height: 100%; animation-name: animateleft;">
+      <%= render 'conversations' %>
+    </div>
+  </div>
+  <div class="modal-button absolute" style="top: 65%; background-color: white; border: 1px solid gray; padding: 7px; z-index: 2;" data-target="modal_conversations">
+     <i class="fa fa-bars" style="color: black;"></i>
+  </div>
 
   <div class="colonne col-gauche bordure-droite hidden-xs">
-    <div class="premiere-ligne">
-      <h4>MESSAGERIE</h4>
-    </div>
-    <div class="index-talents">
-
-      <h3>EN ATTENTE</h3>
-
-        <%  @pending_conversations.each do |conversation| %>
-          <% if current_user.is_a?(Headhunter) %>
-            <%= link_to conversation_path(conversation) do %>
-              <div class="conversation-card">
-                <div class="photo-profil">
-                  <div class="initiale">
-                    <i class="fas fa-rocket"></i>
-                  </div>
-                  <div class="statut"></div>
-                </div>
-
-                <div class="conversation-text">
-                  <% participant = conversation.participants - [current_user] %>
-                  <p class="prenom-contact"> Talent - <%= participant[0].experiences.last.position.capitalize %> </p>
-                  <p class="aperçu-message"><%= truncate(conversation.messages.last.body, length: 20) %></p>
-                </div>
-              </div>
-            <% end %>
-          <% else %>
-            <%= render 'conversation', :conversation => conversation %>
-          <% end %>
-
-        <% end %>
-      <h3>CONTACTÉS</h3>
-
-      <%  @unread_conversations.each do |conversation| %>
-        <%= render 'conversation', :conversation => conversation %>
-      <% end %>
-
-      <%  @read_accepted_conversations.each do |conversation| %>
-        <%= render 'conversation', :conversation => conversation %>
-      <% end %>
-
-    </div>
+    <%= render 'conversations' %>
   </div>
 
   <div class="colonne col-centre bordure-droite">

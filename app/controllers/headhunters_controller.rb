@@ -124,7 +124,7 @@ class HeadhuntersController < ApplicationController
   end
 
   def to_validate
-    @talentist = Talentist.find_by_email("dimitri@hotmail.fr")
+    @talentist = current_talentist
     if params[:commit] == "Accepter"
       if @headhunter.validated == true
         validated_action(nil)

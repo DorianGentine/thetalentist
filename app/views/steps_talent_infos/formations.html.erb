@@ -35,7 +35,7 @@
       <div class="col-xs-12 col-lg-6">
         <div class="blue-background margin-left-background margin-top-background" style="min-height: 147px">
           <p class="label-edit no-margin requis">Compétences techniques</p>
-          <%= f.input :skill_ids, collection: Techno.all, label: false, input_html: { :class => "select2", multiple: "multiple", style: "width: 100%"}, multiple: true, required: true %>
+          <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { :class => "select2", multiple: "multiple", style: "width: 100%"}, multiple: true, required: true %>
         </div>
       </div>
     </div>

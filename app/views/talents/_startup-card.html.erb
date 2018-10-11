@@ -35,7 +35,7 @@
           <% if Mailboxer::Conversation.participant(headhunter).count > 0 %>
             <%= link_to "Messages", headhunter_conversation_path(headhunter.id, headhunter.mailbox.conversations.last)%>
           <% else %>
-            <a>Aucun message</a>
+            <a style="font-size: 12px">Aucun message</a>
           <% end %>
           <%= link_to "Profil", headhunter_path(headhunter)%>
         </div>

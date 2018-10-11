@@ -46,6 +46,7 @@ class StepsTalentInfosController < ApplicationController
     # Si tu as un problème de validation pour créer talent
     # @talent.status = step.to_s
     # @talent.status = 'active' if step == steps.last
+    # raise
     case step
     when :next_aventure
       @talent.update_attributes(talent_params)
@@ -119,7 +120,7 @@ class StepsTalentInfosController < ApplicationController
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       your_small_plus_attributes: [:id, :description, :_destroy],
-      skill_ids: []
+      techno_ids: []
     )
   end
 end

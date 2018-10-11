@@ -5,6 +5,7 @@ function revealModal() {
 
     targetModal.style.display = "block";
 
+    console.log(targetModalID)
     let close = "close_" + targetModalID
     let span = document.getElementById(close);
     span.onclick = function() {
@@ -20,6 +21,7 @@ function revealModal() {
 
   let modalButtonsList = document.querySelectorAll('.modal-button')
   modalButtonsList.forEach((button) => {
+    console.log(button)
     button.addEventListener("click", triggerModal);
   })
 
@@ -27,3 +29,4 @@ function revealModal() {
 
 
 export { revealModal }
+
