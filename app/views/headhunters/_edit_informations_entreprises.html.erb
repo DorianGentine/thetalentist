@@ -22,14 +22,14 @@
   </div>
 
   <div class="row margin-top-15">
+    <p class="label-edit requis">Nombre d'employés</p>
     <div class="col-lg-6 col-xs-12 no-padding">
-      <p class="label-edit requis">Nombre d'employés</p>
       <div class="no-padding margin-right-15 no-margin-xs">
         <%= f.input :collaborators, as: :integer, label: false, input_html: { style: "width: 100%" } %>
       </div>
     </div>
     <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
-      <p class="label-edit requis">Branche</p>
+      <!-- <p class="label-edit requis">Secteur</p> -->
       <div class="no-padding">
         <div class="col-xs-6">
           <%= f.input :btoc, label: "BTOC" %>
