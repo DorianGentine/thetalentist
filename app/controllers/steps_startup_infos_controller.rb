@@ -15,11 +15,11 @@ class StepsStartupInfosController < ApplicationController
 
   def update
     @startup = Startup.new(startup_params)
-    @talentist = Talentist.find_by_email("dimitri@hotmail.fr")
+    @talentist = Talentist.last
     message = "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
     if @startup.save
       @headhunter.update(startup_id: @startup.id)
-      @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
+      Talentist.last.send_message(@headhunter, message, "#{@headhunter.id}")
       HeadhunterMailer.accepted(@headhunter).deliver_now
       render_wizard @headhunter
     else
