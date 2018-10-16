@@ -273,24 +273,20 @@
       grid: auto auto / 50% 50%;
       padding: 0px 70px;
       grid-gap: 60px 0;
-      .chiffres{
-        display: flex;
-        justify-content: space-between;
-        .chiffre{
-          font-size: 60px;
-          font-weight: 600;
-          color: $green;
-          margin: 0;
-          em{
-            font-style: normal;
-            font-size: 30px;
-          }
+      .chiffre{
+        font-size: 60px;
+        font-weight: 600;
+        color: $green;
+        margin: 0;
+        em{
+          font-style: normal;
+          font-size: 30px;
         }
-        .desc-chiffre{
-          font-size: 20px;
-          font-weight: 600;
-          text-transform: uppercase;
-        }
+      }
+      .desc-chiffre{
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
       }
       img{
         object-fit: contain;
@@ -723,9 +719,9 @@
           padding: unset;
           flex-direction: column;
           align-items: center;
-          .chiffres-item{
-            margin-bottom: 50px;
-          }
+        }
+        .chiffres-item{
+          margin-bottom: 50px;
         }
       }
       .destine{
