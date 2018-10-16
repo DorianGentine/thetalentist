@@ -12,6 +12,8 @@ import '../components/blockRotation';
 
 import '../components/dynamicLineHeight';
 
+import '../components/limitedCharacterIndicator';
+
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 
