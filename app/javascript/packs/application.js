@@ -14,6 +14,8 @@ import '../components/dynamicLineHeight';
 
 import '../components/limitedCharacterIndicator';
 
+import '../components/inputSupMin';
+
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 

@@ -33,7 +33,7 @@
       <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
         <p class="label-edit requis">Rapide descriptif</p>
         <div class="no-padding">
-          <%= u.input :short_resume, label: false, :input_html => { style: "width: 100%", class: "limited-character" }, maxlength: 50 %>
+          <%= u.input :short_resume, label: false, :input_html => { style: "width: 100%", class: "limited-character" }, maxlength: 200 %>
         </div>
  <!--        <script>
           var limitedCharacter = document.getElementsByClassName("limited-character");
@@ -133,12 +133,12 @@
         <%= u.input :linkedin, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
       </div>
     </div>
-    <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
+<!--     <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
       <p class="label-edit">Facebook</p>
       <div class="no-padding">
         <%= u.input :facebook, label: false, :input_html => { style: "width: 100%" } %>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <% end %>
