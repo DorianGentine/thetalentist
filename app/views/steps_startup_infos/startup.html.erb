@@ -23,11 +23,11 @@
       <div class="row">
         <p class="label-edit line-height-center no-margin col-lg-2 col-xs-12 requis">Collaborateurs</p>
         <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs">
-          <%= f.input :collaborators, label: false, input_html: { style: "width: 100%" } %>
+          <%= f.input :collaborators, label: false, input_html: { style: "width: 100%", min: "0", class: "sup-zero" } %>
         </div>
         <p class="label-edit line-height-center no-margin col-lg-2 col-xs-12 margin-top-15-xs">Moyenne d'âge</p>
         <div class="col-lg-3 col-xs-12">
-          <%= f.input :average_age, :input_html => { :type => "number" }, label: false, input_html: { style: "width: 100%" } %>
+          <%= f.input :average_age, label: false, input_html: { style: "width: 100%", min: "0", class: "sup-zero" } %>
         </div>
       </div>
       <div class="row margin-top-15">

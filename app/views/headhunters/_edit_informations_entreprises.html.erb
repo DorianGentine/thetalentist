@@ -25,7 +25,7 @@
     <p class="label-edit requis">Nombre d'employés</p>
     <div class="col-lg-6 col-xs-12 no-padding">
       <div class="no-padding margin-right-15 no-margin-xs">
-        <%= f.input :collaborators, as: :integer, label: false, input_html: { style: "width: 100%" } %>
+        <%= f.input :collaborators, as: :integer, label: false, input_html: { style: "width: 100%", min: "0", class: "sup-zero" } %>
       </div>
     </div>
     <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
@@ -45,7 +45,7 @@
     <div class="col-lg-6 col-xs-12 no-padding">
       <p class="label-edit requis">Âge moyen</p>
       <div class="no-padding margin-right-15 no-margin-xs">
-        <%= f.input :average_age, label: false, :input_html => { :type => "number", style: "width: 100%" } %>
+        <%= f.input :average_age, label: false, :input_html => { :type => "number", style: "width: 100%", min: "0", class: "sup-zero" } %>
       </div>
     </div>
   </div>
