@@ -223,8 +223,8 @@ class Talent < ApplicationRecord
     self.phone.present? ? count += value_input : count
     self.city.present? ? count += value_input : count
     self.linkedin.present? ? count += value_input : count
-    self.talent_jobs.first.job.title.present? ? count += value_input : count
-    self.talent_jobs.first.year.present? ? count += value_input : count
+    self.jobs.first.present? ? count += value_input : count
+    self.talent_jobs.first.present? && self.talent_jobs.first.year.present? ? count += value_input : count
     return count.round(0)
   end
 
