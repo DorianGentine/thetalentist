@@ -199,23 +199,6 @@
               <% end %>
             </div>
 
-          <!-- Branche -->
-            <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
-              <p class="titre-rubrique-1 grid-col-span-2">Branche</p>
-              <% if @next_aventures.btoc || @next_aventures.btob %>
-                <% if @next_aventures.btoc && @next_aventures.btob %>
-                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"> BtoB & BtoC</p>
-                <% elsif @next_aventures.btob %>
-                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2">BtoB</p>
-                <% else%>
-                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2">BtoC</p>
-                <% end %>
-              <% elsif !@next_aventures.btoc && !@next_aventures.btob && current_user.is_a?(Headhunter) %>
-                <i class="far fa-question-circle green"></i>
-              <% else %>
-                <i class="red fas fa-exclamation-triangle"></i>
-              <% end %>
-            </div>
 
           <!-- Disponibilité -->
             <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
@@ -223,6 +206,24 @@
               <% if @next_aventures.availability.present? %>
                 <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.availability %></p>
               <% elsif !@next_aventures.availability.present? && current_user.is_a?(Headhunter) %>
+                <i class="far fa-question-circle green"></i>
+              <% else %>
+                <i class="red fas fa-exclamation-triangle"></i>
+              <% end %>
+            </div>
+
+          <!-- Branche -->
+            <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
+              <p class="titre-rubrique-1 grid-col-span-2" style="opacity:0">Branche</p>
+              <% if @next_aventures.btoc || @next_aventures.btob %>
+                <% if @next_aventures.btoc && @next_aventures.btob %>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;"> BtoB & BtoC</p>
+                <% elsif @next_aventures.btob %>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;">BtoB</p>
+                <% else%>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;">BtoC</p>
+                <% end %>
+              <% elsif !@next_aventures.btoc && !@next_aventures.btob && current_user.is_a?(Headhunter) %>
                 <i class="far fa-question-circle green"></i>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>

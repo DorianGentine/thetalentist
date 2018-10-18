@@ -4,7 +4,7 @@
 
 
 <!-- info sur la prochaine aventure -->
-<%= simple_form_for @talent, url: update_next_aventure_talent_path(@talent), method: :patch, remote: true  do |f|%>
+<%= simple_form_for @talent, url: update_next_aventure_talent_path(@talent), method: :patch, remote: false  do |f|%>
   <%= f.simple_fields_for :next_aventures do |u| %>
 
 
