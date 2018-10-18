@@ -14,6 +14,11 @@ import '../components/dynamicLineHeight';
 
 import '../components/googleAnalytics';
 
+import '../components/limitedCharacterIndicator';
+
+import '../components/inputSupMin';
+
+
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 

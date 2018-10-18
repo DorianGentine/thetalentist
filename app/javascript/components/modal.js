@@ -21,7 +21,6 @@ function revealModal() {
 
   let modalButtonsList = document.querySelectorAll('.modal-button')
   modalButtonsList.forEach((button) => {
-    console.log(button)
     button.addEventListener("click", triggerModal);
   })
 

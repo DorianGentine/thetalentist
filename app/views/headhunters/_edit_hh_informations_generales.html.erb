@@ -33,8 +33,34 @@
       <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
         <p class="label-edit requis">Rapide descriptif</p>
         <div class="no-padding">
-          <%= u.input :short_resume, label: false, :input_html => { style: "width: 100%" } %>
+          <%= u.input :short_resume, label: false, :input_html => { style: "width: 100%", class: "limited-character" }, maxlength: 200 %>
         </div>
+ <!--        <script>
+          var limitedCharacter = document.getElementsByClassName("limited-character");
+
+          if (limitedCharacter) {
+            for (var i = 0; i < limitedCharacter.length ; i++) {
+              var inputLength = limitedCharacter[i].value.length;
+              var limitCharacter = limitedCharacter[i].maxLength;
+              limitedCharacter[i].parentNode.insertAdjacentHTML("afterend",'<p id="aide-short_resume" class="titre-rubrique-1 float-right"></p>');
+              var aideShortResume = document.getElementById("aide-short_resume");
+
+              limitedCharacter[i].addEventListener("input", function(e) {
+                inputLength = e.target.value.length;
+                aideShortResume.textContent = inputLength + "/" + limitCharacter;
+              })
+
+              limitedCharacter[i].addEventListener("focus", function(e) {
+                  aideShortResume.textContent = inputLength + "/" + limitCharacter;
+                  aideShortResume.classList.remove("hidden");
+              })
+
+              limitedCharacter[i].addEventListener("blur", function(e) {
+                aideShortResume.classList.add("hidden");
+              })
+            }
+          }
+        </script> -->
       </div>
     </div>
 
@@ -102,17 +128,17 @@
 
   <div class="row margin-top-15">
     <div class="col-lg-6 col-xs-12 no-padding">
-      <p class="label-edit requis">Linkedin</p>
+      <p class="label-edit">Linkedin</p>
       <div class="no-padding margin-right-15 no-margin-xs">
         <%= u.input :linkedin, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
       </div>
     </div>
-    <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
-      <p class="label-edit requis">Facebook</p>
+<!--     <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
+      <p class="label-edit">Facebook</p>
       <div class="no-padding">
         <%= u.input :facebook, label: false, :input_html => { style: "width: 100%" } %>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <% end %>

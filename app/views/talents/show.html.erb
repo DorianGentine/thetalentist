@@ -59,15 +59,17 @@
           </div>
 
         <!-- Téléphone -->
-          <div class="info-grid-1">
-            <p class="titre-rubrique-1 grid-col-span-2">Téléphone</p>
-            <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
-            <% if @talent.phone.present? %>
-              <p class="titre-rubrique-3 no-margin"> <%= @talent.phone %> </p>
-            <% else%>
-              <p class="titre-rubrique-3 no-margin">Ajoute ton numéro de téléphone</p>
-            <% end %>
-          </div>
+          <% if !current_user.is_a?(Headhunter) %>
+            <div class="info-grid-1">
+              <p class="titre-rubrique-1 grid-col-span-2">Téléphone</p>
+              <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
+              <% if @talent.phone.present? %>
+                <p class="titre-rubrique-3 no-margin"> <%= @talent.phone %> </p>
+              <% else%>
+                <p class="titre-rubrique-3 no-margin">Ajoute ton numéro de téléphone</p>
+              <% end %>
+            </div>
+          <% end %>
 
         <!-- Ville -->
           <div class="info-grid-1">
@@ -147,27 +149,6 @@
         <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
         <h2 class="titre-section">Ma prochaine <strong>aventure</strong></h2>
 
-      <!-- Mes petits plus -->
-        <% if !@talent.your_small_plus.present? && current_user.is_a?(Headhunter) %>
-        <% else %>
-          <h3 class="titre-rubrique-2" style="float: left;">Mes petits plus: </h3>
-
-          <div class="talent-competences">
-            <% if !@talent.your_small_plus.present? %>
-              <i class="red fas fa-exclamation-triangle" style="margin: 0 10px 20px"></i>
-            <% else %>
-              <% @talent.your_small_plus.first(5).each do |hobby| %>
-                <p><%= hobby.description %></p>
-              <% end %>
-              <% if @talent.your_small_plus.length > 5 %>
-                <% @talent.your_small_plus.last(@talent.your_small_plus.length - 5).each do |hobby| %>
-                  <p class="read-more-content"><%= hobby.description %></p>
-                <% end %>
-                <p class="read-more" data-text-swap="Close"> + <%= @talent.your_small_plus.length - 5 %> </p>
-              <% end %>
-            <% end %>
-          </div>
-        <% end %>
 
       <!-- Ligne souhaits -->
         <div class="row margin-top-30">
@@ -303,6 +284,31 @@
             </div>
 
         </div>
+
+
+      <!-- Mes petits plus -->
+        <% if !@talent.your_small_plus.present? && current_user.is_a?(Headhunter) %>
+        <% else %>
+          <hr class="separateur-show ligne-horizontal">
+
+          <h3 class="titre-rubrique-2" style="float: left;">Mes petits plus: </h3>
+
+          <div class="talent-competences">
+            <% if !@talent.your_small_plus.present? %>
+              <i class="red fas fa-exclamation-triangle" style="margin: 0 10px 20px"></i>
+            <% else %>
+              <% @talent.your_small_plus.first(5).each do |hobby| %>
+                <p><%= hobby.description %></p>
+              <% end %>
+              <% if @talent.your_small_plus.length > 5 %>
+                <% @talent.your_small_plus.last(@talent.your_small_plus.length - 5).each do |hobby| %>
+                  <p class="read-more-content"><%= hobby.description %></p>
+                <% end %>
+                <p class="read-more" data-text-swap="Close"> + <%= @talent.your_small_plus.length - 5 %> </p>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
 
       <hr class="separateur-show ligne-horizontal">
 
