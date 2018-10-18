@@ -39,9 +39,9 @@
           <h1 class="titre-profil"><%= @talent.firstname %> <%= @talent.name %></h1>
 
         <!-- Poste -->
-            <% if @talent.experiences.last.present? && @talent.experiences.last.position.present? %>
-              <h2 class="sous-titre-profil"><%= @talent.experiences.last.position %></h2>
-            <% else %>
+            <% if @experiences.count > 0 && @experiences.first.position.present? %>
+              <h2 class="sous-titre-profil"><%= @experiences.first.position %></h2>
+              <% else %>
               <h2 class="sous-titre-profil">Pas définit</h2>
             <% end %>
 
@@ -52,9 +52,9 @@
             <p class="titre-rubrique-1 grid-col-span-2">Domaine d'activité</p>
             <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="far fa-compass"></i></p>
             <% if @talent.jobs.last.present? && @talent.jobs.last.title.present? %>
-              <p class="titre-rubrique-3 no-margin"><%= @talent.jobs.last.title %></p>
+              <p class="titre-rubrique-3 no-margin"><%= @talent.jobs.last.title %> depuis <%= @talent.talent_jobs.last.year %> ans </p>
             <% else %>
-              <p class="titre-rubrique-3 no-margin"> Ajoute ton secteur activité</p>
+              <p class="titre-rubrique-3 no-margin"> Ajoute ton domaine activité</p>
             <% end %>
           </div>
 

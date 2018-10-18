@@ -58,7 +58,7 @@ class TalentsController < ApplicationController
 
   def show
     @talents = Talent.all
-    @experiences = @talent.experiences.where(currently: true) + @talent.experiences.where.not(currently: true).order(years: :asc)
+    @experiences = @talent.experiences.where(currently: true) + @talent.experiences.where.not(currently: true).order('years  ASC')
     @next_aventures = @talent.next_aventures.last
 
     @talent_formations = @talent.talent_formations.order(:year)
@@ -254,6 +254,7 @@ private
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id],
       your_small_plus_attributes: [:id, :description, :_destroy],
+      talent_jobs_attributes: [:id, :job_id, :year, :_destroy],
       skill_ids: []
     )
   end
