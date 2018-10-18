@@ -49,10 +49,10 @@
 
         <!-- Secteur d'activité -->
           <div class="info-grid-1">
-            <p class="titre-rubrique-1 grid-col-span-2">Branche TODO</p>
+            <p class="titre-rubrique-1 grid-col-span-2">Domaine d'activité</p>
             <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="far fa-compass"></i></p>
-            <% if @talent.sectors.last.present? && @talent.sectors.last.title.present? %>
-              <p class="titre-rubrique-3 no-margin"><%= @talent.sectors.last.title %></p>
+            <% if @talent.jobs.last.present? && @talent.jobs.last.title.present? %>
+              <p class="titre-rubrique-3 no-margin"><%= @talent.jobs.last.title %></p>
             <% else %>
               <p class="titre-rubrique-3 no-margin"> Ajoute ton secteur activité</p>
             <% end %>
