@@ -12,6 +12,8 @@ import '../components/blockRotation';
 
 import '../components/dynamicLineHeight';
 
+import '../components/googleAnalytics';
+
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 
