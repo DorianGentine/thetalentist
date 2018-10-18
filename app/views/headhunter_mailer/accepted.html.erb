@@ -1,0 +1,70 @@
+
+<!-- BODY MAIL BLOC -->
+  <table style="border-radius: 2px;" align="center"; bgcolor="#F5F7FA" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+<!-- Espace début de la ligne -->
+    <tr>
+      <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+    </tr>
+    <tr>
+      <td>
+        <table  align="center" width="590" border="0" cellpadding="0" cellspacing="0">
+<!-- Bonjour Talent -->
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; text-align: left; font-size: 24px; color: #191B26; mso-line-height-rule: exactly; line-height: 30px; font-weight: bolder;">
+              Bonjour <%= @user.firstname.present? ? @user.firstname : "" %>,
+              <br> ton profil a été accetpté
+            </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Nous avons bien pris en compte la création de ton compte sur The Talentist et nous t’en remercions !
+              <br><br>
+              Pour rappel, ton identifiant est le suivant : <a href="mailto:#{@user.email}" style="font-size: 14px; font-weight: bold; font-family: Avenir, sans-serifs; color: #191B26; text-align: center; text-decoration: none; mso-line-height-rule: exactly; line-height: 24px;">
+                      <%= @user.email %>
+              </a>
+              <br><br>
+                Complète bien ton profil et celui de ton entreprise avant de commencer tes recherches de nouveaux talents.
+            </td>
+          </tr>
+<!-- Espace fin de la ligne -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
+<!-- Bouton Accèder à mon profil -->
+          <tr>
+            <td align="center" height="40">
+              <table align="center" width="270" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <td align="center" bgcolor="#4ECCA3" style="border-radius: 2px; text-align: center;" valign="middle">
+
+                      <%= link_to @user, {controller: "talents", action: "show", id: @user, :style => "font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; font-weight: bold; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;"} do %>
+                        <p style="margin:0">Complète ton profil</p>
+                      <% end %>
+
+                  </td>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Si tu ne l’as pas encore fait, nous t'invitons à compléter ton profil. Si tu as la moindre question, nous restons bien sûr à ta disposition.<br><br><em>À très vite,<br>Magdalena et Dimitri</em></td>
+          </tr>
+<!-- Espace entre les lignes -->
+          <tr>
+            <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+  </table>
+
+
