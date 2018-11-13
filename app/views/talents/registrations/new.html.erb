@@ -15,29 +15,37 @@
       </div>
       <div class="blue-background margin-top-background">
         <div class="row">
-          <p class="col-lg-2 label-edit line-height-center requis no-margin">Civilité</p>
-          <div class="col-lg-3 no-padding margin-right-15">
+          <label class="col-lg-2 label-edit text-align-right line-height-center requis no-margin no-padding-xs" for="talent_firstname">Civilité</label>
+          <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
             <%= f.input :firstname, required: true, autofocus: true, placeholder: "Prénom", label: false, :input_html => { style: "width: 100%"} %>
           </div>
-          <div class="col-lg-3 no-padding">
+          <div class="col-lg-3 col-xs-12 no-padding no-margin-xs margin-bottom-15-xs">
             <%= f.input :name, required: true, autofocus: true, placeholder: "Nom", label: false, :input_html => { style: "width: 100%"} %>
           </div>
         </div>
         <div class="row margin-top-15">
-          <p class="col-lg-2 label-edit line-height-center requis no-margin">Identifiants</p>
-          <%= f.input :email, required: true, autofocus: true, placeholder: "exemple@gmail.com", label: false, :input_html => { :class => "col-lg-3 margin-right-15"}  %>
+          <label class="col-lg-2 label-edit text-align-right line-height-center requis no-margin no-padding-xs" for="talent_email">Identifiants</label>
+          <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs margin-bottom-15-xs">
+            <%= f.input :email, required: true, autofocus: true, placeholder: "exemple@gmail.com", label: false, :input_html => { style: "width: 100%" } %>
+          </div>
 
-          <div class="col-lg-3 margin-right-15 no-padding">
+          <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs">
             <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", :input_html => { id: "margin-bottom-mdp", style: "width: 100%" }, label: false %><%= f.error_notification %>
           </div>
-          <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, :input_html => { :class => "col-lg-3"} %>
+          <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs">
+            <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, :input_html => { :class => "no-margin-xs", style: "width: 100%" } %>
+          </div>
 
         </div>
         <div class="row margin-top-15">
-          <p class="label-edit line-height-center col-lg-2 requis">Tel.</p>
-          <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: false, :input_html => { :class => "col-lg-3 margin-right-15"} %>
-          <p class="label-edit line-height-center col-lg-3 no-padding margin-right-15 requis">Ville</p>
-          <%= f.input :city, placeholder: 'Nantes, France', :input_html => { :id => "talent_city", :class => "col-lg-3" }, label: false %>
+          <label class="label-edit text-align-right line-height-center col-lg-2 requis no-padding-xs" for="talent_phone">Tel.</label>
+          <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs margin-bottom-15-xs">
+            <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%" } %>
+          </div>
+          <label class="label-edit text-align-right text-align-left-xs line-height-center col-lg-3 col-xs-2 no-padding margin-right-15 requis" for="talent_city">Ville</label>
+          <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs">
+            <%= f.input :city, placeholder: 'Nantes, France', :input_html => { :id => "talent_city", style: "width: 100%" }, label: false %>
+          </div>
         </div>
       </div>
 
@@ -46,20 +54,20 @@
         <div class="row">
 
             <%= f.simple_fields_for :talent_jobs do |u| %>
-              <p class="label-edit line-height-center col-lg-2">Spécialité métier</p>
-              <div class="col-lg-3 no-padding margin-right-15">
+              <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-margin no-padding-xs">Spécialité métier</label>
+              <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
                 <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%" } %>
               </div>
-              <p class="label-edit line-height-center col-lg-3 no-padding margin-right-15">Années d'expérience</p>
-              <div class="col-lg-3 no-padding">
+              <label class="col-lg-3 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-padding margin-right-15">Années d'expérience</label>
+              <div class="col-lg-3 col-xs-12 no-padding">
                 <%= u.input :year, label: false, :input_html => { style: "width: 100%" } %>
               </div>
             <% end %>
 
         </div>
         <div class="row margin-top-15">
-          <p class="label-edit line-height-center col-lg-2">Linkedin</p>
-          <div class="col-lg-3 no-padding">
+          <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-margin no-padding-xs">Linkedin</label>
+          <div class="col-lg-3 col-xs-12 no-padding">
             <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: false, :input_html => { style: "width: 100%" } %>
           </div>
         </div>

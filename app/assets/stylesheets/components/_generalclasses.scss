@@ -143,6 +143,9 @@
     .margin-top-30-xs{
       margin-top: 30px !important
     }
+    .margin-top-60-xs{
+      margin-top: 60px !important
+    }
     .margin-left-30-xs{
       margin-left: 30px !important
     }
@@ -167,6 +170,11 @@
   .no-padding{
     padding: unset !important;
   }
+  @media screen and (max-width: 770px){
+    .no-padding-xs{
+      padding: 0 !important;
+    }
+  }
 
 // Position
   .relative{
@@ -188,6 +196,10 @@
   .center-text{
     display: grid;
     place-items: center center;
+  }
+
+  .text-align-right{
+    text-align: right;
   }
 
   .absolute-center-vertical{ // Parent doit avoir position relative
@@ -225,6 +237,9 @@
   }
   .text-align-center-xs{
     text-align: center;
+  }
+  .text-align-left-xs{
+    text-align: left;
   }
 }
 
