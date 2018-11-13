@@ -285,7 +285,7 @@
           <% elsif talent_signed_in?%>
 
             <div class="bottom-menu-item">
-              <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+              <%= link_to "START-UP", repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" %>
             </div>
             <% if current_talent.mailbox.conversations.count > 0 %>
               <div class="bottom-menu-item">
@@ -293,7 +293,7 @@
               </div>
             <% else %>
               <div class="bottom-menu-item">
-                <p>Aucun message</p>
+                <a href="#">0 message</a>
               </div>
             <% end %>
             <div class="bottom-menu-item">
