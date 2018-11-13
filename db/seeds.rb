@@ -2,32 +2,32 @@ p "Destroy Talent"
 
 require 'csv'
 
-# Formation.destroy_all
-# Known.destroy_all
-# Skill.destroy_all
-# Sector.destroy_all
-# Job.destroy_all
-# Keyword.destroy_all
-# Language.destroy_all
-# Techno.destroy_all
-# Talent.destroy_all
+Formation.destroy_all
+Known.destroy_all
+Skill.destroy_all
+Sector.destroy_all
+Job.destroy_all
+Keyword.destroy_all
+Language.destroy_all
+Techno.destroy_all
+Talent.destroy_all
 
-# Experience.destroy_all
-# Credential.destroy_all
-# NextAventure.destroy_all
-# CompanyType.destroy_all
+Experience.destroy_all
+Credential.destroy_all
+NextAventure.destroy_all
+CompanyType.destroy_all
 
-# TalentFormation.destroy_all
-# TalentKnown.destroy_all
-# TalentSkill.destroy_all
-# TalentKeyword.destroy_all
-# TalentLanguage.destroy_all
-# TalentTechno.destroy_all
+TalentFormation.destroy_all
+TalentKnown.destroy_all
+TalentSkill.destroy_all
+TalentKeyword.destroy_all
+TalentLanguage.destroy_all
+TalentTechno.destroy_all
 
-# Startup.destroy_all
+Startup.destroy_all
 Talentist.destroy_all
-# Headhunter.destroy_all
-# Picture.destroy_all
+Headhunter.destroy_all
+Picture.destroy_all
 
 p "Creating The Talenist part"
 
