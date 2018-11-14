@@ -21,22 +21,22 @@
 
 // Color
   .black{
-    color: $black
+    color: $black !importantk
   }
   .gray{
-    color: $gray;
+    color: $gray !important;
   }
   .gray-background{
     background-color: $gray !important;
   }
   .green{
-    color: $green;
+    color: $green !important;
   }
   .green-background{
     background-color: $green !important;
   }
   .red{
-    color: $red;
+    color: $red !important;
   }
   .red-background{
     background-color: $red !important;
@@ -45,7 +45,7 @@
     border-color: $red !important;
   }
   .white{
-    color: white;
+    color: white !important;
   }
 
 // Cursor
