@@ -47,6 +47,9 @@
   .white{
     color: white;
   }
+  .white-background{
+    background-color: white;
+  }
 
 // Cursor
   .pointer{
@@ -183,6 +186,9 @@
   .absolute{
     position: absolute;
   }
+  .fixed{
+    position: fixed;
+  }
 
 // Text
   .capitalize{
@@ -200,6 +206,10 @@
 
   .text-align-right{
     text-align: right;
+  }
+
+  .text-align-center{
+    text-align: center;
   }
 
   .absolute-center-vertical{ // Parent doit avoir position relative
