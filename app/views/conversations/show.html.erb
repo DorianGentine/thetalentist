@@ -1,45 +1,50 @@
 
 
 <div class="fenetre-ecran relative">
-  <div class="colonne bordure-droite modal" id="modal_conversations" style="padding: 0% 22% 0% 0%;">
+  <div class="colonne bordure-droite modal" id="modal_conversations" style="padding: 0 22% 0 0;">
     <span class="close" id="close_modal_conversations">
         <p>&times;</p>
       </span>
-    <div class="modal-content" style="padding: 0; height: 100%; animation-name: animateleft;">
+    <div class="modal-content" style="padding: 0; height: 100%; animation-name: animateleft; border: none;">
       <%= render 'conversations' %>
     </div>
   </div>
-  <div class="modal-button absolute visible-xs" style="top: 65%; background-color: white; border: 1px solid gray; padding: 7px; z-index: 2;" data-target="modal_conversations">
+  <!-- <div class="modal-button absolute visible-xs" style="top: 65%; background-color: white; border: 1px solid gray; padding: 7px; z-index: 2;" data-target="modal_conversations">
      <i class="fa fa-bars" style="color: black;"></i>
-  </div>
+  </div> -->
 
   <div class="colonne col-gauche bordure-droite hidden-xs">
     <%= render 'conversations' %>
   </div>
 
   <div class="colonne col-centre bordure-droite">
-    <div class="premiere-ligne nom-discussion">
+    <div class="premiere-ligne nom-discussion row">
       <!-- div Prénom Nom et poste  -->
-      <% if @participant.is_a?(Talent) %>
-        <% if @relationship && @relationship.status == "Accepter" %>
-          <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
-          <p> <%= @participant.experiences.last.position.capitalize %> </p>
-        <% else %>
-          <% if @participant.experiences.present? && @participant.experiences.last.position.present? %>
-            <h2><%= @participant.experiences.last.position.capitalize %></h2>
-          <% else %>
-            <h2>Talent - Position à remplire</h2>
-          <% end %>
-          <p>En attente ...</p>
-        <% end %>
-      <% elsif @participant.is_a?(Headhunter)%>
-        <h2><%= @participant.firstname.capitalize %> de <%= @participant.startup.name.capitalize %></h2>
-        <p> <%= @participant.job.capitalize %> </p>
+      <div class="modal-button visible-xs col-xs-2" style="text-align: center" data-target="modal_conversations">
+         <i class="fa fa-bars" style="color: black;"></i>
+      </div>
 
-      <% else %>
-        <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
-        <p> Chargé digitale TODO </p>
-      <% end %>
+      <div class="col-lg-12 col-xs-11">
+        <% if @participant.is_a?(Talent) %>
+          <% if @relationship && @relationship.status == "Accepter" %>
+            <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
+            <p> <%= @participant.experiences.last.position.capitalize %> </p>
+          <% else %>
+            <% if @participant.experiences.present? && @participant.experiences.last.position.present? %>
+              <h2><%= @participant.experiences.last.position.capitalize %></h2>
+            <% else %>
+              <h2>Talent - Position à remplire</h2>
+            <% end %>
+            <p>En attente ...</p>
+          <% end %>
+        <% elsif @participant.is_a?(Headhunter)%>
+          <h2><%= @participant.firstname.capitalize %> de <%= @participant.startup.name.capitalize %></h2>
+          <p> <%= @participant.job.capitalize %> </p>
+        <% else %>
+          <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
+          <p> Chargé digitale TODO </p>
+        <% end %>
+      </div>
     </div>
 
     <!-- div link vers profil -->
@@ -54,7 +59,7 @@
       <% elsif current_user.is_a?(Headhunter) %>
         <% if @relationship && @relationship.status == "Accepter" %>
           <%= link_to talent_path(@participant) do %>
-            <p>Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
+            <p class="hidden-xs">Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
             <p>Visiter le profil > </p>
           <% end %>
         <% end %>
@@ -88,7 +93,7 @@
         <div class="send-bar">
           <label for="mailboxer_message_attachment" class="label-file-mailboxer" name="mailboxer_message[attachment]"><i class="fas fa-paperclip"></i></label>
           <%= f.file_field :attachment, :style => "display: none" %>
-          <p href="#" id="uploadFile">Aucun fichier</p>
+          <p href="#" id="uploadFile" style="margin: 0;">Aucun fichier</p>
           <%= f.submit "Envoyer", :class => "btn-envoyer" %>
         </div>
 

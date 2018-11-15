@@ -2,7 +2,7 @@ let label = document.querySelectorAll('.line-height-center')
 if (label) {
   for ( var i = 0 ; i < label.length ; i++ ) {
     let parentDiv = label[i].parentNode;
-    if (parentDiv.offsetHeight < 53 ) {
+    if (screen.width > 770 ) {
       label[i].style.lineHeight = parentDiv.offsetHeight + "px";
     }
   }
