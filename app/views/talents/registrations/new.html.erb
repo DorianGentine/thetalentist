@@ -60,7 +60,7 @@
               </div>
               <label class="col-lg-3 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-padding margin-right-15">Années d'expérience</label>
               <div class="col-lg-3 col-xs-12 no-padding">
-                <%= u.input :year, label: false, :input_html => { style: "width: 100%" } %>
+                <%= u.input :year, label: false, :input_html => { style: "width: 100%", id:"yearPositif", :onchange => "zeroInput(this.value, 'yearPositif')" } %>
               </div>
             <% end %>
 
@@ -81,3 +81,10 @@
   <% end %>
 </div>
 
+<script>
+  function zeroInput(val, id){
+    if (val < 0) {
+      document.getElementById(id).value = 0
+    }
+  }
+</script>

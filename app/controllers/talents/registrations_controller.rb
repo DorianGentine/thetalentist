@@ -22,8 +22,6 @@ class Talents::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-# faire update dans ici
-
 
   private
 
