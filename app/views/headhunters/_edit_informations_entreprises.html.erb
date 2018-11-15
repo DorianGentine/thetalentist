@@ -51,8 +51,8 @@
   </div>
 
 <!-- Titre section -->
-  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
-  <h2 class="titre-section margin-top-30">Les <strong>atouts</strong></h2>
+  <div class="titre-section-icon margin-top-background"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-background">Les <strong>atouts</strong></h2>
 
 
   <div class="row margin-top-15">
@@ -66,8 +66,8 @@
 
 
 <!-- Titre section -->
-  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
-  <h2 class="titre-section margin-top-30">Description & <strong>missions</strong></h2>
+  <div class="titre-section-icon margin-top-background"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-background">Description & <strong>missions</strong></h2>
 
   <div class="row margin-top-30">
     <div class="col-lg-6 col-xs-12 no-padding">
@@ -79,7 +79,7 @@
     <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
       <p class="label-edit requis">Les missions</p>
       <div class="no-padding">
-        <%= f.input :mission, label: false, :input_html => { style: "width: 100%", rows: 4 } %>
+        <%= f.input :mission, as: :text, label: false, :input_html => { style: "width: 100%", rows: 4 } %>
       </div>
     </div>
   </div>
