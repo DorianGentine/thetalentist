@@ -7,15 +7,15 @@
 }
 
 .margin-top-background {
-  margin-top: 30px !important;
+  margin-top: 60px !important;
 }
 
 @media screen and (min-width: 771px) {
   .margin-right-background {
-    margin-right: 15px;
+    margin-right: 30px;
   }
   .margin-left-background {
-    margin-left: 15px;
+    margin-left: 30px;
   }
 }
 .form-control{
@@ -88,13 +88,17 @@
   margin-left: 0;
   margin-right: 0;
 }
-.col-xs-12 {
-  padding-left: 0px;
-  padding-right: 0px;
-}
 .simple-new-talent {
   .simple_form {
         width: 120%;
       margin-left: -10%;
   }
+}
+
+//Equilibre hauteur input text et list
+.select2-container .select2-selection--single{
+  height: 35px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+  line-height: 35px !important;
 }

@@ -1,3 +1,4 @@
+<noscript style="width: 100vw; top: 70px; left: 0; z-index: 19; padding: 20px;" class=" fixed text-align-center white-background"><h3 class="red">The talentist fonctionne mieux avec javascript, activez-le &#128519;</h3></noscript>
 <% if params[:action] != "home" && params[:action] != "talent_home" && params[:action] != "headhunter_home"%>
 
   <div class="navbar-wagon">
@@ -285,7 +286,7 @@
           <% elsif talent_signed_in?%>
 
             <div class="bottom-menu-item">
-              <%= link_to "START-UP", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+              <%= link_to "START-UP", repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" %>
             </div>
             <% if current_talent.mailbox.conversations.count > 0 %>
               <div class="bottom-menu-item">
@@ -293,7 +294,7 @@
               </div>
             <% else %>
               <div class="bottom-menu-item">
-                <p>Aucun message</p>
+                <a href="#">0 message</a>
               </div>
             <% end %>
             <div class="bottom-menu-item">

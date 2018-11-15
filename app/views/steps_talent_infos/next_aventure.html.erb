@@ -12,147 +12,148 @@
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
   <%= f.error_notification %>
 
-    <%= f.simple_fields_for :next_aventures do |u| %>
-      <div class="blue-background">
+    <div class="margin-auto-new-talent">
+      <%= f.simple_fields_for :next_aventures do |u| %>
 
-        <div class="row margin-bottom-15">
-          <div class="col-xs-12 col-lg-3">
-            <p class="label-edit no-margin requis">Mobilité</p>
-            <div class="margin-right-15 no-margin-xs">
-              <%= u.input :city, label: false, prompt:"Choisir", collection: [ "Ville actuelle", "Paris", "France", "Europe", "Hors Europe" ], :input_html => { :class => 'select2', style: "width: 100%" } %>
-            </div>
-          </div>
-          <div class="col-xs-12 col-lg-3 col-lg-offset-3 margin-top-15-xs">
-            <p class="label-edit no-margin requis">Prochain secteur</p>
-            <%= u.input :sector_ids, collection: Sector.all, input_html: { :class => "select2", style: "width: 100%"}, include_blank: true, label: false %>
-          </div>
-        </div>
-        <div class="row margin-bottom-15">
-          <div class="col-xs-12 col-lg-3">
-            <p class="label-edit no-margin requis">Type de contrat</p>
-            <div class="margin-right-15 no-margin-xs">
-              <%= u.input :contrat, label: false, prompt:"Choisir", collection: [ "CDI", "CDD", "Freelance", "Stage" ], :input_html => { :class => 'select2', style: "width: 100%" } %>
-            </div>
-          </div>
-          <div class="col-xs-12 col-lg-3 col-lg-offset-3 margin-top-15-xs">
-            <p class="label-edit no-margin requis" style="opacity: 0">Branche</p>
-            <div class="row">
-              <div class="col-lg-6 col-xs-6">
-                <%= u.input :btoc, label: "BTOC" %>
-              </div>
-              <div class="col-lg-6 col-xs-6">
-                <%= u.input :btob, label: "BTOB" %>
+        <div class="blue-background">
+
+          <div class="row margin-bottom-15">
+            <div class="col-xs-12 col-lg-3">
+              <p class="label-edit no-margin requis">Mobilité</p>
+              <div class="margin-right-15 no-margin-xs">
+                <%= u.input :city, label: false, prompt:"Choisir", collection: [ "Ville actuelle", "Paris", "France", "Europe", "Hors Europe" ], :input_html => { :class => 'select2', style: "width: 100%" } %>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-lg-3">
-            <p class="label-edit no-margin requis">Attentes salariales</p>
-            <div class="margin-right-15 no-margin-xs">
-            <%= u.input :remuneration, label: false, hint: "package K€ annuel brut", collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ], :input_html => { :class => 'select2', style: "width: 100%" } %>
+            <div class="col-xs-12 col-lg-3 col-lg-offset-3 margin-top-15-xs">
+              <p class="label-edit no-margin requis">Prochain secteur</p>
+              <%= u.input :sector_ids, collection: Sector.all, input_html: { :class => "select2", style: "width: 100%"}, include_blank: true, label: false %>
             </div>
           </div>
-          <div class="col-xs-12 col-lg-3 col-lg-offset-3 margin-top-15-xs">
-            <p class="label-edit no-margin requis">Disponibilité</p>
-            <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"], label: false, :input_html => { :class => 'select2', style: "width: 100%" } %>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="row margin-top-background">
-        <div class="col-xs-12 col-lg-6">
-          <div class="blue-background margin-right-background">
-              <p class="label-edit no-margin requis">Vos petits plus </p>
-
-              <%= f.simple_fields_for :your_small_plus do |e| %>
-                <%= render 'your_small_plu_fields', :f => e %>
-              <% end %>
-
-            <div class="links margin-top-15">
-              <%= link_to_add_association 'Ajouter un +', f, :your_small_plus, :partial => 'your_small_plu_fields', :class => "form-hobby-add" %>
+          <div class="row margin-bottom-15">
+            <div class="col-xs-12 col-lg-3">
+              <p class="label-edit no-margin requis">Type de contrat</p>
+              <div class="margin-right-15 no-margin-xs">
+                <%= u.input :contrat, label: false, prompt:"Choisir", collection: [ "CDI", "CDD", "Freelance", "Stage" ], :input_html => { :class => 'select2', style: "width: 100%" } %>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-lg-6 margin-top-30-xs">
-          <div class="blue-background margin-left-background" style="min-height: 155px;">
-            <p class="label-edit no-margin requis">
-            Qu’attends-tu de ta prochaine aventure ?</p>
-            <p class="texte-rubrique-3 no-margin">Sélectionne les 3 critères les plus importants à tes yeux et classe-les par ordre d’importance</p>
-            <div class="row">
-              <div class="col-lg-4 no-padding">
-                <%= u.input :waiting_for_one, label: false, prompt:"Choix n°1", collection: choices, :input_html => { :class => 'select2', style: "width: 90%" } %>
-              </div>
-              <div class="col-lg-4 no-padding margin-top-15-xs">
-                <%= u.input :waiting_for_two, label: false, prompt:"Choix n°2", collection: choices, :input_html => { :class => 'select2', style: "width: 90%" } %>
-              </div>
-              <div class="col-lg-4 no-padding margin-top-15-xs">
-                <%= u.input :waiting_for_three, label: false, prompt:"Choix n°3", collection: choices, :input_html => { :class => 'select2', style: "width: 90%" } %>
+            <div class="col-xs-12 col-lg-3 col-lg-offset-3 margin-top-15-xs">
+              <p class="label-edit no-margin requis" style="opacity: 0">Branche</p>
+              <div class="row">
+                <div class="col-lg-6 col-xs-6">
+                  <%= u.input :btoc, label: "BTOC" %>
+                </div>
+                <div class="col-lg-6 col-xs-6">
+                  <%= u.input :btob, label: "BTOB" %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="blue-background margin-top-background">
-        <p class="label-edit no-margin requis">Es-tu plutôt:</p>
-        <div class="row">
-          <div class="col-xs-12 col-lg-6 margin-top-15-xs">
-            <div class="row">
-              <p class="label-edit col-lg-3 col-xs-4 no-margin no-padding" style="text-align: center;">Chasseur</p>
-              <p class="visible-xs label-edit col-xs-4 no-margin no-padding float-right" style="text-align: center;">Éleveur</p>
-              <div class="col-lg-6 col-xs-12">
-                <%= u.input :hunter_or_breeder, as: :range, input_html: { min: 0, max: 100, class:"slider", style:"width:100%;", id:"level_value_activity" }, label: false, wrapper: false %>
+          <div class="row">
+            <div class="col-xs-12 col-lg-3">
+              <p class="label-edit no-margin requis">Attentes salariales</p>
+              <div class="margin-right-15 no-margin-xs">
+              <%= u.input :remuneration, label: false, hint: "package K€ annuel brut", collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ], :input_html => { :class => 'select2', style: "width: 100%" } %>
               </div>
-              <p class="label-edit col-lg-3 no-margin no-padding hidden-xs" style="text-align: center;">Éleveur</p>
             </div>
-          </div>
-          <div class="col-xs-12 col-lg-6 margin-top-15-xs">
-            <div class="row">
-              <p class="label-edit col-lg-3 col-xs-4 no-margin no-padding" style="text-align: center;">Créatif</p>
-              <p class="visible-xs label-edit col-xs-4 no-margin no-padding float-right" style="text-align: center;">Pragmatique</p>
-              <div class="col-lg-6 col-xs-12">
-                <%= u.input :creative_or_pragmatic, as: :range, input_html: { min: 0, max: 100, class:"slider", style:"width:100%;", id:"level_value_activity" }, label: false, wrapper: false %>
-              </div>
-              <p class="hidden-xs label-edit col-lg-3 no-margin no-padding" style="text-align: center;">Pragmatique</p>
+            <div class="col-xs-12 col-lg-3 col-lg-offset-3 margin-top-15-xs">
+              <p class="label-edit no-margin requis">Disponibilité</p>
+              <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"], label: false, :input_html => { :class => 'select2', style: "width: 100%" } %>
             </div>
           </div>
         </div>
-      </div>
 
+        <div class="row margin-top-background">
+          <div class="col-xs-12 col-lg-6 no-padding">
+            <div class="blue-background margin-right-background">
+                <p class="label-edit no-margin requis">Vos petits plus </p>
 
-      <div class="blue-background margin-top-background">
-        <div class="row">
-          <div class="col-xs-12 col-lg-5">
-            <p class="label-edit no-margin requis">Quel est le rêve que tu remets toujours à demain ?</p>
-            <%= u.input :dream, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%" } %>
+                <%= f.simple_fields_for :your_small_plus do |e| %>
+                  <%= render 'your_small_plu_fields', :f => e %>
+                <% end %>
+
+              <div class="links margin-top-15">
+                <%= link_to_add_association 'Ajouter un +', f, :your_small_plus, :partial => 'your_small_plu_fields', :class => "form-hobby-add" %>
+              </div>
+            </div>
           </div>
-          <div class="col-xs-12 col-lg-5 col-lg-offset-2 margin-top-15-xs">
-            <p class="label-edit no-margin requis">Y a-t-il une personnalité qui t’inspire ? Pourquoi ?</p>
-            <%= u.input :famous_person, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%"} %>
+          <div class="col-xs-12 col-lg-6 no-padding margin-top-30-xs">
+            <div class="blue-background margin-left-background" style="min-height: 155px;">
+              <p class="label-edit no-margin requis">
+              Qu’attends-tu de ta prochaine aventure ?</p>
+              <p class="texte-rubrique-3 no-margin">Sélectionne les 3 critères les plus importants à tes yeux et classe-les par ordre d’importance</p>
+              <div class="row">
+                <div class="col-lg-4 no-padding">
+                  <%= u.input :waiting_for_one, label: false, prompt:"Choix n°1", collection: choices, :input_html => { :class => 'select2', style: "width: 90%" } %>
+                </div>
+                <div class="col-lg-4 no-padding margin-top-15-xs">
+                  <%= u.input :waiting_for_two, label: false, prompt:"Choix n°2", collection: choices, :input_html => { :class => 'select2', style: "width: 90%" } %>
+                </div>
+                <div class="col-lg-4 no-padding margin-top-15-xs">
+                  <%= u.input :waiting_for_three, label: false, prompt:"Choix n°3", collection: choices, :input_html => { :class => 'select2', style: "width: 90%" } %>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row margin-top-15">
-          <div class="col-xs-12 col-lg-5">
-            <p class="label-edit no-margin requis">Selon toi, qu’est-ce qu’un bon manager ?</p>
-            <%= u.input :good_manager, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%" } %>
-          </div>
-          <div class="col-xs-12 col-lg-5 col-lg-offset-2 margin-top-15-xs">
-            <p class="label-edit no-margin requis">Quel travail serais-tu prêt à effectuer gratuitement ?</p>
-            <%= u.input :work_for_free, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%"} %>
-          </div>
-        </div>
-      </div>
-    <% end %>
 
-    <div class="blue-background margin-top-background row">
-      <div class="col-lg-5 col-lg-offset-4 row">
-        <div class="col-xs-2">
-          <%= f.input :terms_of_condition, as: :boolean, label: false, required: true, autofocus: true%>
+        <div class="blue-background margin-top-background">
+          <p class="label-edit no-margin requis">Es-tu plutôt:</p>
+          <div class="row">
+            <div class="col-xs-12 col-lg-6 margin-top-15-xs">
+              <div class="row">
+                <p class="label-edit col-lg-3 col-xs-4 no-margin no-padding" style="text-align: center;">Chasseur</p>
+                <p class="visible-xs label-edit col-xs-4 no-margin no-padding float-right" style="text-align: center;">Éleveur</p>
+                <div class="col-lg-6 col-xs-12">
+                  <%= u.input :hunter_or_breeder, as: :range, input_html: { min: 0, max: 100, class:"slider", style:"width:100%;", id:"level_value_activity" }, label: false, wrapper: false %>
+                </div>
+                <p class="label-edit col-lg-3 no-margin no-padding hidden-xs" style="text-align: center;">Éleveur</p>
+              </div>
+            </div>
+            <div class="col-xs-12 col-lg-6 margin-top-15-xs">
+              <div class="row">
+                <p class="label-edit col-lg-3 col-xs-4 no-margin no-padding" style="text-align: center;">Créatif</p>
+                <p class="visible-xs label-edit col-xs-4 no-margin no-padding float-right" style="text-align: center;">Pragmatique</p>
+                <div class="col-lg-6 col-xs-12">
+                  <%= u.input :creative_or_pragmatic, as: :range, input_html: { min: 0, max: 100, class:"slider", style:"width:100%;", id:"level_value_activity" }, label: false, wrapper: false %>
+                </div>
+                <p class="hidden-xs label-edit col-lg-3 no-margin no-padding" style="text-align: center;">Pragmatique</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-xs-10">
-          <%= link_to 'Acceptez vous les conditions générales', mentions_legales_path %>
+
+        <div class="blue-background margin-top-background">
+          <div class="row">
+            <div class="col-xs-12 col-lg-5">
+              <p class="label-edit no-margin requis">Quel est le rêve que tu remets toujours à demain ?</p>
+              <%= u.input :dream, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%" } %>
+            </div>
+            <div class="col-xs-12 col-lg-5 col-lg-offset-2 margin-top-15-xs">
+              <p class="label-edit no-margin requis">Y a-t-il une personnalité qui t’inspire ? Pourquoi ?</p>
+              <%= u.input :famous_person, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%"} %>
+            </div>
+          </div>
+          <div class="row margin-top-15">
+            <div class="col-xs-12 col-lg-5">
+              <p class="label-edit no-margin requis">Selon toi, qu’est-ce qu’un bon manager ?</p>
+              <%= u.input :good_manager, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%" } %>
+            </div>
+            <div class="col-xs-12 col-lg-5 col-lg-offset-2 margin-top-15-xs">
+              <p class="label-edit no-margin requis">Quel travail serais-tu prêt à effectuer gratuitement ?</p>
+              <%= u.input :work_for_free, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%"} %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="blue-background margin-top-background row">
+        <div class="col-lg-5 col-lg-offset-4 row">
+          <div class="col-xs-2">
+            <%= f.input :terms_of_condition, as: :boolean, label: false, required: true, autofocus: true%>
+          </div>
+          <div class="col-xs-10">
+            <%= link_to 'Acceptez vous les conditions générales', cgu_talents_path %>
+          </div>
         </div>
       </div>
     </div>
