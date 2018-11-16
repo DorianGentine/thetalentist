@@ -75,8 +75,13 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.is_a?(Headhunter)
-      sign_in(resource)
-      headhunter_path(resource)
+      if resource.startup.nil?
+        session[:headhunter_id] = resource.id
+        steps_startup_info_path(:startup)
+      else
+        sign_in(resource)
+        headhunter_path(resource)
+      end
     elsif resource.is_a?(Talent)
       if resource.next_aventures.first
         if resource.validated

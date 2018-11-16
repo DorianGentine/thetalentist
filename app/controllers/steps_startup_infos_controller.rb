@@ -47,7 +47,8 @@ private
       :collaborators,
       :average_age,
       :link,
-      :address
+      :address,
+      :terms_of_condition
       )
   end
 

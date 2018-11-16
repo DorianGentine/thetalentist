@@ -21,6 +21,10 @@ class HeadhunterPolicy < ApplicationPolicy
     user == record
   end
 
+  def destroy?
+    user == record || user.is_a?(Talentist)
+  end
+
   def edit?
     user == record
   end

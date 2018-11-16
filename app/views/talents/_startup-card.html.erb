@@ -6,10 +6,11 @@
       <div class="border">
 
         <div class="talent-job">
+          <!-- A changer -->
           <h2><%= headhunter.firstname.present? ? headhunter.firstname : "Pas infos" %> <%= headhunter.name.present? ? headhunter.name : 'Pas infos' %></h2>
         </div>
         <div class="talent-job">
-          <p>de <%= headhunter.startup.name.present? ? headhunter.startup.name : "No-Name" %></p>
+          <p>de <%= !headhunter.startup.nil? && headhunter.startup.name.present? ? headhunter.startup.name : "Inconnu" %></p>
         </div>
 
         <div class="background-img background-img-talentist">
@@ -37,7 +38,14 @@
           <% else %>
             <a style="font-size: 12px">Aucun message</a>
           <% end %>
-          <%= link_to "Profil", headhunter_path(headhunter)%>
+          <!-- A changer -->
+          <% if headhunter.startup.nil? %>
+            <%= link_to "Supprimer", headhunter_path(headhunter),
+              method: :delete,
+              data: { confirm: "Êtes-vous sur?" } %>
+          <% else %>
+            <%= link_to "Profil", headhunter_path(headhunter)%>
+          <% end %>
         </div>
 
       </div>
