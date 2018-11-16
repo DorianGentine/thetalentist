@@ -1,20 +1,75 @@
-<div class="new_landing">
+<div class="new_landing container-fluid no-padding">
+
+  <!-- navbar -->
+    <div class="row margin-top-30 margin-bottom-30">
+      <div class="col-xs-2 text-align-center">
+        <%= render "shared/top_menu" %>
+      </div>
+      <div class="col-xs-4 col-xs-offset-2 text-align-center">
+        <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
+      </div>
+    </div>
+
+  <!-- box grise -->
+    <div class="row absolute hidden-xs hidden-sm" style="top: 0; z-index: -1;">
+      <div class="col-xs-offset-2 col-xs-10 landing-top"></div>
+    </div>
+
+  <!-- intérieur box -->
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-10 no-padding image-habillage">
+        <div class="row">
+          <!-- image de fond -->
+            <div class="col-lg-offset-4 col-lg-8 col-xs-12 no-padding compartiment-image relative" style="background-image: url('<%= image_path "olu-eletu-134758-unsplash.jpg" %>');">
+              <div class="quatre-metiers hidden-xs">
+                <h3>Plateforme de mise en relation entre talents du digital et startups, spécialisée dans les métiers du Marketing, Produit, Sales et Operations!</h3>
+              </div>
+            </div>
+
+          <!-- texte principal -->
+            <div class="col-lg-11 col-xs-12 margin-top-60 position-top texte-principal">
+              <div class="texte-principal-gauche">
+                <h1>When the most talented candidates meet promising start-ups.</h1>
+              </div>
+              <div class="texte-principal-droit">
+                <h1 class="green">When the most talented candidates meet promising start-ups.</h1>
+              </div>
+            </div>
+
+          <!-- btns inscription -->
+            <div class="col-lg-4">
+              <div class="col-xs-5 btn btn-inscription">
+                <%= link_to welcome_talents_path do  %>
+                  <p><i class="fas fa-user"></i></p>
+                  <p>Je suis un<br>talent</p>
+                <% end %>
+              </div>
+              <div class="col-xs-5 col-xs-offset-2 btn btn-inscription">
+                <%= link_to welcome_headhunters_path do %>
+                  <p><i class="fas fa-rocket"></i></p>
+                  <p>Je suis une<br>start-up</p>
+                <% end %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+</div>
+
+<!-- <div class="new_landing">
 
   <%= render "shared/top_menu" %>
 
 
   <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
 
- <!--  <div class="avatar-home">
-    <#%= render "shared/avatar" %>
-  </div> -->
-
   <div class="landing-top" style="margin-bottom: 0">
 
 
 
     <div id="image-habillage-hp" class="image-habillage">
-      <!-- <img src="/assets/rawpixel-617400-unsplash.jpg" alt="image de fond"> -->
       <div id="position-top-hp" class="position-top">
         <h1 class="hidden-xs hidden-sm">When the most <strong>talented</strong> <br>candidates meet <strong>promising</strong> <br>start-ups.</h1>
         <h1 class="hidden-md hidden-lg">When the <strong>most talented</strong> <br>candidates <strong>meet promising</strong> <br>start-ups.</h1>
@@ -45,7 +100,7 @@
     </div>
 
   </div>
-</div>
+</div> -->
 
 
 

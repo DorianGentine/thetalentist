@@ -2,7 +2,14 @@
 
 <div class="forgot_password">
 
-  <h2>Mentions <strong>légales</strong></h2>
+  <h2 class="relative">
+    Mentions <strong>légales</strong>
+    <%= link_to 'javascript:history.back()' do  %>
+      <div class="btn-edition-container" style="right: 0; bottom: 0;">
+        <p class="no-margin label-edit align-center green"><i class="fas fa-angle-left"></i> Retour</p>
+      </div>
+    <% end %>
+  </h2>
 
   <p style="text-align: justify;">Le Service est édité par la société INEVA & PARTNERS, <br>9, rue Saint Fiacre 75002 Paris - France, RCS Paris 531 821 296<br> <br>
 
@@ -29,7 +36,7 @@
 
   Lors de vos visites sur le site, un cookie peut s’installer automatiquement sur votre logiciel de navigation. <br>
   Des cookies sont notamment utilisés par l’outil Google Analytics utilisé sur ce site. <br>
-  <em style="background-color: yellow;">En savoir + (créer un lien profond qui renvoie sur une page « Utilisation des cookies par INEVA & PARTNERS »)</em> <br> <br>
+  En savoir + (créer un lien profond qui renvoie sur une page « Utilisation des cookies par INEVA & PARTNERS »)<br> <br>
 
   DROITS D'AUTEUR / COPYRIGHT : <br> <br>
 
