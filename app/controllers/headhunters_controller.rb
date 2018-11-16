@@ -1,5 +1,8 @@
 class HeadhuntersController < ApplicationController
-  before_action :set_headhunter, only: [ :show, :to_validate, :update, :update_profile, :update_startup, :update_photos, :edit]
+  before_action :set_headhunter, only: [
+    :show, :to_validate, :update,
+    :update_profile, :update_startup, :update_photos, :edit
+  ]
   def repertory
     @headhunter = current_headhunter
     authorize @headhunter
@@ -27,6 +30,13 @@ class HeadhuntersController < ApplicationController
       end
     end
 
+  end
+
+  def destroy
+    @headhunter = Headhunter.find(params[:id])
+    @headhunter.destroy
+    redirect_to headhunters_path
+    authorize @headhunter
   end
 
   def index

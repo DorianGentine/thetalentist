@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     registrations: 'headhunters/registrations'
   }
   resources :startups, only: [ :update ]
-  resources :headhunters, only: [:show, :update, :index, :edit] do
+  resources :headhunters, only: [:show, :update, :index, :edit, :destroy] do
     patch 'to_validate', :on => :member
     patch 'update_profile', :on => :member
     patch 'update_photos', :on => :member
