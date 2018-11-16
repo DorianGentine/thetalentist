@@ -1,26 +1,76 @@
-<div class="new_landing" id="talent-landing">
+<%= link_to welcome_talents_path do  %>
+  <%= render "shared/switch_button" %>
+<% end %>
 
-  <%= render "shared/top_menu" %>
+<div class="new_landing container-fluid no-padding" id="talent-landing">
 
-  <%= link_to welcome_talents_path do  %>
-    <%= render "shared/switch_button" %>
-  <% end %>
+  <!-- navbar -->
+    <div class="row margin-top-30 margin-bottom-30">
+      <div class="col-xs-2 text-align-center">
+        <%= render "shared/top_menu" %>
+      </div>
+      <div class="col-xs-4 col-xs-offset-2 text-align-center">
+        <%= link_to root_path do %>
+          <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
+        <% end %>
+      </div>
+      <div class="col-xs-4">
+        <%= render "shared/connexion-btns" %>
+      </div>
+    </div>
 
-  <!-- <img class="new-landing-logo-talentist" src="/assets/Logo The talentist-01.png" alt="logo The talentist">  -->
-  <%= link_to root_path do %>
-    <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
-  <% end %>
-  <%= render "shared/connexion-btns" %>
+  <!-- box grise -->
+    <div class="row absolute hidden-xs hidden-sm" style="top: 0; z-index: -1;">
+      <div class="col-xs-offset-2 col-xs-10 landing-top"></div>
+    </div>
 
-  <div class="landing-top">
+  <!-- intérieur box -->
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-10 no-padding image-habillage">
+        <div class="row">
+          <!-- image de fond -->
+            <div class="col-lg-offset-4 col-lg-8 col-xs-12 no-padding compartiment-image relative" style="background-image: url('<%= image_path "olu-eletu-134758-unsplash.jpg" %>');">
+              <div class="quatre-metiers hidden-xs">
+                <h3>Rencontrez les meilleurs profils Marketing, Produit, Sales et Operations du marché digital !</h3>
+              </div>
+            </div>
+
+          <!-- texte principal -->
+            <div class="col-lg-11 col-xs-12 margin-top-60 position-top texte-principal">
+              <div class="texte-principal-gauche">
+                <h1>Je suis une start-up</h1>
+              </div>
+              <div class="texte-principal-droit">
+                <h1 class="green">Je suis une start-up</h1>
+              </div>
+            </div>
+
+          <!-- btns inscription -->
+            <div class="col-lg-4 margin-btn-inscription-lp">
+              <div class="col-xs-5 btn btn-inscription">
+                <%= link_to new_headhunter_registration_path do  %>
+                  <p>S'inscrire</p>
+                <% end %>
+              </div>
+              <div class="col-xs-6 col-xs-offset-1 btn btn-inscription">
+                <%= link_to new_headhunter_session_path do %>
+                  <p>Se connecter</p>
+                <% end %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
 
 
+    <a href="#landing-main"><i class="fas fa-angle-double-down fleche-bas"></i></a>
+
+
+<!--   <div class="landing-top">
     <div class="image-habillage">
-
       <div class="position-top">
         <h1 style="font-size: 5.3vw" class="hidden-xs">Je suis une <strong>start-up</strong></h1>
         <h1 style="font-size: 9.5vw" class="hidden visible-xs">Je suis une <strong>start-up</strong></h1>
-
 
         <div class="actions-xs hidden visible-xs">
           <div class="btn-connexion">
@@ -44,12 +94,9 @@
       <div class="compartiment-image">
         <%= image_tag "olu-eletu-134758-unsplash.jpg" %>
       </div>
-
     </div>
-
-    <a href="#landing-main"><i class="fas fa-angle-double-down fleche-bas"></i></a>
-
-  </div>
+  </div> -->
+  <a href="#landing-main"><i class="fas fa-angle-double-down fleche-bas"></i></a>
 
   <div class="landing-main">
 

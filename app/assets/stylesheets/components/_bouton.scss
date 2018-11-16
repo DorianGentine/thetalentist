@@ -160,15 +160,9 @@
 
 // btn-inscription
   .btn-inscription{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 30%;
-    max-width: 12vw;
-    height: 12.5vw;
+    margin-top: 90px;
     border: 2px solid $green;
     border-radius: 4px;
-    margin: 0 50px 0 0;
     background-color: rgba(0,0,0,0);
     animation: anim-bouton 2s ease-out infinite;
     transition: 0.15s;
@@ -204,11 +198,8 @@
   }
   @media screen and (max-width: 1000px) {
     .btn-inscription{
-      margin: 0 40px;
-      width: unset;
-      height: unset;
-      max-width: unset;
       background-color: white;
+      margin-top: 35vh;
       p{
         font-size: 3vw;
         i{

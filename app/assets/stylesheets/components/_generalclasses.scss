@@ -30,7 +30,7 @@
     background-color: $gray !important;
   }
   .green{
-    color: $green;
+    color: $green !important;
   }
   .green-background{
     background-color: $green !important;
@@ -110,6 +110,9 @@
   }
   .no-margin{
     margin: 0 !important;
+  }
+  .margin-top-60{
+    margin-top: 60px !important
   }
   .margin-bottom-30{
     margin-bottom: 30px !important
