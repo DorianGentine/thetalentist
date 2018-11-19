@@ -50,13 +50,13 @@
               <tbody>
                 <td height="40" align="center" bgcolor="#4ECCA3" style="border-radius: 2px; text-align: center;" valign="middle">
                   <% if @receveur.is_a?(Talent) %>
-                    <%= correct_url = talent_url(@receveur) %>
+                    <% correct_url = talent_url(@receveur) %>
                   <% elsif @receveur.is_a?(Talentist) %>
-                    <%= correct_url = talents_url %>
+                    <% correct_url = talents_url %>
                   <% elsif @receveur.is_a?(Headhunter) %>
-                    <%= correct_url = headhunter_url(@receveur) %>
+                    <% correct_url = headhunter_url(@receveur) %>
                   <% else %>
-                    <%= correct_url = root_url %>
+                    <% correct_url = root_url %>
                   <% end %>
                   <%= link_to correct_url, { :style => "font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; font-weight: bold; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;"} do %>
                       <p style="margin:0"> Voir et répondre au message </p>
