@@ -256,12 +256,12 @@ class Talent < ApplicationRecord
     experiences_count = self.experiences.size * 6
     value_input = stat(experiences_count)
     self.experiences.each do |experience|
-      experience.position.present? ? count += value_input : raise
-      experience.starting.present? ? count += value_input : raise
+      experience.position.present? ? count += value_input : count
+      experience.starting.present? ? count += value_input : count
       experience.currently || experience.years.present? ? count += value_input : count
-      experience.overview.present? ? count += value_input : raise
-      experience.company_name.present? ? count += value_input : raise
-      experience.company_type_id.present? ? count += value_input : raise
+      experience.overview.present? ? count += value_input : count
+      experience.company_name.present? ? count += value_input : count
+      experience.company_type_id.present? ? count += value_input : count
     end
     return count.round(0)
   end

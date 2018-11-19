@@ -38,10 +38,11 @@
         </div>
 
         <div class="talent-update margin-bottom-15">
-          <p class="no-margin"><i class="far fa-clock margin-right-15"></i>MAJ : <%= l(talent.updated_at, :locale => :fr) %>
+          <p class="no-margin"><i class="far fa-clock margin-right-15">
+            </i>MAJ : <%= l(talent.updated_at, :locale => :fr) %>
           </p>
           <p class="no-margin">
-            <i class=" <#%= talent.completed_totaly > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle"  %> margin-right-15"></i>profil complété à <strong class=" <#%= talent.completed_totaly > 85 ? "green" : "red"  %>"><#%= talent.completed_totaly %></strong>
+            <i class=" <%= talent.completed_totaly > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle"  %> margin-right-15"></i>profil complété à <strong class=" <%= talent.completed_totaly > 85 ? "green" : "red"  %>"><%= talent.completed_totaly %>%</strong>
           </p>
         </div>
 
