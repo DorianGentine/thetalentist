@@ -10,7 +10,7 @@ Rails.application.configure do
   # TODO when we have a hosting
   # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.action_mailer.default_url_options = { host: "thetalentist.com" }
+  config.action_mailer.default_url_options = { host: "www.betatalentist.com" }
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -54,7 +54,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -99,4 +99,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  ENV["DATABASE_URL"] = 'postgres://oqpmateobuxwak:09e8a066afdcaaf308173b8ff11bdf785a100f9d12aca2a06187d090fb4b3569@ec2-79-125-6-160.eu-west-1.compute.amazonaws.com:5432/ddpu4j1nshvjap'
+
 end
