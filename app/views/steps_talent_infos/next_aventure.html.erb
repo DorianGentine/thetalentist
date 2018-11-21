@@ -1,8 +1,6 @@
 <% choices = ["Ambiance", "International", "Produit", "Rémunération", "Sens", "Valeurs", "Mission", "Management", "Worklife balance", "Impact"]  %>
 
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
+
 <div class="form-container simple-new-talent" data-page="4">
 
   <%= render 'shared/formprogression' %>
