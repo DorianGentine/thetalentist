@@ -6,8 +6,8 @@
   <h2 class="form-titre-page"><i class="far fa-id-badge"></i> Qui se cache derrière <strong>ce Talent</strong> ?</h2>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= f.error_notification %>
     <div class="margin-auto-new-talent">
+      <%= f.error_notification %>
       <div class="linkedin-btn blue-background center-text">
         <%= link_to talent_linkedin_omniauth_authorize_path, :class => "button-linkedin" do %>
           <p class="no-margin"><i class="fab fa-linkedin"></i> Connect with Linkedin</p>
@@ -30,7 +30,7 @@
           </div>
 
           <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs">
-            <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", :input_html => { id: "margin-bottom-mdp", style: "width: 100%" }, label: false %><%= f.error_notification %>
+            <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", :input_html => { id: "margin-bottom-mdp", style: "width: 100%" }, label: false %>
           </div>
           <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs">
             <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, :input_html => { :class => "no-margin-xs", style: "width: 100%" } %>
@@ -52,8 +52,9 @@
 
       <div class="blue-background margin-top-background">
         <div class="row">
-
+            <% @talent.talent_jobs.present? ? "" : @talent.talent_jobs.build %>
             <%= f.simple_fields_for :talent_jobs do |u| %>
+
               <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-margin no-padding-xs">Spécialité métier</label>
               <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
                 <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%" } %>
