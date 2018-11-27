@@ -53,7 +53,7 @@ class UserInfoPdf < Prawn::Document
     [["Ville:", present?(next_aventure.city)]] +
     [["Contrat:", present?(next_aventure.contrat)]] +
     [["Rémuneration:", present?(next_aventure.remuneration)]] +
-    [["Secteur:", present?(next_aventure.next_aventure_sectors.first.sector.title)]] +
+    [["Secteur:", next_aventure.sectors.first.present? ? present?(next_aventure.sectors.first.title) : "false"]] +
     [["Attente n°1:", present?(next_aventure.waiting_for_one)]] +
     [["Attente n°2:", present?(next_aventure.waiting_for_two)]] +
     [["Attente n°3:", present?(next_aventure.waiting_for_three)]] +
