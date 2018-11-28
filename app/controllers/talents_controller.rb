@@ -141,7 +141,7 @@ class TalentsController < ApplicationController
     if params[:commit] == "Accepter"
       if @talent.validated == true
         validated_action(nil)
-      elsif @talent.validated == false
+      else # @talent.validated == false || @talent.validated == nil
         validated_action(true)
         conversations = Mailboxer::Conversation.participant(@talentist).participant(@talent)
         if conversations.size > 0
@@ -150,8 +150,8 @@ class TalentsController < ApplicationController
           @talentist.send_message(@talent, "Bonjour #{@talent.firstname}, Bienvenue sur notre plateforme!", "#{@talent.id}")
           @talent.send_accepted
         end
-      else @talent.validated == nil
-        validated_action(true)
+      # else @talent.validated == nil
+      #   validated_action(true)
       end
     elsif params[:commit] == "Refuser"
       if @talent.validated == false
