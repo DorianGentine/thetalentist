@@ -47,7 +47,7 @@
               <% if talent.next_aventures.present? && talent.next_aventures.last.sectors.present? %>
                 <p><%= talent.next_aventures.last.sectors.first.title.capitalize %></p>
               <% else %>
-                <p> A remplire</p>
+                <p> A remplir</p>
               <% end %>
             </div>
             <div class="card-dispsition">
@@ -72,20 +72,20 @@
           <div class="lower-body-item-content">
             <div>
               <h5>La personnalité qui m'inspire ?</h5>
-              <% if @next_aventures.present? %>
-                <% if @next_aventures.famous_person.present?  %>
-                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.famous_person %></p>
-                <% elsif !@next_aventures.famous_person.present? && current_user.is_a?(Headhunter) %>
+              <% if talent.next_aventures.first.present? %>
+                <% if talent.next_aventures.first.famous_person.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= talent.next_aventures.first.famous_person %></p>
+                <% elsif !talent.next_aventures.first.famous_person.present? && current_user.is_a?(Headhunter) %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
                 <% end %>
               <% end %>
             </div>
             <div>
               <h5>Le job de mes rêves</h5>
-              <% if @next_aventures.present? %>
-                <% if @next_aventures.work_for_free.present?  %>
-                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.work_for_free %></p>
-                <% elsif !@next_aventures.work_for_free.present? && current_user.is_a?(Headhunter) %>
+              <% if talent.next_aventures.first.present? %>
+                <% if talent.next_aventures.first.work_for_free.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= talent.next_aventures.first.work_for_free %></p>
+                <% elsif !talent.next_aventures.first.work_for_free.present? && current_user.is_a?(Headhunter) %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
                 <% end %>
               <% end %>
