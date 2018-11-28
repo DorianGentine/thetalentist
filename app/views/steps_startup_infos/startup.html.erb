@@ -10,7 +10,7 @@
         <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
           <%= f.input :name, required: true, label: false, input_html: { style: "width: 100%" } %>
         </div>
-        <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-2 col-xs-12 requis margin-top-15-xs">Création</label>
+        <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-2 col-xs-12 margin-top-15-xs">Création</label>
         <div class="col-lg-3 col-xs-12 no-padding">
           <%= f.input :year_of_creation, collection: 2000..2018, prompt: "année de création", label: false, input_html: { style: "width: 100%" }  %>
         </div>
@@ -19,17 +19,17 @@
 
     <div class="blue-background margin-top-background">
       <div class="row">
-        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin requis col-lg-2 col-xs-12">Collaborateurs</p>
+        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Collaborateurs</p>
         <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
           <%= f.input :collaborators, label: false, input_html: { style: "width: 100%", min: "0", max: "1000000000", class: "sup-zero" } %>
         </div>
-        <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-2 col-xs-12 requis margin-top-15-xs">Moyenne d'âge</label>
+        <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-2 col-xs-12 margin-top-15-xs">Moyenne d'âge</label>
         <div class="col-lg-3 col-xs-12 no-padding">
           <%= f.input :average_age, label: false, input_html: { style: "width: 100%", min: "0", max:"100", class: "sup-zero" } %>
         </div>
       </div>
       <div class="row margin-top-15">
-        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin requis col-lg-2 col-xs-12">Adresse</p>
+        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Adresse</p>
         <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
           <%= f.input :address, placeholder: '16 villa gaudelet 75011 paris', :input_html => { :id => "startup_address" }, label: false, input_html: { style: "width: 100%" }%>
         </div>
