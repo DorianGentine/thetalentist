@@ -21,11 +21,11 @@
       <div class="row">
         <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin requis col-lg-2 col-xs-12">Collaborateurs</p>
         <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
-          <%= f.input :collaborators, label: false, input_html: { style: "width: 100%", min: "0", class: "sup-zero" } %>
+          <%= f.input :collaborators, label: false, input_html: { style: "width: 100%", min: "0", max: "1000000000", class: "sup-zero" } %>
         </div>
         <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-2 col-xs-12 requis margin-top-15-xs">Moyenne d'âge</label>
         <div class="col-lg-3 col-xs-12 no-padding">
-          <%= f.input :average_age, label: false, input_html: { style: "width: 100%", min: "0", class: "sup-zero" } %>
+          <%= f.input :average_age, label: false, input_html: { style: "width: 100%", min: "0", max:"100", class: "sup-zero" } %>
         </div>
       </div>
       <div class="row margin-top-15">

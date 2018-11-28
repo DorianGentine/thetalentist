@@ -162,6 +162,7 @@ class TalentsController < ApplicationController
         validated_action(false)
         visible_action(false)
       else @talent.validated == nil
+        @talent.send_refused
         validated_action(false)
         visible_action(false)
       end
