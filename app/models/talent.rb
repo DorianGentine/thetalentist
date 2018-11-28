@@ -78,7 +78,7 @@ class Talent < ApplicationRecord
   before_destroy { Mailboxer::Conversation.destroy_all }
 
   # link with pdf_uploader
-  mount_uploader :cv, PdfUploader
+  # mount_uploader :cv, PdfUploader
   mount_uploader :photo, PhotoUploader
 
 
@@ -307,6 +307,11 @@ class Talent < ApplicationRecord
       end
     end
     return count.round(0)
+  end
+
+  def save_completed_profil
+     self.cv =  self.completed_totaly
+     self.save
   end
 
   private
