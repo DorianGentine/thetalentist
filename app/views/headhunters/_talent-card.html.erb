@@ -37,22 +37,27 @@
           <% end %>
         </div>
 
+
         <div class="talent-update margin-bottom-15">
           <p class="no-margin"><i class="far fa-clock margin-right-15">
             </i>MAJ : <%= l(talent.updated_at, :locale => :fr) %>
           </p>
-          <!-- <p class="no-margin">
-            <i class=" <#%= talent.completed_totaly > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle"  %> margin-right-15"></i>profil complété à <strong class=" <#%= talent.completed_totaly > 85 ? "green" : "red"  %>"><#%= talent.completed_totaly %>%</strong>
-          </p> -->
+            <% if talent.completed_totaly != 'nil'  %>
+          <p class="no-margin">
+
+
+            <i class=" <%= talent.completed_totaly > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle"  %> margin-right-15"></i>profil complété à <strong class=" <%= talent.completed_totaly > 85 ? "green" : "red"  %>"><%= talent.completed_totaly %>%</strong>
+          </p>
+            <% end %>
         </div>
 
         <div class="lien-messagerie-profil">
 
-         <!--  <#% if Mailboxer::Conversation.participant(talent).count > 0 %>
-            <#%= link_to "Messages", talent_conversation_path(talent, talent.mailbox.conversations.last)%>
-          <#% else %> -->
+          <% if Mailboxer::Conversation.participant(talent).count > 0 %>
+            <%= link_to "Messages", talent_conversation_path(talent, talent.mailbox.conversations.last)%>
+          <% else %>
             <a style="font-size: 12px;">Aucun message</a>
-          <!-- <#% end %> -->
+          <% end %>
           <%= link_to "Profil", talent_path(talent)%>
         </div>
       </div>

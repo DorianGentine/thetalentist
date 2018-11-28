@@ -138,18 +138,18 @@ class HeadhuntersController < ApplicationController
     if params[:commit] == "Accepter"
       if @headhunter.validated == true
         validated_action(nil)
-      elsif @headhunter.validated == false
+      else # @headhunter.validated == false
         validated_action(true)
         # find the conversation between two user
         conversations = Mailboxer::Conversation.participant(@talentist).participant(@headhunter)
         if conversations.size > 0
           @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@headhunter.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
         else
-          # @talentist.send_message(@headhunter, "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme!", "#{@headhunter.id}")
-          # HeadhunterMailer.accepted(@headhunter).deliver_now
+          @talentist.send_message(@headhunter, "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme!", "#{@headhunter.id}")
+          HeadhunterMailer.accepted(@headhunter).deliver_now
         end
-      else @headhunter.validated == nil
-        validated_action(true)
+      # else @headhunter.validated == nil
+      #   validated_action(true)
       end
     else params[:commit] == "Refuser"
       if @headhunter.validated == false
