@@ -209,8 +209,8 @@ class Talent < ApplicationRecord
   end
 
   def completed_totaly
-    all_parts = self.completed_profil + self.completed_formation_skill_language + self.completed_experience + self.completed_next_aventures
-    if all_parts != nil
+    if self.completed_profil != nil &&  self.completed_formation_skill_language != nil &&  self.completed_experience != nil &&  self.completed_next_aventures != nil &&
+      all_parts = self.completed_profil + self.completed_formation_skill_language + self.completed_experience + self.completed_next_aventures
       result = all_parts / 4.0
       return result.round(1)
     else
