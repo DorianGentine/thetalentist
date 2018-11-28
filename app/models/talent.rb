@@ -209,9 +209,13 @@ class Talent < ApplicationRecord
   end
 
   def completed_totaly
-    all_parts = self.completed_profil + self.completed_formation_skill_language + self.completed_experience + self.completed_next_aventures
-    result = all_parts / 4.0
-    return result.round(1)
+    if self.completed_profil != nil &&  self.completed_formation_skill_language != nil &&  self.completed_experience != nil &&  self.completed_next_aventures != nil &&
+      all_parts = self.completed_profil + self.completed_formation_skill_language + self.completed_experience + self.completed_next_aventures
+      result = all_parts / 4.0
+      return result.round(1)
+    else
+      return 0
+    end
   end
 
   def completed_profil
@@ -234,20 +238,26 @@ class Talent < ApplicationRecord
     language_count = self.talent_languages.size * 2
     skills_count = self.talent_skills.size * 1
     value_input = stat(formation_count + language_count + skills_count)
-    self.talent_formations.each do |talent_formation|
-      talent_formation.formation_id.present? ? count += value_input : count
-      talent_formation.year.present? ? count += value_input : count
-      talent_formation.title.present? ? count += value_input : count
-      # talent_formation.level.present? ? count += value_input : count
-      talent_formation.type_of_formation.present? ? count += value_input : count
+    if self.talent_formations.count > 0
+      self.talent_formations.each do |talent_formation|
+        talent_formation.formation_id.present? ? count += value_input : count
+        talent_formation.year.present? ? count += value_input : count
+        talent_formation.title.present? ? count += value_input : count
+        # talent_formation.level.present? ? count += value_input : count
+        talent_formation.type_of_formation.present? ? count += value_input : count
+      end
     end
-    self.talent_languages.each do |talent_language|
-      talent_language.language_id.present? ? count += value_input : count
-      talent_language.level.present? ? count += value_input : count
+    if self.talent_languages.count > 0
+      self.talent_languages.each do |talent_language|
+        talent_language.language_id.present? ? count += value_input : count
+        talent_language.level.present? ? count += value_input : count
+      end
     end
-    self.talent_skills.each do |talent_skill|
-      talent_skill.skill_id.present? ? count += value_input : count
-      # talent_skill.level.present? ? count += value_input : count
+    if self.talent_skills.count > 0
+      self.talent_skills.each do |talent_skill|
+        talent_skill.skill_id.present? ? count += value_input : count
+        # talent_skill.level.present? ? count += value_input : count
+      end
     end
     return count.round(0)
   end
@@ -276,7 +286,7 @@ class Talent < ApplicationRecord
       next_aventure.city.present? ? count += value_input : count
       next_aventure.contrat.present? ? count += value_input : count
       next_aventure.remuneration.present? ? count += value_input : count
-      next_aventure.sector_ids.present? ? count += value_input : count
+      next_aventure.sector_ids.count > 0 ? count += value_input : count
       next_aventure.btob || next_aventure.btoc ? count += value_input : count
       next_aventure.availability.present? ? count += value_input : count
       next_aventure.waiting_for_one.present? ? count += value_input : count
@@ -289,8 +299,10 @@ class Talent < ApplicationRecord
       next_aventure.good_manager.present? ? count += value_input : count
       next_aventure.work_for_free.present? ? count += value_input : count
     end
-    self.your_small_plus.each do |your_small_plu|
-      your_small_plu.description.present? ? count += value_input : count
+    if self.your_small_plus.count > 0
+      self.your_small_plus.each do |your_small_plu|
+        your_small_plu.description.present? ? count += value_input : count
+      end
     end
     return count.round(0)
   end
