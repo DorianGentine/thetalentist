@@ -28,9 +28,14 @@ $(function() {
   $(idAvatar).change(function(){
     $(idImgAvatar).addClass('hidden');
     $(idPrevAvatar).removeClass('hidden');
-    console.log(this)
-    console.log(idAvatar)
-    readURL(this, targetAvatar);
+    if ( this.files[0].size > 10000000 ) {
+      console.log(this.files[0].size)
+      var text = "<p class='col-xs-10 red' style='font-size: 11px;'>Votre photo est trop lourde</p>"
+      idPrevAvatar.parentNode.insertAdjacentHTML("afterend",text)
+      alert("Votre photo est trop large : " + this.files[0].size + " au lieu de 10MB maximum" )
+    } else {
+      readURL(this, targetAvatar);
+    }
   });
 
   }
@@ -45,12 +50,11 @@ function readURL(input, target) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     let idImg = document.getElementById("img_prev" + target)
-
     reader.onload = function (e) {
       $(idImg).attr('src', e.target.result);
     }
     reader.readAsDataURL(input.files[0]);
-    console.log(input.files[0].size)
+
   }
 }
 
