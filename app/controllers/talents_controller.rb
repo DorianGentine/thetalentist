@@ -6,9 +6,9 @@ class TalentsController < ApplicationController
   def index
     @talentist = current_talentist
     @talents = Talent.all
-    @talents.each do |talent|
-      talent.save_completed_profil
-    end
+    # @talents.each do |talent|
+    #   talent.save_completed_profil
+    # end
     if !@talents = policy_scope(Talent)
       if current_user.is_a?(Talent)
         redirect_to talent_path(current_user)
