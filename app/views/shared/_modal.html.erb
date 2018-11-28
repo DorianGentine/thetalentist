@@ -71,12 +71,24 @@
           <h4><i class="far fa-id-badge"></i> PROFIL</h4>
           <div class="lower-body-item-content">
             <div>
-              <h5>Qui suis-je ?</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet.</p>
+              <h5>La personnalité qui m'inspire ?</h5>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.famous_person.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.famous_person %></p>
+                <% elsif !@next_aventures.famous_person.present? && current_user.is_a?(Headhunter) %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
+                <% end %>
+              <% end %>
             </div>
             <div>
               <h5>Le job de mes rêves</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet.</p>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.work_for_free.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.work_for_free %></p>
+                <% elsif !@next_aventures.work_for_free.present? && current_user.is_a?(Headhunter) %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3">Le talent n'a pas souhaité répondre à cette question.</p>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>

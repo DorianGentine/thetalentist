@@ -27,7 +27,7 @@ class TalentMailer < ApplicationMailer
     mail(
       to: @user.email,
       cc: "bienvenue@thetalentist.com",
-      subject: "#{@user.firstname}, ton profil a été accpeté :D"
+      subject: "#{@user.firstname}, ton profil a été accepté :D"
       )
   end
 

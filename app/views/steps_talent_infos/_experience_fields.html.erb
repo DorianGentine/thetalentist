@@ -5,26 +5,26 @@
 
       <div class="row">
         <div class="col-lg-6 col-xs-12">
-          <p class="label-edit requis no-margin">Entreprise</p>
+          <p class="label-edit no-margin">Entreprise</p>
           <div class="margin-right-15 no-margin-xs">
             <%= f.input :company_name, label: false, placeholder:"le nom de l'entreprise", :input_html => { style: "width: 100%" } %>
           </div>
         </div>
         <div class="col-lg-6 col-xs-12 margin-top-15-xs">
-          <p class="label-edit requis no-margin">Intitulé du poste</p>
+          <p class="label-edit no-margin">Intitulé du poste</p>
           <%= f.input :position, label: false, placeholder:"Intitulé du poste", :input_html => { style: "width: 100%" } %>
         </div>
       </div>
 
       <div class="row margin-top-15">
         <div class="margin-date-picker col-lg-2 col-xs-12">
-          <p class="label-edit requis no-margin">De</p>
+          <p class="label-edit no-margin">De</p>
           <div class="margin-right-15 no-margin-xs">
             <%= f.input :starting, label: false, as: :string, input_html: { :class => "datepicker1", style: "width: 100%"} %>
           </div>
         </div>
         <div class="margin-date-picker col-lg-2 col-xs-12 margin-top-15-xs">
-          <p class="label-edit requis no-margin">À</p>
+          <p class="label-edit no-margin">À</p>
           <div class="margin-right-15 no-margin-xs">
             <%= f.input :years, label: false, as: :string, input_html: {:class => "datepicker1 to_experience #{f.object.currently ? 'checked_boxe' : 'false'}", style: "width: 100%"}  %>
           </div>
@@ -34,14 +34,14 @@
           <%= f.input :currently, label: false, input_html: {class: "currently_checked"},data: { target: "#to_experience" } %>
         </div>
         <div class="col-lg-6 col-xs-12 margin-top-15-xs">
-          <p class="label-edit requis no-margin">Type d'entreprise</p>
+          <p class="label-edit no-margin">Type d'entreprise</p>
           <%= f.input :company_type_id, collection: CompanyType.all, label: false, prompt:"Type d'entreprise", :input_html => { :class => 'select2', style: "width: 100%" } %>
         </div>
       </div>
 
       <div class="row margin-top-15">
         <div id="text_area-experience" class="col-xs-12">
-          <p class="label-edit requis no-margin">Description des missions</p>
+          <p class="label-edit no-margin">Description des missions</p>
           <%= f.text_area :overview, label: false, placeholder:"Vos missions", style: "border-color: #ccc" %>
         </div>
       </div>

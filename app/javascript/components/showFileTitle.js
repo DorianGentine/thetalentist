@@ -20,18 +20,6 @@ function showFileName( event ) {
 
 
 $(function() {
-  function readURL(input, target) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      let idImg = document.getElementById("img_prev" + target)
-      console.log(idImg)
-
-      reader.onload = function (e) {
-        $(idImg).attr('src', e.target.result);
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
   function triggerAvatar(event){
     let targetAvatar = event.currentTarget.dataset.target
     let idAvatar = document.getElementById("avatar-upload" + targetAvatar)
@@ -52,3 +40,27 @@ $(function() {
     btn.addEventListener('click', triggerAvatar)
   })
 });
+
+function readURL(input, target) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    let idImg = document.getElementById("img_prev" + target)
+
+    reader.onload = function (e) {
+      $(idImg).attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+    console.log(input.files[0].size)
+  }
+}
+
+function getReadableFileSizeString(fileSizeInBytes) {
+    var i = -1;
+    var byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
+    do {
+        fileSizeInBytes = fileSizeInBytes / 1024;
+        i++;
+    } while (fileSizeInBytes > 1024);
+
+    return Math.max(fileSizeInBytes, 0.1).toFixed(1) + byteUnits[i];
+};
