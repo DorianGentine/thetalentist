@@ -32,9 +32,11 @@
         </div>
 
       <% if headhunter.startup.present? %>
-        <p class="no-margin">
-          <i class='<%= headhunter.completed_totaly > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle"  %> margin-right-15'></i>profil complété à <strong class='<#%= headhunter.completed_totaly > 85 ? "green" : "red"  %>'><%= headhunter.completed_totaly %>%</strong>
+        <p class="margin-top-15 margin-bottom-15">
+          <i class='<%= headhunter.completed_totaly > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle" %>'></i>profil complété à <strong class='<#%= headhunter.completed_totaly > 85 ? "green" : "red"  %>'><%= headhunter.completed_totaly %>%</strong>
         </p>
+      <% else %>
+        <p class="margin-top-15 margin-bottom-15">La startup n'est pas renseigné</p>
       <% end %>
 
         <div class="lien-messagerie-profil">

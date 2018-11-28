@@ -115,15 +115,14 @@
       <% end %>
 
     <!-- Mes compétences techniques -->
-      <% if @talent.skills.nil? && current_user.is_a?(Headhunter) %>
+      <% if @talent.technos.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
         <div class="blue-background margin-top-background">
           <p class="titre-rubrique-3 margin-bottom-30">Mes compétences techniques :</p>
-
-          <% if @talent.skills.present? %>
+          <% if @talent.technos.present? %>
             <div class="talent-competences">
-              <% @talent.skills.each do |skill| %>
-                <p><%= skill.title %></p>
+              <% @talent.technos.each do |techno| %>
+                <p><%= techno.title %></p>
               <% end %>
             </div>
           <% else %>
