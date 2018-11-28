@@ -48,11 +48,11 @@
 
         <div class="lien-messagerie-profil">
 
-          <% if Mailboxer::Conversation.participant(talent).count > 0 %>
-            <%= link_to "Messages", talent_conversation_path(talent, talent.mailbox.conversations.last)%>
-          <% else %>
+         <!--  <#% if Mailboxer::Conversation.participant(talent).count > 0 %>
+            <#%= link_to "Messages", talent_conversation_path(talent, talent.mailbox.conversations.last)%>
+          <#% else %> -->
             <a style="font-size: 12px;">Aucun message</a>
-          <% end %>
+          <!-- <#% end %> -->
           <%= link_to "Profil", talent_path(talent)%>
         </div>
       </div>
