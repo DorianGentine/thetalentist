@@ -60,7 +60,7 @@ class Headhunter < ApplicationRecord
   def completed_profil
     count = 0
     headhunters_count = self.startup.headhunters.size * 4
-    value_input = stat(headhunters_count + 7)
+    value_input = stat(headhunters_count + 6)
     self.startup.headhunters.each do |headhunter|
       headhunter.firstname.present? ? count += value_input : count
       headhunter.name.present? ? count += value_input : count
@@ -73,7 +73,7 @@ class Headhunter < ApplicationRecord
     self.startup.address.present? ? count += value_input : count
     self.startup.short_resume.present? ? count += value_input : count
     self.startup.linkedin.present? ? count += value_input : count
-    self.startup.facebook.present? ? count += value_input : count
+    # self.startup.facebook.present? ? count += value_input : count
     return count.round(0)
   end
 
