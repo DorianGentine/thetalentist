@@ -6,7 +6,7 @@ class TalentMailer < ApplicationMailer
     attachments["#{@user.firstname}_#{@user.name}.pdf"] = { :mime_type => 'application/pdf', :content => pdf.render }
     mail(
       to: @user.email,
-      cc: ["#{Talentist.second.email}", "#{Talentist.first.email}"],
+      # cc: ["#{Talentist.second.email}", "#{Talentist.first.email}"],
       subject: "Bonjour #{@user.firstname}, merci pour votre candidature !"
       )
   end
