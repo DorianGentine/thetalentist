@@ -1,4 +1,4 @@
-
+<!-- A REVOIR : PAS PRÊT POUR ENVOI -->
 <!-- BODY MAIL BLOC -->
   <table style="border-radius: 2px;" align="center"; bgcolor="#F5F7FA" border="0" cellpadding="0" cellspacing="0">
   <tbody>
@@ -20,17 +20,17 @@
             <td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp; </td>
           </tr>
           <tr>
-            <%= if @user.is_a?(Talent) || if @user.is_a?(Headhunter) %>
+            <% if @user.is_a?(Talent) || if @user.is_a?(Headhunter) %>
               <%= @user.firstname %> <%= @user.name %> <%= @user.email %>
             <% else %>
               <%= @user.name %>
-            <%=  %>
+            <% end %>
           </tr>
 <!-- Espace fin de la ligne -->
           <tr>
             <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
           </tr>
-<!-- Bouton Accèder à mon profil -->
+<!-- Bouton Accéder à mon profil -->
           <tr>
             <td align="center" height="40">
               <table align="center" width="270" cellspacing="0" cellpadding="0">
@@ -43,7 +43,7 @@
                       <% end %>
                     <% else %>
                       <%= link_to headhunter_url(@user), { :style => "font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; font-weight: bold; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;"} do %>
-                        <p style="margin:0">Accèder à mon profil</p>
+                        <p style="margin:0">Accéder à mon profil</p>
                       <% end %>
                     <% end %>
                   </td>

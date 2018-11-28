@@ -23,7 +23,7 @@
 
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag 'application', media: 'all', type: "text/css" %>
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
 
     <%= stylesheet_pack_tag 'application' %>
@@ -37,12 +37,13 @@
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
         ga('create', 'UA-127063612-1', 'auto');
-                                 ga('set', 'anonymizeIp', true);
+        ga('set', 'anonymizeIp', true);
         ga('send', 'pageview');
         ga_fired = true;
     </script>
   </head>
   <body>
+    <!-- <p style="color: blue">CECI EST UN TEST</p> -->
     <div id="navbar">
       <%= render "shared/navbar" %>
     </div>

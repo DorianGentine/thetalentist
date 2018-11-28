@@ -13,7 +13,7 @@
           <tr>
             <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; text-align: left; font-size: 24px; color: #191B26; mso-line-height-rule: exactly; line-height: 30px; font-weight: bolder;">
               Bonjour <%= @user.firstname.present? ? @user.firstname : "" %>,
-              <br> ton profil a été accetpté
+              <br> ton profil a été accepté
             </td>
           </tr>
 <!-- Desciption du mail -->
@@ -23,18 +23,16 @@
           <tr>
             <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Nous avons bien pris en compte la création de ton compte sur The Talentist et nous t’en remercions !
               <br><br>
-              Pour rappel, ton identifiant est le suivant : <a href="mailto:#{@user.email}" style="font-size: 14px; font-weight: bold; font-family: Avenir, sans-serifs; color: #191B26; text-align: center; text-decoration: none; mso-line-height-rule: exactly; line-height: 24px;">
-                      <%= @user.email %>
-              </a>
+              Pour rappel, ton identifiant est le suivant : <strong><%= @user.email %></strong>
               <br><br>
-                Des startups vont rapidement rentrer en contact avec toi! Tu vas pouvoir discuter avec eux directement.
+                Des startups vont rapidement rentrer en contact avec toi ! Tu vas pouvoir discuter avec eux directement.
             </td>
           </tr>
 <!-- Espace fin de la ligne -->
           <tr>
             <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
           </tr>
-<!-- Bouton Accèder à mon profil -->
+<!-- Bouton Accéder à mon profil -->
           <tr>
             <td align="center" height="40">
               <table align="center" width="270" cellspacing="0" cellpadding="0">
