@@ -159,9 +159,9 @@
         <div class="row margin-top-30">
             <div class="info-grid-1 no-padding col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Mobilité</p>
-              <% if @talent.city.present? %>
-                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @talent.city %></p>
-              <% elsif !@talent.city.present? && current_user.is_a?(Headhunter) %>
+              <% if @next_aventures.city.present? %>
+                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.city %></p>
+              <% elsif !@next_aventures.city.present? && current_user.is_a?(Headhunter) %>
                 <i class="far fa-question-circle green"></i>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
@@ -281,7 +281,7 @@
                 <% if @next_aventures.famous_person.present?  %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.famous_person %></p>
                 <% elsif !@next_aventures.famous_person.present? && current_user.is_a?(Headhunter) %>
-                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> répondre à cette question.</p>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
                 <% else %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
                 <% end %>
@@ -297,7 +297,7 @@
                 <% if @next_aventures.good_manager.present?  %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.good_manager %></p>
                 <% elsif !@next_aventures.good_manager.present? && current_user.is_a?(Headhunter) %>
-                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> répondre à cette question.</p>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
                 <% else %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
                 <% end %>
@@ -313,7 +313,7 @@
                 <% if @next_aventures.work_for_free.present?  %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.work_for_free %></p>
                 <% elsif !@next_aventures.work_for_free.present? && current_user.is_a?(Headhunter) %>
-                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> répondre à cette question.</p>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
                 <% else %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
                 <% end %>
