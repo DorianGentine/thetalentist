@@ -149,8 +149,9 @@
           <div class="col-xs-2 col-lg-offset-3 col-lg-1 no-padding">
             <%= f.input :terms_of_condition, as: :boolean, label: false, required: true, autofocus: true%>
           </div>
-          <div class="col-xs-10 col-lg-4 no-padding">
-            <%= link_to 'Acceptez vous les conditions générales', cgu_talents_path %>
+          <div class="col-xs-10 col-lg-6 no-padding">
+            <label for="talent_terms_of_condition" style="font-weight: unset;">Acceptez vous les conditions générales, </label>
+            <span><%= link_to 'lire ici', cgu_talents_path %></span>
           </div>
         </div>
       </div>
