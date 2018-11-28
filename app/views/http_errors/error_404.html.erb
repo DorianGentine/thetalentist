@@ -1,25 +1,26 @@
 
 <div class="error-page">
-  <%= image_tag 'homme-bureau.png' %>
-  <!-- <img src="assets/homme-bureau.png" alt="homme au bureau"> -->
-   <div class="double-text">
-      <h1 class="double-text-item">404</h1>
-      <br>
-      <p class="error-description">Desole, <%= current_user.present? && current_user.firstname.present? ? current_user.firstname.capitalize : "" %> quelque chose c'est mal passe</p>
-      <p><%= @not_found_path %></p>
-     </div>
-   </div>
+
+  <div class="double-text">
+    <h1 class="double-text-item">404</h1>
+    <br>
+    <p class="error-description">Désolé, <%= current_user.present? && current_user.firstname.present? ? current_user.firstname.capitalize : "" %> quelque chose c'est mal passé</p>
+    <p><%= @not_found_path %></p>
+  </div>
+  <%= image_tag 'homme-bureau.png', :class => "img__error-page" %>
+
 
   <% if current_user.is_a?(Talent) %>
-    <%= link_to("Mon profil", talent_path(current_talent))  %>
+    <%= link_to("Mon profil", talent_path(current_talent), :class => "link__error-page") %>
   <% elsif current_user.is_a?(Headhunter) %>
-    <%= link_to("Mon profil", headhunter_path(current_headhunter))  %>
+    <%= link_to("Mon profil", headhunter_path(current_headhunter), :class => "link__error-page") %>
   <% elsif current_user.is_a?(Talentist) %>
-    <%= link_to("Mon profil", talentist_path(current_talentist))  %>
+    <%= link_to("Mon profil", talentist_path(current_talentist), :class => "link__error-page") %>
   <% else %>
-    <%= link_to("Page d'accueil", root_path)  %>
+    <%= link_to("Page d'accueil", root_path, :class => "link__error-page") %>
   <% end %>
 
+</div>
 <style>
 
  @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Raleway:400,100,300,700,500");
@@ -27,10 +28,11 @@
   .error-page{
     text-align: center;
     position: relative;
+    padding: 50px;
+    min-height: calc(100vh - 190px);
   }
   .double-text{
     position: absolute;
-    top: -50px;
     left: 50%;
   }
   .double-text-item{
@@ -44,6 +46,33 @@
     font-family: "Avenir";
     margin: -80px 0 0;
     font-size: 23px;
+  }
+  .img__error-page{
+    height: 60vh;
+    position: absolute;
+    z-index: -1;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .link__error-page{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #4ECCA3;
+    color: white;
+    position: absolute;
+    transform: translateX(-50%);
+    bottom: 10px;
+    height: 50px;
+    width: 50vw;
+    line-height: calc(50px - 20px);
+    z-index: 20;
+    transition: 0.3s;
+  }
+  .link__error-page:hover{
+    background-color: white;
+    color: #4ECCA3;
+    border: 1px solid #4ECCA3;
   }
 
 </style>
