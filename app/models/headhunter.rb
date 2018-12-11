@@ -103,19 +103,19 @@ class Headhunter < ApplicationRecord
   end
 
   def send_new_user_to_talentist
-    ApplicationMailer.new_user(self).deliver_now
+    ApplicationMailer.new_user(self).deliver_later
   end
 
   def send_relation(talent, status)
-    HeadhunterMailer.in_relation(self, talent, status).deliver_now
+    HeadhunterMailer.in_relation(self, talent, status).deliver_later
   end
 
   def send_welcome_email
-    ApplicationMailer.welcome(self).deliver_now
+    ApplicationMailer.welcome(self).deliver_later
   end
 
   def new_message(message, receveur)
-    ApplicationMailer.new_message(message, receveur, self).deliver_now
+    ApplicationMailer.new_message(message, receveur, self).deliver_later
   end
 
   def count_unread_message

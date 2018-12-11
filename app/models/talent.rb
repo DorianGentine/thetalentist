@@ -82,6 +82,10 @@ class Talent < ApplicationRecord
   mount_uploader :photo, PhotoUploader
 
 
+  scope :his_job_is, -> (job) { joins(:jobs).merge(Job.where(title: job)) }
+  # scope :is_comming_to, -> (point) { where( point: point, invited: true, status: "I'm in") }
+  # scope :activity_title, -> (current_title) { joins(:user_activity).merge(UserActivity.by_activity_title(current_title)) }
+
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
   end
@@ -101,6 +105,7 @@ class Talent < ApplicationRecord
     end
 
   end
+
 
   def job_is?(job)
     job_ids = []
@@ -182,30 +187,30 @@ class Talent < ApplicationRecord
 
 
   def send_new_user_to_talentist
-    ApplicationMailer.new_user(self).deliver_now
+    ApplicationMailer.new_user(self).deliver_later
   end
 
   def new_message(message, receveur)
-    ApplicationMailer.new_message(message, receveur, self).deliver_now
+    ApplicationMailer.new_message(message, receveur, self).deliver_later
   end
 
   def send_invitation(headhunter)
-    TalentMailer.invited(self, headhunter).deliver_now
+    TalentMailer.invited(self, headhunter).deliver_later
   end
   def send_candidate
-    TalentMailer.candidate(self).deliver_now
+    TalentMailer.candidate(self).deliver_later
   end
 
   def send_welcome_email
-    ApplicationMailer.welcome(self).deliver_now
+    ApplicationMailer.welcome(self).deliver_later
   end
 
   def send_refused
-    TalentMailer.refused(self).deliver_now
+    TalentMailer.refused(self).deliver_later
   end
 
   def send_accepted
-    TalentMailer.accepted(self).deliver_now
+    TalentMailer.accepted(self).deliver_later
   end
 
   def completed_totaly

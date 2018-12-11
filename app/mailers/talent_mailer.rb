@@ -18,7 +18,7 @@ class TalentMailer < ApplicationMailer
     mail(
       to: @user.email,
       cc: "bienvenue@thetalentist.com",
-      subject: "Vous avez été invité"
+      subject: "Vous avez été invité par #{@headhunter.firstname} de #{@headhunter.startup.name}"
       )
   end
 

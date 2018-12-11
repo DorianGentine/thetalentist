@@ -23,6 +23,8 @@ module TheTalentist
     # test pour les pages erreurs
     config.exceptions_app = self.routes
 
+    config.active_job.queue_adapter = :sidekiq
+
     # config.middleware.use PDFKit::Middleware
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

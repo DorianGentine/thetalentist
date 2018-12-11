@@ -79,3 +79,7 @@ gem 'prawn-rails'
 gem "pdfkit"
 gem "wkhtmltopdf-binary"
 gem 'wicked_pdf'
+
+# job workers
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
