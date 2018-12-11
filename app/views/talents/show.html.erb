@@ -159,9 +159,15 @@
         <div class="row margin-top-30">
             <div class="info-grid-1 no-padding col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Mobilité</p>
-              <% if @next_aventures.city.present? %>
-                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.city %></p>
-              <% elsif !@next_aventures.city.present? && current_user.is_a?(Headhunter) %>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.city.present? %>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.city %></p>
+                <% elsif !@next_aventures.city.present? && current_user.is_a?(Headhunter) %>
+                  <i class="far fa-question-circle green"></i>
+                <% else %>
+                  <i class="red fas fa-exclamation-triangle"></i>
+                <% end %>
+              <% elsif !@next_aventures.present? && current_user.is_a?(Headhunter) %>
                 <i class="far fa-question-circle green"></i>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>

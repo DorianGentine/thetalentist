@@ -7,10 +7,26 @@
         <i class="fas fa-angle-down" data-toggle="dropdown"></i>
         <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
 
-          <li><a href=""><i class="fas fa-search"></i> DATA</a></li>
-          <li><a href=""><i class="far fa-comments"></i> SALES</a></li>
-          <li><a href=""><i class="fas fa-tachometer-alt"></i> MARKET</a></li>
-          <li><a href=""><i class="fas fa-archive"></i> PRODUCT</a></li>
+          <li>
+            <%= link_to headhunters_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
+              <p><i class="fas fa-infinity"></i> Tous</p>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to headhunters_path(tag: "Valider") do %>
+              <p><i class="fas fa-check"></i> Validés</p>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to headhunters_path(tag: "Refuser") do %>
+              <p><i class="fas fa-times"></i> Refusés</p>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to headhunters_path(tag: "En attende") do %>
+              <p><i class="far fa-clock"></i> En attente</p>
+            <% end %>
+          </li>
  <!--          <li>
             <a href="">Créer une alerte <i class="fas fa-bell"></i></a>
           </li> -->

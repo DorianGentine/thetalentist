@@ -1,0 +1,33 @@
+#modal_alerte{
+  // display: block;
+  .modal-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    animation-name: animatetop_alerte;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    .modal-header{
+      height: unset;
+      padding: 20px;
+      h3{
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 770px) {
+  #modal_alerte .modal-content{
+    width: 90vw;
+    .modal-body{
+      padding: unset;
+    }
+  }
+}
+
+@keyframes animatetop_alerte {
+  from {top:-300px; opacity:0}
+  to {top:50%; opacity:1}
+}

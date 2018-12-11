@@ -1,0 +1,24 @@
+<div id="modal_alerte" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="margin-right-15">Si vous quittez cette page, les informations non-enregistrées seront perdues</h3>
+      <span class="close" id="close_modal_alerte">
+        <p>&times;</p>
+      </span>
+    </div>
+    <div class="margin-top-30 modal-body row">
+      <% if current_user.is_a?(Headhunter) %>
+        <%= link_to headhunter_path(current_headhunter), { class: "col-md-8 col-md-offset-2 col-xs-offset-0 col-xs-12" } do %>
+          <p class="btn-connexion">J'ai tout enregistré</p>
+        <% end %>
+      <% elsif current_user.is_a?(Talent) %>
+        <%= link_to talent_path(current_talent), { class: "col-md-8 col-md-offset-2 col-xs-offset-0 col-xs-12" } do %>
+          <p class="btn-connexion">J'ai tout enregistré</p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+

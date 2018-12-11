@@ -10,7 +10,7 @@
     <div class="col-lg-6 col-xs-12 no-padding">
       <p class="label-edit requis">Création</p>
       <div class="no-padding margin-right-15 no-margin-xs">
-        <%= f.input :year_of_creation, collection: 2000..2018, prompt: "année de création", label: false, input_html: { style: "width: 100%" }  %>
+        <%= f.input :year_of_creation, collection: (1960..Date.current.year).to_a.reverse, prompt: "année de création", label: false, input_html: { style: "width: 100%" }  %>
       </div>
     </div>
     <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
