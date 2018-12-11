@@ -1,12 +1,3 @@
-
-<!-- <%#= render 'profil' %>
-<%#= render 'headhunters' %>
-<%#= render 'figures' %>
-<%#= render 'overview' %>
-<%#= render 'pictures' %> a supprimer -->
-
-
-
 <% if current_user.is_a?(Headhunter) %>
   <%= link_to edit_headhunter_path(@headhunter) do %>
     <div class="btn-edition-container">
@@ -14,6 +5,12 @@
       <div class="btn-edition">
         <span><i class="fas fa-edit"></i></span>
       </div>
+    </div>
+  <% end %>
+<% elsif current_user.is_a?(Talentist) %>
+  <%= link_to 'javascript:history.back()' do  %>
+    <div class="btn-edition-container">
+      <p class="no-margin label-edit align-center green"><i class="fas fa-angle-left"></i> Retour</p>
     </div>
   <% end %>
 <% end %>
@@ -30,7 +27,7 @@
 
             <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @startup.logo, :transformation=>[ :gravity=>"face"] %>'); background-size: contain; background-repeat: no-repeat;">
               <div class="statut tooltip <%= @headhunter.validated ? 'green-background' : 'red-background' %>">
-                <span class="tooltiptext"><%= @headhunter.validated ? 'Profil validé' : "Profil pas validé" %></span>
+                <span class="tooltiptext"><%= @headhunter.validated ? 'Profil validé' : "Profil non validé" %></span>
               </div>
             </div>
           <% else %>
@@ -40,7 +37,7 @@
                 <%= @startup.name.split(//).first.upcase %><%= @startup.name.split(//).second.upcase %>
               </div>
               <div class="statut tooltip <%= @headhunter.validated ? 'green-background' : 'red-background' %>">
-                <span class="tooltiptext"><%= @headhunter.validated ? 'Profil validé' : "Profil pas validé" %></span>
+                <span class="tooltiptext"><%= @headhunter.validated ? 'Profil validé' : "Profil non validé" %></span>
               </div>
             </div>
           <% end %>

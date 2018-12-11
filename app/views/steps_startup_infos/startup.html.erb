@@ -12,7 +12,13 @@
         </div>
         <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-2 col-xs-12 margin-top-15-xs">Création</label>
         <div class="col-lg-3 col-xs-12 no-padding">
-          <%= f.input :year_of_creation, collection: 2000..2018, prompt: "année de création", label: false, input_html: { style: "width: 100%" }  %>
+          <%= f.input :year_of_creation, collection: (1960..Date.current.year).to_a.reverse, prompt: "année de création", label: false, input_html: { style: "width: 100%" }  %>
+        </div>
+      </div>
+      <div class="row margin-top-15">
+        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Rapide descriptif</p>
+        <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
+          <%= f.input :short_resume, label: false, :input_html => { style: "width: 100%", class: "limited-character" }, maxlength: 200 %>
         </div>
       </div>
     </div>
@@ -38,7 +44,48 @@
           <%= f.input :link, label: false, input_html: { style: "width: 100%" } %>
         </div>
       </div>
+      <div class="row margin-top-15">
+        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Domaine d'activité</p>
+        <div class="col-lg-3 col-xs-12 margin-right-15 margin-bottom-15-xs no-margin-xs no-padding">
+          <%= f.input :sector_ids, collection: Sector.all, label: false, :input_html => { style: "width: 100%" } %>
+        </div>
+        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-2">BTOC</p>
+        <div class="col-lg-1 col-xs-2 margin-right-15 no-padding">
+          <%= f.input :btoc, label: false %>
+        </div>
+        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-1 col-xs-2">BTOB</p>
+        <div class="col-lg-1 col-xs-2 margin-right-15 no-margin-xs no-padding">
+          <%= f.input :btob, label: false %>
+        </div>
+      </div>
+    </div>
 
+    <div class="blue-background margin-top-background">
+      <div class="row">
+        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Ce qui vous définit</p>
+        <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
+          <%= f.input :word_ids, collection: Word.all, input_html: { :class => "select2", multiple: "multiple", style: "width: 100%"}, include_blank: true, label: false %>
+        </div>
+        <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-2 col-xs-12 margin-top-15-xs">Description</label>
+        <div class="col-lg-3 col-xs-12 no-padding">
+          <%= f.input :overview, placeholder: 'Ici, pas de limite de caractères', label: false, input_html: { style: "width: 100%", rows: 1 }  %>
+        </div>
+      </div>
+      <div class="row margin-top-15">
+        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Les missions</p>
+        <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
+          <%= f.input :mission, as: :text, label: false, :input_html => { style: "width: 100%", rows: 1 } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="blue-background margin-top-background">
+      <div class="row">
+        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Linkedin</p>
+        <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
+          <%= f.input :linkedin, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
+        </div>
+      </div>
     </div>
 
     <div class="form-actions">

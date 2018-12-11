@@ -44,10 +44,18 @@ private
     params.require(:startup).permit(
       :name,
       :year_of_creation,
+      :short_resume,
       :collaborators,
       :average_age,
       :link,
       :address,
+      :sector_ids,
+      :btoc,
+      :btob,
+      :word_ids,
+      :overview,
+      :mission,
+      :linkedin,
       :terms_of_condition
       )
   end
