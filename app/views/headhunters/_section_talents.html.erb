@@ -1,6 +1,7 @@
 <section class="container">
 
   <!-- Division pour résultats de recherche -->
+
   <div class="search-results">
     <% if @talents.count > 1 %>
       <p><strong><%= @talents.count %> Profils</strong> correspondent à votre recherche</p>
@@ -13,8 +14,10 @@
   <div id="modal_talents" class="cards-repertory">
 
     <% @talents.each do |talent| %>
-      <%= render 'talent-card', talent: talent %>
-      <%= render 'shared/modal', talent: talent %>
+
+        <%= render 'talent-card', talent: talent, cached: true %>
+        <%= render 'shared/modal', talent: talent, cached: true %>
+
     <% end %>
 
   </div>

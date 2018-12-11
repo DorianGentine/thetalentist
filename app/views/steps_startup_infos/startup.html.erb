@@ -6,9 +6,9 @@
 
     <div class="blue-background">
       <div class="row">
-        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin requis col-lg-2 col-xs-12">Raison sociale</p>
+        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Raison sociale</p>
         <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
-          <%= f.input :name, required: true, label: false, input_html: { style: "width: 100%" } %>
+          <%= f.input :name, required: true, label: false, input_html: { style: "width: 100%", value: params[:query] } %>
         </div>
         <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-2 col-xs-12 margin-top-15-xs">Création</label>
         <div class="col-lg-3 col-xs-12 no-padding">

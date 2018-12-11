@@ -17,7 +17,7 @@ class Startup < ApplicationRecord
   accepts_nested_attributes_for :startup_words, allow_destroy: true
   accepts_nested_attributes_for :words, allow_destroy: true
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :link, presence: true
 
   geocoded_by :address

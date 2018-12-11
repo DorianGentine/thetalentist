@@ -20,7 +20,7 @@ class StepsStartupInfosController < ApplicationController
     if @startup.save
       @headhunter.update(startup_id: @startup.id)
       Talentist.last.send_message(@headhunter, message, "#{@headhunter.id}")
-      HeadhunterMailer.accepted(@headhunter).deliver_now
+      HeadhunterMailer.accepted(@headhunter).deliver_later
       render_wizard @headhunter
     else
       render "steps_startup_infos/#{step}"
@@ -35,7 +35,6 @@ private
   end
 
   def finish_wizard_path
-
     sign_in(@headhunter)
     headhunter_path(@headhunter)
   end

@@ -22,7 +22,7 @@ class Talentist < ApplicationRecord
   end
 
   def new_message(message, receveur)
-    ApplicationMailer.new_message(message, receveur, self).deliver_now
+    ApplicationMailer.new_message(message, receveur, self).deliver_later
   end
 
   def notif_of_unread

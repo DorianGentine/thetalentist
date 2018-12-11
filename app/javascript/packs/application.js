@@ -49,4 +49,3 @@ readMoreText();
 
 import { openOnglet } from '../components/toggableVerticalTabs';
 openOnglet();
-

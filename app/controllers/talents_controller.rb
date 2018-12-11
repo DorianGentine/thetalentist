@@ -5,7 +5,8 @@ class TalentsController < ApplicationController
 
   def index
     @talentist = current_talentist
-    @talents = Talent.all
+    # raise
+    # @talents = Talent.all.order('created_at DESC')
     # @talents.each do |talent|
     #   talent.save_completed_profil
     # end
@@ -20,27 +21,27 @@ class TalentsController < ApplicationController
     end
 
     if params[:tag].blank?
-      @talents = Talent.all.order(name: :asc)
+      @talents = Talent.all.order('created_at DESC')
       @titre = 'All'
     else
       # les talents dont le job est : params[:tag]
       if params[:tag] == "Tous"
-        @talents = Talent.all
+        @talents = Talent.all.order('created_at DESC')
         @titre = "Tous"
       elsif params[:tag] == "Valider"
-        @talents = Talent.where(:validated => true)
+        @talents = Talent.where(:validated => true).order('created_at DESC')
         @titre = "Valider"
       elsif params[:tag] == "Refuser"
-        @talents = Talent.where(:validated => false)
+        @talents = Talent.where(:validated => false).order('created_at DESC')
         @titre = "Refuser"
       elsif params[:tag] == "En attende"
         @titre = "En attente"
-        @talents = Talent.where(:validated => nil)
+        @talents = Talent.where(:validated => nil).order('created_at DESC')
       elsif params[:tag] == "Visible"
-        @talents = Talent.where(:visible => true)
+        @talents = Talent.where(:visible => true).order('created_at DESC')
         @titre = "Visible"
       else params[:tag] == "Invisible"
-        @talents = Talent.where(:visible => false)
+        @talents = Talent.where(:visible => false).order('created_at DESC')
         @titre = "Invisible"
       end
     end
@@ -139,7 +140,6 @@ class TalentsController < ApplicationController
   def update_next_aventure
     update_edit(@talent, talent_params)
     @talent.save_completed_profil
-
   end
 
 
@@ -183,14 +183,15 @@ class TalentsController < ApplicationController
         if job_alertes.count > 0
           job_alertes.each do |job_alerte|
             headhunter = Headhunter.find(job_alerte.headhunter_id)
-            HeadhunterMailer.alerte(headhunter).deliver_now
+            HeadhunterMailer.alerte(headhunter).deliver_later
           end
         end
       end
-    else params[:commit] == "Invisible"
+    elsif params[:commit] == "Invisible"
       if @talent.visible == true || @talent.visible == nil
         visible_action(false)
       end
+    else
     end
     redirect_to talents_path
   end

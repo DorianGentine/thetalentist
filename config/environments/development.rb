@@ -25,9 +25,12 @@ Rails.application.configure do
     }
   else
     config.action_controller.perform_caching = false
-
     config.cache_store = :null_store
   end
+
+  config.action_controller.perform_caching = true
+  config.cache_store = :file_store, Rails.root.join('tmp/cache/view')
+
   config.action_controller.asset_host = 'http://localhost:3000'
   config.action_mailer.asset_host = config.action_controller.asset_host
 
