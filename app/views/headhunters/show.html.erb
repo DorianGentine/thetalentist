@@ -210,7 +210,7 @@
 
           <!-- Les missions que nous réalisons -->
             <div class="col-lg-6 col-xs-12">
-              <h4 class="titre-rubrique-3">Les missions que nous réalisons</h4>
+              <h4 class="titre-rubrique-3">Rejoindre notre entreprise c'est :</h4>
               <% if @startup.mission.present?  %>
                 <p class="texte-rubrique-3 margin-right-15 no-margin-xs"> <%= @startup.mission %></p>
               <% elsif !@startup.mission.present? && current_user.is_a?(Talent) %>
