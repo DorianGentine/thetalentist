@@ -5,7 +5,9 @@
   <% if @headhunters.count > 0 %>
     <div class="cards-repertory">
       <% @headhunters.each do |headhunter| %>
-        <%= render 'talents/startup-card', headhunter: headhunter %>
+        <%= cache headhunter do %>
+          <%= render 'talents/startup-card', headhunter: headhunter %>
+        <% end %>
       <% end %>
     </div>
   <% else %>
