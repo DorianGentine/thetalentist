@@ -8,6 +8,7 @@
 <div class="container-show">
   <div class="blue-background">
 
+            <%= cache @headhunter do %>
 
     <div class="row">
       <div class="col-lg-3 col-xs-12 no-padding tablinksAll" id='tabs-edit'>
@@ -38,10 +39,11 @@
       <!-- info générale sur le profil -->
       <div class="col-lg-8 no-padding">
           <div id="informations_generales" class="tabcontent" style="display: block;">
-            <%= render 'edit_hh_informations_generales' %>
+              <%= render 'edit_hh_informations_generales' %>
           </div>
 
           <div id="modifier_photos" class="tabcontent" style="display: none;">
+
             <%= render 'edit_modifier_photos' %>
           </div>
 
@@ -58,6 +60,7 @@
 
     </div>
     </div>
+    <% end %>
   </div>
 </div>
 
