@@ -117,4 +117,27 @@ class ApplicationController < ActionController::Base
       new
     end
   end
+
+  def create_new_data_with_only_title(params, table_name)
+    class_name = table_name.classify.constantize
+    words = []
+    params.each do |param|
+      if param == ""
+      elsif param.to_i != 0
+        word_id = param
+      else
+        if class_name.where(title: param.capitalize ).count < 1
+          word = class_name.create(title: param.capitalize )
+        else
+          word = class_name.where(title: param.capitalize ).first
+        end
+        word_id = word.id.to_s
+      end
+      if word_id.present?
+        words << word_id
+      end
+    end
+    return words
+  end
+
 end

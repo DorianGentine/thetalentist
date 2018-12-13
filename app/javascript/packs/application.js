@@ -49,3 +49,6 @@ readMoreText();
 
 import { openOnglet } from '../components/toggableVerticalTabs';
 openOnglet();
+
+import { verifDateWithMonthAndYear } from '../components/verifDate';
+verifDateWithMonthAndYear();

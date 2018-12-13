@@ -16,6 +16,7 @@ class StepsStartupInfosController < ApplicationController
 
   def update
     @startup = Startup.new(startup_params)
+    set_new_words(@startup)
     @talentist = Talentist.last
     message = "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
     if @startup.save
@@ -30,6 +31,7 @@ class StepsStartupInfosController < ApplicationController
 
 private
 
+
   def find_headhunter
     @headhunter = Headhunter.find(session[:headhunter_id])
     # authorize @headhunter
@@ -38,6 +40,12 @@ private
   def finish_wizard_path
     sign_in(@headhunter)
     headhunter_path(@headhunter)
+  end
+
+  def set_new_words(startup)
+    word_params = params.require(:startup).permit(word_ids: [])[:word_ids]
+    word_ids = create_new_data_with_only_title(word_params, "word")
+    startup.word_ids = word_ids
   end
 
   def startup_params
@@ -49,14 +57,13 @@ private
       :average_age,
       :link,
       :address,
-      :sector_ids,
       :btoc,
       :btob,
-      :word_ids,
       :overview,
       :mission,
       :linkedin,
-      :terms_of_condition
+      :terms_of_condition,
+      sector_ids: []
       )
   end
 
