@@ -20,13 +20,13 @@
         <div class="margin-date-picker col-lg-2 col-xs-12">
           <p class="label-edit no-margin">De</p>
           <div class="margin-right-15 no-margin-xs">
-            <%= f.input :starting, label: false, as: :string, input_html: { :class => "datepicker1", style: "width: 100%"} %>
+            <%= f.input :starting, label: false, placeholder:"MM-AAAA", as: :string, input_html: { class:"verifDateWithMonthAndYear", style: "width: 100%"} %>
           </div>
         </div>
         <div class="margin-date-picker col-lg-2 col-xs-12 margin-top-15-xs">
           <p class="label-edit no-margin">À</p>
           <div class="margin-right-15 no-margin-xs">
-            <%= f.input :years, label: false, as: :string, input_html: {:class => "datepicker1 to_experience #{f.object.currently ? 'checked_boxe' : 'false'}", style: "width: 100%"}  %>
+            <%= f.input :years, label: false, as: :string, input_html: {:class => "verifDateWithMonthAndYear to_experience #{f.object.currently ? 'checked_boxe' : 'false'}", style: "width: 100%"}  %>
           </div>
         </div>
         <div id="font-input-currently" class="col-lg-2 col-xs-12 margin-top-15-xs">

@@ -82,7 +82,9 @@
 
       <!-- div conversation -->
       <% @messages.each do |receipt| %>
-        <%= render 'conversations/messages', receipt: receipt %>
+        <%= cache receipt do %>
+          <%= render 'conversations/messages', receipt: receipt %>
+        <% end %>
       <% end %>
     </div>
     <div class="boite-envoi">
