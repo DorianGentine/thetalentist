@@ -23,6 +23,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
         session[:headhunter_id] = @headhunter.id
         redirect_to steps_startup_info_path(:startup, :query => startup_params )
       else
+        @headhunter.send_welcome_email
         @talentist = Talentist.find_by_email("dimitri@ineva-partners.com")
         @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
         session[:headhunter_id] = @headhunter.id

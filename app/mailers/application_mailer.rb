@@ -14,6 +14,25 @@ class ApplicationMailer < ActionMailer::Base
   end
 
 
+  def new_user(user)
+    @user = user  # Instance variable => available in view
+    @talentist1 = Talentist.first
+    @talentist2 = Talentist.last
+
+    if @user.is_a?(Talent)
+      @type = "Talent"
+    elsif @user.is_a?(Headhunter)
+      @type = "Recruteur"
+    else
+      @type = "Startup"
+    end
+
+    mail(
+      to: @talentist1.email,
+      subject: "Un nouveau membre sur la plateforme")
+    # This will render a view in `app/views/talent_mailer`!
+  end
+
   def erreur_message(type_erreur)
     @user = user
 
@@ -30,7 +49,7 @@ class ApplicationMailer < ActionMailer::Base
     @message = message
 
     mail(
-      to:       @receveur.email,
+      to: @receveur.email,
       cc: "bienvenue@thetalentist.com",
       subject:  "Vous avez reçu un nouveau message de #{@envoyeur.firstname}!"
       )

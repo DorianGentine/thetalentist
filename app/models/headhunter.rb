@@ -22,7 +22,7 @@ class Headhunter < ApplicationRecord
 
   validates :name, :firstname, :job, :email, :terms_of_condition, presence: true
 
-  after_create :send_welcome_email, :send_new_user_to_talentist
+  after_create :send_new_user_to_talentist
   before_save :capitalize_name_firstname
 
   mount_uploader :photo, PhotoUploader
