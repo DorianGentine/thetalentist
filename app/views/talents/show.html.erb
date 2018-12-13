@@ -1,3 +1,4 @@
+<%= cache @talent do %>
 <% if current_user.is_a?(Talent) %>
   <%= link_to edit_talent_path(@talent) do %>
     <div class="btn-edition-container">
@@ -479,4 +480,4 @@
 
   </div>
 </div>
-
+<% end %>

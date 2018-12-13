@@ -24,18 +24,24 @@
               </div>
             <% end %>
           <% else %>
-            <%= render 'conversation', :conversation => conversation %>
+            <%= cache conversation do %>
+              <%= render 'conversation', :conversation => conversation %>
+            <% end %>
           <% end %>
 
         <% end %>
       <h3>CONTACTÉS</h3>
 
       <%  @unread_conversations.each do |conversation| %>
-        <%= render 'conversation', :conversation => conversation %>
+        <%= cache conversation do %>
+          <%= render 'conversation', :conversation => conversation %>
+        <% end %>
       <% end %>
 
       <%  @read_accepted_conversations.each do |conversation| %>
-        <%= render 'conversation', :conversation => conversation %>
+        <%= cache conversation do %>
+          <%= render 'conversation', :conversation => conversation %>
+        <% end %>
       <% end %>
 
     </div>
