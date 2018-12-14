@@ -38,6 +38,11 @@ class StepsTalentInfosController < ApplicationController
     else
       0.times { @talent.your_small_plus.build }
     end
+    if @talent.next_aventures.first.mobilities.count > 0
+      @mobilities = @talent.next_aventures.first.mobilities
+    else
+      @mobilities = Mobility.new
+    end
     render_wizard
   end
 
@@ -48,6 +53,7 @@ class StepsTalentInfosController < ApplicationController
     # @talent.status = 'active' if step == steps.last
     case step
     when :next_aventure
+
       @talent.update_attributes(talent_params)
       # TODO
       @talent.save_completed_profil
@@ -86,7 +92,7 @@ class StepsTalentInfosController < ApplicationController
         sign_in(@talent)
         talent_path(@talent)
       else
-        @talent.send_candidate
+        @talent.send_candidate_and_user_information
         waiting_for_validation_path
       end
     else
@@ -120,6 +126,12 @@ class StepsTalentInfosController < ApplicationController
     end
   end
 
+  def compile_cities_of_next_aventure
+    cities = params.require(:talent).permit(next_aventures_attributes:[ city: []])[:next_aventures_attributes][:"0"][:city]
+    city = cities.join(', ')
+    return city
+  end
+
   def talent_params
     # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
      params.require(:talent).permit(
@@ -136,8 +148,7 @@ class StepsTalentInfosController < ApplicationController
       :sector_ids,
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
-      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), :sector_ids],
-      # next_aventures_attributes: [ your_small_plus_attributes: [:id, :description, :_destroy] ],
+      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[:id, :title, :_destroy]],
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       your_small_plus_attributes: [:id, :description, :_destroy],
@@ -145,8 +156,6 @@ class StepsTalentInfosController < ApplicationController
     )
   end
 end
-
-
 
 
 

@@ -187,30 +187,32 @@ class Talent < ApplicationRecord
 
 
   def send_new_user_to_talentist
-    ApplicationMailer.new_user(self).deliver_later
+    ApplicationMailer.new_user("talent", self.id).deliver_later
   end
 
   def new_message(message, receveur)
-    ApplicationMailer.new_message(message, receveur, self).deliver_later
+    ApplicationMailer.new_message("talent", message, receveur.id, self.id).deliver_later
   end
 
   def send_invitation(headhunter)
-    TalentMailer.invited(self, headhunter).deliver_later
+    TalentMailer.invited(self.id, headhunter.id).deliver_later
   end
-  def send_candidate
-    TalentMailer.candidate(self).deliver_later
+
+  def send_candidate_and_user_information
+    TalentMailer.candidate(self.id).deliver_later(wait_until: Date.tomorrow.noon)
+    TalentMailer.pdf_of_user_information(self.id).deliver_later(wait_until: Date.tomorrow.noon + 1.hour)
   end
 
   def send_welcome_email
-    ApplicationMailer.welcome(self).deliver_later
+    ApplicationMailer.welcome("talent", self.id).deliver_later
   end
 
   def send_refused
-    TalentMailer.refused(self).deliver_later
+    TalentMailer.refused(self.id).deliver_later
   end
 
   def send_accepted
-    TalentMailer.accepted(self).deliver_later
+    TalentMailer.accepted(self.id).deliver_later
   end
 
   def completed_totaly

@@ -3,8 +3,9 @@ class ApplicationMailer < ActionMailer::Base
   default from: 'bienvenue@thetalentist.com'
   layout 'mailer'
 
-  def welcome(user)
-    @user = user  # Instance variable => available in view
+  def welcome(user_class, user_id)
+    class_name = user_class.classify.constantize
+    @user = class_name.find(user_id)
 
     mail(
       to: @user.email,
@@ -14,18 +15,13 @@ class ApplicationMailer < ActionMailer::Base
   end
 
 
-  def new_user(user)
-    @user = user  # Instance variable => available in view
+  def new_user(user_class, user_id)
+    class_name = user_class.classify.constantize
+    @user = class_name.find(user_id)
     @talentist1 = Talentist.first
     @talentist2 = Talentist.last
 
-    if @user.is_a?(Talent)
-      @type = "Talent"
-    elsif @user.is_a?(Headhunter)
-      @type = "Recruteur"
-    else
-      @type = "Startup"
-    end
+    @type = user_class.to_s
 
     mail(
       to: @talentist1.email,
@@ -43,7 +39,9 @@ class ApplicationMailer < ActionMailer::Base
       )
   end
 
-  def new_message(message, receveur, envoyeur)
+  def new_message(user_class, message, receveur, envoyeur_id)
+    class_name = user_class.classify.constantize
+    @envoyeur = class_name.find(envoyeur_id)
     @receveur = receveur
     @envoyeur = envoyeur
     @message = message

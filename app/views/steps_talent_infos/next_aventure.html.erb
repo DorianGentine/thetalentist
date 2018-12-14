@@ -19,7 +19,13 @@
             <div class="col-xs-12 col-lg-3">
               <p class="label-edit no-margin requis">Mobilité</p>
               <div class="margin-right-15 no-margin-xs">
-                <%= u.input :city, label: false, prompt:"Choisir", collection: [ "Ville actuelle", "Paris", "France", "Europe", "Hors Europe" ], :input_html => { :class => 'select2', multiple: "multiple", style: "width: 100%" } %>
+                <%= u.simple_fields_for :mobilities, @mobilities do |e| %>
+                  <%= render 'mobility_fields', :f => e %>
+                <% end %>
+                <div class="links margin-top-15">
+                  <%= link_to_add_association 'Ajouter un +', u, :mobilities, :partial => 'mobility_fields', :class => "form-hobby-add" %>
+                </div>
+
               </div>
             </div>
             <div class="col-xs-12 col-lg-3 col-lg-offset-3 margin-top-15-xs">

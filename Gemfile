@@ -51,6 +51,8 @@ gem "cocoon"
 gem 'cloudinary'
 gem 'carrierwave', '~> 1.2'
 
+gem 'carrierwave_backgrounder'
+
 # Pour la fonction adresse de la startup
 gem "geocoder"
 

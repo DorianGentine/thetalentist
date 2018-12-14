@@ -185,7 +185,9 @@ class HeadhuntersController < ApplicationController
 
   def update_startup
     @startup = @headhunter.startup
+    set_new_words(@startup)
     update_edit(@headhunter, headhunter_params)
+
     # update_edit_startup(@startup, startup_params, @headhunter)
   end
 
@@ -202,7 +204,7 @@ class HeadhuntersController < ApplicationController
           @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@headhunter.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
         else
           @talentist.send_message(@headhunter, "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme!", "#{@headhunter.id}")
-          HeadhunterMailer.accepted(@headhunter).deliver_later
+          HeadhunterMailer.accepted(@headhunter.id).deliver_later
         end
       # else @headhunter.validated == nil
       #   validated_action(true)
@@ -221,6 +223,12 @@ class HeadhuntersController < ApplicationController
   end
 
   private
+
+  def set_new_words(startup)
+    word_params = params.require(:headhunter).permit(startup_attributes:[word_ids:[]])[:startup_attributes][:word_ids]
+    word_ids = create_new_data_with_only_title(word_params, "word")
+    startup.word_ids = word_ids
+  end
 
   def update_edit(headhunter, headhunter_params)
     if headhunter.update_attributes(headhunter_params)
@@ -265,9 +273,10 @@ class HeadhuntersController < ApplicationController
       :photo, :name, :firstname, :job,
       startup_attributes: [ :id, :name, :link, :logo, :address, :mission,
       :sector_ids, :btob, :btoc, :validated, :short_resume, :linkedin, :facebook,
-      :average_age, :collaborators, :year_of_creation, :overview, word_ids: [],
+      :average_age, :collaborators, :year_of_creation, :overview,
       pictures_attributes: [ :id, :photo, :_destroy],
-      startup_words_attributes: [ :id, :word_id, :_destroy]],
+      # startup_words_attributes: [ :id, :word_id, :_destroy]],
+      ],
       word: [],
       job_ids: []
       )
@@ -276,9 +285,9 @@ class HeadhuntersController < ApplicationController
     params.require(:startup).permit(
       :name, :link, :logo, :address,
       :sector_ids, :btob, :btoc, :validated, :short_resume, :mission, :linkedin, :facebook,
-      :average_age, :collaborators, :year_of_creation, :overview, word_ids: [],
+      :average_age, :collaborators, :year_of_creation, :overview,
       pictures_attributes: [ :id, :photo, :_destroy],
-      startup_words_attributes: [ :id, :word_id, :_destroy ],
+      # startup_words_attributes: [ :id, :word_id, :_destroy ],
       job_ids: []
       )
   end

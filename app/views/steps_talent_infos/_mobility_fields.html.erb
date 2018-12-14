@@ -1,0 +1,11 @@
+<div class='nested-fields row margin-bottom-15'>
+  <div class="col-xs-10 col-lg-9 no-padding">
+    <%= f.input :title, label: false, prompt:"Choisir", collection: [ "Ville actuelle", "Paris", "France", "Europe", "Hors Europe" ], :input_html => { :class => 'select2', style: "width: 100%" } %>
+  </div>
+  <!-- TODO button -->
+  <div class="col-xs-2 col-lg-2 line-height-center">
+    <%= link_to_remove_association f do %>
+      <i class="fas fa-trash-alt no-padding"></i>
+    <% end %>
+  </div>
+</div>

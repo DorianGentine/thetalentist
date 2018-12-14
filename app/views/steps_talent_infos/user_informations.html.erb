@@ -8,11 +8,12 @@
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
     <div class="margin-auto-new-talent">
     <%= f.error_notification %>
-      <div class="linkedin-btn blue-background center-text">
-        <%= link_to talent_linkedin_omniauth_authorize_path, :class => "button-linkedin" do %>
+
+      <!-- <div class="linkedin-btn blue-background center-text">
+        <#%= link_to talent_linkedin_omniauth_authorize_path, :class => "button-linkedin" do %>
           <p class="no-margin"><i class="fab fa-linkedin"></i> Connect with Linkedin</p>
-        <% end %>
-      </div>
+        <#% end %>
+      </div> -->
       <div class="blue-background margin-top-background">
         <div class="row">
           <label class="col-lg-2 label-edit text-align-right line-height-center requis no-margin no-padding-xs" for="talent_firstname">Civilité</label>
