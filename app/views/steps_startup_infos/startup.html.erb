@@ -3,12 +3,11 @@
   <h2 class="form-titre-page" style="margin-top: 100px;"><i class="fas fa-briefcase"></i> Renseigner <strong>votre entreprise</strong> ?</h2>
 
   <%= simple_form_for @startup, url: wizard_path, method: :put do |f| %>
-
     <div class="blue-background">
       <div class="row">
         <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Raison sociale</p>
         <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
-          <%= f.input :name, required: true, label: false, input_html: { style: "width: 100%", value: params[:query] } %>
+          <%= f.input :name, label: false, input_html: { style: "width: 100%" } %>
         </div>
         <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-2 col-xs-12 margin-top-15-xs">Création</label>
         <div class="col-lg-3 col-xs-12 no-padding">

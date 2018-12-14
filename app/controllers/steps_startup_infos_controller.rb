@@ -10,7 +10,7 @@ class StepsStartupInfosController < ApplicationController
 
   def show
     p "ok je suis dans step pour créer une startup"
-    @startup = Startup.new
+    @startup = @headhunter.startup
     render_wizard
   end
 

@@ -7,7 +7,7 @@ $('.select2').select2(
   );
 
 $('.selectAndCreate').selectize({
-  plugins: ['restore_on_backspace'],
+  plugins: ['remove_button'],
   delimiter: ',',
   persist: false,
   create: function(input) {

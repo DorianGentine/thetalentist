@@ -5,8 +5,8 @@ class HeadhunterMailer < ApplicationMailer
   #
   #   en.headhunter_mailer.alerte.subject
   #
-  def accepted(user)
-    @user = user
+  def accepted(user_id)
+    @user = Headhunter.find(user_id)
 
     mail(
       to: @user.email,
@@ -15,9 +15,9 @@ class HeadhunterMailer < ApplicationMailer
       )
   end
 
-  def in_relation(user, talent, status)
-    @user = user
-    @talent = talent
+  def in_relation(user_id, talent_id, status)
+    @user = Headhunter.find(user_id)
+    @talent = Talent.find(talent_id)
 
     if status == "Accepter"
       @connected = true
@@ -36,12 +36,9 @@ class HeadhunterMailer < ApplicationMailer
       )
   end
 
-  def inscription_startup()
 
-  end
-
-  def alerte(user)
-    @user = user,
+  def alerte(user_id)
+    @user = Headhunter.find(user_id)
 
     mail( to: user.email ,cc: "bienvenue@thetalentist.com", subject: "Un nouveau talent pourrait t'intéresser")
   end

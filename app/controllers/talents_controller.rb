@@ -118,6 +118,11 @@ class TalentsController < ApplicationController
     else
       0.times { @talent.your_small_plus.build }
     end
+    if @talent.next_aventures.first.mobilities.count > 0
+      @mobilities = @talent.next_aventures.first.mobilities
+    else
+      @mobilities = Mobility.new
+    end
     @choices = ["Ambiance", "International", "Produit", "Rémunération", "Sens", "Valeurs", "Mission", "Management", "Worklife balance", "Impact"]
   end
 
@@ -183,7 +188,7 @@ class TalentsController < ApplicationController
         if job_alertes.count > 0
           job_alertes.each do |job_alerte|
             headhunter = Headhunter.find(job_alerte.headhunter_id)
-            HeadhunterMailer.alerte(headhunter).deliver_later
+            HeadhunterMailer.alerte(headhunter.id).deliver_later
           end
         end
       end
@@ -258,7 +263,7 @@ private
       techno_ids: [],
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
-      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), :sector_ids],
+      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[:id, :title, :_destroy]],
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id],
       your_small_plus_attributes: [:id, :description, :_destroy],
