@@ -63,18 +63,20 @@
     <div class="blue-background margin-top-background">
       <div class="row">
         <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Ce qui vous définit</p>
-        <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
+        <div class="col-lg-9 col-xs-12 margin-right-15 no-margin-xs no-padding">
           <%= f.input :word_ids, collection: Word.all, input_html: { :class => "selectAndCreate", multiple: "multiple", style: "width: 100%"}, include_blank: true, label: false %>
-        </div>
-        <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-2 col-xs-12 margin-top-15-xs">Description</label>
-        <div class="col-lg-3 col-xs-12 no-padding">
-          <%= f.input :overview, placeholder: 'Ici, pas de limite de caractères', label: false, input_html: { style: "width: 100%", rows: 1 }  %>
         </div>
       </div>
       <div class="row margin-top-15">
-        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Rejoindre notre entreprise c'est :</p>
-        <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
-          <%= f.input :mission, as: :text, label: false, :input_html => { style: "width: 100%", rows: 1 } %>
+        <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-2 col-xs-12 margin-top-15-xs">Description</label>
+        <div class="col-lg-9 col-xs-12 no-padding">
+          <%= f.input :overview, placeholder: 'Ici, pas de limite de caractères', label: false, input_html: { style: "width: 100%", rows: 3 }  %>
+        </div>
+      </div>
+      <div class="row margin-top-15">
+        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Pourquoi nous rejoindre</p>
+        <div class="col-lg-9 col-xs-12 margin-right-15 no-margin-xs no-padding">
+          <%= f.input :mission, as: :text, label: false, :input_html => { style: "width: 100%", rows: 3 } %>
         </div>
       </div>
     </div>
@@ -83,7 +85,7 @@
       <div class="row">
         <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin col-lg-2 col-xs-12">Linkedin</p>
         <div class="col-lg-3 col-xs-12 margin-right-15 no-margin-xs no-padding">
-          <%= f.input :linkedin, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
+          <%= f.input :linkedin, label: false, :input_html => { style: "width: 100%" } %>
         </div>
       </div>
     </div>
