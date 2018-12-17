@@ -1,4 +1,4 @@
-<%= cache @talent do %>
+
 <% if current_user.is_a?(Talent) %>
   <%= link_to edit_talent_path(@talent) do %>
     <div class="btn-edition-container">
@@ -84,6 +84,7 @@
             <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
             <p class="titre-rubrique-3 no-margin"><%= @talent.city.present? ? @talent.city : "Dis-nous où tu habites" %></p>
           </div>
+          <!-- <#% raise %> -->
           <% if @talent.city.present? %>
             <div id="map" data-markers="<%= @markers.to_json %>"></div>
           <% end %>
@@ -161,8 +162,11 @@
             <div class="info-grid-1 no-padding col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Mobilité</p>
               <% if @next_aventures.present? %>
-                <% if @next_aventures.city.present? %>
-                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.city %></p>
+
+                <% if @next_aventures.mobilities.count > 0 %>
+                  <% @next_aventures.mobilities.each do |mobility| %>
+                    <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= mobility.title %></p>
+                  <% end %>
                 <% elsif !@next_aventures.city.present? && current_user.is_a?(Headhunter) %>
                   <i class="far fa-question-circle green"></i>
                 <% else %>
@@ -212,7 +216,9 @@
             <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Secteur</p>
               <% if @sectors.present? %>
-                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @sectors.first.sector.title %></p>
+                <% @sectors.each do |talent_sector| %>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= talent_sector.sector.title %></p>
+                <% end %>
               <% elsif !@next_aventures.present? && current_user.is_a?(Headhunter) %>
                 <i class="far fa-question-circle green"></i>
               <% else %>
@@ -480,4 +486,4 @@
 
   </div>
 </div>
-<% end %>
+
