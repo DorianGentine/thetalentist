@@ -12,7 +12,7 @@
   <div class="row margin-top-30-xs">
 
     <div class="col-xs-12 <%= @talent.validated? ? "col-lg-3" : "col-lg-4" %> no-padding">
-      <div class="margin-right-15 no-margin-xs">
+      <div class="margin-right-15 no-margin-xs" id="testdorian">
         <%= f.association :formation, collection: Formation.all.order('title ASC'), prompt:"Établissement", label: false, input_html: { :class => "select2", style: "width: 100%" } %>
       </div>
     </div>
