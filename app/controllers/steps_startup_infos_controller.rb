@@ -63,7 +63,7 @@ private
       :mission,
       :linkedin,
       :terms_of_condition,
-      sector_ids: []
+      :sector_ids
       )
   end
 
