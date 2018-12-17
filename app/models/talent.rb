@@ -11,7 +11,7 @@ class Talent < ApplicationRecord
           :omniauthable, omniauth_providers: [:linkedin]
 
   validates_confirmation_of :password
-  validates :name, :firstname, :city, :phone, :email, presence: true
+  validates :name, :firstname, :city, :email, presence: true
 
   geocoded_by :city
   after_validation :geocode
@@ -151,7 +151,6 @@ class Talent < ApplicationRecord
     talent_params[:firstname] =  auth.info.first_name
     talent_params[:name] =  auth.info.last_name
     talent_params[:city] =  auth.info.location
-    talent_params[:phone] =  "to add"
     talent_params[:linkedin] =  auth.info.urls.public_profile
     talent_params.merge! auth.info.slice(:email)
     talent_params[:photo] = auth.info.image
