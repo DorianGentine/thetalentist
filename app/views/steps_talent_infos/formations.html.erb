@@ -14,18 +14,24 @@
     <!-- si spécialité métier pas renseigné -->
     <% if @talent.talent_jobs.first.id.nil? %>
       <div class="blue-background">
-        <div class="row">
-          <%= f.simple_fields_for :talent_jobs do |u| %>
+        <%= f.simple_fields_for :talent_jobs do |u| %>
+          <div class="row">
             <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-margin no-padding-xs">Spécialité métier</label>
             <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
               <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%" } %>
             </div>
             <label class="col-lg-3 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-padding margin-right-15">Années d'expérience</label>
             <div class="col-lg-3 col-xs-12 no-padding">
-              <%= u.input :year, label: false, :input_html => { style: "width: 100%", id:"yearPositif", :onchange => "zeroInput(this.value, 'yearPositif')" } %>
+              <%= u.input :year, label: false, :input_html => { style: "width: 100%", id:"yearPositif", min: "0", class: "sup-zero" } %>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
+          <div class="row margin-top-15">
+            <label class="label-edit text-align-right line-height-center col-lg-2 requis no-padding-xs" for="talent_phone">Tel.</label>
+            <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs margin-bottom-15-xs">
+              <%= f.input :phone, required: true, autofocus: false, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%" } %>
+            </div>
+          </div>
       </div>
 
       <div class="blue-background margin-top-background">

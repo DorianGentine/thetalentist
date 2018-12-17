@@ -15,7 +15,7 @@
             <%= render 'experience_fields', :f => u %>
           <% end %>
           <div class="links margin-top-30">
-            <%= link_to_add_association 'Ajouter une expérience +', f, :experiences, :partial => 'experience_fields', :class => "form-hobby-add" %>
+            <%= link_to_add_association 'Ajouter une expérience +', f, :experiences, :partial => 'experience_fields', :class => "form-hobby-add", id: "add_experience" %>
           </div>
         </ol>
       </div>
