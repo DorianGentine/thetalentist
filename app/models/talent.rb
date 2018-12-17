@@ -16,7 +16,6 @@ class Talent < ApplicationRecord
   geocoded_by :city
   after_validation :geocode
 
-
   after_create :send_welcome_email, :send_new_user_to_talentist
   before_save :capitalize_name_firstname
 
