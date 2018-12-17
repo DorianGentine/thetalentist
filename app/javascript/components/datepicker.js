@@ -1,20 +1,19 @@
-const data = document.querySelector('.datepicker1')
-import flatpickr from "flatpickr"
-import "flatpickr/dist/flatpickr.min.css" // Note this is important!
+// Muted le 17 Décembre by Dg.
 
-// install yarn add flatpickr et suivre les infos https://flatpickr.js.org/
-function onMonthOrYearChange(dObj, dStr, fp) {
-  fp.setDate(new Date(fp.currentYear, fp.currentMonth));
-}
+// const data = document.querySelector('.datepicker1')
+// import flatpickr from "flatpickr"
+// import "flatpickr/dist/flatpickr.min.css" // Note this is important!
 
-if (data) {
+// // install yarn add flatpickr et suivre les infos https://flatpickr.js.org/
+// function onMonthOrYearChange(dObj, dStr, fp) {
+//   fp.setDate(new Date(fp.currentYear, fp.currentMonth));
+// }
 
-  flatpickr(".datepicker1", {
-     dateFormat: "M - Y",
-     onYearChange: onMonthOrYearChange,
-    onMonthChange: onMonthOrYearChange
-  });
-}
+// if (data) {
 
-
-
+//   flatpickr(".datepicker1", {
+//      dateFormat: "M - Y",
+//      onYearChange: onMonthOrYearChange,
+//     onMonthChange: onMonthOrYearChange
+//   });
+// }

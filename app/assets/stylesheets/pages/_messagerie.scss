@@ -223,7 +223,7 @@ textarea{
     border-left: 0px;
     padding: 10px;
   }
-  .send-bar{
+  #send-bar{
     display: flex;
     justify-content: space-between;
     .label-file-mailboxer{
@@ -244,6 +244,11 @@ textarea{
       border: none;
       flex-grow: 1;
     }
+  }
+  .gray-button {
+    background-color: $gray;
+    cursor: default !important;
+    box-shadow: 1px 3px 8px rgba(0,0,0,0.17) !important;
   }
   .accept-relation{
     position: absolute;

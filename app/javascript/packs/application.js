@@ -8,8 +8,6 @@ import '../components/datepicker';
 
 import '../components/showFileTitle';
 
-import '../components/blockRotation';
-
 import '../components/dynamicLineHeight';
 
 import '../components/googleAnalytics';

@@ -78,7 +78,7 @@
       <% end %>
     </div>
 
-    <div class="conversation">
+    <div id="conversation">
 
       <!-- div conversation -->
       <% @messages.each do |receipt| %>
@@ -91,14 +91,30 @@
 
       <%= form_for @message, url: conversation_messages_path(@conversation) do |f|  %>
         <%= f.text_area :body, placeholder: "Écrivez votre message..." %>
-        <div class="send-bar">
+        <div id="send-bar">
           <label for="mailboxer_message_attachment" class="label-file-mailboxer" name="mailboxer_message[attachment]"><i class="fas fa-paperclip"></i></label>
           <%= f.file_field :attachment, :style => "display: none" %>
           <p href="#" id="uploadFile" style="margin: 0;">Aucun fichier</p>
-          <%= f.submit "Envoyer", :class => "btn-envoyer" %>
+          <%= f.submit "Envoyer", :class => "btn-envoyer gray-button", id: "send-bar-btn" %>
         </div>
 
       <% end %>
+
+    <script>
+      var message = document.getElementById("mailboxer_message_body")
+      var sendButton = document.getElementById("send-bar-btn")
+      sendButton.disabled = true
+      message.addEventListener("input", function() {
+        var textMessage = message.value
+        if (textMessage == "") {
+          sendButton.classList.add("gray-button")
+          sendButton.disabled = true
+        } else {
+          sendButton.classList.remove("gray-button")
+          sendButton.disabled = false
+        }
+      })
+    </script>
 
     <!-- div accepter la relation -->
       <% if current_user.is_a?(Talent) && @connexion %>
