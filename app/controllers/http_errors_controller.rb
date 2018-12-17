@@ -21,6 +21,6 @@ class HttpErrorsController < ApplicationController
 
 
   def store_location
-    session[‘saved_location’] = request.request_uri
+    # session[‘saved_location’] = request.request_uri
   end
 end
