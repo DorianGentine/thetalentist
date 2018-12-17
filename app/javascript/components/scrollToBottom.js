@@ -1,11 +1,11 @@
 function scrollToBottom () {
 
-  let objDiv = document.querySelector('.conversation');
+  let objDiv = document.getElementById('conversation');
 
   if (objDiv){
-    window.onload = function() {
-      objDiv.scrollTop = objDiv.scrollHeight;
-    }
+    window.addEventListener("load", function() {
+      $(objDiv).scrollTop($(objDiv)[0].scrollHeight);
+    })
   }
 
 }
