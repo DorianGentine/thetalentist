@@ -17,21 +17,23 @@
       </div>
 
       <div class="row margin-top-15">
-        <div class="margin-date-picker col-lg-2 col-xs-12">
-          <p class="label-edit no-margin">De</p>
-          <div class="margin-right-15 no-margin-xs">
-            <%= f.input :starting, label: false, placeholder:"MM-AAAA", as: :string, input_html: { class:"verifDateWithMonthAndYear", style: "width: 100%"} %>
+        <div class="col-lg-6 col-xs-12 no-padding date_module">
+          <div class="margin-date-picker col-lg-4 col-xs-12">
+            <p class="label-edit no-margin">De</p>
+            <div class="margin-right-15 no-margin-xs">
+              <%= f.input :starting, label: false, placeholder:"MM-AAAA", as: :string, input_html: { class: "verifDateWithMonthAndYear", style: "width: 100%"} %>
+            </div>
           </div>
-        </div>
-        <div class="margin-date-picker col-lg-2 col-xs-12 margin-top-15-xs">
-          <p class="label-edit no-margin">À</p>
-          <div class="margin-right-15 no-margin-xs">
-            <%= f.input :years, label: false, as: :string, input_html: {:class => "verifDateWithMonthAndYear to_experience #{f.object.currently ? 'checked_boxe' : 'false'}", style: "width: 100%"}  %>
+          <div class="margin-date-picker col-lg-4 col-xs-12 margin-top-15-xs">
+            <p class="label-edit no-margin">À</p>
+            <div class="margin-right-15 no-margin-xs">
+              <%= f.input :years, label: false, as: :string, input_html: {:class => "verifDateWithMonthAndYear to_experience #{f.object.currently ? 'checked_boxe' : 'false'}", style: "width: 100%"}  %>
+            </div>
           </div>
-        </div>
-        <div id="font-input-currently" class="col-lg-2 col-xs-12 margin-top-15-xs">
-          <p class="label-edit no-margin">Poste actuel</p>
-          <%= f.input :currently, label: false, input_html: {class: "currently_checked"},data: { target: "#to_experience" } %>
+          <div id="font-input-currently" class="col-lg-4 col-xs-12 margin-top-15-xs">
+            <p class="label-edit no-margin">Poste actuel</p>
+            <%= f.input :currently, label: false, input_html: {class: "currently_checked"},data: { target: "#to_experience" } %>
+          </div>
         </div>
         <div class="col-lg-6 col-xs-12 margin-top-15-xs">
           <p class="label-edit no-margin">Type d'entreprise</p>
