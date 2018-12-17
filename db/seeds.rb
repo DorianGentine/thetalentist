@@ -64,16 +64,16 @@ nathan_from_agricool = Credential.create!(firstname: "nathan", company_name: "de
 florian_from_manomano = Credential.create!(firstname: "florian", company_name: "desbrasenplus", name: "martin", email: "florian@hotmail.fr", phone: "0786019941", talent: erwan)
 gregoire_from_agricool = Credential.create!(firstname: "gregoire", company_name: "desbrasenplus", name: "barbier", email: "gregoire@hotmail.fr", phone: "0786019941", talent: erwan)
 
-p "Creating Company_names"
+# p "Creating Company_names"
 
-csv_file_entreprise   = File.join(__dir__, 'entreprises.csv')
+# csv_file_entreprise   = File.join(__dir__, 'entreprises.csv')
 
-CSV.foreach(csv_file_entreprise) do |row|
-  if row[0]
-    entre = CompanyName.new({ title: row[0].gsub( "'", "" ) })
-    entre.save
-  end
-end
+# CSV.foreach(csv_file_entreprise) do |row|
+#   if row[0]
+#     entre = CompanyName.new({ title: row[0].gsub( "'", "" ) })
+#     entre.save
+#   end
+# end
 
 p "Creating company_type part"
 
@@ -83,17 +83,17 @@ tpe = CompanyType.create!(title: "Micro entreprise (TPE)")
 
 p "Creating experiences"
 
-data_analyst = Experience.create!( position: "Data analyste", talent: luc, company_name: "Total", company_type_id: ge.id, link:"https://www.valeo.com/fr/", years:"2017", currently: false, starting: "2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
-data_scientist = Experience.create!( position: "data scientist", talent: donatien, company_name: "Total", company_type_id: tpe.id, link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
-data_owner = Experience.create!( position: "data owner", talent: dorian, company_name: "Total", company_type_id: eti.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2012", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_owner = Experience.create!( position: "data owner", talent: erwan, company_name: "Total", company_type_id: ge.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2014", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_analyst = Experience.create!( position: "Data analyste", talent: erwan, company_name: "Total", company_type_id: tpe.id, link:"https://www.valeo.com/fr/", years:"2017", currently: false, starting: "2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
-data_scientist = Experience.create!( position: "data scientist", talent: dorian, company_name: "Total", company_type_id: tpe.id, link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
-data_owner = Experience.create!( position: "data owner", talent: donatien, company_name: "Total", company_type_id: ge.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_owner = Experience.create!( position: "data owner", talent: luc, company_name: "Total", company_type_id: eti.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_scientist = Experience.create!( position: "data scientist", talent: louis, company_name: "Total", company_type_id: tpe.id, link:"https://www.uber.com/", currently: true, starting: "2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
-data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "Total", company_type_id: tpe.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
-data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "Total", company_type_id: ge.id, link:"https://www.backmarket.com/", years:"2018", currently: false, starting: "2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_analyst = Experience.create!( position: "Data analyste", talent: luc, company_name: "Total", company_type_id: ge.id, link:"https://www.valeo.com/fr/", years:"11-2017", currently: false, starting: "10-2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
+data_scientist = Experience.create!( position: "data scientist", talent: donatien, company_name: "Total", company_type_id: tpe.id, link:"https://www.uber.com/", currently: true, starting: "03-2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
+data_owner = Experience.create!( position: "data owner", talent: dorian, company_name: "Total", company_type_id: eti.id, link:"https://www.backmarket.com/", years:"11-2018", currently: false, starting: "03-2012", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_owner = Experience.create!( position: "data owner", talent: erwan, company_name: "Total", company_type_id: ge.id, link:"https://www.backmarket.com/", years:"11-2018", currently: false, starting: "03-2014", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_analyst = Experience.create!( position: "Data analyste", talent: erwan, company_name: "Total", company_type_id: tpe.id, link:"https://www.valeo.com/fr/", years:"11-2017", currently: false, starting: "03-2015", overview: "Valeo est un équipementier automobile, partenaire de tous les constructeurs dans le monde. Entreprise technologique, Valeo propose des systèmes et équipements innovants permettant la réduction des émissions de CO2 et le développement de la conduite intuitive.")
+data_scientist = Experience.create!( position: "data scientist", talent: dorian, company_name: "Total", company_type_id: tpe.id, link:"https://www.uber.com/", currently: true, starting: "03-2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
+data_owner = Experience.create!( position: "data owner", talent: donatien, company_name: "Total", company_type_id: ge.id, link:"https://www.backmarket.com/", years:"11-2018", currently: false, starting: "03-2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_owner = Experience.create!( position: "data owner", talent: luc, company_name: "Total", company_type_id: eti.id, link:"https://www.backmarket.com/", years:"11-2018", currently: false, starting: "03-2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_scientist = Experience.create!( position: "data scientist", talent: louis, company_name: "Total", company_type_id: tpe.id, link:"https://www.uber.com/", currently: true, starting: "03-2015", overview: "Uber, anciennement UberCab, est une entreprise technologique américaine qui développe et exploite des applications mobiles de mise en contact d'utilisateurs avec des conducteurs réalisant des services de transport.")
+data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "Total", company_type_id: tpe.id, link:"https://www.backmarket.com/", years:"11-2018", currently: false, starting: "03-2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
+data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "Total", company_type_id: ge.id, link:"https://www.backmarket.com/", years:"11-2018", currently: false, starting: "03-2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
 
 p "Creating formations"
 
@@ -323,49 +323,49 @@ doctolib = Startup.create!(name: "doctolib", year_of_creation: 2010, collaborato
 
 p "Creating Picture part"
 photo1 = Picture.new(title: "open-space", startup:backmarket )
-photo1.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258542/Ces-startups-qui-inventent-l-equipement-de-bureau-de-demain.jpg"
+photo1.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1542619544/46519567_509488812890886_4973431962510295040_n.jpg"
 photo1.save
 
 photo2 = Picture.new(title: "open-space", startup:backmarket )
-photo2.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258542/tencent-open-space.png"
+photo2.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1542619544/46519567_509488812890886_4973431962510295040_n.jpg"
 photo2.save
 
 photo3 = Picture.new(title: "open-space", startup:backmarket )
-photo3.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258541/open-space.png"
+photo3.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1542619544/46519567_509488812890886_4973431962510295040_n.jpg"
 photo3.save
 
 photo1 = Picture.new(title: "open-space", startup:manomano )
-photo1.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258541/photo_startup_holidog_12.jpg"
+photo1.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1542619544/46519567_509488812890886_4973431962510295040_n.jpg"
 photo1.save
 
 photo2 = Picture.new(title: "open-space", startup:manomano )
-photo2.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258541/3025567-poster-p-1-how-to-fix-open-offices-bad-for-work-825x510.jpg"
+photo2.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1542619544/46519567_509488812890886_4973431962510295040_n.jpg"
 photo2.save
 
 photo3 = Picture.new(title: "open-space", startup:manomano )
-photo3.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258540/240_F_109957412_Po0p0h1Rz6lg0SOt8msSVnW2rp5w6i3L.jpg"
+photo3.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1542619544/46519567_509488812890886_4973431962510295040_n.jpg"
 photo3.save
 
 photo1 = Picture.new(title: "open-space", startup:doctolib )
-photo1.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258541/photo_startup_holidog_12.jpg"
+photo1.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1542619544/46519567_509488812890886_4973431962510295040_n.jpg"
 photo1.save
 
 photo2 = Picture.new(title: "open-space", startup:doctolib )
-photo2.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258542/Ces-startups-qui-inventent-l-equipement-de-bureau-de-demain.jpg"
+photo2.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1542619544/46519567_509488812890886_4973431962510295040_n.jpg"
 photo2.save
 
 photo3 = Picture.new(title: "open-space", startup:doctolib )
-photo3.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1539258541/open-space.png"
+photo3.remote_photo_url = "https://res.cloudinary.com/da4nnrzbu/image/upload/v1542619544/46519567_509488812890886_4973431962510295040_n.jpg"
 photo3.save
 
 
 
 p "Creating Headhunter part"
 
-lucas = Headhunter.create!(email: "dimitri@ineva-partners.com", password:"password", name: "Rideau", firstname: "lucas", job:"HR", validated: true, startup: backmarket)
-amelie = Headhunter.create!(email: "erwan.guillou@mail.novancia.fr", password:"password", name: "Rideau", firstname: "amelie", job:"HR data_analyst", validated: false, startup: manomano)
-justine = Headhunter.create!(email: "magdalena@ineva-partners.com", password:"password", name: "Rideau", firstname: "justine", job:"drh", validated: true, startup: doctolib)
-loic = Headhunter.create!(email: "dorian.gentine@mail.novancia.fr", password:"password", name: "Rideau", firstname: "loic", job:"rh for sales and product owner", validated: true, startup: doctolib)
+lucas = Headhunter.create!(email: "dimitri@ineva-partners.com", password:"password", name: "Rideau", firstname: "lucas", job:"HR", validated: true, startup: backmarket, terms_of_condition: true)
+amelie = Headhunter.create!(email: "erwan.guillou@mail.novancia.fr", password:"password", name: "Rideau", firstname: "amelie", job:"HR data_analyst", validated: false, startup: manomano, terms_of_condition: true)
+justine = Headhunter.create!(email: "magdalena@ineva-partners.com", password:"password", name: "Rideau", firstname: "justine", job:"drh", validated: true, startup: doctolib, terms_of_condition: true)
+loic = Headhunter.create!(email: "dorian.gentine@mail.novancia.fr", password:"password", name: "Rideau", firstname: "loic", job:"rh for sales and product owner", validated: true, startup: doctolib, terms_of_condition: true)
 
 
 

@@ -21,7 +21,9 @@ class Experience < ApplicationRecord
   end
 
   def years_is_bigger_than_starting_date?
-    self.starting < self.years
+    if self.years.present?
+      self.starting < self.years
+    end
   end
 end
 
