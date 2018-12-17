@@ -7,7 +7,7 @@
 <%= simple_form_for @startup, url: update_photos_headhunter_path(@headhunter), method: :patch, remote: false  do |f| %>
 
   <div class="row">
-    <%= f.simple_fields_for :pictures, f.object.pictures.order(:created_at) do |u| %>
+    <%= f.simple_fields_for :pictures, @startup.pictures.count > 0 ? f.object.pictures.order(:created_at) : "" do |u| %>
       <% random_num = "#{rand(1...100)}" + "a" + "#{rand(1...100)}" %>
       <!-- si photo présente -->
         <div class="col-lg-4 col-xs-12 margin-top-30">

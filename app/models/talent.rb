@@ -11,6 +11,10 @@ class Talent < ApplicationRecord
           :omniauthable, omniauth_providers: [:linkedin]
 
   validates_confirmation_of :password
+  validates :name, :firstname, :city, :phone, :email, presence: true
+
+  geocoded_by :city
+  after_validation :geocode
 
   after_create :send_welcome_email, :send_new_user_to_talentist
   before_save :capitalize_name_firstname
@@ -63,7 +67,6 @@ class Talent < ApplicationRecord
   has_many :next_aventures, dependent: :destroy
   accepts_nested_attributes_for :next_aventures, allow_destroy: true, reject_if: :all_blank
 
-  validates :name, :firstname, :city, :phone, :email, presence: true
 
   # messagerie
   has_many :relationships, dependent: :destroy

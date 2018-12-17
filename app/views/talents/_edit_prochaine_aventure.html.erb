@@ -12,11 +12,11 @@
       <div class="col-xs-12 col-lg-6">
         <p class="label-edit no-margin requis">Mobilité</p>
         <div class="margin-right-15 no-margin-xs">
-          <%= u.simple_fields_for :mobilities, @mobilities do |e| %>
-            <%= render 'mobility_fields', :f => e %>
+          <%= u.simple_fields_for :mobilities do |e| %>
+            <%= render 'steps_talent_infos/mobility_fields', :f => e %>
           <% end %>
           <div class="links margin-top-15">
-            <%= link_to_add_association 'Ajouter un +', u, :mobilities, :partial => 'mobility_fields', :class => "form-hobby-add" %>
+            <%= link_to_add_association 'Ajouter un +', u, :mobilities, :partial => 'steps_talent_infos/mobility_fields', :class => "form-hobby-add" %>
           </div>
         </div>
       </div>
