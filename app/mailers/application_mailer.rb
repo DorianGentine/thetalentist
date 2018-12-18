@@ -29,13 +29,13 @@ class ApplicationMailer < ActionMailer::Base
     # This will render a view in `app/views/talent_mailer`!
   end
 
-  def erreur_message(type_erreur)
-    @user = user
-
+  def erreur_message( current_page, type_erreur)
+    @current_page = current_page.present? ? current_page : nil
+    @error_datas = type_erreur
     mail(
-      to: "donatien@avemcreation, erwan@avemcreation.com, dorian@avemcreation.com",
+      to: "donatien@avemcreation, erwan@avemcreation.com, dorian@avemcreation.com, donatien@rollandmail.com",
       cc: "bienvenue@thetalentist.com",
-      subject: "Une erreur #{type_erreur} a été reçu sur Talentsit"
+      subject: "Une erreur #{@error_datas} a été reçu sur Talentsit"
       )
   end
 
