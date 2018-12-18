@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
+  after_action :set_error_cookies, except: [:error_500, :error_404, :error_422 ]
+
   # Uncomment when you *really understand* Pundit!
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   def user_not_authorized
@@ -35,10 +37,6 @@ class ApplicationController < ActionController::Base
   end
 
 
-
-  # def current_user
-  #   @current_user
-  # end
   def prise_de_contact
     @contact = ContactForm.new
 
@@ -138,6 +136,42 @@ class ApplicationController < ActionController::Base
       end
     end
     return words
+  end
+
+  def set_error_cookies
+    if current_user.present?
+      if current_user.is_a?(Talent)
+        model_user = 'Talent'
+      elsif current_user.is_a?(Talentist)
+        model_user = 'Talentist'
+      else
+        model_user = 'Headhunter'
+      end
+      user_id = current_user.id
+    elsif !current_user && @talent || @headhunter || @talentist
+      model_user = {
+        talent: @talent.class.name,
+        headhunter: @headhunter.class.name,
+        talentist: @talentist.class.name
+      }
+      user_id = {
+        talent: @talent.nil? ? "Blank" : @talent.id,
+        headhunter: @headhunter.nil? ? "Blank" : @headhunter.id,
+        talentist: @talentist.nil? ? "Blank" : @talentist.id
+      }
+    else
+      model_user = "Blank"
+      user_id = "Blank"
+    end
+
+    session[:data_error] = {
+      time: Time.now.strftime("%d/%m/%Y a %I:%M%p"),
+      path: request.url,
+      controller: params[:controller],
+      action: params[:action],
+      model_user: model_user,
+      user_id: user_id
+    }
   end
 
 end
