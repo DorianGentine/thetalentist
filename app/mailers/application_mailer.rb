@@ -35,7 +35,7 @@ class ApplicationMailer < ActionMailer::Base
     mail(
       to: "donatien@avemcreation, erwan@avemcreation.com, dorian@avemcreation.com, donatien@rollandmail.com",
       cc: "bienvenue@thetalentist.com",
-      subject: "Une erreur #{@error_datas} a été reçu sur Talentsit"
+      subject: "Une erreur #{@current_page} a été reçu sur Talentsit"
       )
   end
 
