@@ -1,6 +1,5 @@
 class StartupsController < ApplicationController
   def update
-    # raise
     @startup = Startup.find(params[:id])
     @startup.btob = false
     @startup.btoc = false

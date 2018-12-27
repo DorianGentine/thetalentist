@@ -1,0 +1,87 @@
+// Equilibre hauteur input text et list
+.select2-container .select2-selection--single{
+  height: 35px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+  line-height: 35px !important;
+}
+
+
+#diplome-form{
+  .select span {
+    width: 100% !important;
+  }
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    width: 25px !important;
+  }
+}
+
+/* change 'loisir' box aspect */
+.select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single {
+  border: 1px solid #ccc !important;
+  border-radius: 2px !important;
+}
+
+// Met en page les réponses
+  .select2-results__option {
+    color: #303030;
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: $green !important;
+  }
+
+// recopie le padding du selectize
+  .select2-container--open .select2-dropdown--below, .select2-container--open .select2-dropdown--above {
+      padding: 6px 12px;
+  }
+
+// aligne l'onglet recherche
+  .select2-search--dropdown {
+      padding: 4px 0 !important;
+  }
+// change l'aspect du focus
+// :focus {
+//     outline: -webkit-focus-ring-color auto 2px;
+// }
+
+// supprime bordure au-dessus du dropdown
+  span.select2-dropdown.select2-dropdown--below {
+      top: -2px;
+      border: 1px solid #ccc;
+      border-top: none;
+  }
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  margin: 0 3px 3px 0;
+  padding: 0 4px !important;
+  background-color: #f2f2f2 !important;
+  border-radius: 0px !important;
+  color: #303030;
+  border: 0 solid #d0d0d0 !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: $black;
+    margin-right: 5px !important;
+    border-right: 1px solid #d0d0d0;
+    padding-right: 4px;
+}
+
+
+
+// .select2-container--default .select2-selection--multiple .select2-selection__choice{
+//   background-color: white !important;
+//   border: 1px solid $green !important;
+//   color: $green !important;
+//   margin-right: 10px !important;
+//   padding: 5px 10px !important;
+// }
+// .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+//   color: $green !important;
+//   font-weight: 500 !important;
+//   margin-right: 5px !important;
+// }
+
+

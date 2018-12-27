@@ -10,13 +10,13 @@
     <div class="col-lg-6 col-xs-12 no-padding">
       <p class="label-edit requis">Création</p>
       <div class="no-padding margin-right-15 no-margin-xs">
-        <%= f.input :year_of_creation, collection: (1960..Date.current.year).to_a.reverse, prompt: "année de création", label: false, input_html: { style: "width: 100%" }  %>
+        <%= f.input :year_of_creation, collection: (1960..Date.current.year).to_a.reverse, prompt: "année de création", label: false, input_html: { style: "width: 100%", class: "select2 no-search" }  %>
       </div>
     </div>
     <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
       <p class="label-edit requis">Domaine d'acivité</p>
       <div class="no-padding">
-        <%= f.input :sector_ids, collection: Sector.all, label: false, :input_html => { style: "width: 100%" } %>
+        <%= f.input :sector_ids, collection: Sector.all, label: false, :input_html => { style: "width: 100%", class: "select2 no-search" } %>
       </div>
     </div>
   </div>

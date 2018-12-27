@@ -67,9 +67,7 @@ class StepsTalentInfosController < ApplicationController
       if need_to_create_data?
         set_new_technos(@talent)
       end
-      # raise
       if @talent.update(talent_params)
-      # raise
         # TODO
         @talent.save_completed_profil
         # @talent = current_user
