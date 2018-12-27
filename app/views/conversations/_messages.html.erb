@@ -1,11 +1,11 @@
-<!-- partie gauche -->
-<% if receipt.message.sender != @participant %>
-  <div class="message right">
+<!-- partie droite -->
+<% if receipt.message.sender != @current_user %>
+  <div class="message left">
     <div class="avatar">
-      <% if @user.photo.present? %>
-        <%= cl_image_tag @user.photo.url(:bright_face) %>
+      <% if @participant.photo.present? %>
+        <%= cl_image_tag @participant.photo.url(:bright_face) %>
       <% else %>
-        <p><%= @user.firstname.split(//).first.upcase %>
+        <p><%= @participant.firstname.split(//).first.upcase %>
       <% end %>
     </div>
     <p class="x-commented"><%= receipt.message.sender.firstname %></p>
@@ -14,14 +14,14 @@
       <p class="the-message"><%= link_to  "Document envoyé", receipt.message.attachment.url, target: "_blank" %></p>
     <% end %>
   </div>
-<!-- partie droite -->
+<!-- partie gauche -->
 <% else %>
-  <div class="message left">
+  <div class="message right">
     <div class="avatar">
-      <% if @participant.photo.present? %>
-        <%= cl_image_tag @participant.photo.url(:bright_face) %>
+      <% if @user.photo.present? %>
+        <%= cl_image_tag @user.photo.url(:bright_face) %>
       <% else %>
-        <p><%= @participant.firstname.split(//).first.upcase %>
+        <p><%= @user.firstname.split(//).first.upcase %>
       <% end %>
     </div>
     <p class="x-commented"><%= receipt.message.sender.firstname %></p>

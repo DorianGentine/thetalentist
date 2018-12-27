@@ -29,7 +29,7 @@
       <div class="col-xs-12 col-lg-6">
         <p class="label-edit no-margin requis">Type de contrat</p>
         <div class="margin-right-15 no-margin-xs">
-          <%= u.input :contrat, label: false, prompt:"ex: Freelance", collection: [ "CDI", "CDD", "Freelance", "Stage" ], :input_html => { :class => 'select2', style: "width: 100%" } %>
+          <%= u.input :contrat, label: false, prompt:"ex: Freelance", collection: [ "CDI", "CDD", "Freelance", "Stage" ], :input_html => { :class => 'select2 no-search', style: "width: 100%" } %>
         </div>
       </div>
       <div class="col-xs-12 col-lg-6 margin-top-15-xs">
@@ -48,12 +48,12 @@
       <div class="col-xs-12 col-lg-6">
         <p class="label-edit no-margin requis">Attentes salariales</p>
         <div class="margin-right-15 no-margin-xs">
-        <%= u.input :remuneration, label: false, hint: "package K€ annuel brut", collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ], :input_html => { :class => 'select2', style: "width: 100%" } %>
+        <%= u.input :remuneration, label: false, hint: "package K€ annuel brut", collection: [ "30 - 40", "40 - 50", "50 - 70", "70 - 100", "100+" ], :input_html => { :class => 'select2 no-search', style: "width: 100%" } %>
         </div>
       </div>
       <div class="col-xs-12 col-lg-6 margin-top-15-xs">
         <p class="label-edit no-margin requis">Disponibilité</p>
-        <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"], label: false, :input_html => { :class => 'select2', style: "width: 100%" } %>
+        <%= u.input :availability, collection: ["Immédiate","- de 3 mois", "+ de 3 mois"], label: false, :input_html => { :class => 'select2 no-search', style: "width: 100%" } %>
       </div>
     </div>
 

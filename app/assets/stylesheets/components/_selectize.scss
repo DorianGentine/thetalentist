@@ -7,4 +7,14 @@
 .selectize-dropdown{
   margin-left: -12px !important;
   height: unset;
+  color: $green;
+}
+
+.selectize-dropdown .active {
+  background-color: $green !important;
+  color: white !important;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field:focus{
+  box-shadow: unset !important;
 }

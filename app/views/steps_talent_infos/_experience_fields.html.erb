@@ -37,7 +37,7 @@
         </div>
         <div class="col-lg-6 col-xs-12 margin-top-15-xs">
           <p class="label-edit no-margin">Type d'entreprise</p>
-          <%= f.input :company_type_id, collection: CompanyType.all, label: false, prompt:"Type d'entreprise", :input_html => { :class => 'select2', style: "width: 100%" } %>
+          <%= f.input :company_type_id, collection: CompanyType.all, label: false, prompt:"Type d'entreprise", :input_html => { :class => 'select2 no-search', style: "width: 100%" } %>
         </div>
       </div>
 
