@@ -5,7 +5,6 @@ class TalentsController < ApplicationController
 
   def index
     @talentist = current_talentist
-    # raise
     # @talents = Talent.all.order('created_at DESC')
     # @talents.each do |talent|
     #   talent.save_completed_profil
@@ -60,7 +59,6 @@ class TalentsController < ApplicationController
   end
 
   def show
-    # raise
     @flats = []
     @flats << @talent
     @flats << @talent
@@ -92,7 +90,6 @@ class TalentsController < ApplicationController
       end
     end
     @talent.update_password_with_password(talent_password)
-    # raise
     # @talent.update_attributes(talent_params)
     redirect_to talent_path(@talent)
   end
@@ -143,7 +140,6 @@ class TalentsController < ApplicationController
   end
 
   def update_formation_and_skill
-    # raise
     update_edit(@talent, talent_params)
     @talent.save_completed_profil
   end

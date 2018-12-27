@@ -17,7 +17,6 @@ class NextAventure < ApplicationRecord
   private
 
   def compile_cities_of_next_aventure
-    raise
     return self.city.join(', ')
   end
 

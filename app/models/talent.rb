@@ -172,7 +172,6 @@ class Talent < ApplicationRecord
 
   def update_password_with_password(params, *options)
     current_password = params.delete(:current_password)
-    # raise
     result = if valid_password?(current_password)
                update_attributes(params, *options)
              else

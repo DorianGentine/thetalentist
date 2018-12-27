@@ -41,7 +41,6 @@ class Talents::PasswordsController < Devise::PasswordsController
   # protected
 
   def after_resetting_password_path_for(resource)
-    raise
     super(resource)
   end
 

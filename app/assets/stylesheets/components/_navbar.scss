@@ -35,12 +35,12 @@
 
 #notif {
   background-color: #ff4c4c;
-  width: 15px;
-  height: 15px;
+  line-height: 15px;
+  min-width: 15px;
   font-size: 11px;
   color: white;
-  border-radius: 50%;
-  padding-left: 5px;
+  border-radius: 30px;
+  padding: 0px 5px;
 }
 
 /* Navbar link */

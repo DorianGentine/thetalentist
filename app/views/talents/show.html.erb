@@ -84,7 +84,6 @@
             <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
             <p class="titre-rubrique-3 no-margin"><%= @talent.city.present? ? @talent.city : "Dis-nous où tu habites" %></p>
           </div>
-          <!-- <#% raise %> -->
           <% if @talent.city.present? %>
             <div id="map" data-markers="<%= @markers.to_json %>"></div>
           <% end %>
