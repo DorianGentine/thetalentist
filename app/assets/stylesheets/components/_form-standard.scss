@@ -1,4 +1,3 @@
-
 .blue-background {
   background-color: $blue-background;
   padding: 30px;
@@ -24,7 +23,7 @@
   // width: unset;
   height: 35px;
   padding: 6px 12px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.428571429;
   background-color: #fff;
   background-image: none;
@@ -91,4 +90,9 @@
   }
 }
 
+.add-picture{
+  position: absolute;
+  bottom: 80px;
+  right: 50px;
+}
 

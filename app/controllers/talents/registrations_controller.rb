@@ -35,7 +35,7 @@ class Talents::RegistrationsController < Devise::RegistrationsController
       :password,
       :password_confirmation,
       :linkedin,
-      talent_jobs_attributes: [ :id, :job_id, :year]
+      talent_jobs_attributes: [ :id, :job_id, :year ]
       )
   end
 end
