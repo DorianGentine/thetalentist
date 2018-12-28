@@ -17,13 +17,26 @@ class Startup < ApplicationRecord
   accepts_nested_attributes_for :startup_words, allow_destroy: true
   accepts_nested_attributes_for :words, allow_destroy: true
 
-  validates :name, presence: true
-  validates :link, presence: true
+  validates :name, presence: true, uniqueness: true, if: :checking_name_available?
+  # validates :link, presence: true
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 
   mount_uploader :logo, PhotoUploader
+
+
+  def checking_name_available?
+    if Startup.where(name: self.name).count > 0
+      false
+    elsif Startup.where(name: self.name.capitalize).count > 0
+      false
+    else
+      true
+    end
+  end
+
+
   def there_is_no_social_network?
     if self.facebook.nil? && self.linkedin.nil?
       return true
@@ -31,6 +44,6 @@ class Startup < ApplicationRecord
   end
 
   def capitalize_name
-    self.name = self.name.capitalize if self.name && !self.name.blank?
+    self.name = self.name.capitalize
   end
 end

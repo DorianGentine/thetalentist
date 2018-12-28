@@ -4,7 +4,10 @@ class YourSmallPlu < ApplicationRecord
   accepts_nested_attributes_for :talent, :reject_if => :all_blank
 
 
+
   def capitalize_description
-    self.description.capitalize
+    if !self.description.nil?
+      self.description.capitalize
+    end
   end
 end

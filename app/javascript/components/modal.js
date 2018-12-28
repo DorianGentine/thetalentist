@@ -5,7 +5,7 @@ function revealModal() {
 
     targetModal.style.display = "block";
 
-    console.log(targetModalID)
+    // console.log(targetModalID)
     let close = "close_" + targetModalID
     let span = document.getElementById(close);
     span.onclick = function() {

@@ -8,8 +8,6 @@ import '../components/datepicker';
 
 import '../components/showFileTitle';
 
-import '../components/blockRotation';
-
 import '../components/dynamicLineHeight';
 
 import '../components/googleAnalytics';
@@ -50,3 +48,8 @@ readMoreText();
 import { openOnglet } from '../components/toggableVerticalTabs';
 openOnglet();
 
+import { verifDateWithMonthAndYear } from '../components/verifDate';
+verifDateWithMonthAndYear();
+
+// import { addSelectTwo } from '../components/addSelectTwo';
+// addSelectTwo();

@@ -1,12 +1,66 @@
-<h1>Il est là,</h1>
 
-<p>
-  Un petit Talent t'attend, il est beau fort et validé pour The Talentist!
-</p>
+<!-- BODY MAIL BLOC -->
+  <table style="border-radius: 2px;" align="center"; bgcolor="#F5F7FA" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+<!-- Espace début de la ligne -->
+    <tr>
+      <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+    </tr>
+    <tr>
+      <td>
+        <table  align="center" width="590" border="0" cellpadding="0" cellspacing="0">
+<!-- Bonjour Talent -->
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; text-align: left; font-size: 24px; color: #191B26; mso-line-height-rule: exactly; line-height: 30px; font-weight: bolder;">
+              Bonjour <%= @user.firstname.present? ? @user.firstname : "" %>,
+              <br> un talent correspondant à ta recherche a été trouvé !
+            </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Un petit Talent t'attend, il est beau, fort et validé par The Talentist!
+              <br><br>
+                N'hésite plus et prend contact avec lui !
+            </td>
+          </tr>
+<!-- Espace fin de la ligne -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
+<!-- Bouton Accéder à mon profil -->
+          <tr>
+            <td align="center" height="40">
+              <table align="center" width="270" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <td align="center" bgcolor="#4ECCA3" style="border-radius: 2px; text-align: center;" valign="middle">
+
+                      <%= link_to repertoire_url, {:style => "font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; font-weight: bold; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;"} do %>
+                        <p style="margin:0">Go go go !</p>
+                      <% end %>
+
+                  </td>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">Si tu as la moindre question, nous restons à ta disposition.<br><br><em>À très vite,<br>Magdalena et Dimitri</em></td>
+          </tr>
+<!-- Espace entre les lignes -->
+          <tr>
+            <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+  </table>
 
 
-  <%= link_to repertoire_url do %>
-    Go go go!
-  <% end %>
-
-<img src="/asset/logo.png" alt="">

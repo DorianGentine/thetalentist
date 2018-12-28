@@ -1,5 +1,5 @@
-<!-- partie gauche -->
-<% if receipt.message.sender == @participant %>
+<!-- partie droite -->
+<% if receipt.message.sender != @current_user %>
   <div class="message left">
     <div class="avatar">
       <% if @participant.photo.present? %>
@@ -14,7 +14,7 @@
       <p class="the-message"><%= link_to  "Document envoyé", receipt.message.attachment.url, target: "_blank" %></p>
     <% end %>
   </div>
-<!-- partie droite -->
+<!-- partie gauche -->
 <% else %>
   <div class="message right">
     <div class="avatar">

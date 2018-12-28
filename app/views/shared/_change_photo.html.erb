@@ -26,13 +26,11 @@
   </label>
 
   <% if f.object.is_a?(Startup) %>
-    <%= f.file_field :logo, id:"avatar-upload#{f.object.name}" %>
-    <%= f.hidden_field :logo_cache, as: :hidden %>
+    <%= f.file_field :logo, as: :hidden, id:"avatar-upload#{f.object.name}" %>
   <% else %>
-    <%= f.file_field :photo, id:"avatar-upload#{f.object.name}" %>
-    <%= f.hidden_field :photo_cache, as: :hidden %>
+    <%= f.file_field :photo, as: :hidden, id:"avatar-upload#{f.object.name}" %>
   <% end %>
 
 
-  <label for="avatar-upload<%= f.object.name %>" class="label-edit no-margin btn-avatar" data-target="p<%= f.object.name %>" style="line-height: 70px; cursor: pointer;">Modifier</label>
+  <label for="avatar-upload<%= f.object.name %>" class="col-lg-1 label-edit no-margin no-padding btn-avatar requis" data-target="p<%= f.object.name %>" style="line-height: 70px; cursor: pointer;">Modifier</label>
 </div>

@@ -11,6 +11,10 @@ class Talent < ApplicationRecord
           :omniauthable, omniauth_providers: [:linkedin]
 
   validates_confirmation_of :password
+  validates :name, :firstname, :city, :email, presence: true
+
+  geocoded_by :city
+  after_validation :geocode
 
   after_create :send_welcome_email, :send_new_user_to_talentist
   before_save :capitalize_name_firstname
@@ -63,7 +67,6 @@ class Talent < ApplicationRecord
   has_many :next_aventures, dependent: :destroy
   accepts_nested_attributes_for :next_aventures, allow_destroy: true, reject_if: :all_blank
 
-  validates :name, :firstname, :city, :phone, :email, presence: true
 
   # messagerie
   has_many :relationships, dependent: :destroy
@@ -78,9 +81,13 @@ class Talent < ApplicationRecord
   before_destroy { Mailboxer::Conversation.destroy_all }
 
   # link with pdf_uploader
-  mount_uploader :cv, PdfUploader
+  # mount_uploader :cv, PdfUploader
   mount_uploader :photo, PhotoUploader
 
+
+  scope :his_job_is, -> (job) { joins(:jobs).merge(Job.where(title: job)) }
+  # scope :is_comming_to, -> (point) { where( point: point, invited: true, status: "I'm in") }
+  # scope :activity_title, -> (current_title) { joins(:user_activity).merge(UserActivity.by_activity_title(current_title)) }
 
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
@@ -101,6 +108,7 @@ class Talent < ApplicationRecord
     end
 
   end
+
 
   def job_is?(job)
     job_ids = []
@@ -143,7 +151,6 @@ class Talent < ApplicationRecord
     talent_params[:firstname] =  auth.info.first_name
     talent_params[:name] =  auth.info.last_name
     talent_params[:city] =  auth.info.location
-    talent_params[:phone] =  "to add"
     talent_params[:linkedin] =  auth.info.urls.public_profile
     talent_params.merge! auth.info.slice(:email)
     talent_params[:photo] = auth.info.image
@@ -165,7 +172,6 @@ class Talent < ApplicationRecord
 
   def update_password_with_password(params, *options)
     current_password = params.delete(:current_password)
-    # raise
     result = if valid_password?(current_password)
                update_attributes(params, *options)
              else
@@ -182,36 +188,42 @@ class Talent < ApplicationRecord
 
 
   def send_new_user_to_talentist
-    ApplicationMailer.new_user(self).deliver_now
+    ApplicationMailer.new_user("talent", self.id).deliver_later
   end
 
   def new_message(message, receveur)
-    ApplicationMailer.new_message(message, receveur, self).deliver_now
+    ApplicationMailer.new_message("talent", message, receveur.id, self.id).deliver_later
   end
 
   def send_invitation(headhunter)
-    TalentMailer.invited(self, headhunter).deliver_now
+    TalentMailer.invited(self.id, headhunter.id).deliver_later
   end
-  def send_candidate
-    TalentMailer.candidate(self).deliver_now
+
+  def send_candidate_and_user_information
+    TalentMailer.candidate(self.id).deliver_later(wait_until: Date.tomorrow.noon)
+    TalentMailer.pdf_of_user_information(self.id).deliver_later(wait_until: Date.tomorrow.noon + 1.hour)
   end
 
   def send_welcome_email
-    ApplicationMailer.welcome(self).deliver_now
+    ApplicationMailer.welcome("talent", self.id).deliver_later
   end
 
   def send_refused
-    TalentMailer.refused(self).deliver_now
+    TalentMailer.refused(self.id).deliver_later
   end
 
   def send_accepted
-    TalentMailer.accepted(self).deliver_now
+    TalentMailer.accepted(self.id).deliver_later
   end
 
   def completed_totaly
-    all_parts = self.completed_profil + self.completed_formation_skill_language + self.completed_experience + self.completed_next_aventures
-    result = all_parts / 4.0
-    return result.round(1)
+    if self.completed_profil != nil &&  self.completed_formation_skill_language != nil &&  self.completed_experience != nil &&  self.completed_next_aventures != nil &&
+      all_parts = self.completed_profil + self.completed_formation_skill_language + self.completed_experience + self.completed_next_aventures
+      result = all_parts / 4.0
+      return result.round(1)
+    else
+      return 0
+    end
   end
 
   def completed_profil
@@ -224,7 +236,9 @@ class Talent < ApplicationRecord
     self.city.present? ? count += value_input : count
     self.linkedin.present? ? count += value_input : count
     self.jobs.first.present? ? count += value_input : count
-    self.talent_jobs.first.present? && self.talent_jobs.first.year.present? ? count += value_input : count
+    if self.talent_jobs.first.present?
+      self.talent_jobs.first.year.present? ? count += value_input : count
+    end
     return count.round(0)
   end
 
@@ -234,20 +248,26 @@ class Talent < ApplicationRecord
     language_count = self.talent_languages.size * 2
     skills_count = self.talent_skills.size * 1
     value_input = stat(formation_count + language_count + skills_count)
-    self.talent_formations.each do |talent_formation|
-      talent_formation.formation_id.present? ? count += value_input : count
-      talent_formation.year.present? ? count += value_input : count
-      talent_formation.title.present? ? count += value_input : count
-      # talent_formation.level.present? ? count += value_input : count
-      talent_formation.type_of_formation.present? ? count += value_input : count
+    if self.talent_formations.count > 0
+      self.talent_formations.each do |talent_formation|
+        talent_formation.formation_id.present? ? count += value_input : count
+        talent_formation.year.present? ? count += value_input : count
+        talent_formation.title.present? ? count += value_input : count
+        # talent_formation.level.present? ? count += value_input : count
+        talent_formation.type_of_formation.present? ? count += value_input : count
+      end
     end
-    self.talent_languages.each do |talent_language|
-      talent_language.language_id.present? ? count += value_input : count
-      talent_language.level.present? ? count += value_input : count
+    if self.talent_languages.count > 0
+      self.talent_languages.each do |talent_language|
+        talent_language.language_id.present? ? count += value_input : count
+        talent_language.level.present? ? count += value_input : count
+      end
     end
-    self.talent_skills.each do |talent_skill|
-      talent_skill.skill_id.present? ? count += value_input : count
-      # talent_skill.level.present? ? count += value_input : count
+    if self.talent_skills.count > 0
+      self.talent_skills.each do |talent_skill|
+        talent_skill.skill_id.present? ? count += value_input : count
+        # talent_skill.level.present? ? count += value_input : count
+      end
     end
     return count.round(0)
   end
@@ -256,12 +276,12 @@ class Talent < ApplicationRecord
     experiences_count = self.experiences.size * 6
     value_input = stat(experiences_count)
     self.experiences.each do |experience|
-      experience.position.present? ? count += value_input : raise
-      experience.starting.present? ? count += value_input : raise
+      experience.position.present? ? count += value_input : count
+      experience.starting.present? ? count += value_input : count
       experience.currently || experience.years.present? ? count += value_input : count
-      experience.overview.present? ? count += value_input : raise
-      experience.company_name.present? ? count += value_input : raise
-      experience.company_type_id.present? ? count += value_input : raise
+      experience.overview.present? ? count += value_input : count
+      experience.company_name.present? ? count += value_input : count
+      experience.company_type_id.present? ? count += value_input : count
     end
     return count.round(0)
   end
@@ -276,7 +296,7 @@ class Talent < ApplicationRecord
       next_aventure.city.present? ? count += value_input : count
       next_aventure.contrat.present? ? count += value_input : count
       next_aventure.remuneration.present? ? count += value_input : count
-      next_aventure.sector_ids.present? ? count += value_input : count
+      next_aventure.sector_ids.count > 0 ? count += value_input : count
       next_aventure.btob || next_aventure.btoc ? count += value_input : count
       next_aventure.availability.present? ? count += value_input : count
       next_aventure.waiting_for_one.present? ? count += value_input : count
@@ -289,10 +309,17 @@ class Talent < ApplicationRecord
       next_aventure.good_manager.present? ? count += value_input : count
       next_aventure.work_for_free.present? ? count += value_input : count
     end
-    self.your_small_plus.each do |your_small_plu|
-      your_small_plu.description.present? ? count += value_input : count
+    if self.your_small_plus.count > 0
+      self.your_small_plus.each do |your_small_plu|
+        your_small_plu.description.present? ? count += value_input : count
+      end
     end
     return count.round(0)
+  end
+
+  def save_completed_profil
+     self.cv =  self.completed_totaly
+     self.save
   end
 
   private

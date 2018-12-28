@@ -1,5 +1,8 @@
 class HeadhuntersController < ApplicationController
-  before_action :set_headhunter, only: [ :show, :to_validate, :update, :update_profile, :update_startup, :update_photos, :edit]
+  before_action :set_headhunter, only: [
+    :show, :to_validate, :update,
+    :update_profile, :update_startup, :update_photos, :edit
+  ]
   def repertory
     @headhunter = current_headhunter
     authorize @headhunter
@@ -8,25 +11,88 @@ class HeadhuntersController < ApplicationController
     @job_alert = JobAlerte.new
 
     @jobs = Job.all
-
     if params[:jobs].blank? || params[:jobs] == "Tous"
-      @talents = Talent.where(:visible => true).order(updated_at: :desc)
+      talents = Talent.where(:visible => true).order(updated_at: :desc)
     else
-      @talents = []
-      talent_jobs = TalentJob.joins(:job, :talent).where(:jobs => {:title => params[:jobs]}, :talents => {:visible => true})
-
-      talent_jobs.each do |job|
-        talent = Talent.find(job.talent_id)
-        # if !@headhunter.is_connected_to?(talent)
-          @talents << talent
-          respond_to do |format|
-            format.html
-            format.js
-          end
-        # end
+      talents = Talent.his_job_is(params[:jobs]).where(visible: true).order(updated_at: :desc).to_a
+      respond_to do |format|
+        format.html
+        format.js
       end
     end
 
+    @talents = []
+    talents.each do |talent|
+
+      talent_formations = []
+      talent.talent_formations.each do |talent_formation|
+        formation_injected = {
+          title: talent_formation.present? ? talent_formation.title : nil ,
+          type_of_formation: talent_formation.present? ? talent_formation.type_of_formation : nil,
+          year: talent_formation.present? ? talent_formation.year : nil
+        }
+        talent_formations << formation_injected
+      end
+
+      talent_experiences = []
+      talent.experiences.reverse_each do |experience|
+        experience_injected = {
+          position: experience.position.present? ? experience.position : false,
+          company_type: experience.company_type.present? ? experience.company_type.title : false,
+          starting: experience.starting.present? ? experience.starting : false,
+          currently: experience.currently ? "Aujourd'hui" : false,
+          years: experience.years.present? ? experience.years : false,
+        }
+        talent_experiences << experience_injected
+      end
+
+      talent_technos = []
+      talent.technos.each do |talent_techno|
+        techno_injected = {
+          title: talent_techno.title
+        }
+        talent_technos << techno_injected
+      end
+
+      your_small_plus = []
+      talent.your_small_plus.each do |small_plu|
+        small_plu_injected = {
+          description: small_plu.description
+        }
+        your_small_plus << small_plu_injected
+      end
+
+      talent_injected = {
+        id: talent.id,
+        position: talent.experiences.last.present? ? talent.experiences.last.position : nil,
+        year_experience_job: talent.talent_jobs.last.present? ? talent.talent_jobs.last.year : "0",
+        city: talent.city,
+        btob: talent.btob,
+        btoc: talent.btoc,
+        job: talent.jobs.first.present? ? talent.jobs.first.title : nil,
+        overview: talent.overview,
+        update: talent.updated_at,
+        next_aventure: {
+          famous_person: talent.next_aventures.last.famous_person.present? ? talent.next_aventures.last.famous_person : "Le talent n'a pas souhaité répondre à cette question.",
+          work_for_free: talent.next_aventures.last.work_for_free.present? ? talent.next_aventures.last.work_for_free : "Le talent n'a pas souhaité répondre à cette question.",
+          sector: talent.next_aventures.last.sectors.present? ? talent.next_aventures.last.sectors.first.title : nil,
+        },
+        formations: talent_formations,
+        experiences: talent_experiences,
+        technos: talent_technos,
+        talent_small_plus: your_small_plus,
+      }
+
+      @talents << talent_injected
+    end
+
+  end
+
+  def destroy
+    @headhunter = Headhunter.find(params[:id])
+    @headhunter.destroy
+    redirect_to headhunters_path
+    authorize @headhunter
   end
 
   def index
@@ -46,21 +112,21 @@ class HeadhuntersController < ApplicationController
     end
 
     if params[:tag].blank?
-      @headhunters = Headhunter.all.order(name: :asc)
+      @headhunters = Headhunter.all.order('created_at DESC')
       @titre = "Tous"
     else
       # les headhunters dont le job est : params[:tag]
       if params[:tag] == "Tous"
-        @headhunters = Headhunter.all
+        @headhunters = Headhunter.all.order('created_at DESC')
         @titre = "Tous"
       elsif params[:tag] == "Valider"
-        @headhunters = Headhunter.where(:validated => true)
+        @headhunters = Headhunter.where(:validated => true).order('created_at DESC')
         @titre = "Valider"
       elsif params[:tag] == "Refuser"
-        @headhunters = Headhunter.where(:validated => false)
+        @headhunters = Headhunter.where(:validated => false).order('created_at DESC')
         @titre = "Refuser"
       else params[:tag] == "En attende"
-        @headhunters = Headhunter.where(:validated => nil)
+        @headhunters = Headhunter.where(:validated => nil).order('created_at DESC')
         @titre = "En attente"
       end
     end
@@ -119,7 +185,9 @@ class HeadhuntersController < ApplicationController
 
   def update_startup
     @startup = @headhunter.startup
+    set_new_words(@startup)
     update_edit(@headhunter, headhunter_params)
+
     # update_edit_startup(@startup, startup_params, @headhunter)
   end
 
@@ -128,18 +196,18 @@ class HeadhuntersController < ApplicationController
     if params[:commit] == "Accepter"
       if @headhunter.validated == true
         validated_action(nil)
-      elsif @headhunter.validated == false
+      else # @headhunter.validated == false
         validated_action(true)
         # find the conversation between two user
         conversations = Mailboxer::Conversation.participant(@talentist).participant(@headhunter)
         if conversations.size > 0
           @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@headhunter.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
         else
-          # @talentist.send_message(@headhunter, "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme!", "#{@headhunter.id}")
-          # HeadhunterMailer.accepted(@headhunter).deliver_now
+          @talentist.send_message(@headhunter, "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme!", "#{@headhunter.id}")
+          HeadhunterMailer.accepted(@headhunter.id).deliver_later
         end
-      else @headhunter.validated == nil
-        validated_action(true)
+      # else @headhunter.validated == nil
+      #   validated_action(true)
       end
     else params[:commit] == "Refuser"
       if @headhunter.validated == false
@@ -155,6 +223,12 @@ class HeadhuntersController < ApplicationController
   end
 
   private
+
+  def set_new_words(startup)
+    word_params = params.require(:headhunter).permit(startup_attributes:[word_ids:[]])[:startup_attributes][:word_ids]
+    word_ids = create_new_data_with_only_title(word_params, "word")
+    startup.word_ids = word_ids
+  end
 
   def update_edit(headhunter, headhunter_params)
     if headhunter.update_attributes(headhunter_params)
@@ -199,9 +273,10 @@ class HeadhuntersController < ApplicationController
       :photo, :name, :firstname, :job,
       startup_attributes: [ :id, :name, :link, :logo, :address, :mission,
       :sector_ids, :btob, :btoc, :validated, :short_resume, :linkedin, :facebook,
-      :average_age, :collaborators, :year_of_creation, :overview, word_ids: [],
+      :average_age, :collaborators, :year_of_creation, :overview,
       pictures_attributes: [ :id, :photo, :_destroy],
-      startup_words_attributes: [ :id, :word_id, :_destroy]],
+      # startup_words_attributes: [ :id, :word_id, :_destroy]],
+      ],
       word: [],
       job_ids: []
       )
@@ -210,9 +285,9 @@ class HeadhuntersController < ApplicationController
     params.require(:startup).permit(
       :name, :link, :logo, :address,
       :sector_ids, :btob, :btoc, :validated, :short_resume, :mission, :linkedin, :facebook,
-      :average_age, :collaborators, :year_of_creation, :overview, word_ids: [],
+      :average_age, :collaborators, :year_of_creation, :overview,
       pictures_attributes: [ :id, :photo, :_destroy],
-      startup_words_attributes: [ :id, :word_id, :_destroy ],
+      # startup_words_attributes: [ :id, :word_id, :_destroy ],
       job_ids: []
       )
   end

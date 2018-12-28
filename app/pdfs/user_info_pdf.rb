@@ -53,7 +53,7 @@ class UserInfoPdf < Prawn::Document
     [["Ville:", present?(next_aventure.city)]] +
     [["Contrat:", present?(next_aventure.contrat)]] +
     [["Rémuneration:", present?(next_aventure.remuneration)]] +
-    [["Secteur:", present?(next_aventure.next_aventure_sectors.first.sector.title)]] +
+    [["Secteur:", next_aventure.sectors.first.present? ? present?(next_aventure.sectors.first.title) : "false"]] +
     [["Attente n°1:", present?(next_aventure.waiting_for_one)]] +
     [["Attente n°2:", present?(next_aventure.waiting_for_two)]] +
     [["Attente n°3:", present?(next_aventure.waiting_for_three)]] +
@@ -72,9 +72,9 @@ class UserInfoPdf < Prawn::Document
     [["Entreprise","Type d'entreprise", "Position", "Années", "En poste", "Résumé"]] +
     @user.experiences.map do |experience|
       [
-      present?(experience.company_name),
-      present?(experience.company_type.title),
-      present?(experience.position),
+      experience.company_name.present? ? present?(experience.company_name) : "False",
+      experience.company_type.present? ? present?(experience.company_type.title) : "False",
+      experience.position.present? ? present?(experience.position) : "False",
       "#{present?(experience.starting)} / #{present?(experience.years)}",
       its_true?(experience.currently),
       present?(experience.overview)
@@ -86,7 +86,7 @@ class UserInfoPdf < Prawn::Document
     [["Formation", "Type", "Années", "Diplome"]] +
     @user.talent_formations.map do |formation|
       [
-      present?(formation.formation.title),
+      formation.formation.present? ? present?(formation.formation.title) : "False",
       present?(formation.type_of_formation),
       present?(formation.year),
       present?(formation.title)
@@ -97,7 +97,7 @@ class UserInfoPdf < Prawn::Document
     [["Compétence", "Niveau"]] +
     @user.talent_skills.map do |skill|
       [
-      present?(skill.skill.title),
+      skill.skill.present? ? present?(skill.skill.title) : "False",
       present?(skill.level)
       ]
     end
@@ -107,7 +107,7 @@ class UserInfoPdf < Prawn::Document
     [["Languge", "Niveau"]] +
     @user.talent_languages.map do |language|
       [
-      present?(language.language.title),
+      language.language.present? ? present?(language.language.title) : "False",
       present?(language.level)
       ]
     end

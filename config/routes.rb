@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  require "sidekiq/web"
+  authenticate :talentist, lambda { |u| u.admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   # get 'contact_forms/create'
   match "/404", :to => "http_errors#error_404", :via => :all
@@ -17,7 +21,7 @@ Rails.application.routes.draw do
     registrations: 'headhunters/registrations'
   }
   resources :startups, only: [ :update ]
-  resources :headhunters, only: [:show, :update, :index, :edit] do
+  resources :headhunters, only: [:show, :update, :index, :edit, :destroy] do
     patch 'to_validate', :on => :member
     patch 'update_profile', :on => :member
     patch 'update_photos', :on => :member
@@ -67,6 +71,11 @@ Rails.application.routes.draw do
   get 'welcome_talents', to: "pages#talent_home"
   get 'welcome_startups', to: "pages#headhunter_home", as: "welcome_headhunters"
   get 'legal_informations', to: "pages#legal_informations", as: "mentions_legales"
+  get 'cgu_talents', to: "pages#cgu_talents", as: "cgu_talents"
+  get 'cgu_employeurs', to: "pages#cgu_headhunters", as: "cgu_employeurs"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+
+
 end
 

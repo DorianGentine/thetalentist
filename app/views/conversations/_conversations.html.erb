@@ -4,7 +4,6 @@
     <div class="index-talents">
 
       <h3>EN ATTENTE</h3>
-
         <%  @pending_conversations.each do |conversation| %>
           <% if current_user.is_a?(Headhunter) %>
             <%= link_to conversation_path(conversation) do %>
@@ -24,18 +23,24 @@
               </div>
             <% end %>
           <% else %>
-            <%= render 'conversation', :conversation => conversation %>
+            <%= cache conversation do %>
+              <%= render 'conversation', :conversation => conversation %>
+            <% end %>
           <% end %>
 
         <% end %>
       <h3>CONTACTÉS</h3>
 
       <%  @unread_conversations.each do |conversation| %>
-        <%= render 'conversation', :conversation => conversation %>
+        <%= cache conversation do %>
+          <%= render 'conversation', :conversation => conversation %>
+        <% end %>
       <% end %>
 
       <%  @read_accepted_conversations.each do |conversation| %>
-        <%= render 'conversation', :conversation => conversation %>
+        <%= cache conversation do %>
+          <%= render 'conversation', :conversation => conversation %>
+        <% end %>
       <% end %>
 
     </div>

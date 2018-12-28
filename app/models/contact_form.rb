@@ -8,6 +8,6 @@ class ContactForm < ApplicationRecord
   private
 
   def send_contact_form
-    ContactFormMailer.contact_form(self).deliver_now
+    ContactFormMailer.contact_form(self).deliver_later
   end
 end

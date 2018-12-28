@@ -34,16 +34,6 @@
 }
 
 
-#diplome-form{
-  .select span {
-    width: 100% !important;
-  }
-  .select2-container--default .select2-selection--single .select2-selection__arrow {
-    width: 25px !important;
-  }
-}
-
-
 .margin-auto-new-talent {
   width: 85%;
   margin: auto;
@@ -55,22 +45,6 @@
   font-size: 14px;
 }
 
-/* change 'loisir' box aspect */
-.select2-container--default .select2-selection--multiple {
-  border: 1px solid #ccc !important;
-  border-radius: 2px !important;
-}
-.select2-container--default.select2-container--focus .select2-selection--multiple {
-  border: solid #4ECCA3 1px !important;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(78, 204, 163, 0.6);
-}
-.select2-results__option {
-  color: #ccc;
-  text-transform: capitalize;
-}
-.select2-container--default .select2-results__option--highlighted[aria-selected] {
-  background-color: #4ECCA3 !important;
-}
 
 .alert{
   background-color: $red;
@@ -155,18 +129,6 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice{
-  background-color: white !important;
-  border: 1px solid $green !important;
-  color: $green !important;
-  margin-right: 10px !important;
-  padding: 5px 10px !important;
-}
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
-  color: $green !important;
-  font-weight: 500 !important;
-  margin-right: 5px !important;
-}
 
 @media screen and (max-width: 770px) {
   .form-container{
@@ -302,12 +264,6 @@ input[type="radio"], input[type="checkbox"] {
 }
 .ending-grid {
   grid-column: 6 / span 1;
-}
-.margin-date-picker {
-  p {
-    width: 20%;
-    margin-right: 10px;
-  }
 }
 .currently-grid {
   text-align: center;

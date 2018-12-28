@@ -9,18 +9,20 @@ class StepsStartupInfosController < ApplicationController
 
 
   def show
-    @startup = Startup.new
+    p "ok je suis dans step pour créer une startup"
+    @startup = @headhunter.startup
     render_wizard
   end
 
   def update
     @startup = Startup.new(startup_params)
+    set_new_words(@startup)
     @talentist = Talentist.last
     message = "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
     if @startup.save
       @headhunter.update(startup_id: @startup.id)
       Talentist.last.send_message(@headhunter, message, "#{@headhunter.id}")
-      HeadhunterMailer.accepted(@headhunter).deliver_now
+      @headhunter.send_welcome_email
       render_wizard @headhunter
     else
       render "steps_startup_infos/#{step}"
@@ -29,25 +31,39 @@ class StepsStartupInfosController < ApplicationController
 
 private
 
+
   def find_headhunter
     @headhunter = Headhunter.find(session[:headhunter_id])
     # authorize @headhunter
   end
 
   def finish_wizard_path
-
     sign_in(@headhunter)
     headhunter_path(@headhunter)
+  end
+
+  def set_new_words(startup)
+    word_params = params.require(:startup).permit(word_ids: [])[:word_ids]
+    word_ids = create_new_data_with_only_title(word_params, "word")
+    startup.word_ids = word_ids
   end
 
   def startup_params
     params.require(:startup).permit(
       :name,
       :year_of_creation,
+      :short_resume,
       :collaborators,
       :average_age,
       :link,
-      :address
+      :address,
+      :btoc,
+      :btob,
+      :overview,
+      :mission,
+      :linkedin,
+      :terms_of_condition,
+      :sector_ids
       )
   end
 

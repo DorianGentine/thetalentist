@@ -1,12 +1,12 @@
 
 
-<%= simple_form_for @contact, :html => { :class => "contact-form-grid" } do |f| %>
-  <%= f.input :email, placeholder: "Votre email", label: false, :wrapper_html => { :class => 'small-width-input' } %>
-  <%= f.input :name, placeholder: "Votre nom", label: false, :wrapper_html => { :class => 'small-width-input' } %>
-  <%= f.input :phone, placeholder: "Votre téléphone", label: false, :wrapper_html => { :class => 'small-width-input' }  %>
-  <%= f.input :subject, placeholder: "En savoir plus sur cet outil", label: false, :wrapper_html => { :class => 'small-width-input lastchild' } %>
-  <%= f.input :message, as: :text, :input_html => { :style => 'width: 100%', :rows => 3 }, placeholder: "Message", label: false, :wrapper_html => { :class => 'large-width-input' }  %>
-  <%= f.submit "Envoyer", class: "btn btn-primary btn-exercise btn-exercise-important contact_form_submit"%>
+<%= simple_form_for @contact do |f| %>
+  <%= f.input :email, placeholder: "Votre email", label: false, :wrapper_html => { :class => 'col-lg-6 col-xs-12' } %>
+  <%= f.input :name, placeholder: "Votre nom", label: false, :wrapper_html => { :class => 'col-lg-6 col-xs-12 margin-top-15-xs' } %>
+  <%= f.input :phone, placeholder: "Votre téléphone", label: false, :wrapper_html => { :class => 'col-lg-6 col-xs-12 margin-top-15' }  %>
+  <%= f.input :subject, placeholder: "En savoir plus sur cet outil", label: false, :wrapper_html => { :class => 'col-lg-6 col-xs-12 margin-top-15 lastchild' } %>
+  <%= f.input :message, as: :text, :input_html => { :style => 'width: 100%', :rows => 3 }, placeholder: "Message", label: false, :wrapper_html => { :class => 'col-xs-12 margin-top-15' }  %>
+  <%= f.submit "Envoyer", class: "btn btn-success btn-exercise btn-exercise-important contact_form_submit col-lg-2 margin-top-30 margin-left-15"%>
 <% end %>
 
 

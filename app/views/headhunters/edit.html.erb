@@ -1,15 +1,14 @@
-<%= link_to headhunter_path(current_headhunter) do %>
-  <div class="btn-edition-container">
-    <p class="no-margin margin-right-15 label-edit align-center hidden-xs green">
-      Revenir sur mon profil <i class="fas fa-home green"></i>
-    </div>
-  </div>
-<% end %>
+<%= render 'shared/modal_alerte' %>
+
+<div class="btn-edition-container modal-button" data-target="modal_alerte">
+  <p class="no-margin margin-right-15 label-edit align-center green">
+    Revenir sur mon profil <i class="fas fa-home green"></i></p>
+</div>
 
 <div class="container-show">
   <div class="blue-background">
 
-    <!-- !!!!!!!!!!!!!faire render de chaque parties !!!!!!!!!!! -->
+
 
     <div class="row">
       <div class="col-lg-3 col-xs-12 no-padding tablinksAll" id='tabs-edit'>
@@ -35,17 +34,16 @@
 
 
 
-
-
       </div>
       <hr class="ligne-vertical col-lg-1 no-padding" id="ligne-edit">
       <!-- info générale sur le profil -->
       <div class="col-lg-8 no-padding">
           <div id="informations_generales" class="tabcontent" style="display: block;">
-            <%= render 'edit_hh_informations_generales' %>
+              <%= render 'edit_hh_informations_generales' %>
           </div>
 
           <div id="modifier_photos" class="tabcontent" style="display: none;">
+
             <%= render 'edit_modifier_photos' %>
           </div>
 
@@ -54,7 +52,7 @@
           </div>
 
           <div id="modifier_mon_compte" class="tabcontent" style="display: none;">
-            <%= render 'talents/edit_modifier_compte', user: @headhunter %>
+            <%#= render 'talents/edit_modifier_compte', user: @headhunter %>
           </div>
 
 
@@ -62,6 +60,7 @@
 
     </div>
     </div>
+
   </div>
 </div>
 

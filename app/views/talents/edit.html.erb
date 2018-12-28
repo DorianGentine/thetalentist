@@ -1,10 +1,9 @@
-<%= link_to talent_path(current_talent) do %>
-  <div class="btn-edition-container">
-    <p class="no-margin margin-right-15 label-edit align-center green">
-      Revenir sur mon profil <i class="fas fa-home green"></i>
-    </div>
-  </div>
-<% end %>
+<%= render 'shared/modal_alerte' %>
+
+<div class="btn-edition-container modal-button" data-target="modal_alerte">
+  <p class="no-margin margin-right-15 label-edit align-center green">
+    Revenir sur mon profil <i class="fas fa-home green"></i></p>
+</div>
 
 <%# if current_user.is_a?(Talent) %>
   <%#= link_to edit_talent_path(@talent) do %>
@@ -19,36 +18,33 @@
 
 <div class="container-show">
   <div class="blue-background">
-
-    <!-- !!!!!!!!!!!!!faire render de chaque parties !!!!!!!!!!! -->
-
-    <div class="row">
-      <div class="col-lg-3 col-xs-12 no-padding tablinksAll" id='tabs-edit'>
-        <div class="tablinks flex space-between active" data-idTab='informations_generales' style="align-items: center;">
-          <p class="titre-rubrique-3">
-          Informations générales  </p>
-          <p class="cercle <%= @talent.completed_profil < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+      <div class="row">
+        <div class="col-lg-3 col-xs-12 no-padding tablinksAll" id='tabs-edit'>
+          <div class="tablinks flex space-between active" data-idTab='informations_generales' style="align-items: center;">
+            <p class="titre-rubrique-3">
+            Informations générales  </p>
+            <p class="cercle <%= @talent.completed_profil < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+          </div>
+          <div class="tablinks flex space-between" data-idTab='formations_et_competences' style="align-items: center;">
+            <p class="titre-rubrique-3">Formations et compétences</p>
+            <p class="cercle <%= @talent.completed_formation_skill_language < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+          </div>
+          <div class="tablinks flex space-between" data-idTab='experiences_professionnelles' style="align-items: center;">
+            <p class="titre-rubrique-3">Expériences professionnelles</p>
+            <p class="cercle <%= @talent.completed_experience < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+          </div>
+          <div class="tablinks flex space-between" data-idTab='ma_prochaine_aventure' style="align-items: center;">
+            <p class="titre-rubrique-3">Ma prochaine aventure</p>
+            <p class="cercle <%= @talent.completed_next_aventures < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+          </div>
+          <div class="tablinks flex space-between hidden" data-idTab='modifier_mon_compte' style="align-items: center;">
+            <p class="titre-rubrique-3" data-idTab='modifier_mon_compte'>Modifier mon compte</p>
+            <p class="cercle <%= @talent.completed_profil < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+          </div>
         </div>
-        <div class="tablinks flex space-between" data-idTab='formations_et_competences' style="align-items: center;">
-          <p class="titre-rubrique-3">Formations et compétences</p>
-          <p class="cercle <%= @talent.completed_formation_skill_language < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
-        </div>
-        <div class="tablinks flex space-between" data-idTab='experiences_professionnelles' style="align-items: center;">
-          <p class="titre-rubrique-3">Expériences professionnelles</p>
-          <p class="cercle <%= @talent.completed_experience < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
-        </div>
-        <div class="tablinks flex space-between" data-idTab='ma_prochaine_aventure' style="align-items: center;">
-          <p class="titre-rubrique-3">Ma prochaine aventure</p>
-          <p class="cercle <%= @talent.completed_next_aventures < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
-        </div>
-        <div class="tablinks flex space-between hidden" data-idTab='modifier_mon_compte' style="align-items: center;">
-          <p class="titre-rubrique-3" data-idTab='modifier_mon_compte'>Modifier mon compte</p>
-          <p class="cercle <%= @talent.completed_profil < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
-        </div>
-      </div>
-      <hr class="ligne-vertical col-lg-1 no-padding" id="ligne-edit">
-      <!-- info générale sur le profil -->
-      <div class="col-lg-8 no-padding">
+        <hr class="ligne-vertical col-lg-1 no-padding" id="ligne-edit">
+        <!-- info générale sur le profil -->
+        <div class="col-lg-8 no-padding">
           <div id="informations_generales" class="tabcontent" style="display: block;">
             <%= render 'edit_informations_generales' %>
           </div>
@@ -68,11 +64,7 @@
           <div id="modifier_mon_compte" class="tabcontent" style="display: none;">
             <%= render 'edit_modifier_compte', user: @talent %>
           </div>
-
-
-
-
-    </div>
-    </div>
+        </div>
+      </div>
   </div>
 </div>

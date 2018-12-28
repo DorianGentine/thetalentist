@@ -20,9 +20,9 @@ class Headhunter < ApplicationRecord
   acts_as_messageable
   before_destroy { Mailboxer::Conversation.destroy_all }
 
-  validates :name, :firstname, :job, :email, presence: true
+  validates :name, :firstname, :job, :email, :terms_of_condition, :startup, presence: true
 
-  after_create :send_welcome_email, :send_new_user_to_talentist
+  after_create :send_new_user_to_talentist
   before_save :capitalize_name_firstname
 
   mount_uploader :photo, PhotoUploader
@@ -60,7 +60,7 @@ class Headhunter < ApplicationRecord
   def completed_profil
     count = 0
     headhunters_count = self.startup.headhunters.size * 4
-    value_input = stat(headhunters_count + 7)
+    value_input = stat(headhunters_count + 6)
     self.startup.headhunters.each do |headhunter|
       headhunter.firstname.present? ? count += value_input : count
       headhunter.name.present? ? count += value_input : count
@@ -73,7 +73,7 @@ class Headhunter < ApplicationRecord
     self.startup.address.present? ? count += value_input : count
     self.startup.short_resume.present? ? count += value_input : count
     self.startup.linkedin.present? ? count += value_input : count
-    self.startup.facebook.present? ? count += value_input : count
+    # self.startup.facebook.present? ? count += value_input : count
     return count.round(0)
   end
 
@@ -103,19 +103,19 @@ class Headhunter < ApplicationRecord
   end
 
   def send_new_user_to_talentist
-    ApplicationMailer.new_user(self).deliver_now
+    ApplicationMailer.new_user("headhunter", self.id).deliver_later
   end
 
   def send_relation(talent, status)
-    HeadhunterMailer.in_relation(self, talent, status).deliver_now
+    HeadhunterMailer.in_relation(self.id, talent.id, status).deliver_later
   end
 
   def send_welcome_email
-    ApplicationMailer.welcome(self).deliver_now
+    ApplicationMailer.welcome("headhunter", self.id).deliver_later
   end
 
   def new_message(message, receveur)
-    ApplicationMailer.new_message(message, receveur, self).deliver_now
+    ApplicationMailer.new_message("headhunter", message, receveur, self.id).deliver_later
   end
 
   def count_unread_message

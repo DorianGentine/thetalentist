@@ -1,0 +1,20 @@
+.selectize-input{
+  margin: -6px -12px;
+  width: calc(100% + 24px) !important;
+  border: none !important;
+  padding: 7px !important;
+}
+.selectize-dropdown{
+  margin-left: -12px !important;
+  height: unset;
+  color: $green;
+}
+
+.selectize-dropdown .active {
+  background-color: $green !important;
+  color: white !important;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field:focus{
+  box-shadow: unset !important;
+}

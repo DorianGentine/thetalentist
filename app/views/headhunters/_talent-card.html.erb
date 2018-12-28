@@ -37,9 +37,16 @@
           <% end %>
         </div>
 
-        <div class="talent-update card-dispsition">
-          <p class="icon-margin-right"><i class="far fa-clock"></i></p>
-          <p>Mise à jour : <%= l(talent.updated_at, :locale => :fr) %> </p>
+
+        <div class="talent-update margin-bottom-15">
+          <p class="no-margin"><i class="far fa-clock margin-right-15">
+            </i>MAJ : <%= l(talent.updated_at, :locale => :fr) %>
+          </p>
+          <p class="no-margin">
+
+            <i class='<%= talent.cv.to_i > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle"  %> margin-right-15'></i>profil complété à <strong class='<%= talent.cv.to_i > 85 ? "green" : "red"  %>'><%= talent.cv %>%</strong>
+
+          </p>
         </div>
 
         <div class="lien-messagerie-profil">
@@ -59,18 +66,18 @@
 <% else %>
 
   <div class="talent-card-placement">
-    <div class="talent-card modal-button" data-target= "modal_<%= talent.id %>">
+    <div class="talent-card modal-button" data-target= "modal_<%= talent[:id] %>">
       <div class="card-title">
         <p>LE TALENT</p>
       </div>
 
-      <%= render 'headhunters/illu-card', talent: talent %>
+      <!-- <#%= render 'headhunters/illu-card', talent: talent %> -->
 
       <div class="border">
 
         <div class="talent-job">
-          <% if talent.experiences.last.present? && talent.experiences.last.position.present? %>
-            <h2><%= talent.experiences.last.position %></h2>
+          <% if !talent[:position].nil? %>
+            <h2><%= talent[:position] %></h2>
           <% else %>
             <h2> Rajouter une experience </h2>
           <% end %>
@@ -79,16 +86,18 @@
         <div class="talent-info">
           <div class="talent-info-item card-dispsition">
             <p class="icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
-            <p><%= talent.city %></p>
+            <p><%= talent[:city] %></p>
           </div>
           <div class="talent-info-item card-dispsition">
             <p class="icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
-            <% if talent.btoc && talent.btob %>
+            <% if talent[:btoc] && talent[:btob] %>
               <p> BtoB & BtoC</p>
-            <% elsif talent.btoc %>
+            <% elsif talent[:btob] %>
               <p>BtoB</p>
-            <% else %>
+            <% elsif talent[:btoc] %>
               <p>BtoC</p>
+            <% else %>
+              <p>Pas renseigné</p>
             <% end %>
           </div>
           <div class="talent-info-item card-dispsition">
@@ -97,16 +106,16 @@
           </div>
         </div>
 
-        <% talent.talent_formations.first(2).each do |talent_formation| %>
+        <% talent[:formations].each do |talent_formation| %>
           <div class="talent-school-1 card-dispsition">
             <p class="icon-margin-right"><i class="fas fa-graduation-cap"></i></p>
             <p>
-              <%= talent_formation.type_of_formation.present? ? talent_formation.type_of_formation : "" %>, <%=talent_formation.title %></p>
+              <%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] : "" %>, <%=talent_formation[:title] %></p>
             <!-- <p>HEC, Master entrepreneuriat - 2015</p> -->
           </div>
         <% end %>
         <div class="talent-description hidden-xs">
-          <p><%= truncate(talent.overview, length: 180) %></p>
+          <p><%= truncate(talent[:overview], length: 180) %></p>
         </div>
 
 
@@ -114,11 +123,11 @@
 
         <div class="talent-update card-dispsition">
           <p class="icon-margin-right"><i class="far fa-clock"></i></p>
-          <p>Mise à jour le <%= l(talent.updated_at, :locale => :fr) %> </p>
+          <p>Mise à jour le <%= l(talent[:update], :locale => :fr) %> </p>
         </div>
 
         <div class="talent-more">
-            <p data-target= "modal_<%= talent.id %>">En savoir plus <i class="fas fa-angle-right"></i></p>
+            <p data-target= "modal_<%= talent[:id] %>">En savoir plus <i class="fas fa-angle-right"></i></p>
         </div>
       </div>
     </div>

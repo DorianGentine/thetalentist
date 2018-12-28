@@ -6,7 +6,7 @@ gem 'figaro'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma'
-gem 'rails', '5.2.0'
+gem 'rails', '5.2.1'
 gem 'redis'
 
 gem 'autoprefixer-rails'
@@ -17,7 +17,7 @@ gem 'uglifier'
 gem 'webpacker'
 
 # changed version of font-awesome gem
-gem 'font-awesome-sass', '~> 5.0.9'
+gem 'font-awesome-sass', '~> 5.5.0.1'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
@@ -42,7 +42,7 @@ gem "pundit"
 
 # add multi-step form the form talent / startup
 gem 'wicked'
-gem 'turbolinks', '~> 5.0.0'
+gem 'turbolinks', '~> 5.2.0'
 gem 'jquery-rails'
 # gerer les formulaire avec nested table
 gem "cocoon"
@@ -51,6 +51,8 @@ gem "cocoon"
 gem 'cloudinary'
 gem 'carrierwave', '~> 1.2'
 
+gem 'carrierwave_backgrounder'
+
 # Pour la fonction adresse de la startup
 gem "geocoder"
 
@@ -58,8 +60,8 @@ gem "geocoder"
 gem 'mailboxer'
 
 # # that for admin part
-gem 'activeadmin', github: 'activeadmin/activeadmin'
-gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+gem 'activeadmin', '~> 1.4.2'
+gem 'inherited_resources', '~> 1.9.0'
 
 # linkedin connect
 gem 'omniauth'
@@ -79,3 +81,7 @@ gem 'prawn-rails'
 gem "pdfkit"
 gem "wkhtmltopdf-binary"
 gem 'wicked_pdf'
+
+# job workers
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'

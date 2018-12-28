@@ -33,59 +33,33 @@
       <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
         <p class="label-edit requis">Rapide descriptif</p>
         <div class="no-padding">
-          <%= u.input :short_resume, label: false, :input_html => { style: "width: 100%", class: "limited-character" }, maxlength: 200 %>
+          <%= u.input :short_resume, label: false, :input_html => { style: "width: 100%", class: "limited-character" }, maxlength: 50 %>
         </div>
- <!--        <script>
-          var limitedCharacter = document.getElementsByClassName("limited-character");
-
-          if (limitedCharacter) {
-            for (var i = 0; i < limitedCharacter.length ; i++) {
-              var inputLength = limitedCharacter[i].value.length;
-              var limitCharacter = limitedCharacter[i].maxLength;
-              limitedCharacter[i].parentNode.insertAdjacentHTML("afterend",'<p id="aide-short_resume" class="titre-rubrique-1 float-right"></p>');
-              var aideShortResume = document.getElementById("aide-short_resume");
-
-              limitedCharacter[i].addEventListener("input", function(e) {
-                inputLength = e.target.value.length;
-                aideShortResume.textContent = inputLength + "/" + limitCharacter;
-              })
-
-              limitedCharacter[i].addEventListener("focus", function(e) {
-                  aideShortResume.textContent = inputLength + "/" + limitCharacter;
-                  aideShortResume.classList.remove("hidden");
-              })
-
-              limitedCharacter[i].addEventListener("blur", function(e) {
-                aideShortResume.classList.add("hidden");
-              })
-            }
-          }
-        </script> -->
-      </div>
     </div>
+  </div>
 
 
 <!-- Titre section -->
-  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
-  <h2 class="titre-section margin-top-30">Vos <strong>informations</strong></h2>
+  <div class="titre-section-icon margin-top-background"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-background">Vos <strong>informations</strong></h2>
 
   <%= render "/shared/change_photo", f: f %>
 
   <div class="row margin-top-15">
     <div class="col-lg-8 col-xs-12 no-padding">
       <p class="label-edit requis">Civilité</p>
-      <div class="col-lg-6 col-xs-12">
+      <div class="col-lg-6 col-xs-12 no-padding">
         <div class="margin-right-15 no-margin-xs">
-          <%= f.input :firstname, required: true, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
+          <%= f.input :firstname, required: true, label: false, :input_html => { style: "width: 100%" } %>
         </div>
       </div>
-      <div class="col-lg-6 col-xs-12 margin-top-15-xs">
+      <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
         <div class="margin-right-15 no-margin-xs">
           <%= f.input :name, required: true, label: false, :input_html => { style: "width: 100%" } %>
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-xs-12 margin-top-15-xs">
+    <div class="col-lg-4 col-xs-12 no-padding margin-top-15-xs">
       <p class="label-edit requis">Poste actuel</p>
       <div class="no-padding">
         <%= f.input :job, required: true, label: false, :input_html => { style: "width: 100%" } %>
@@ -95,8 +69,8 @@
 
 <!-- Titre section -->
   <% if @other_headhunters.length > 0 %>
-    <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
-    <h2 class="titre-section margin-top-30">Vos <strong>collaborateurs</strong></h2>
+    <div class="titre-section-icon margin-top-background"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+    <h2 class="titre-section margin-top-background">Vos <strong>collaborateurs</strong></h2>
 
     <div class="row">
       <% @other_headhunters.each do |headhunter| %>
@@ -123,14 +97,14 @@
   <% end %>
 
 <!-- Titre section -->
-  <div class="titre-section-icon margin-top-30"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
-  <h2 class="titre-section margin-top-30">Nous <strong>suivre</strong></h2>
+  <div class="titre-section-icon margin-top-background"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-background">Nous <strong>suivre</strong></h2>
 
   <div class="row margin-top-15">
     <div class="col-lg-6 col-xs-12 no-padding">
       <p class="label-edit">Linkedin</p>
       <div class="no-padding margin-right-15 no-margin-xs">
-        <%= u.input :linkedin, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
+        <%= u.input :linkedin, label: false, :input_html => { style: "width: 100%" } %>
       </div>
     </div>
 <!--     <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">

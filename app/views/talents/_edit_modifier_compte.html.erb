@@ -1,6 +1,34 @@
 <!-- Titre section -->
   <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
   <h2 class="titre-section">Modifier <strong>mon compte</strong></h2>
+    <% user_name = :talent %>
+    <%= simple_form_for(user, as: user_name, url: registration_path(user_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :email, required: true, autofocus: true %>
+
+        <!-- <#% if devise_mapping.confirmable? && user.pending_reconfirmation? %>
+          <p>Currently waiting confirmation for: <#%= user.unconfirmed_email %></p>
+        <#% end %> -->
+
+        <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+        <%= f.input :password_confirmation, required: false %>
+        <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Update" %>
+      </div>
+    <% end %>
+
+    <h3>Cancel my account</h3>
+
+    <p>Unhappy? <%= link_to "Cancel my account", registration_path(user_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+    <%= link_to "Back", :back %>
+
+
 
 <!-- info sur le compte  -->
   <%= simple_form_for user do |f| %>

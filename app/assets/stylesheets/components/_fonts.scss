@@ -122,12 +122,13 @@
 
 // Texte rubrique 3
   .texte-rubrique-3{
-    color: $gray;
+    color: darken($gray, 15%);
     font-size: 12px;
-    font-weight: 300;
+    font-weight: 500;
     letter-spacing: 0.2px;
     line-height: 18px;
     text-align: justify;
+    white-space: pre-line;
   }
 
 // Texte rubrique - 3bis / Organisme formation

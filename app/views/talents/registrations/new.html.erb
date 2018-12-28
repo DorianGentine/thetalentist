@@ -1,13 +1,11 @@
-
 <div class="form-container simple-new-talent" data-page="1" id="new-talent">
 
   <%= render 'shared/formprogression' %>
 
   <h2 class="form-titre-page"><i class="far fa-id-badge"></i> Qui se cache derrière <strong>ce Talent</strong> ?</h2>
-
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= f.error_notification %>
     <div class="margin-auto-new-talent">
+      <%= f.error_notification %>
       <div class="linkedin-btn blue-background center-text">
         <%= link_to talent_linkedin_omniauth_authorize_path, :class => "button-linkedin" do %>
           <p class="no-margin"><i class="fab fa-linkedin"></i> Connect with Linkedin</p>
@@ -17,20 +15,20 @@
         <div class="row">
           <label class="col-lg-2 label-edit text-align-right line-height-center requis no-margin no-padding-xs" for="talent_firstname">Civilité</label>
           <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
-            <%= f.input :firstname, required: true, autofocus: true, placeholder: "Prénom", label: false, :input_html => { style: "width: 100%"} %>
+            <%= f.input :firstname, required: true, autofocus: false, placeholder: "Prénom", label: false, :input_html => { style: "width: 100%"} %>
           </div>
           <div class="col-lg-3 col-xs-12 no-padding no-margin-xs margin-bottom-15-xs">
-            <%= f.input :name, required: true, autofocus: true, placeholder: "Nom", label: false, :input_html => { style: "width: 100%"} %>
+            <%= f.input :name, required: true, autofocus: false, placeholder: "Nom", label: false, :input_html => { style: "width: 100%"} %>
           </div>
         </div>
         <div class="row margin-top-15">
           <label class="col-lg-2 label-edit text-align-right line-height-center requis no-margin no-padding-xs" for="talent_email">Identifiants</label>
           <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs margin-bottom-15-xs">
-            <%= f.input :email, required: true, autofocus: true, placeholder: "exemple@gmail.com", label: false, :input_html => { style: "width: 100%" } %>
+            <%= f.input :email, required: true, autofocus: false, placeholder: "exemple@gmail.com", label: false, :input_html => { style: "width: 100%" } %>
           </div>
 
           <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs">
-            <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", :input_html => { id: "margin-bottom-mdp", style: "width: 100%" }, label: false %><%= f.error_notification %>
+            <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", :input_html => { id: "margin-bottom-mdp", style: "width: 100%" }, label: false %>
           </div>
           <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs">
             <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, :input_html => { :class => "no-margin-xs", style: "width: 100%" } %>
@@ -40,7 +38,7 @@
         <div class="row margin-top-15">
           <label class="label-edit text-align-right line-height-center col-lg-2 requis no-padding-xs" for="talent_phone">Tel.</label>
           <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs margin-bottom-15-xs">
-            <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%" } %>
+            <%= f.input :phone, required: true, autofocus: false, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%" } %>
           </div>
           <label class="label-edit text-align-right text-align-left-xs line-height-center col-lg-3 col-xs-2 no-padding margin-right-15 requis" for="talent_city">Ville</label>
           <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs">
@@ -49,18 +47,18 @@
         </div>
       </div>
 
-
       <div class="blue-background margin-top-background">
         <div class="row">
-
+            <% @talent.talent_jobs.present? ? "" : @talent.talent_jobs.build %>
             <%= f.simple_fields_for :talent_jobs do |u| %>
+
               <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-margin no-padding-xs">Spécialité métier</label>
               <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
-                <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%" } %>
+                <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", :class => "select2 no-search", id: "testdorian" } %>
               </div>
               <label class="col-lg-3 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-padding margin-right-15">Années d'expérience</label>
               <div class="col-lg-3 col-xs-12 no-padding">
-                <%= u.input :year, label: false, :input_html => { style: "width: 100%" } %>
+                <%= u.input :year, label: false, :input_html => { style: "width: 100%", id:"yearPositif", min: "0", class: "sup-zero"} %>
               </div>
             <% end %>
 
@@ -68,7 +66,7 @@
         <div class="row margin-top-15">
           <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-margin no-padding-xs">Linkedin</label>
           <div class="col-lg-3 col-xs-12 no-padding">
-            <%= f.input :linkedin, autofocus: true, placeholder: "https://linkedin.com/demoi", label: false, :input_html => { style: "width: 100%" } %>
+            <%= f.input :linkedin, autofocus: false, placeholder: "https://linkedin.com/demoi", label: false, :input_html => { style: "width: 100%" } %>
           </div>
         </div>
       </div>
@@ -81,3 +79,10 @@
   <% end %>
 </div>
 
+<script>
+  function zeroInput(val, id){
+    if (val < 0) {
+      document.getElementById(id).value = 0
+    }
+  }
+</script>

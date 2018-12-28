@@ -1,45 +1,50 @@
 
 
 <div class="fenetre-ecran relative">
-  <div class="colonne bordure-droite modal" id="modal_conversations" style="padding: 0% 22% 0% 0%;">
+  <div class="colonne bordure-droite modal" id="modal_conversations" style="padding: 0 22% 0 0;">
     <span class="close" id="close_modal_conversations">
         <p>&times;</p>
       </span>
-    <div class="modal-content" style="padding: 0; height: 100%; animation-name: animateleft;">
+    <div class="modal-content" style="padding: 0; height: 100%; animation-name: animateleft; border: none;">
       <%= render 'conversations' %>
     </div>
   </div>
-  <div class="modal-button absolute visible-xs" style="top: 65%; background-color: white; border: 1px solid gray; padding: 7px; z-index: 2;" data-target="modal_conversations">
+  <!-- <div class="modal-button absolute visible-xs" style="top: 65%; background-color: white; border: 1px solid gray; padding: 7px; z-index: 2;" data-target="modal_conversations">
      <i class="fa fa-bars" style="color: black;"></i>
-  </div>
+  </div> -->
 
   <div class="colonne col-gauche bordure-droite hidden-xs">
     <%= render 'conversations' %>
   </div>
 
   <div class="colonne col-centre bordure-droite">
-    <div class="premiere-ligne nom-discussion">
+    <div class="premiere-ligne nom-discussion row">
       <!-- div Prénom Nom et poste  -->
-      <% if @participant.is_a?(Talent) %>
-        <% if @relationship && @relationship.status == "Accepter" %>
-          <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
-          <p> <%= @participant.experiences.last.position.capitalize %> </p>
-        <% else %>
-          <% if @participant.experiences.present? && @participant.experiences.last.position.present? %>
-            <h2><%= @participant.experiences.last.position.capitalize %></h2>
-          <% else %>
-            <h2>Talent - Position à remplire</h2>
-          <% end %>
-          <p>En attente ...</p>
-        <% end %>
-      <% elsif @participant.is_a?(Headhunter)%>
-        <h2><%= @participant.firstname.capitalize %> de <%= @participant.startup.name.capitalize %></h2>
-        <p> <%= @participant.job.capitalize %> </p>
+      <div class="modal-button visible-xs col-xs-2" style="text-align: center" data-target="modal_conversations">
+         <i class="fa fa-bars" style="color: black;"></i>
+      </div>
 
-      <% else %>
-        <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
-        <p> Chargé digitale TODO </p>
-      <% end %>
+      <div class="col-lg-12 col-xs-11">
+        <% if @participant.is_a?(Talent) %>
+          <% if @relationship && @relationship.status == "Accepter" %>
+            <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
+            <p> <%= @participant.experiences.last.position.capitalize %> </p>
+          <% else %>
+            <% if @participant.experiences.present? && @participant.experiences.last.position.present? %>
+              <h2><%= @participant.experiences.last.position.capitalize %></h2>
+            <% else %>
+              <h2>Talent - Position à remplire</h2>
+            <% end %>
+            <p>En attente ...</p>
+          <% end %>
+        <% elsif @participant.is_a?(Headhunter)%>
+          <h2><%= @participant.firstname.capitalize %> de <%= @participant.startup.name.capitalize %></h2>
+          <p> <%= @participant.job.capitalize %> </p>
+        <% else %>
+          <h2><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
+          <p> Chargé digitale TODO </p>
+        <% end %>
+      </div>
     </div>
 
     <!-- div link vers profil -->
@@ -54,7 +59,7 @@
       <% elsif current_user.is_a?(Headhunter) %>
         <% if @relationship && @relationship.status == "Accepter" %>
           <%= link_to talent_path(@participant) do %>
-            <p>Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
+            <p class="hidden-xs">Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
             <p>Visiter le profil > </p>
           <% end %>
         <% end %>
@@ -73,26 +78,43 @@
       <% end %>
     </div>
 
-    <div class="conversation">
+    <div id="conversation">
 
       <!-- div conversation -->
       <% @messages.each do |receipt| %>
-        <%= render 'conversations/messages', receipt: receipt %>
-
+        <%= cache receipt do %>
+          <%= render 'conversations/messages', receipt: receipt %>
+        <% end %>
       <% end %>
     </div>
     <div class="boite-envoi">
 
       <%= form_for @message, url: conversation_messages_path(@conversation) do |f|  %>
-        <%= f.text_area :body, placeholder: "Écrivez votre message..." %>
-        <div class="send-bar">
+        <%= f.text_area :body, placeholder: "Écrivez votre message...", autofocus: true %>
+        <div id="send-bar">
           <label for="mailboxer_message_attachment" class="label-file-mailboxer" name="mailboxer_message[attachment]"><i class="fas fa-paperclip"></i></label>
           <%= f.file_field :attachment, :style => "display: none" %>
-          <p href="#" id="uploadFile">Aucun fichier</p>
-          <%= f.submit "Envoyer", :class => "btn-envoyer" %>
+          <p href="#" id="uploadFile" style="margin: 0;">Aucun fichier</p>
+          <%= f.submit "Envoyer", :class => "btn-envoyer gray-button", id: "send-bar-btn" %>
         </div>
 
       <% end %>
+
+    <script>
+      var message = document.getElementById("mailboxer_message_body")
+      var sendButton = document.getElementById("send-bar-btn")
+      sendButton.disabled = true
+      message.addEventListener("input", function() {
+        var textMessage = message.value
+        if (textMessage == "") {
+          sendButton.classList.add("gray-button")
+          sendButton.disabled = true
+        } else {
+          sendButton.classList.remove("gray-button")
+          sendButton.disabled = false
+        }
+      })
+    </script>
 
     <!-- div accepter la relation -->
       <% if current_user.is_a?(Talent) && @connexion %>

@@ -38,6 +38,11 @@ class StepsTalentInfosController < ApplicationController
     else
       0.times { @talent.your_small_plus.build }
     end
+    if @talent.next_aventures.first.mobilities.count > 0
+      @mobilities = @talent.next_aventures.first.mobilities
+    else
+      @mobilities = Mobility.new
+    end
     render_wizard
   end
 
@@ -46,10 +51,12 @@ class StepsTalentInfosController < ApplicationController
     # Si tu as un problème de validation pour créer talent
     # @talent.status = step.to_s
     # @talent.status = 'active' if step == steps.last
-    # raise
     case step
     when :next_aventure
+
       @talent.update_attributes(talent_params)
+      # TODO
+      @talent.save_completed_profil
       if !@talent.terms_of_condition
         flash[:notice] = "N'oubliez pas de accepter les conditions générale"
         render "steps_talent_infos/#{step}"
@@ -57,17 +64,20 @@ class StepsTalentInfosController < ApplicationController
         render_wizard @talent
       end
     else
+      if need_to_create_data?
+        set_new_technos(@talent)
+      end
       if @talent.update(talent_params)
+        # TODO
+        @talent.save_completed_profil
         # @talent = current_user
         render_wizard @talent
       else
         # si l'update ne fonctionne pas, il faut render l'étape sur laquelle tu te trouves donc tu as besoin de la connaître
         # ça render la méthode "show" mais propre à UNE étape en particulier, donc tu dois la nommer explicitement et pas juste "show"
         render "steps_talent_infos/#{step}"
+      end
     end
-    end
-
-
   end
 
   private
@@ -80,7 +90,7 @@ class StepsTalentInfosController < ApplicationController
         sign_in(@talent)
         talent_path(@talent)
       else
-        @talent.send_candidate
+        @talent.send_candidate_and_user_information
         waiting_for_validation_path
       end
     else
@@ -99,6 +109,27 @@ class StepsTalentInfosController < ApplicationController
 
   end
 
+  def set_new_technos(talent)
+    techno_params = params.require(:talent).permit(techno_ids: [])[:techno_ids]
+    techno_ids = create_new_data_with_only_title(techno_params, "techno")
+    talent.techno_ids = techno_ids
+  end
+
+  def need_to_create_data?
+    techno_params = params.require(:talent).permit(techno_ids: [])[:techno_ids]
+    if techno_params.nil?
+      return false
+    else
+      return true
+    end
+  end
+
+  def compile_cities_of_next_aventure
+    cities = params.require(:talent).permit(next_aventures_attributes:[ city: []])[:next_aventures_attributes][:"0"][:city]
+    city = cities.join(', ')
+    return city
+  end
+
   def talent_params
     # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
      params.require(:talent).permit(
@@ -115,18 +146,14 @@ class StepsTalentInfosController < ApplicationController
       :sector_ids,
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
-      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), :sector_ids],
-      # next_aventures_attributes: [ your_small_plus_attributes: [:id, :description, :_destroy] ],
+      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[:id, :title, :_destroy]],
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       your_small_plus_attributes: [:id, :description, :_destroy],
-      talent_jobs_attributes: [:id, :job_id, :year, :_destroy],
-      techno_ids: []
+      talent_jobs_attributes: [:id, :job_id, :year, :_destroy]
     )
   end
 end
-
-
 
 
 

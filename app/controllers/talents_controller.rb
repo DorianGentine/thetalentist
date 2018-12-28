@@ -5,8 +5,10 @@ class TalentsController < ApplicationController
 
   def index
     @talentist = current_talentist
-    @talents = Talent.all
-
+    # @talents = Talent.all.order('created_at DESC')
+    # @talents.each do |talent|
+    #   talent.save_completed_profil
+    # end
     if !@talents = policy_scope(Talent)
       if current_user.is_a?(Talent)
         redirect_to talent_path(current_user)
@@ -18,27 +20,27 @@ class TalentsController < ApplicationController
     end
 
     if params[:tag].blank?
-      @talents = Talent.all.order(name: :asc)
+      @talents = Talent.all.order('created_at DESC')
       @titre = 'All'
     else
       # les talents dont le job est : params[:tag]
       if params[:tag] == "Tous"
-        @talents = Talent.all
+        @talents = Talent.all.order('created_at DESC')
         @titre = "Tous"
       elsif params[:tag] == "Valider"
-        @talents = Talent.where(:validated => true)
+        @talents = Talent.where(:validated => true).order('created_at DESC')
         @titre = "Valider"
       elsif params[:tag] == "Refuser"
-        @talents = Talent.where(:validated => false)
+        @talents = Talent.where(:validated => false).order('created_at DESC')
         @titre = "Refuser"
       elsif params[:tag] == "En attende"
         @titre = "En attente"
-        @talents = Talent.where(:validated => nil)
+        @talents = Talent.where(:validated => nil).order('created_at DESC')
       elsif params[:tag] == "Visible"
-        @talents = Talent.where(:visible => true)
+        @talents = Talent.where(:visible => true).order('created_at DESC')
         @titre = "Visible"
       else params[:tag] == "Invisible"
-        @talents = Talent.where(:visible => false)
+        @talents = Talent.where(:visible => false).order('created_at DESC')
         @titre = "Invisible"
       end
     end
@@ -57,10 +59,20 @@ class TalentsController < ApplicationController
   end
 
   def show
-    @talents = Talent.all
+    @flats = []
+    @flats << @talent
+    @flats << @talent
+    @markers = @flats.map do |flat|
+      {
+        lat: @talent.latitude,
+        lng: @talent.longitude
+      #,
+      # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
+      }
+    end
+    # @talents = Talent.all
     @experiences = @talent.experiences.where(currently: true) + @talent.experiences.where.not(currently: true).order('years  ASC')
     @next_aventures = @talent.next_aventures.last
-
     @talent_formations = @talent.talent_formations.order(:year)
     if @talent.next_aventures.last.present?
       @sectors = @talent.next_aventures.last.next_aventure_sectors
@@ -78,7 +90,6 @@ class TalentsController < ApplicationController
       end
     end
     @talent.update_password_with_password(talent_password)
-    # raise
     # @talent.update_attributes(talent_params)
     redirect_to talent_path(@talent)
   end
@@ -115,24 +126,32 @@ class TalentsController < ApplicationController
     else
       0.times { @talent.your_small_plus.build }
     end
+    if @talent.next_aventures.first.mobilities.count > 0
+      1.times {  @talent.next_aventures.first.mobilities.build }
+    else
+      0.times {  @talent.next_aventures.first.mobilities.build }
+    end
     @choices = ["Ambiance", "International", "Produit", "Rémunération", "Sens", "Valeurs", "Mission", "Management", "Worklife balance", "Impact"]
   end
 
   def update_profile
     update_edit(@talent, talent_params)
+    @talent.save_completed_profil
   end
 
   def update_formation_and_skill
-    # raise
     update_edit(@talent, talent_params)
+    @talent.save_completed_profil
   end
 
   def update_experience
     update_edit(@talent, talent_params)
+    @talent.save_completed_profil
   end
 
   def update_next_aventure
     update_edit(@talent, talent_params)
+    @talent.save_completed_profil
   end
 
 
@@ -141,7 +160,7 @@ class TalentsController < ApplicationController
     if params[:commit] == "Accepter"
       if @talent.validated == true
         validated_action(nil)
-      elsif @talent.validated == false
+      else # @talent.validated == false || @talent.validated == nil
         validated_action(true)
         conversations = Mailboxer::Conversation.participant(@talentist).participant(@talent)
         if conversations.size > 0
@@ -150,8 +169,8 @@ class TalentsController < ApplicationController
           @talentist.send_message(@talent, "Bonjour #{@talent.firstname}, Bienvenue sur notre plateforme!", "#{@talent.id}")
           @talent.send_accepted
         end
-      else @talent.validated == nil
-        validated_action(true)
+      # else @talent.validated == nil
+      #   validated_action(true)
       end
     elsif params[:commit] == "Refuser"
       if @talent.validated == false
@@ -162,6 +181,7 @@ class TalentsController < ApplicationController
         validated_action(false)
         visible_action(false)
       else @talent.validated == nil
+        @talent.send_refused
         validated_action(false)
         visible_action(false)
       end
@@ -175,14 +195,15 @@ class TalentsController < ApplicationController
         if job_alertes.count > 0
           job_alertes.each do |job_alerte|
             headhunter = Headhunter.find(job_alerte.headhunter_id)
-            HeadhunterMailer.alerte(headhunter).deliver_now
+            HeadhunterMailer.alerte(headhunter.id).deliver_later
           end
         end
       end
-    else params[:commit] == "Invisible"
+    elsif params[:commit] == "Invisible"
       if @talent.visible == true || @talent.visible == nil
         visible_action(false)
       end
+    else
     end
     redirect_to talents_path
   end
@@ -249,7 +270,7 @@ private
       techno_ids: [],
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
-      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), :sector_ids],
+      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id],
       your_small_plus_attributes: [:id, :description, :_destroy],

@@ -5,9 +5,7 @@ class Talents::RegistrationsController < Devise::RegistrationsController
   def new
     @talent = Talent.new
     authorize @talent
-
     @talent.talent_jobs.build
-
   end
 
   def create
@@ -22,8 +20,8 @@ class Talents::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-# faire update dans ici
-
+  def edit
+  end
 
   private
 

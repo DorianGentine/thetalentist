@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
+  after_action :set_error_cookies, except: [:error_500, :error_404, :error_422 ]
+
   # Uncomment when you *really understand* Pundit!
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   def user_not_authorized
@@ -24,7 +26,6 @@ class ApplicationController < ActionController::Base
   def authenticate!
    :authenticate_talent! || :authenticate_headhunter! || :authenticate_talentist!
     # @current_user = talent_signed_in? ? current_talent : current_headhunter
-    # raise
     if talent_signed_in?
       @current_user = current_talent
     elsif talentist_signed_in?
@@ -35,10 +36,6 @@ class ApplicationController < ActionController::Base
   end
 
 
-
-  # def current_user
-  #   @current_user
-  # end
   def prise_de_contact
     @contact = ContactForm.new
 
@@ -75,8 +72,13 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.is_a?(Headhunter)
-      sign_in(resource)
-      headhunter_path(resource)
+      if resource.startup.nil?
+        session[:headhunter_id] = resource.id
+        steps_startup_info_path(:startup)
+      else
+        sign_in(resource)
+        headhunter_path(resource)
+      end
     elsif resource.is_a?(Talent)
       if resource.next_aventures.first
         if resource.validated
@@ -112,4 +114,63 @@ class ApplicationController < ActionController::Base
       new
     end
   end
+
+  def create_new_data_with_only_title(params, table_name)
+    class_name = table_name.classify.constantize
+    words = []
+    params.each do |param|
+      if param == ""
+      elsif param.to_i != 0
+        word_id = param
+      else
+        if class_name.where(title: param.capitalize ).count < 1
+          word = class_name.create(title: param.capitalize )
+        else
+          word = class_name.where(title: param.capitalize ).first
+        end
+        word_id = word.id.to_s
+      end
+      if word_id.present?
+        words << word_id
+      end
+    end
+    return words
+  end
+
+  def set_error_cookies
+    if current_user.present?
+      if current_user.is_a?(Talent)
+        model_user = 'Talent'
+      elsif current_user.is_a?(Talentist)
+        model_user = 'Talentist'
+      else
+        model_user = 'Headhunter'
+      end
+      user_id = current_user.id
+    elsif !current_user && @talent || @headhunter || @talentist
+      model_user = {
+        talent: @talent.class.name,
+        headhunter: @headhunter.class.name,
+        talentist: @talentist.class.name
+      }
+      user_id = {
+        talent: @talent.nil? ? "Blank" : @talent.id,
+        headhunter: @headhunter.nil? ? "Blank" : @headhunter.id,
+        talentist: @talentist.nil? ? "Blank" : @talentist.id
+      }
+    else
+      model_user = "Blank"
+      user_id = "Blank"
+    end
+
+    session[:data_error] = {
+      time: Time.now.strftime("%d/%m/%Y a %I:%M%p"),
+      path: request.url,
+      controller: params[:controller],
+      action: params[:action],
+      model_user: model_user,
+      user_id: user_id
+    }
+  end
+
 end

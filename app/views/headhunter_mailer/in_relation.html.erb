@@ -21,9 +21,9 @@
           </tr>
           <tr>
             <% if @connected %>
-              <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;"><strong><%= @firstname %></strong> a <%= @status %> votre demande. Vous êtes maintenant connectés<br>Vous pouvez maintenant échanger !</td>
+              <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;"><strong><%= @firstname %></strong> a <%= @status %> votre demande. Vous êtes maintenant connectés<br>Vous pouvez échanger !</td>
             <% else %>
-              <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;"><strong><%= @firstname %></strong> a <%= @status %> votre demande. Son profil restera donc confidentiel<br>Pleins d'autres talents vous attend, n'hésitez pas à consulter régulièrement la page !</td>
+              <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;"><strong><%= @firstname %></strong> a <%= @status %> votre demande. Son profil restera donc confidentiel<br>Pleins d'autres talents vous attendent, n'hésitez pas à consulter régulièrement la page !</td>
             <% end %>
           </tr>
 <!-- Espace fin de la ligne -->
@@ -38,11 +38,11 @@
                 <td height="40" align="center" bgcolor="#4ECCA3" style="border-radius: 2px; text-align: center;" valign="middle">
                   <% if @connected %>
                     <%= link_to talent_url(@talent), { :style => "font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; font-weight: bold; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;"} do %>
-                      <p style="margin:0"> Accèder à son profil </p>
+                      <p style="margin:0"> Accéder à son profil </p>
                     <% end %>
                   <% else %>
                     <%= link_to repertoire_url, { :style => "font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; font-weight: bold; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;"} do %>
-                      <p style="margin:0"> Accèder au répertoire </p>
+                      <p style="margin:0"> Accéder au répertoire </p>
                     <% end %>
                   <% end %>
 

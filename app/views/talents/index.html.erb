@@ -63,7 +63,9 @@
   <div class="cards-repertory">
 
     <% @talents.each do |talent| %>
-      <%= render 'headhunters/talent-card', talent: talent %>
+      <%= cache talent do %>
+        <%= render 'headhunters/talent-card', talent: talent %>
+      <% end %>
     <% end %>
 
   </div>
@@ -73,5 +75,3 @@
     <p>Préc. <strong>1</strong> 2 3 Suiv.</p>
   </div> -->
 </section>
-
-

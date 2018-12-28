@@ -1,3 +1,4 @@
+
 <% if current_user.is_a?(Talent) %>
   <%= link_to edit_talent_path(@talent) do %>
     <div class="btn-edition-container">
@@ -5,6 +6,12 @@
       <div class="btn-edition">
         <span><i class="fas fa-edit"></i></span>
       </div>
+    </div>
+  <% end %>
+<% elsif current_user.is_a?(Talentist) %>
+  <%= link_to 'javascript:history.back()' do  %>
+    <div class="btn-edition-container">
+      <p class="no-margin label-edit align-center green"><i class="fas fa-angle-left"></i> Retour</p>
     </div>
   <% end %>
 <% end %>
@@ -109,15 +116,14 @@
       <% end %>
 
     <!-- Mes compétences techniques -->
-      <% if @talent.skills.nil? && current_user.is_a?(Headhunter) %>
+      <% if @talent.technos.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
         <div class="blue-background margin-top-background">
           <p class="titre-rubrique-3 margin-bottom-30">Mes compétences techniques :</p>
-
-          <% if @talent.skills.present? %>
+          <% if @talent.technos.present? %>
             <div class="talent-competences">
-              <% @talent.skills.each do |skill| %>
-                <p><%= skill.title %></p>
+              <% @talent.technos.each do |techno| %>
+                <p><%= techno.title %></p>
               <% end %>
             </div>
           <% else %>
@@ -154,22 +160,36 @@
         <div class="row margin-top-30">
             <div class="info-grid-1 no-padding col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Mobilité</p>
-              <% if @talent.city.present? %>
-                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @talent.city %></p>
-              <% elsif !@talent.city.present? && current_user.is_a?(Headhunter) %>
+              <% if @next_aventures.present? %>
+
+                <% if @next_aventures.mobilities.count > 0 %>
+                  <% @next_aventures.mobilities.each do |mobility| %>
+                    <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= mobility.title %></p>
+                  <% end %>
+                <% elsif !@next_aventures.city.present? && current_user.is_a?(Headhunter) %>
+                  <i class="far fa-question-circle green"></i>
+                <% else %>
+                  <i class="red fas fa-exclamation-triangle"></i>
+                <% end %>
+              <% elsif !@next_aventures.present? && current_user.is_a?(Headhunter) %>
                 <i class="far fa-question-circle green"></i>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
             </div>
 
+
           <!-- Type de contrat -->
             <div class="info-grid-1 no-padding col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Type de contrat</p>
-              <% if @next_aventures.contrat.present? %>
-                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.contrat %></p>
-              <% elsif !@next_aventures.contrat.present? && current_user.is_a?(Headhunter) %>
-                <i class="far fa-question-circle green"></i>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.contrat.present? %>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.contrat %></p>
+                <% elsif !@next_aventures.contrat.present? && current_user.is_a?(Headhunter) %>
+                  <i class="far fa-question-circle green"></i>
+                <% else %>
+                  <i class="red fas fa-exclamation-triangle"></i>
+                <% end %>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -178,10 +198,14 @@
           <!-- Attentes salariales -->
             <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Attentes salariales</p>
-              <% if @next_aventures.remuneration.present? %>
-                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.remuneration %></p>
-              <% elsif !@next_aventures.remuneration.present? && current_user.is_a?(Headhunter) %>
-                <i class="far fa-question-circle green"></i>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.remuneration.present? %>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.remuneration %></p>
+                <% elsif !@next_aventures.remuneration.present? && current_user.is_a?(Headhunter) %>
+                  <i class="far fa-question-circle green"></i>
+                <% else %>
+                  <i class="red fas fa-exclamation-triangle"></i>
+                <% end %>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -191,7 +215,9 @@
             <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Secteur</p>
               <% if @sectors.present? %>
-                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @sectors.first.sector.title %></p>
+                <% @sectors.each do |talent_sector| %>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= talent_sector.sector.title %></p>
+                <% end %>
               <% elsif !@next_aventures.present? && current_user.is_a?(Headhunter) %>
                 <i class="far fa-question-circle green"></i>
               <% else %>
@@ -203,10 +229,14 @@
           <!-- Disponibilité -->
             <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Disponibilité</p>
-              <% if @next_aventures.availability.present? %>
-                <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.availability %></p>
-              <% elsif !@next_aventures.availability.present? && current_user.is_a?(Headhunter) %>
-                <i class="far fa-question-circle green"></i>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.availability.present? %>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.availability %></p>
+                <% elsif !@next_aventures.availability.present? && current_user.is_a?(Headhunter) %>
+                  <i class="far fa-question-circle green"></i>
+                <% else %>
+                  <i class="red fas fa-exclamation-triangle"></i>
+                <% end %>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -215,16 +245,20 @@
           <!-- Branche -->
             <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2" style="opacity:0">Branche</p>
-              <% if @next_aventures.btoc || @next_aventures.btob %>
-                <% if @next_aventures.btoc && @next_aventures.btob %>
-                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;"> BtoB & BtoC</p>
-                <% elsif @next_aventures.btob %>
-                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;">BtoB</p>
-                <% else%>
-                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;">BtoC</p>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.btoc || @next_aventures.btob %>
+                  <% if @next_aventures.btoc && @next_aventures.btob %>
+                    <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;"> BtoB & BtoC</p>
+                  <% elsif @next_aventures.btob %>
+                    <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;">BtoB</p>
+                  <% else%>
+                    <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;">BtoC</p>
+                  <% end %>
+                <% elsif !@next_aventures.btoc && !@next_aventures.btob && current_user.is_a?(Headhunter) %>
+                  <i class="far fa-question-circle green"></i>
+                <% else %>
+                  <i class="red fas fa-exclamation-triangle"></i>
                 <% end %>
-              <% elsif !@next_aventures.btoc && !@next_aventures.btob && current_user.is_a?(Headhunter) %>
-                <i class="far fa-question-circle green"></i>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
@@ -239,10 +273,14 @@
           <!-- Rêve remis à demain -->
             <div class="col-lg-3 col-xs-12">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">Le rêve que je remets à demain</h4>
-              <% if @next_aventures.dream.present?  %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.dream %></p>
-              <% elsif !@next_aventures.overview.present? && current_user.is_a?(Headhunter) %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.dream.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.dream %></p>
+                <% elsif !@next_aventures.dream.present? && current_user.is_a?(Headhunter) %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
+                <% else %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                <% end %>
               <% else %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
@@ -251,10 +289,14 @@
           <!-- La personnalité qui m'inspire -->
             <div class="col-lg-3 col-xs-12 margin-top-30-xs">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">La personnalité qui m'inspire</h4>
-              <% if @next_aventures.famous_person.present?  %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.famous_person %></p>
-              <% elsif !@next_aventures.famous_person.present? && current_user.is_a?(Headhunter) %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> répondre à cette question.</p>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.famous_person.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.famous_person %></p>
+                <% elsif !@next_aventures.famous_person.present? && current_user.is_a?(Headhunter) %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
+                <% else %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                <% end %>
               <% else %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
@@ -263,10 +305,14 @@
           <!-- Un bon manager, c'est -->
             <div class="col-lg-3 col-xs-12 margin-top-30-xs">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" style="min-height: 44px">Un bon manager, c'est</h4>
-              <% if @next_aventures.good_manager.present?  %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.good_manager %></p>
-              <% elsif !@next_aventures.good_manager.present? && current_user.is_a?(Headhunter) %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> répondre à cette question.</p>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.good_manager.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.good_manager %></p>
+                <% elsif !@next_aventures.good_manager.present? && current_user.is_a?(Headhunter) %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
+                <% else %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                <% end %>
               <% else %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
@@ -275,10 +321,14 @@
           <!-- Le travail effectué gratuitement serait -->
             <div class="col-lg-3 col-xs-12 margin-top-30-xs">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">Le travail effectué gratuitement serait</h4>
-              <% if @next_aventures.work_for_free.present?  %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.work_for_free %></p>
-              <% elsif !@next_aventures.work_for_free.present? && current_user.is_a?(Headhunter) %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> répondre à cette question.</p>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.work_for_free.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.work_for_free %></p>
+                <% elsif !@next_aventures.work_for_free.present? && current_user.is_a?(Headhunter) %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
+                <% else %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                <% end %>
               <% else %>
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
@@ -323,10 +373,14 @@
                 <p class="texte-rubrique-2b no-margin no-padding col-lg-2 col-xs-6">Chasseur</p>
                 <p class="visible-xs texte-rubrique-2b no-margin no-padding col-xs-6" style="text-align: right;">Éleveur</p>
                 <div class="range-slider col-lg-7 no-padding col-xs-12 no-margin-xs">
-                  <% if @next_aventures.hunter_or_breeder.nil? && !current_user.is_a?(Headhunter) %>
-                    <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
+                  <% if @next_aventures.present? %>
+                    <% if @next_aventures.hunter_or_breeder.nil? && !current_user.is_a?(Headhunter) %>
+                      <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
+                    <% else %>
+                      <div class="range-slider-cursor" style="left: <%= @next_aventures.hunter_or_breeder.nil? ? "50" : @next_aventures.hunter_or_breeder %>%"></div>
+                    <% end %>
                   <% else %>
-                    <div class="range-slider-cursor" style="left: <%= @next_aventures.hunter_or_breeder.nil? ? "50" : @next_aventures.hunter_or_breeder %>%"></div>
+                    <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
                   <% end %>
                 </div>
                 <p class="hidden-xs texte-rubrique-2b no-margin no-padding col-lg-2">Éleveur</p>
@@ -337,10 +391,14 @@
                 <p class="texte-rubrique-2b no-margin no-padding col-lg-2 col-xs-6">Créatif</p>
                 <p class="visible-xs texte-rubrique-2b no-margin no-padding col-xs-6" style="text-align: right;">Pragmatique</p>
                 <div class="range-slider col-lg-7 no-padding col-xs-12 no-margin-xs">
-                  <% if @next_aventures.creative_or_pragmatic.nil? && !current_user.is_a?(Headhunter) %>
-                    <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
+                  <% if @next_aventures.present? %>
+                    <% if @next_aventures.creative_or_pragmatic.nil? && !current_user.is_a?(Headhunter) %>
+                      <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
+                    <% else %>
+                      <div class="range-slider-cursor" style="left: <%= @next_aventures.creative_or_pragmatic.nil? ? "50" : @next_aventures.creative_or_pragmatic %>%"></div>
+                    <% end %>
                   <% else %>
-                    <div class="range-slider-cursor" style="left: <%= @next_aventures.creative_or_pragmatic.nil? ? "50" : @next_aventures.creative_or_pragmatic %>%"></div>
+                    <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
                   <% end %>
                 </div>
                 <p class="hidden-xs texte-rubrique-2b no-margin no-padding col-lg-2">Pragmatique</p>
@@ -352,9 +410,15 @@
             <h3 class="titre-rubrique-2">Je priorise:</h3>
 
             <ol class="priority-list text-align-center-xs">
-              <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_one.nil? ? "À définir" : @next_aventures.waiting_for_one %></li>
-              <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_two.nil? ? "À définir" : @next_aventures.waiting_for_two %></li>
-              <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_three.nil? ? "À définir" : @next_aventures.waiting_for_three %></li>
+              <% if @next_aventures.present? %>
+                <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_one.nil? ? "À définir" : @next_aventures.waiting_for_one %></li>
+                <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_two.nil? ? "À définir" : @next_aventures.waiting_for_two %></li>
+                <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_three.nil? ? "À définir" : @next_aventures.waiting_for_three %></li>
+              <% else %>
+                <li class="priority-list-item texte-rubrique-2b">À définir</li>
+                <li class="priority-list-item texte-rubrique-2b">À définir</li>
+                <li class="priority-list-item texte-rubrique-2b">À définir</li>
+              <% end %>
             </ol>
           </div>
       </div>

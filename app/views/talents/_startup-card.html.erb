@@ -6,10 +6,11 @@
       <div class="border">
 
         <div class="talent-job">
+          <!-- A changer -->
           <h2><%= headhunter.firstname.present? ? headhunter.firstname : "Pas infos" %> <%= headhunter.name.present? ? headhunter.name : 'Pas infos' %></h2>
         </div>
         <div class="talent-job">
-          <p>de <%= headhunter.startup.name.present? ? headhunter.startup.name : "No-Name" %></p>
+          <p>de <%= !headhunter.startup.nil? && headhunter.startup.name.present? ? headhunter.startup.name : "Inconnu" %></p>
         </div>
 
         <div class="background-img background-img-talentist">
@@ -30,6 +31,13 @@
           <% end %>
         </div>
 
+      <% if headhunter.startup.present? %>
+        <p class="margin-top-15 margin-bottom-15">
+          <i class='<%= headhunter.completed_totaly > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle" %>'></i>profil complété à <strong class='<#%= headhunter.completed_totaly > 85 ? "green" : "red"  %>'><%= headhunter.completed_totaly %>%</strong>
+        </p>
+      <% else %>
+        <p class="margin-top-15 margin-bottom-15">La startup n'est pas renseigné</p>
+      <% end %>
 
         <div class="lien-messagerie-profil">
           <% if Mailboxer::Conversation.participant(headhunter).count > 0 %>
@@ -37,7 +45,14 @@
           <% else %>
             <a style="font-size: 12px">Aucun message</a>
           <% end %>
-          <%= link_to "Profil", headhunter_path(headhunter)%>
+          <!-- A changer -->
+          <% if headhunter.startup.nil? %>
+            <%= link_to "Supprimer", headhunter_path(headhunter),
+              method: :delete,
+              data: { confirm: "Êtes-vous sur?" } %>
+          <% else %>
+            <%= link_to "Profil", headhunter_path(headhunter)%>
+          <% end %>
         </div>
 
       </div>
@@ -70,8 +85,8 @@
           </div>
         </div>
 
-        <div class="talent-description">
-          <p><%= headhunter.startup.overview.present? ? headhunter.startup.overview : "pas d'info" %></p>
+        <div class="talent-description hidden-xs">
+          <p><%= headhunter.startup.short_resume.present? ? headhunter.startup.short_resume : "pas d'info" %></p>
         </div>
 
 

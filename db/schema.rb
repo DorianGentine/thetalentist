@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_05_105009) do
+ActiveRecord::Schema.define(version: 2018_12_17_042422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2018_10_05_105009) do
     t.string "photo"
     t.string "name"
     t.boolean "validated"
+    t.boolean "terms_of_condition", default: false, null: false
     t.index ["email"], name: "index_headhunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_headhunters_on_reset_password_token", unique: true
     t.index ["startup_id"], name: "index_headhunters_on_startup_id"
@@ -211,6 +212,14 @@ ActiveRecord::Schema.define(version: 2018_10_05_105009) do
     t.string "message_id"
     t.index ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
+  end
+
+  create_table "mobilities", force: :cascade do |t|
+    t.string "title"
+    t.bigint "next_aventure_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["next_aventure_id"], name: "index_mobilities_on_next_aventure_id"
   end
 
   create_table "next_aventure_sectors", force: :cascade do |t|
@@ -489,6 +498,8 @@ ActiveRecord::Schema.define(version: 2018_10_05_105009) do
     t.datetime "token_expiry"
     t.boolean "terms_of_condition", default: false, null: false
     t.string "declined"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["email"], name: "index_talents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_talents_on_reset_password_token", unique: true
   end
@@ -525,6 +536,7 @@ ActiveRecord::Schema.define(version: 2018_10_05_105009) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "mobilities", "next_aventures"
   add_foreign_key "next_aventure_sectors", "next_aventures"
   add_foreign_key "next_aventure_sectors", "sectors"
   add_foreign_key "next_aventures", "talents"

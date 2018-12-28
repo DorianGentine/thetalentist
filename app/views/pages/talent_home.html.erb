@@ -1,65 +1,81 @@
-<div class="new_landing" id="talent-landing">
+<%= link_to welcome_headhunters_path do  %>
+  <%= render "shared/switch_button" %>
+<% end %>
 
-  <%= render "shared/top_menu" %>
+<h4> <%= @user_id %></h4>
 
-  <%= link_to welcome_headhunters_path do  %>
-    <%= render "shared/switch_button" %>
-  <% end %>
+<div class="new_landing container-fluid no-padding" id="talent-landing">
 
-  <!-- <img class="new-landing-logo-talentist" src="/assets/Logo The talentist-01.png" alt="logo The talentist">  -->
-  <%= link_to root_path do %>
-    <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
-  <% end %>
-  <%= render "shared/connexion-btns" %>
-
-  <div class="landing-top">
-
-
-
-
-    <div class="image-habillage">
-
-      <div class="position-top">
-        <h1>Je suis un <strong>talent</strong></h1>
-
-
-        <div class="actions-xs hidden visible-xs">
-          <div class="btn-connexion">
-            <%= link_to("S'inscrire", new_talent_registration_path)  %>
-          </div>
-          <div class="blue-connexion btn-connexion">
-            <%= link_to("Se connecter", new_talent_session_path) %>
-          </div>
-        </div>
-        <div class="inscription-items hidden-xs hidden-sm">
-          <div class="btn-connexion" style="margin-bottom: 80px">
-            <%= link_to("S'inscrire", new_talent_registration_path)  %>
-          </div>
-        </div>
+  <!-- navbar -->
+    <div class="row margin-top-30 margin-bottom-30">
+      <div class="col-xs-2 text-align-center">
+        <%= render "shared/top_menu" %>
       </div>
-
-      <div class="quatre-metiers">
-        <h3>
-          Tu recherches ta prochaine aventure? <br>
-          Tu es spécialisé en Marketing, Produit, Sales ou Operations ? <br>
-          Ici, ce sont les entreprises qui viennent à toi ! Inscris toi !
-        </h3>
+      <div class="col-xs-4 col-xs-offset-2 text-align-center">
+        <%= link_to root_path do %>
+          <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
+        <% end %>
       </div>
-
-      <div class="compartiment-image">
-        <%= image_tag "olu-eletu-134758-unsplash.jpg" %>
+      <div class="col-xs-4">
+        <%= render "shared/connexion-btns" %>
       </div>
-
     </div>
+
+  <!-- box grise -->
+    <div class="row absolute hidden-xs hidden-sm" style="top: 0; z-index: -1;">
+      <div class="col-xs-offset-2 col-xs-10 landing-top"></div>
+    </div>
+
+  <!-- intérieur box -->
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-10 no-padding image-habillage">
+        <div class="row">
+          <!-- image de fond -->
+            <div class="col-lg-offset-4 col-lg-8 col-xs-12 no-padding compartiment-image relative" style="background-image: url('<%= image_path "olu-eletu-134758-unsplash.jpg" %>');">
+              <div class="quatre-metiers hidden-xs hidden-sm hidden-md">
+                <h3>Tu recherches ta prochaine aventure? <br>
+                Tu es spécialisé en Marketing, Produit, Sales ou Operations ? <br>
+                Ici, ce sont les entreprises qui viennent à toi ! Inscris toi !</h3>
+              </div>
+            </div>
+
+          <!-- texte principal -->
+            <div class="col-lg-11 col-xs-12 margin-top-60 position-top texte-principal">
+              <div class="texte-principal-gauche">
+                <h1>Je suis un talent</h1>
+              </div>
+              <div class="texte-principal-droit">
+                <h1 class="green">Je suis un talent</h1>
+              </div>
+            </div>
+
+          <!-- btns inscription -->
+            <div class="col-lg-4 margin-btn-inscription-lp">
+              <div class="col-xs-5 btn btn-inscription">
+                <%= link_to new_talent_registration_path do  %>
+                  <p>S'inscrire</p>
+                <% end %>
+              </div>
+              <div class="col-xs-6 col-xs-offset-1 btn btn-inscription">
+                <%= link_to new_talent_session_path do %>
+                  <p>Se connecter</p>
+                <% end %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
 
     <a href="#landing-main"><i class="fas fa-angle-double-down fleche-bas"></i></a>
 
-  </div>
+
+
 
   <div class="landing-main">
 
     <div id="landing-main" style="padding-top: 25px;">
-      <h2>Créez vos propres opportunités</h2>
+      <h2 class="margin-top-15-xs">Créez vos propres opportunités</h2>
       <div class="opportunites">
         <div class="opportunite">
           <h5 class="eql-height">Accompagnement<br>Personnalisé</h5>

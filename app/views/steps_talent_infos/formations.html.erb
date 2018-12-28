@@ -9,38 +9,70 @@
 
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
 
-    <div class="blue-background">
-      <%= f.simple_fields_for :talent_formations do |u| %>
-        <%= render 'formation_fields', :f => u %>
-      <% end %>
-      <div class='links'>
-        <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'formation_fields', class: "form-hobby-add" %>
-      </div>
-    </div>
+    <div class="margin-auto-new-talent">
+      <%= f.error_notification message: 'INFORMATIONS NON COMPLÈTES!', id: 'user_error_message', class: 'form_error' %>
 
-    <div class=" row">
-      <div class="col-xs-12 col-lg-6 no-padding">
-        <div id="add-language" class="blue-background margin-right-background margin-top-background">
-          <p class="label-edit no-margin requis">Compétences linguistiques</p>
-          <div class="add-language-line">
-            <%= f.simple_fields_for :talent_languages do |u| %>
-              <%= render 'language_fields', :f => u %>
-            <% end %>
-            <div class='links'>
-              <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'language_fields', :class => "form-hobby-add" %>
+    <!-- si spécialité métier pas renseigné -->
+    <% if (@talent.talent_jobs.first.id.nil? || @talent.phone.nil?) %>
+      <div class="blue-background">
+        <% if @talent.talent_jobs.first.id.nil? %>
+          <%= f.simple_fields_for :talent_jobs do |u| %>
+            <div class="row">
+              <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-margin no-padding-xs">Spécialité métier</label>
+              <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
+                <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%" } %>
+              </div>
+              <label class="col-lg-3 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-padding margin-right-15">Années d'expérience</label>
+              <div class="col-lg-3 col-xs-12 no-padding">
+                <%= u.input :year, label: false, :input_html => { style: "width: 100%", id:"yearPositif", min: "0", class: "sup-zero" } %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% if @talent.phone.nil? %>
+          <div class="row <%= @talent.talent_jobs.first.id.present? ? 'margin-top-15' : '' %>">
+            <label class="label-edit text-align-right line-height-center col-lg-2 no-padding-xs" for="talent_phone">Tel.</label>
+            <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs margin-bottom-15-xs">
+              <%= f.input :phone, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%" } %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="blue-background margin-top-background">
+    <% else %>
+      <div class="blue-background">
+    <% end %>
+        <%= f.simple_fields_for :talent_formations do |u| %>
+          <%= render 'formation_fields', :f => u %>
+        <% end %>
+        <div class='links'>
+          <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'formation_fields', class: "form-hobby-add" %>
+        </div>
+      </div>
+
+      <div class=" row">
+        <div class="col-xs-12 col-lg-6 no-padding">
+          <div id="add-language" class="blue-background margin-right-background margin-top-background">
+            <p class="label-edit no-margin">Compétences linguistiques</p>
+            <div class="add-language-line">
+              <%= f.simple_fields_for :talent_languages do |u| %>
+                <%= render 'language_fields', :f => u %>
+              <% end %>
+              <div class='links'>
+                <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'language_fields', :class => "form-hobby-add" %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-xs-12 col-lg-6 no-padding">
-        <div class="blue-background margin-left-background margin-top-background" style="min-height: 154px">
-          <p class="label-edit no-margin requis">Compétences techniques</p>
-          <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { :class => "select2", multiple: "multiple", style: "width: 100%"}, multiple: true, required: true %>
+        <div class="col-xs-12 col-lg-6 no-padding">
+          <div class="blue-background margin-left-background margin-top-background" style="min-height: 154px">
+            <p class="label-edit no-margin">Compétences techniques</p>
+            <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { :class => "selectAndCreate", multiple: "multiple", style: "width: 100%"}, multiple: true, required: true %>
+          </div>
         </div>
       </div>
     </div>
-
-    <%= f.error_notification message: 'INFORMATIONS NON COMPLÈTES!', id: 'user_error_message', class: 'form_error' %>
 
     <div class="form-actions">
       <%= link_to "Précedent", previous_wizard_path, class: "b-btn-link form-btn form-btn-precedent" %>
