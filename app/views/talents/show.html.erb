@@ -100,10 +100,10 @@
               <% @talent.talent_languages.each do |langue| %>
                 <p class="texte-rubrique-3b no-margin"><%= langue.language.title %></p>
                 <div class="notation-etoile">
-                  <% for i in 1..TalentLanguage.levels[langue.level] %>
+                  <% for i in 1..TalentLanguage.levels[langue.level].to_i %>
                     <span class="fas fa-circle etoile checked"></span>
                   <% end %>
-                  <% for i in 1..(5-TalentLanguage.levels[langue.level]) %>
+                  <% for i in 1..(5-TalentLanguage.levels[langue.level].to_i) %>
                     <span class="fas fa-circle etoile"></span>
                   <% end %>
                 </div>
