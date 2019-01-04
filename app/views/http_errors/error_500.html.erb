@@ -1,9 +1,7 @@
 
-<ul>
-  <li><%= @error_datas["path"]%> </li>
-    <li> <%= @error_datas["controller"]%> </li>
 
-</ul>
+<% @error_datas["path"]%>
+<% @error_datas["controller"]%>
 
 <div class="error-page">
 
@@ -38,6 +36,7 @@
   .double-text{
     position: absolute;
     left: 50%;
+    top: 0;
   }
   .double-text-item{
     font-family: "Avenir";
