@@ -6,7 +6,7 @@
       <% if talent[:position].present? %>
         <h3><%= talent[:position].capitalize %></h3>
       <% end %>
-      <div id="relation_<%= talent[:id] %>">
+      <div id="relation_<%= talent[:id] %>" class="hidden-xs">
         <% if current_user.is_a?(Headhunter) %>
           <% if Talent.find(talent[:id]).is_connected_to?(@headhunter) %>
             <%= render 'headhunters/relationship', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
@@ -145,6 +145,15 @@
               <% end %>
             </div>
           </div>
+        </div>
+        <div id="relation_<%= talent[:id] %>" class="hidden visible-xs">
+          <% if current_user.is_a?(Headhunter) %>
+            <% if Talent.find(talent[:id]).is_connected_to?(@headhunter) %>
+              <%= render 'headhunters/relationship', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
+            <% else %>
+              <%= render 'relationships/form', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
+            <% end %>
+          <% end %>
         </div>
 
       </div>

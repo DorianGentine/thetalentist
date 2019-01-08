@@ -82,19 +82,6 @@
   background: transparent !important;
   color: black !important;
 }
-// .navbar-wagon-dropdown-menu:before {
-//   content: ' ';
-//   height: 10px;
-//   width: 10px;
-//   position: absolute;
-//   right: 10px;
-//   top: -6px;
-//   background-color: white;
-//   transform: rotate(45deg);
-//   border-left: 1px solid #E6E6E6;
-//   border-top: 1px solid #E6E6E6;
-// }
-
 .bottom-menu{
   display: none;
 }
@@ -106,6 +93,9 @@
   .navbar-wagon{
     justify-content: center;
   }
+  .lien-messagerie #notif{
+  top: 5px;
+}
   .bottom-menu{
     display: flex;
     height: 47px;
@@ -131,21 +121,6 @@
       color: $green;
     }
   }
-  // .dropdown-menu{
-  //   top: initial;
-  //   bottom: 30px;
-  // }
-  // .dropdown-menu-right{
-  //   right: -8px;
-  // }
-  // .navbar-wagon-dropdown-menu:before{
-  //   top: initial;
-  //   bottom: -5px;
-  //   border-top: none;
-  //   border-left: none;
-  //   border-bottom: 1px solid #E6E6E6;
-  //   border-right: 1px solid #E6E6E6;
-  // }
 }
 
 
