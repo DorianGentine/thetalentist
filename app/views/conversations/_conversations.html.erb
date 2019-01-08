@@ -17,7 +17,7 @@
 
                 <div class="conversation-text">
                   <% participant = conversation.participants - [current_user] %>
-                  <p class="prenom-contact"> Talent - <%= participant[0].experiences.last.position.capitalize %> </p>
+                  <p class="prenom-contact"> Talent - <%= participant[0].experiences.last.present? ? participant[0].experiences.last.position.capitalize : "" %> </p>
                   <p class="aperçu-message"><%= truncate(conversation.messages.last.body, length: 20) %></p>
                 </div>
               </div>
