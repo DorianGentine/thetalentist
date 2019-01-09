@@ -49,12 +49,16 @@
               <% if talent[:next_aventure][:sector].present? %>
                 <p><%= talent[:next_aventure][:sector].capitalize %></p>
               <% else %>
-                <p> A remplir</p>
+                <p>A remplir</p>
               <% end %>
             </div>
             <div class="card-dispsition">
               <p class="icon-margin-right icon-green-color"><i class="far fa-calendar"></i></p>
-              <p><%= talent[:year_experience_job] %> ans d'expériences</p>
+              <% if talent[:year_experience_job].present? %>
+                <p><%= talent[:year_experience_job] %> ans d'expériences</p>
+              <% else %>
+                <p>Pas renseigné</p>
+              <% end %>
             </div>
           </div>
           <div class="talent-school">
@@ -77,7 +81,7 @@
           <div class="lower-body-item-content">
             <div>
               <h5>La personnalité qui m'inspire ?</h5>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= talent[:next_aventure][:famous_person] %></p>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= talent[:next_aventure][:famous_person].present? ? talent[:next_aventure][:famous_person] : "Pas renseigné" %></p>
             </div>
             <div>
               <h5>Le job de mes rêves</h5>
@@ -100,8 +104,8 @@
                       <div class="point-barre-pointee"></div>
                     </div>
                     <div class="placement-talent-experience">
-                      <p class="experience-post"><%= experience[:position] %></p>
-                      <p class="experience-entreprise"><%= experience[:company_type] %></p>
+                      <p class="experience-post"><%= experience[:position].present? ? experience[:position] : "Pas renseigné" %></p>
+                      <p class="experience-entreprise"><%= experience[:company_type].present? ? experience[:company_type] : "Pas renseigné" %></p>
                       <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:currently] %></p>
                     </div>
                   </div>
@@ -114,8 +118,8 @@
                       <div class="point-barre-pointee"></div>
                     </div>
                     <div class="placement-talent-experience">
-                      <p class="experience-post"><%= experience[:position] %></p>
-                      <p class="experience-entreprise"><%= experience[:company_type] %></p>
+                      <p class="experience-post"><%= experience[:position].present? ? experience[:position] : "Pas renseigné" %></p>
+                      <p class="experience-entreprise"><%= experience[:company_type].present? ? experience[:company_type] : "Pas renseigné" %></p>
                       <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:currently] %></p>
                     </div>
                   </div>

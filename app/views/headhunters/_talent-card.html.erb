@@ -71,8 +71,6 @@
         <p>LE TALENT</p>
       </div>
 
-      <!-- <#%= render 'headhunters/illu-card', talent: talent %> -->
-
       <div class="border">
 
         <div class="talent-job">
@@ -86,7 +84,7 @@
         <div class="talent-info">
           <div class="talent-info-item card-dispsition">
             <p class="icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
-            <p><%= talent[:city] %></p>
+            <p><%= talent[:city].present? ? talent[:city] : "Pas renseigné" %></p>
           </div>
           <div class="talent-info-item card-dispsition">
             <p class="icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
@@ -110,12 +108,12 @@
           <div class="talent-school-1 card-dispsition">
             <p class="icon-margin-right"><i class="fas fa-graduation-cap"></i></p>
             <p>
-              <%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] : "" %>, <%=talent_formation[:title] %></p>
+              <%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] : "Pas renseigné" %>, <%=talent_formation[:title] %></p>
             <!-- <p>HEC, Master entrepreneuriat - 2015</p> -->
           </div>
         <% end %>
         <div class="talent-description hidden-xs">
-          <p><%= truncate(talent[:overview], length: 180) %></p>
+          <p><%= talent[:overview].present? ? truncate(talent[:overview], length: 180) : "Pas renseigné" %></p>
         </div>
 
 
