@@ -81,11 +81,19 @@
           <div class="lower-body-item-content">
             <div>
               <h5>La personnalité qui m'inspire ?</h5>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= talent[:next_aventure][:famous_person].present? ? talent[:next_aventure][:famous_person] : "Pas renseigné" %></p>
+                <% if talent[:next_aventure].present? %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= talent[:next_aventure][:famous_person].present? ? talent[:next_aventure][:famous_person] : "Le talent n'a pas souhaité répondre à cette question." %></p>
+                <% else %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more">Le talent n'a pas souhaité répondre à cette question.</p>
+                <% end %>
             </div>
             <div>
               <h5>Le job de mes rêves</h5>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= talent[:next_aventure][:work_for_free] %></p></p>
+                <% if talent[:next_aventure].present? %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= talent[:next_aventure][:work_for_free].present? ? talent[:next_aventure][:work_for_free] : "Le talent n'a pas souhaité répondre à cette question." %> </p>
+                <% else %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more">Le talent n'a pas souhaité répondre à cette question.</p>
+                <% end %>
             </div>
           </div>
         </div>
