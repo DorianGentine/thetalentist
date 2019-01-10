@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="upper-right-body">
-          <p class="talent-metier"><i class="fas fa-search"></i> <%=talent[:job].upcase %></p>
+          <p class="talent-metier"><i class="fas fa-search"></i> <%=talent[:job].present? ? talent[:job].upcase : "Pas renseigné" %></p>
           <div class="illu-card illu-modal"></div>
         </div>
       </div>
