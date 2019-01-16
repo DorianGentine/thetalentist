@@ -104,7 +104,7 @@
               <% talent[:sectors].first(talent[:sectors].length-1).each do |talent_sector| %>
                 <%= talent_sector[:title].present? ? talent_sector[:title] + ", " : "" %>
               <% end %>
-              <%= talent[:sectors].last[:title].present? ? talent[:sectors].last[:title] + "." : "" %>
+              <%= talent[:sectors].last[:title].present? ? talent[:sectors].last[:title] : "" %>
             </p>
           </div>
         </div>
