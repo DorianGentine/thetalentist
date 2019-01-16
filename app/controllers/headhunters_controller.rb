@@ -35,11 +35,13 @@ class HeadhuntersController < ApplicationController
       end
 
       talent_sectors = []
-      talent.next_aventures.last.sectors.each do |talent_sector|
-        sector_injected = {
-          title: talent_sector.present? ? talent_sector.title : nil,
-        }
-        talent_sectors << sector_injected
+      if talent.next_aventures.count > 0
+        talent.next_aventures.last.sectors.each do |talent_sector|
+          sector_injected = {
+            title: talent_sector.present? ? talent_sector.title : nil,
+          }
+          talent_sectors << sector_injected
+        end
       end
 
       talent_experiences = []
