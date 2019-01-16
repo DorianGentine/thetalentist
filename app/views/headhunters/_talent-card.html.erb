@@ -82,22 +82,30 @@
         </div>
 
         <div class="row">
-          <div class="col-xs-4 no-padding">
+          <div class="col-xs-6 no-padding">
             <p class="margin-right-5"><i class="fas fa-map-marker-alt margin-right-5 green"></i><%= talent[:city].present? ? talent[:city].truncate(10, separator: ', ', omission: '') : "_" %></p>
           </div>
-          <div class="col-xs-4 no-padding">
-            <p><i class="fas fa-briefcase margin-right-5 green"></i><%= talent[:next_aventure][:sector].present? ? talent[:next_aventure][:sector] : "_" %></p>
-          </div>
-          <div class="col-xs-4 no-padding">
-            <% if talent[:btoc] && talent[:btob] %>
+
+          <div class="col-xs-6 no-padding">
+            <% if talent[:next_aventure][:btoc] && talent[:next_aventure][:btob] %>
               <p><i class="fas fa-code-branch margin-right-5 green"></i>BtoB & BtoC</p>
-            <% elsif talent[:btob] %>
+            <% elsif talent[:next_aventure][:btob] %>
               <p><i class="fas fa-code-branch margin-right-5 green"></i>BtoB</p>
-            <% elsif talent[:btoc] %>
+            <% elsif talent[:next_aventure][:btoc] %>
               <p><i class="fas fa-code-branch margin-right-5 green"></i>BtoC</p>
             <% else %>
               <p><i class="fas fa-code-branch margin-right-5 green"></i>_</p>
             <% end %>
+          </div>
+
+          <div class="col-xs-12 no-padding">
+            <p>
+              <i class="fas fa-briefcase margin-right-5 green"></i>
+              <% talent[:sectors].first(talent[:sectors].length-1).each do |talent_sector| %>
+                <%= talent_sector[:title].present? ? talent_sector[:title] + ", " : "" %>
+              <% end %>
+              <%= talent[:sectors].last[:title].present? ? talent[:sectors].last[:title] + "." : "" %>
+            </p>
           </div>
         </div>
 
