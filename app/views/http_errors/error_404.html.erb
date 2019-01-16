@@ -4,7 +4,7 @@
   <div class="double-text">
     <h1 class="double-text-item">404</h1>
     <br>
-    <p class="error-description">Désolé, <%= current_user.present? && current_user.firstname.present? ? current_user.firstname.capitalize : "" %> quelque chose c'est mal passé</p>
+    <p class="error-description">Désolé, <%= current_user.present? && current_user.firstname.present? ? current_user.firstname.capitalize : "" %> quelque chose s'est mal passé</p>
     <p><%= @not_found_path %></p>
   </div>
   <%= image_tag 'homme-bureau.png', :class => "img__error-page" %>

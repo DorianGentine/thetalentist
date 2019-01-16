@@ -84,7 +84,11 @@
         <div class="talent-info">
           <div class="talent-info-item card-dispsition">
             <p class="icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
-            <p><%= talent[:city].present? ? talent[:city] : "Pas renseigné" %></p>
+            <p><%= talent[:city].present? ? talent[:city].truncate(15, separator: ', ', omission: '') : "" %></p>
+          </div>
+          <div class="talent-info-item card-dispsition">
+            <p class="icon-margin-right icon-green-color"><i class="fas fa-briefcase"></i></p>
+            <p><%= talent[:next_aventure][:sector].present? ? talent[:next_aventure][:sector] : "" %></p>
           </div>
           <div class="talent-info-item card-dispsition">
             <p class="icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
@@ -98,23 +102,27 @@
               <p>Pas renseigné</p>
             <% end %>
           </div>
-          <div class="talent-info-item card-dispsition">
-            <p class="icon-margin-right icon-green-color"><i class="fas fa-briefcase"></i></p>
-            <p>CDI</p>
-          </div>
         </div>
 
         <% talent[:formations].each do |talent_formation| %>
           <div class="talent-school-1 card-dispsition">
-            <p class="icon-margin-right"><i class="fas fa-graduation-cap"></i></p>
-            <p>
-              <%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] : "Pas renseigné" %>, <%=talent_formation[:title] %></p>
-            <!-- <p>HEC, Master entrepreneuriat - 2015</p> -->
+            <p><i class="fas fa-graduation-cap margin-right-5"></i>
+              <%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] + ", " : "" %> <%=talent_formation[:title] %></p>
           </div>
         <% end %>
-        <div class="talent-description hidden-xs">
-          <p><%= talent[:overview].present? ? truncate(talent[:overview], length: 180) : "Pas renseigné" %></p>
-        </div>
+        <% if talent[:year_experience_job].present? && talent[:year_experience_job] > 0 %>
+          <p>
+            <i class="far fa-calendar margin-right-5"></i>
+            <%= talent[:year_experience_job] %>
+            <%= talent[:year_experience_job] > 1 ? "ans" : "an" %>
+            d'expérience
+          </p>
+        <% end %>
+        <% if talent[:experiences].count > 1 %>
+          <div class="talent-description">
+            <p><i class="fas fa-briefcase margin-right-5"></i> <%= talent[:experiences][talent[:experiences].count-1][:position] %></p>
+          </div>
+        <% end %>
 
 
 
