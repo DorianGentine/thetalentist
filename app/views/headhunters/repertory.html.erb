@@ -9,16 +9,16 @@
         <div class="dropdown">
           <i class="fas fa-angle-down" data-toggle="dropdown"></i>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <li><%= link_to repertoire_path(tag: "Data") do %>
-              <i class="fas fa-search"></i> OPERATIONS
+            <li><%= link_to repertoire_path(tag: "#{Job.first.title}") do %>
+              <i class="fas fa-search"></i> <%= Job.first.title.upcase %>
             <% end %></li>
-            <li><%= link_to repertoire_path(tag: "Sales") do %>
+            <li><%= link_to repertoire_path(tag: "#{Job.second.title}") do %>
               <i class="far fa-comments"></i> SALES
             <% end %></li>
-            <li><%= link_to repertoire_path(tag: "Market") do %>
+            <li><%= link_to repertoire_path(tag: "#{Job.third.title}") do %>
               <i class="fas fa-tachometer-alt"></i> MARKETING
             <% end %></li>
-            <li><%= link_to repertoire_path(tag: "Product") do %>
+            <li><%= link_to repertoire_path(tag: "#{Job.fourth.title}") do %>
               <i class="fas fa-archive"></i> PRODUCT
             <% end %></li>
               <a href="">Créer une alerte <i class="fas fa-bell"></i></a>

@@ -34,6 +34,14 @@ class HeadhuntersController < ApplicationController
         talent_formations << formation_injected
       end
 
+      talent_sectors = []
+      talent.next_aventures.last.sectors.each do |talent_sector|
+        sector_injected = {
+          title: talent_sector.present? ? talent_sector.title : nil,
+        }
+        talent_sectors << sector_injected
+      end
+
       talent_experiences = []
       talent.experiences.reverse_each do |experience|
         experience_injected = {
@@ -67,16 +75,16 @@ class HeadhuntersController < ApplicationController
         position: talent.experiences.last.present? ? talent.experiences.last.position : nil,
         year_experience_job: talent.talent_jobs.last.present? ? talent.talent_jobs.last.year : "0",
         city: talent.city,
-        btob: talent.btob,
-        btoc: talent.btoc,
         job: talent.jobs.first.present? ? talent.jobs.first.title : nil,
         overview: talent.overview,
         update: talent.updated_at,
         next_aventure: {
           famous_person: talent.next_aventures.count > 0 && talent.next_aventures.last.famous_person.present? ? talent.next_aventures.last.famous_person : "Le talent n'a pas souhaité répondre à cette question.",
           work_for_free: talent.next_aventures.count > 0 && talent.next_aventures.last.work_for_free.present? ? talent.next_aventures.last.work_for_free : "Le talent n'a pas souhaité répondre à cette question.",
-          sector: talent.next_aventures.count > 0 && talent.next_aventures.last.sectors.present? ? talent.next_aventures.last.sectors.first.title : nil,
+          btob: talent.next_aventures.count > 0 && talent.next_aventures.last.btob.present? ? true : false,
+          btoc: talent.next_aventures.count > 0 && talent.next_aventures.last.btoc.present? ? true : false,
         },
+        sectors: talent_sectors,
         formations: talent_formations,
         experiences: talent_experiences,
         technos: talent_technos,
