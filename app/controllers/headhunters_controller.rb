@@ -213,7 +213,7 @@ class HeadhuntersController < ApplicationController
         if conversations.size > 0
           @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@headhunter.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
         else
-          @talentist.send_message(@headhunter, "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme!", "#{@headhunter.id}")
+          @talentist.send_message(@headhunter, "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme !", "#{@headhunter.id}")
           HeadhunterMailer.accepted(@headhunter.id).deliver_later
         end
       # else @headhunter.validated == nil

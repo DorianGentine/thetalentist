@@ -18,7 +18,7 @@ class StepsStartupInfosController < ApplicationController
     @startup = Startup.new(startup_params)
     set_new_words(@startup)
     @talentist = Talentist.last
-    message = "Bonjour #{@headhunter.firstname}, Bienvenue sur notre plateforme! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
+    message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme ! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
     if @startup.save
       @headhunter.update(startup_id: @startup.id)
       Talentist.last.send_message(@headhunter, message, "#{@headhunter.id}")
