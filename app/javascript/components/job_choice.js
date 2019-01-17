@@ -9,7 +9,7 @@ function jobFilter() {
   const data = document.getElementById("data");
   const sales = document.getElementById("sales");
   const product = document.getElementById("product");
-  const market = document.getElementById("market");
+  const market = document.getElementById("marketing");
   const submit = document.querySelector(".submit-filtre");
 
   if (data) {
