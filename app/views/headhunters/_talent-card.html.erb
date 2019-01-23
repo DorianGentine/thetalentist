@@ -75,7 +75,7 @@
 
         <div class="talent-job">
           <% if !talent[:position].nil? %>
-            <h2><%= talent[:position] %></h2>
+            <h2><%= talent[:position].truncate(45, separator: ' ', omission: '') %></h2>
           <% else %>
             <h2> Rajouter une experience </h2>
           <% end %>
@@ -127,7 +127,7 @@
         <% end %>
         <% if talent[:experiences].count > 1 %>
           <div class="talent-description">
-            <p><i class="fas fa-briefcase margin-right-5"></i><span>-1</span> <%= talent[:experiences][talent[:experiences].count-1][:position] %></p>
+            <p><i class="fas fa-briefcase margin-right-5"></i><sup>-1</sup> <%= talent[:experiences][talent[:experiences].count-1][:position] %></p>
           </div>
         <% end %>
 
