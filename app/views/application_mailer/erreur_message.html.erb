@@ -1,14 +1,14 @@
 
-<h2> Bonjour, nous avons une erreure <%= @current_page %> </h2>
+<h2> Bonjour, nous avons une erreur : <%= @current_page %> </h2>
 
 
-<h3> Voici les données enregirstés le <%= @error_datas["time"] %> </h3>
+<h3> Voici les données enregistrées le <%= @error_datas["time"] %> </h3>
 
 <ul>
   <li>Route: <%= @error_datas["path"] %> </li>
   <li>Controller: <%= @error_datas["controller"] %> </li>
   <li>Action:  <%= @error_datas["action"] %> </li>
-  <li>Le user est un <%= @error_datas["model_user"] %> comme id: <%= @error_datas["user_id"] %> </li>
+  <li>Le user est un <%= @error_datas["model_user"] %> avec comme id: <%= @error_datas["user_id"] %> </li>
 </ul>
 
 
