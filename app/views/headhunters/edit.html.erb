@@ -26,15 +26,16 @@
           <p class="cercle <%= @headhunter.completed_startup < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
         </div>
 
-        <div class="tablinks flex space-between hidden" data-idTab='modifier_mon_compte' style="align-items: center;">
-          <p class="titre-rubrique-3" data-idTab='modifier_mon_compte'>Modifier mon compte</p>
-          <p class="cercle <%= @headhunter.completed_profil < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
-        </div>
-
-
+       <!--  <#%= link_to edit_headhunter_registration_path do %>
+          <div class="tablinks2 flex space-between" style="align-items: center;">
+            <p class="titre-rubrique-3" data-idTab='modifier_mon_compte'>Modifier mon compte</p>
+            <p class="cercle <%= @headhunter.completed_profil < 98 ? "red-background" : "green-background" %>" style="height: 10px; width: 10px;"></p>
+          </div>
+        <#% end %> -->
 
 
       </div>
+
       <hr class="ligne-vertical col-lg-1 no-padding" id="ligne-edit">
       <!-- info générale sur le profil -->
       <div class="col-lg-8 no-padding">
@@ -51,9 +52,10 @@
             <%= render 'edit_informations_entreprises' %>
           </div>
 
-          <div id="modifier_mon_compte" class="tabcontent" style="display: none;">
-            <%#= render 'talents/edit_modifier_compte', user: @headhunter %>
-          </div>
+          <!-- <div id="modifier_mon_compte" class="tabcontent" style="display: none;">
+            <#%= link_to 'test mot de passe', edit_headhunter_registration_path %>
+            <#%= render 'headhunters/registrations/edit', resource: @headhunter, resource_name: "headhunter" %>
+          </div> -->
 
 
 

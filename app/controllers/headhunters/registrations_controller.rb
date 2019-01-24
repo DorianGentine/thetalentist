@@ -40,6 +40,13 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  protected
+
+    def after_update_path_for(resource)
+      headhunter_path(resource)
+    end
+
+
   private
 
     def startup_is_available?(param)

@@ -20,8 +20,13 @@ class Talents::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def edit
-  end
+
+  protected
+
+    def after_update_path_for(resource)
+      talent_path(resource)
+    end
+
 
   private
 
