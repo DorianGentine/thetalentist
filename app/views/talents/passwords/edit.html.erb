@@ -4,26 +4,34 @@
 
   <h2>Vous pouvez <strong>réinitialiser</strong> votre mot de passe</h2>
 
-  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), method: :put ,
-html: { class: "pure-form pure-form-stacked" }) do |f| %>
-    <div class="">
-      <div class="form-inputs">
-    <!-- <#%= f.hidden_field :reset_password_token %> -->
-    <%= f.input :current_password %>
-    <%= f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, label: "Confirm your new password", required: true %>
-  </div>
-      <%= f.button :submit, "Réinitialiser mon mot de passe", :class => "submit_forgot_password" %>
-      <!-- <#%= f.error_notification %> -->
-      <!-- <#%= f.input :reset_password_token, as: :hidden %> -->
-      <!-- <#%= f.full_error :reset_password_token %> -->
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name),
+html: { class: "pure-form pure-form-stacked", method: :put  }) do |f| %>
+    <%= f.error_notification %>
 
+    <%= f.input :reset_password_token, as: :hidden %>
+    <%= f.full_error :reset_password_token %>
+
+    <div class="form-inputs">
+      <%= f.input :password,
+                  label: "Nouveau mot de passe",
+                  required: true,
+                  autofocus: true,
+                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation, label: "Confirmation", required: true %>
     </div>
-  <% end %>
 
-  <div class="forgot_password_links">
-    <%= render "talents/shared/links" %>
+  <div class="form-actions">
+    <%= f.button :submit, "Changer mon mot de passe", :class => "submit_forgot_password" %>
   </div>
+
+
+
+  <% end %>
+<!--
+  <div class="forgot_password_links">
+    <#%= render "talents/shared/links" %>
+  </div> -->
 
 </div>
 

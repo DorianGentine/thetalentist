@@ -23,3 +23,19 @@
 .tablinks.active {
     background-color: rgba(3,13,89,0.1);
 }
+
+
+.tablinks2 {
+  appearance: none;
+  color: black;
+  padding: 22px 16px;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.15s;
+  margin-bottom: 15px;
+  p {
+    margin: unset;
+  }
+}

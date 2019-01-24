@@ -52,6 +52,11 @@
                 <% end %>
               </li>
               <li>
+                <%= link_to edit_headhunter_registration_path do %>
+                  <i class="fas fa-cogs"></i></i> <%= t(".profil", default: "Configuration") %>
+                <% end %>
+              </li>
+              <li>
                 <%= link_to destroy_headhunter_session_path, method: :delete do %>
                   <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
                 <% end %>
@@ -95,6 +100,11 @@
                 <% end %>
               </li>
               <li>
+                <%= link_to edit_talent_registration_path do %>
+                  <i class="fas fa-cogs"></i></i> <%= t(".profil", default: "Configuration") %>
+                <% end %>
+              </li>
+              <li>
                 <%= link_to destroy_talent_session_path, method: :delete do %>
                   <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
                 <% end %>
@@ -131,6 +141,11 @@
               </div>
             <% end %>
             <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+              <li>
+                <%= link_to edit_talentist_registration_path do %>
+                  <i class="fas fa-cogs"></i></i> <%= t(".profil", default: "Configuration") %>
+                <% end %>
+              </li>
               <li>
                 <%= link_to destroy_talentist_session_path, method: :delete do %>
                   <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>

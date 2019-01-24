@@ -1,7 +1,7 @@
 <!-- Titre section -->
   <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
   <h2 class="titre-section">Modifier <strong>mon compte</strong></h2>
-    <% user_name = :talent %>
+    <% user_name = :headhunter %>
     <%= simple_form_for(user, as: user_name, url: registration_path(user_name), html: { method: :put }) do |f| %>
       <%= f.error_notification %>
 

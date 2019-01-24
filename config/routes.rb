@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   ActiveAdmin.routes(self)
-  devise_for :talentists, path: 'talentists'
+  devise_for :talentists, path: 'talentists', controllers: {
+    sessions: 'talentists/sessions',
+    passwords: 'talentists/passwords',
+    registrations: 'talentists/registrations'
+  }
 
   devise_for :headhunters, path: 'headhunters', controllers: {
     sessions: 'headhunters/sessions',
