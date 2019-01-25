@@ -49,9 +49,10 @@ gem "cocoon"
 
 # add picture and pdf file
 gem 'cloudinary'
-gem 'carrierwave', '~> 1.2'
-
-gem 'carrierwave_backgrounder'
+gem 'carrierwave'
+# gem 'carrierwave', '~> 1.2'
+gem "mini_magick"
+gem 'carrierwave_backgrounder', git: 'https://github.com/lardawge/carrierwave_backgrounder'
 
 # Pour la fonction adresse de la startup
 gem "geocoder"
@@ -74,7 +75,7 @@ gem 'activerecord-session_store'
 gem "gmaps4rails"
 
 # for google analytics API
-gem 'google-api-client', '~> 0.11'
+gem 'google-api-client'
 
 # to pdf
 gem 'prawn-rails'

@@ -178,6 +178,7 @@ class HeadhuntersController < ApplicationController
     for i in count_picture..4 do
       @startup.pictures.build
     end
+
     @other_headhunters = @startup.headhunters - [@headhunter]
     @startup.startup_words.build
   end
