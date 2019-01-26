@@ -1,7 +1,7 @@
 class PhotoUploader < CarrierWave::Uploader::Base
+  include ::CarrierWave::Backgrounder::Delay
   include Cloudinary::CarrierWave
   include CarrierWave::MiniMagick
-  include ::CarrierWave::Backgrounder::Delay
 
   process eager: true
 
