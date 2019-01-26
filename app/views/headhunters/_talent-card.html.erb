@@ -119,15 +119,14 @@
         <% end %>
         <% if talent[:year_experience_job].present? && talent[:year_experience_job].to_i > 0 %>
           <p>
-            <i class="far fa-calendar margin-right-5"></i>
-            <%= talent[:year_experience_job] %>
+            <i class="far fa-calendar margin-right-5"></i><%= talent[:year_experience_job] %>
             <%= talent[:year_experience_job] > 1 ? "ans" : "an" %>
             d'expérience
           </p>
         <% end %>
         <% if talent[:experiences].count > 1 %>
           <div class="talent-description">
-            <p><i class="fas fa-briefcase margin-right-5"></i><sup>-1</sup> <%= talent[:experiences][talent[:experiences].count-1][:position] %></p>
+            <p><i class="fas fa-briefcase margin-right-5"><sup style="font-family: 'Avenir', 'Open Sans', 'Helvetica', 'sans-serif'; font-weight: 500">-1</sup></i><%= talent[:experiences][talent[:experiences].count-1][:position] %></p>
           </div>
         <% end %>
 

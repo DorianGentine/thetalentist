@@ -34,5 +34,5 @@
   <% end %>
 
 
-  <label for="avatar-upload<%= f.object.name %>" class="col-lg-1 label-edit no-margin no-padding btn-avatar requis" data-target="p<%= f.object.name %>" style="line-height: 70px; cursor: pointer;">Modifier</label>
+  <label for="avatar-upload<%= f.object.name %>" class="col-lg-10 label-edit no-margin no-padding btn-avatar requis" data-target="p<%= f.object.name %>" style="line-height: 70px; cursor: pointer;"><%= f.object.is_a?(Startup) ? "Logo de l'entreprise" : "Modifier ma photo" %></label>
 </div>
