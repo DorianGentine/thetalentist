@@ -27,8 +27,10 @@
 
   <% if f.object.is_a?(Startup) %>
     <%= f.file_field :logo, as: :hidden, id:"avatar-upload#{f.object.name}" %>
+    <%= f.hidden_field :logo_cache %>
   <% else %>
     <%= f.file_field :photo, as: :hidden, id:"avatar-upload#{f.object.name}" %>
+    <%= f.hidden_field :photo_cache %>
   <% end %>
 
 

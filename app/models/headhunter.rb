@@ -26,6 +26,9 @@ class Headhunter < ApplicationRecord
   before_save :capitalize_name_firstname
 
   mount_uploader :photo, PhotoUploader
+  process_in_background :photo
+  # store_in_background :photo
+
 
   def mailboxer_email(object)
    #return the model's email here

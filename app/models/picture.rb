@@ -4,4 +4,5 @@ class Picture < ApplicationRecord
   mount_uploader :photo, PhotoUploader
   process_in_background :photo
 
+
 end

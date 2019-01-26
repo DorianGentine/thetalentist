@@ -15,7 +15,7 @@ class StepsStartupInfosController < ApplicationController
   end
 
   def update
-    @startup = Startup.new(startup_params)
+    @startup = @headhunter.startup
     set_new_words(@startup)
     @talentist = Talentist.last
     message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme ! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
@@ -33,8 +33,11 @@ private
 
 
   def find_headhunter
-    @headhunter = Headhunter.find(session[:headhunter_id])
-    # authorize @headhunter
+    if session[:headhunter_id]
+      @headhunter = Headhunter.find(session[:headhunter_id])
+    else
+      @headhunter = current_headhunter
+    end
   end
 
   def finish_wizard_path

@@ -25,7 +25,8 @@ class Startup < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   mount_uploader :logo, PhotoUploader
-
+  process_in_background :logo
+  # store_in_background :logo
 
   def checking_name_available?
     if Startup.where(name: self.name).count > 0
