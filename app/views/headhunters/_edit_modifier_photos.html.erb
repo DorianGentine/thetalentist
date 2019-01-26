@@ -7,7 +7,7 @@
 <%= simple_form_for @startup, url: update_photos_headhunter_path(@headhunter), method: :patch, remote: false  do |f| %>
 
   <div class="row">
-    <%= f.simple_fields_for :pictures, @startup.pictures.count > 0 ? f.object.pictures.order(:created_at) : "" do |u| %>
+    <%= f.simple_fields_for :pictures do |u| %>
       <% random_num = "#{rand(1...100)}" + "a" + "#{rand(1...100)}" %>
       <!-- si photo présente -->
         <div class="col-lg-4 col-xs-12 margin-top-30">
@@ -18,17 +18,20 @@
                 <i class="fas fa-edit white absolute-center" style="font-size: 25px"></i>
               </div>
               <div id="no_img<%= random_num %>">
-
-                  <div class="center-text" style="background-image: url('<%= cl_image_path u.object.photo? ? u.object.photo : "https://images.homedepot-static.com/productImages/fc91cb23-b6db-4d32-b02a-f1ed61dd39a8/svn/folkstone-matte-formica-laminate-sheets-009271258408000-64_400_compressed.jpg";  %>'); background-size: cover; background-position: center;  height: 200px; cursor: pointer;">
-                    <i class="fas fa-edit white" style="font-size: 25px; opacity: 0.5;"></i>
-                  </div>
-
+                <div class="center-text" style="background-image: url('<%= cl_image_path u.object.photo? ? u.object.photo : "https://images.homedepot-static.com/productImages/fc91cb23-b6db-4d32-b02a-f1ed61dd39a8/svn/folkstone-matte-formica-laminate-sheets-009271258408000-64_400_compressed.jpg";  %>'); background-size: cover; background-position: center;  height: 200px; cursor: pointer;">
+                  <i class="fas fa-edit white" style="font-size: 25px; opacity: 0.5;"></i>
+                </div>
               </div>
             </label>
-            <label for="avatar-upload<%= random_num %>" class="pointer"><i class="fas fa-edit float-left black margin-top-15 margin-left-15" style="font-size: 25px"></i></label>
-            <i class="fas fa-trash-alt float-right black margin-top-15 margin-right-15" style="font-size: 25px"></i>
+            <label for="avatar-upload<%= random_num %>" class="pointer">
+              <i class="fas fa-edit float-left black margin-top-15 margin-left-15" style="font-size: 25px"></i>
+            </label>
+            <label for="avatar-remove<%= random_num %>" class="float-right pointer">
+              <i class="fas fa-trash-alt black margin-top-15 margin-right-15" style="font-size: 25px"></i>
+            </label>
             <%= u.file_field :photo, id:"avatar-upload#{random_num}", as: :hidden %>
             <%= u.hidden_field :photo_cache, as: :hidden %>
+            <%= u.check_box :remove_photo, id:"avatar-remove#{random_num}", as: :hidden %>
           </div>
         </div>
     <% end %>

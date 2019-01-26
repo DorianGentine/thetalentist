@@ -5,6 +5,7 @@ class Startup < ApplicationRecord
   accepts_nested_attributes_for :headhunters, allow_destroy: true
 
   has_many :pictures, dependent: :destroy
+  validates_length_of :pictures, maximum: 5
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
   has_many :startup_sectors, dependent: :destroy

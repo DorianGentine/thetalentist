@@ -178,6 +178,7 @@ class HeadhuntersController < ApplicationController
     for i in count_picture..4 do
       @startup.pictures.build
     end
+    # raise
 
     @other_headhunters = @startup.headhunters - [@headhunter]
     @startup.startup_words.build
@@ -285,7 +286,7 @@ class HeadhuntersController < ApplicationController
       startup_attributes: [ :id, :name, :link, :logo, :address, :mission,
       :sector_ids, :btob, :btoc, :validated, :short_resume, :linkedin, :facebook,
       :average_age, :collaborators, :year_of_creation, :overview,
-      pictures_attributes: [ :id, :photo, :_destroy],
+      pictures_attributes: [ :id, :photo, :photo_cache, :remove_photo, :_destroy],
       # startup_words_attributes: [ :id, :word_id, :_destroy]],
       ],
       word: [],
@@ -297,7 +298,7 @@ class HeadhuntersController < ApplicationController
       :name, :link, :logo, :address,
       :sector_ids, :btob, :btoc, :validated, :short_resume, :mission, :linkedin, :facebook,
       :average_age, :collaborators, :year_of_creation, :overview,
-      pictures_attributes: [ :id, :photo, :_destroy],
+      pictures_attributes: [ :id, :photo, :photo_cache, :remove_photo, :_destroy],
       # startup_words_attributes: [ :id, :word_id, :_destroy ],
       job_ids: []
       )
