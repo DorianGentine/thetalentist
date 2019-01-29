@@ -2,7 +2,7 @@
   <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
   <h2 class="titre-section">Remplissez votre <strong>profil</strong></h2>
 
-  <%= simple_form_for @talent, url: update_profile_talent_path(@talent), method: :patch, remote: true  do |f|%>
+  <%= simple_form_for @talent, url: update_profile_talent_path(@talent), method: :patch, remote: false  do |f|%>
 
     <%= render 'shared/change_photo', f: f %>
 

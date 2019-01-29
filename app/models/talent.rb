@@ -83,7 +83,7 @@ class Talent < ApplicationRecord
   # link with pdf_uploader
   # mount_uploader :cv, PdfUploader
   mount_uploader :photo, PhotoUploader
-
+  process_in_background :photo
 
   scope :his_job_is, -> (job) { joins(:jobs).merge(Job.where(title: job)) }
   # scope :is_comming_to, -> (point) { where( point: point, invited: true, status: "I'm in") }
@@ -318,8 +318,8 @@ class Talent < ApplicationRecord
   end
 
   def save_completed_profil
-     self.cv =  self.completed_totaly
-     self.save
+    self.cv =  self.completed_totaly
+    self.save
   end
 
   private

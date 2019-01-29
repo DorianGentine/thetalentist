@@ -80,20 +80,6 @@ class TalentsController < ApplicationController
     @credentials = @talent.credentials
   end
 
-  def update
-    if talent_params["talent_formations_attributes"]
-      talent_params["talent_formations_attributes"].each do |talent_formation|
-        if talent_formation[1]["id"]
-          t = TalentFormation.find(talent_formation[1]["id"].to_i)
-          t.update(title: talent_formation[1]["title"], year: talent_formation[1]["year"], formation_id: talent_formation[1]["formation_id"].to_i)
-        end
-      end
-    end
-    @talent.update_password_with_password(talent_password)
-    # @talent.update_attributes(talent_params)
-    redirect_to talent_path(@talent)
-  end
-
   # edit general
   def edit
      if @talent.talent_formations.count == 0
@@ -134,24 +120,43 @@ class TalentsController < ApplicationController
     @choices = ["Ambiance", "International", "Produit", "Rémunération", "Sens", "Valeurs", "Mission", "Management", "Worklife balance", "Impact"]
   end
 
+
+  def update
+    raise
+    if talent_params["talent_formations_attributes"]
+      talent_params["talent_formations_attributes"].each do |talent_formation|
+        if talent_formation[1]["id"]
+          t = TalentFormation.find(talent_formation[1]["id"].to_i)
+          t.update(title: talent_formation[1]["title"], year: talent_formation[1]["year"], formation_id: talent_formation[1]["formation_id"].to_i)
+        end
+      end
+    end
+    # @talent.update_password_with_password(talent_password)
+    @talent.update_attributes(talent_params)
+    redirect_to talent_path(@talent)
+  end
+
   def update_profile
     update_edit(@talent, talent_params)
-    @talent.save_completed_profil
+    # @talent.save_completed_profil
+    StatisticJob.perform_now(@talent.id)
   end
 
   def update_formation_and_skill
     update_edit(@talent, talent_params)
-    @talent.save_completed_profil
+    StatisticJob.perform_now(@talent.id)
+    # @talent.save_completed_profil
   end
 
   def update_experience
     update_edit(@talent, talent_params)
-    @talent.save_completed_profil
+    # @talent.save_completed_profil
+    StatisticJob.perform_now(@talent.id)
   end
 
   def update_next_aventure
     update_edit(@talent, talent_params)
-    @talent.save_completed_profil
+    StatisticJob.perform_now(@talent.id)
   end
 
 
@@ -211,16 +216,10 @@ class TalentsController < ApplicationController
 private
 
   def update_edit(talent, talent_params)
-    if talent.update_attributes(talent_params)
-      respond_to do |format|
-        format.html { redirect_to edit_talent_path(talent) }
-        format.js
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to edit_talent_path(talent) }
-        format.js  # <-- idem
-      end
+    talent.update_attributes(talent_params)
+    respond_to do |format|
+      format.html { redirect_to edit_talent_path(talent) }
+      format.js
     end
   end
 
@@ -264,6 +263,8 @@ private
       :btoc,
       :btob,
       :photo,
+      :photo_cache,
+      :photo_remove,
       :terms_of_condition,
       :no_more,
       :sector_ids,

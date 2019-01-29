@@ -7,7 +7,7 @@ class Experience < ApplicationRecord
 
   validates :position, presence: true
   validates :company_name, presence: true
-  validates :company_type, presence: true
+  validates :company_type_id, presence: true
   validates :starting, presence: true, format: { with: /\d{2}-\d{4}/, message: "date must be like 10-2015" }
   validates :years, presence: true, format: { with: /\d{2}-\d{4}/, message: "date must be like 10-2015" }, if: :currently_is_on? && :years_is_bigger_than_starting_date?
   validates :currently, presence: true, if: :years_is_on?
