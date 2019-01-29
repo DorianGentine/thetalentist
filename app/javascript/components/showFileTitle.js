@@ -21,23 +21,31 @@ function showFileName( event ) {
 
 $(function() {
   function triggerAvatar(event){
-    let targetAvatar = event.currentTarget.dataset.target
-    let idAvatar = document.getElementById("avatar-upload" + targetAvatar)
-    let idImgAvatar = document.getElementById("no_img" + targetAvatar)
-    let idPrevAvatar = document.getElementById("div_img_prev" + targetAvatar)
-  $(idAvatar).change(function(){
-    $(idImgAvatar).addClass('hidden');
-    $(idPrevAvatar).removeClass('hidden');
-    if ( this.files[0].size > 10000000 ) {
-      console.log(this.files[0].size)
-      var text = "<p class='col-xs-10 red' style='font-size: 11px;'>Votre photo est trop lourde</p>"
-      idPrevAvatar.parentNode.insertAdjacentHTML("afterend",text)
-      alert("Votre photo est trop large : " + this.files[0].size + " au lieu de 10MB maximum" )
-    } else {
-      readURL(this, targetAvatar);
-    }
-  });
-
+    const targetAvatar = event.currentTarget.dataset.target
+    const idAvatar = document.getElementById("avatar-upload" + targetAvatar)
+    const idAvatarRemove = document.getElementById("avatar-remove" + targetAvatar)
+    const idImgAvatar = document.getElementById("no_img" + targetAvatar)
+    const idImg = document.getElementById("img_prev" + targetAvatar)
+    const idPrevAvatar = document.getElementById("div_img_prev" + targetAvatar)
+    $(idAvatar).change(function(){
+      // $(idImgAvatar).addClass('hidden');
+      // $(idPrevAvatar).removeClass('hidden');
+      if ( this.files[0].size > 10000000 ) {
+        var text = "<p class='col-xs-10 red' style='font-size: 11px;'>Votre photo est trop lourde</p>"
+        idPrevAvatar.parentNode.insertAdjacentHTML("afterend",text)
+        alert("Votre photo est trop large : " + this.files[0].size + " au lieu de 10MB maximum" )
+      } else {
+        readURL(this, targetAvatar);
+        if (idAvatarRemove && idAvatarRemove.checked) {
+          idAvatarRemove.checked = false;
+        }
+      }
+    });
+    $(idAvatarRemove).change(function(){
+      if (idAvatarRemove.checked) {
+        $(idImg).attr('src', 'https://images.homedepot-static.com/productImages/fc91cb23-b6db-4d32-b02a-f1ed61dd39a8/svn/folkstone-matte-formica-laminate-sheets-009271258408000-64_400_compressed.jpg');
+      }
+    });
   }
 
   const btnAvatars = document.querySelectorAll('.btn-avatar')
@@ -45,6 +53,8 @@ $(function() {
     btn.addEventListener('click', triggerAvatar)
   })
 });
+
+
 
 function readURL(input, target) {
   if (input.files && input.files[0]) {

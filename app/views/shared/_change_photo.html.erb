@@ -1,38 +1,31 @@
 <div class="row input-none">
+
+  <!-- ATTENTION CHANGER LA FROME CAR LE JS NE FONCTIONNE PLUS COMME CA. + REGARDER SUR LES PAGES SI CA MACH -->
   <label for="avatar-upload<%= f.object.name %>" class="col-lg-1 margin-right-15 no-padding btn-avatar" data-target="<%= f.object.name %>" id="edit-photo">
-    <div class="cercle relative hidden" id="div_img_prev<%= f.object.name %>" style="height: 70px; width: 70px; cursor: pointer;">
-      <img id="img_prev<%= f.object.name %>" width=70 height=70 src="#" alt="your image" class=" cercle "/>
-      <i class="fas fa-edit white absolute-center" style="font-size: 25px"></i>
-    </div>
-    <div id="no_img<%= f.object.name %>">
+    <div class="cercle relative" id="div_img_prev<%= f.object.name %>" style="height: 70px; width: 70px; cursor: pointer;">
       <% if f.object.is_a?(Startup) %>
-        <% if f.object.logo? %>
-          <%= render 'talents/edit-photo', f: f.object %>
-        <% else %>
-          <div class="cercle gray-background center-text" style="height: 70px; width: 70px; cursor: pointer;">
-            <i class="fas fa-edit white" style="font-size: 25px"></i>
-          </div>
-        <% end %>
+        <img id="img_prev<%= f.object.name %>" src='<%= f.object.logo? ? f.object.logo_url : "https://images.homedepot-static.com/productImages/fc91cb23-b6db-4d32-b02a-f1ed61dd39a8/svn/folkstone-matte-formica-laminate-sheets-009271258408000-64_400_compressed.jpg" %>' alt="your image" class=" cercle " style="object-fit: fill; height: 100%; width: 100%;"/>
       <% else %>
-        <% if f.object.photo? %>
-          <%= render 'talents/edit-photo', f: f.object %>
-        <% else %>
-          <div class="cercle gray-background center-text" style="height: 70px; width: 70px; cursor: pointer;">
-            <i class="fas fa-edit white" style="font-size: 25px"></i>
-          </div>
-        <% end %>
+        <img id="img_prev<%= f.object.name %>" src='<%= f.object.photo? ? f.object.photo_url : "https://images.homedepot-static.com/productImages/fc91cb23-b6db-4d32-b02a-f1ed61dd39a8/svn/folkstone-matte-formica-laminate-sheets-009271258408000-64_400_compressed.jpg" %>' alt="your image" class=" cercle " style="object-fit: fill; height: 100%; width: 100%;"/>
       <% end %>
+      <i class="fas fa-edit white absolute-center" style="font-size: 25px"></i>
     </div>
   </label>
 
   <% if f.object.is_a?(Startup) %>
     <%= f.file_field :logo, as: :hidden, id:"avatar-upload#{f.object.name}" %>
     <%= f.hidden_field :logo_cache %>
+    <%= f.check_box :remove_logo, id:"avatar-remove#{f.object.name}" %>
   <% else %>
     <%= f.file_field :photo, as: :hidden, id:"avatar-upload#{f.object.name}" %>
     <%= f.hidden_field :photo_cache %>
+    <%= f.check_box :remove_photo, id:"avatar-remove#{f.object.name}" %>
   <% end %>
-
-
-  <label for="avatar-upload<%= f.object.name %>" class="col-lg-10 label-edit no-margin no-padding btn-avatar requis" data-target="p<%= f.object.name %>" style="line-height: 70px; cursor: pointer;"><%= f.object.is_a?(Startup) ? "Logo de l'entreprise" : "Modifier ma photo" %></label>
+  <div class="col-lg-10">
+    <label for="avatar-upload<%= f.object.name %>" class=" label-edit no-margin no-padding btn-avatar requis" data-target="p<%= f.object.name %>" style="line-height: 70px; cursor: pointer;"><%= f.object.is_a?(Startup) ? "Logo de l'entreprise" : "Modifier ma photo" %>
+    </label>
+    <label for="avatar-remove<%= f.object.name %>" class=" pointer btn-avatar" data-target="<%= f.object.name %>">
+      <i class="fas fa-trash-alt black margin-top-15 margin-right-15" style="font-size: 10px"></i>
+    </label>
+  </div>
 </div>
