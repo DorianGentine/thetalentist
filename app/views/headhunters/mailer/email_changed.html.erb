@@ -32,7 +32,7 @@
             <br>
             <div style="display:flex; flex-direction: row; align-items: center; " >
               <p>Vous pouvez dès maintenant vous connecter sur</p>
-              <%= link_to @resource, {controller: "headhunter", action: "index", id: @resource, :style => "font-size: 14px; font-weight: bold; font-family: Avenir, sans-serifs; color: #191B26; text-align: center; text-decoration: none; mso-line-height-rule: exactly; line-height: 24px;"} do %>
+              <%= link_to @resource, {controller: "headhunters", action: "show", id: @resource, :style => "font-size: 14px; font-weight: bold; font-family: Avenir, sans-serifs; color: #191B26; text-align: center; text-decoration: none; mso-line-height-rule: exactly; line-height: 24px;"} do %>
                 <p style="margin:0; margin-left: 5px"><%= @resource.email %></p>
               <% end %>
             </div>
