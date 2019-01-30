@@ -41,7 +41,7 @@ class UserInfoPdf < Prawn::Document
     [["Adresse:", present?(@user.city)]] +
     [["Téléphone:", present?(@user.phone)]] +
     [["Linkedin:", present?(@user.linkedin)]] +
-    [["Cv:", present?(@user.cv)]] +
+    [["Cv:", present?(@user.completing)]] +
     [["Btob:", its_true?(@user.btob)]] +
     [["Btoc:", its_true?(@user.btoc)]] +
     [["Photo:", present?(@user.photo)]]

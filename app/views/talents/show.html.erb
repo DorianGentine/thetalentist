@@ -2,7 +2,7 @@
 <% if current_user.is_a?(Talent) %>
   <%= link_to edit_talent_path(@talent) do %>
     <div class="btn-edition-container">
-      <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong class=" <%= @talent.completed_totaly > 85 ? "green" : "red"  %>"><%= @talent.completed_totaly %>%</strong></p>
+      <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong class=" <%= @talent.completed_totaly > 85 ? "green" : "red"  %>"><%= @talent.completing %>%</strong></p>
       <div class="btn-edition">
         <span><i class="fas fa-edit"></i></span>
       </div>

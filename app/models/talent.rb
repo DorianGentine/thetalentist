@@ -17,7 +17,8 @@ class Talent < ApplicationRecord
   after_validation :geocode
 
   after_create :send_welcome_email, :send_new_user_to_talentist
-  before_save :capitalize_name_firstname
+  before_save :capitalize_name_firstname, :save_completed_profil
+
 
   # Tu devras ajouter les lignes has_many :xx through: :xx pour tous les champs que le talent devra remplir dans le questionnaire
   has_many :talent_sectors, dependent: :destroy
@@ -318,11 +319,26 @@ class Talent < ApplicationRecord
   end
 
   def save_completed_profil
-    self.cv =  self.completed_totaly
-    self.save
+    self.completing = self.completed_totaly
   end
 
+  def pass_from_cv_to_completing
+    if self.completing.nil?
+      self.cv.to_i
+    else
+      self.completing
+    end
+  end
+
+  # mettre en place un background pour calculer les stat
+  # def async_update
+  #   p "tu rentre dans le job"
+  #   StatisticJob.perform_now(self.id)
+  # end
+
   private
+
+
 
   def stat(arg)
     length_input = arg

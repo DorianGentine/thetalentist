@@ -6,9 +6,6 @@ class TalentsController < ApplicationController
   def index
     @talentist = current_talentist
     # @talents = Talent.all.order('created_at DESC')
-    # @talents.each do |talent|
-    #   talent.save_completed_profil
-    # end
     if !@talents = policy_scope(Talent)
       if current_user.is_a?(Talent)
         redirect_to talent_path(current_user)
@@ -138,25 +135,18 @@ class TalentsController < ApplicationController
 
   def update_profile
     update_edit(@talent, talent_params)
-    # @talent.save_completed_profil
-    StatisticJob.perform_now(@talent.id)
   end
 
   def update_formation_and_skill
     update_edit(@talent, talent_params)
-    StatisticJob.perform_now(@talent.id)
-    # @talent.save_completed_profil
   end
 
   def update_experience
     update_edit(@talent, talent_params)
-    # @talent.save_completed_profil
-    StatisticJob.perform_now(@talent.id)
   end
 
   def update_next_aventure
     update_edit(@talent, talent_params)
-    StatisticJob.perform_now(@talent.id)
   end
 
 
@@ -264,7 +254,7 @@ private
       :btob,
       :photo,
       :photo_cache,
-      :photo_remove,
+      :remove_photo,
       :terms_of_condition,
       :no_more,
       :sector_ids,
