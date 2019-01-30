@@ -55,8 +55,6 @@ class StepsTalentInfosController < ApplicationController
     when :next_aventure
 
       @talent.update_attributes(talent_params)
-      # TODO
-      @talent.save_completed_profil
       if !@talent.terms_of_condition
         flash[:notice] = "N'oubliez pas de accepter les conditions générale"
         render "steps_talent_infos/#{step}"
@@ -68,8 +66,6 @@ class StepsTalentInfosController < ApplicationController
         set_new_technos(@talent)
       end
       if @talent.update(talent_params)
-        # TODO
-        @talent.save_completed_profil
         # @talent = current_user
         render_wizard @talent
       else
