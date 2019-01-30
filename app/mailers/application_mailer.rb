@@ -33,7 +33,7 @@ class ApplicationMailer < ActionMailer::Base
     @current_page = current_page.present? ? current_page : nil
     @error_datas = type_erreur
     mail(
-      to: "donatien@avemcreation.com, dorian@avemcreation.com, donatien@rollandmail.com",
+      to: "donatien@avemcreation.com, dorian@avemcreation.com",
       cc: "bienvenue@thetalentist.com",
       subject: "Une erreur #{@current_page} a été reçu sur Talentsit"
       )
