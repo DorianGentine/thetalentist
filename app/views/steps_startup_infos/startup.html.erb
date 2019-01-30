@@ -63,7 +63,7 @@
       <div class="row flex">
         <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 no-margin col-lg-2 col-xs-12" style="align-self: center;">Ce qui vous définit</p>
         <div class="col-lg-9 col-xs-12 margin-right-15 no-margin-xs no-padding">
-          <%= f.input :word_ids, collection: Word.all, input_html: { :class => "selectAndCreate", multiple: "multiple", style: "width: 100%; height: 100%"}, include_blank: true, label: false %>
+          <%= f.input :word_ids, collection: Word.all, input_html: { :class => "selectAndCreate", multiple: "multiple", style: "width: 100%"}, include_blank: true, label: false %>
         </div>
       </div>
       <div class="row margin-top-15 flex" style="height: 100%;">

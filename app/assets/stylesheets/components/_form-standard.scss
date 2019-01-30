@@ -9,8 +9,14 @@
   margin-top: 60px !important;
 }
 
+// Mets les polices de select2 à 14px
 span.select2.select2-container.select2-container--default {
-    font-size: 14px;
+  font-size: 14px;
+}
+
+// Ajuste height selectize pour que les champs bougent avec leurs contenu
+.selectize-control.form-control.select.optional.selectAndCreate.multi.plugin-remove_button {
+  height: unset;
 }
 
 @media screen and (min-width: 771px) {
