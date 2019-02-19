@@ -14,7 +14,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
     startup_params = params.require(:headhunter).permit(:startup)[:startup]
     authorize @headhunter
     message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme ! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
-
+    @headhunter.validated = true
     if startup_params.to_i != 0
       @headhunter.startup_id = startup_params.to_i
     else
@@ -90,7 +90,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
 
     def sign_up(resource)
       sign_in(resource)
-      redirect_to headhunter_path(resource)
+      redirect_to repertoire_path(query: "new_member")
     end
 
     def headhunter_params
