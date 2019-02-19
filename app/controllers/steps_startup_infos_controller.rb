@@ -42,7 +42,8 @@ private
 
   def finish_wizard_path
     sign_in(@headhunter)
-    headhunter_path(@headhunter)
+    repertoire_path(query: "new_member")
+    # headhunter_path(@headhunter)
   end
 
   def set_new_words(startup)

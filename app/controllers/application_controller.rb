@@ -77,7 +77,8 @@ class ApplicationController < ActionController::Base
         steps_startup_info_path(:startup)
       else
         sign_in(resource)
-        headhunter_path(resource)
+        # headhunter_path(resource)
+        repertoire_path
       end
     elsif resource.is_a?(Talent)
       if resource.next_aventures.first
@@ -102,6 +103,7 @@ class ApplicationController < ActionController::Base
   def after_sign_up_path_for(resource)
     if resource.is_a?(Headhunter)
       headhunter_path(Headhunter)
+      # repertoire_path
     elsif resource.is_a?(Talent)
       if resource.validated
         talent_path(resource)
