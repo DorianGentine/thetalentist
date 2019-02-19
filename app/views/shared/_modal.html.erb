@@ -4,7 +4,7 @@
 
     <div class="modal-header" id="relation" data-url="<%= relationships_path %>">
       <% if talent[:position].present? %>
-        <h3><%= talent[:position].capitalize %></h3>
+        <h3><%= talent[:position].capitalize.truncate(45, separator:' ', omission:'') %></h3>
       <% end %>
       <div id="relation_<%= talent[:id] %>" class="hidden-xs">
         <% if current_user.is_a?(Headhunter) %>
@@ -102,11 +102,7 @@
           <div class="lower-body-item-content">
             <hr class="barre-pointee">
             <div class="talent-experiences">
-              <% if  %>
-
-              <% end %>
               <% talent[:experiences].each do |experience| %>
-                <% if experience[:currently] %>
                   <div class="placement-point-barre">
                     <div>
                       <div class="point-barre-pointee"></div>
@@ -114,24 +110,13 @@
                     <div class="placement-talent-experience">
                       <p class="experience-post"><%= experience[:position].present? ? experience[:position] : "Pas renseigné" %></p>
                       <p class="experience-entreprise"><%= experience[:company_type].present? ? experience[:company_type] : "Pas renseigné" %></p>
-                      <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:currently] %></p>
+                      <% if experience[:currently] %>
+                        <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:currently] %></p>
+                      <% else %>
+                        <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:years] %></p>
+                      <% end %>
                     </div>
                   </div>
-                <% end %>
-              <% end %>
-              <% talent[:experiences].each do |experience| %>
-                <% if experience[:currently] %>
-                  <div class="placement-point-barre">
-                    <div>
-                      <div class="point-barre-pointee"></div>
-                    </div>
-                    <div class="placement-talent-experience">
-                      <p class="experience-post"><%= experience[:position].present? ? experience[:position] : "Pas renseigné" %></p>
-                      <p class="experience-entreprise"><%= experience[:company_type].present? ? experience[:company_type] : "Pas renseigné" %></p>
-                      <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:currently] %></p>
-                    </div>
-                  </div>
-                <% end %>
               <% end %>
             </div>
           </div>
