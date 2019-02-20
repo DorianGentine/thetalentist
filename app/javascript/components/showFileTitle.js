@@ -24,16 +24,15 @@ $(function() {
     const targetAvatar = event.currentTarget.dataset.target
     const idAvatar = document.getElementById("avatar-upload" + targetAvatar)
     const idAvatarRemove = document.getElementById("avatar-remove" + targetAvatar)
-    const idImgAvatar = document.getElementById("no_img" + targetAvatar)
     const idImg = document.getElementById("img_prev" + targetAvatar)
-    const idPrevAvatar = document.getElementById("div_img_prev" + targetAvatar)
+    const idPrevAvatar = document.getElementById("no_img" + targetAvatar)
+    console.log(idPrevAvatar)
     $(idAvatar).change(function(){
-      // $(idImgAvatar).addClass('hidden');
-      // $(idPrevAvatar).removeClass('hidden');
       if ( this.files[0].size > 10000000 ) {
-        var text = "<p class='col-xs-10 red' style='font-size: 11px;'>Votre photo est trop lourde</p>"
-        idPrevAvatar.parentNode.insertAdjacentHTML("afterend",text)
-        alert("Votre photo est trop large : " + this.files[0].size + " au lieu de 10MB maximum" )
+        // Esthétiquement pas joli : à revoir.
+        // var text = "<p class='col-xs-10 red' style='font-size: 11px;'>Votre photo est trop lourde</p>"
+        // idPrevAvatar.parentNode.insertAdjacentHTML("beforeend",text)
+        alert("Votre photo est trop large : 10MB maximum. Nous vous invitons à en charger une moins grosse 🙂" )
       } else {
         readURL(this, targetAvatar);
         if (idAvatarRemove && idAvatarRemove.checked) {
