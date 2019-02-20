@@ -16,11 +16,13 @@ class StepsStartupInfosController < ApplicationController
 
   def update
     @startup = @headhunter.startup
+    @startup.update_attributes(startup_params)
+    # raise
     set_new_words(@startup)
     @talentist = Talentist.last
     message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme ! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
     if @startup.save
-      @headhunter.update(startup_id: @startup.id)
+      # @headhunter.update(startup_id: @startup.id)
       Talentist.last.send_message(@headhunter, message, "#{@headhunter.id}")
       @headhunter.send_welcome_email
       render_wizard @headhunter
