@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   # TODO modifier authenticate_talent pour tous les users
   before_action :authenticate!
   before_action :current_user
-  before_action :prise_de_contact
+  before_action :prise_de_contact, except: :admin
 
   # Pundit: white-list approach.
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
@@ -35,22 +35,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
-  def prise_de_contact
-    @contact = ContactForm.new
-
-    flats = []
-    flats << {lat: 48.870129, lng: 2.345335}
-    flats << {lat: 48.870129, lng: 2.345335}
-    @markers = flats.map do |flat|
-         {
-        lat: flat[:lat],
-        lng: flat[:lng]
-        #,
-        # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
-      }
-    end
-  end
   # TEST
   def current_user
     if current_talent
@@ -173,6 +157,22 @@ class ApplicationController < ActionController::Base
       model_user: model_user,
       user_id: user_id
     }
+  end
+
+  def prise_de_contact
+    @contact = ContactForm.new
+
+    flats = []
+    flats << {lat: 48.870129, lng: 2.345335}
+    flats << {lat: 48.870129, lng: 2.345335}
+    @markers = flats.map do |flat|
+         {
+        lat: flat[:lat],
+        lng: flat[:lng]
+        #,
+        # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
+      }
+    end
   end
 
 end

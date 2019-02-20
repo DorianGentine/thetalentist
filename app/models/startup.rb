@@ -1,6 +1,13 @@
 class Startup < ApplicationRecord
   before_save :capitalize_name
 
+  scope :with_headhunter, -> { where.not(headhunters: [nil, ""])}
+  scope :with_no_headhunter, -> { where(headhunters: [nil, ""]) }
+
+
+
+
+
   has_many :headhunters, dependent: :destroy
   accepts_nested_attributes_for :headhunters, allow_destroy: true
 
