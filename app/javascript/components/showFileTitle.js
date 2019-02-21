@@ -26,7 +26,6 @@ $(function() {
     const idAvatarRemove = document.getElementById("avatar-remove" + targetAvatar)
     const idImg = document.getElementById("img_prev" + targetAvatar)
     const idPrevAvatar = document.getElementById("no_img" + targetAvatar)
-    console.log(idPrevAvatar)
     $(idAvatar).change(function(){
       if ( this.files[0].size > 10000000 ) {
         // Esthétiquement pas joli : à revoir.
