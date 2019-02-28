@@ -27,19 +27,15 @@
         </div>
       </div>
     </div>
-      <div class="filter-item hidden-xs hidden-sm">
-        <%= form_tag repertoire_path, :method => 'get', remote: true do %>
-            <input type="checkbox" name="jobs[]" id="data" value="Operations" class="hidden">
-            <label class= "category-choice" for="data"><i class="fas fa-search"></i> OPERATIONS</label>
-            <input type="checkbox" name="jobs[]" id="sales" value="Sales" class="hidden">
-            <label class= "category-choice" for="sales"><i class="far fa-comments"></i> SALES</label>
-            <input type="checkbox" name="jobs[]" id="product" value="Product" class="hidden">
-            <label class= "category-choice" for="product"><i class="fas fa-archive"></i> PRODUCT</label>
-            <input type="checkbox" name="jobs[]" id="market" value="Marketing" class="hidden">
-            <label class= "category-choice" for="market"><i class="fas fa-tachometer-alt"></i> MARKETING</label>
-          <input type="submit" class="submit-filtre hidden" name="commit" value="Search" data-disable-with="Search">
-        <% end %>
-      </div>
+    <div class="filter-item hidden-xs hidden-sm">
+      <%= form_tag repertoire_path, :method => 'get', id:"search-lg", remote: true do %>
+          <% @jobs.each do |job| %>
+            <input type="checkbox" name="jobs[]" id="<%= job.title.downcase %>" value="<%= job.title.capitalize %>" class="hidden">
+            <label class= "category-choice" for="<%= job.title.downcase %>"><i class="<%= job.icon %>"></i> <%= job.title.upcase %></label>
+          <% end %>
+        <input type="submit" class="submit-filtre hidden" name="commit" value="Search" data-disable-with="Search">
+      <% end %>
+    </div>
 
     <div class="alert-creation hidden-xs hidden-sm modal-button" data-target= "create_alert">
       <% if @headhunter.job_alertes.first.present? %>
@@ -48,7 +44,6 @@
         <p>Créer une alerte <i class="far fa-bell"></i></p>
       <% end %>
     </div>
-
 
 </div>
 
