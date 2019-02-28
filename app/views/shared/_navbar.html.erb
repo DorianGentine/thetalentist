@@ -30,6 +30,7 @@
         <% if current_headhunter.validated %>
           <%= link_to headhunter_path(current_headhunter), class:"navbar-wagon-item navbar-wagon-link" do %>
             <i class="fa fa-user"></i> PROFIL
+            <%= render "shared/notif_point" %>
           <% end %>
         <% end %>
 
