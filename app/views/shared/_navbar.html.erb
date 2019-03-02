@@ -22,16 +22,22 @@
           <div class="lien-messagerie">
             <%= link_to conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
               <i class="fas fa-envelope"></i> MESSAGERIE
-              <%= render "shared/notif_point" %>
+              <% if current_user.count_unread_message > 0 %>
+                <%= render "shared/notif_point" %>
+              <% end %>
             <% end %>
           </div>
         <% end %>
 
         <% if current_headhunter.validated %>
-          <%= link_to headhunter_path(current_headhunter), class:"navbar-wagon-item navbar-wagon-link" do %>
-            <i class="fa fa-user"></i> PROFIL
-            <%= render "shared/notif_point" %>
-          <% end %>
+          <div class="lien-messagerie">
+            <%= link_to headhunter_path(current_headhunter), class:"navbar-wagon-item navbar-wagon-link" do %>
+              <i class="fa fa-user"></i> PROFIL
+              <% if @headhunter.completed_totaly < 95 %>
+                <%= render "shared/notif_point" %>
+              <% end %>
+            <% end %>
+          </div>
         <% end %>
 
         <!-- Avatar with dropdown menu -->
@@ -237,9 +243,11 @@
               <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
             </div>
             <% if current_headhunter.mailbox.conversations.count > 0 %>
-              <div class="bottom-menu-item">
+              <div class="bottom-menu-item lien-messagerie">
                 <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link lien-messagerie" %>
-                <%= render "shared/notif_point" %>
+                <% if current_user.count_unread_message > 0 %>
+                  <%= render "shared/notif_point" %>
+                <% end %>
               </div>
             <% else %>
               <div class="bottom-menu-item">
@@ -251,9 +259,12 @@
                 <div class="dropup">
                   <i class="fa fa-bars dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown"></i>
                   <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-                    <li>
+                    <li class="lien-messagerie">
                       <%= link_to headhunter_path(current_headhunter) do %>
                         <i class="fa fa-user"></i> <%= t(".profil", default: "Profil") %>
+                        <% if @headhunter.completed_totaly < 95 %>
+                          <%= render "shared/notif_point" %>
+                        <% end %>
                       <% end %>
                     </li>
                     <li>
