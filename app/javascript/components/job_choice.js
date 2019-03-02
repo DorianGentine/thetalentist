@@ -16,7 +16,6 @@ function jobFilter() {
     })
   }
 
-
 }
 
 export { jobFilter }
