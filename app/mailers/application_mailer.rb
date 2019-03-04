@@ -49,7 +49,6 @@ class ApplicationMailer < ActionMailer::Base
     class_name = user_class.classify.constantize
     @envoyeur = class_name.find(envoyeur_id)
     @receveur = receveur
-    @envoyeur = envoyeur
     @message = message
 
     mail(

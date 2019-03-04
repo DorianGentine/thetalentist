@@ -1,7 +1,8 @@
 <!-- Répertoire côté start-up -->
 <%= render 'create_alert' %>
-<%= render 'modal_welcome' %>
-
+<% if params[:query] == "new_member" %>
+  <%= render 'modal_welcome' %>
+<% end %>
 <div class="filter">
 
     <div class="filter-category">
