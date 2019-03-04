@@ -1,3 +1,17 @@
+// button
+  button{
+    color: $green;
+    background: transparent;
+    border: 1px solid $green;
+    border-radius: 15px;
+    padding: 5px 20px;
+    transition: 0.3s;
+  }
+  button:hover{
+    color: white;
+    background: $green;
+  }
+
 // btn-edition
   .btn-edition-container{
     position: absolute;

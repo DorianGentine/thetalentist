@@ -1,8 +1,10 @@
 function jobFilter() {
 
-  $(document).ready(function(){
-    $(".category-choice").click(function(){
-      $(this).toggleClass("selected");
+  if (document.getElementById('search-lg')) {
+    $(document).ready(function(){
+      $(".category-choice").click(function(){
+        $(this).toggleClass("selected");
+      });
     });
   });
 
@@ -16,8 +18,6 @@ function jobFilter() {
       });
     })
   }
-
-
 }
 
 export { jobFilter }

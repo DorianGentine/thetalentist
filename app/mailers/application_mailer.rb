@@ -17,13 +17,11 @@ class ApplicationMailer < ActionMailer::Base
   def new_user(user_class, user_id)
     class_name = user_class.classify.constantize
     @user = class_name.find(user_id)
-    @talentist1 = Talentist.first
-    @talentist2 = Talentist.last
 
     @type = user_class.to_s
 
     mail(
-      to: @talentist1.email,
+      to: Talentist.all.collect(&:email).join(", "),
       subject: "Un nouveau membre sur la plateforme")
   end
 
