@@ -33,7 +33,7 @@
           <div class="lien-messagerie">
             <%= link_to headhunter_path(current_headhunter), class:"navbar-wagon-item navbar-wagon-link" do %>
               <i class="fa fa-user"></i> PROFIL
-              <% if @headhunter.completed_totaly < 95 %>
+              <% if current_headhunter.completed_totaly < 95 %>
                 <%= render "shared/notif_point" %>
               <% end %>
             <% end %>
@@ -262,7 +262,7 @@
                     <li class="lien-messagerie">
                       <%= link_to headhunter_path(current_headhunter) do %>
                         <i class="fa fa-user"></i> <%= t(".profil", default: "Profil") %>
-                        <% if @headhunter.completed_totaly < 95 %>
+                        <% if current_headhunter.completed_totaly < 95 %>
                           <%= render "shared/notif_point" %>
                         <% end %>
                       <% end %>
