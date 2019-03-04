@@ -7,12 +7,15 @@ function jobFilter() {
   });
 
   const submit = document.querySelector(".submit-filtre");
-  const inputs = document.getElementById('search-lg').getElementsByTagName("input")
-  Array.from(inputs).forEach((input) => {
-    input.addEventListener("click", function(){
-      submit.click();
-    });
-  })
+  const form = document.getElementById('search-lg')
+  if (form) {
+    const inputs = form.getElementsByTagName("input")
+    Array.from(inputs).forEach((input) => {
+      input.addEventListener("click", function(){
+        submit.click();
+      });
+    })
+  }
 
 
 }

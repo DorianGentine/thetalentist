@@ -1,0 +1,10 @@
+
+  <div style="width: 30%" data-formation-id="<%= formation.id %>">
+    <%= simple_form_for( [@talentist, formation], remote: true )do |f| %>
+      <p><%= f.object.title %></p>
+      <%= f.input :type_of_formation %>
+      <%= f.input :ranking %>
+      <%= f.submit "Suivant" %>
+    <% end %>
+  </div>
+

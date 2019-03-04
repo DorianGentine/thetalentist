@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     passwords: 'talentists/passwords',
     registrations: 'talentists/registrations'
   }
+  resources :talentists, only: [ :edit ] do
+    resources :formations, only: [ :update ]
+  end
 
   devise_for :headhunters, path: 'headhunters', controllers: {
     sessions: 'headhunters/sessions',

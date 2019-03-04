@@ -24,7 +24,7 @@ class StepsStartupInfosController < ApplicationController
     if @startup.save
       # @headhunter.update(startup_id: @startup.id)
       Talentist.last.send_message(@headhunter, message, "#{@headhunter.id}")
-      @headhunter.send_welcome_email
+      @headhunter.send_welcome_and_reminder_email
       render_wizard @headhunter
     else
       render "steps_startup_infos/#{step}"
