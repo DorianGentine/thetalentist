@@ -11,7 +11,6 @@ class ApplicationMailer < ActionMailer::Base
       to: @user.email,
       cc: "bienvenue@thetalentist.com",
       subject: "Bienvenue sur The Talentist!")
-    # This will render a view in `app/views/talent_mailer`!
   end
 
 
@@ -24,7 +23,16 @@ class ApplicationMailer < ActionMailer::Base
     mail(
       to: Talentist.all.collect(&:email).join(", "),
       subject: "Un nouveau membre sur la plateforme")
-    # This will render a view in `app/views/talent_mailer`!
+  end
+
+  def reminder(user_class, user_id)
+    class_name = user_class.classify.constantize
+    @user = class_name.find(user_id)
+
+    mail(
+      to: @user.email,
+      cc: "bienvenue@thetalentist.com",
+      subject: "Vous nous manquez déjà")
   end
 
   def erreur_message( current_page, type_erreur)

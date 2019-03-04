@@ -18,7 +18,7 @@ class HeadhunterPolicy < ApplicationPolicy
   end
 
   def update?
-    user == record
+    user == record || user.is_a?(Talentist)
   end
 
   def destroy?
@@ -26,7 +26,7 @@ class HeadhunterPolicy < ApplicationPolicy
   end
 
   def edit?
-    user == record
+    user == record || user.is_a?(Talentist)
   end
 
   def update_profile?

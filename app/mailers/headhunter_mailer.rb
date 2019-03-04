@@ -15,6 +15,15 @@ class HeadhunterMailer < ApplicationMailer
       )
   end
 
+  def reminder(user_id)
+    @user = Headhunter.find(user_id)
+    mail(
+      to: @user.email,
+      cc: "bienvenue@thetalentist.com",
+      subject: "Vous nous manquez déjà")
+  end
+
+
   def in_relation(user_id, talent_id, status)
     @user = Headhunter.find(user_id)
     @talent = Talent.find(talent_id)

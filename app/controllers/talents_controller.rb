@@ -16,6 +16,8 @@ class TalentsController < ApplicationController
       end
     end
 
+    @formations = Formation.missing_informations_with_talent
+
     if params[:tag].blank?
       @talents = Talent.all.order('created_at DESC')
       @titre = 'All'

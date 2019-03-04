@@ -113,8 +113,9 @@ class Headhunter < ApplicationRecord
     HeadhunterMailer.in_relation(self.id, talent.id, status).deliver_later
   end
 
-  def send_welcome_email
+  def send_welcome_and_reminder_email
     ApplicationMailer.welcome("headhunter", self.id).deliver_later
+    ApplicationMailer.reminder("headhunter", self.id).deliver_later(wait_until: Date.tomorrow.noon + 1.hour)
   end
 
   def new_message(message, receveur)

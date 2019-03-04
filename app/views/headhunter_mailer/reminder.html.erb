@@ -1,0 +1,75 @@
+
+<!-- BODY MAIL BLOC -->
+  <table style="border-radius: 2px;" align="center"; bgcolor="#F5F7FA" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+<!-- Espace début de la ligne -->
+    <tr>
+      <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+    </tr>
+    <tr>
+      <td>
+        <table  align="center" width="590" border="0" cellpadding="0" cellspacing="0">
+<!-- Bonjour Talent -->
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; text-align: left; font-size: 24px; color: #191B26; mso-line-height-rule: exactly; line-height: 30px; font-weight: bolder;">
+              Bonjour <%= @user.firstname.present? ? @user.firstname : "" %>,<br>
+            </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">
+              Voilà maintenant une semaine que nous sommes fiers de vous compter parmi les entreprises présentes sur notre plateforme.
+              <br>
+              The Talentist, c’est l’occasion de rencontrer les plus beaux profils du digital, en quelques clics !
+              <br>
+              Alors venez-vous en rendre compte par vous-mêmes en accédant à votre profil entreprise ici:
+            </td>
+          </tr>
+<!-- Espace fin de la ligne -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
+<!-- Bouton Accéder à mon profil -->
+          <tr>
+            <td align="center" height="40">
+              <table align="center" width="270" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <td align="center" bgcolor="#4ECCA3" style="border-radius: 2px; text-align: center;" valign="middle">
+                    <%= link_to headhunter_url(@user), { :style => "font-size: 14px; font-weight: normal; font-family: Avenir, sans-serifs; color: #fff; font-weight: bold; text-align: center; text-decoration: none; line-height: 40px; display: block; height: 40px;"} do %>
+                      <p style="margin:0">Accéder à votre profil</p>
+                    <% end %>
+                  </td>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+<!-- Desciption du mail -->
+          <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;"> &nbsp; </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0px 40px 0px 40px; font-family: Avenir, sans-serifs; font-weight: normal; text-align: left; font-size: 14px; color: #191B26; mso-line-height-rule: exactly; line-height: 22px;">
+              D’ailleurs, nous vous conseillons, si ce n’est pas le cas, de compléter ce dernier au maximum pour le rendre encore plus attractif auprès des talents.
+              <br>
+              Si vous avez la moindre question, l’équipe se fera une joie d’y répondre !
+              <br><br>
+              A très vite sur The Talentist,
+              <br>
+              Magdalena et Dimitri
+            </td>
+          </tr>
+<!-- Espace entre les lignes -->
+          <tr>
+            <td height="50" style="font-size: 50px; line-height: 50px;"> &nbsp; </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </tbody>
+  </table>
+
+

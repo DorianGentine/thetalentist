@@ -63,10 +63,12 @@
           </div>
           <div class="talent-school">
             <% talent[:formations].each do |talent_formation| %>
-              <p class="blue-background talent-school-item"><i class="fas fa-graduation-cap"></i><%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] + ", " : "" %><%=talent_formation[:title] %> - <%= talent_formation[:year] %></p>
-
-
-
+              <p class="blue-background talent-school-item"><i class="fas fa-graduation-cap"></i>
+                <%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] + " - " : "" %>
+                <%= talent_formation[:ranking].present? ? talent_formation[:ranking] + ", " : "" %>
+                <br>
+                <%=talent_formation[:title] %> - <%= talent_formation[:year] %>
+              </p>
             <% end %>
           </div>
         </div>

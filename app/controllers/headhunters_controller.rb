@@ -26,11 +26,15 @@ class HeadhuntersController < ApplicationController
 
       talent_formations = []
       talent.talent_formations.each do |talent_formation|
-        formation_injected = {
-          title: talent_formation.present? ? talent_formation.title : nil ,
-          type_of_formation: talent_formation.present? ? talent_formation.type_of_formation : nil,
-          year: talent_formation.present? ? talent_formation.year : nil
-        }
+        if talent_formation.present?
+          formation_injected = {
+            title: talent_formation.title,
+            # TODO change later when all talent will have type of formation from formation
+            type_of_formation: talent_formation.formation.type_of_formation.present? ? talent_formation.formation.type_of_formation : talent_formation.type_of_formation,
+            ranking: talent_formation.formation.ranking.present? ? talent_formation.formation.ranking : nil,
+            year: talent_formation.year
+          }
+        end
         talent_formations << formation_injected
       end
 
@@ -179,8 +183,11 @@ class HeadhuntersController < ApplicationController
       @startup.pictures.build
     end
     # raise
-
-    @other_headhunters = @startup.headhunters - [@headhunter]
+    if current_user.is_a? Headhunter
+      @other_headhunters = @startup.headhunters - [@headhunter]
+    else
+      @other_headhunters = @startup.headhunters
+    end
     @startup.startup_words.build
   end
 
