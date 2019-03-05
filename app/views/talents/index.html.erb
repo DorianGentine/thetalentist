@@ -56,7 +56,17 @@
 
   <!-- Division pour résultats de recherche -->
   <div class="search-results">
-    <p><strong><%= @talents.count %> Profils</strong> correspondent à votre recherche '<em><%= @titre %></em>'</p>
+    <p><strong><%= pluralize(@talents.count, 'Profil')%></strong> correspondent à votre recherche '<em><%= @titre %></em>'</p>
+  </div>
+
+  <div>
+    <p id="update_formation_title"><strong><%= pluralize( @formations.count, 'Formation') %> </strong> doivent être complété</p>
+
+    <div style="">
+      <%= @formations.each do |formation| %>
+        <%= render 'talentists/formation', formation: formation %>
+      <% end %>
+    </div>
   </div>
 
   <!-- Répertoire des talents -->

@@ -50,4 +50,13 @@ class TalentMailer < ApplicationMailer
       )
   end
 
+  def reminder_completed(user_id)
+    @user = Talent.find(user_id)
+    mail(
+      to: @user.email,
+      cc: "bienvenue@thetalentist.com",
+      subject: "Vous nous manquez déjà")
+  end
+
+
 end

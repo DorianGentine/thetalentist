@@ -22,18 +22,23 @@
         <%= f.input :title, placeholder: "Formation", label: false, input_html: { style: "width: 100%" } %>
       </div>
     </div>
-    <% if @talent.validated %>
+
+    <!-- plus besoin car c'est talentist qui va s'en occuper -->
+    <!-- Si supprimer définitivement Attention à supprimier le render question-mark -->
+      <!-- Fait le 4 mars 2019 -->
+
+  <!--   <#% if @talent.validated %>
       <div class="col-xs-12 col-lg-3 no-padding margin-top-15-xs relative">
         <div class="margin-right-15 no-margin-xs">
-          <%= f.input :type_of_formation, label: false, placeholder:"Classement de l'école ou Type d'école", input_html: { style: "width: 100%" } %>
+          <#%= f.input :type_of_formation, label: false, placeholder:"Classement de l'école ou Type d'école", input_html: { style: "width: 100%" } %>
         </div>
-        <% text_formation = "Classement de l'école ou Type d'école : Dans un premier temps, le recruteur n'aura pas accès au nom de votre formation. Une fois que vous avez accèpté de rentrer en contact avec lui, le recruteur pourra avoir accès à votre profil. Renseignez donc votre formation selon le classement, le domaine, ou autre." %>
+        <#% text_formation = "Classement de l'école ou Type d'école : Dans un premier temps, le recruteur n'aura pas accès au nom de votre formation. Une fois que vous avez accèpté de rentrer en contact avec lui, le recruteur pourra avoir accès à votre profil. Renseignez donc votre formation selon le classement, le domaine, ou autre." %>
         <div class="absolute" style="top: -11px; right: 11px; color: black;">
-        <%= render 'shared/question-mark', text: text_formation %>
+        <#%= render 'shared/question-mark', text: text_formation %>
         </div>
       </div>
 
-    <% end %>
+    <#% end %> -->
 
     <div class="col-xs-12 <%= @talent.validated? ? "col-lg-2" : "col-lg-3" %> no-padding margin-top-15-xs">
       <div class="margin-right-15 no-margin-xs">

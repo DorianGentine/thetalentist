@@ -16,7 +16,7 @@ class Talent < ApplicationRecord
   geocoded_by :city
   after_validation :geocode
 
-  after_create :send_welcome_email, :send_new_user_to_talentist
+  after_create :send_welcome_and_reminder_email, :send_new_user_to_talentist
   before_save :capitalize_name_firstname, :save_completed_profil
 
 
@@ -89,6 +89,7 @@ class Talent < ApplicationRecord
   scope :his_job_is, -> (job) { joins(:jobs).merge(Job.where(title: job)) }
   # scope :is_comming_to, -> (point) { where( point: point, invited: true, status: "I'm in") }
   # scope :activity_title, -> (current_title) { joins(:user_activity).merge(UserActivity.by_activity_title(current_title)) }
+  # scope :formation_missing_informations, -> { joins(:formations).merge(Formation.with_no_type_of_formation)}
 
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
@@ -171,20 +172,20 @@ class Talent < ApplicationRecord
     return talent
   end
 
-  def update_password_with_password(params, *options)
-    current_password = params.delete(:current_password)
-    result = if valid_password?(current_password)
-               update_attributes(params, *options)
-             else
-               self.assign_attributes(params, *options)
-               self.valid?
-               self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
-               false
-             end
+  # def update_password_with_password(params, *options)
+  #   current_password = params.delete(:current_password)
+  #   result = if valid_password?(current_password)
+  #              update_attributes(params, *options)
+  #            else
+  #              self.assign_attributes(params, *options)
+  #              self.valid?
+  #              self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+  #              false
+  #            end
 
-    clean_up_passwords
-    result
-  end
+  #   clean_up_passwords
+  #   result
+  # end
 
 
 
@@ -205,8 +206,9 @@ class Talent < ApplicationRecord
     TalentMailer.pdf_of_user_information(self.id).deliver_later(wait_until: Date.tomorrow.noon + 1.hour)
   end
 
-  def send_welcome_email
+  def send_welcome_and_reminder_email
     ApplicationMailer.welcome("talent", self.id).deliver_later
+    ApplicationMailer.reminder("talent", self.id).deliver_later(wait_until: self.created_at.next_week.tomorrow + 9.hours )
   end
 
   def send_refused
@@ -245,7 +247,7 @@ class Talent < ApplicationRecord
 
   def completed_formation_skill_language
     count = 0
-    formation_count = self.talent_formations.size * 4
+    formation_count = self.talent_formations.size * 3
     language_count = self.talent_languages.size * 2
     skills_count = self.talent_skills.size * 1
     value_input = stat(formation_count + language_count + skills_count)
@@ -255,7 +257,7 @@ class Talent < ApplicationRecord
         talent_formation.year.present? ? count += value_input : count
         talent_formation.title.present? ? count += value_input : count
         # talent_formation.level.present? ? count += value_input : count
-        talent_formation.type_of_formation.present? ? count += value_input : count
+        # talent_formation.type_of_formation.present? ? count += value_input : count
       end
     end
     if self.talent_languages.count > 0
