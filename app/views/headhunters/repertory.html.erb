@@ -3,33 +3,8 @@
 <% if params[:query] == "new_member" %>
   <%= render 'modal_welcome' %>
 <% end %>
-<div class="filter">
 
-    <div class="filter-category">
-      <p><i class="fas fa-filter"></i> Filtrer par MÉTIER</p>
-    </div>
-    <div class="filter-item">
-      <%= form_tag repertoire_path, :method => 'get', id:"search-lg", remote: true do %>
-          <% @jobs.each do |job| %>
-            <input type="checkbox" name="jobs[]" id="<%= job.title.downcase %>" value="<%= job.title.capitalize %>" class="hidden">
-            <label class= "category-choice" for="<%= job.title.downcase %>"><i class="<%= job.icon %>"></i> <%= job.title.upcase %></label>
-          <% end %>
-        <input type="submit" class="submit-filtre hidden" name="commit" value="Search" data-disable-with="Search">
-      <% end %>
-    </div>
-
-    <div class="alert-creation hidden-xs hidden-sm modal-button" data-target= "create_alert">
-      <% if @headhunter.job_alertes.first.present? %>
-        <p>mes alertes <i class="fas fa-bell"></i></p>
-      <% else %>
-        <p>Créer une alerte <i class="far fa-bell"></i></p>
-      <% end %>
-    </div>
-
-</div>
-
-
-
+<%= render 'filter', conditioning: 'repertoire' %>
 
 <div id="all-talents">
 

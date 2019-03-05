@@ -1,0 +1,97 @@
+<div class="filter row flex">
+
+    <div id="filter-category" class="col-lg-2">
+      <p><i class="fas fa-filter"></i> Filtrer par MÉTIER</p>
+    </div>
+
+    <div class="col-lg-8 filter-item">
+
+      <% if conditioning == 'repertoire' %>
+        <%= form_tag repertoire_path, :method => 'get', id:"search-lg", remote: true do %>
+            <% @jobs.each do |job| %>
+              <input type="checkbox" name="jobs[]" id="<%= job.title.downcase %>" value="<%= job.title.capitalize %>" class="hidden">
+              <label class= "category-choice" for="<%= job.title.downcase %>"><i class="<%= job.icon %>"></i> <%= job.title.upcase %></label>
+            <% end %>
+          <input type="submit" class="submit-filtre hidden" name="commit" value="Search" data-disable-with="Search">
+        <% end %>
+      <% elsif conditioning == 'talents' %>
+        <%= link_to talents_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
+          <i class="fas fa-infinity"></i> Tous
+        <% end %>
+        <%= link_to talents_path(tag: "Valider") do %>
+          <i class="fas fa-check"></i> Validés
+        <% end %>
+        <%= link_to talents_path(tag: "Refuser") do %>
+          <i class="fas fa-times"></i> Refusés
+        <% end %>
+        <%= link_to talents_path(tag: "En attende"), { :class=> "bordure-droite"} do %>
+          <i class="far fa-clock"></i> En attente
+        <% end %>
+        <%= link_to talents_path(tag: "Visible") do %>
+          <i class="far fa-eye"></i> Visible
+        <% end %>
+        <%= link_to talents_path(tag: "Invisible") do %>
+          <i class="far fa-eye-slash"></i> Invisible
+        <% end %>
+      <% elsif conditioning == 'headhunters' %>
+        <%= link_to headhunters_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
+          <i class="fas fa-infinity"></i> Tous
+        <% end %>
+        <%= link_to headhunters_path(tag: "Valider") do %>
+          <i class="fas fa-check"></i> Validés
+        <% end %>
+        <%= link_to headhunters_path(tag: "Refuser") do %>
+          <i class="fas fa-times"></i> Refusés
+        <% end %>
+        <%= link_to headhunters_path(tag: "En attende") do %>
+          <i class="far fa-clock"></i> En attente
+        <% end %>
+      <% end %>
+
+    </div>
+
+    <% if headhunter_signed_in? && current_headhunter %>
+      <div class="col-lg-2 alert-creation hidden-xs hidden-sm modal-button" data-target= "create_alert">
+        <% if @headhunter.job_alertes.first.present? %>
+          <p>mes alertes <i class="fas fa-bell"></i></p>
+        <% else %>
+          <p>Créer une alerte <i class="far fa-bell"></i></p>
+        <% end %>
+      </div>
+    <% end %>
+
+</div>
+
+<!-- <%# if conditioning == 'repertoire' %>
+  <div id="filter-menu" class="row">
+    <%#= form_tag repertoire_path, :method => 'get', id:"search-lg", remote: true do %>
+        <%# @jobs.each do |job| %>
+          <input type="checkbox" name="jobs[]" id="<%#= job.title.downcase %>" value="<%#= job.title.capitalize %>" class="hidden">
+          <label class= "category-choice col-sm-12" for="<%#= job.title.downcase %>"><i class="<%#= job.icon %>"></i> <%#= job.title.upcase %></label>
+        <%# end %>
+      <input type="submit" class="submit-filtre hidden" name="commit" value="Search" data-disable-with="Search">
+    <%# end %>
+
+  </div>
+<%# end %>
+
+<script>
+  const openFilter = document.getElementById("filter-category");
+  const filterMenu = document.getElementById("filter-menu");
+  if (filterMenu) {
+    openFilter.addEventListener("click", () => {
+      filterMenu.classList.toggle("open")
+    })
+  }
+</script> -->
+
+
+
+
+
+
+
+
+
+
+
