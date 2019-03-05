@@ -10,33 +10,21 @@
  }
 
 .filter{
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  padding: 0 33px;
+  min-height: 50px;
   border-bottom: 1px solid $gray;
-  position: relative;
-  .filter-category{
-    border-right: 1px solid $gray;
-    height: 100%;
-    width: 230px;
-    display: flex;
-    align-items: center;
+  #filter-category{
+    align-self: center;
+    text-align: center;
     p{
       color: $green;
       margin: 0;
     }
   }
-  .filter-item{
-    display: flex;
-    justify-content: space-around;
-    label{
-      color: $black;
+  .filter-item {
+    border-left: 1px solid $gray;
+    label, a{
       padding: 0 20px;
-      p{
-        margin: 0;
-      }
+      line-height: 50px;
     }
     .category-choice:hover{
       color: $green;
@@ -48,18 +36,31 @@
   }
 
 
-  .alert-creation{
-    position: absolute;
-    right: 33px;
-    text-align: right;
-    margin-top: 5px;
+  .alert-creation {
+    align-self: center;
+    text-align: center;
     p{
       color: $red;
-    }
-    p:hover{
-      cursor: pointer;
+      margin: 0;
     }
   }
+}
+
+#filter-menu {
+  width: 0px !important;
+  overflow-x: hidden;
+  position: absolute;
+  border-right: 1px solid $gray;
+  height: 100vh;
+  background: white;
+  z-index: 3;
+  transition: 0.5s;
+  label.category-choice {
+    padding: 10px 20px;
+  }
+}
+#filter-menu.open {
+  width: calc(16.6666666667% + 1px) !important;
 }
 
 .search-results{
