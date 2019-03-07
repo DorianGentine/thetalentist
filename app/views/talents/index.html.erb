@@ -1,21 +1,23 @@
 <%= render './headhunters/filter', conditioning: 'talents' %>
 
-<section class="container">
+<section class="container" style="min-height: calc( 100vh - 241px);">
 
   <!-- Division pour résultats de recherche -->
   <div class="search-results">
     <p><strong><%= pluralize(@talents.count, 'Profil')%></strong> correspondent à votre recherche '<em><%= @titre %></em>'</p>
   </div>
 
-  <div>
-    <p id="update_formation_title"><strong><%= pluralize( @formations.count, 'Formation') %> </strong> doivent être complété</p>
+  <% if @formations.count > 0 %>
+    <div class="row blue-background margin-bottom-30">
+      <p id="update_formation_title" class="col-xs-6 col-xs-offset-3 text-align-center"><strong><%= pluralize( @formations.count, 'Formation') %> </strong> doivent être complété</p>
 
-    <div style="">
-      <%= @formations.each do |formation| %>
-        <%= render 'talentists/formation', formation: formation %>
-      <% end %>
+      <div style="" class="col-xs-12">
+        <% @formations.each do |formation| %>
+          <%= render 'talentists/formation', formation: formation %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <!-- Répertoire des talents -->
   <div class="cards-repertory">
@@ -33,3 +35,47 @@
     <p>Préc. <strong>1</strong> 2 3 Suiv.</p>
   </div> -->
 </section>
+
+<% if @formations.count > 0 %>
+  <script>
+    const formations = document.getElementsByClassName('formation-form');
+    const nextButtons = document.getElementsByClassName('formation-form-btn');
+    let formationActive = 0
+
+    formations[formationActive].style.display = "block";
+
+    for (let i = 0; i < nextButtons.length; i++) {
+      nextButtons[i].addEventListener("click", () => {
+        if (formationActive < formations.length - 1){;
+          formations[formationActive].style.display = "none";
+          formationActive++;
+          formations[formationActive].style.display = "block";
+        } else {
+          formations[formationActive].style.display = "none";
+          formationActive = 0;
+          formations[formationActive].style.display = "block";
+        }
+      })
+    };
+  </script>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
