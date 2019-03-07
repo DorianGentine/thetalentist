@@ -1,14 +1,3 @@
-.container{
-  width: 100%;
-  padding: 0 100px;
-  min-height: calc(100vh - 190px);
-}
- @media screen and (max-width: 596px) {
-   .container{
-    padding: 0 15px;
-   }
- }
-
 .filter{
   min-height: 50px;
   border-bottom: 1px solid $gray;

@@ -1,0 +1,16 @@
+.formation-form{
+  display: none;
+  transition: 0.5s;
+  animation: form-apparition 0.5s;
+}
+
+@keyframes form-apparition {
+  0% {
+    margin-left: 16.6666666667%;
+    opacity: 0;
+  }
+  100% {
+    margin-left: 8.3333333333%;
+    opacity: 100%;
+  }
+}

@@ -5,8 +5,10 @@
   <div class="search-results">
     <% if @talents.count > 1 %>
       <p><strong><%= @talents.count %> Profils</strong> correspondent à votre recherche</p>
+    <% elsif @talents.count = 1 %>
+      <p><strong><%= @talents.count %> Profil</strong> correspond à votre recherche</p>
     <% else %>
-      <p><strong><%= @talents.count %> Profil</strong> correspondent à votre recherche</p>
+      <p><strong>Aucun profil</strong> ne correspond à votre recherche</p>
     <% end %>
   </div>
 
