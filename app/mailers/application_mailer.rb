@@ -3,17 +3,6 @@ class ApplicationMailer < ActionMailer::Base
   default from: 'bienvenue@thetalentist.com'
   layout 'mailer'
 
-  def welcome(user_class, user_id)
-    class_name = user_class.classify.constantize
-    @user = class_name.find(user_id)
-
-    mail(
-      to: @user.email,
-      cc: "bienvenue@thetalentist.com",
-      subject: "Bienvenue sur The Talentist!")
-  end
-
-
   def new_user(user_class, user_id)
     class_name = user_class.classify.constantize
     @user = class_name.find(user_id)
@@ -23,16 +12,6 @@ class ApplicationMailer < ActionMailer::Base
     mail(
       to: Talentist.all.collect(&:email).join(", "),
       subject: "Un nouveau membre sur la plateforme")
-  end
-
-  def reminder(user_class, user_id)
-    class_name = user_class.classify.constantize
-    @user = class_name.find(user_id)
-
-    mail(
-      to: @user.email,
-      cc: "bienvenue@thetalentist.com",
-      subject: "Vous nous manquez déjà")
   end
 
   def erreur_message( current_page, type_erreur)

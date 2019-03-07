@@ -4,13 +4,21 @@ class HeadhunterMailer < ApplicationMailer
   # with the following lookup:
   #
   #   en.headhunter_mailer.alerte.subject
-  #
-  def accepted(user_id)
+  def welcome(user_id)
     @user = Headhunter.find(user_id)
 
     mail(
       to: @user.email,
       cc: "bienvenue@thetalentist.com",
+      subject: "Bienvenue #{@user.firstname} sur The Talentist!")
+  end
+
+  def accepted(user_id)
+    @user = Headhunter.find(user_id)
+
+    mail(
+      to: @user.email,
+      cc: Talentist.all.collect(&:email).join(", "),
       subject: "Profil accepté :)"
       )
   end
@@ -19,8 +27,8 @@ class HeadhunterMailer < ApplicationMailer
     @user = Headhunter.find(user_id)
     mail(
       to: @user.email,
-      cc: "bienvenue@thetalentist.com",
-      subject: "Vous nous manquez déjà")
+      cc: Talentist.all.collect(&:email).join(", "),
+      subject: "Déjà une semaine!")
   end
 
 
@@ -40,7 +48,7 @@ class HeadhunterMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      cc: "bienvenue@thetalentist.com",
+      cc: Talentist.all.collect(&:email).join(", "),
       subject: "#{@firstname} a #{@status} ton inviation"
       )
   end

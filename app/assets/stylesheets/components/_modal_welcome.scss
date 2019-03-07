@@ -1,4 +1,12 @@
-#modal-welcome{
-  display: block;
-  padding: 20vh 10vw;
+@media screen and (max-width: 770px) {
+  #modal-welcome{
+    display: block;
+    padding: 3vh 2vw;
+  }
+}
+@media screen and (min-width: 771px) {
+  #modal-welcome{
+    display: block;
+    padding: 15vh 30vw;
+  }
 }

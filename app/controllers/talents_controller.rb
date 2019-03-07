@@ -5,7 +5,9 @@ class TalentsController < ApplicationController
 
   def index
     @talentist = current_talentist
-    # @talents = Talent.all.order('created_at DESC')
+
+    reminde_new_talents_less_than(2.weeks.ago, 70)
+
     if !@talents = policy_scope(Talent)
       if current_user.is_a?(Talent)
         redirect_to talent_path(current_user)
@@ -215,6 +217,14 @@ private
     end
   end
 
+  def reminde_new_talents_less_than(created, number)
+    talents = Talent.where('created_at <= ?', created).completed_less_than(number).have_been_never_reminded
+    talents.each do |talent|
+      TalentMailer.reminder_completed(talent.id).deliver_later
+      talent.reminder = DateTime.now
+      talent.save
+    end
+  end
 
   def set_talent
     @talent = Talent.find(params[:id])
