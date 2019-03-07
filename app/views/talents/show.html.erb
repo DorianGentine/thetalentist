@@ -57,32 +57,36 @@
         <!-- Secteur d'activité -->
           <div class="info-grid-1">
             <p class="titre-rubrique-1 grid-col-span-2">Domaine d'activité</p>
-            <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="far fa-compass"></i></p>
-            <% if @talent.jobs.last.present? && @talent.jobs.last.title.present? %>
-              <p class="titre-rubrique-3 no-margin"><%= @talent.jobs.last.title %> depuis <%= @talent.talent_jobs.last.year %> ans </p>
-            <% else %>
-              <p class="titre-rubrique-3 no-margin"> Ajoute ton domaine activité</p>
-            <% end %>
+            <p class="titre-rubrique-3 no-margin"><i class="far fa-compass margin-right-5 green"></i>
+              <% if @talent.jobs.last.present? && @talent.jobs.last.title.present? %>
+                <%= @talent.jobs.last.title %> depuis <%= pluralize(@talent.talent_jobs.last.year, 'an') %>
+              <% else %>
+                Ajoute ton domaine activité
+              <% end %>
+            </p>
           </div>
 
         <!-- Téléphone -->
           <% if !current_user.is_a?(Headhunter) %>
             <div class="info-grid-1">
               <p class="titre-rubrique-1 grid-col-span-2">Téléphone</p>
-              <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-code-branch"></i></p>
-              <% if @talent.phone.present? %>
-                <p class="titre-rubrique-3 no-margin"> <%= @talent.phone %> </p>
-              <% else%>
-                <p class="titre-rubrique-3 no-margin">Ajoute ton numéro de téléphone</p>
-              <% end %>
+              <p class="titre-rubrique-3 no-margin"><i class="fas fa-code-branch margin-right-5 green"></i>
+                <% if @talent.phone.present? %>
+                  <%= @talent.phone %>
+                <% else%>
+                  Ajoute ton numéro de téléphone
+                <% end %>
+              </p>
             </div>
           <% end %>
 
         <!-- Ville -->
           <div class="info-grid-1">
             <p class="titre-rubrique-1 grid-col-span-2">Ville</p>
-            <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
-            <p class="titre-rubrique-3 no-margin"><%= @talent.city.present? ? @talent.city : "Dis-nous où tu habites" %></p>
+            <p class="titre-rubrique-3 no-margin">
+              <i class="fas fa-map-marker-alt margin-right-5 green"></i>
+              <%= @talent.city.present? ? @talent.city : "Dis-nous où tu habites" %>
+            </p>
           </div>
           <% if @talent.city.present? %>
             <div id="map" data-markers="<%= @markers.to_json %>"></div>

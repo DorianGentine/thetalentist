@@ -52,11 +52,8 @@
   width: calc(16.6666666667% + 1px) !important;
 }
 
-.search-results{
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.search-results p{
+  line-height: 150px;
   text-align: center;
   strong{
     color: $green;
