@@ -1,27 +1,7 @@
-.talent-card-placement{
-  width: 33%;
-  min-width: 340px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@media screen and (max-width: 1220px){
-  .talent-card-placement{
-    width: 50%;
-  }
-}
-
-@media screen and (max-width: 400px){
-  .talent-card-placement{
-    min-width: 300px;
-  }
-}
+.talent-card-placement{}
 
 .talent-card{
-  width: 330px;
   height: 388px;
-  margin: 20px 0;
   position: relative
 }
 .talent-card:hover{
@@ -76,27 +56,16 @@
 }
 
 .border{
-  i{
-    width: 18px;
-  }
-  width: 100%;
   border: 2px solid $violet;
   border-radius: 4px;
   padding: 0 34px 34px;
   box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.21);
   height: 100%;
-  position: absolute;
-  top: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   transition: 0.15s;
   .talent-job{
     height: 138px;
     display: flex;
     align-items: center;
-    z-index: 1;
     h2{
       font-size: 26px;
       font-weight: 900;
@@ -107,9 +76,6 @@
   }
   p{
     font-size: 12px;
-  }
-  .talent-description{
-    text-align: justify;
   }
   .talent-more {
     position: absolute;
@@ -130,15 +96,6 @@
   }
 }
 
-.card-dispsition{
-  display: flex;
-}
-.icon-margin-right{
-  margin-right: 6px;
-}
-.icon-green-color{
-  color: $green;
-}
 .talent-info{
   display: flex;
   justify-content: space-between;
@@ -164,9 +121,6 @@
           font-size: 16px;
           text-transform: capitalize;
         }
-      }
-      .talent-update p{
-        font-size: 10px
       }
     }
     .illu-card{

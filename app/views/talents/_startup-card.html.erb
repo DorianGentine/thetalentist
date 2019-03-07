@@ -74,17 +74,18 @@
         </div>
 
         <div class="talent-info">
-          <div class="talent-info-item card-dispsition">
-            <p class="icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
-            <p><%= headhunter.startup.address.present? ? headhunter.startup.address : "Pas info" %></p>
+          <div class="talent-info-item">
+            <p><i class="fas fa-map-marker-alt margin-right-5 green"></i><%= headhunter.startup.address.present? ? headhunter.startup.address : "Pas info" %></p>
           </div>
-          <div class="talent-info-item card-dispsition">
-            <p class="icon-margin-right icon-green-color"><i class="fas fa-link"></i></p>
-            <p><a href="<%= headhunter.startup.link %>" target="_blank" >Voir le site</a></p>
+          <div class="talent-info-item">
+            <p>
+              <i class="fas fa-link margin-right-5 green"></i>
+              <a href="<%= headhunter.startup.link %>" target="_blank" >Voir le site</a>
+            </p>
           </div>
         </div>
 
-        <div class="talent-description hidden-xs">
+        <div class="hidden-xs">
           <p><%= headhunter.startup.short_resume.present? ? headhunter.startup.short_resume : "pas d'info" %></p>
         </div>
 
