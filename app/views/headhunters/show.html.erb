@@ -50,14 +50,14 @@
         <!-- Site internet -->
           <div class="info-grid-1">
             <p class="titre-rubrique-1 grid-col-span-2">Site internet</p>
-            <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="far fa-compass"></i></p>
+            <p class="titre-rubrique-3 no-margin"><i class="far fa-compass margin-right-5 green"></i></p>
             <p class="titre-rubrique-3 no-margin"><%= @startup.link.present? ? @startup.link : "Ajoutez votre site internet" %></p>
           </div>
 
         <!-- Adresse -->
           <div class="info-grid-1">
             <p class="titre-rubrique-1 grid-col-span-2">Adresse</p>
-            <p class="titre-rubrique-3 no-margin icon-margin-right icon-green-color"><i class="fas fa-map-marker-alt"></i></p>
+            <p class="titre-rubrique-3 no-margin"><i class="fas fa-map-marker-alt margin-right-5 green"></i></p>
             <p class="titre-rubrique-3 no-margin"><%= @startup.address.present? ? @startup.address : "Ajoutez votre adresse" %></p>
           </div>
           <% if @startup.address.present? %>
