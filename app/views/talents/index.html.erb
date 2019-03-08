@@ -8,7 +8,7 @@
   </p>
 
   <% if @formations.count > 0 %>
-    <div class="row blue-background margin-bottom-30">
+    <div class="row blue-background" style="margin-bottom: 100px;">
       <p id="update_formation_title" class="col-xs-6 col-xs-offset-3 text-align-center"><strong><%= pluralize( @formations.count, 'Formation') %> </strong> doivent être complété</p>
 
       <div style="" class="col-xs-12">
@@ -20,7 +20,7 @@
   <% end %>
 
   <!-- Répertoire des talents -->
-  <div class="row">
+  <div class="row margin-top-60">
 
     <% @talents.each do |talent| %>
       <%= cache talent do %>

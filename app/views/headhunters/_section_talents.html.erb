@@ -5,7 +5,7 @@
   <p class="search-results">
     <% if @talents.count > 1 %>
       <strong><%= @talents.count %> Profils</strong> correspondent à votre recherche
-    <% elsif @talents.count = 1 %>
+    <% elsif @talents.count == 1 %>
       <strong><%= @talents.count %> Profil</strong> correspond à votre recherche
     <% else %>
       <strong>Aucun profil</strong> ne correspond à votre recherche

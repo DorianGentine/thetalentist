@@ -9,7 +9,6 @@ class RelationshipsController < ApplicationController
     if @relationship.save
       @headhunter = @relationship.headhunter
       @headhunter.send_message(@talent, "#{@headhunter.firstname} souhaite rentrer en contact avec vous", "#{@headhunter.firstname}")
-      raise
       flash[:success] = "Relationship was created!"
       # redirect_to repertoire_path, flash: {notice: "Vous êtes maintenant en relation avec ce Talent."}
       @talent.send_invitation(@headhunter)
