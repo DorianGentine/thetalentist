@@ -11,10 +11,11 @@ class HeadhuntersController < ApplicationController
     @job_alert = JobAlerte.new
 
     @jobs = Job.all
+    talents_visible = Talent.where(:visible => true).order(updated_at: :desc)
     if params[:jobs].blank? || params[:jobs] == "Tous"
-      talents = Talent.where(:visible => true).order(updated_at: :desc)
+      talents = talents_visible
     else
-      talents = Talent.his_job_is(params[:jobs]).where(visible: true).order(updated_at: :desc).to_a
+      talents = talents_visible.his_job_is(params[:jobs]).to_a
       respond_to do |format|
         format.html
         format.js
