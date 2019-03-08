@@ -205,8 +205,8 @@ class Talent < ApplicationRecord
 
   def completed_totaly
     if self.completed_profil != nil &&  self.completed_formation_skill_language != nil &&  self.completed_experience != nil &&  self.completed_next_aventures != nil &&
-      all_parts = self.completed_profil + self.completed_formation_skill_language + self.completed_experience + self.completed_next_aventures
-      result = all_parts / 4.0
+      all_parts = self.completed_profil + self.completed_formation_skill_language + self.completed_next_aventures
+      result = all_parts / 3.0
       return result.round(1)
     else
       return 0
@@ -260,7 +260,7 @@ class Talent < ApplicationRecord
   end
   def completed_experience
     count = 0
-    experiences_count = self.experiences.size * 6
+    experiences_count = self.experiences.size * 5
     value_input = stat(experiences_count)
     self.experiences.each do |experience|
       experience.position.present? ? count += value_input : count
@@ -268,7 +268,7 @@ class Talent < ApplicationRecord
       experience.currently || experience.years.present? ? count += value_input : count
       experience.overview.present? ? count += value_input : count
       experience.company_name.present? ? count += value_input : count
-      experience.company_type_id.present? ? count += value_input : count
+      # experience.company_type_id.present? ? count += value_input : count
     end
     return count.round(0)
   end
@@ -305,7 +305,7 @@ class Talent < ApplicationRecord
   end
 
   def save_completed_profil
-    self.completing = self.completed_totaly
+    # self.completing = self.completed_totaly
   end
 
   def pass_from_cv_to_completing

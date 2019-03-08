@@ -1,24 +1,3 @@
-.fenetre-ecran{
-  display: flex;
-  height: calc(100vh - 70px);
-  width: 100vw;
-}
-
-.col-gauche{
-  width: 25%;
-}
-.col-centre{
-  width: 55%;
-}
-@media screen and (max-width: 991px) {
-  .col-centre{
-    width: 75%;
-  }
-}
-.col-droite{
-  width: 20%;
-}
-
 .premiere-ligne{
   height: 60px;
   border-bottom: 1px solid $gray;
@@ -37,7 +16,7 @@
 }
 .index-talents{
   padding: 20px;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 130px);
   overflow: auto;
   a{
     text-decoration: none;
@@ -90,9 +69,6 @@
 }
 
 .nom-discussion{
-  // flex-direction: column;
-  // align-items: flex-start;
-  // padding: 0 20px;
   h2{
     font-size: 20px;
   }
@@ -136,7 +112,7 @@
 }
 
 #conversation{
-  height: calc(100% - 280px);
+  height: calc(100vh - 280px);
   padding: 10px 50px 0;
   position: relative;
   overflow: auto;

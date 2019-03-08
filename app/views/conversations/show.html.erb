@@ -1,6 +1,6 @@
 
 
-<div class="fenetre-ecran relative">
+<div class="row">
   <div class="colonne bordure-droite modal" id="modal_conversations" style="padding: 0 22% 0 0;">
     <span class="close" id="close_modal_conversations">
         <p>&times;</p>
@@ -9,22 +9,19 @@
       <%= render 'conversations' %>
     </div>
   </div>
-  <!-- <div class="modal-button absolute visible-xs" style="top: 65%; background-color: white; border: 1px solid gray; padding: 7px; z-index: 2;" data-target="modal_conversations">
-     <i class="fa fa-bars" style="color: black;"></i>
-  </div> -->
 
-  <div class="colonne col-gauche bordure-droite hidden-xs">
+  <div class="bordure-droite col-xs-3 hidden-xs no-padding">
     <%= render 'conversations' %>
   </div>
 
-  <div class="colonne col-centre bordure-droite">
+  <div class="bordure-droite col-md-6 col-sm-9 col-xs-12 no-padding">
     <div class="premiere-ligne nom-discussion row">
       <!-- div Prénom Nom et poste  -->
       <div class="modal-button visible-xs col-xs-2" style="text-align: center" data-target="modal_conversations">
          <i class="fa fa-bars" style="color: black;"></i>
       </div>
 
-      <div class="col-lg-12 col-xs-11">
+      <div class="col-lg-12 col-xs-10">
         <% if @participant.is_a?(Talent) %>
           <% if @relationship && @relationship.status == "Accepter" %>
             <h2 class="no-margin"><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
@@ -78,7 +75,17 @@
       <% end %>
     </div>
 
-    <div id="conversation">
+    <% if current_user.is_a?(Talent) %>
+      <% if !@participant.is_a?(Headhunter) %>
+        <div id="conversation" style="height: calc(100vh - 230px);">
+      <% end %>
+    <% elsif current_user.is_a?(Headhunter) %>
+      <% if @relationship && !@relationship.status == "Accepter" %>
+        <div id="conversation" style="height: calc(100vh - 230px);">
+      <% end %>
+    <% else %>
+      <div id="conversation">
+    <% end %>
 
       <!-- div conversation -->
       <% @messages.each do |receipt| %>
@@ -87,6 +94,7 @@
         <% end %>
       <% end %>
     </div>
+
     <div class="boite-envoi">
 
       <%= form_for @message, url: conversation_messages_path(@conversation) do |f|  %>
@@ -150,7 +158,7 @@
     </div>
   </div>
 
-  <div class="colonne col-droite hidden-xs hidden-sm">
+  <div class="col-xs-3 colonne hidden-sm hidden-xs no-padding">
     <div class="premiere-ligne">
       <h4>Documents échangés</h4>
 

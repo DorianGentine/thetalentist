@@ -75,6 +75,7 @@
         <%= link_to repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" do %>
           <i class="fas fa-rocket"></i> MES START-UPS
         <% end %>
+
         <% if current_talent.mailbox.conversations.count > 0 %>
           <div class="lien-messagerie">
             <%= link_to conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
