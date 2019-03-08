@@ -1,16 +1,16 @@
-<section class="container">
+<section class="container margin-bottom-30" style="min-height: calc(100vh - 240px);">
 
   <!-- Division pour résultats de recherche -->
 
-  <div class="search-results">
+  <p class="search-results">
     <% if @talents.count > 1 %>
-      <p><strong><%= @talents.count %> Profils</strong> correspondent à votre recherche</p>
+      <strong><%= @talents.count %> Profils</strong> correspondent à votre recherche
     <% elsif @talents.count = 1 %>
-      <p><strong><%= @talents.count %> Profil</strong> correspond à votre recherche</p>
+      <strong><%= @talents.count %> Profil</strong> correspond à votre recherche
     <% else %>
-      <p><strong>Aucun profil</strong> ne correspond à votre recherche</p>
+      <strong>Aucun profil</strong> ne correspond à votre recherche
     <% end %>
-  </div>
+  </p>
 
   <!-- Répertoire des talents -->
   <div class="row">

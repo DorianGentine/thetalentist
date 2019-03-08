@@ -3,9 +3,9 @@
 <section class="container" style="min-height: calc( 100vh - 241px);">
 
   <!-- Division pour résultats de recherche -->
-  <div class="search-results">
-    <p><strong><%= pluralize(@talents.count, 'Profil')%></strong> correspondent à votre recherche '<em><%= @titre %></em>'</p>
-  </div>
+  <p class="search-results">
+    <strong><%= pluralize(@talents.count, 'Profil')%></strong> correspondent à votre recherche '<em><%= @titre %></em>'
+  </p>
 
   <% if @formations.count > 0 %>
     <div class="row blue-background margin-bottom-30">
@@ -20,7 +20,7 @@
   <% end %>
 
   <!-- Répertoire des talents -->
-  <div class="cards-repertory">
+  <div class="row">
 
     <% @talents.each do |talent| %>
       <%= cache talent do %>

@@ -1,12 +1,12 @@
 <% if talentist_signed_in? && current_talentist %>
   <% if talent.photo.present? %>
 
-    <div class="illu-card photo-profil" style="background-image: url('<%= cl_image_path talent.photo, :transformation=>[ :gravity=>"face"] %>');">
+    <div class="illu-card-talentist" style="background-image: url('<%= cl_image_path talent.photo, :transformation=>[ :gravity=>"face"] %>');">
     </div>
 
   <% else %>
 
-    <div class="illu-card photo-profil">
+    <div class="illu-card-talentist">
       <div class="initiale">
         <%= talent.firstname.split(//).first.upcase %><%= talent.name.split(//).first.upcase %>
       </div>

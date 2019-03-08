@@ -15,7 +15,7 @@
         <!-- Links when logged in -->
         <% if current_headhunter.validated %>
           <%= link_to repertoire_path, class: "navbar-wagon-item navbar-wagon-link" do %>
-            <i class="fas fa-user-friends"></i> TALENTS
+            <i class="fas fa-user-friends"></i> RÉPERTOIRE
           <% end %>
         <% end %>
         <% if current_headhunter.mailbox.conversations.count > 0 %>
@@ -23,7 +23,7 @@
             <%= link_to conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
               <i class="fas fa-envelope"></i> MESSAGERIE
               <% if current_user.count_unread_message > 0 %>
-                <%= render "shared/notif_point" %>
+                <%= render "shared/notif_message" %>
               <% end %>
             <% end %>
           </div>
@@ -79,7 +79,7 @@
           <div class="lien-messagerie">
             <%= link_to conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
               <i class="fas fa-envelope"></i> MESSAGERIE
-              <%= render "shared/notif_point" %>
+              <%= render "shared/notif_message" %>
             <% end %>
           </div>
         <% end %>
@@ -132,7 +132,7 @@
           <% if current_talentist.messages.count > 0  %>
             <%= link_to "MESSAGERIE", conversation_path(current_talentist.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
           <% end %>
-          <%= render "shared/notif_point" %>
+          <%= render "shared/notif_message" %>
         </div>
 
         <!-- Avatar with dropdown menu -->
@@ -177,11 +177,11 @@
                   <li><%= link_to headhunter_path(current_headhunter) do %>
                     <i class="fa fa-user"></i> <%= t(".profil", default: "Profil") %>
                   <% end %></li>
-                  <li><%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %></li>
+                  <li><%= link_to "RÉPERTOIRE", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %></li>
                   <li>
                     <% if current_headhunter.mailbox.conversations.count > 0 %>
                       <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-                      <%= render "shared/notif_point" %>
+                      <%= render "shared/notif_message" %>
                     <% else %>
                       <p>Aucun message</p>
                     <% end %>
@@ -200,11 +200,11 @@
                   <li><%= link_to talent_path(current_talent) do %>
                     <i class="fa fa-user"></i> <%= t(".profil", default: "Profil") %>
                   <% end %></li>
-                  <li><%= link_to "START-UP", repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" %></li>
+                  <li><%= link_to "RÉPERTOIRE", repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" %></li>
                   <li>
                     <% if current_talent.mailbox.conversations.count > 0 %>
                       <%= link_to "MESSAGERIE", conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-                      <%= render "shared/notif_point" %>
+                      <%= render "shared/notif_message" %>
                     <% else %>
                       <p>Aucun message</p>
                     <% end %>
@@ -240,13 +240,13 @@
 
             <!-- Links when logged in -->
             <div class="bottom-menu-item">
-              <%= link_to "TALENTS", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
+              <%= link_to "RÉPERTOIRE", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
             </div>
             <% if current_headhunter.mailbox.conversations.count > 0 %>
               <div class="bottom-menu-item lien-messagerie">
                 <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link lien-messagerie" %>
                 <% if current_user.count_unread_message > 0 %>
-                  <%= render "shared/notif_point" %>
+                  <%= render "shared/notif_message" %>
                 <% end %>
               </div>
             <% else %>
@@ -286,7 +286,7 @@
               <div class="bottom-menu-item lien-messagerie">
                 <%= link_to conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
                   MESSAGERIE
-                  <%= render "shared/notif_point" %>
+                  <%= render "shared/notif_message" %>
                 <% end %>
               </div>
             <% else %>

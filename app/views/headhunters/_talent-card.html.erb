@@ -1,28 +1,30 @@
 <% if talentist_signed_in? && current_talentist %>
 
-  <div class="talent-card-placement placement-talentist">
-    <div class="talent-card">
-      <div class="card-title">
-        <p>LE TALENT</p>
-      </div>
+  <div class="col-xs-12 col-md-3 margin-bottom-30 placement-talentist">
+    <div class="relative talent-card">
 
       <%= render 'headhunters/illu-card', talent: talent %>
       <%= render 'talents/declined-modal', talent: talent %>
 
-      <div class="border">
+      <div class="border relative">
 
-        <div class="talent-job">
-          <h2><%= talent.firstname.present? ? talent.firstname : "No-info" %> <%= talent.name.present? ? talent.name : "No-info" %></h2>
+        <div class="card-title">
+          <p>LE TALENT</p>
         </div>
 
-        <div class="accepter-talent">
+        <div class="talent-job" style="height: 80px">
+          <h2 style="font-size: 16px; text-transform: capitalize;">
+            <%= talent.firstname.present? ? talent.firstname : "No-info" %> <%= talent.name.present? ? talent.name : "No-info" %>
+          </h2>
+        </div>
+
+        <div class="margin-bottom-15 margin-top-15">
           <%= simple_form_for talent , url: to_validate_talent_path(talent) do |f| %>
             <div class="btn-validate margin-bottom-15">
               <div class="<%= "green_validation" if talent.validated === true %>">
                 <%= f.submit "Accepter" %>
               </div>
               <div class="<%= "red_validation" if talent.validated === false %>">
-                <!-- <#%= f.submit "Refuser" %> -->
                 <p class="modal-button no-margin"  data-target= "modal_declined_<%= talent.id %>" >Refuser</p>
               </div>
             </div>
@@ -66,12 +68,13 @@
 <% else %>
 
   <div class="col-xs-12 col-md-4" style="padding: 20px 25px;">
-    <div class="talent-card modal-button" data-target= "modal_<%= talent[:id] %>">
-      <div class="card-title">
-        <p>LE TALENT</p>
-      </div>
+    <div class="talent-card modal-button" data-target= "modal_<%= talent[:id] %>" style="height: 400px;">
 
-      <div class="border">
+      <div class="border relative">
+
+        <div class="card-title">
+          <p>LE TALENT</p>
+        </div>
 
         <div class="talent-job">
           <% if !talent[:position].nil? %>

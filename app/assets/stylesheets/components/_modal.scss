@@ -88,53 +88,23 @@
 }
 
 
-.upper-body{
-  width: 100%;
-  height: 192px;
-  display: flex;
-  .upper-left-body{
-    width: 70%;
-    height: 100%;
-    padding: 30px 30px 30px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .talent-school{
-      display: flex;
-      justify-content: space-between;
-      .talent-school-item{
-        padding: 10px;
-        margin: 0 10px 0 0;
-        border-radius: 5px;
-        font-size: 1.2vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-grow: 1;
-        background-color: rgba(1, 10, 80, 0.05);
-        box-shadow: 3px 6px 8px rgba(0,0,0,0.06)
-      }
-    }
-  }
-  .upper-right-body{
-    height: 100%;
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    .talent-metier{
-      font-size: 50px;
-      color: $green;
-      font-weight: bold;
-      margin: 0;
-      z-index: 1;
-    }
-    .illu-modal{
-      align-self: flex-start;
-      top: 0;
-      right: -30px;
-    }
-  }
+
+.talent-school-item{
+  padding: 10px 5px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(1, 10, 80, 0.05);
+  box-shadow: 3px 6px 8px rgba(0,0,0,0.06);
+  width: calc(50% - 10px);
+  margin: 5px;
+}
+
+.talent-metier{
+  font-size: 3vw;
+  color: $green;
+  font-weight: bold;
+  margin: 0;
+  text-align: right;
 }
 
 
@@ -146,69 +116,37 @@ h4{
 }
 
 
-.lower-left-body{
-  h5{
+.lower-left-body h5{
     color: $green;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     font-style: oblique;
     margin: 0;
-  }
+}
+
+.talent-experiences{
   p{
-    margin-bottom: 30px;
+    margin: 0;
+    font-weight: 600;
+  }
+  .experience-post{
+    text-transform: uppercase;
+  }
+  .experience-entreprise{
+    font-style: oblique;
+    color: $green;
+  }
+  .experience-duree{
+    font-weight: 300;
   }
 }
-.lower-body{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  .lower-body-item{
-    height: 100%;
-    width: 29%;
-    // padding: 30px 0;
-    p{
-      font-size: 16px;
-      text-align: justify;
-    }
-  }
-  .lower-body-item-content{
-    height: calc(100% - 69px);
-  }
-  .lower-middle-body{
-    .lower-body-item-content{
-      position: relative;
-      .talent-experiences{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        p{
-          margin: 0;
-          font-weight: 600;
-        }
-        .experience-post{
-          text-transform: uppercase;
-        }
-        .experience-entreprise{
-          font-style: oblique;
-          color: $green;
-        }
-        .experience-duree{
-          font-weight: 300;
-        }
-        .experience-desc{
-          font-size: 14px;
-          font-weight: 100;
-          text-align: justify;
-        }
-      }
-    }
-  }
-  .en-relation{
-    width: 240px;
-    background-color: rgba(0, 0, 0, 0);
-    border: 2px solid white;
-  }
+
+.en-relation{
+  width: 240px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid white;
 }
+
 .talent-competences{
   display: flex;
   flex-wrap: wrap;
@@ -227,56 +165,28 @@ h4{
     background-color: $green;
   }
 }
-.lower-right-body{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 10px;
-  .links-startup {
-    display: flex;
-    a{
-      margin: 0;
-      color: $green;
-      border: 1px solid $green;
-      border-radius: 50px;
-      padding: 7px 10px;
-      font-size: 14px;
-      transition: 0.15s;
-    }
-    a:hover{
-      background-color: $green;
-      color: white;
-    }
-  }
-}
 
-.talent-info-item p{
-  text-transform: capitalize;
-}
 
 /* CSS pour barre pointée */
-.barre-pointee{
-  position: absolute;
-  top: 6px;
-  left: 5px;
-  height: calc( 100% - 5px);
-  width: 2px;
-  background-color: $green;
-  margin: 0;
-  border-top: 0;
-}
-.point-barre-pointee{
-  height: 12px;
-  width: 12px;
-  background-color: $green;
-  border: 1px solid white;
-  border-radius: 20px;
-  z-index: 1;
-  margin: 5px 10px 0 0;
-}
-.placement-point-barre{
-  display: flex;
-}
+  .barre-pointee{
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    height: calc( 100% - 5px);
+    width: 2px;
+    background-color: $green;
+    margin: 0;
+    border-top: 0;
+  }
+  .point-barre-pointee{
+    height: 12px;
+    width: 12px;
+    background-color: $green;
+    border: 1px solid white;
+    border-radius: 20px;
+    z-index: 1;
+    margin: 5px 10px 0 0;
+  }
 
 
 /* Add Animation */
@@ -290,24 +200,24 @@ h4{
 }
 
 /* The Close Button */
-.close {
-  height: 42px;
-  width: 42px;
-  float: right;
-  margin-right: 25px;
-  font-weight: 100;
-  font-size: 42px;
-}
+  .close {
+    height: 42px;
+    width: 42px;
+    float: right;
+    margin-right: 25px;
+    font-weight: 100;
+    font-size: 42px;
+  }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
 // modal create_alert
-#create_alert .modal-content .modal-body{
+#create_alert .modal-body{
   margin-top: 30px;
   form input{
     color: $green;
@@ -319,72 +229,11 @@ h4{
 
 
 
-@media screen and (max-width: 1095px) {
-  .upper-body{
-    .upper-left-body{
-      width: 100%;
-      padding-right: 0;
-      .talent-school .talent-school-item{
-        font-size: 1.8vw;
-      }
-    }
-    .upper-right-body{
-      display: none;
-    }
-  }
-}
-
-@media screen and (max-width: 960px) {
-  .lower-body{
-    flex-wrap: wrap;
-    .lower-body-item{
-      width: 45%;
-      height: 430px;
-    }
-    .lower-right-body{
-      width: 100%;
-      height: 200px;
-      flex-direction: row;
-      .lower-right-body-item{
-        width: 45%;
-      }
-    }
-  }
-}
-
 @media screen and (max-width: 660px) {
-  .upper-body{
-    height: unset;
-    .upper-left-body{
-      .talent-info{
-        flex-wrap: wrap;
-        .talent-info-item{
-          margin: 0 10px;
-        }
-      }
-      .talent-school{
-        height: 100px;
-        flex-direction: column;
-        .talent-school-item{
-          font-size: calc(12px + 0.5vw);
-          padding: 0 10px;
-        }
-      }
-    }
-  }
-  .lower-body{
-    display: block;
-    .lower-body-item{
-      width: 100%;
-      height: unset;
-      padding: 30px 0 0 0;
-    }
-    .lower-right-body{
-      flex-direction: column;
-      .lower-right-body-item{
-        width: 100%;
-        padding: 30px 0 0 0;
-      }
+  .talent-info{
+    flex-wrap: wrap;
+    p{
+      margin: 0 10px;
     }
   }
 }

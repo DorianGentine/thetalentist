@@ -55,9 +55,10 @@
         <hr class="separateur-show ligne-horizontal">
 
         <!-- Secteur d'activité -->
-          <div class="info-grid-1">
-            <p class="titre-rubrique-1 grid-col-span-2">Domaine d'activité</p>
-            <p class="titre-rubrique-3 no-margin"><i class="far fa-compass margin-right-5 green"></i>
+          <div class="row margin-bottom-15">
+            <p class="titre-rubrique-1 col-xs-12 no-padding">Domaine d'activité</p>
+            <i class="far fa-compass green titre-rubrique-3 col-xs-1 no-padding"></i>
+            <p class="titre-rubrique-3 no-margin col-xs-11 no-padding">
               <% if @talent.jobs.last.present? && @talent.jobs.last.title.present? %>
                 <%= @talent.jobs.last.title %> depuis <%= pluralize(@talent.talent_jobs.last.year, 'an') %>
               <% else %>
@@ -68,9 +69,10 @@
 
         <!-- Téléphone -->
           <% if !current_user.is_a?(Headhunter) %>
-            <div class="info-grid-1">
-              <p class="titre-rubrique-1 grid-col-span-2">Téléphone</p>
-              <p class="titre-rubrique-3 no-margin"><i class="fas fa-code-branch margin-right-5 green"></i>
+            <div class="row margin-bottom-15">
+              <p class="titre-rubrique-1 col-xs-12 no-padding">Téléphone</p>
+              <i class="fas fa-code-branch green titre-rubrique-3 col-xs-1 no-padding" style="font-weight: 900"></i>
+              <p class="titre-rubrique-3 no-margin col-xs-11 no-padding">
                 <% if @talent.phone.present? %>
                   <%= @talent.phone %>
                 <% else%>
@@ -81,10 +83,10 @@
           <% end %>
 
         <!-- Ville -->
-          <div class="info-grid-1">
-            <p class="titre-rubrique-1 grid-col-span-2">Ville</p>
-            <p class="titre-rubrique-3 no-margin">
-              <i class="fas fa-map-marker-alt margin-right-5 green"></i>
+          <div class="row margin-bottom-15">
+            <p class="titre-rubrique-1 col-xs-12 no-padding">Ville</p>
+            <i class="fas fa-map-marker-alt green titre-rubrique-3 col-xs-1 no-padding" style="font-weight: 900"></i>
+            <p class="titre-rubrique-3 no-margin col-xs-11 no-padding">
               <%= @talent.city.present? ? @talent.city : "Dis-nous où tu habites" %>
             </p>
           </div>
