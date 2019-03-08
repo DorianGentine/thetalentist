@@ -776,9 +776,12 @@ to {top: 90vh;}
 
 
 
-
+a:hover{
+  color: $green;
+}
 
 *, a:hover{
+  // color: $green;
   text-decoration: none;
 }
 

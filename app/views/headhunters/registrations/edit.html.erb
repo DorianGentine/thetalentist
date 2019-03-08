@@ -20,7 +20,7 @@
           <div class="col-lg-6 col-xs-12">
             <p class="label-edit no-margin requis">Mot de passe actuel</p>
             <div class="margin-right-15 no-margin-xs">
-              <%= f.input :current_password, label: false, required: true, :input_html => { style: "width: 100%" }, hint: "Nous avons besoin de mot de passe actuel pour confirmer les changements" %>
+              <%= f.input :current_password, label: false, required: true, :input_html => { style: "width: 100%" }, hint: "Nous avons besoin du mot de passe actuel pour confirmer les changements" %>
             </div>
           </div>
         </div>
@@ -29,7 +29,7 @@
           <div class="col-lg-6 col-xs-12">
             <p class="label-edit no-margin">Nouveau mot de passe</p>
             <div class="margin-right-15 no-margin-xs">
-              <%= f.input :password, label: false, autocomplete: "off", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), hint:"Laisser le vide si vous ne voulez pas le changer", :input_html => { style: "width: 100%" } %>
+              <%= f.input :password, label: false, autocomplete: "off", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), hint:"Laisser vide si vous ne voulez pas changer", :input_html => { style: "width: 100%" } %>
             </div>
           </div>
           <div class="col-lg-6 col-xs-12 margin-top-15-xs">
