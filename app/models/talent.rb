@@ -16,9 +16,8 @@ class Talent < ApplicationRecord
   geocoded_by :city
   after_validation :geocode
 
-  after_create :send_welcome_and_reminder_email, :send_new_user_to_talentist
+  after_create :send_welcome_email, :send_new_user_to_talentist
   before_save :capitalize_name_firstname, :save_completed_profil
-
 
   # Tu devras ajouter les lignes has_many :xx through: :xx pour tous les champs que le talent devra remplir dans le questionnaire
   has_many :talent_sectors, dependent: :destroy
@@ -90,6 +89,9 @@ class Talent < ApplicationRecord
   # scope :is_comming_to, -> (point) { where( point: point, invited: true, status: "I'm in") }
   # scope :activity_title, -> (current_title) { joins(:user_activity).merge(UserActivity.by_activity_title(current_title)) }
   # scope :formation_missing_informations, -> { joins(:formations).merge(Formation.with_no_type_of_formation)}
+
+  scope :completed_less_than, -> (number) { where('completing <=  ?', number)}
+  scope :have_been_never_reminded, -> { where(reminder: nil)}
 
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
@@ -172,23 +174,6 @@ class Talent < ApplicationRecord
     return talent
   end
 
-  # def update_password_with_password(params, *options)
-  #   current_password = params.delete(:current_password)
-  #   result = if valid_password?(current_password)
-  #              update_attributes(params, *options)
-  #            else
-  #              self.assign_attributes(params, *options)
-  #              self.valid?
-  #              self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
-  #              false
-  #            end
-
-  #   clean_up_passwords
-  #   result
-  # end
-
-
-
   def send_new_user_to_talentist
     ApplicationMailer.new_user("talent", self.id).deliver_later
   end
@@ -202,13 +187,12 @@ class Talent < ApplicationRecord
   end
 
   def send_candidate_and_user_information
-    TalentMailer.candidate(self.id).deliver_later(wait_until: Date.tomorrow.noon)
-    TalentMailer.pdf_of_user_information(self.id).deliver_later(wait_until: Date.tomorrow.noon + 1.hour)
+    TalentMailer.candidate(self.id).deliver_later(wait_until: Date.tomorrow.noon + 9.hours)
+    TalentMailer.pdf_of_user_information(self.id).deliver_later(wait_until: Date.tomorrow.noon + 2.hours)
   end
 
-  def send_welcome_and_reminder_email
-    ApplicationMailer.welcome("talent", self.id).deliver_later
-    ApplicationMailer.reminder("talent", self.id).deliver_later(wait_until: self.created_at.next_week.tomorrow + 9.hours )
+  def send_welcome_email
+    TalentMailer.welcome(self.id).deliver_later
   end
 
   def send_refused

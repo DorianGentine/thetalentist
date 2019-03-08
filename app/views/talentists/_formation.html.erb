@@ -1,8 +1,8 @@
 <div class="col-xs-10 col-xs-offset-1 margin-top-15 margin-bottom-15 formation-form" data-formation-id="<%= formation.id %>">
   <%= simple_form_for( [@talentist, formation], remote: true )do |f| %>
-    <p><%= f.object.title %></p>
-    <%= f.input :type_of_formation %>
-    <%= f.input :ranking %>
+    <h3 style="text-align: center;"><%= f.object.title %></h3>
+    <%= f.input :type_of_formation, label: "Type de formation", placeholder:"ingénerieur / commerce / architecture " %>
+    <%= f.input :ranking, label: "Classement", placeholder:"ex: Palmarès des écoles d'ingénieur 2019" %>
     <%= f.submit "Suivant", class: "btn btn-success margin-top-15 col-xs-6 col-xs-offset-3 formation-form-btn" %>
   <% end %>
 </div>

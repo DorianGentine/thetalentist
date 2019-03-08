@@ -1,10 +1,18 @@
 class TalentMailer < ApplicationMailer
 
+  def welcome(user_id)
+    @user = Talent.find(user_id)
+    mail(
+      to: @user.email,
+      cc: "bienvenue@thetalentist.com",
+      subject: "Bienvenue sur The Talentist!")
+  end
+
   def candidate(user_id)
     @user = Talent.find(user_id)
     mail(
       to: @user.email,
-      cc: Talentist.first.email,
+      cc: Talentist.all.collect(&:email).join(", "),
       subject: "Bonjour #{@user.firstname}, merci pour votre candidature !"
       )
   end
@@ -15,7 +23,7 @@ class TalentMailer < ApplicationMailer
     attachments["#{@user.firstname}_#{@user.name}.pdf"] = { :mime_type => 'application/pdf', :content => pdf.render }
     mail(
       to: @user.email,
-      cc: ["#{Talentist.second.email}", "#{Talentist.first.email}"],
+      cc: Talentist.all.collect(&:email).join(", "),
       subject: "Bonjour #{@user.firstname}, merci pour votre candidature !"
       )
   end
@@ -54,8 +62,8 @@ class TalentMailer < ApplicationMailer
     @user = Talent.find(user_id)
     mail(
       to: @user.email,
-      cc: "bienvenue@thetalentist.com",
-      subject: "Vous nous manquez déjà")
+      cc: Talentist.all.collect(&:email).join(", "),
+      subject: "Seulement #{@user.completing}% de votre profil est complété")
   end
 
 
