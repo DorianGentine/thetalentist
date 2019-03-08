@@ -3,7 +3,7 @@
 
 <section class="container" id="container-startup">
   <% if @headhunters.count > 0 %>
-    <div class="cards-repertory">
+    <div class="row">
       <% @headhunters.each do |headhunter| %>
         <%= cache headhunter do %>
           <%= render 'talents/startup-card', headhunter: headhunter %>

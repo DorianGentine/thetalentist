@@ -1,42 +1,24 @@
 .talent-card-placement{}
 
-.talent-card{
-  height: 388px;
-  position: relative
-}
 .talent-card:hover{
   cursor: pointer;
   .border{
     box-shadow: none;
   }
 }
-@media screen and (max-width: 767px){
-  .talent-card{
-    height: 280px;
-  }
-}
-@media screen and (max-width: 400px){
-  .talent-card{
-    width: 300px;
-  }
-}
 
 .card-title{
   background-color: white;
   position: absolute;
-  top: -14px;
   left: 50%;
-  transform: translate( -50% );
-  z-index: 2;
-  margin: auto;
+  transform: translate(-50%, -50%);
   width: 60%;
-  display: flex;
-  justify-content: center;
   p{
     font-size: 20px;
     color: $violet;
     font-weight: bold;
     margin-bottom: 0;
+    text-align: center;
     letter-spacing: 6px;
   }
 }
@@ -102,66 +84,56 @@
 }
 
 .placement-talentist{
-  width: 20%;
-  min-width: 210px;
+  // width: 20%;
+  // min-width: 210px;
+  .card-title p{
+    font-size: 12px
+  }
+  .lien-messagerie-profil{
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    display: flex;
+    height: 26px;
+    a{
+      width: 50%;
+      text-align: center;
+      border-top: 1px solid $violet;
+      font-size: 14px;
+      padding: 5px 0;
+      transition: 0.15s;
+    }
+    a:first-child{
+      border-right: 1px solid $violet;
+    }
+    a:hover{
+      color: $green;
+    }
+  }
   .talent-card{
-    width: 200px;
-    height: 240px;
-    .card-title{
-      top: -8px;
-      p{
-        font-size: 12px
-      }
-    }
-    .border{
-      padding: 0 20px 30px;
-      .talent-job{
-        height: 80px;
-        h2{
-          font-size: 16px;
-          text-transform: capitalize;
-        }
-      }
-    }
-    .illu-card{
-      height: 72px;
-      width: 72px;
-      position: absolute;
-      top: 10px;
-      right: 0;
-      border-radius: 5px;
-      overflow: hidden;
-      opacity: 0.7;
-      .initiale{
-        border-radius: unset;
-        font-size: 40px;
-      }
-    }
-    .lien-messagerie-profil{
-      position: absolute;
-      bottom: 4px;
-      left: 4px;
-      right: 4px;
-      display: flex;
-      height: 26px;
-      a{
-        width: 50%;
-        text-align: center;
-        border-top: 1px solid $violet;
-        font-size: 14px;
-        padding: 5px 0;
-        transition: 0.15s;
-      }
-      a:first-child{
-        border-right: 1px solid $violet;
-      }
-      a:hover{
-        color: $green;
-      }
-    }
+    width: 95%;
+    margin: auto;
   }
 }
 
+.illu-card-talentist{
+  height: 72px;
+  width: 72px;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  border-radius: 5px;
+  overflow: hidden;
+  opacity: 0.7;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  .initiale{
+    border-radius: unset;
+    font-size: 200%;
+  }
+}
 
 
 

@@ -1,5 +1,3 @@
-<% if current_user.is_a?(Headhunter) && current_user.count_unread_message > 0 %>
-  <p class="notif"><%= current_user.count_unread_message > 100 ? "99" : current_user.count_unread_message %></p>
-<% elsif current_user.is_a?(Headhunter) && current_user.completed_totaly < 95 %>
+<% if current_user.is_a?(Headhunter) && current_user.completed_totaly < 95 %>
   <p class="notif"></p>
 <% end %>

@@ -48,17 +48,17 @@
         <hr class="separateur-show ligne-horizontal">
 
         <!-- Site internet -->
-          <div class="info-grid-1">
-            <p class="titre-rubrique-1 grid-col-span-2">Site internet</p>
-            <p class="titre-rubrique-3 no-margin"><i class="far fa-compass margin-right-5 green"></i></p>
-            <p class="titre-rubrique-3 no-margin"><%= @startup.link.present? ? @startup.link : "Ajoutez votre site internet" %></p>
+          <div class="row margin-bottom-15">
+            <p class="titre-rubrique-1 col-xs-12 no-padding">Site internet</p>
+            <i class="far fa-compass green titre-rubrique-3 col-xs-1 no-padding"></i>
+            <p class="titre-rubrique-3 no-margin col-xs-11 no-padding"><%= @startup.link.present? ? @startup.link : "Ajoutez votre site internet" %></p>
           </div>
 
         <!-- Adresse -->
-          <div class="info-grid-1">
-            <p class="titre-rubrique-1 grid-col-span-2">Adresse</p>
-            <p class="titre-rubrique-3 no-margin"><i class="fas fa-map-marker-alt margin-right-5 green"></i></p>
-            <p class="titre-rubrique-3 no-margin"><%= @startup.address.present? ? @startup.address : "Ajoutez votre adresse" %></p>
+          <div class="row margin-bottom-15">
+            <p class="titre-rubrique-1 col-xs-12 no-padding">Adresse</p>
+            <i class="fas fa-map-marker-alt green titre-rubrique-3 col-xs-1 no-padding" style="font-weight: 900"></i>
+            <p class="titre-rubrique-3 no-margin col-xs-11 no-padding"><%= @startup.address.present? ? @startup.address : "Ajoutez votre adresse" %></p>
           </div>
           <% if @startup.address.present? %>
             <div id="map" data-markers="<%= @markers.to_json %>"></div>

@@ -1,19 +1,18 @@
 <% if talentist_signed_in? && current_talentist %>
 
-  <div class="talent-card-placement placement-talentist">
-    <div class="talent-card startup-card">
+  <div class="col-xs-12 col-md-3 margin-bottom-30 placement-talentist">
+    <div class="talent-card">
 
-      <div class="border">
+      <div class="border relative">
 
-        <div class="talent-job">
-          <!-- A changer -->
+        <div class="talent-job" style="height: 80px;">
           <h2><%= headhunter.firstname.present? ? headhunter.firstname : "Pas infos" %> <%= headhunter.name.present? ? headhunter.name : 'Pas infos' %></h2>
         </div>
-        <div class="talent-job">
-          <p>de <%= !headhunter.startup.nil? && headhunter.startup.name.present? ? headhunter.startup.name : "Inconnu" %></p>
-        </div>
 
-        <div class="background-img background-img-talentist">
+        <p class="margin-top-15">de <%= !headhunter.startup.nil? && headhunter.startup.name.present? ? headhunter.startup.name : "Inconnu" %></p>
+
+
+        <div class="background-img" style="height: 80px">
           <%= image_tag "olu-eletu-134758-unsplash.jpg", class: "img-de-fond" %>
         </div>
 
@@ -30,13 +29,17 @@
           <% end %>
         </div>
 
-      <% if headhunter.startup.present? %>
-        <p class="margin-top-15 margin-bottom-15">
-          <i class='<%= headhunter.completed_totaly > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle" %>'></i>profil complété à <strong class='<#%= headhunter.completed_totaly > 85 ? "green" : "red"  %>'><%= headhunter.completed_totaly %>%</strong>
-        </p>
-      <% else %>
-        <p class="margin-top-15 margin-bottom-15">La startup n'est pas renseigné</p>
-      <% end %>
+      <p class="margin-top-15 margin-bottom-15">
+        <% if headhunter.startup.present? %>
+          <i class='<%= headhunter.completed_totaly > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle" %> margin-right-5'></i>
+          profil complété à
+          <strong class='<#%= headhunter.completed_totaly > 85 ? "green" : "red"  %>'>
+            <%=headhunter.completed_totaly %>%
+          </strong>
+        <% else %>
+          La startup n'est pas renseigné
+        <% end %>
+      </p>
 
         <div class="lien-messagerie-profil">
           <% if Mailboxer::Conversation.participant(headhunter).count > 0 %>
@@ -60,43 +63,43 @@
 
 <% else %>
 
-  <div class="talent-card-placement">
-    <div class="talent-card startup-card">
+  <div class="col-md-3 col-xs-12">
 
-      <div class="border">
+    <div class="border relative">
 
-        <div class="talent-job">
-          <h2 style="text-transform: unset;"><%= headhunter.startup.name.present? && headhunter.firstname.present? ? "#{headhunter.firstname.capitalize} de #{headhunter.startup.name.capitalize}" : "No-Name" %></h2>
-        </div>
-
-        <div class="background-img">
-          <%= image_tag "olu-eletu-134758-unsplash.jpg", class: "img-de-fond" %>
-        </div>
-
-        <div class="talent-info">
-          <div class="talent-info-item">
-            <p><i class="fas fa-map-marker-alt margin-right-5 green"></i><%= headhunter.startup.address.present? ? headhunter.startup.address : "Pas info" %></p>
-          </div>
-          <div class="talent-info-item">
-            <p>
-              <i class="fas fa-link margin-right-5 green"></i>
-              <a href="<%= headhunter.startup.link %>" target="_blank" >Voir le site</a>
-            </p>
-          </div>
-        </div>
-
-        <div class="hidden-xs">
-          <p><%= headhunter.startup.short_resume.present? ? headhunter.startup.short_resume : "pas d'info" %></p>
-        </div>
-
-
-        <!-- Lien vers le profil de la SU -->
-        <div class="talent-more talent-more-startup">
-          <p><%= link_to "Voir le profil", headhunter_path(headhunter)%></p>
-        </div>
-
+      <div class="talent-job margin-bottom-15">
+        <h2 style="text-transform: unset;"><%= headhunter.startup.name.present? && headhunter.firstname.present? ? "#{headhunter.firstname.capitalize} de #{headhunter.startup.name.capitalize}" : "No-Name" %></h2>
       </div>
+
+      <div class="background-img">
+        <%= image_tag "olu-eletu-134758-unsplash.jpg", class: "img-de-fond" %>
+      </div>
+
+      <div class="row">
+
+        <p class="col-xs-6 no-padding">
+          <i class="fas fa-map-marker-alt margin-right-5 green"></i>
+          <%= headhunter.startup.address.present? ? headhunter.startup.address : "Pas info" %>
+        </p>
+
+        <p class="col-xs-6 no-padding">
+          <i class="fas fa-link margin-right-5 green"></i>
+          <a href="<%= headhunter.startup.link %>" target="_blank" >Voir le site</a>
+        </p>
+
+        <p class="hidden-xs col-xs-12 no-padding">
+          <i class="fas fa-info-circle margin-right-5 green"></i>
+          <%= headhunter.startup.short_resume.present? ? headhunter.startup.short_resume : "pas d'info" %>
+        </p>
+      </div>
+
+
+
+      <!-- Lien vers le profil de la SU -->
+        <%= link_to "Voir le profil", headhunter_path(headhunter), class: "talent-more talent-more-startup" %>
+
     </div>
+
   </div>
 
 <% end %>
