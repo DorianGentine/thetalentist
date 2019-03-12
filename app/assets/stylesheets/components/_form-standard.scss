@@ -30,7 +30,6 @@ span.select2.select2-container.select2-container--default {
 .form-control{
   color: $black;
   display: block;
-  // width: unset;
   height: 35px;
   padding: 6px 12px;
   font-size: 14px;
@@ -58,7 +57,7 @@ span.select2.select2-container.select2-container--default {
 }
 
 .form-actions{
-  margin: 50px 0 80px 0;
+  margin: 50px 0;
   display: flex;
   justify-content: center;
   .form-btn{
@@ -66,6 +65,7 @@ span.select2.select2-container.select2-container--default {
     width: 170px;
     border-radius: 25px;
     border: 2px solid $green;
+    color: $green;
     padding: 0;
     margin: 0 30px;
   }
@@ -73,7 +73,6 @@ span.select2.select2-container.select2-container--default {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $green;
   }
   .form-btn-suivant{
     background-color: $green;
@@ -84,7 +83,6 @@ span.select2.select2-container.select2-container--default {
 .form-label-font-size {
   font-weight: 600;
   font-size: 15px;
-  // text-align: right;
   margin: 0;
 }
 
@@ -93,11 +91,9 @@ span.select2.select2-container.select2-container--default {
   margin-left: 0;
   margin-right: 0;
 }
-.simple-new-talent {
-  .simple_form {
-        width: 120%;
-      margin-left: -10%;
-  }
+.simple-new-talent .simple_form {
+  width: 120%;
+  margin-left: -10%;
 }
 
 .add-picture{
