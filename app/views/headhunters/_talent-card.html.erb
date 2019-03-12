@@ -73,34 +73,37 @@
       <div class="border relative">
 
         <div class="card-title">
-          <p>LE TALENT</p>
+          <p><%=talent[:job].present? ? talent[:job].upcase : "Pas renseigné" %></p>
         </div>
 
         <div class="talent-job">
           <% if !talent[:position].nil? %>
             <h2><%= talent[:position].truncate(45, separator: ' ', omission: '') %></h2>
           <% else %>
-            <h2> Rajouter une experience </h2>
+            <h2> - </h2>
           <% end %>
         </div>
 
         <div class="row">
-          <p class="col-xs-6 no-padding"><i class="fas fa-map-marker-alt margin-right-5 green"></i><%= talent[:city].present? ? talent[:city].truncate(10, separator: ', ', omission: '') : "_" %></p>
+          <p class="col-xs-6 no-padding">
+            <i style="min-width: 20px;" class="fas fa-map-marker-alt margin-right-5 green"></i><%= talent[:city].present? ? talent[:city].truncate(10, separator: ', ', omission: '') : "_" %>
+          </p>
 
           <p class="col-xs-6 no-padding">
+            <i style="min-width: 20px;" class="fas fa-code-branch margin-right-5 green"></i>
             <% if talent[:next_aventure][:btoc] && talent[:next_aventure][:btob] %>
-              <i class="fas fa-code-branch margin-right-5 green"></i>BtoB & BtoC
+              BtoB & BtoC
             <% elsif talent[:next_aventure][:btob] %>
-              <i class="fas fa-code-branch margin-right-5 green"></i>BtoB
+              BtoB
             <% elsif talent[:next_aventure][:btoc] %>
-              <i class="fas fa-code-branch margin-right-5 green"></i>BtoC
-            <% else %>
-              <i class="fas fa-code-branch margin-right-5 green"></i>_
+              BtoC
+            <%# else %>
+              <!-- _ -->
             <% end %>
           </p>
 
           <p class="col-xs-12 no-padding">
-            <i class="fas fa-briefcase margin-right-5 green"></i>
+            <i style="min-width: 16px;" class="fas fa-briefcase margin-right-5 green"></i>
             <% if talent[:sectors].length > 0 %>
               <% talent[:sectors].first(talent[:sectors].length-1).each do |talent_sector| %>
                 <%= talent_sector[:title].present? ? talent_sector[:title] + ", " : "" %>
@@ -111,28 +114,24 @@
 
           <% talent[:formations].first(2).each do |talent_formation| %>
             <p class="col-xs-12 no-padding">
-              <i class="fas fa-graduation-cap margin-right-5"></i>
-              <%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] + ", " : "" %> <%=talent_formation[:title] %>
+              <i style="min-width: 20px;" class="fas fa-graduation-cap margin-right-5"></i><%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] + ", " : "" %> <%=talent_formation[:title] %>
             </p>
           <% end %>
 
           <% if talent[:year_experience_job].present? && talent[:year_experience_job].to_i > 0 %>
             <p class="col-xs-12 no-padding">
-              <i class="far fa-calendar margin-right-5"></i>
-              <%= pluralize(talent[:year_experience_job], 'an') %> d'expérience
+              <i style="min-width: 20px;" class="far fa-calendar margin-right-5"></i><%= pluralize(talent[:year_experience_job], 'an') %> d'expérience
             </p>
           <% end %>
 
           <% if talent[:experiences].count > 1 %>
               <p class="col-xs-12 no-padding">
-                <i class="fas fa-briefcase margin-right-5"><sup style="font-family: 'Avenir', 'Open Sans', 'Helvetica', 'sans-serif'; font-weight: 500">-1</sup></i>
-                <%= talent[:experiences][talent[:experiences].count-1][:position] %>
+                <i style="min-width: 20px;" class="fas fa-briefcase margin-right-5"><sup style="font-family: 'Avenir', 'Open Sans', 'Helvetica', 'sans-serif'; font-weight: 500">-1</sup></i><%= talent[:experiences][talent[:experiences].count-1][:position] %>
               </p>
           <% end %>
 
           <p class="col-xs-12 no-padding">
-            <i class="far fa-clock margin-right-5"></i>
-            Mise à jour le <%= l(talent[:update], :locale => :fr) %>
+            <i style="min-width: 20px;" class="far fa-clock margin-right-5"></i>Mise à jour le <%= l(talent[:update], :locale => :fr) %>
           </p>
         </div>
 

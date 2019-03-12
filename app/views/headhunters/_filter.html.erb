@@ -9,13 +9,12 @@
       <% if conditioning == 'repertoire' %>
 
         <%= form_tag repertoire_path, :method => 'get', id:"search-lg", remote: true do %>
-            <% @jobs.each do |job| %>
-              <label class= "category-choice" for="<%= job.title.downcase %>"><i class="<%= job.icon %>"></i> <%= job.title.upcase %></label>
-              <input type="checkbox" name="jobs[]" id="<%= job.title.downcase %>" value="<%= job.title.capitalize %>" class="hidden">
-            <% end %>
+          <% @jobs.each do |job| %>
+            <label class= "category-choice" for="<%= job.title.downcase %>"><i class="<%= job.icon %>"></i> <%= job.title.upcase %></label>
+            <input type="checkbox" name="jobs[]" id="<%= job.title.downcase %>" value="<%= job.title.capitalize %>" class="hidden">
+          <% end %>
           <input type="submit" class="submit-filtre hidden" name="commit" value="Search" data-disable-with="Search">
         <% end %>
-
       <% elsif conditioning == 'talents' %>
         <%= link_to talents_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
           <i class="fas fa-infinity"></i> Tous
@@ -62,31 +61,6 @@
       </div>
     <% end %>
 
-</div>
-
-<div>
-<!-- <%# if conditioning == 'repertoire' %>
-  <div id="filter-menu" class="row">
-    <%#= form_tag repertoire_path, :method => 'get', id:"search-lg", remote: true do %>
-        <%# @jobs.each do |job| %>
-          <input type="checkbox" name="jobs[]" id="<%#= job.title.downcase %>" value="<%#= job.title.capitalize %>" class="hidden">
-          <label class= "category-choice col-sm-12" for="<%#= job.title.downcase %>"><i class="<%#= job.icon %>"></i> <%#= job.title.upcase %></label>
-        <%# end %>
-      <input type="submit" class="submit-filtre hidden" name="commit" value="Search" data-disable-with="Search">
-    <%# end %>
-
-  </div>
-<%# end %>
-
-<script>
-  const openFilter = document.getElementById("filter-category");
-  const filterMenu = document.getElementById("filter-menu");
-  if (filterMenu) {
-    openFilter.addEventListener("click", () => {
-      filterMenu.classList.toggle("open")
-    })
-  }
-</script> -->
 </div>
 
 
