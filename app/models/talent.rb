@@ -11,7 +11,11 @@ class Talent < ApplicationRecord
           :omniauthable, omniauth_providers: [:linkedin]
 
   validates_confirmation_of :password
-  validates :name, :firstname, :city, :email, presence: true
+
+  validates_presence_of :city, :message => "Le lieu doit être remplit"
+  validates_presence_of :email, :message => "l'email doit être remplit"
+  validates_presence_of :firstname, :message => "le prénom doit être remplit"
+  validates_presence_of :name, :message => "le nom doit être remplit"
 
   geocoded_by :city
   after_validation :geocode
@@ -52,7 +56,8 @@ class Talent < ApplicationRecord
 
   has_many :talent_technos, dependent: :destroy
   has_many :technos, through: :talent_technos
-  accepts_nested_attributes_for :technos, allow_destroy: true, reject_if: :all_blank
+  # accepts_nested_attributes_for :talent_technos, allow_destroy: true, reject_if: :all_blank
+  # accepts_nested_attributes_for :technos, allow_destroy: true, reject_if: :all_blank
 
   has_many :talent_hobbies, dependent: :destroy
   has_many :hobbies, through: :talent_hobbies
@@ -62,7 +67,7 @@ class Talent < ApplicationRecord
   has_many :credentials, dependent: :destroy
 
   has_many :experiences, dependent: :destroy
-  accepts_nested_attributes_for :experiences, allow_destroy: true, reject_if: proc { |att| att['position'].blank? }
+  accepts_nested_attributes_for :experiences, allow_destroy: true, reject_if: :all_blank
 
   has_many :next_aventures, dependent: :destroy
   accepts_nested_attributes_for :next_aventures, allow_destroy: true, reject_if: :all_blank
