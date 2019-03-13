@@ -1,5 +1,5 @@
 class TalentsController < ApplicationController
-  before_action :set_talent, only: [ :show, :edit, :update_profile,
+  before_action :set_talent, only: [ :show, :edit,
     :update_experience, :update_next_aventure, :update_formation_and_skill,
     :update, :to_validate, :info_pdf, :update_photo ]
 
@@ -123,34 +123,35 @@ class TalentsController < ApplicationController
 
 
   def update
-    raise
-    if talent_params["talent_formations_attributes"]
-      talent_params["talent_formations_attributes"].each do |talent_formation|
-        if talent_formation[1]["id"]
-          t = TalentFormation.find(talent_formation[1]["id"].to_i)
-          t.update(title: talent_formation[1]["title"], year: talent_formation[1]["year"], formation_id: talent_formation[1]["formation_id"].to_i)
-        end
-      end
+    if @talent.update_attributes(talent_params)
+       redirect_to edit_talent_path(@talent)
+    else
+      render :edit
     end
-    # @talent.update_password_with_password(talent_password)
-    @talent.update_attributes(talent_params)
-    redirect_to talent_path(@talent)
-  end
-
-  def update_profile
-    update_edit(@talent, talent_params)
   end
 
   def update_formation_and_skill
-    update_edit(@talent, talent_params)
+    if @talent.update_attributes(formation_and_skill_params)
+      redirect_to edit_talent_path(@talent)
+    else
+      render :edit
+    end
   end
 
   def update_experience
-    update_edit(@talent, talent_params)
+    if @talent.update_attributes(experience_params)
+      redirect_to edit_talent_path(@talent)
+    else
+      render :edit
+    end
   end
 
   def update_next_aventure
-    update_edit(@talent, talent_params)
+    if @talent.update_attributes(next_aventure_params)
+      redirect_to edit_talent_path(@talent)
+    else
+      render :edit
+    end
   end
 
 
@@ -209,14 +210,6 @@ class TalentsController < ApplicationController
 
 private
 
-  def update_edit(talent, talent_params)
-    talent.update_attributes(talent_params)
-    respond_to do |format|
-      format.html { redirect_to edit_talent_path(talent) }
-      format.js
-    end
-  end
-
   def reminde_new_talents_less_than(created, number)
     talents = Talent.where('created_at <= ?', created).completed_less_than(number).have_been_never_reminded
     talents.each do |talent|
@@ -255,7 +248,7 @@ private
 
   def talent_params
     # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
-     params.require(:talent).permit(
+    params.require(:talent).permit(
       :name,
       :firstname,
       :phone,
@@ -270,18 +263,35 @@ private
       :terms_of_condition,
       :no_more,
       :sector_ids,
-      techno_ids: [],
-      hobby_ids: [],
-      experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
-      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
-      talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
-      talent_languages_attributes: [ :id, :level, :language_id],
-      your_small_plus_attributes: [:id, :description, :_destroy],
+      # hobby_ids: [],
+      # experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
+      # next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
+      # talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
+      # talent_languages_attributes: [ :id, :level, :language_id],
+      # your_small_plus_attributes: [:id, :description, :_destroy],
       talent_jobs_attributes: [:id, :job_id, :year, :_destroy],
       skill_ids: []
     )
   end
+  def formation_and_skill_params
+    params.require(:talent).permit(
+      talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
+      talent_languages_attributes: [ :id, :level, :language_id],
+      techno_ids: []
+    )
+  end
+  def experience_params
+    params.require(:talent).permit(
+      experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy]
+    )
+  end
 
+  def next_aventure_params
+     params.require(:talent).permit(
+      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
+      your_small_plus_attributes: [:id, :description, :_destroy]
+    )
+  end
 end
 
 

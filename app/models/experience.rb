@@ -5,8 +5,8 @@ class Experience < ApplicationRecord
   accepts_nested_attributes_for :talent, :reject_if => :all_blank
   accepts_nested_attributes_for :company_type, :reject_if => :all_blank
 
-  validates :position, presence: true
-  validates :company_name, presence: true
+  validates_presence_of :position, message: "Ajoute l'intituler de ton poste"
+  validates_presence_of :company_name, message: "Ajoute le nom de l'entreprise"
   validates :company_type_id, presence: true
   validates :starting, presence: true, format: { with: /\d{2}-\d{4}/, message: "date must be like 10-2015" }
   validates :years, presence: true, format: { with: /\d{2}-\d{4}/, message: "date must be like 10-2015" }, if: :currently_is_on? && :years_is_bigger_than_starting_date?

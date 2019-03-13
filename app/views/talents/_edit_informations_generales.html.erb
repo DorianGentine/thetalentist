@@ -2,28 +2,28 @@
   <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
   <h2 class="titre-section">Remplissez votre <strong>profil</strong></h2>
 
-  <%= simple_form_for @talent, url: update_profile_talent_path(@talent), method: :patch, remote: false  do |f|%>
+  <%= simple_form_for @talent, remote: false  do |f|%>
 
     <%= render 'shared/change_photo', f: f %>
 
     <div class="row margin-top-30">
       <p class="label-edit requis">Civilité</p>
       <div class="col-lg-4 no-padding margin-right-15 no-margin-xs">
-        <%= f.input :firstname, label: false, :input_html => { style: "width: 100%" } %>
+        <%= f.input :firstname, label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:firstname][0] %>
       </div>
       <div class="col-lg-4 no-padding margin-top-15-xs">
-        <%= f.input :name, label: false, :input_html => { style: "width: 100%" } %>
+        <%= f.input :name, label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:name][0] %>
       </div>
     </div>
 
     <div class="row margin-top-30">
       <div class="col-lg-4 no-padding margin-right-15 no-margin-xs">
         <p class="label-edit requis">Téléphone</p>
-        <%= f.input :phone, label: false, :input_html => { style: "width: 100%" } %>
+        <%= f.input :phone, label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:phone][0] %>
       </div>
       <div class="col-lg-4 no-padding margin-top-15-xs">
         <p class="label-edit requis">Ville actuelle</p>
-        <%= f.input :city, label: false, :input_html => { style: "width: 100%" } %>
+        <%= f.input :city, label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:city][0] %>
       </div>
     </div>
 
@@ -31,11 +31,11 @@
       <%= f.simple_fields_for :talent_jobs do |u| %>
         <div class="col-lg-4 no-padding margin-right-15 no-margin-xs">
           <p class="label-edit requis">Sélectionner mon domaine d'activité</p>
-          <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%" } %>
+          <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%" }, error: u.object.errors.messages[:job_id][0] %>
         </div>
         <div class="col-lg-4 no-padding margin-top-15-xs">
           <p class="label-edit requis">Années d'expérience</p>
-          <%= u.input :year, label: false, :input_html => { style: "width: 100%", min: "0", id:"yearPositif", :onchange => "zeroInput(this.value, 'yearPositif')" } %>
+          <%= u.input :year, label: false, :input_html => { style: "width: 100%", min: "0", id:"yearPositif", :onchange => "zeroInput(this.value, 'yearPositif')" }, error: u.object.errors.messages[:year][0] %>
         </div>
       <% end %>
     </div>

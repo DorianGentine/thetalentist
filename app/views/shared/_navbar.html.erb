@@ -78,12 +78,14 @@
         <% end %>
 
         <% if current_talent.mailbox.conversations.count > 0 %>
-          <div class="lien-messagerie">
-            <%= link_to conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
-              <i class="fas fa-envelope"></i> MESSAGERIE
-              <%= render "shared/notif_message" %>
-            <% end %>
-          </div>
+
+            <div class="lien-messagerie">
+              <%= link_to conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
+                <i class="fas fa-envelope"></i> MESSAGERIE
+                <%= render "shared/notif_message" %>
+              <% end %>
+            </div>
+
         <% end %>
         <% if current_talent.validated %>
           <%= link_to talent_path(current_talent), class:"navbar-wagon-item navbar-wagon-link" do %>
