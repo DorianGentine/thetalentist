@@ -18,6 +18,7 @@
             <i class="fas fa-user-friends"></i> RÉPERTOIRE
           <% end %>
         <% end %>
+
         <% if current_headhunter.mailbox.conversations.count > 0 %>
           <div class="lien-messagerie">
             <%= link_to conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
