@@ -5,7 +5,7 @@
   <h2 class="form-titre-page"><i class="far fa-id-badge"></i> Qui se cache derrière <strong>ce Talent</strong> ?</h2>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <div class="margin-auto-new-talent">
-      <%= f.error_notification %>
+      <!-- <#%= f.error_notification %> -->
       <div class="linkedin-btn blue-background center-text">
         <%= link_to talent_linkedin_omniauth_authorize_path, :class => "button-linkedin" do %>
           <p class="no-margin"><i class="fab fa-linkedin"></i> Connect with Linkedin</p>
@@ -15,10 +15,10 @@
         <div class="row">
           <label class="col-lg-2 label-edit text-align-right line-height-center requis no-margin no-padding-xs" for="talent_firstname">Civilité</label>
           <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
-            <%= f.input :firstname, required: true, autofocus: false, placeholder: "Prénom", label: false, :input_html => { style: "width: 100%"} %>
+            <%= f.input :firstname, required: true, autofocus: false, placeholder: "Prénom", label: false, :input_html => { style: "width: 100%"}, error: f.object.errors.messages[:firstname][0] %>
           </div>
           <div class="col-lg-3 col-xs-12 no-padding no-margin-xs margin-bottom-15-xs">
-            <%= f.input :name, required: true, autofocus: false, placeholder: "Nom", label: false, :input_html => { style: "width: 100%"} %>
+            <%= f.input :name, required: true, autofocus: false, placeholder: "Nom", label: false, :input_html => { style: "width: 100%"}, error: f.object.errors.messages[:name][0] %>
           </div>
         </div>
         <div class="row margin-top-15">
@@ -31,7 +31,7 @@
             <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", :input_html => { id: "margin-bottom-mdp", style: "width: 100%" }, label: false %>
           </div>
           <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs">
-            <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, :input_html => { :class => "no-margin-xs", style: "width: 100%" } %>
+            <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, :input_html => { :class => "no-margin-xs", style: "width: 100%" }, error: f.object.errors.messages[:password_confirmation][0] %>
           </div>
 
         </div>
@@ -42,7 +42,7 @@
           </div>
           <label class="label-edit text-align-right text-align-left-xs line-height-center col-lg-3 col-xs-2 no-padding margin-right-15 requis" for="talent_city">Ville</label>
           <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs">
-            <%= f.input :city, placeholder: 'Nantes, France', :input_html => { :id => "talent_city", style: "width: 100%" }, label: false %>
+            <%= f.input :city, placeholder: 'Nantes, France', :input_html => { :id => "talent_city", style: "width: 100%" }, label: false, error: f.object.errors.messages[:city][0] %>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
               </div>
               <label class="col-lg-3 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-padding margin-right-15">Années d'expérience</label>
               <div class="col-lg-3 col-xs-12 no-padding">
-                <%= u.input :year, label: false, :input_html => { style: "width: 100%", id:"yearPositif", min: "0", :onchange => "zeroInput(this.value, 'yearPositif')" } %>
+                <%= u.input :year, label: false, :input_html => { style: "width: 100%", id:"yearPositif", min: "0", :onchange => "zeroInput(this.value, 'yearPositif')" }, error: u.object.errors.messages[:year][0] %>
               </div>
             <% end %>
 

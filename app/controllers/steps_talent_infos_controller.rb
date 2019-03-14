@@ -53,7 +53,6 @@ class StepsTalentInfosController < ApplicationController
     # @talent.status = 'active' if step == steps.last
     case step
     when :next_aventure
-
       @talent.update_attributes(talent_params)
       if !@talent.terms_of_condition
         flash[:notice] = "N'oubliez pas de accepter les conditions générale"
@@ -61,11 +60,30 @@ class StepsTalentInfosController < ApplicationController
       else
         render_wizard @talent
       end
+
+    when :experiences
+      @talent.attributes = talent_params
+      @talent.experiences.each do |experience|
+        experience.skip_position_validation = true
+        experience.skip_company_name_validation = true
+        experience.skip_starting_validation = true
+        experience.skip_currently_validation = true
+      end
+      if @talent.save
+        @talent.experiences.each do |experience|
+          experience.nothing_to_save
+        end
+        render_wizard @talent
+      else
+        render "steps_talent_infos/#{step}"
+      end
     else
       if need_to_create_data?
         set_new_technos(@talent)
       end
-      if @talent.update(talent_params)
+      @talent.attributes = talent_params
+      @talent.skip_city_validation = true
+      if @talent.save
         # @talent = current_user
         render_wizard @talent
       else
