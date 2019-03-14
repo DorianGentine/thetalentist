@@ -10,12 +10,15 @@ class Talent < ApplicationRecord
           :validatable,
           :omniauthable, omniauth_providers: [:linkedin]
 
-  validates_confirmation_of :password
+  validates_confirmation_of :password, message: "Votre mot de passe ne concodre pas"
 
-  validates_presence_of :city, :message => "Le lieu doit être remplit"
+  validates_presence_of :city, :message => "Le lieu doit être remplit", unless: :skip_city_validation
+  validates_presence_of :phone, :message => "Votre téléphone doit être remplit", unless: :skip_phone_validation
   validates_presence_of :email, :message => "l'email doit être remplit"
   validates_presence_of :firstname, :message => "le prénom doit être remplit"
   validates_presence_of :name, :message => "le nom doit être remplit"
+
+  attr_accessor :skip_city_validation, :skip_phone_validation
 
   geocoded_by :city
   after_validation :geocode
