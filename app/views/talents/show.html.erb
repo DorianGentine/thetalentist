@@ -8,7 +8,7 @@
       </div>
     </div>
   <% end %>
-<% elsif current_user.is_a?(Talentist) %>
+<% elsif current_user.is_a?(Talentist) || current_user.is_a?(Headhunter) %>
   <%= link_to 'javascript:history.back()' do  %>
     <div class="btn-edition-container">
       <p class="no-margin label-edit align-center green"><i class="fas fa-angle-left"></i> Retour</p>

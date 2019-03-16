@@ -231,6 +231,10 @@ input, button, select, textarea {
     text-align: center;
   }
 
+  .text-align-justify{
+    text-align: justify;
+  }
+
   .absolute-center-vertical{ // Parent doit avoir position relative
     position: absolute;
     top: 50%;

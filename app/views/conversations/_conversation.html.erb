@@ -32,7 +32,8 @@
         <div class="statut"></div>
       </div>
 
-      <div class="conversation-text <%= "strong-color" if conversation.is_unread?(Headhunter.find(params[:headhunter_id])) %>">
+
+      <div class="conversation-text <%= conversation.is_unread?(Headhunter.find(params[:headhunter_id])) ? "strong-color" : "" %>">
         <% if conversation.participants.count > 1 %>
           <p class="prenom-contact"><% parti = conversation.participants - [Headhunter.find(params[:headhunter_id])] %><%= parti[0].firstname %></p>
           <p class="apercu-message"><%= conversation.messages.last.body %></p>

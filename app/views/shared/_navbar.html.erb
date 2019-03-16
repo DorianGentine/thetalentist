@@ -135,8 +135,8 @@
         <div class="lien-messagerie">
           <% if current_talentist.messages.count > 0  %>
             <%= link_to "MESSAGERIE", conversation_path(current_talentist.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
+            <%= render "shared/notif_message" %>
           <% end %>
-          <%= render "shared/notif_message" %>
         </div>
 
         <!-- Avatar with dropdown menu -->
@@ -169,69 +169,6 @@
         <%= link_to "REVENIR  À LA PAGE DE CONNEXION", root_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <% end %>
     </div>
-
-    <!-- Dropdown list appearing on mobile only -->
-      <!-- <% if current_user && !current_talentist %>
-        <% if current_user.validated  %>
-          <% if headhunter_signed_in? %>
-            <div class="navbar-wagon-item hidden-450px hidden-md hidden-lg">
-              <div class="dropdown">
-                <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
-                <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-                  <li><%= link_to headhunter_path(current_headhunter) do %>
-                    <i class="fa fa-user"></i> <%= t(".profil", default: "Profil") %>
-                  <% end %></li>
-                  <li><%= link_to "RÉPERTOIRE", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %></li>
-                  <li>
-                    <% if current_headhunter.mailbox.conversations.count > 0 %>
-                      <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-                      <%= render "shared/notif_message" %>
-                    <% else %>
-                      <p>Aucun message</p>
-                    <% end %>
-                  </li>
-                  <li><%= link_to destroy_headhunter_session_path, method: :delete do %>
-                    <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-                  <% end %></li>
-                </ul>
-              </div>
-            </div>
-          <% elsif talent_signed_in?%>
-            <div class="navbar-wagon-item hidden-450px hidden-md hidden-lg">
-              <div class="dropdown">
-                <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
-                <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-                  <li><%= link_to talent_path(current_talent) do %>
-                    <i class="fa fa-user"></i> <%= t(".profil", default: "Profil") %>
-                  <% end %></li>
-                  <li><%= link_to "RÉPERTOIRE", repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" %></li>
-                  <li>
-                    <% if current_talent.mailbox.conversations.count > 0 %>
-                      <%= link_to "MESSAGERIE", conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" %>
-                      <%= render "shared/notif_message" %>
-                    <% else %>
-                      <p>Aucun message</p>
-                    <% end %>
-                  </li>
-                  <li><%= link_to destroy_talent_session_path, method: :delete do %>
-                    <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-                  <% end %></li>
-                </ul>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      <% end %> -->
-
-
-
-
-
-
-
-
-
-
 
 
     <!-- Menu appearing at page bottom -->
