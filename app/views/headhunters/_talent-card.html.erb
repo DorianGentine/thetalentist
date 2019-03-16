@@ -9,7 +9,7 @@
       <div class="border relative">
 
         <div class="card-title">
-          <p><%= talent[:job].present? ? talent[:job].upcase : "Pas renseigné" %></p>
+          <p><%= talent.jobs.count > 0 ? talent.jobs.first.title : "pas renseigné" %></p>
         </div>
 
         <div class="talent-job" style="height: 80px">
