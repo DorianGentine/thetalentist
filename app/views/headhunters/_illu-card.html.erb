@@ -2,6 +2,7 @@
   <% if talent.photo.present? %>
 
     <div class="illu-card-talentist" style="background-image: url('<%= cl_image_path talent.photo, :transformation=>[ :gravity=>"face"] %>');">
+      <div class="statut <%= talent.visible ? 'green-background' : 'red-background' %>" style="width: 20px; height: 20px; border: 2px solid;"></div>
     </div>
 
   <% else %>
@@ -10,6 +11,7 @@
       <div class="initiale">
         <%= talent.firstname.split(//).first.upcase %><%= talent.name.split(//).first.upcase %>
       </div>
+      <div class="statut <%= talent.visible ? 'green-background' : 'red-background' %>" style="width: 20px; height: 20px; border: 2px solid;"></div>
     </div>
 
   <% end %>

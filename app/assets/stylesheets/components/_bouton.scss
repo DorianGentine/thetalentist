@@ -174,7 +174,6 @@
 
 // btn-inscription
   .btn-inscription{
-    margin-top: 90px;
     border: 2px solid $green;
     border-radius: 4px;
     background-color: rgba(0,0,0,0);
@@ -283,11 +282,11 @@
 
 // Linkedin-btn
   .linkedin-btn a p {
-    width: 235px;
+    width: 225px;
     color: #fff;
     background-color: #007bb6;
     display: inline-block;
-    padding: 6px 12px;
+    padding: 6px 9px;
     cursor: pointer;
     border: 1px solid transparent;
     border-radius: 4px;
@@ -300,6 +299,8 @@
   .btn-aline {
     display: grid;
     grid: auto / auto auto;
+    grid-gap: 15px;
+    margin-left: -7.5px;
     justify-content: space-between;
   }
   @media screen and (max-width: 770px) {

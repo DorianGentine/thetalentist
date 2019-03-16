@@ -5,12 +5,11 @@
         <span><i class="fas fa-edit"></i></span>
       </div>
   <% end %>
-<% end %>
-<!-- <#% if !current_user.is_a?(Talentist) %>
-  <#%= link_to 'javascript:history.back()', class:"btn-edition-container" do  %>
+<% elsif current_user.is_a?(Talent) %>
+  <%= link_to 'javascript:history.back()', class:"btn-edition-container" do  %>
       <p class="no-margin label-edit align-center green"><i class="fas fa-angle-left"></i> Retour</p>
-  <#% end %>
-<#% end %> -->
+  <% end %>
+<% end %>
 
 
 <div class="container-show grid-show">
@@ -47,7 +46,14 @@
 
         <hr class="separateur-show ligne-horizontal">
 
-        <!-- Site internet -->
+        <!-- Domaine d'activité -->
+          <div class="row margin-bottom-15">
+            <p class="titre-rubrique-1 col-xs-12 no-padding">Domaine d'activité</p>
+            <i class="far fa-compass green titre-rubrique-3 col-xs-1 no-padding"></i>
+            <p class="titre-rubrique-3 no-margin col-xs-11 no-padding"><%= @startup.sectors.last.title.present? ? @startup.sectors.last.title : "Ajoutez votre domaine d'activité" %></p>
+          </div>
+
+          <!-- Site internet -->
           <div class="row margin-bottom-15">
             <p class="titre-rubrique-1 col-xs-12 no-padding">Site internet</p>
             <i class="far fa-compass green titre-rubrique-3 col-xs-1 no-padding"></i>
@@ -147,7 +153,7 @@
     <% end %>
 
     <!-- Section découverte de l'entreprise -->
-      <div class="blue-background margin-top-background">
+      <div class="blue-background <%= !@startup.pictures.present? && current_user.is_a?(Talent) ? "" : "margin-top-background" %>">
 
         <!-- Titre section -->
           <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
