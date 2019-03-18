@@ -114,7 +114,7 @@
             <div class="relative">
               <hr class="barre-pointee">
               <div class="talent-experiences">
-                <% talent[:experiences].each do |experience| %>
+                <% talent[:experiences].first(2).each do |experience| %>
                     <div class="flex">
                       <div>
                         <div class="point-barre-pointee"></div>
@@ -129,6 +129,32 @@
                         <% end %>
                       </div>
                     </div>
+                <% end %>
+                <% if talent[:experiences].length > 2 %>
+                  <% talent[:experiences].last(talent[:experiences].length - 2).each do |experience| %>
+                    <div class="read-more-content">
+                      <div class="flex">
+                        <div>
+                          <div class="point-barre-pointee"></div>
+                        </div>
+                        <div class="margin-bottom-30">
+                          <p class="experience-post"><%= experience[:position].present? ? experience[:position] : "-" %></p>
+                          <p class="experience-entreprise"><%= experience[:company_type].present? ? experience[:company_type] : "-" %></p>
+                          <% if experience[:currently] %>
+                            <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:currently] %></p>
+                          <% else %>
+                            <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:years] %></p>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                  <div class="flex">
+                    <div>
+                      <div class="point-barre-pointee"></div>
+                    </div>
+                    <p class="read-more" data-text-swap="Close" style="border-radius: 6px; padding: 1px 6px;">+ <%= pluralize(talent[:experiences].length - 2, 'expérience') %> </p>
+                  </div>
                 <% end %>
               </div>
             </div>
