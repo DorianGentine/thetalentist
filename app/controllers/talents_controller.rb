@@ -5,10 +5,10 @@ class TalentsController < ApplicationController
 
   def index
     @talentist = current_talentist
-    # Talent.all.first(15).each do |talent|
-    #   talent.save
-    # end
-    reminde_new_talents_less_than(2.weeks.ago, 70)
+    Talent.all.each do |talent|
+      talent.save
+    end
+    # reminde_new_talents_less_than(2.weeks.ago, 70)
 
     if !@talents = policy_scope(Talent)
       if current_user.is_a?(Talent)
