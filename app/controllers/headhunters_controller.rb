@@ -4,8 +4,16 @@ class HeadhuntersController < ApplicationController
     :update_profile, :update_startup, :update_photos, :edit
   ]
   def repertory
-    @headhunter = current_headhunter
-    authorize @headhunter
+    if current_user.is_a?(Talentist)
+      @talentist = current_talentist
+      @headhunter = nil
+      authorize @talentist
+    else
+      @talentist = nil
+      @headhunter = current_headhunter
+      authorize @headhunter
+    end
+
 
     @relationship = Relationship.new
     @job_alert = JobAlerte.new

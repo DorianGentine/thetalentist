@@ -24,7 +24,7 @@
 
     <% @talents.each do |talent| %>
       <%= cache talent do %>
-        <%= render 'headhunters/talent-card', talent: talent %>
+        <%= render 'talentists/talent-card', talent: talent %>
       <% end %>
     <% end %>
 

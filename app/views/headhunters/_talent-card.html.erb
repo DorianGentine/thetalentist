@@ -1,71 +1,3 @@
-<% if talentist_signed_in? && current_talentist %>
-
-  <div class="col-xs-12 col-md-3 margin-bottom-30 placement-talentist">
-    <div class="relative talent-card">
-
-      <%= render 'headhunters/illu-card', talent: talent %>
-      <%= render 'talents/declined-modal', talent: talent %>
-
-      <div class="border relative">
-
-        <div class="card-title">
-          <p><%= talent.jobs.count > 0 ? talent.jobs.first.title : "pas renseigné" %></p>
-        </div>
-
-        <div class="talent-job" style="height: 80px">
-          <h2 style="font-size: 16px; text-transform: capitalize;">
-            <%= talent.firstname.present? ? talent.firstname : "No-info" %> <%= talent.name.present? ? talent.name : "No-info" %>
-          </h2>
-        </div>
-
-        <div class="margin-bottom-15 margin-top-15">
-          <%= simple_form_for talent , url: to_validate_talent_path(talent) do |f| %>
-            <div class="btn-validate margin-bottom-15">
-              <div class="<%= "green_validation" if talent.validated === true %>">
-                <%= f.submit "Accepter" %>
-              </div>
-              <div class="<%= "red_validation" if talent.validated === false %>">
-                <p class="modal-button no-margin"  data-target= "modal_declined_<%= talent.id %>" >Refuser</p>
-              </div>
-            </div>
-            <div class="btn-validate">
-              <div class="<%= "green_validation" if talent.visible == true %>">
-                <%= f.submit "Visible"%>
-              </div>
-              <div class="<%= "red_validation" if talent.visible === false %>">
-                <%= f.submit "Invisible" %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-
-        <div class="margin-bottom-15">
-          <p class="no-margin"><i class="far fa-clock margin-right-15">
-            </i>MAJ : <%= l(talent.updated_at, :locale => :fr) %>
-          </p>
-          <p class="no-margin">
-
-            <i class='<%#= talent.completing > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle" %> margin-right-15'></i>profil complété à <strong class='<%#= talent.completing > 85 ? "green" : "red"  %>'><%#= talent.completing %>%</strong>
-
-          </p>
-        </div>
-
-
-        <div class="lien-messagerie-profil">
-
-          <% if Mailboxer::Conversation.participant(talent).count > 0 %>
-            <%= link_to "Messages", talent_conversation_path(talent, talent.mailbox.conversations.last)%>
-          <% else %>
-            <a style="font-size: 12px;">Aucun message</a>
-          <% end %>
-          <%= link_to "Profil", talent_path(talent)%>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-<% else %>
 
   <div class="col-xs-12 col-md-4" style="padding: 20px 25px;">
     <div class="talent-card modal-button" data-target= "modal_<%= talent[:id] %>" style="height: 400px;">
@@ -142,5 +74,3 @@
       </div>
     </div>
   </div>
-
-<% end %>

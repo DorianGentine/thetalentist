@@ -13,6 +13,10 @@
           <% else %>
             <%= render 'relationships/form', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
           <% end %>
+        <% elsif current_user.is_a?(Talentist) %>
+          <div class="contact-btn en-relation">
+            <p> Votre demande à été envoyé </p>
+          </div>
         <% end %>
       </div>
       <span class="close" id="close_modal_<%= talent[:id] %>">

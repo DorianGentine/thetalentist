@@ -1,5 +1,7 @@
 <!-- Répertoire côté start-up -->
-<%= render 'create_alert' %>
+<% if !@headhunter.nil? %>
+  <%= render 'create_alert' %>
+<% end %>
 <% if params[:query] == "new_member" %>
   <%= render 'modal_welcome' %>
 <% end %>

@@ -39,7 +39,7 @@ class Talents::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to steps_talent_info_path(:formations)
       end
     else
-      # session['devise.linkedin_data'] = request.env['omniauth.auth']
+      session['devise.linkedin_data'] = request.env['omniauth.auth']
       redirect_to new_talent_registration_url
     end
   end
