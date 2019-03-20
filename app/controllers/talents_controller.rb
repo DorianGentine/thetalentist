@@ -6,6 +6,7 @@ class TalentsController < ApplicationController
   def index
     @talentist = current_talentist
     Talent.all.each do |talent|
+      p "talent #{talent.id}"
       talent.save
     end
     # reminde_new_talents_less_than(2.weeks.ago, 70)
