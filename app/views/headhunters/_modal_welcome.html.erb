@@ -14,11 +14,26 @@
         Attention ces profils sont anonymes! Demandez une mise en contact avec les talents qui vous intéressent et ils reviendront vers vous en acceptant ou refusant.
         <br><br>
         Et n'oubliez pas de compléter votre profil pour intéresser au mieux nos talents 😇<br><br>À bientôt</p>
-
-      <button class="col-lg-6 col-lg-offset-3 col-xs-12 closeWelcome">J'ai compris</button>
+      <%= link_to "J'ai compris", repertoire_path, class:"col-lg-6 col-lg-offset-3 col-xs-12 closeWelcome" %>
     </div>
   </div>
 </div>
+
+<style>
+  #modal-welcome a {
+      color: #4ECCA3;
+      background: transparent;
+      border: 1px solid #4ECCA3;
+      border-radius: 15px;
+      padding: 5px 20px;
+      transition: 0.3s;
+      text-align: center;
+  }
+   #modal-welcome a:hover {
+    color: white;
+    background: #4ECCA3;
+  }
+</style>
 
 <script>
   const modalWelcome = document.getElementById("modal-welcome");

@@ -313,7 +313,7 @@ class Talent < ApplicationRecord
   end
 
   def save_completed_profil
-    # self.completing = self.completed_totaly
+    self.completing = self.completed_totaly
   end
 
   def pass_from_cv_to_completing

@@ -9,6 +9,10 @@ class TalentistPolicy < ApplicationPolicy
     user == record
   end
 
+  def repertory?
+    user == record
+  end
+
   def index?
     # scope.where(:id => record.id).exists? && user == record
   end

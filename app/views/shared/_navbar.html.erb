@@ -124,6 +124,9 @@
           </div>
         </div>
       <% elsif talentist_signed_in? && current_talentist %>
+        <%= link_to repertoire_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+          <i class="fas fa-user-friends"></i> RÉPERTOIRE
+        <% end %>
         <% if current_talentist.admin %>
           <%= link_to "ADMIN", admin_root_path, class: "navbar-wagon-item navbar-wagon-link" %>
         <% end %>
