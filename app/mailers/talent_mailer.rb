@@ -59,6 +59,7 @@ class TalentMailer < ApplicationMailer
   end
 
   def reminder_completed(user_id)
+    p "Talent: reminder completed id: #{user_id}"
     @user = Talent.find(user_id)
     mail(
       to: @user.email,

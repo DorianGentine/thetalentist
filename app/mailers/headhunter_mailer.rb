@@ -24,6 +24,7 @@ class HeadhunterMailer < ApplicationMailer
   end
 
   def reminder(user_id)
+    p "Headhunter: reminder id: #{user_id}"
     @user = Headhunter.find(user_id)
     mail(
       to: @user.email,
