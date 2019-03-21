@@ -165,7 +165,7 @@ class Talent < ApplicationRecord
     talent_params[:city] =  auth.info.location
     talent_params[:linkedin] =  auth.info.urls.public_profile
     talent_params.merge! auth.info.slice(:email)
-    talent_params[:photo] = auth.info.image
+    talent_params[:linkedin_picture_url] = auth.info.image
     talent_params[:token] = auth.credentials.token
     # talent_params[:token_expiry] = Time.at(auth.credentials.expires_at)
     talent_params = talent_params.to_h
@@ -221,12 +221,20 @@ class Talent < ApplicationRecord
     end
   end
 
+  def display_linkedin?
+    if self.linkedin_picture_url.present? && self.display_linkedin_picture
+      return true
+    else
+      return false
+    end
+  end
+
   def completed_profil
     count = 0
     value_input = stat(8)
     self.firstname.present? ? count += value_input : count
     self.name.present? ? count += value_input : count
-    self.photo? ? count += value_input : count
+    self.photo? || self.display_linkedin? ? count += value_input : count
     self.phone.present? ? count += value_input : count
     self.city.present? ? count += value_input : count
     self.linkedin.present? ? count += value_input : count

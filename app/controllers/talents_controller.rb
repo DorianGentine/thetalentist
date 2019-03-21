@@ -9,7 +9,7 @@ class TalentsController < ApplicationController
     #   p "talent #{talent.id}"
     #   talent.save
     # end
-    reminde_new_talents_less_than(2.weeks.ago, 70)
+    # reminde_new_talents_less_than(2.weeks.ago, 70)
 
     if !@talents = policy_scope(Talent)
       if current_user.is_a?(Talent)
@@ -266,6 +266,7 @@ private
       :terms_of_condition,
       :no_more,
       :sector_ids,
+      :display_linkedin_picture,
       # hobby_ids: [],
       # experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
       # next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],

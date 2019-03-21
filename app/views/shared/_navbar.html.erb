@@ -97,7 +97,9 @@
           <div class="dropdown">
             <% if current_talent.photo.present? %>
               <%= cl_image_tag current_talent.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
-            <% else %>
+            <% elsif current_talent.display_linkedin? %>
+              <%= cl_image_tag current_talent.linkedin_picture_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+            <% else current_talent.linkedin_picture_url.nil? %>
               <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
                 <div class="initiale">
                   <p style="font-size: 14px; font-weight: 400; margin: 0; color: white;"><%= current_talent.firstname.split(//).first.upcase %><%= current_talent.name.split(//).first.upcase %></p>

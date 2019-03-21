@@ -17,7 +17,7 @@
   <% elsif current_user.is_a?(Headhunter) %>
     <%= link_to("Mon profil", headhunter_path(current_headhunter), :class => "link__error-page") %>
   <% elsif current_user.is_a?(Talentist) %>
-    <%= link_to("Mon profil", talentist_path(current_talentist), :class => "link__error-page") %>
+    <%= link_to("Mon profil", talents_path(current_talentist), :class => "link__error-page") %>
   <% else %>
     <%= link_to("Page d'accueil", root_path, :class => "link__error-page") %>
   <% end %>
