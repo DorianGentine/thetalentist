@@ -14,7 +14,7 @@
     <%= render 'conversations' %>
   </div>
 
-  <div class="bordure-droite col-md-6 col-sm-9 col-xs-12 no-padding">
+  <div class="bordure-droite col-md-6 col-sm-9 col-xs-12 no-padding" style="height: calc(100vh - 70px);">
     <div class="premiere-ligne nom-discussion row">
       <!-- div Prénom Nom et poste  -->
       <div class="modal-button visible-xs col-xs-2" style="text-align: center" data-target="modal_conversations">
@@ -80,7 +80,7 @@
         (current_user.is_a?(Talent) && !@participant.is_a?(Headhunter)) ||
         (current_user.is_a?(Headhunter) && @relationship && @relationship.status != "Accepter") ||
         (current_user.is_a?(Headhunter) && !@participant.is_a?(Talent)) %>
-        <div id="conversation" style="height: calc(100vh - 230px);">
+        <div id="conversation" style="height: calc(100vh - 250px);">
       <% else %>
         <div id="conversation">
       <% end %>
@@ -105,21 +105,6 @@
 
       <% end %>
 
-      <script>
-        var message = document.getElementById("mailboxer_message_body")
-        var sendButton = document.getElementById("send-bar-btn")
-        sendButton.disabled = true
-        message.addEventListener("input", function() {
-          var textMessage = message.value
-          if (textMessage == "") {
-            sendButton.classList.add("gray-button")
-            sendButton.disabled = true
-          } else {
-            sendButton.classList.remove("gray-button")
-            sendButton.disabled = false
-          }
-        })
-      </script>
 
       <!-- div accepter la relation -->
         <% if current_user.is_a?(Talent) && @connexion %>
@@ -175,6 +160,22 @@
 
 </div>
 
+<script>
+  var message = document.getElementById("mailboxer_message_body")
+  var sendButton = document.getElementById("send-bar-btn")
+  sendButton.disabled = true
+  message.addEventListener("input", function() {
+    var textMessage = message.value
+    if (textMessage == "") {
+      sendButton.classList.add("gray-button")
+      sendButton.disabled = true
+    } else {
+      sendButton.classList.remove("gray-button")
+      sendButton.disabled = false
+    }
+  })
+
+</script>
 
 
 
