@@ -247,10 +247,13 @@ class Talent < ApplicationRecord
 
   def completed_formation_skill_language
     count = 0
-    formation_count = self.talent_formations.size * 3
-    language_count = self.talent_languages.size * 2
-    skills_count = self.talent_skills.size * 1
+    formation_count = self.talent_formations.size > 0 ? self.talent_formations.size * 3 : 3
+    language_count = self.talent_languages.size > 0 ? self.talent_languages.size * 2 : 2
+    skills_count = self.techno_ids.size > 0 ? self.techno_ids.size * 1 : 1
     value_input = stat(formation_count + language_count + skills_count)
+
+    p "value_input #{value_input}"
+    p "count starting #{count}"
     if self.talent_formations.count > 0
       self.talent_formations.each do |talent_formation|
         talent_formation.formation_id.present? ? count += value_input : count
@@ -260,23 +263,26 @@ class Talent < ApplicationRecord
         # talent_formation.type_of_formation.present? ? count += value_input : count
       end
     end
+    p "count formation #{count}"
     if self.talent_languages.count > 0
       self.talent_languages.each do |talent_language|
         talent_language.language_id.present? ? count += value_input : count
         talent_language.level.present? ? count += value_input : count
       end
     end
-    if self.talent_skills.count > 0
-      self.talent_skills.each do |talent_skill|
-        talent_skill.skill_id.present? ? count += value_input : count
+    p "count formation + languages #{count}"
+    if self.techno_ids.count > 0
+      self.techno_ids.each do |techno_id|
+        techno_id.present? ? count += value_input : count
         # talent_skill.level.present? ? count += value_input : count
       end
     end
+    p "count formation + languages + skills #{count}"
     return count.round(0)
   end
   def completed_experience
     count = 0
-    experiences_count = self.experiences.size * 5
+    experiences_count = self.experiences.size > 0 ? self.experiences.size * 5 : 5
     value_input = stat(experiences_count)
     self.experiences.each do |experience|
       experience.position.present? ? count += value_input : count
@@ -291,8 +297,8 @@ class Talent < ApplicationRecord
 
   def completed_next_aventures
     count = 0
-    next_aventure_count = self.next_aventures.size * 15
-    small_plu_count = self.your_small_plus.size * 1
+    next_aventure_count = self.next_aventures.size > 0 ? self.next_aventures.size * 15 : 15
+    small_plu_count = self.your_small_plus.size > 0 ? self.your_small_plus.size * 1 : 1
     # skills_count = self.talent_skills.size * 1
     value_input = stat(next_aventure_count + small_plu_count)
     self.next_aventures.each do |next_aventure|

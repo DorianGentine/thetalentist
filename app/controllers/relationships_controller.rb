@@ -6,11 +6,11 @@ class RelationshipsController < ApplicationController
 
     @talent = @relationship.talent
     @relationship.status = "pending"
+    @headhunter = @relationship.headhunter
     if @relationship.save
-      @headhunter = @relationship.headhunter
       @headhunter.send_message(@talent, "#{@headhunter.firstname} souhaite rentrer en contact avec vous", "#{@headhunter.firstname}")
-      flash[:success] = "Relationship was created!"
-      # redirect_to repertoire_path, flash: {notice: "Vous êtes maintenant en relation avec ce Talent."}
+      @relationship.conversation_id = Mailboxer::Conversation.between(@talent, @headhunter).last.id
+      @relationship.save
       @talent.send_invitation(@headhunter)
       respond_to do |format|
         format.html { redirect_to repertoire_path }

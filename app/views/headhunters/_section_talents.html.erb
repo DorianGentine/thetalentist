@@ -16,9 +16,9 @@
   <div class="row">
 
     <% @talents.each do |talent| %>
+      <%= render 'shared/modal', talent: talent, cached: true %>
       <%= cache talent do %>
         <%= render 'talent-card', talent: talent, cached: true %>
-        <%= render 'shared/modal', talent: talent, cached: true %>
       <% end %>
     <% end %>
 
