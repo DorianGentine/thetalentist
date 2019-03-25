@@ -1,6 +1,5 @@
-<!-- c'est pourquoi ca ?? -->
+<!-- Talentist watch talent and headhunter -->
 <% if params[:talent_id] %>
-    <% raise %>
   <%= link_to talent_conversation_path(params[:talent_id],conversation) do %>
     <div class="conversation-card">
       <div class="photo-profil">
@@ -22,7 +21,6 @@
   <% end %>
 <!-- pareil ?? -->
 <% elsif params[:headhunter_id] %>
-  <% raise %>
   <%= link_to headhunter_conversation_path(params[:headhunter_id], conversation) do %>
     <div class="conversation-card">
       <div class="photo-profil">
