@@ -2,13 +2,30 @@
 <% if receipt.message.sender != @current_user %>
   <div class="message left">
     <div class="avatar">
-      <% if @participant.photo.present? %>
-        <%= cl_image_tag @participant.photo.url(:bright_face) %>
+      <% if @participant.is_a?(Talent) && @user.is_a?(Headhunter) %>
+        <% if @relationship.status == "Refuser" || @relationship.status == "Pending" %>
+
+              <i class="fas fa-rocket"></i>
+
+        <% end %>
       <% else %>
-        <p><%= @participant.firstname.split(//).first.upcase %>
+        <% if @participant.photo.present? %>
+          <%= cl_image_tag @participant.photo.url(:bright_face) %>
+        <% elsif @participant.is_a?(Talent) && @participant.display_linkedin? %>
+          <%= cl_image_tag @participant.linkedin_picture_url, style:"border-radius: 50%;" %>
+        <% else %>
+          <p><%= @participant.firstname.split(//).first.upcase %></p>
+        <% end %>
       <% end %>
     </div>
-    <p class="x-commented"><%= receipt.message.sender.firstname %></p>
+
+    <% if @participant.is_a?(Talent) && @user.is_a?(Headhunter) %>
+      <% if @relationship.status == "Refuser" || @relationship.status == "Pending" %>
+        <p class="x-commented">Talent</p>
+      <% end %>
+    <% else %>
+      <p class="x-commented"><%= receipt.message.sender.firstname %></p>
+    <% end %>
     <%= simple_format(receipt.message.body, class: 'the-message') %>
     <% if receipt.message.attachment.url.present? %>
       <p class="the-message"><%= link_to  "Document envoyé", receipt.message.attachment.url, target: "_blank" %></p>
@@ -20,8 +37,10 @@
     <div class="avatar">
       <% if @user.photo.present? %>
         <%= cl_image_tag @user.photo.url(:bright_face) %>
+      <% elsif @user.is_a?(Talent) && @user.display_linkedin? %>
+        <%= cl_image_tag @user.linkedin_picture_url, style:"border-radius: 50%;" %>
       <% else %>
-        <p><%= @user.firstname.split(//).first.upcase %>
+        <p><%= @user.firstname.split(//).first.upcase %></p>
       <% end %>
     </div>
     <p class="x-commented"><%= receipt.message.sender.firstname %></p>

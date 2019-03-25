@@ -14,7 +14,7 @@
     <%= render 'conversations' %>
   </div>
 
-  <div class="bordure-droite col-md-6 col-sm-9 col-xs-12 no-padding">
+  <div class="bordure-droite col-md-6 col-sm-9 col-xs-12 no-padding" style="height: calc(100vh - 70px);">
     <div class="premiere-ligne nom-discussion row">
       <!-- div Prénom Nom et poste  -->
       <div class="modal-button visible-xs col-xs-2" style="text-align: center" data-target="modal_conversations">
@@ -23,20 +23,24 @@
 
       <div class="col-lg-12 col-xs-10">
         <% if @participant.is_a?(Talent) %>
-          <% if @relationship && @relationship.status == "Accepter" %>
+          <% if !@relationship.nil? && @relationship.status == "Accepter" %>
             <h2 class="no-margin"><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
             <p class="no-margin"><%= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_" %></p>
           <% else %>
             <% if @participant.experiences.present? && @participant.experiences.last.position.present? %>
               <h2 class="no-margin"><%= @participant.experiences.last.position.capitalize.truncate(45, separator:' ', omission:'') %></h2>
             <% else %>
-              <h2 class="no-margin">Talent - Position à remplire</h2>
+              <h2 class="no-margin">Talent - Position inconnue</h2>
             <% end %>
-            <p class="no-margin">En attente ...</p>
+            <% if !@relationship.nil? %>
+              <p class="no-margin"> <%= @relationship.status == "Refuser" ? "Le talent ne souhaite pas échanger pour le moment" : "En attente ..." %> </p>
+            <% else %>
+              <p class="no-margin"><%= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_/" %></p>
+            <% end %>
           <% end %>
         <% elsif @participant.is_a?(Headhunter)%>
           <h2 class="no-margin"><%= @participant.firstname.capitalize %> de <%= @participant.startup.name.capitalize %></h2>
-          <p class="no-margin"> <%= @participant.job.capitalize %> </p>
+          <p class="no-margin"> <%= @participant.job.capitalize %></p>
         <% else %>
           <h2 class="no-margin"><%= @participant.firstname.capitalize %></h2>
           <p class="no-margin"> The Talentist </p>
@@ -80,15 +84,15 @@
         (current_user.is_a?(Talent) && !@participant.is_a?(Headhunter)) ||
         (current_user.is_a?(Headhunter) && @relationship && @relationship.status != "Accepter") ||
         (current_user.is_a?(Headhunter) && !@participant.is_a?(Talent)) %>
-        <div id="conversation" style="height: calc(100vh - 230px);">
+        <div id="conversation" style="height: calc(100vh - 250px);">
       <% else %>
-        <div id="conversation">
+        <div id="conversation" style="height: calc(100vh - 320px);">
       <% end %>
 
           <% @messages.each do |receipt| %>
-            <%= cache receipt do %>
-              <%= render 'conversations/messages', receipt: receipt %>
-            <% end %>
+
+              <%= render 'conversations/messages', receipt: receipt, cached: true %>
+
           <% end %>
         </div>
 
@@ -105,21 +109,6 @@
 
       <% end %>
 
-      <script>
-        var message = document.getElementById("mailboxer_message_body")
-        var sendButton = document.getElementById("send-bar-btn")
-        sendButton.disabled = true
-        message.addEventListener("input", function() {
-          var textMessage = message.value
-          if (textMessage == "") {
-            sendButton.classList.add("gray-button")
-            sendButton.disabled = true
-          } else {
-            sendButton.classList.remove("gray-button")
-            sendButton.disabled = false
-          }
-        })
-      </script>
 
       <!-- div accepter la relation -->
         <% if current_user.is_a?(Talent) && @connexion %>
@@ -175,6 +164,22 @@
 
 </div>
 
+<script>
+  var message = document.getElementById("mailboxer_message_body")
+  var sendButton = document.getElementById("send-bar-btn")
+  sendButton.disabled = true
+  message.addEventListener("input", function() {
+    var textMessage = message.value
+    if (textMessage == "") {
+      sendButton.classList.add("gray-button")
+      sendButton.disabled = true
+    } else {
+      sendButton.classList.remove("gray-button")
+      sendButton.disabled = false
+    }
+  })
+
+</script>
 
 
 

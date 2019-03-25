@@ -227,7 +227,7 @@ class HeadhuntersController < ApplicationController
       else # @headhunter.validated == false
         validated_action(true)
         # find the conversation between two user
-        conversations = Mailboxer::Conversation.participant(@talentist).participant(@headhunter)
+        conversations = Mailboxer::Conversation.between(@talentist, @headhunter)
         if conversations.size > 0
           @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@headhunter.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
         else
