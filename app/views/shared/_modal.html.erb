@@ -64,7 +64,7 @@
                   <% end %>
                 </p>
               </div>
-              
+
               <div class="row">
                 <% talent[:formations].each do |talent_formation| %>
                   <p class="col-xs-12 talent-school-item"><i class="fas fa-graduation-cap margin-right-5"></i>
@@ -80,10 +80,9 @@
               <p class="talent-metier">
                 <i class="fas fa-search margin-right-5"></i>
                 <%=talent[:job].present? ? talent[:job].upcase : "-" %>
-               </p>
+              </p>
             </div>
         </div>
-
 
         <div class="row lower-body">
           <!-- lower left -->
@@ -96,13 +95,13 @@
                   <%= talent[:next_aventure][:famous_person].present? ? talent[:next_aventure][:famous_person] : "-" %>
                 <% else %>
                   -
-                <%# end %>
-              </p> -->
+                <% end %>
+              </p>
 
               <h5 class="margin-top-30">Le job de mes rêves</h5>
               <p class="no-margin-xs texte-rubrique-3 more" style="white-space: unset;">
                 <% if talent[:next_aventure].present? %>
-                    <%= talent[:next_aventure][:work_for_free].present? ? talent[:next_aventure][:work_for_free] : "-" %>
+                  <%= talent[:next_aventure][:work_for_free].present? ? talent[:next_aventure][:work_for_free] : "-" %>
                 <% else %>
                   -
                 <% end %>
@@ -115,20 +114,20 @@
                 <hr class="barre-pointee">
                 <div class="talent-experiences">
                   <% talent[:experiences].first(2).each do |experience| %>
-                      <div class="flex">
-                        <div>
-                          <div class="point-barre-pointee"></div>
-                        </div>
-                        <div class="margin-bottom-30">
-                          <p class="experience-post"><%= experience[:position].present? ? experience[:position] : "-" %></p>
-                          <p class="experience-entreprise"><%= experience[:company_type].present? ? experience[:company_type] : "-" %></p>
-                          <% if experience[:currently] %>
-                            <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:currently] %></p>
-                          <% else %>
-                            <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:years] %></p>
-                          <% end %>
-                        </div>
+                    <div class="flex">
+                      <div>
+                        <div class="point-barre-pointee"></div>
                       </div>
+                      <div class="margin-bottom-30">
+                        <p class="experience-post"><%= experience[:position].present? ? experience[:position] : "-" %></p>
+                        <p class="experience-entreprise"><%= experience[:company_type].present? ? experience[:company_type] : "-" %></p>
+                        <% if experience[:currently] %>
+                          <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:currently] %></p>
+                        <% else %>
+                          <p class="experience-duree"><%= experience[:starting] %> - <%= experience[:years] %></p>
+                        <% end %>
+                      </div>
+                    </div>
                   <% end %>
                   <% if talent[:experiences].length > 2 %>
                     <% talent[:experiences].last(talent[:experiences].length - 2).each do |experience| %>
@@ -156,6 +155,7 @@
                       <p class="read-more" data-text-swap="Fermer" style="border-radius: 6px; padding: 1px 6px;">+ <%= pluralize(talent[:experiences].length - 2, 'expérience') %> </p>
                     </div>
                   <% end %>
+                </div>
               </div>
             </div>
           <!-- lower right -->
@@ -198,11 +198,12 @@
                   <%= render 'headhunters/relationship', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
                 <% else %>
                   <%= render 'relationships/form', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
-                  <% end %>
                 <% end %>
+              <% end %>
             </div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+
