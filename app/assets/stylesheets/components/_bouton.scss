@@ -93,9 +93,17 @@
     }
   }
 
+  .en-relation{
+    width: 240px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid white;
+  }
+
   .modal-header{
     .contact-btn{
       margin-right: 40px;
+      padding: 0 20px;
+      width: unset;
     }
   }
 

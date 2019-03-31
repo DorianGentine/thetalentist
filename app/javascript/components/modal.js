@@ -14,9 +14,15 @@ function revealModal() {
 
     window.onclick = function(event) {
       if (event.target == targetModal) {
-          targetModal.style.display = "none";
+        targetModal.style.display = "none";
       }
     }
+
+    window.onkeydown = function(event){
+      if (event.keyCode == 27 && targetModal.style.display == "block") {
+        targetModal.style.display = "none";
+      }
+    };
   }
 
   let modalButtonsList = document.querySelectorAll('.modal-button')

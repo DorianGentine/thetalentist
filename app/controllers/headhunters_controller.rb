@@ -86,8 +86,8 @@ class HeadhuntersController < ApplicationController
         overview: talent.overview,
         update: talent.updated_at,
         next_aventure: {
-          famous_person: talent.next_aventures.count > 0 && talent.next_aventures.last.famous_person.present? ? talent.next_aventures.last.famous_person : "Le talent n'a pas souhaité répondre à cette question.",
-          work_for_free: talent.next_aventures.count > 0 && talent.next_aventures.last.work_for_free.present? ? talent.next_aventures.last.work_for_free : "Le talent n'a pas souhaité répondre à cette question.",
+          famous_person: talent.next_aventures.count > 0 && talent.next_aventures.last.famous_person.present? ? talent.next_aventures.last.famous_person : false,
+          work_for_free: talent.next_aventures.count > 0 && talent.next_aventures.last.work_for_free.present? ? talent.next_aventures.last.work_for_free : false,
           btob: talent.next_aventures.count > 0 && talent.next_aventures.last.btob.present? ? true : false,
           btoc: talent.next_aventures.count > 0 && talent.next_aventures.last.btoc.present? ? true : false,
         },
