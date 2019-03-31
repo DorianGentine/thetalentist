@@ -1,4 +1,4 @@
-
+<!-- Talentist watch talent and headhunter -->
 <% if params[:talent_id] %>
   <%= link_to talent_conversation_path(params[:talent_id],conversation) do %>
     <div class="conversation-card">
@@ -14,12 +14,12 @@
       <div class="conversation-text <%= "strong-color" if conversation.is_unread?(Talent.find(params[:talent_id])) %>">
         <% if conversation.participants.count > 1 %>
           <p class="prenom-contact"><% parti = conversation.participants - [Talent.find(params[:talent_id])] %><%= parti[0].firstname %></p>
-          <p class="apercu-message"><%= conversation.messages.last.body %></p>
+          <p class="apercu-message"><%= conversation.last_message.body %></p>
         <% end %>
       </div>
     </div>
   <% end %>
-
+<!-- pareil ?? -->
 <% elsif params[:headhunter_id] %>
   <%= link_to headhunter_conversation_path(params[:headhunter_id], conversation) do %>
     <div class="conversation-card">
@@ -36,28 +36,60 @@
       <div class="conversation-text <%= conversation.is_unread?(Headhunter.find(params[:headhunter_id])) ? "strong-color" : "" %>">
         <% if conversation.participants.count > 1 %>
           <p class="prenom-contact"><% parti = conversation.participants - [Headhunter.find(params[:headhunter_id])] %><%= parti[0].firstname %></p>
-          <p class="apercu-message"><%= conversation.messages.last.body %></p>
+          <p class="apercu-message"><%= conversation.last_message.body %></p>
         <% end %>
       </div>
     </div>
   <% end %>
-
 <% else %>
   <%= link_to conversation_path(conversation) do %>
     <div class="conversation-card">
-      <div class="photo-profil">
-        <div class="initiale">
-          <% if conversation.participants.count > 1 %>
-            <% parti = conversation.participants - [current_user] %><%= parti[0].firstname.split(//).first.upcase %>
+
+      <% if conversation.participants.count > 1 %>
+        <% parti = conversation.participants - [current_user] %>
+        <!-- Check if relation is accpeted btw headhunter and talent -->
+        <% relation = Relationship.where(talent: parti[0], headhunter: current_user) %>
+        <% if parti[0].is_a?(Talent) && current_user.is_a?(Headhunter) && relation[0].status == "Refuser" %>
+          <div class="photo-profil">
+            <div class="initiale">
+              <i class="fas fa-rocket"></i>
+            </div>
+          </div>
+        <!-- check what type of avatar display -->
+        <% elsif parti[0].is_a?(Talent) && parti[0].display_linkedin? %>
+          <div class="photo-profil">
+            <%= cl_image_tag parti[0].linkedin_picture_url, class:"avatar-conversation" %>
+          </div>
+        <% else %>
+          <% if parti[0].photo? %>
+            <div class="photo-profil">
+              <%= cl_image_tag parti[0].photo, class:"avatar-conversation" %>
+            </div>
+          <% else %>
+            <div class="photo-profil">
+              <div class="initiale">
+                <%= parti[0].firstname.split(//).first.upcase %>
+              </div>
+              <div class="statut"></div>
+            </div>
           <% end %>
-        </div>
-        <div class="statut"></div>
-      </div>
+        <% end %>
+      <% end %>
 
       <div class="conversation-text <%= "strong-color" if conversation.is_unread?(current_user) %>">
         <% if conversation.participants.count > 1 %>
-          <p class="prenom-contact"><% parti = conversation.participants - [current_user] %><%= parti[0].firstname %></p>
-          <p class="apercu-message"><%= conversation.messages.last.body %></p>
+          <% if conversation.participants.count > 1 %>
+            <% parti = conversation.participants - [current_user] %>
+            <!-- Check if relation is accpeted btw headhunter and talent -->
+            <% relation = Relationship.where(talent: parti[0], headhunter: current_user) %>
+            <% if parti[0].is_a?(Talent) && current_user.is_a?(Headhunter) && relation[0].status == "Refuser" %>
+              <p class="prenom-contact">Talent</p>
+              <p class="apercu-message"><%= conversation.last_message.body %></p>
+            <% else %>
+              <p class="prenom-contact"><%= parti[0].firstname %></p>
+              <p class="apercu-message"><%= conversation.last_message.body %></p>
+            <% end %>
+          <% end %>
         <% end %>
       </div>
     </div>

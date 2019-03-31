@@ -13,7 +13,7 @@ class Talent < ApplicationRecord
   validates_confirmation_of :password, message: "Votre mot de passe ne concodre pas"
 
   validates_presence_of :city, :message => "Le lieu doit être remplit", unless: :skip_city_validation
-  validates_presence_of :phone, :message => "Votre téléphone doit être remplit", unless: :skip_phone_validation
+  # validates_presence_of :phone, :message => "Votre téléphone doit être remplit", unless: :skip_phone_validation
   validates_presence_of :email, :message => "l'email doit être remplit"
   validates_presence_of :firstname, :message => "le prénom doit être remplit"
   validates_presence_of :name, :message => "le nom doit être remplit"
@@ -165,7 +165,7 @@ class Talent < ApplicationRecord
     talent_params[:city] =  auth.info.location
     talent_params[:linkedin] =  auth.info.urls.public_profile
     talent_params.merge! auth.info.slice(:email)
-    talent_params[:photo] = auth.info.image
+    talent_params[:linkedin_picture_url] = auth.info.image
     talent_params[:token] = auth.credentials.token
     # talent_params[:token_expiry] = Time.at(auth.credentials.expires_at)
     talent_params = talent_params.to_h
@@ -221,12 +221,20 @@ class Talent < ApplicationRecord
     end
   end
 
+  def display_linkedin?
+    if self.linkedin_picture_url.present? && self.display_linkedin_picture
+      return true
+    else
+      return false
+    end
+  end
+
   def completed_profil
     count = 0
     value_input = stat(8)
     self.firstname.present? ? count += value_input : count
     self.name.present? ? count += value_input : count
-    self.photo? ? count += value_input : count
+    self.photo? || self.display_linkedin? ? count += value_input : count
     self.phone.present? ? count += value_input : count
     self.city.present? ? count += value_input : count
     self.linkedin.present? ? count += value_input : count
@@ -239,10 +247,13 @@ class Talent < ApplicationRecord
 
   def completed_formation_skill_language
     count = 0
-    formation_count = self.talent_formations.size * 3
-    language_count = self.talent_languages.size * 2
-    skills_count = self.talent_skills.size * 1
+    formation_count = self.talent_formations.size > 0 ? self.talent_formations.size * 3 : 3
+    language_count = self.talent_languages.size > 0 ? self.talent_languages.size * 2 : 2
+    skills_count = self.techno_ids.size > 0 ? self.techno_ids.size * 1 : 1
     value_input = stat(formation_count + language_count + skills_count)
+
+    p "value_input #{value_input}"
+    p "count starting #{count}"
     if self.talent_formations.count > 0
       self.talent_formations.each do |talent_formation|
         talent_formation.formation_id.present? ? count += value_input : count
@@ -252,23 +263,26 @@ class Talent < ApplicationRecord
         # talent_formation.type_of_formation.present? ? count += value_input : count
       end
     end
+    p "count formation #{count}"
     if self.talent_languages.count > 0
       self.talent_languages.each do |talent_language|
         talent_language.language_id.present? ? count += value_input : count
         talent_language.level.present? ? count += value_input : count
       end
     end
-    if self.talent_skills.count > 0
-      self.talent_skills.each do |talent_skill|
-        talent_skill.skill_id.present? ? count += value_input : count
+    p "count formation + languages #{count}"
+    if self.techno_ids.count > 0
+      self.techno_ids.each do |techno_id|
+        techno_id.present? ? count += value_input : count
         # talent_skill.level.present? ? count += value_input : count
       end
     end
+    p "count formation + languages + skills #{count}"
     return count.round(0)
   end
   def completed_experience
     count = 0
-    experiences_count = self.experiences.size * 5
+    experiences_count = self.experiences.size > 0 ? self.experiences.size * 5 : 5
     value_input = stat(experiences_count)
     self.experiences.each do |experience|
       experience.position.present? ? count += value_input : count
@@ -283,8 +297,8 @@ class Talent < ApplicationRecord
 
   def completed_next_aventures
     count = 0
-    next_aventure_count = self.next_aventures.size * 15
-    small_plu_count = self.your_small_plus.size * 1
+    next_aventure_count = self.next_aventures.size > 0 ? self.next_aventures.size * 15 : 15
+    small_plu_count = self.your_small_plus.size > 0 ? self.your_small_plus.size * 1 : 1
     # skills_count = self.talent_skills.size * 1
     value_input = stat(next_aventure_count + small_plu_count)
     self.next_aventures.each do |next_aventure|
@@ -313,7 +327,7 @@ class Talent < ApplicationRecord
   end
 
   def save_completed_profil
-    # self.completing = self.completed_totaly
+    self.completing = self.completed_totaly
   end
 
   def pass_from_cv_to_completing

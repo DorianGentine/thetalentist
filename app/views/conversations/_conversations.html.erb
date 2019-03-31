@@ -2,8 +2,8 @@
       <h4>MESSAGERIE</h4>
     </div>
     <div class="index-talents">
-
-      <h3>EN ATTENTE</h3>
+      <% if @pending_conversations.count > 0 %>
+        <h3>EN ATTENTE</h3>
         <%  @pending_conversations.each do |conversation| %>
           <% if current_user.is_a?(Headhunter) %>
             <%= link_to conversation_path(conversation) do %>
@@ -18,29 +18,25 @@
                 <div class="conversation-text">
                   <% participant = conversation.participants - [current_user] %>
                   <p class="prenom-contact"> Talent - <%= participant[0].experiences.last.present? ? participant[0].experiences.last.position.capitalize : "" %> </p>
-                  <p class="aperçu-message"><%= truncate(conversation.messages.last.body, length: 20) %></p>
+                  <p class="aperçu-message"><%= truncate(conversation.last_message.body, length: 20) %></p>
                 </div>
               </div>
             <% end %>
           <% else %>
-            <%= cache conversation do %>
-              <%= render 'conversation', :conversation => conversation %>
-            <% end %>
+            <%= render 'conversation', :conversation => conversation %>
           <% end %>
-
         <% end %>
+      <% end %>
       <h3>CONTACTÉS</h3>
 
       <%  @unread_conversations.each do |conversation| %>
-        <%= cache conversation do %>
-          <%= render 'conversation', :conversation => conversation %>
-        <% end %>
+        <%= render 'conversation', :conversation => conversation %>
       <% end %>
 
       <%  @read_accepted_conversations.each do |conversation| %>
-        <%= cache conversation do %>
+        <!-- <#%= cache conversation do %> -->
           <%= render 'conversation', :conversation => conversation %>
-        <% end %>
+        <!-- <#% end %> -->
       <% end %>
 
     </div>

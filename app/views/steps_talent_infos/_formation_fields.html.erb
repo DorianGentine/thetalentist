@@ -11,13 +11,13 @@
     </div>
   <div class="row margin-top-30-xs">
 
-    <div class="col-xs-12 <%= @talent.validated? ? "col-lg-3" : "col-lg-4" %> no-padding">
+    <div class="col-xs-12 <%= @talent.validated? ? "col-lg-4" : "col-lg-4" %> no-padding">
       <div class="margin-right-15 no-margin-xs">
         <%= f.association :formation, collection: Formation.all.order('title ASC'), prompt:"Établissement", label: false, input_html: { :class => "select2", style: "width: 100%" } %>
       </div>
     </div>
 
-    <div class="col-xs-12 <%= @talent.validated? ? "col-lg-3" : "col-lg-4" %> no-padding margin-top-15-xs">
+    <div class="col-xs-12 <%= @talent.validated? ? "col-lg-5" : "col-lg-4" %> no-padding margin-top-15-xs">
       <div class="margin-right-15 no-margin-xs">
         <%= f.input :title, placeholder: "Formation", label: false, input_html: { style: "width: 100%" }, error: f.object.errors.messages[:title][0]  %>
       </div>

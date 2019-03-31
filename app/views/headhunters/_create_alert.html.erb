@@ -13,18 +13,16 @@
 
     <div class="modal-body">
       <p> Séléctionnez vos métiers sur lesquel vous souhaiteriez être prévenu lorsqu'un profil matche avec vos recherches</p>
-      <%= simple_form_for @headhunter do |f| %>
-
-        <div class="row">
-          <div class="col-xs-12 col-md-6 no-padding">
-            <%= f.input :job_ids, collection: Job.all, label: false, input_html: { class: "select2", multiple: "multiple", style: "width: 100%;" } %>
+        <%= simple_form_for @headhunter do |f| %>
+          <div class="row">
+            <div class="col-xs-12 col-md-6 no-padding">
+              <%= f.input :job_ids, collection: Job.all, label: false, input_html: { class: "select2", multiple: "multiple", style: "width: 100%;" } %>
+            </div>
+            <div class="col-xs-12 col-md-6 no-padding">
+              <%= f.submit "Créer une alerte", input_html: { class: "col-xs-12 col-md-6" } %>
+            </div>
           </div>
-          <div class="col-xs-12 col-md-6 no-padding">
-            <%= f.submit "Créer une alerte", input_html: { class: "col-xs-12 col-md-6" } %>
-          </div>
-        </div>
-
-      <% end %>
+        <% end %>
     </div>
   </div>
 </div>

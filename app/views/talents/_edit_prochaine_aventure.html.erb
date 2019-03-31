@@ -6,8 +6,6 @@
 <!-- info sur la prochaine aventure -->
 <%= simple_form_for @talent, url: update_next_aventure_talent_path(@talent), method: :patch, remote: false  do |f|%>
   <%= f.simple_fields_for :next_aventures do |u| %>
-
-  <h2>Test</h2>
     <div class="row margin-bottom-15">
       <div class="col-xs-12 col-lg-6">
         <p class="label-edit no-margin requis">Mobilité</p>

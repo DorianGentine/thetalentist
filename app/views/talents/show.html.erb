@@ -30,6 +30,12 @@
                 <span class="tooltiptext"><%= @talent.visible ? 'Profil visible' : "Profil pas visible" %></span>
               </div>
             </div>
+          <% elsif !@talent.linkedin_picture_url.nil? && @talent.display_linkedin_picture %>
+            <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @talent.linkedin_picture_url %>');">
+              <div class="statut tooltip <%= @talent.visible ? 'green-background' : 'red-background' %>">
+                <span class="tooltiptext"><%= @talent.visible ? 'Profil visible' : "Profil pas visible" %></span>
+              </div>
+            </div>
           <% else %>
 
             <div class="photo-profil margin-auto">

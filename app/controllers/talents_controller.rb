@@ -5,8 +5,11 @@ class TalentsController < ApplicationController
 
   def index
     @talentist = current_talentist
-
-    reminde_new_talents_less_than(2.weeks.ago, 70)
+    # Talent.all.each do |talent|
+    #   p "talent #{talent.id}"
+    #   talent.save
+    # end
+    # reminde_new_talents_less_than(2.weeks.ago, 70)
 
     if !@talents = policy_scope(Talent)
       if current_user.is_a?(Talent)
@@ -162,7 +165,7 @@ class TalentsController < ApplicationController
         validated_action(nil)
       else # @talent.validated == false || @talent.validated == nil
         validated_action(true)
-        conversations = Mailboxer::Conversation.participant(@talentist).participant(@talent)
+        conversations = Mailboxer::Conversation.between(@talentist, @talent)
         if conversations.size > 0
           @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@talent.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
         else
@@ -263,6 +266,7 @@ private
       :terms_of_condition,
       :no_more,
       :sector_ids,
+      :display_linkedin_picture,
       # hobby_ids: [],
       # experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
       # next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],

@@ -1,12 +1,13 @@
 <% if talentist_signed_in? && current_talentist %>
   <% if talent.photo.present? %>
-
     <div class="illu-card-talentist" style="background-image: url('<%= cl_image_path talent.photo, :transformation=>[ :gravity=>"face"] %>');">
       <div class="statut <%= talent.visible ? 'green-background' : 'red-background' %>" style="width: 20px; height: 20px; border: 2px solid;"></div>
     </div>
-
+  <% elsif talent.linkedin_picture_url.present? %>
+    <div class="illu-card-talentist" style="background-image: url('<%= cl_image_path talent.linkedin_picture_url, :transformation=>[ :gravity=>"face"] %>');">
+      <div class="statut <%= talent.visible ? 'green-background' : 'red-background' %>" style="width: 20px; height: 20px; border: 2px solid;"></div>
+    </div>
   <% else %>
-
     <div class="illu-card-talentist">
       <div class="initiale">
         <%= talent.firstname.split(//).first.upcase %><%= talent.name.split(//).first.upcase %>

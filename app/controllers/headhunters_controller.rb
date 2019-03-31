@@ -4,8 +4,16 @@ class HeadhuntersController < ApplicationController
     :update_profile, :update_startup, :update_photos, :edit
   ]
   def repertory
-    @headhunter = current_headhunter
-    authorize @headhunter
+    if current_user.is_a?(Talentist)
+      @talentist = current_talentist
+      @headhunter = nil
+      authorize @talentist
+    else
+      @talentist = nil
+      @headhunter = current_headhunter
+      authorize @headhunter
+    end
+
 
     @relationship = Relationship.new
     @job_alert = JobAlerte.new
@@ -219,7 +227,7 @@ class HeadhuntersController < ApplicationController
       else # @headhunter.validated == false
         validated_action(true)
         # find the conversation between two user
-        conversations = Mailboxer::Conversation.participant(@talentist).participant(@headhunter)
+        conversations = Mailboxer::Conversation.between(@talentist, @headhunter)
         if conversations.size > 0
           @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@headhunter.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
         else

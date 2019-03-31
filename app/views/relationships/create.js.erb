@@ -8,6 +8,14 @@ $(document).ready(function() {
     newRelationForm.innerHTML = innerHTML;
   }
 
+  function refreshNavBar(innerHTML) {
+    let navbar = document.getElementById("navbar");
+    navbar.innerHTML = "";
+    navbar.innerHTML = innerHTML;
+  }
+
+
+  refreshNavBar('<%= j render "shared/navbar" %>');
   refreshForm('<%= j render "headhunters/relationship", headhunter: @headhunter, talent: @talent %>');
 
 

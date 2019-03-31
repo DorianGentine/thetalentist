@@ -32,7 +32,13 @@
 .form-group {
   margin: unset;
 }
-
+#display-btn{
+  .form-check {
+    display: flex;
+    align-items: center;
+    height: 100%
+  }
+}
 
 .margin-auto-new-talent {
   width: 85%;
