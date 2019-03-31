@@ -2,13 +2,13 @@
 <% if Talent.find(talent[:id]).witch_status?(@headhunter) == "pending" %>
   <div class="contact-btn en-relation">
     <%= link_to conversation_path(Talent.find(talent[:id]).find_conversation(@headhunter)) do %>
-      <p> Votre demande à été envoyé </p>
+      <p>Votre demande à été envoyée</p>
     <% end %>
   </div>
 <% else %>
   <div class="contact-btn en-relation">
     <%= link_to conversation_path(Talent.find(talent[:id])) do %>
-      <p> Vous êtes déjà en relation </p>
+      <p>Vous êtes déjà en relation</p>
     <% end %>
   </div>
 <% end %>

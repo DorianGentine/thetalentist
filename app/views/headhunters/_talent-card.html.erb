@@ -41,6 +41,8 @@
                 <%= talent_sector[:title].present? ? talent_sector[:title] + ", " : "" %>
               <% end %>
               <%= talent[:sectors].last[:title].present? ? talent[:sectors].last[:title] : "" %>
+            <% else %>
+              -
             <% end %>
           </p>
 

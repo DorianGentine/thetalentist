@@ -37,11 +37,11 @@
               <div class="talent-info">
                 <p><i class="fas fa-map-marker-alt margin-right-5 green"></i><%= talent[:city] %></p>
                 <p><i class="fas fa-code-branch margin-right-5 green"></i>
-                  <% if talent[:btoc] && talent[:btob] %>
+                  <% if talent[:next_aventure][:btoc] && talent[:next_aventure][:btob] %>
                     BtoB & BtoC
-                  <% elsif talent[:btob] %>
+                  <% elsif talent[:next_aventure][:btob] %>
                     BtoB
-                  <% elsif talent[:btoc] %>
+                  <% elsif talent[:next_aventure][:btoc] %>
                     BtoC
                   <% else %>
                     -
@@ -49,16 +49,8 @@
                 </p>
 
                 <p><i class="fas fa-briefcase margin-right-5 green"></i>
-                  <% if talent[:next_aventure][:contrat].present? %>
-                    <%= talent[:next_aventure][:contrat].capitalize %>
-                  <% else %>
-                    -
-                  <% end %>
-                </p>
-
-                <p><i class="far fa-compass margin-right-5 green"></i>
-                  <% if talent[:next_aventure][:sector].present? %>
-                    <%= talent[:next_aventure][:sector].capitalize %>
+                  <% if talent[:sectors].length > 0 %>
+                    <%= talent[:sectors].first[:title].present? ? talent[:sectors].first[:title] : "-" %>
                   <% else %>
                     -
                   <% end %>
@@ -71,8 +63,8 @@
                     -
                   <% end %>
                 </p>
-
               </div>
+              
               <div class="row">
                 <% talent[:formations].each do |talent_formation| %>
                   <p class="col-xs-12 talent-school-item"><i class="fas fa-graduation-cap margin-right-5"></i>
@@ -104,8 +96,8 @@
                   <%= talent[:next_aventure][:famous_person].present? ? talent[:next_aventure][:famous_person] : "-" %>
                 <% else %>
                   -
-                <% end %>
-              </p>
+                <%# end %>
+              </p> -->
 
               <h5 class="margin-top-30">Le job de mes rêves</h5>
               <p class="no-margin-xs texte-rubrique-3 more" style="white-space: unset;">
@@ -161,10 +153,9 @@
                       <div>
                         <div class="point-barre-pointee"></div>
                       </div>
-                      <p class="read-more" data-text-swap="Close" style="border-radius: 6px; padding: 1px 6px;">+ <%= pluralize(talent[:experiences].length - 2, 'expérience') %> </p>
+                      <p class="read-more" data-text-swap="Fermer" style="border-radius: 6px; padding: 1px 6px;">+ <%= pluralize(talent[:experiences].length - 2, 'expérience') %> </p>
                     </div>
                   <% end %>
-                </div>
               </div>
             </div>
           <!-- lower right -->
@@ -180,7 +171,7 @@
                     <% talent[:technos].last(talent[:technos].length - 5).each do |talent_techno| %>
                       <p class="read-more-content"><%= talent_techno[:description] %></p>
                     <% end %>
-                    <p class="read-more" data-text-swap="Close"> + <%= talent[:technos].length - 5 %> </p>
+                    <p class="read-more" data-text-swap="Fermer"> + <%= talent[:technos].length - 5 %> </p>
                   <% end %>
                 </div>
               <% end %>
@@ -192,10 +183,10 @@
                     <p><%= your_small_plu[:description] %></p>
                   <% end %>
                   <% if talent[:talent_small_plus].length > 5 %>
-                    <% talent[:talent_small_plus].last(talent[:talent_small_plus].length - 5).each do |hobby| %>
-                      <p class="read-more-content"><%= hobby[:description] %></p>
+                    <% talent[:talent_small_plus].last(talent[:talent_small_plus].length - 5).each do |your_small_plu| %>
+                      <p class="read-more-content"><%= your_small_plu[:description] %></p>
                     <% end %>
-                    <p class="read-more" data-text-swap="Close"> + <%= talent[:talent_small_plus].length - 5 %> </p>
+                    <p class="read-more" data-text-swap="Fermer"> + <%= talent[:talent_small_plus].length - 5 %> </p>
                   <% end %>
                 </div>
               <% end %>
@@ -207,8 +198,8 @@
                   <%= render 'headhunters/relationship', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
                 <% else %>
                   <%= render 'relationships/form', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
+                  <% end %>
                 <% end %>
-              <% end %>
             </div>
         </div>
       </div>
