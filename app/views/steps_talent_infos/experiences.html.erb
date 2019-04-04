@@ -7,7 +7,6 @@
   <h2 class="form-titre-page"><i class="far fa-file-alt"></i> Quel est votre expérience <strong>en entreprise</strong> ?</h2>
 
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
-
     <div class="margin-auto-new-talent">
       <div class="blue-background">
         <ol class="priority-list experience-list">
@@ -20,14 +19,11 @@
         </ol>
       </div>
     </div>
-
-      <div class="form-actions">
-        <%= link_to "Précedent", previous_wizard_path, class: "b-btn-link form-btn form-btn-precedent" %>
-        <%= f.submit "Continuer", class: "b-btn form-btn form-btn-suivant" %>
-      </div>
+    <div class="form-actions">
+      <%= link_to "Précedent", previous_wizard_path, class: "b-btn-link form-btn form-btn-precedent" %>
+      <%= f.submit "Continuer", class: "b-btn form-btn form-btn-suivant" %>
+    </div>
   <% end %>
-
-
 </div>
 
 

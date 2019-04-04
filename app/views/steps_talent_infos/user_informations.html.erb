@@ -44,20 +44,28 @@
 
 
       <div class="blue-background margin-top-background">
-        <div class="row">
-
+        <div class="col-lg-offset-2 margin-top-30" id="talent_jobs">
+          <div class="row">
+            <div class="col-lg-4 no-padding margin-right-15 no-margin-xs">
+              <p class="label-edit requis">Sélectionner mon domaine d'activité</p>
+            </div>
+            <div class="col-lg-3 no-padding margin-top-15-xs">
+              <p class="label-edit requis">Années d'expérience</p>
+            </div>
+            <div class="col-lg-3">
+              <p class="label-edit requis">Métier principal</p>
+            </div>
+          </div>
+          <div class="row">
             <%= f.simple_fields_for :talent_jobs do |u| %>
-              <label class="col-lg-2 label-edit text-align-right line-height-center requis no-margin no-padding-xs" for="talent_firstname">Spécialité métier</label>
-              <div class="col-lg-3 col-xs-12 no-padding margin-right-15 margin-bottom-15-xs">
-                <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", :class => "select2 no-search" } %>
-              </div>
-              <p class="label-edit line-height-center col-lg-3 col-xs-12 no-padding margin-right-15">Années d'expérience</p>
-              <div class="col-lg-3 col-xs-12 no-padding">
-                <%= u.input :year, label: false, :input_html => { style: "width: 100%", id:"yearPositif", :onchange => "zeroInput(this.value, 'yearPositif')" } %>
-              </div>
+              <%= render 'talents/talent_job_fields', :f => u %>
             <% end %>
-
+          </div>
+          <div class="links margin-top-30">
+            <%= link_to_add_association 'Ajouter métier', f, :talent_jobs, :partial => 'talents/talent_job_fields', :class => "form-hobby-add", id: "add_job" %>
+          </div>
         </div>
+
         <div class="row margin-top-15">
           <label class="col-lg-2 label-edit text-align-right line-height-center requis no-margin no-padding-xs" for="talent_firstname">Linkedin</label>
           <div class="col-lg-3 col-xs-12 no-padding">
@@ -75,11 +83,15 @@
 </div>
 
 
+  <%= javascript_pack_tag "job_position" %>
 <script>
+
   function zeroInput(val, id){
     if (val < 0) {
       document.getElementById(id).value = 0
     }
   }
+
+
 </script>
 

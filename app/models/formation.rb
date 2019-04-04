@@ -17,6 +17,10 @@ class Formation < ApplicationRecord
     where('formations.ranking IS ? OR formations.type_of_formation IS ? OR formations.ranking = ? OR formations.type_of_formation = ?', nil, nil, '', '')
     .joins(:talent_formations).uniq
   }
+  scope :missing_type_with_talent, -> {
+    where('formations.type_of_formation IS ? OR formations.type_of_formation = ?', nil, '')
+    .joins(:talent_formations).uniq
+  }
 
   def capitalize_type_and_ranking
     self.type_of_formation = self.type_of_formation.titleize if self.type_of_formation && !self.type_of_formation.blank?
@@ -31,7 +35,8 @@ class Formation < ApplicationRecord
   end
 
   def is_completed?
-    if self.ranking = !nil && !self.ranking.empty? && self.type_of_formation = !nil && !self.type_of_formation.empty?
+    if self.type_of_formation = !nil && !self.type_of_formation.empty?
+    # if self.ranking = !nil && !self.ranking.empty? && self.type_of_formation = !nil && !self.type_of_formation.empty?
       return true
     end
   end

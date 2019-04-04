@@ -16,18 +16,28 @@
     <% if (@talent.talent_jobs.first.id.nil? || @talent.phone.nil?) %>
       <div class="blue-background">
         <% if @talent.talent_jobs.first.id.nil? %>
-          <%= f.simple_fields_for :talent_jobs do |u| %>
+          <div class="margin-top-30" id="talent_jobs">
             <div class="row">
-              <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-margin no-padding-xs">Spécialité métier</label>
-              <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
-                <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", :class => "select2 no-search" } %>
+              <div class="col-lg-4 no-padding margin-right-15 no-margin-xs">
+                <p class="label-edit requis">Sélectionner mon domaine d'activité</p>
               </div>
-              <label class="col-lg-3 col-xs-12 label-edit text-align-right text-align-left-xs line-height-center no-padding margin-right-15">Années d'expérience</label>
-              <div class="col-lg-3 col-xs-12 no-padding">
-                <%= u.input :year, label: false, :input_html => { style: "width: 100%", id:"yearPositif", min: "0", class: "sup-zero" } %>
+              <div class="col-lg-3 no-padding margin-top-15-xs">
+                <p class="label-edit requis">Années d'expérience</p>
+
+              </div>
+              <div class="col-lg-3">
+                <p class="label-edit requis">Métier principal</p>
               </div>
             </div>
-          <% end %>
+            <div class="row">
+            <%= f.simple_fields_for :talent_jobs do |u| %>
+              <%= render 'talents/talent_job_fields', :f => u %>
+            <% end %>
+            </div>
+            <div class="links margin-top-30">
+              <%= link_to_add_association 'Ajouter métier', f, :talent_jobs, :partial => 'talents/talent_job_fields', :class => "form-hobby-add", id: "add_job" %>
+            </div>
+          </div>
         <% end %>
         <% if @talent.phone.nil? %>
           <div class="row <%= @talent.talent_jobs.first.id.present? ? 'margin-top-15' : '' %>">
@@ -84,4 +94,4 @@
 
 
 </div>
-
+<%= javascript_pack_tag "job_position" %>

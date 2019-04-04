@@ -17,6 +17,7 @@ class Talents::RegistrationsController < Devise::RegistrationsController
     # TODO envoyer un email de bienvenue
     @talent = Talent.new(talent_params)
     authorize @talent
+
     @talent.skip_city_validation = true
     @talent.skip_phone_validation = true
     if @talent.save
@@ -47,7 +48,7 @@ class Talents::RegistrationsController < Devise::RegistrationsController
       :password,
       :password_confirmation,
       :linkedin,
-      talent_jobs_attributes: [ :id, :job_id, :year ]
+      talent_jobs_attributes: [ :id, :job_id, :year, :position ]
       )
   end
 end
