@@ -1,0 +1,24 @@
+<div class="nested-fields row margin-top-15">
+  <div class="col-lg-4 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
+    <%= f.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", :class => "select2 no-search" } %>
+  </div>
+
+  <div class="col-lg-3 col-xs-12 no-padding">
+    <%= f.input :year, label: false, :input_html => { style: "width: 50%", id:"yearPositif", min: "0", :onchange => "zeroInput(this.value, 'yearPositif')" }, error: f.object.errors.messages[:year][0] %>
+  </div>
+
+
+  <div class="col-lg-3 col-xs-12 no-padding divPositionJob">
+    <%= f.input :position, label: false, input_html: { class: "positionJob", style:"width: 10%"}, wrapper: false, as: :hidden %>
+    <input type="checkbox" class="firstJob">
+  </div>
+
+  <div class="center-text col-lg-1 col-xs-1 no-padding deleted-job">
+    <%= link_to_remove_association f do %>
+      <i class="fas fa-trash-alt"></i>
+    <% end %>
+  </div>
+</div>
+
+
+

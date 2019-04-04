@@ -82,6 +82,7 @@ class StepsTalentInfosController < ApplicationController
         set_new_technos(@talent)
       end
       @talent.attributes = talent_params
+
       @talent.skip_city_validation = true
       if @talent.save
         # @talent = current_user
@@ -152,7 +153,6 @@ class StepsTalentInfosController < ApplicationController
       :phone,
       :linkedin,
       :city,
-      :job_ids,
       :btoc,
       :btob,
       :terms_of_condition,
@@ -164,7 +164,7 @@ class StepsTalentInfosController < ApplicationController
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       your_small_plus_attributes: [:id, :description, :_destroy],
-      talent_jobs_attributes: [:id, :job_id, :year, :_destroy]
+      talent_jobs_attributes: [:id, :job_id, :year, :position, :_destroy]
     )
   end
 end

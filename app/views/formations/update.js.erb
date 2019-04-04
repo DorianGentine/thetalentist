@@ -5,4 +5,4 @@ document.querySelector("[data-formation-id='<%= @formation.id %>']").remove();
 <% end %>
 
 
-document.getElementById("update_formation_title").innerHTML = "<strong><%= j pluralize( Formation.missing_informations_with_talent.count, 'Formation') %> </strong> doivent être complété"
+document.getElementById("update_formation_title").innerHTML = "<strong><%= j pluralize( Formation.missing_type_with_talent.count, 'Formation') %> </strong> doivent être complété"

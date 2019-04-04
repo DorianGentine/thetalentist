@@ -121,7 +121,6 @@ class Talent < ApplicationRecord
 
   end
 
-
   def job_is?(job)
     job_ids = []
     jobs = TalentJob.joins(:job).where(:jobs => {:title => job })

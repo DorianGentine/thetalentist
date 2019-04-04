@@ -21,7 +21,8 @@ class TalentsController < ApplicationController
       end
     end
 
-    @formations = Formation.missing_informations_with_talent
+
+    @formations = Formation.missing_type_with_talent
 
     if params[:tag].blank?
       @talents = Talent.all.order('created_at DESC')
@@ -273,7 +274,7 @@ private
       # talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
       # talent_languages_attributes: [ :id, :level, :language_id],
       # your_small_plus_attributes: [:id, :description, :_destroy],
-      talent_jobs_attributes: [:id, :job_id, :year, :_destroy],
+      talent_jobs_attributes: [:id, :job_id, :year, :position, :_destroy],
       skill_ids: []
     )
   end

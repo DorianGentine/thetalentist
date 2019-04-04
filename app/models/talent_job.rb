@@ -9,4 +9,5 @@ class TalentJob < ApplicationRecord
 
   accepts_nested_attributes_for :talent, :reject_if => :all_blank
   accepts_nested_attributes_for :job, :reject_if => :all_blank
+
 end

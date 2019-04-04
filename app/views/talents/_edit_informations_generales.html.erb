@@ -27,17 +27,29 @@
       </div>
     </div>
 
-    <div class="row margin-top-30">
-      <%= f.simple_fields_for :talent_jobs do |u| %>
+    <div class="row margin-top-30" id="talent_jobs">
+      <div class="row">
         <div class="col-lg-4 no-padding margin-right-15 no-margin-xs">
           <p class="label-edit requis">Sélectionner mon domaine d'activité</p>
-          <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%" }, error: u.object.errors.messages[:job_id][0] %>
         </div>
-        <div class="col-lg-4 no-padding margin-top-15-xs">
+        <div class="col-lg-3 no-padding margin-top-15-xs">
           <p class="label-edit requis">Années d'expérience</p>
-          <%= u.input :year, label: false, :input_html => { style: "width: 100%", min: "0", id:"yearPositif", :onchange => "zeroInput(this.value, 'yearPositif')" }, error: u.object.errors.messages[:year][0] %>
+
         </div>
+        <div class="col-lg-3">
+          <p class="label-edit requis">Métier principal</p>
+        </div>
+
+      </div>
+      <div class="row">
+      <%= f.simple_fields_for :talent_jobs do |u| %>
+        <%= render 'talents/talent_job_fields', :f => u %>
+
       <% end %>
+      </div>
+      <div class="links margin-top-30">
+        <%= link_to_add_association 'Ajouter métier', f, :talent_jobs, :partial => 'talents/talent_job_fields', :class => "form-hobby-add", id: "add_job" %>
+      </div>
     </div>
 
 <!-- Titre section -->
@@ -55,12 +67,15 @@
 
 <% end %>
 
+<%= javascript_pack_tag "job_position" %>
+
 <script>
   function zeroInput(val, id){
     if (val < 0) {
       document.getElementById(id).value = 0
     }
   }
+
 </script>
 
 
