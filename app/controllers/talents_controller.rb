@@ -5,10 +5,13 @@ class TalentsController < ApplicationController
 
   def index
     @talentist = current_talentist
-    # Talent.all.each do |talent|
-    #   p "talent #{talent.id}"
-    #   talent.save
-    # end
+    Talent.all.each do |talent|
+      talent.experiences.each do |experience|
+        experience.save
+      end
+    end
+
+    # Remettre pour le lancement officiel!
     # reminde_new_talents_less_than(2.weeks.ago, 70)
 
     if !@talents = policy_scope(Talent)
@@ -20,7 +23,6 @@ class TalentsController < ApplicationController
         redirect_to root_path
       end
     end
-
 
     @formations = Formation.missing_type_with_talent
 
@@ -75,8 +77,7 @@ class TalentsController < ApplicationController
       # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
       }
     end
-    # @talents = Talent.all
-    @experiences = @talent.experiences.where(currently: true) + @talent.experiences.where.not(currently: true).order('years  ASC')
+    @experiences = @talent.experiences
     @next_aventures = @talent.next_aventures.last
     @talent_formations = @talent.talent_formations.order(:year)
     if @talent.next_aventures.last.present?
@@ -135,6 +136,7 @@ class TalentsController < ApplicationController
   end
 
   def update_formation_and_skill
+    set_new_technos(@talent)
     if @talent.update_attributes(formation_and_skill_params)
       redirect_to edit_talent_path(@talent)
     else
@@ -214,6 +216,12 @@ class TalentsController < ApplicationController
 
 private
 
+  def set_new_technos(talent)
+    techno_params = params[:talent][:techno_ids]
+    techno_ids = create_new_data_with_only_title(techno_params, "techno")
+    talent.techno_ids = techno_ids
+  end
+
   def reminde_new_talents_less_than(created, number)
     talents = Talent.where('created_at <= ?', created).completed_less_than(number).have_been_never_reminded
     talents.each do |talent|
@@ -241,17 +249,16 @@ private
     @talent.save
   end
 
-  def talent_password_old
-    old = params.require(:talent).permit(:password_old)
-    return old[:password_old]
-  end
+  # def talent_password_old
+  #   old = params.require(:talent).permit(:password_old)
+  #   return old[:password_old]
+  # end
 
-  def talent_password
-    params.require(:talent).permit(:password_old, :password, :password_confirmation )
-  end
+  # def talent_password
+  #   params.require(:talent).permit(:password_old, :password, :password_confirmation )
+  # end
 
   def talent_params
-    # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
     params.require(:talent).permit(
       :name,
       :firstname,
@@ -268,12 +275,6 @@ private
       :no_more,
       :sector_ids,
       :display_linkedin_picture,
-      # hobby_ids: [],
-      # experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
-      # next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
-      # talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
-      # talent_languages_attributes: [ :id, :level, :language_id],
-      # your_small_plus_attributes: [:id, :description, :_destroy],
       talent_jobs_attributes: [:id, :job_id, :year, :position, :_destroy],
       skill_ids: []
     )
@@ -281,8 +282,7 @@ private
   def formation_and_skill_params
     params.require(:talent).permit(
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
-      talent_languages_attributes: [ :id, :level, :language_id],
-      techno_ids: []
+      talent_languages_attributes: [ :id, :level, :language_id]
     )
   end
   def experience_params

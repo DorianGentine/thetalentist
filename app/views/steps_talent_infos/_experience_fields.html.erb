@@ -21,13 +21,13 @@
           <div class="margin-date-picker col-lg-4 col-xs-12">
             <p class="label-edit no-margin">De</p>
             <div class="margin-right-15 no-margin-xs">
-              <%= f.input :starting, label: false, placeholder:"MM-AAAA", as: :string, input_html: { class: "verifDateWithMonthAndYear", style: "width: 100%"}, error: f.object.errors.messages[:starting][0] %>
+              <%= f.input :starting, label: false, placeholder:"MM-AAAA", as: :string, input_html: { class: "verifDateWithMonthAndYear", style: "width: 100%", value:"#{f.object.starting.present? ? f.object.input_date_format(f.object.starting) : ''}"}, error: f.object.errors.messages[:starting][0] %>
             </div>
           </div>
           <div class="margin-date-picker col-lg-4 col-xs-12 margin-top-15-xs">
             <p class="label-edit no-margin">À</p>
             <div class="margin-right-15 no-margin-xs">
-              <%= f.input :years, label: false, as: :string, input_html: {:class => "verifDateWithMonthAndYear to_experience #{f.object.currently ? 'checked_boxe' : 'false'}", style: "width: 100%"}  %>
+              <%= f.input :years, label: false, as: :string, input_html: {:class => "verifDateWithMonthAndYear to_experience #{f.object.currently ? 'checked_boxe' : 'false'}", style: "width: 100%", value:"#{f.object.years.present? ? f.object.input_date_format(f.object.years) : ''}" }  %>
             </div>
           </div>
           <div id="font-input-currently" class="col-lg-4 col-xs-12 margin-top-15-xs">

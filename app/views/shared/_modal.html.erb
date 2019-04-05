@@ -14,7 +14,6 @@
       <div id="relation_<%= talent[:id] %>" class="hidden-xs">
         <% if current_user.is_a?(Headhunter) %>
           <% if Talent.find(talent[:id]).is_connected_to?(@headhunter) %>
-            <p>Yess</p>
             <%= render 'headhunters/relationship', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
           <% else %>
             <%= render 'relationships/form', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
@@ -36,25 +35,23 @@
             <div class="col-xs-12 col-md-8">
               <div class="talent-info">
                 <p><i class="fas fa-map-marker-alt margin-right-5 green"></i><%= talent[:city] %></p>
-                <p><i class="fas fa-code-branch margin-right-5 green"></i>
-                  <% if talent[:next_aventure][:btoc] && talent[:next_aventure][:btob] %>
-                    BtoB & BtoC
-                  <% elsif talent[:next_aventure][:btob] %>
-                    BtoB
-                  <% elsif talent[:next_aventure][:btoc] %>
-                    BtoC
-                  <% else %>
-                    -
-                  <% end %>
-                </p>
 
-                <p><i class="fas fa-briefcase margin-right-5 green"></i>
-                  <% if talent[:sectors].length > 0 %>
-                    <%= talent[:sectors].first[:title].present? ? talent[:sectors].first[:title] : "-" %>
-                  <% else %>
-                    -
-                  <% end %>
-                </p>
+                <% if talent[:next_aventure][:btoc] && talent[:next_aventure][:btob] %>
+                  <p><i class="fas fa-code-branch margin-right-5 green"></i>
+                    <%= "BtoB" if talent[:next_aventure][:btob] %>
+                    <%= " & " if talent[:next_aventure][:btob] && talent[:next_aventure][:btoc]%>
+                    <%= "BtoC" if talent[:next_aventure][:btoc] %>
+                  </p>
+                <% end %>
+
+                <% if talent[:sectors].length > 0 %>
+                  <p><i style="min-width: 16px;" class="fas fa-briefcase margin-right-5 green"></i>
+                    <% talent[:sectors].each_with_index do |talent_sector, index| %>
+                      <%= talent_sector[:title] %>
+                      <%= (index +1) == talent[:sectors].count ? "" : ", " %>
+                    <% end %>
+                  </p>
+                <% end %>
 
                 <p><i class="far fa-calendar margin-right-5 green"></i>
                   <% if talent[:year_experience_job].present? %>

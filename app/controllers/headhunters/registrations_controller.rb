@@ -66,6 +66,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
       end
     end
 
+      # DO I NEED IT ?
     def create_new_data_with_only_title(params, table_name)
       class_name = table_name.classify.constantize
       words = []
