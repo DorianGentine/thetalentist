@@ -6,6 +6,7 @@
 
         <div class="card-title">
           <p><%=talent[:job].present? ? talent[:job].upcase : "Pas renseigné" %></p>
+          <p style="font-weight: inherit;"><%=talent[:job2].present? ? talent[:job2].upcase : "" %></p>
         </div>
 
         <div class="talent-job">
@@ -17,55 +18,60 @@
         </div>
 
         <div class="row">
+          <hr style="margin-top: 0; border-top-color: #bab9b9">
+          <% talent[:experiences].each_with_index do |experience, index|  %>
+            <% if index < 2 %>
+              <p class="col-xs-12 no-padding">
+                <i style="min-width: 20px;" class="fas fa-briefcase margin-right-5"><sup style="font-family: 'Avenir', 'Open Sans', 'Helvetica', 'sans-serif'; font-weight: 500"><%= index == 0 ? "-1" : "-2" %></sup></i><%= experience[:position] %>
+              </p>
+            <% end %>
+          <% end %>
+
+          <p class="col-xs-12 no-padding">
+            <i style="min-width: 20px;" class="far fa-calendar margin-right-5"></i><%= pluralize(talent[:year_experience_job], 'an') %> d'expérience
+          </p>
+
+          <% talent[:formations].first(2).each do |talent_formation| %>
+            <% if talent_formation[:type_of_formation].present? %>
+              <p class="col-xs-12 no-padding">
+                <i style="min-width: 20px;" class="fas fa-graduation-cap margin-right-5"></i>
+                <%= talent_formation[:type_of_formation]%>
+                <%= ", " if talent_formation[:ranking].present? %>
+                <%= talent_formation[:ranking] %>
+              </p>
+            <% end %>
+          <% end %>
+
+          <p class="col-xs-12 no-padding">
+            <% if talent[:sectors].length > 0 %>
+              <i style="min-width: 16px;" class="fas fa-briefcase margin-right-5 green"></i>
+              <% talent[:sectors].each_with_index do |talent_sector, index| %>
+                <%= talent_sector[:title] %>
+                <%= (index +1) == talent[:sectors].count ? "" : ", " %>
+              <% end %>
+            <% end %>
+          </p>
+
+
+          <% if talent[:next_aventure][:btoc] && talent[:next_aventure][:btob] %>
+            <p class="col-xs-6 no-padding">
+              <i style="min-width: 20px;" class="fas fa-code-branch margin-right-5 green"></i>
+              <%= "BtoB" if talent[:next_aventure][:btob] %>
+              <%= " & " if talent[:next_aventure][:btob] && talent[:next_aventure][:btoc]%>
+              <%= "BtoC" if talent[:next_aventure][:btoc] %>
+            </p>
+            <% end %>
+
           <p class="col-xs-6 no-padding">
             <i style="min-width: 20px;" class="fas fa-map-marker-alt margin-right-5 green"></i><%= talent[:city].present? ? talent[:city].truncate(10, separator: ', ', omission: '') : "_" %>
           </p>
 
-          <p class="col-xs-6 no-padding">
-            <i style="min-width: 20px;" class="fas fa-code-branch margin-right-5 green"></i>
-            <% if talent[:next_aventure][:btoc] && talent[:next_aventure][:btob] %>
-              BtoB & BtoC
-            <% elsif talent[:next_aventure][:btob] %>
-              BtoB
-            <% elsif talent[:next_aventure][:btoc] %>
-              BtoC
-            <%# else %>
-              <!-- _ -->
-            <% end %>
-          </p>
+
+
 
           <p class="col-xs-12 no-padding">
-            <i style="min-width: 16px;" class="fas fa-briefcase margin-right-5 green"></i>
-            <% if talent[:sectors].length > 0 %>
-              <% talent[:sectors].first(talent[:sectors].length-1).each do |talent_sector| %>
-                <%= talent_sector[:title].present? ? talent_sector[:title] + ", " : "" %>
-              <% end %>
-              <%= talent[:sectors].last[:title].present? ? talent[:sectors].last[:title] : "" %>
-            <% else %>
-              -
-            <% end %>
-          </p>
-
-          <% talent[:formations].first(2).each do |talent_formation| %>
-            <p class="col-xs-12 no-padding">
-              <i style="min-width: 20px;" class="fas fa-graduation-cap margin-right-5"></i><%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] + ", " : "" %> <%=talent_formation[:title] %>
-            </p>
-          <% end %>
-
-          <% if talent[:year_experience_job].present? && talent[:year_experience_job].to_i > 0 %>
-            <p class="col-xs-12 no-padding">
-              <i style="min-width: 20px;" class="far fa-calendar margin-right-5"></i><%= pluralize(talent[:year_experience_job], 'an') %> d'expérience
-            </p>
-          <% end %>
-
-          <% if talent[:experiences].count > 1 %>
-              <p class="col-xs-12 no-padding">
-                <i style="min-width: 20px;" class="fas fa-briefcase margin-right-5"><sup style="font-family: 'Avenir', 'Open Sans', 'Helvetica', 'sans-serif'; font-weight: 500">-1</sup></i><%= talent[:experiences][talent[:experiences].count-1][:position] %>
-              </p>
-          <% end %>
-
-          <p class="col-xs-12 no-padding">
-            <i style="min-width: 20px;" class="far fa-clock margin-right-5"></i>Mise à jour le <%= l(talent[:update], :locale => :fr) %>
+            <!-- <i style="min-width: 20px;" class="far fa-clock margin-right-5"></i>Mise à jour le <#%= l(talent[:update], :locale => :fr) %> -->
+            <i style="min-width: 20px;" class="far fa-clock margin-right-5"></i>Connecté il y a <%= distance_of_time_in_words(talent[:connection], Time.now) %>
           </p>
         </div>
 

@@ -337,12 +337,16 @@ class Talent < ApplicationRecord
     end
   end
 
-  # mettre en place un background pour calculer les stat
-  # def async_update
-  #   p "tu rentre dans le job"
-  #   StatisticJob.perform_now(self.id)
-  # end
+  def set_time_conextion
+    if self.last_sign_in_at < Date.yesterday
+      return self.last_sign_in_at.now.strftime('%m/%d/%Y')
+    elsif elf.last_sign_in_at < 30.day.ago
+      return self.last_sign_in_at.now.strftime('%m/%d/%Y')
+    else
+      return "Plus d'un mois"
+    end
 
+  end
   private
 
 

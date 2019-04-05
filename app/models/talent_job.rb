@@ -7,6 +7,8 @@ class TalentJob < ApplicationRecord
 
   attr_accessor :skip_year_validation
 
+  default_scope { order(position: :asc) }
+
   accepts_nested_attributes_for :talent, :reject_if => :all_blank
   accepts_nested_attributes_for :job, :reject_if => :all_blank
 

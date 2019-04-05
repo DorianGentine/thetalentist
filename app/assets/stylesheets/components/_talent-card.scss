@@ -46,9 +46,11 @@
   height: 100%;
   transition: 0.15s;
   .talent-job{
-    height: 138px;
+    margin-top: 10px;
+    height: 100px;
     display: flex;
     align-items: center;
+    justify-content: center;
     h2{
       font-size: 18px;
       font-weight: 900;
