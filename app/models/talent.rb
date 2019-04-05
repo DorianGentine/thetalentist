@@ -317,14 +317,11 @@ class Talent < ApplicationRecord
       next_aventure.good_manager.present? ? count += value_input : count
       next_aventure.work_for_free.present? ? count += value_input : count
     end
-    p "value_input #{value_input}"
-    p "count #{count}"
     if self.your_small_plus.count > 0
       self.your_small_plus.each do |your_small_plu|
         your_small_plu.description.present? ? count += value_input : count
       end
     end
-    p "count #{count}"
     return count.round(0)
   end
 

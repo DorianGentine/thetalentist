@@ -5,7 +5,7 @@ class TalentsController < ApplicationController
 
   def index
     @talentist = current_talentist
-    Talent.all.each do |talent|
+    Talent.all.first(5).each do |talent|
       talent.experiences.each do |experience|
         experience.save
       end
