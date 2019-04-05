@@ -91,8 +91,9 @@ class HeadhuntersController < ApplicationController
         year_experience_job: talent.talent_jobs.last.present? ? talent.talent_jobs.last.year : "0",
         city: talent.city,
         job: talent.jobs.first.present? ? talent.jobs.first.title : nil,
+        job2: talent.jobs.second.present? ? talent.jobs.second.title : nil,
         overview: talent.overview,
-        update: talent.updated_at,
+        connection: talent.last_sign_in_at.present? ? talent.last_sign_in_at : 1.month.ago,
         next_aventure: {
           famous_person: talent.next_aventures.count > 0 && talent.next_aventures.last.famous_person.present? ? talent.next_aventures.last.famous_person : false,
           work_for_free: talent.next_aventures.count > 0 && talent.next_aventures.last.work_for_free.present? ? talent.next_aventures.last.work_for_free : false,

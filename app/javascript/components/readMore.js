@@ -16,7 +16,7 @@ function readMore(){
         }
 
       // Change couleur background
-        this.classList.toggle("red-background")
+        // this.classList.toggle("red-background")
 
       // Show read-more-content
         var content = document.getElementsByClassName("read-more-content");
