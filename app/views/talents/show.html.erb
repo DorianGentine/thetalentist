@@ -488,7 +488,7 @@
                     <p class="titre-rubrique-3" style="margin-bottom: 6px"><%= experience.position %></p>
                     <p class="texte-rubrique-3b float-left no-margin"><%= experience.company_name %></p>
                     <p class="float-left" style="margin: 0 5px; font-size: 14px; line-height: 18px">&bull;</p>
-                    <p class="texte-annee-formation green no-margin"><%= experience.starting %> - <%= experience.currently ? "Aujourd’hui" : experience.years %></p>
+                    <p class="texte-annee-formation green no-margin"><%= experience.starting_display %> - <%= experience.currently ? "Aujourd’hui" : experience.years_display %></p>
                     <p class="texte-rubrique-3"><%= experience.overview %></p>
                   </li>
                 <% end %>

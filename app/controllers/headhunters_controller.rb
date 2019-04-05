@@ -58,13 +58,13 @@ class HeadhuntersController < ApplicationController
       end
 
       talent_experiences = []
-      talent.experiences.reverse_each do |experience|
+      talent.experiences.each do |experience|
         experience_injected = {
           position: experience.position.present? ? experience.position : false,
           company_type: experience.company_type.present? ? experience.company_type.title : false,
-          starting: experience.starting.present? ? experience.starting : false,
+          starting: experience.starting.present? ? experience.starting_display : false,
           currently: experience.currently ? "Aujourd'hui" : false,
-          years: experience.years.present? ? experience.years : false,
+          years: experience.years.present? ? experience.years_display : false,
         }
         talent_experiences << experience_injected
       end
@@ -87,7 +87,7 @@ class HeadhuntersController < ApplicationController
 
       talent_injected = {
         id: talent.id,
-        position: talent.experiences.last.present? ? talent.experiences.last.position : nil,
+        position: talent.experiences.first.present? ? talent.experiences.first.position : nil,
         year_experience_job: talent.talent_jobs.last.present? ? talent.talent_jobs.last.year : "0",
         city: talent.city,
         job: talent.jobs.first.present? ? talent.jobs.first.title : nil,

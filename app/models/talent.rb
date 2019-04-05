@@ -296,12 +296,12 @@ class Talent < ApplicationRecord
 
   def completed_next_aventures
     count = 0
-    next_aventure_count = self.next_aventures.size > 0 ? self.next_aventures.size * 15 : 15
+    next_aventure_count = 15
     small_plu_count = self.your_small_plus.size > 0 ? self.your_small_plus.size * 1 : 1
     # skills_count = self.talent_skills.size * 1
     value_input = stat(next_aventure_count + small_plu_count)
     self.next_aventures.each do |next_aventure|
-      next_aventure.city.present? ? count += value_input : count
+      next_aventure.mobilities.count > 0 ? count += value_input : count
       next_aventure.contrat.present? ? count += value_input : count
       next_aventure.remuneration.present? ? count += value_input : count
       next_aventure.sector_ids.count > 0 ? count += value_input : count
@@ -317,11 +317,14 @@ class Talent < ApplicationRecord
       next_aventure.good_manager.present? ? count += value_input : count
       next_aventure.work_for_free.present? ? count += value_input : count
     end
+    p "value_input #{value_input}"
+    p "count #{count}"
     if self.your_small_plus.count > 0
       self.your_small_plus.each do |your_small_plu|
         your_small_plu.description.present? ? count += value_input : count
       end
     end
+    p "count #{count}"
     return count.round(0)
   end
 
@@ -352,9 +355,8 @@ class Talent < ApplicationRecord
 
 
   def stat(arg)
-    length_input = arg
     total_completed = 100.00
-    value_input = total_completed / length_input
+    return total_completed / arg
   end
 
   def normalize_name_firstname
