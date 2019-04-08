@@ -1,25 +1,15 @@
 <div class="nested-fields row margin-top-15">
-  <div class="col-lg-4 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
+  <label class="label-edit text-align-right line-height-center col-lg-2 requis js_remove" style="padding: 0 15px 0 0;">Mon&#8239;domaine&#8239;d'activité</label>
+  <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs js_move">
 
-    <%= f.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", class:"selectizeTwo" }, error: f.object.errors.messages[:job_id][0] %>
+    <%= f.input :job_id, collection: Job.all, prompt: "Domaine d'activité pricipale", label: false, :input_html => { style: "width: 100%", class:"selectizeTwo" }, error: f.object.errors.messages[:job_id][0] %>
   </div>
 
-
-  <div class="col-lg-3 col-xs-12 no-padding">
-    <%= f.input :year, label: false, :input_html => { style: "width: 50%", id:"", min: "0", :onchange => "zeroInput(this.value, 'yearPositif')" }, error: f.object.errors.messages[:year][0] %>
+  <label class="label-edit text-align-right text-align-left-xs line-height-center col-lg-3 col-xs-12 no-padding margin-right-15 requis js_remove" style="display: none">Années&#8239;d'expérience</label>
+  <div class="col-lg-3 col-xs-12 no-padding js_remove">
+    <%= f.input :year, prompt: "Années d'expérience", label: false, :input_html => { style: "width: 100%", id:"", min: "0", :onchange => "zeroInput(this.value, 'yearPositif')" }, error: f.object.errors.messages[:year][0] %>
   </div>
 
+  <%= f.input :position, as: :hidden %>
 
-  <div class="col-lg-3 col-xs-12 no-padding">
-    <%= f.input :position, label: false, input_html: { class: "", style:"width: 100%"}, wrapper: false %>
-  </div>
-
-  <% if f.object.position == 2 %>
-    <div class="center-text col-lg-1 col-xs-1 no-padding deleted-job">
-      <%= link_to_remove_association f do %>
-        <i class="fas fa-trash-alt"></i>
-      <% end %>
-    </div>
-  <% end %>
 </div>
-
