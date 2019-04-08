@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_02_105308) do
+ActiveRecord::Schema.define(version: 2019_04_08_041715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -421,6 +421,15 @@ ActiveRecord::Schema.define(version: 2019_04_02_105308) do
     t.index ["talent_id"], name: "index_talent_messages_on_talent_id"
   end
 
+  create_table "talent_second_jobs", force: :cascade do |t|
+    t.bigint "talent_id"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_talent_second_jobs_on_job_id"
+    t.index ["talent_id"], name: "index_talent_second_jobs_on_talent_id"
+  end
+
   create_table "talent_sectors", force: :cascade do |t|
     t.bigint "talent_id"
     t.bigint "sector_id"
@@ -573,6 +582,8 @@ ActiveRecord::Schema.define(version: 2019_04_02_105308) do
   add_foreign_key "talent_languages", "talents"
   add_foreign_key "talent_messages", "relationships"
   add_foreign_key "talent_messages", "talents"
+  add_foreign_key "talent_second_jobs", "jobs"
+  add_foreign_key "talent_second_jobs", "talents"
   add_foreign_key "talent_sectors", "sectors"
   add_foreign_key "talent_sectors", "talents"
   add_foreign_key "talent_skills", "skills"
