@@ -16,6 +16,8 @@ import '../components/limitedCharacterIndicator';
 
 import '../components/inputSupMin';
 
+import '../components/select2_relaunch';
+
 
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
