@@ -50,7 +50,13 @@
           <div class="row margin-bottom-15">
             <p class="titre-rubrique-1 col-xs-12 no-padding">Domaine d'activité</p>
             <i class="far fa-compass green titre-rubrique-3 col-xs-1 no-padding"></i>
-            <p class="titre-rubrique-3 no-margin col-xs-11 no-padding"><%= @startup.sectors.last.title.present? ? @startup.sectors.last.title : "Ajoutez votre domaine d'activité" %></p>
+            <p class="titre-rubrique-3 no-margin col-xs-11 no-padding">
+              <% if @startup.sectors.present? %>
+                <%= @startup.sectors.last.title.present? ? @startup.sectors.last.title : "Ajoutez votre domaine d'activité" %>
+              <% else %>
+                Ajoutez votre domaine d'activité
+              <% end %>
+            </p>
           </div>
 
           <!-- Site internet -->

@@ -14,7 +14,6 @@
       <div id="relation_<%= talent[:id] %>" class="hidden-xs">
         <% if current_user.is_a?(Headhunter) %>
           <% if Talent.find(talent[:id]).is_connected_to?(@headhunter) %>
-            <p>Yess</p>
             <%= render 'headhunters/relationship', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
           <% else %>
             <%= render 'relationships/form', headhunter: @headhunter, talent: Talent.find(talent[:id]) %>
