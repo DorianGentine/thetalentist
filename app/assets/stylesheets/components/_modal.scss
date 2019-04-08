@@ -90,13 +90,19 @@
 
 
 .talent-school-item{
-  padding: 10px 5px;
+  padding: 10px 5px 10px 10px;
   border-radius: 5px;
   text-align: center;
   background-color: rgba(1, 10, 80, 0.05);
   box-shadow: 3px 6px 8px rgba(0,0,0,0.06);
   width: calc(50% - 10px);
   margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  p {
+    margin: 0;
+  }
 }
 
 .talent-metier{
@@ -158,7 +164,6 @@ h4{
     padding: 2px 20px;
     margin: 0 10px 20px;
     border-radius: 20px;
-    text-transform: capitalize;
   }
   .modal-hh:hover{
     cursor: pointer;

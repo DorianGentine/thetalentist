@@ -1,15 +1,58 @@
 class TalentJob < ApplicationRecord
   belongs_to :talent
-  belongs_to :job
+  belongs_to :job, optional: :skip_job
 
-  validates_presence_of :year, message: "L'année doit être remplit", unless: :skip_year_validation
-  validates_presence_of :job_id, message: "doit être remplit"
+  before_validation :set_year
 
-  attr_accessor :skip_year_validation
+  before_save :set_position
+
+  validates_presence_of :year, message: "L'année doit être remplit", unless: :skip_year
+  validates_presence_of :job_id, message: "Le métier doit être remplit", unless: :is_second_job
+
+  # attr_accessor :skip_year_validation
 
   default_scope { order(position: :asc) }
 
-  accepts_nested_attributes_for :talent, :reject_if => :all_blank
-  accepts_nested_attributes_for :job, :reject_if => :all_blank
+  def set_position
+    talent = self.talent
+    if talent.talent_jobs.count > 0 && talent.talent_jobs.second == self
+      self.position = 2
+    else
+      self.position = 1
+    end
+  end
 
+
+  def set_year
+    talent = self.talent
+    if talent.talent_jobs.count > 1 && talent.talent_jobs.second == self
+      self.year = talent.talent_jobs.first.year
+    end
+  end
+
+  def skip_year
+    talent = self.talent
+    if self.job.blank? && talent.talent_jobs.first != self
+      return true
+    end
+  end
+  def skip_job
+    talent = self.talent
+    first = talent.talent_jobs.count > 0 && talent.talent_jobs.first.position.present? ? talent.talent_jobs.where(position: 1).first : nil
+    if first == self || first.nil? || !talent.talent_jobs.first.id.nil?
+      return true
+    else
+      return false
+    end
+  end
+
+  def is_second_job
+    talent = self.talent
+    first = talent.talent_jobs.count > 0 && talent.talent_jobs.first.position.present? ? talent.talent_jobs.where(position: 1).first : nil
+    if first == self || first.nil? || talent.talent_jobs.first.id.nil?
+      return false
+    else
+      return true
+    end
+  end
 end

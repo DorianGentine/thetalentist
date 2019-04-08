@@ -453,7 +453,7 @@
               <p><i class="red fas fa-exclamation-triangle"></i> Ajoutez vos formations <i class="red fas fa-exclamation-triangle"></i></p>
             <% else %>
               <ul class="list-ligne">
-                <% @talent_formations.reverse_each do |formation| %>
+                <% @talent_formations.each do |formation| %>
                   <li>
                     <p class="titre-rubrique-3" style="margin-bottom: 6px"><%= formation.title %></p>
                     <p class="texte-rubrique-3b float-left no-margin"><%= formation.formation.title %></p>

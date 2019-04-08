@@ -5,12 +5,14 @@ class Talents::RegistrationsController < Devise::RegistrationsController
   def new
     @talent = Talent.new
 
-  # @talent_job = TalentJob.new(talent: @talent)
-  # @talent_job.skip_year_validation = true
-  # @talent_job.save
-
+   if @talent.talent_jobs.count == 0
+      2.times { @talent.talent_jobs.build }
+    elsif @talent.talent_jobs.count == 1
+      1.times { @talent.talent_jobs.build }
+    else
+      0.times { @talent.talent_jobs }
+    end
     authorize @talent
-    @talent.talent_jobs.build
   end
 
   def create
@@ -18,8 +20,8 @@ class Talents::RegistrationsController < Devise::RegistrationsController
     @talent = Talent.new(talent_params)
     authorize @talent
 
-    @talent.skip_city_validation = true
-    @talent.skip_phone_validation = true
+    # @talent.skip_city_validation = true
+    # @talent.skip_phone_validation = true
     if @talent.save
       session[:talent_id] = @talent.id
       redirect_to steps_talent_info_path(:formations)

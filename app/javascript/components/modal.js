@@ -23,6 +23,17 @@ function revealModal() {
         targetModal.style.display = "none";
       }
     };
+
+
+    // heights for formation repertoire talents
+    const formations = targetModal.querySelectorAll('.talent-school-item')
+    let maxHeight = 0
+    formations.forEach((formation) => {
+      if (maxHeight < formation.offsetHeight) {
+        maxHeight = formation.offsetHeight
+      }
+    })
+    formations.forEach((formation) => {formation.style.height = maxHeight + "px"})
   }
 
   let modalButtonsList = document.querySelectorAll('.modal-button')
@@ -34,4 +45,3 @@ function revealModal() {
 
 
 export { revealModal }
-

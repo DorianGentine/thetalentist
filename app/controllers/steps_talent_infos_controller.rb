@@ -14,9 +14,11 @@ class StepsTalentInfosController < ApplicationController
       0.times { @talent.talent_formations.build }
     end
     if @talent.talent_jobs.count == 0
+      2.times { @talent.talent_jobs.build }
+    elsif @talent.talent_jobs.count == 1
       1.times { @talent.talent_jobs.build }
     else
-      0.times { @talent.talent_jobs.build }
+      0.times { @talent.talent_jobs }
     end
     if @talent.talent_languages.count == 0
       1.times { @talent.talent_languages.build }
@@ -60,7 +62,6 @@ class StepsTalentInfosController < ApplicationController
       else
         render_wizard @talent
       end
-
     when :experiences
       @talent.attributes = talent_params
       @talent.experiences.each do |experience|
@@ -82,7 +83,6 @@ class StepsTalentInfosController < ApplicationController
         set_new_technos(@talent)
       end
       @talent.attributes = talent_params
-
       @talent.skip_city_validation = true
       if @talent.save
         # @talent = current_user

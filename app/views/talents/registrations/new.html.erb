@@ -38,7 +38,7 @@
         <div class="row margin-top-15">
           <label class="label-edit text-align-right line-height-center col-lg-2 requis no-padding-xs" for="talent_phone">Tel.</label>
           <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs margin-bottom-15-xs">
-            <%= f.input :phone, required: true, autofocus: false, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%" } %>
+            <%= f.input :phone, required: true, autofocus: false, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:phone][0] %>
           </div>
           <label class="label-edit text-align-right text-align-left-xs line-height-center col-lg-3 col-xs-2 no-padding margin-right-15 requis" for="talent_city">Ville</label>
           <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs">
@@ -63,13 +63,9 @@
 
             </div>
             <div class="row">
-            <%= f.simple_fields_for :talent_jobs do |u| %>
-              <%= render 'talents/talent_job_fields', :f => u %>
-
-            <% end %>
-            </div>
-            <div class="links margin-top-30">
-              <%= link_to_add_association 'Ajouter métier', f, :talent_jobs, :partial => 'talents/talent_job_fields', :class => "form-hobby-add", id: "add_job" %>
+              <%= f.simple_fields_for :talent_jobs do |u| %>
+                <%= render 'talents/talent_job_fields', :f => u %>
+              <% end %>
             </div>
           </div>
 
@@ -82,6 +78,7 @@
       </div>
     </div>
 
+
     <div class="form-actions">
       <%= link_to 'Précédent', new_session_path(resource_name), { :class => "form-btn form-btn-precedent"} %>
       <%= f.button :submit, "Suivant", { :class => "form-btn form-btn-suivant"} %>
@@ -89,7 +86,7 @@
   <% end %>
 </div>
 
-  <%= javascript_pack_tag "job_position" %>
+<!--   <#%= javascript_pack_tag "job_position" %> -->
 
 <script>
   function zeroInput(val, id){

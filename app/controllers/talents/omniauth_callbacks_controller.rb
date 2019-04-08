@@ -36,7 +36,7 @@ class Talents::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         set_flash_message(:notice, :success, kind: 'Linkedin') if is_navigational_format?
       else
         session[:talent_id] = talent.id
-        redirect_to steps_talent_info_path(:formations)
+        redirect_to steps_talent_info_path(:user_informations)
       end
     else
       session['devise.linkedin_data'] = request.env['omniauth.auth']

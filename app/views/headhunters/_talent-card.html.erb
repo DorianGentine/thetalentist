@@ -11,7 +11,7 @@
 
         <div class="talent-job">
           <% if !talent[:position].nil? %>
-            <h2><%= talent[:position].truncate(45, separator: ' ', omission: '') %></h2>
+            <h2 style="text-align: center;"><%= talent[:position].truncate(45, separator: ' ', omission: '') %></h2>
           <% else %>
             <h2> - </h2>
           <% end %>
@@ -69,14 +69,14 @@
 
 
 
-          <p class="col-xs-12 no-padding">
-            <!-- <i style="min-width: 20px;" class="far fa-clock margin-right-5"></i>Mise à jour le <#%= l(talent[:update], :locale => :fr) %> -->
-            <i style="min-width: 20px;" class="far fa-clock margin-right-5"></i>Connecté il y a <%= distance_of_time_in_words(talent[:connection], Time.now) %>
-          </p>
         </div>
 
-        <div class="talent-more">
-            <p data-target= "modal_<%= talent[:id] %>">En savoir plus <i class="fas fa-angle-right"></i></p>
+        <div class="talent-more" style="display: flex; justify-content: space-between;">
+          <p class="no-padding">
+            <!-- <i style="min-width: 20px;" class="far fa-clock margin-right-5"></i>Mise à jour le <#%= l(talent[:update], :locale => :fr) %> -->
+            <i class="far fa-clock margin-right-5"></i>Connecté il y a <%= distance_of_time_in_words(talent[:connection], Time.now) %>
+          </p>
+            <p id="green-p"data-target= "modal_<%= talent[:id] %>">En savoir plus <i class="fas fa-angle-right"></i></p>
         </div>
 
       </div>

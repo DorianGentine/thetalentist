@@ -24,6 +24,13 @@ $('.selectAndCreate').selectize({
   }
 });
 
+$('.selectizeTwo').selectize({
+  plugins: ['remove_button'],
+  delimiter: ',',
+  maxItems: 2
+});
+
+
 
 
 // Requiring CSS! Path is relative to ./node_modules

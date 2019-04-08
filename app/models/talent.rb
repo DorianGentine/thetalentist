@@ -13,15 +13,18 @@ class Talent < ApplicationRecord
   validates_confirmation_of :password, message: "Votre mot de passe ne concodre pas"
 
   validates_presence_of :city, :message => "Le lieu doit être remplit", unless: :skip_city_validation
-  # validates_presence_of :phone, :message => "Votre téléphone doit être remplit", unless: :skip_phone_validation
-  validates_presence_of :email, :message => "l'email doit être remplit"
+  validates_presence_of :phone, :message => "Votre téléphone doit être remplit", unless: :skip_phone_validation
+  validates_presence_of :email, :message => "Votre email doit être remplit"
   validates_presence_of :firstname, :message => "le prénom doit être remplit"
   validates_presence_of :name, :message => "le nom doit être remplit"
 
   attr_accessor :skip_city_validation, :skip_phone_validation
 
+  validates_associated :talent_jobs
+
   geocoded_by :city
   after_validation :geocode
+  # before_validation :destroy_talent_job_without_job
 
   after_create :send_welcome_email, :send_new_user_to_talentist
   before_save :capitalize_name_firstname, :save_completed_profil
@@ -35,7 +38,7 @@ class Talent < ApplicationRecord
 
   has_many :talent_jobs, dependent: :destroy
   has_many :jobs, through: :talent_jobs
-  accepts_nested_attributes_for :talent_jobs, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :talent_jobs, allow_destroy: true
 
   has_many :talent_skills, dependent: :destroy
   has_many :skills, through: :talent_skills
@@ -131,6 +134,14 @@ class Talent < ApplicationRecord
     job_ids.include?(talent[0].id)
   end
 
+  def destroy_talent_job_without_job
+    self.talent_jobs.each do |talent_job|
+      if talent_job.job.blank?
+        talent_job.destroy
+      end
+    end
+  end
+
   def notif_of_unread
     conversations = self.mailbox.conversations
     @unread_conversations = []
@@ -166,7 +177,7 @@ class Talent < ApplicationRecord
     talent_params.merge! auth.info.slice(:email)
     talent_params[:linkedin_picture_url] = auth.info.image
     talent_params[:token] = auth.credentials.token
-    # talent_params[:token_expiry] = Time.at(auth.credentials.expires_at)
+    talent_params[:phone] = "To fill it"
     talent_params = talent_params.to_h
 
     talent = Talent.find_by(provider: auth.provider, uid: auth.uid)
