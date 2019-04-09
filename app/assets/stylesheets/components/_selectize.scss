@@ -23,3 +23,7 @@
 .create strong {
   color: white;
 }
+
+.selectize-control.plugin-remove_button [data-value] .remove {
+  line-height: unset;
+}
