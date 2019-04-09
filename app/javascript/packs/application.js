@@ -4,8 +4,6 @@ import '../components/select2';
 
 import "../components/equalHeight"
 
-import '../components/datepicker';
-
 import '../components/showFileTitle';
 
 import '../components/dynamicLineHeight';
@@ -17,6 +15,8 @@ import '../components/limitedCharacterIndicator';
 import '../components/inputSupMin';
 
 import '../components/select2_relaunch';
+
+import '../components/jsStyleDomaineActivite';
 
 
 import { autocomplete } from '../components/autocomplete';

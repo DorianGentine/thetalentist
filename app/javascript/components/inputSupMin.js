@@ -1,6 +1,7 @@
 var numberSupZero = document.getElementsByClassName("sup-zero");
 
-if (numberSupZero) {
+
+if (numberSupZero.length > 0) {
   for (var i = 0; i < numberSupZero.length ; i++) {
 
     numberSupZero[i].addEventListener("blur", function(e) {

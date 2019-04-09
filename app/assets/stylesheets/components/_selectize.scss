@@ -18,3 +18,8 @@
 .select2-container--default .select2-search--inline .select2-search__field:focus{
   box-shadow: unset !important;
 }
+
+// mets le texte en blanc quand user crée une entrée
+.create strong {
+  color: white;
+}

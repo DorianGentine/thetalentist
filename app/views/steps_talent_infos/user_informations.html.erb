@@ -38,18 +38,6 @@
           <%= f.simple_fields_for :talent_jobs do |u| %>
             <%= render 'talents/talent_job_fields', :f => u %>
           <% end %>
-          <script>
-            const jsRemove = document.getElementsByClassName("js_remove")
-            const jsMove = document.getElementsByClassName("js_move")
-
-            // remove unecessary element
-            for (var i = 3; i < jsRemove.length; i++) {
-              jsRemove[i].style.display = "none";
-            }
-
-            // change la place
-            jsMove[0].insertAdjacentElement("afterend", jsMove[1]);
-          </script>
         </div>
         <% if @talent.linkedin.nil? || @talent.linkedin == "" %>
           <div class="row margin-top-15">
