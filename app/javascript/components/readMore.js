@@ -1,4 +1,3 @@
-
 function readMore(){
 
   var colls = document.getElementsByClassName("read-more");

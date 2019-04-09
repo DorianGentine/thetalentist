@@ -1,4 +1,3 @@
-
 var input = document.getElementById( 'mailboxer_message_attachment' );
 
 if (input != null) {

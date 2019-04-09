@@ -1,6 +1,6 @@
 var limitedCharacter = document.getElementsByClassName("limited-character");
 
-if (limitedCharacter) {
+if (limitedCharacter.length > 0) {
   for (var i = 0; i < limitedCharacter.length ; i++) {
     var inputLength = limitedCharacter[i].value.length;
     var limitCharacter = limitedCharacter[i].maxLength;
