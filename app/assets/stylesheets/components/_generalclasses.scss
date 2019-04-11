@@ -103,6 +103,11 @@ input, button, select, textarea {
     grid-column: span 2;
   }
 
+// Height
+  .height-unset{
+    height: unset !important;
+  }
+
 // Ligne
   .ligne-vertical{
     border: none;

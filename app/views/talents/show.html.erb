@@ -368,9 +368,9 @@
               <% end %>
               <% if @talent.your_small_plus.length > 5 %>
                 <% @talent.your_small_plus.last(@talent.your_small_plus.length - 5).each do |hobby| %>
-                  <p class="read-more-content"><%= hobby.description %></p>
+                  <p class="read-more-content RMC-hobby"><%= hobby.description %></p>
                 <% end %>
-                <p class="read-more" data-text-swap="Close"> + <%= @talent.your_small_plus.length - 5 %> </p>
+                <p class="read-more" data-text-swap="Fermer" data-content-title="RMC-hobby"> + <%= @talent.your_small_plus.length - 5 %> </p>
               <% end %>
             <% end %>
           </div>
