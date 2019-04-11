@@ -94,6 +94,8 @@ class TalentsController < ApplicationController
       0.times { @talent.talent_formations.build }
     end
     if @talent.talent_jobs.count == 0
+      2.times { @talent.talent_jobs.build }
+    elsif @talent.talent_jobs.count == 1
       1.times { @talent.talent_jobs.build }
     else
       0.times { @talent.talent_jobs.build }

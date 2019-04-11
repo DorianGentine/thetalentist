@@ -12,47 +12,7 @@
     <div class="margin-auto-new-talent">
       <%= f.error_notification message: 'INFORMATIONS NON COMPLÈTES!', id: 'user_error_message', class: 'form_error' %>
 
-    <!-- si spécialité métier pas renseigné -->
-<!--     <#% if (@talent.talent_jobs.first.nil? || @talent.phone.nil?) %>
       <div class="blue-background">
-        <#% if @talent.talent_jobs.first.nil? %>
-          <div class="margin-top-30" id="talent_jobs">
-            <div class="row">
-              <div class="col-lg-4 no-padding margin-right-15 no-margin-xs">
-                <p class="label-edit requis">Sélectionner mon domaine d'activité</p>
-              </div>
-              <div class="col-lg-3 no-padding margin-top-15-xs">
-                <p class="label-edit requis">Années d'expérience</p>
-
-              </div>
-              <div class="col-lg-3">
-                <p class="label-edit requis">Métier principal</p>
-              </div>
-            </div>
-            <div class="row">
-            <#%= f.simple_fields_for :talent_jobs do |u| %>
-              <#%= render 'talents/talent_job_fields', :f => u %>
-            <#% end %>
-            </div>
-            <div class="links margin-top-30">
-              <#%= link_to_add_association 'Ajouter métier', f, :talent_jobs, :partial => 'talents/talent_job_fields', :class => "form-hobby-add", id: "add_job" %>
-            </div>
-          </div>
-        <#% end %>
-        <#% if @talent.phone == "To fill it" %>
-          <div class="row <#%= @talent.talent_jobs.first.present? ? 'margin-top-15' : '' %>">
-            <label class="label-edit text-align-right line-height-center col-lg-2 no-padding-xs" for="talent_phone">Tel.</label>
-            <div class="col-lg-3 col-xs-12 margin-right-15 no-padding no-margin-xs margin-bottom-15-xs">
-              <#%= f.input :phone, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%", value:"" } %>
-            </div>
-          </div>
-        <#% end %>
-      </div>
-
-      <div class="blue-background margin-top-background">
-    <#% else %> -->
-      <div class="blue-background">
-    <!-- <#% end %> -->
         <%= f.simple_fields_for :talent_formations do |u| %>
           <%= render 'formation_fields', :f => u %>
         <% end %>
