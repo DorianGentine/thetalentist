@@ -131,7 +131,7 @@
                   <% end %>
                   <% if talent[:experiences].length > 2 %>
                     <% talent[:experiences].last(talent[:experiences].length - 2).each do |experience| %>
-                      <div class="read-more-content">
+                      <div class="read-more-content RMC-formation">
                         <div class="flex">
                           <div>
                             <div class="point-barre-pointee"></div>
@@ -152,7 +152,7 @@
                       <div>
                         <div class="point-barre-pointee"></div>
                       </div>
-                      <p class="read-more" data-text-swap="Fermer" style="border-radius: 6px; padding: 1px 6px;">+ <%= pluralize(talent[:experiences].length - 2, 'expérience') %> </p>
+                      <p class="read-more" data-text-swap="Fermer" data-content-title="RMC-formation" style="border-radius: 6px; padding: 1px 6px;">+ <%= pluralize(talent[:experiences].length - 2, 'expérience') %> </p>
                     </div>
                   <% end %>
                 </div>
@@ -169,9 +169,9 @@
                   <% end %>
                   <% if talent[:technos].length > 5 %>
                     <% talent[:technos].last(talent[:technos].length - 5).each do |talent_techno| %>
-                      <p class="read-more-content"><%= talent_techno[:description] %></p>
+                      <p class="read-more-content RMC-competences"><%= talent_techno[:title] %></p>
                     <% end %>
-                    <p class="read-more" data-text-swap="Fermer"> + <%= talent[:technos].length - 5 %> </p>
+                    <p class="read-more" data-text-swap="Fermer" data-content-title="RMC-competences"> + <%= talent[:technos].length - 5 %> </p>
                   <% end %>
                 </div>
               <% end %>
@@ -184,9 +184,9 @@
                   <% end %>
                   <% if talent[:talent_small_plus].length > 5 %>
                     <% talent[:talent_small_plus].last(talent[:talent_small_plus].length - 5).each do |your_small_plu| %>
-                      <p class="read-more-content"><%= your_small_plu[:description] %></p>
+                      <p class="read-more-content RMC-petitsplus"><%= your_small_plu[:description] %></p>
                     <% end %>
-                    <p class="read-more" data-text-swap="Fermer"> + <%= talent[:talent_small_plus].length - 5 %> </p>
+                    <p class="read-more" data-text-swap="Fermer" data-content-title="RMC-petitsplus"> + <%= talent[:talent_small_plus].length - 5 %> </p>
                   <% end %>
                 </div>
               <% end %>

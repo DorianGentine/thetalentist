@@ -18,7 +18,8 @@ function readMore(){
         // this.classList.toggle("red-background")
 
       // Show read-more-content
-        var content = document.getElementsByClassName("read-more-content");
+        const contentTitle = this.getAttribute("data-content-title")
+        var content = document.getElementsByClassName(contentTitle);
         for (i = 0; i < content.length; i++) {
           if (content[i].style.display === "block") {
             content[i].style.display = "none";
