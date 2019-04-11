@@ -2,7 +2,7 @@
   <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
   <h2 class="titre-section">Remplissez votre <strong>profil</strong></h2>
 
-  <%= simple_form_for @talent, remote: false  do |f|%>
+<%= simple_form_for @talent, remote: false  do |f|%>
 
     <%= render 'shared/change_photo', f: f %>
 
@@ -29,26 +29,23 @@
 
     <div class="row margin-top-30" id="talent_jobs">
       <%= f.simple_fields_for :talent_jobs do |u| %>
+        <label class="label-edit col-lg-2 col-xs-12 requis js_remove" style="padding: 0 15px 0 0;">Mon&#8239;domaine  d'activité</label>
         <%= render 'talents/talent_job_fields', :f => u %>
       <% end %>
-      </div>
-      <div class="links margin-top-30">
-        <%= link_to_add_association 'Ajouter métier', f, :talent_jobs, :partial => 'talents/talent_job_fields', :class => "form-hobby-add", id: "add_job" %>
-      </div>
     </div>
 
-<!-- Titre section -->
-  <div class="titre-section-icon margin-top-background"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
-  <h2 class="titre-section margin-top-background">Me suivre <strong>sur :</strong></h2>
+  <!-- Titre section -->
+    <div class="titre-section-icon margin-top-background"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+    <h2 class="titre-section margin-top-background">Me suivre <strong>sur :</strong></h2>
 
-    <div class="row margin-top-30">
-      <div class="col-lg-4 no-padding margin-right-15">
-        <p class="label-edit">Linkedin</p>
-        <%= f.input :linkedin, label: false, :input_html => { style: "width: 100%" } %>
+      <div class="row margin-top-30">
+        <div class="col-lg-4 no-padding margin-right-15">
+          <p class="label-edit">Linkedin</p>
+          <%= f.input :linkedin, label: false, :input_html => { style: "width: 100%" } %>
+        </div>
       </div>
-    </div>
 
-<%= render 'edit_validations_buttons', f: f %>
+  <%= render 'edit_validations_buttons', f: f %>
 
 <% end %>
 
