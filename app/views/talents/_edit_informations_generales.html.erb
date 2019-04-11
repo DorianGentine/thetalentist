@@ -28,23 +28,8 @@
     </div>
 
     <div class="row margin-top-30" id="talent_jobs">
-      <div class="row">
-        <div class="col-lg-4 no-padding margin-right-15 no-margin-xs">
-          <p class="label-edit requis">Sélectionner mon domaine d'activité</p>
-        </div>
-        <div class="col-lg-3 no-padding margin-top-15-xs">
-          <p class="label-edit requis">Années d'expérience</p>
-
-        </div>
-        <div class="col-lg-3">
-          <p class="label-edit requis">Métier principal</p>
-        </div>
-
-      </div>
-      <div class="row">
       <%= f.simple_fields_for :talent_jobs do |u| %>
         <%= render 'talents/talent_job_fields', :f => u %>
-
       <% end %>
       </div>
       <div class="links margin-top-30">
