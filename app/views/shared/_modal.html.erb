@@ -90,7 +90,7 @@
               <h4><i class="far fa-id-badge"></i> PROFIL</h4>
 
               <h5>La personnalité qui m'inspire ?</h5>
-              <p class="no-margin-xs texte-rubrique-3 more" style="white-space: unset;">
+              <p class="no-margin-xs texte-rubrique-3" style="white-space: unset;">
                 <% if talent[:next_aventure].present? %>
                   <%= talent[:next_aventure][:famous_person].present? ? talent[:next_aventure][:famous_person] : "-" %>
                 <% else %>
@@ -99,7 +99,7 @@
               </p>
 
               <h5 class="margin-top-30">Le job de mes rêves</h5>
-              <p class="no-margin-xs texte-rubrique-3 more" style="white-space: unset;">
+              <p class="no-margin-xs texte-rubrique-3" style="white-space: unset;">
                 <% if talent[:next_aventure].present? %>
                   <%= talent[:next_aventure][:work_for_free].present? ? talent[:next_aventure][:work_for_free] : "-" %>
                 <% else %>
@@ -131,7 +131,7 @@
                   <% end %>
                   <% if talent[:experiences].length > 2 %>
                     <% talent[:experiences].last(talent[:experiences].length - 2).each do |experience| %>
-                      <div class="read-more-content RMC-formation">
+                      <div class="read-more-content RMC-experience">
                         <div class="flex">
                           <div>
                             <div class="point-barre-pointee"></div>
@@ -152,7 +152,7 @@
                       <div>
                         <div class="point-barre-pointee"></div>
                       </div>
-                      <p class="read-more" data-text-swap="Fermer" data-content-title="RMC-formation" style="border-radius: 6px; padding: 1px 6px;">+ <%= pluralize(talent[:experiences].length - 2, 'expérience') %> </p>
+                      <p class="read-more" data-text-swap="Fermer" data-content-title="RMC-experience" style="border-radius: 6px; padding: 1px 6px;">+ <%= pluralize(talent[:experiences].length - 2, 'expérience') %> </p>
                     </div>
                   <% end %>
                 </div>
