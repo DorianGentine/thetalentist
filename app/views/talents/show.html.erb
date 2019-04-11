@@ -67,7 +67,7 @@
             <p class="titre-rubrique-3 no-margin col-xs-11 no-padding">
               <% if @talent.jobs.first.present? && @talent.jobs.first.title.present? %>
                 <% @talent.talent_jobs.each_with_index do |talent_job, index| %>
-                  <%= talent_job.job.title %> depuis <%= pluralize(talent_job.year, 'an') %>
+                  <%= talent_job.job.present? ? talent_job.job.title : "" %> depuis <%= pluralize(talent_job.year, 'an') %>
                   <%= "-" if index == 0 && @talent.talent_jobs.count > 1 %>
                 <% end %>
               <% else %>

@@ -41,10 +41,13 @@
   .select2-search--dropdown {
       padding: 4px 0 !important;
   }
-// change l'aspect du focus
-// :focus {
-//     outline: -webkit-focus-ring-color auto 2px;
-// }
+
+// supprime la search-box (ajouter la class select2_nosearch)
+  // .select2_nosearch {
+  //   input.select2-search__field{
+  //     display: none;
+  //   }
+  // }
 
 // supprime bordure au-dessus du dropdown
   span.select2-dropdown.select2-dropdown--below {
@@ -68,20 +71,4 @@
     border-right: 1px solid #d0d0d0;
     padding-right: 4px;
 }
-
-
-
-// .select2-container--default .select2-selection--multiple .select2-selection__choice{
-//   background-color: white !important;
-//   border: 1px solid $green !important;
-//   color: $green !important;
-//   margin-right: 10px !important;
-//   padding: 5px 10px !important;
-// }
-// .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
-//   color: $green !important;
-//   font-weight: 500 !important;
-//   margin-right: 5px !important;
-// }
-
 
