@@ -4,12 +4,19 @@ import 'selectize';
 
 const initSelect2 = () => {
   $('.select2').select2();
+
+  // supprime la search-box (ajouter la class no-search)
+  $('.no-search').select2({
+    minimumResultsForSearch: -1
+  });
+
+  $(".domaine-change-placeholder").select2({
+    minimumResultsForSearch: -1,
+    placeholder: "Domaine d'activité"
+  });
 };
 
 
-$('.no-search').select2({
-  minimumResultsForSearch: -1
-});
 
 
 $('.selectAndCreate').selectize({

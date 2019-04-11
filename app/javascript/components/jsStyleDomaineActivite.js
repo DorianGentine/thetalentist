@@ -17,7 +17,7 @@ if (jsRemove.length > 0) {
   jsMove[0].insertAdjacentElement("afterend", jsMove[1]);
 
   // change le placeholder
-  setTimeout( () => {
-    jsMove[0].getElementsByClassName("select2-selection__rendered")[0].title = "Domaine d'activité principale"
-  }, 30)
+  // setTimeout( () => {
+  //   jsMove[0].getElementsByClassName("select2-selection__rendered")[0].title = "Domaine d'activité principale"
+  // }, 30)
 }

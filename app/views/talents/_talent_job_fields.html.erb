@@ -2,7 +2,7 @@
   <label class="label-edit text-align-right line-height-center col-lg-2 requis js_remove" style="padding: 0 15px 0 0;">Mon&#8239;domaine&#8239;d'activité</label>
   <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs js_move">
 
-    <%= f.input :job_id, collection: Job.all, prompt: "Domaine d'activité secondaire (facultatif)", label: false, :input_html => { style: "width: 100%", class: "select2" }, error: f.object.errors.messages[:job_id][0] %>
+    <%= f.input :job_id, collection: Job.all, placeholder: "Domaine secondaire (facultatif)", label: false, :input_html => { style: "width: 100%", class: "domaine-change-placeholder" }, error: f.object.errors.messages[:job_id][0] %>
   </div>
 
   <div class="col-lg-3 col-xs-12 no-padding js_remove">
