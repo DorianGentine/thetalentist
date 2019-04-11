@@ -65,11 +65,14 @@
               <div class="row">
                 <% talent[:formations].each do |talent_formation| %>
                 <div class="col-xs-12 talent-school-item">
-                  <p class="">
-                    <i class="fas fa-graduation-cap margin-right-5"></i>
+                  <i class="fas fa-graduation-cap black margin-right-5"></i>
+                  <p>
                     <%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] + " - " : "" %>
                     <%= talent_formation[:ranking].present? ? talent_formation[:ranking] + ", " : "" %>
-                    <%=talent_formation[:title] %> - <%= talent_formation[:year] %>
+                    <br>
+                    <%=talent_formation[:title] %>
+                    <br>
+                    <%= talent_formation[:year] %>
                   </p>
                 </div>
                 <% end %>
