@@ -2,7 +2,7 @@
 ActionMailer::Base.smtp_settings = {
   user_name: ENV['SENDGRID_USERNAME'],
   password: ENV['SENDGRID_PASSWORD'],
-  domain: 'www.betatalentist.com',
+  domain: 'www.thetalentist.com',
   address: "smtp.sendgrid.net",
   port: 587,
   authentication: :login,
