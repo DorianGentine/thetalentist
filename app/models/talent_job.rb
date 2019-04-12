@@ -22,7 +22,6 @@ class TalentJob < ApplicationRecord
     end
   end
 
-
   def set_year
     talent = self.talent
     if talent.talent_jobs.count > 1 && talent.talent_jobs.second == self
