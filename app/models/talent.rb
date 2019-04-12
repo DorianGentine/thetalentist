@@ -27,7 +27,7 @@ class Talent < ApplicationRecord
   # before_validation :destroy_talent_job_without_job
 
   after_create :send_welcome_email, :send_new_user_to_talentist
-  before_save :capitalize_name_firstname, :save_completed_profil, :delete_extra_jobs
+  before_save :capitalize_name_firstname, :save_completed_profil
 
   # Tu devras ajouter les lignes has_many :xx through: :xx pour tous les champs que le talent devra remplir dans le questionnaire
   has_many :talent_sectors, dependent: :destroy
