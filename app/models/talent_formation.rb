@@ -2,7 +2,7 @@ class TalentFormation < ApplicationRecord
   belongs_to :talent
   belongs_to :formation
 
-  validates_presence_of :title, message: "Ajouter un titre"
+  validates_presence_of :title, message: "Information obligatoire"
   validates_presence_of :year, message: "Ajouter l'année d'obtention"
 
   default_scope { order(year: :DESC) }

@@ -2,7 +2,7 @@ class NextAventure < ApplicationRecord
   belongs_to :talent
 
 
-  validates_presence_of :mobilities, message: "Ajouter un titre"
+  validates_presence_of :mobilities, message: "Information obligatoire"
   validates_presence_of :contrat, message: "Ajoute ton type de contrat"
   validates_presence_of :sector_ids, message: "Ajoute un secteur"
 
