@@ -45,11 +45,16 @@
                 <% end %>
 
                 <% if talent[:sectors].length > 0 %>
-                  <p><i style="min-width: 16px;" class="fas fa-briefcase margin-right-5 green"></i>
-                    <% talent[:sectors].each_with_index do |talent_sector, index| %>
+                  <p class="tooltip"><i style="min-width: 16px;" class="fas fa-briefcase margin-right-5 green"></i>
+                    <%= talent[:sectors].first[:title] %>
+                    +<%= talent[:sectors].length - 1 %>
+                    <span class="tooltiptext">
+                      <% talent[:sectors].each_with_index do |talent_sector, index| %>
                       <%= talent_sector[:title] %>
-                      <%= (index +1) == talent[:sectors].count ? "" : ", " %>
+                      <br>
+                      <%#= (index +1) == talent[:sectors].count ? "" : ", " %>
                     <% end %>
+                    </span>
                   </p>
                 <% end %>
 
@@ -63,7 +68,7 @@
               </div>
 
               <div class="row">
-                <% talent[:formations].each do |talent_formation| %>
+                <% talent[:formations].first(2).each do |talent_formation| %>
                 <div class="col-xs-12 talent-school-item">
                   <i class="fas fa-graduation-cap black margin-right-5"></i>
                   <p>

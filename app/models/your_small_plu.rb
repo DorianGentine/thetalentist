@@ -7,7 +7,7 @@ class YourSmallPlu < ApplicationRecord
 
   def capitalize_description
     if !self.description.nil?
-      self.description.capitalize
+      self.description
     end
   end
 end
