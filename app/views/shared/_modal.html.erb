@@ -47,14 +47,15 @@
                 <% if talent[:sectors].length > 0 %>
                   <p class="tooltip"><i style="min-width: 16px;" class="fas fa-briefcase margin-right-5 green"></i>
                     <%= talent[:sectors].first[:title] %>
-                    +<%= talent[:sectors].length - 1 %>
-                    <span class="tooltiptext">
-                      <% talent[:sectors].each_with_index do |talent_sector, index| %>
-                      <%= talent_sector[:title] %>
-                      <br>
-                      <%#= (index +1) == talent[:sectors].count ? "" : ", " %>
+                    <% if talent[:sectors].length > 1 %>
+                      +<%= talent[:sectors].length - 1 %>
+                      <span class="tooltiptext">
+                        <% talent[:sectors].each_with_index do |talent_sector, index| %>
+                        <%= talent_sector[:title] %>
+                        <br>
+                      <% end %>
+                      </span>
                     <% end %>
-                    </span>
                   </p>
                 <% end %>
 
