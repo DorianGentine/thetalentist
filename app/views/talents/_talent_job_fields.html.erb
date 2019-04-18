@@ -1,9 +1,9 @@
 <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs js_move">
 
-  <%= f.input :job_id, collection: Job.all, placeholder: "Domaine secondaire (facultatif)", label: false, :input_html => { style: "width: 100%", class: "select2 domaine-change-placeholder" }, error: f.object.errors.messages[:job_id][0] %>
+  <%= f.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", class: "select2 domaine-change-placeholder" }, error: f.object.errors.messages[:job_id][0] %>
 </div>
 
-<div class="col-lg-3 col-xs-12 no-padding js_remove">
+<div class="col-lg-3 col-xs-12 margin-left-15 no-margin-xs margin-top-15-xs no-padding js_remove">
   <%= f.input :year, placeholder: "Années d'expérience", label: false, :input_html => { style: "width: 100%", min: "0", :onchange => "zeroInput(this.value, 'yearPositif')", class: "copy_value" }, error: f.object.errors.messages[:year][0] %>
 </div>
 

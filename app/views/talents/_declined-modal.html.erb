@@ -17,7 +17,7 @@
         <h4><%= f.object.firstname %> <%= f.object.name %></h4>
 
         <div class="row">
-          <%= f.text_area :declined, placeholder: "En effet, malgré .... et ..., le ... est un critère extrêmement important pour nous.", label: false, :input_html => { rows: 2 }, style: "width: 100%;" %>
+          <%= f.text_area :declined, placeholder: "En effet, malgré .... et ..., le ... est un critère extrêmement important pour nous.", label: false, :rows => 6, style: "width: 100%;" %>
         </div>
 
         <%= f.submit "Refuser", class: "btn-edit red-border red margin-top-30" %>

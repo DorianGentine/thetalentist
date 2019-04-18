@@ -14,8 +14,9 @@ class Talent < ApplicationRecord
 
   validates_presence_of :city, :message => "Le lieu doit être rempli", unless: :skip_city_validation
   validates_presence_of :phone, :message => "Ton téléphone doit être rempli", unless: :skip_phone_validation
+  validates_presence_of :linkedin, :message => "Ton linkedin doit être rempli"
   validates_presence_of :email, :message => "Ton email doit être rempli"
-  validates_presence_of :password, :message => "Ton mot de passe doit être rempli"
+  # validates_presence_of :password, :message => "Ton mot de passe doit être rempli"
   validates_presence_of :firstname, :message => "Ton prénom doit être rempli"
   validates_presence_of :name, :message => "Ton nom doit être rempli"
 

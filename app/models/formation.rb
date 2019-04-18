@@ -6,6 +6,9 @@ class Formation < ApplicationRecord
 
   before_save :capitalize_type_and_ranking
 
+  # validates_presence_of :talent_formations, :message => "Une formation doit être renseignée"
+  # validates_presence_of :formation, :message => "Une formation doit être renseignée"
+
   # scope :talent_with_no_type_of_formation, -> { where(type_of_formation: [nil, '']).joins(:talent_formations) }
   # scope :talent_with_no_ranking, -> { where("ranking LIKE ? OR ranking IS ?", '', nil).joins(:talent_formations) }
 

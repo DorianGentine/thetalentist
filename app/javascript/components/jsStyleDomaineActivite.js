@@ -1,3 +1,5 @@
+import { initSelect2 } from '../components/select2';
+
 const jsRemove = document.getElementsByClassName("js_remove")
 const jsMove = document.getElementsByClassName("js_move")
 const copyValue = document.getElementsByClassName("copy_value")
@@ -18,6 +20,7 @@ if (jsRemove.length > 0) {
 
   // change le placeholder
   // setTimeout( () => {
-  //   jsMove[0].getElementsByClassName("select2-selection__rendered")[0].title = "Domaine d'activité principale"
+  //   jsMove[1].classList.add("second-domaine")
+  //   initSelect2()
   // }, 30)
 }
