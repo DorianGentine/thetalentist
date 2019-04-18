@@ -63,7 +63,7 @@ span.select2.select2-container.select2-container--default {
   .form-btn{
     height: 40px;
     width: 170px;
-    border-radius: 25px;
+    border-radius: 10px;
     border: 2px solid $green;
     color: $green;
     padding: 0;
@@ -73,10 +73,12 @@ span.select2.select2-container.select2-container--default {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 18px;
   }
   .form-btn-suivant{
     background-color: $green;
     color: white;
+    font-size: 18px;
   }
 }
 

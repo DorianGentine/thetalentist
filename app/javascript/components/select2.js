@@ -14,6 +14,11 @@ const initSelect2 = () => {
     minimumResultsForSearch: -1,
     placeholder: "Domaine d'activité"
   });
+
+  $(".second-domaine").select2({
+    minimumResultsForSearch: -1,
+    placeholder: "Domaine d'activité secondaire (facultatif)"
+  });
 };
 
 
