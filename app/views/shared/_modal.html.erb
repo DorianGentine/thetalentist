@@ -73,8 +73,8 @@
                 <div class="col-xs-12 talent-school-item">
                   <i class="fas fa-graduation-cap black margin-right-5"></i>
                   <p>
-                    <%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] + " - " : "" %>
-                    <%= talent_formation[:ranking].present? ? talent_formation[:ranking] + ", " : "" %>
+                    <%= talent_formation[:type_of_formation].present? ? talent_formation[:type_of_formation] : "" %>
+                    <%= talent_formation[:ranking].present? ? "-" + talent_formation[:ranking] : "" %>
                     <br>
                     <%=talent_formation[:title] %>
                     <br>
