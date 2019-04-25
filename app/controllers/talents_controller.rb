@@ -189,6 +189,7 @@ class TalentsController < ApplicationController
         validated_action(false)
         visible_action(false)
       else @talent.validated == nil
+        @talent.update(declined_params)
         @talent.send_refused
         validated_action(false)
         visible_action(false)
@@ -248,17 +249,9 @@ private
 
   def validated_action(action)
     @talent.validated = action
+    @talent.skip_linkedin_validation = true
     @talent.save
   end
-
-  # def talent_password_old
-  #   old = params.require(:talent).permit(:password_old)
-  #   return old[:password_old]
-  # end
-
-  # def talent_password
-  #   params.require(:talent).permit(:password_old, :password, :password_confirmation )
-  # end
 
   def talent_params
     params.require(:talent).permit(

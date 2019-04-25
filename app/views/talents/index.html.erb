@@ -11,7 +11,7 @@
     <div class="row blue-background" style="margin-bottom: 100px;">
       <p id="update_formation_title" class="col-xs-6 col-xs-offset-3 text-align-center"><strong><%= pluralize( @formations.count, 'Formation') %> </strong> doivent être complétées</p>
 
-      <div style="" class="col-xs-12">
+      <div class="col-xs-12">
         <% @formations.each do |formation| %>
           <%= render 'talentists/formation', formation: formation %>
         <% end %>

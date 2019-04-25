@@ -14,19 +14,17 @@ class Talent < ApplicationRecord
 
   validates_presence_of :city, :message => "Le lieu doit être rempli", unless: :skip_city_validation
   validates_presence_of :phone, :message => "Ton téléphone doit être rempli", unless: :skip_phone_validation
-  validates_presence_of :linkedin, :message => "Ton linkedin doit être rempli"
+  # validates_presence_of :linkedin, :message => "Ton linkedin doit être rempli", unless: :skip_linkedin_validation
   validates_presence_of :email, :message => "Ton email doit être rempli"
-  # validates_presence_of :password, :message => "Ton mot de passe doit être rempli"
   validates_presence_of :firstname, :message => "Ton prénom doit être rempli"
   validates_presence_of :name, :message => "Ton nom doit être rempli"
 
-  attr_accessor :skip_city_validation, :skip_phone_validation
+  attr_accessor :skip_city_validation, :skip_phone_validation, :skip_linkedin_validation
 
   validates_associated :talent_jobs
 
   geocoded_by :city
   after_validation :geocode
-  # before_validation :destroy_talent_job_without_job
 
   after_create :send_welcome_email, :send_new_user_to_talentist
   before_save :capitalize_name_firstname, :save_completed_profil
@@ -134,14 +132,6 @@ class Talent < ApplicationRecord
     end
     talent = TalentJob.joins(:talent).where(:talents => { :id => self.id })
     job_ids.include?(talent[0].id)
-  end
-
-  def destroy_talent_job_without_job
-    self.talent_jobs.each do |talent_job|
-      if talent_job.job.blank?
-        talent_job.destroy
-      end
-    end
   end
 
   def notif_of_unread
