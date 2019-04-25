@@ -10,7 +10,7 @@ ActiveAdmin.register Talent do
     column :firstname
     column :name
     column :linkedin
-    column( "1er Metier", nil, sortable: :"jobs.title") {|talent| talent.jobs.first.title }
+    # column( "1er Metier", nil, sortable: :"jobs.title") {|talent| talent.jobs.first.title }
     column :created_at
     actions
   end
