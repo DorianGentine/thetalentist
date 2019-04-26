@@ -11,6 +11,10 @@ class TalentJob < ApplicationRecord
 
   # attr_accessor :skip_year_validation
 
+
+  # scope :his_job_is, -> { joins(:job).where("jobs.title LIKE ?", "Sales") }
+  scope :his_job_is, -> (job) { joins(:job).where("jobs.title LIKE ?", job) }
+
   default_scope { order(position: :asc) }
 
   def set_position
