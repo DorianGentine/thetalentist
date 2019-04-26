@@ -47,7 +47,7 @@ class Talent < ApplicationRecord
 
   def jobs
     jobs = []
-    jobs << self.talent_job.job
+    jobs << self.talent_job.job if self.talent_job.present?
     jobs << self.talent_second_job.job if self.talent_second_job.present?
     return jobs
   end
