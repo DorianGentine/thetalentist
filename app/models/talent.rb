@@ -21,7 +21,6 @@ class Talent < ApplicationRecord
 
   attr_accessor :skip_city_validation, :skip_phone_validation, :skip_linkedin_validation
 
-  validates_associated :talent_jobs
 
   geocoded_by :city
   after_validation :geocode
@@ -36,9 +35,22 @@ class Talent < ApplicationRecord
   has_many :your_small_plus, dependent: :destroy
   accepts_nested_attributes_for :your_small_plus, allow_destroy: true, reject_if: :all_blank
 
-  has_many :talent_jobs, dependent: :destroy
-  has_many :jobs, through: :talent_jobs
-  accepts_nested_attributes_for :talent_jobs, allow_destroy: true
+  validates_associated :talent_job
+  has_one :talent_job, dependent: :destroy
+  has_one :talent_second_job, dependent: :destroy
+  # has_many :talent_jobs, dependent: :destroy
+  # has_many :jobs, through: :talent_jobs
+  scope :his_job_is, -> (job) { joins(:jobs).merge(Job.where(title: job)) }
+
+  def jobs
+    jobs = []
+    jobs << self.talent_job.job
+    jobs << self.talent_second_job.job if self.talent_second_job.present?
+    return jobs
+  end
+
+  accepts_nested_attributes_for :talent_job, allow_destroy: true
+  accepts_nested_attributes_for :talent_second_job, allow_destroy: true
 
   has_many :talent_skills, dependent: :destroy
   has_many :skills, through: :talent_skills
@@ -96,7 +108,6 @@ class Talent < ApplicationRecord
   mount_uploader :photo, PhotoUploader
   process_in_background :photo
 
-  scope :his_job_is, -> (job) { joins(:jobs).merge(Job.where(title: job)) }
   # scope :is_comming_to, -> (point) { where( point: point, invited: true, status: "I'm in") }
   # scope :activity_title, -> (current_title) { joins(:user_activity).merge(UserActivity.by_activity_title(current_title)) }
   # scope :formation_missing_informations, -> { joins(:formations).merge(Formation.with_no_type_of_formation)}
@@ -241,8 +252,8 @@ class Talent < ApplicationRecord
     self.city.present? ? count += value_input : count
     self.linkedin.present? ? count += value_input : count
     self.jobs.first.present? ? count += value_input : count
-    if self.talent_jobs.first.present?
-      self.talent_jobs.first.year.present? ? count += value_input : count
+    if self.talent_job.present?
+      self.talent_job.year.present? ? count += value_input : count
     end
     return count.round(0)
   end
