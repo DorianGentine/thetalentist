@@ -1,15 +1,15 @@
-<div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs js_move">
-  <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", class: "select2 domaine-change-placeholder" }, error: u.object.errors.messages[:job_id][0] %>
+<div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
+  <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", class: "select2 premier-domaine" }, error: u.object.errors.messages[:job_id][0] %>
 </div>
 
 <%= f.simple_fields_for :talent_second_job do |e| %>
-  <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs js_move">
-    <%= e.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", class: "select2 domaine-change-placeholder" }, error: e.object.errors.messages[:job_id][0] %>
+  <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs margin-bottom-15-xs">
+    <%= e.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", class: "select2 second-domaine" }, error: e.object.errors.messages[:job_id][0] %>
   </div>
 <% end %>
 
 <div class="col-lg-3 col-xs-12 margin-left-15 no-margin-xs margin-top-15-xs no-padding">
-  <%= u.input :year, placeholder: "Années d'expérience", label: false, :input_html => { style: "width: 100%", min: "0", :onchange => "zeroInput(this.value, 'yearPositif')", class: "copy_value" }, error: u.object.errors.messages[:year][0] %>
+  <%= u.input :year, placeholder: "Années d'expérience", label: false, :input_html => { style: "width: 100%", min: "0", :onchange => "zeroInput(this.value, 'yearPositif')" }, error: u.object.errors.messages[:year][0] %>
 </div>
 
 <%= u.input :position, as: :hidden %>

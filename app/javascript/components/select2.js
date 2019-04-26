@@ -10,14 +10,14 @@ const initSelect2 = () => {
     minimumResultsForSearch: -1
   });
 
-  $(".domaine-change-placeholder").select2({
+  $(".premier-domaine").select2({
     minimumResultsForSearch: -1,
-    placeholder: "Domaine d'activité"
+    placeholder: "principal"
   });
 
   $(".second-domaine").select2({
     minimumResultsForSearch: -1,
-    placeholder: "Domaine d'activité secondaire (facultatif)"
+    placeholder: "secondaire (facultatif)"
   });
 };
 
