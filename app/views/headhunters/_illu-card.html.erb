@@ -18,10 +18,7 @@
   <% end %>
 <% else current_headhunter || current_talent %>
 
-  <% if talent.talent_jobs.blank? %>
-
-  <% else %>
-
+  <% if !talent.talent_job.blank? %>
     <% if talent.job_is?("Data") %>
       <div class="illu-card"><%= image_tag "illu-data.png" %></div>
     <% elsif talent.job_is?("Product") %>
