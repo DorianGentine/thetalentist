@@ -5,13 +5,14 @@ class Talents::RegistrationsController < Devise::RegistrationsController
   def new
     @talent = Talent.new
 
-   if @talent.talent_jobs.count == 0
-      2.times { @talent.talent_jobs.build }
-    elsif @talent.talent_jobs.count == 1
-      1.times { @talent.talent_jobs.build }
-    else
-      0.times { @talent.talent_jobs }
-    end
+    # if @talent.talent_jobs.count == 0
+    #   2.times { @talent.talent_jobs.build }
+    # elsif @talent.talent_jobs.count == 1
+      @talent.build_talent_job if @talent.jobs.count == 0
+      @talent.build_talent_second_job if @talent.jobs.count < 2
+    # else
+    #   0.times { @talent.talent_jobs }
+    # end
     authorize @talent
   end
 
@@ -50,7 +51,8 @@ class Talents::RegistrationsController < Devise::RegistrationsController
       :password,
       :password_confirmation,
       :linkedin,
-      talent_jobs_attributes: [ :id, :job_id, :year, :position ]
+      talent_job_attributes: [ :id, :job_id, :year ],
+      talent_second_job_attributes: [ :id, :job_id ]
       )
   end
 end

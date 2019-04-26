@@ -2,9 +2,9 @@ class TalentJob < ApplicationRecord
   belongs_to :talent
   belongs_to :job, optional: true
 
-  before_validation :set_year
+  # before_validation :set_year
 
-  before_save :set_position
+  # before_save :set_position
 
   validates_presence_of :year, message: "L'année doit être remplit", unless: :skip_year
   # validates_presence_of :job_id, message: "Le métier doit être remplit", unless: :is_second_job

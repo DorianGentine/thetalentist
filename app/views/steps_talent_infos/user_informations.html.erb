@@ -46,9 +46,9 @@
 
       <div class="blue-background margin-top-background">
         <div class="row flex" id="talent_jobs">
-          <%= f.simple_fields_for :talent_jobs do |u| %>
-            <label class="label-edit text-align-right col-lg-2 col-xs-12 requis align-center js_remove" style="padding: 0 15px 0 0;">Mon&#8239;domaine&#8239;d'activité</label>
-            <%= render 'talents/talent_job_fields', :f => u %>
+          <%= f.simple_fields_for :talent_job do |u| %>
+            <label class="label-edit text-align-right col-lg-2 col-xs-12 requis align-center" style="padding: 0 15px 0 0;">Mon&#8239;domaine&#8239;d'activité</label>
+            <%= render 'talents/talent_job_fields', :u => u, f: f %>
           <% end %>
         </div>
         <% if @talent.linkedin.nil? || @talent.linkedin == "" %>

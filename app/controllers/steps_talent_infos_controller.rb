@@ -13,13 +13,15 @@ class StepsTalentInfosController < ApplicationController
     else
       0.times { @talent.talent_formations.build }
     end
-    if @talent.talent_jobs.count == 0
-      2.times { @talent.talent_jobs.build }
-    elsif @talent.talent_jobs.count == 1
-      1.times { @talent.talent_jobs.build }
-    else
-      0.times { @talent.talent_jobs }
-    end
+    @talent.build_talent_job if @talent.jobs.count == 0
+    @talent.build_talent_second_job if @talent.jobs.count < 2
+    # if @talent.talent_jobs.count == 0
+    #   2.times { @talent.talent_jobs.build }
+    # elsif @talent.talent_jobs.count == 1
+    #   1.times { @talent.talent_jobs.build }
+    # else
+    #   0.times { @talent.talent_jobs }
+    # end
     if @talent.talent_languages.count == 0
       1.times { @talent.talent_languages.build }
     else
@@ -146,7 +148,6 @@ class StepsTalentInfosController < ApplicationController
   end
 
   def talent_params
-    # ici tu ajouteras au fur et à mesure les champs du formulaire (toutes étapes confondues)
      params.require(:talent).permit(
       :name,
       :firstname,
@@ -164,7 +165,8 @@ class StepsTalentInfosController < ApplicationController
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       your_small_plus_attributes: [:id, :description, :_destroy],
-      talent_jobs_attributes: [:id, :job_id, :year, :position, :_destroy]
+      talent_job_attributes: [:id, :job_id, :year, :position, :_destroy],
+      talent_second_job_attributes: [ :id, :job_id ]
     )
   end
 end

@@ -2,6 +2,9 @@ class Job < ApplicationRecord
   has_many :talent_jobs, dependent: :destroy
   has_many :talents, through: :talent_jobs
 
+  has_many :talent_second_jobs, dependent: :destroy
+  # has_many :talents, through: :talent_second_jobs
+
   has_many :job_alertes, dependent: :destroy
   has_many :headhunters, through: :job_alertes
 
