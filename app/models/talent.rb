@@ -38,13 +38,16 @@ class Talent < ApplicationRecord
   validates_associated :talent_job
   has_one :talent_job, dependent: :destroy
   has_one :talent_second_job, dependent: :destroy
-  # has_many :talent_jobs, dependent: :destroy
-  # has_many :jobs, through: :talent_jobs
+
+  # ATTENTION IL MANQUE TALENT_SECOND_JOB
+  has_many :jobs, through: :talent_job, class_name:"Job"
+
+
   scope :his_job_is, -> (job) { joins(:jobs).merge(Job.where(title: job)) }
 
   def jobs
     jobs = []
-    jobs << self.talent_job.job
+    jobs << self.talent_job.job if self.talent_job.present?
     jobs << self.talent_second_job.job if self.talent_second_job.present?
     return jobs
   end
@@ -361,8 +364,8 @@ class Talent < ApplicationRecord
     end
 
   end
-  private
 
+  private
 
 
   def stat(arg)

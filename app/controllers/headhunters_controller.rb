@@ -88,7 +88,7 @@ class HeadhuntersController < ApplicationController
       talent_injected = {
         id: talent.id,
         position: talent.experiences.first.present? ? talent.experiences.first.position : nil,
-        year_experience_job: talent.talent_job.present? ? talent.talent_job.year : "1",
+        year_experience_job: talent.talent_job.present? ? talent.talent_job.year : "0",
         city: talent.city,
         job: talent.jobs.first.present? ? talent.jobs.first.title : nil,
         job2: talent.jobs.second.present? ? talent.jobs.second.title : nil,
