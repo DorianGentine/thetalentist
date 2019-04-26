@@ -7,7 +7,7 @@
     <div class="border relative">
 
       <div class="card-title">
-        <p><%= talent.jobs.count > 0 ? talent.jobs.first.title : "pas renseigné" %></p>
+        <p><%= talent.jobs.first.nil? ? "pas renseigné" : talent.jobs.first.title %></p>
       </div>
 
       <div class="talent-job" style="height: 80px">
