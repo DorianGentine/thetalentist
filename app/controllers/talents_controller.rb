@@ -187,7 +187,9 @@ class TalentsController < ApplicationController
         validated_action(nil)
       elsif @talent.validated == true
         @talent.update(declined_params)
-        @talent.send_refused
+        if @talent.declined != ""
+          @talent.send_refused
+        end
         validated_action(false)
         visible_action(false)
       else @talent.validated == nil
