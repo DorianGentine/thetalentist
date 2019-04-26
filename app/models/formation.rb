@@ -26,8 +26,8 @@ class Formation < ApplicationRecord
   }
 
   def capitalize_type_and_ranking
-    self.type_of_formation = self.type_of_formation.titleize if self.type_of_formation && !self.type_of_formation.blank?
-    self.ranking = self.ranking.titleize if self.ranking && !self.ranking.blank?
+    self.type_of_formation = self.type_of_formation.capitalize if self.type_of_formation && !self.type_of_formation.blank?
+    self.ranking = self.ranking.capitalize if self.ranking && !self.ranking.blank?
   end
 
   def all_formation_title

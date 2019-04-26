@@ -16,8 +16,6 @@ import '../components/inputSupMin';
 
 import '../components/select2_relaunch';
 
-import '../components/jsStyleDomaineActivite';
-
 
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
