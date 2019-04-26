@@ -17,6 +17,7 @@ const initSelect2 = () => {
 
   $(".second-domaine").select2({
     minimumResultsForSearch: -1,
+    allowClear: true,
     placeholder: "secondaire (facultatif)"
   });
 };
