@@ -203,7 +203,8 @@ class Talent < ApplicationRecord
   end
 
   def new_message(message, receveur)
-    ApplicationMailer.new_message("talent", message, receveur.id, self.id).deliver_later
+    receveur_class = receveur.is_a?(Headhunter) ? "headhunter" : "talentist"
+    ApplicationMailer.new_message("talent", message, receveur_class, receveur.id, self.id).deliver_later
   end
 
   def send_invitation(headhunter)

@@ -120,6 +120,7 @@ class ConversationsController < ApplicationController
 
   def user_conversation
     good_user
+    # @conversation = Mailboxer::Conversation.find(params[:id])
     @conversation = @user.mailbox.conversations.find(params[:id])
     @conversations = @user.mailbox.conversations
     authorize @conversation

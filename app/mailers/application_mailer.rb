@@ -24,10 +24,11 @@ class ApplicationMailer < ActionMailer::Base
       )
   end
 
-  def new_message(user_class, message, receveur, envoyeur_id)
+  def new_message(user_class, message, receveur_class, receveur_id, envoyeur_id)
     class_name = user_class.classify.constantize
     @envoyeur = class_name.find(envoyeur_id)
-    @receveur = receveur
+    receveur_class_name = receveur_class.classify.constantize
+    @receveur = receveur_class_name.find(receveur_id)
     @message = message
 
     mail(

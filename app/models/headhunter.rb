@@ -119,7 +119,8 @@ class Headhunter < ApplicationRecord
   end
 
   def new_message(message, receveur)
-    ApplicationMailer.new_message("headhunter", message, receveur, self.id).deliver_later
+    receveur_class = receveur.is_a?(Talent) ? "talent" : "talentist"
+    ApplicationMailer.new_message("headhunter", message, receveur_class, receveur.id, self.id).deliver_later
   end
 
   def count_unread_message

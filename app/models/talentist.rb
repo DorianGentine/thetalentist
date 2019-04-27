@@ -22,7 +22,8 @@ class Talentist < ApplicationRecord
   end
 
   def new_message(message, receveur)
-    ApplicationMailer.new_message("talentist", message, receveur, self.id).deliver_later
+    receveur_class = receveur.is_a?(Talent) ? "talent" : "headhunter"
+    ApplicationMailer.new_message("talentist", message, receveur_class, receveur.id, self.id).deliver_later
   end
 
   def notif_of_unread
