@@ -158,6 +158,9 @@
       padding: 10px;
       background-color: $green;
       border-radius: 8px;
+      a:hover{
+        color: white;
+      }
     }
   }
   .left {
@@ -174,6 +177,9 @@
     }
     .the-message{
       background-color: #EEEEEE;
+      a:hover{
+        color: $green;
+      }
     }
   }
   .right{
@@ -247,7 +253,7 @@ textarea{
     position: absolute;
     top: 7px;
     left: 3px;
-    bottom: 3px;
+    bottom: -22px;
     right: 3px;
     z-index: 1;
     background-color: rgba(216, 216, 216, 0.87);

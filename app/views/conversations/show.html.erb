@@ -27,8 +27,8 @@
             <h2 class="no-margin"><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
             <p class="no-margin"><%= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_" %></p>
           <% else %>
-            <% if @participant.experiences.present? && @participant.experiences.last.position.present? %>
-              <h2 class="no-margin"><%= @participant.experiences.last.position.capitalize.truncate(45, separator:' ', omission:'') %></h2>
+            <% if @participant.experiences.present? && @participant.experiences.first.position.present? %>
+              <h2 class="no-margin"><%= @participant.experiences.first.position.capitalize.truncate(45, separator:' ', omission:'') %></h2>
             <% else %>
               <h2 class="no-margin">Talent - Position inconnue</h2>
             <% end %>
@@ -116,8 +116,8 @@
             <div class="accept-relation">
               <%= simple_form_for :current_user, method: :put do |f| %>
                 <%= f.simple_fields_for @relationship do |u| %>
-                  <%= u.submit "Accepter" %>
-                  <%= u.submit "Refuser" %>
+                  <%= u.submit "Accepter", class: "btn-envoyer" %>
+                  <%= u.submit "Refuser", class: "btn-envoyer" %>
                 <% end %>
               <% end %>
             </div>
