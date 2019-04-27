@@ -230,7 +230,7 @@ class HeadhuntersController < ApplicationController
         # find the conversation between two user
         conversations = Mailboxer::Conversation.between(@talentist, @headhunter)
         if conversations.size > 0
-          @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@headhunter.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
+          @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@headhunter.firstname} ! N'hésite pas si tu as des questions", nil, true, true, nil)
         else
           @talentist.send_message(@headhunter, "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme !", "#{@headhunter.id}")
           HeadhunterMailer.accepted(@headhunter.id).deliver_later

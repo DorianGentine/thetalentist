@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-  let i = "relation_" + <%= @talent.id %>
+  const i = "relation_" + <%= @talent.id %>
 
   function refreshForm(innerHTML) {
-    let newRelationForm = document.getElementById(i);
+    const newRelationForm = document.getElementById(i);
     newRelationForm.innerHTML = "";
     newRelationForm.innerHTML = innerHTML;
   }

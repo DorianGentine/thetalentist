@@ -28,7 +28,7 @@
     <% end %>
     <%= simple_format(receipt.message.body, class: 'the-message') %>
     <% if receipt.message.attachment.url.present? %>
-      <p class="the-message"><%= link_to  "Document envoyé", receipt.message.attachment.url, target: "_blank" %></p>
+      <p class="the-message" id="message_link"><%= link_to  "Document envoyé", receipt.message.attachment.url, target: "_blank" %></p>
     <% end %>
   </div>
 <!-- partie gauche -->

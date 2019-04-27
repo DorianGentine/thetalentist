@@ -174,7 +174,7 @@ class TalentsController < ApplicationController
         validated_action(true)
         conversations = Mailboxer::Conversation.between(@talentist, @talent)
         if conversations.size > 0
-          @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@talent.firstname}! N'hésite pas si tu as des questions", nil, true, true, nil)
+          @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@talent.firstname} ! N'hésite pas si tu as des questions", nil, true, true, nil)
         else
           @talentist.send_message(@talent, "Bonjour #{@talent.firstname}, bienvenue sur notre plateforme!", "#{@talent.id}")
           @talent.send_accepted
