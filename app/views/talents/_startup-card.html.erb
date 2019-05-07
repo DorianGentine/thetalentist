@@ -31,10 +31,10 @@
 
       <p class="margin-top-15 margin-bottom-15">
         <% if headhunter.startup.present? %>
-          <i class='<%= headhunter.completed_totaly > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle" %> margin-right-5'></i>
+          <i class='<%= CompletedHeadhunter.new(headhunter).completed_totaly > 85 ? "green fas fa-thumbs-up" : "red fas fa-exclamation-triangle" %> margin-right-5'></i>
           profil complété à
-          <strong class='<#%= headhunter.completed_totaly > 85 ? "green" : "red"  %>'>
-            <%=headhunter.completed_totaly %>%
+          <strong class='<#%= CompletedHeadhunter.new(headhunter).completed_totaly > 85 ? "green" : "red"  %>'>
+            <%=CompletedHeadhunter.new(headhunter).completed_totaly %>%
           </strong>
         <% else %>
           La startup n'est pas renseigné

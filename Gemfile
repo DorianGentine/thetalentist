@@ -68,6 +68,7 @@ gem 'inherited_resources', '~> 1.9.0'
 gem 'omniauth'
 gem 'omniauth-linkedin'
 # gem 'omniauth-linkedin-oauth2'
+gem 'linkedin'
 
 #fixe cookie overflow
 gem 'activerecord-session_store'

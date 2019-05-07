@@ -55,8 +55,8 @@
             <% end %>
             <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
               <li>
-                <%= link_to headhunter_path(current_headhunter) do %>
-                  <i class="fas fa-sliders-h"></i> <%= t(".profil", default: "Mon compte") %>
+                <%= link_to edit_headhunter_path(current_headhunter) do %>
+                  <i class="fas fa-sliders-h"></i> <%= t(".profil", default: "Editer mon compte") %>
                 <% end %>
               </li>
               <li>
@@ -109,7 +109,7 @@
             <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
               <li>
                 <%= link_to edit_talent_path(current_talent) do %>
-                  <i class="fa fa-user"></i> <%= t(".profil", default: "Profil") %>
+                  <i class="fa fa-user"></i> <%= t(".profil", default: "Editer mon profil") %>
                 <% end %>
               </li>
               <li>

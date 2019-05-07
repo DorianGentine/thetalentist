@@ -1,6 +1,6 @@
 <% if current_user.is_a?(Headhunter) || current_user.is_a?(Talentist)%>
   <%= link_to edit_headhunter_path(@headhunter), class:"btn-edition-container" do %>
-      <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong class=" <%= @headhunter.completed_totaly > 85 ? "green" : "red"  %>"><%= @headhunter.completed_totaly %>%</strong></p>
+      <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong class=" <%= CompletedHeadhunter.new(@headhunter).completed_totaly > 85 ? "green" : "red"  %>"><%= CompletedHeadhunter.new(@headhunter).completed_totaly %>%</strong></p>
       <div class="btn-edition">
         <span><i class="fas fa-edit"></i></span>
       </div>
