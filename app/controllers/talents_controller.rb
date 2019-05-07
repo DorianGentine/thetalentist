@@ -177,7 +177,7 @@ class TalentsController < ApplicationController
           @talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{@talent.firstname} ! N'hésite pas si tu as des questions", nil, true, true, nil)
         else
           @talentist.send_message(@talent, "Bonjour #{@talent.firstname}, bienvenue sur notre plateforme!", "#{@talent.id}")
-          @talent.send_accepted
+          # @talent.send_accepted
         end
       # else @talent.validated == nil
       #   validated_action(true)

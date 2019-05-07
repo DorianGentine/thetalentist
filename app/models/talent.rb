@@ -90,6 +90,8 @@ class Talent < ApplicationRecord
   has_many :experiences, dependent: :destroy
   accepts_nested_attributes_for :experiences, allow_destroy: true, reject_if: :all_blank
 
+  scope :without_same_current_startup, -> (startup) { joins(:experiences).merge(Experience.all.where.not(company_name: startup.name))}
+
   has_many :next_aventures, dependent: :destroy
   accepts_nested_attributes_for :next_aventures, allow_destroy: true, reject_if: :all_blank
 
@@ -228,15 +230,7 @@ class Talent < ApplicationRecord
     TalentMailer.accepted(self.id).deliver_later
   end
 
-  def completed_totaly
-    if self.completed_profil != nil &&  self.completed_formation_skill_language != nil &&  self.completed_experience != nil &&  self.completed_next_aventures != nil &&
-      all_parts = self.completed_profil + self.completed_formation_skill_language + self.completed_next_aventures
-      result = all_parts / 3.0
-      return result.round(1)
-    else
-      return 0
-    end
-  end
+
 
   def display_linkedin?
     if self.linkedin_picture_url.present? && self.display_linkedin_picture
@@ -246,113 +240,8 @@ class Talent < ApplicationRecord
     end
   end
 
-  def completed_profil
-    count = 0
-    value_input = stat(8)
-    self.firstname.present? ? count += value_input : count
-    self.name.present? ? count += value_input : count
-    self.photo? || self.display_linkedin? ? count += value_input : count
-    self.phone.present? ? count += value_input : count
-    self.city.present? ? count += value_input : count
-    self.linkedin.present? ? count += value_input : count
-    self.jobs.first.present? ? count += value_input : count
-    if self.talent_job.present?
-      self.talent_job.year.present? ? count += value_input : count
-    end
-    return count.round(0)
-  end
-
-  def completed_formation_skill_language
-    count = 0
-    formation_count = self.talent_formations.size > 0 ? self.talent_formations.size * 3 : 3
-    language_count = self.talent_languages.size > 0 ? self.talent_languages.size * 2 : 2
-    skills_count = self.techno_ids.size > 0 ? self.techno_ids.size * 1 : 1
-    value_input = stat(formation_count + language_count + skills_count)
-
-    p "value_input #{value_input}"
-    p "count starting #{count}"
-    if self.talent_formations.count > 0
-      self.talent_formations.each do |talent_formation|
-        talent_formation.formation_id.present? ? count += value_input : count
-        talent_formation.year.present? ? count += value_input : count
-        talent_formation.title.present? ? count += value_input : count
-        # talent_formation.level.present? ? count += value_input : count
-        # talent_formation.type_of_formation.present? ? count += value_input : count
-      end
-    end
-    p "count formation #{count}"
-    if self.talent_languages.count > 0
-      self.talent_languages.each do |talent_language|
-        talent_language.language_id.present? ? count += value_input : count
-        talent_language.level.present? ? count += value_input : count
-      end
-    end
-    p "count formation + languages #{count}"
-    if self.techno_ids.count > 0
-      self.techno_ids.each do |techno_id|
-        techno_id.present? ? count += value_input : count
-        # talent_skill.level.present? ? count += value_input : count
-      end
-    end
-    p "count formation + languages + skills #{count}"
-    return count.round(0)
-  end
-  def completed_experience
-    count = 0
-    experiences_count = self.experiences.size > 0 ? self.experiences.size * 5 : 5
-    value_input = stat(experiences_count)
-    self.experiences.each do |experience|
-      experience.position.present? ? count += value_input : count
-      experience.starting.present? ? count += value_input : count
-      experience.currently || experience.years.present? ? count += value_input : count
-      experience.overview.present? ? count += value_input : count
-      experience.company_name.present? ? count += value_input : count
-      # experience.company_type_id.present? ? count += value_input : count
-    end
-    return count.round(0)
-  end
-
-  def completed_next_aventures
-    count = 0
-    next_aventure_count = 15
-    small_plu_count = self.your_small_plus.size > 0 ? self.your_small_plus.size * 1 : 1
-    # skills_count = self.talent_skills.size * 1
-    value_input = stat(next_aventure_count + small_plu_count)
-    self.next_aventures.each do |next_aventure|
-      next_aventure.mobilities.count > 0 ? count += value_input : count
-      next_aventure.contrat.present? ? count += value_input : count
-      next_aventure.remuneration.present? ? count += value_input : count
-      next_aventure.sector_ids.count > 0 ? count += value_input : count
-      next_aventure.btob || next_aventure.btoc ? count += value_input : count
-      next_aventure.availability.present? ? count += value_input : count
-      next_aventure.waiting_for_one.present? ? count += value_input : count
-      next_aventure.waiting_for_two.present? ? count += value_input : count
-      next_aventure.waiting_for_three.present? ? count += value_input : count
-      next_aventure.hunter_or_breeder.present? ? count += value_input : count
-      next_aventure.creative_or_pragmatic.present? ? count += value_input : count
-      next_aventure.dream.present? ? count += value_input : count
-      next_aventure.famous_person.present? ? count += value_input : count
-      next_aventure.good_manager.present? ? count += value_input : count
-      next_aventure.work_for_free.present? ? count += value_input : count
-    end
-    if self.your_small_plus.count > 0
-      self.your_small_plus.each do |your_small_plu|
-        your_small_plu.description.present? ? count += value_input : count
-      end
-    end
-    return count.round(0)
-  end
-
   def save_completed_profil
-    self.completing = self.completed_totaly
-  end
-
-  def pass_from_cv_to_completing
-    if self.completing.nil?
-      self.cv.to_i
-    else
-      self.completing
-    end
+    self.completing = CompletedTalent.new(self).completed_totaly
   end
 
   def set_time_conextion
@@ -367,12 +256,6 @@ class Talent < ApplicationRecord
   end
 
   private
-
-
-  def stat(arg)
-    total_completed = 100.00
-    return total_completed / arg
-  end
 
   def normalize_name_firstname
     self.firstname = self.firstname.capitalize

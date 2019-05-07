@@ -31,7 +31,7 @@ class Talents::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def linkedin
     talent = Talent.find_for_linkedin_oauth(request.env['omniauth.auth'])
     if talent.persisted?
-      if talent.next_aventures.count > 0
+      if talent.validated
         sign_in_and_redirect talent, event: :authentication
         set_flash_message(:notice, :success, kind: 'Linkedin') if is_navigational_format?
       else
