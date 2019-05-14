@@ -54,7 +54,9 @@ class Headhunter < ApplicationRecord
     end
   end
 
-
+  def completed_totaly
+    CompletedHeadhunter.new(self).completed_totaly
+  end
 
   def send_new_user_to_talentist
     ApplicationMailer.new_user("headhunter", self.id).deliver_later
