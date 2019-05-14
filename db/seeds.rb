@@ -29,10 +29,10 @@ require 'csv'
 # Headhunter.destroy_all
 # Picture.destroy_all
 
-# p "Creating The Talenist part"
+p "Creating The Talenist part"
 
-# dimitri = Talentist.create!(email: "dimitri@ineva-partners.com", password:"password", firstname: "dimitri", name:"mussat", admin: true)
-# magdalena = Talentist.create!(email: "magdalena@ineva-partners.com", password:"password", firstname: "MAGDALENA", name:"mussat", admin: true)
+dimitri = Talentist.create!(email: "dimitri@ineva-partners.com", password:"password", firstname: "dimitri", name:"mussat", admin: true)
+magdalena = Talentist.create!(email: "magdalena@ineva-partners.com", password:"password", firstname: "MAGDALENA", name:"mussat", admin: true)
 
 # p "Creating talents"
 
@@ -100,15 +100,15 @@ end
 # data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "Total", company_type_id: tpe.id, link:"https://www.backmarket.com/", years:"11-2018", currently: false, starting: "03-2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
 # data_owner = Experience.create!( position: "data owner", talent: louis, company_name: "Total", company_type_id: ge.id, link:"https://www.backmarket.com/", years:"11-2018", currently: false, starting: "03-2015", overview: "Smartphone reconditionné à neuf et garanti. Et des centaines d'ordinateurs, PS4, tablettes, télévisions, etc. Livraison 48h. iPhone 6 reconditionné")
 
-# p "Creating formations"
+p "Creating formations"
 
-# csv_file_school   = File.join(__dir__, 'axis_school.csv')
+csv_file_school   = File.join(__dir__, 'axis_school.csv')
 
-# CSV.foreach(csv_file_school) do |row|
-#   if row[1]
-#     Formation.create!({ title: row[1].gsub("''", "@").gsub("'", "").gsub("@", "'") })
-#   end
-# end
+CSV.foreach(csv_file_school) do |row|
+  if row[1]
+    Formation.create!({ title: row[1].gsub("''", "@").gsub("'", "").gsub("@", "'") })
+  end
+end
 
 # hec = Formation.create!( title: "HEC")
 # icam = Formation.create!( title: "Icam")
@@ -179,15 +179,15 @@ end
 # TalentKnown.create!(talent: erwan, known: twitter)
 # TalentKnown.create!(talent: louis, known: evenement)
 
-# p "Creating languages"
+p "Creating languages"
 
-# csv_file_language   = File.join(__dir__, 'axis_languages.csv')
+csv_file_language   = File.join(__dir__, 'axis_languages.csv')
 
-# CSV.foreach(csv_file_language) do |row|
-#   if row[1]
-#     Language.create!({ title: row[1].gsub(" ","").gsub("'","").gsub(")", "").gsub(";","") })
-#   end
-# end
+CSV.foreach(csv_file_language) do |row|
+  if row[1]
+    Language.create!({ title: row[1].gsub(" ","").gsub("'","").gsub(")", "").gsub(";","") })
+  end
+end
 
 
 # english = Language.first
@@ -213,14 +213,14 @@ end
 # nexterwan = NextAventure.create!(city: "normandie", talent: erwan, contrat:"cdi", remuneration: "8000", no_more: "Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", overview:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", why_leaving:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", last_words:"Et sis et eadem in ambigente venias in adsiduitati ad te cum tandem quo numerando.", available: true)
 # nextlouis = NextAventure.create!(city: "normandie", talent: louis, contrat:"cdi", remuneration: "8000", no_more: "Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", overview:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", why_leaving:"Iuris Iudaeis aptae et domitis Iudaeis calentes in navigerum speciem navigerum dictione in sorte locis locis dictione aquae ad delata in emergunt domitis his regiones multiplicium provinciae domitis dictione Iudaeis.", last_words:"Et sis et eadem in ambigente venias in adsiduitati ad te cum tandem quo numerando.", available: true)
 
-# p "Creating sectors"
+p "Creating sectors"
 
-# saas = Sector.create!(title: "Saas", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-# marketplace = Sector.create!(title: "Marketplace", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-# iot = Sector.create!(title: "IOT", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-# marketing = Sector.create!(title: "Marketing", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-# finance = Sector.create!(title: "Finance", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-# sante = Sector.create!(title: "Santé", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
+saas = Sector.create!(title: "Saas", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
+marketplace = Sector.create!(title: "Marketplace", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
+iot = Sector.create!(title: "IOT", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
+marketing = Sector.create!(title: "Marketing", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
+finance = Sector.create!(title: "Finance", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
+sante = Sector.create!(title: "Santé", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
 
 # p "Creating next_aventure_sectors"
 
@@ -239,12 +239,14 @@ end
 # TalentSector.create!(sector: marketplace, year: 1, talent: erwan)
 # TalentSector.create!(sector: saas, year: 10, talent: louis)
 
-# p "Creating jobs"
+p "Creating jobs"
 
-# data = Job.create!(title: "Operations")
-# sales = Job.create!(title: "Sales")
-# product = Job.create!(title: "Product")
-# market = Job.create!(title: "Market")
+data = Job.create!(title: "Operations")
+sales = Job.create!(title: "Sales")
+product = Job.create!(title: "Product")
+market = Job.create!(title: "Market")
+market = Job.create!(title: "Developper")
+market = Job.create!(title: "Digital")
 
 # p "Creating talent_jobs"
 
@@ -254,13 +256,13 @@ end
 # TalentJob.create!(talent: erwan, job: sales, year: 9)
 # TalentJob.create!(talent: louis, job: product, year: 12)
 
-# p "Creating skills"
+p "Creating skills"
 
-# statistiques = Skill.create!(title: "statistiques")
-# outils_analytiques = Skill.create!(title: "outils analytiques")
-# programmation = Skill.create!(title: " langages de programmation")
-# hadoop = Skill.create!(title: "Hadoop")
-# logiciel = Skill.create!(title: "ingénierie logicielle")
+statistiques = Skill.create!(title: "statistiques")
+outils_analytiques = Skill.create!(title: "outils analytiques")
+programmation = Skill.create!(title: " langages de programmation")
+hadoop = Skill.create!(title: "Hadoop")
+logiciel = Skill.create!(title: "ingénierie logicielle")
 
 # p "Creating talent_skills"
 
@@ -277,12 +279,12 @@ end
 # TalentSkill.create!(level: 4, talent: louis, skill: outils_analytiques)
 # TalentSkill.create!(level: 2, talent: louis, skill: programmation)
 
-# p "Creating technos"
+p "Creating technos"
 
-# digital = Techno.create!(title: "Digital")
-# php = Techno.create!(title: "php")
-# ruby = Techno.create!(title: "ruby")
-# sql = Techno.create!(title: "sql")
+digital = Techno.create!(title: "Digital")
+php = Techno.create!(title: "php")
+ruby = Techno.create!(title: "ruby")
+sql = Techno.create!(title: "sql")
 
 # p "Creating talent_technos"
 
@@ -297,27 +299,27 @@ end
 # TalentTechno.create!(talent: louis, techno: php)
 # TalentTechno.create!(talent: louis, techno: ruby)
 
-# p "Creating hobbies"
+p "Creating hobbies"
 
-# Hobby.create!(title: "Voile")
-# Hobby.create!(title: "Boxe")
-# Hobby.create!(title: "Football")
-# Hobby.create!(title: "ski")
-# Hobby.create!(title: "Danse")
+Hobby.create!(title: "Voile")
+Hobby.create!(title: "Boxe")
+Hobby.create!(title: "Football")
+Hobby.create!(title: "ski")
+Hobby.create!(title: "Danse")
 
-# p "Creating words"
+p "Creating words"
 
-# Word.create!(title: "Entrepreneuriat")
-# Word.create!(title: "RSE")
-# Word.create!(title: "Intraprenariat")
-# Word.create!(title: "Innovation")
-# Word.create!(title: "Esprit d’équipe")
-# Word.create!(title: "Intégrité")
-# Word.create!(title: "Respect")
-# Word.create!(title: "Responsabilité")
-# Word.create!(title: "Satisfaction Client")
-# Word.create!(title: "Excellence")
-# Word.create!(title: "Partage")
+Word.create!(title: "Entrepreneuriat")
+Word.create!(title: "RSE")
+Word.create!(title: "Intraprenariat")
+Word.create!(title: "Innovation")
+Word.create!(title: "Esprit d’équipe")
+Word.create!(title: "Intégrité")
+Word.create!(title: "Respect")
+Word.create!(title: "Responsabilité")
+Word.create!(title: "Satisfaction Client")
+Word.create!(title: "Excellence")
+Word.create!(title: "Partage")
 
 
 # p "Creating Startup part"
