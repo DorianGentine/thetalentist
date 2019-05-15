@@ -43,6 +43,10 @@ class Headhunter < ApplicationRecord
     self.firstname = self.firstname.capitalize if self.firstname && !self.firstname.blank?
   end
 
+  def completed_totaly
+    CompletedHeadhunter.new(self).completed_totaly
+  end
+
 
   def notif_of_unread
     conversations = self.mailbox.conversations
