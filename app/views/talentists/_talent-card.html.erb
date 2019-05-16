@@ -17,20 +17,22 @@
       </div>
 
       <div class="margin-bottom-15 margin-top-15">
-        <%= simple_form_for talent , url: to_validate_talent_path(talent) do |f| %>
+        <%= simple_form_for talent , url: validation_talent_path(talent) do |f| %>
           <div class="btn-validate margin-bottom-15">
-            <div class="<%= "green_validation" if talent.validated === true %>">
+            <div class="<%= "green_validation" if talent.validated %>">
               <%= f.submit "Accepter" %>
             </div>
-            <div class="<%= "red_validation" if talent.validated === false %>">
+            <div class="<%= "red_validation" if !talent.validated && !talent.validated.nil? %>">
               <p class="modal-button no-margin"  data-target= "modal_declined_<%= talent.id %>">Refuser</p>
             </div>
           </div>
+        <% end %>
+        <%= simple_form_for talent , url: visible_talent_path(talent) do |f| %>
           <div class="btn-validate">
-            <div class="<%= "green_validation" if talent.visible == true %>">
+            <div class="<%= "green_validation" if talent.visible %>">
               <%= f.submit "Visible"%>
             </div>
-            <div class="<%= "red_validation" if talent.visible === false %>">
+            <div class="<%= "red_validation" if !talent.visible && !talent.visible.nil? %>">
               <%= f.submit "Invisible" %>
             </div>
           </div>

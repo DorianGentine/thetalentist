@@ -2,7 +2,7 @@ class TalentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.is_a?(Talentist)
-        scope.all
+        scope.all.order('created_at DESC')
       elsif user.is_a?(Talent)
         false
       end
@@ -72,12 +72,15 @@ class TalentPolicy < ApplicationPolicy
     user = record
   end
 
-
-  def to_validate?
+  def validation?
     if user.is_a?(Talentist)
       true
-    else
-      false
+    end
+  end
+
+  def visible?
+    if user.is_a?(Talentist)
+      true
     end
   end
 end

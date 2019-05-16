@@ -11,7 +11,7 @@
 
     </div>
 
-    <%= simple_form_for talent, url: to_validate_talent_path(talent)  do |f| %>
+    <%= simple_form_for talent, url: validation_talent_path(talent)  do |f| %>
       <div style="padding: 30px">
 
         <h4><%= f.object.firstname %> <%= f.object.name %></h4>

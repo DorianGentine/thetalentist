@@ -8,40 +8,7 @@ class StepsTalentInfosController < ApplicationController
   skip_before_action :current_user
 
   def show
-    if @talent.talent_formations.count == 0
-      1.times { @talent.talent_formations.build }
-    else
-      0.times { @talent.talent_formations.build }
-    end
-    @talent.build_talent_job if @talent.jobs.count == 0
-    @talent.build_talent_second_job if @talent.jobs.count < 2
-    # if @talent.talent_jobs.count == 0
-    #   2.times { @talent.talent_jobs.build }
-    # elsif @talent.talent_jobs.count == 1
-    #   1.times { @talent.talent_jobs.build }
-    # else
-    #   0.times { @talent.talent_jobs }
-    # end
-    if @talent.talent_languages.count == 0
-      1.times { @talent.talent_languages.build }
-    else
-      0.times { @talent.talent_languages.build }
-    end
-    if @talent.experiences.count == 0
-      1.times { @talent.experiences.build }
-    else
-      0.times { @talent.experiences.build }
-    end
-    if @talent.next_aventures.count == 0
-      1.times { @talent.next_aventures.build }
-    else
-      0.times { @talent.next_aventures.build }
-    end
-    if @talent.your_small_plus.count == 0
-      1.times { @talent.your_small_plus.build }
-    else
-      0.times { @talent.your_small_plus.build }
-    end
+    @talent.set_build_belong_tables
     if @talent.next_aventures.first.mobilities.count > 0
       @mobilities = @talent.next_aventures.first.mobilities
     else

@@ -59,7 +59,8 @@ Rails.application.routes.draw do
     patch 'update_formation_and_skill', :on => :member
     patch 'update_experience', :on => :member
     patch 'update_next_aventure', :on => :member
-    patch 'to_validate', :on => :member
+    patch 'validation', :on => :member
+    patch 'visible', :on => :member
     resources :conversations, only: [ :show ]
   end
 
