@@ -53,7 +53,7 @@ class CompletedTalent
   end
   def completed_experience
     count = 0
-    experiences_count = @talent.experiences.size > 0 ? @talent.experiences.size * 5 : 5
+    experiences_count = @talent.experiences.size > 0 ? @talent.experiences.size * 6 : 6
     value_input = stat(experiences_count)
     @talent.experiences.each do |experience|
       experience.position.present? ? count += value_input : count
@@ -61,7 +61,7 @@ class CompletedTalent
       experience.currently || experience.years.present? ? count += value_input : count
       experience.overview.present? ? count += value_input : count
       experience.company_name.present? ? count += value_input : count
-      # experience.company_type_id.present? ? count += value_input : count
+      experience.company_type_id.present? ? count += value_input : count
     end
     return count.round(0)
   end
@@ -99,8 +99,8 @@ class CompletedTalent
 
   def completed_totaly
     if completed_profil != nil && completed_formation_skill_language != nil && completed_experience != nil && completed_next_aventures != nil
-      all_parts = completed_profil + completed_formation_skill_language + completed_next_aventures
-      result = all_parts / 3.0
+      all_parts = completed_profil + completed_formation_skill_language + completed_next_aventures + completed_experience
+      result = all_parts / 4.0
       return result.round(1)
     else
     raise

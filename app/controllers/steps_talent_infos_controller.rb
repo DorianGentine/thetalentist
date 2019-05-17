@@ -38,6 +38,7 @@ class StepsTalentInfosController < ApplicationController
         experience.skip_company_name_validation = true
         experience.skip_starting_validation = true
         experience.skip_currently_validation = true
+        set_new_startups(experience.company_name) if startup_is_available?(experience.company_name)
       end
       if @talent.save
         @talent.experiences.each do |experience|
@@ -88,10 +89,24 @@ class StepsTalentInfosController < ApplicationController
     else
       @talent = current_talent
     end
-    # authorize @talent
-    # va chercher l'autorisation dans talent_policy.rb dans show? ou dans update? (pas besoin de méthode find_talent?)
-
   end
+
+  def startup_is_available?(param)
+    if Startup.where(name: param).count > 0 || Startup.where(name: param.upcase).count > 0
+      return false
+    else
+      return true
+    end
+  end
+
+  def set_new_startups(param)
+    if param.present?
+      startup = Startup.create(name: param)
+      return startup.id
+    end
+  end
+
+
 
   def set_new_technos(talent)
     techno_params = params.require(:talent).permit(techno_ids: [])[:techno_ids]

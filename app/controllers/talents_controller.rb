@@ -4,6 +4,9 @@ class TalentsController < ApplicationController
     :update, :validation, :visible, :info_pdf, :update_photo ]
 
   def index
+    # Delete after action
+    Talent.all.each { |talent| talent.save }
+
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent
     talents = policy_scope(Talent)
@@ -78,6 +81,9 @@ class TalentsController < ApplicationController
 
   def update_experience
     if @talent.update_attributes(experience_params)
+      @talent.experiences.each do |experience|
+        set_new_startups(experience.company_name) if startup_is_available?(experience.company_name)
+      end
       redirect_to edit_talent_path(@talent)
     else
       render :edit
@@ -121,6 +127,21 @@ class TalentsController < ApplicationController
   end
 
 private
+
+  def startup_is_available?(param)
+    if Startup.where(name: param).count > 0 || Startup.where(name: param.upcase).count > 0
+      return false
+    else
+      return true
+    end
+  end
+
+  def set_new_startups(param)
+    if param.present?
+      startup = Startup.create(name: param)
+      return startup.id
+    end
+  end
 
   def set_new_technos(talent)
     techno_params = params[:talent][:techno_ids]

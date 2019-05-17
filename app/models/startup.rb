@@ -1,10 +1,10 @@
 class Startup < ApplicationRecord
-  before_save :capitalize_name
+  before_save :upace_name
 
   scope :with_headhunter, -> { where.not(headhunters: [nil, ""])}
   scope :with_no_headhunter, -> { where(headhunters: [nil, ""]) }
 
-
+  default_scope {order(name: :desc)}
 
 
 
@@ -51,7 +51,9 @@ class Startup < ApplicationRecord
       return true
     end
   end
-
+  def upace_name
+    self.name = self.name.lstrip.upcase
+  end
   def capitalize_name
     self.name = self.name.capitalize
   end
