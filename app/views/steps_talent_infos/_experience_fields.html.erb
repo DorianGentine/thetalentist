@@ -7,7 +7,7 @@
         <div class="col-lg-6 col-xs-12">
           <p class="label-edit no-margin">Entreprise</p>
           <div class="margin-right-15 no-margin-xs">
-            <%= f.input :company_name, collection: Startup.all.map {|startup| startup.name}, input_html: { style: "width: 100%", class:"selectAndCreate" }, label: false, placeholder:"le nom de l'entreprise", error: f.object.errors.messages[:company_name][0] %>
+            <%= f.input :company_name, collection: Startup.all.reverse_each.map {|startup| startup.name}, input_html: { style: "width: 100%", class:"selectAndCreate" }, label: false, placeholder:"le nom de l'entreprise", error: f.object.errors.messages[:company_name][0] %>
           </div>
         </div>
         <div class="col-lg-6 col-xs-12 margin-top-15-xs">

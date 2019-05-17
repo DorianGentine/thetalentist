@@ -45,9 +45,9 @@ class HeadhuntersController < ApplicationController
 
   def index
     # DO IT TIME delete after
-    Startup.all.each do |startup|
-      startup.save
-    end
+    # Startup.all.each do |startup|
+    #   startup.save
+    # end
 
     @talentist = current_talentist
     @startups = Startup.all

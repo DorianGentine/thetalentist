@@ -5,7 +5,7 @@ class TalentsController < ApplicationController
 
   def index
     # Delete after action
-    Talent.all.each { |talent| talent.save }
+    # Talent.all.each { |talent| talent.save }
 
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent

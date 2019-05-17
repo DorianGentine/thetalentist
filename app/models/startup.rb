@@ -4,7 +4,7 @@ class Startup < ApplicationRecord
   scope :with_headhunter, -> { where.not(headhunters: [nil, ""])}
   scope :with_no_headhunter, -> { where(headhunters: [nil, ""]) }
 
-  default_scope {order(name: :desc)}
+  default_scope {order('name ASC')}
 
 
 
