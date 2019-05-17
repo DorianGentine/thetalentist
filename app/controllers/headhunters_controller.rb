@@ -18,10 +18,10 @@ class HeadhuntersController < ApplicationController
     @job_alert = JobAlerte.new
 
     @jobs = Job.all
-    all_talents_visible = Talent.where(:visible => true).order(updated_at: :desc)
-    talents_same_startup = @headhunter.present? ? Talent.all_with_startup(@headhunter.startup.name) : []
+    talents_visible = Talent.where(:visible => true).order(updated_at: :desc)
+    # talents_same_startup = @headhunter.present? ? Talent.all_with_startup(@headhunter.startup.name) : []
 
-    talents_visible = all_talents_visible - talents_same_startup
+    # talents_visible = all_talents_visible - talents_same_startup
 
     if params[:jobs].blank? || params[:jobs] == "Tous"
       talents = talents_visible
