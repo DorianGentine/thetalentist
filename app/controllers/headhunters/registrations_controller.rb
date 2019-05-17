@@ -50,9 +50,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
   private
 
     def startup_is_available?(param)
-      if Startup.where(name: param).count > 0
-        return false
-      elsif Startup.where(name: param.capitalize).count > 0
+      if Startup.where(name: param).count > 0 || Startup.where(name: param.upcase).count > 0
         return false
       else
         return true
@@ -61,7 +59,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
 
     def set_new_startups(param)
       if param.present?
-        startup = Startup.create(name: param.capitalize )
+        startup = Startup.create(name: param)
         return startup.id
       end
     end

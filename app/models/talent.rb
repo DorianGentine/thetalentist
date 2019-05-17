@@ -40,6 +40,9 @@ class Talent < ApplicationRecord
   # ATTENTION IL MANQUE TALENT_SECOND_JOB
   has_many :jobs, through: :talent_job, class_name:"Job"
 
+  scope :all_with_startup, -> (name) { joins(:experiences).where(:visible => true).where(experiences: {company_name: name})}
+
+  scope :no_startup, -> (name) { where( in_this_startup?(name) )}
 
   scope :his_job_is, -> (job) { joins(:jobs).merge(Job.where(title: job)) }
 
@@ -305,5 +308,4 @@ class Talent < ApplicationRecord
   def save_completed_profil
     self.completing = CompletedTalent.new(self).completed_totaly
   end
-
 end
