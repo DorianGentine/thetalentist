@@ -43,10 +43,10 @@ class TalentsController < ApplicationController
       { lat: @talent.latitude, lng: @talent.longitude }
     end
     @experiences = @talent.experiences
-    @next_aventures = @talent.next_aventures.last
+    @next_aventures = @talent.next_aventures.first
     @talent_formations = @talent.talent_formations.order(:year)
-    if @talent.next_aventures.last.present?
-      @sectors = @talent.next_aventures.last.next_aventure_sectors
+    if @talent.next_aventures.first.present?
+      @sectors = @talent.next_aventures.first.next_aventure_sectors
     end
     @credentials = @talent.credentials
   end
