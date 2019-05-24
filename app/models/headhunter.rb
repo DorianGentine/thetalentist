@@ -58,8 +58,15 @@ class Headhunter < ApplicationRecord
     end
   end
 
-  def completed_totaly
-    CompletedHeadhunter.new(self).completed_totaly
+
+  def set_conversation_between(talentist)
+    conversations = Mailboxer::Conversation.between(talentist, self)
+    if conversations.size > 0
+      talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{self.firstname} ! N'hésite pas si tu as des questions", nil, true, true, nil)
+    else
+      talentist.send_message(self, "Bonjour #{self.firstname}, bienvenue sur notre plateforme !", "#{self.id}")
+      HeadhunterMailer.accepted(self.id).deliver_later
+    end
   end
 
   def send_new_user_to_talentist

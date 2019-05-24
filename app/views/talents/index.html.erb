@@ -4,7 +4,7 @@
 
   <!-- Division pour résultats de recherche -->
   <p class="search-results">
-    <strong><%= pluralize(@talents.count, 'Profil')%></strong> correspondent à votre recherche '<em><%= @titre %></em>'
+    <strong><%= pluralize(@talents.count, 'Profil')%></strong> correspondent à votre recherche '<em><%= params[:tag] || 'Tous' %></em>'
   </p>
 
   <% if @formations.count > 0 %>

@@ -52,7 +52,6 @@ class CompletedHeadhunter
     @headhunter.startup.words.present? ? count += value_input : count
     @headhunter.startup.overview.present? ? count += value_input : count
     @headhunter.startup.mission.present? ? count += value_input : count
-
     return count.round(0)
   end
 

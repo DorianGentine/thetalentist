@@ -8,40 +8,7 @@ class StepsTalentInfosController < ApplicationController
   skip_before_action :current_user
 
   def show
-    if @talent.talent_formations.count == 0
-      1.times { @talent.talent_formations.build }
-    else
-      0.times { @talent.talent_formations.build }
-    end
-    @talent.build_talent_job if @talent.jobs.count == 0
-    @talent.build_talent_second_job if @talent.jobs.count < 2
-    # if @talent.talent_jobs.count == 0
-    #   2.times { @talent.talent_jobs.build }
-    # elsif @talent.talent_jobs.count == 1
-    #   1.times { @talent.talent_jobs.build }
-    # else
-    #   0.times { @talent.talent_jobs }
-    # end
-    if @talent.talent_languages.count == 0
-      1.times { @talent.talent_languages.build }
-    else
-      0.times { @talent.talent_languages.build }
-    end
-    if @talent.experiences.count == 0
-      1.times { @talent.experiences.build }
-    else
-      0.times { @talent.experiences.build }
-    end
-    if @talent.next_aventures.count == 0
-      1.times { @talent.next_aventures.build }
-    else
-      0.times { @talent.next_aventures.build }
-    end
-    if @talent.your_small_plus.count == 0
-      1.times { @talent.your_small_plus.build }
-    else
-      0.times { @talent.your_small_plus.build }
-    end
+    @talent.set_build_belong_tables
     if @talent.next_aventures.first.mobilities.count > 0
       @mobilities = @talent.next_aventures.first.mobilities
     else
@@ -71,6 +38,7 @@ class StepsTalentInfosController < ApplicationController
         experience.skip_company_name_validation = true
         experience.skip_starting_validation = true
         experience.skip_currently_validation = true
+        set_new_startups(experience.company_name) if startup_is_available?(experience.company_name)
       end
       if @talent.save
         @talent.experiences.each do |experience|
@@ -121,10 +89,24 @@ class StepsTalentInfosController < ApplicationController
     else
       @talent = current_talent
     end
-    # authorize @talent
-    # va chercher l'autorisation dans talent_policy.rb dans show? ou dans update? (pas besoin de méthode find_talent?)
-
   end
+
+  def startup_is_available?(param)
+    if Startup.where(name: param).count > 0 || Startup.where(name: param.upcase).count > 0
+      return false
+    else
+      return true
+    end
+  end
+
+  def set_new_startups(param)
+    if param.present?
+      startup = Startup.create(name: param)
+      return startup.id
+    end
+  end
+
+
 
   def set_new_technos(talent)
     techno_params = params.require(:talent).permit(techno_ids: [])[:techno_ids]

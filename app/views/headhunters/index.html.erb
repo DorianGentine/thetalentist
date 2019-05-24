@@ -5,7 +5,7 @@
 
   <!-- Division pour résultats de recherche -->
   <p class="search-results">
-    <strong><%= @headhunters.count %> Profils</strong> correspondent à votre recherche '<em><%= @titre %></em>'
+    <strong><%= @headhunters.count %> Profils</strong> correspondent à votre recherche '<em><%= params[:tag] || 'Tous' %></em>'
   </p>
 
 
