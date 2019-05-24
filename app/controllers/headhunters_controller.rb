@@ -52,6 +52,9 @@ class HeadhuntersController < ApplicationController
     @talentist = current_talentist
     @startups = Startup.all
     headhunters = policy_scope(Headhunter)
+
+    headhunters.each { |e| e.new_starting_set_conversation_between(@talentist)}
+
     if params[:tag] == "Valider"
       @headhunters = headhunters.where(:validated => true)
     elsif params[:tag] == "Refuser"

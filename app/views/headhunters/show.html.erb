@@ -63,7 +63,9 @@
           <div class="row margin-bottom-15">
             <p class="titre-rubrique-1 col-xs-12 no-padding">Site internet</p>
             <i class="far fa-compass green titre-rubrique-3 col-xs-1 no-padding"></i>
-            <a class="titre-rubrique-3 no-margin col-xs-11 no-padding" href="https://<%= @startup.link.split("//").count > 1 ? @startup.link.split("//").second : @startup.link.split("//").first %>" target="_blank"><%= @startup.link.present? ? @startup.link : "Ajoutez votre site internet" %></a>
+            <% if @startup.link.present? %>
+              <a class="titre-rubrique-3 no-margin col-xs-11 no-padding" href="https://<%= @startup.link.split("//").count > 1 ? @startup.link.split("//").second : @startup.link.split("//").first %>" target="_blank"><%= @startup.link.present? ? @startup.link : "Ajoutez votre site internet" %></a>
+            <% end %>
           </div>
 
         <!-- Adresse -->
