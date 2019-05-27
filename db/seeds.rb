@@ -80,11 +80,11 @@ CSV.foreach(csv_file_entreprise) do |row|
   end
 end
 
-# p "Creating company_type part"
+p "Creating company_type part"
 
-# ge = CompanyType.create!(title: "Grande entreprise (GE)")
-# eti = CompanyType.create!(title: "Entreprise de taille intermédiaire (ETI)")
-# tpe = CompanyType.create!(title: "Micro entreprise (TPE)")
+ge = CompanyType.create!(title: "Grande entreprise (GE)")
+eti = CompanyType.create!(title: "Entreprise de taille intermédiaire (ETI)")
+tpe = CompanyType.create!(title: "Micro entreprise (TPE)")
 
 # p "Creating experiences"
 
