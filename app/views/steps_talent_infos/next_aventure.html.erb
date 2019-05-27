@@ -76,7 +76,7 @@
                 <% end %>
 
               <div class="links margin-top-15">
-                <%= link_to_add_association 'Ajouter un +', f, :your_small_plus, :partial => 'your_small_plu_fields', :class => "form-hobby-add" %>
+                <%= link_to_add_association 'Ajouter un +', f, :your_small_plus, :partial => 'your_small_plu_fields', :class => "form-hobby-add", id: "add_petit_plus" %>
               </div>
             </div>
           </div>
@@ -176,6 +176,29 @@
 
 
 </div>
+
+
+<!-- Appuie sur Entrée et ajoute un petit plus -->
+<!-- still TODO : add focus... -->
+<script>
+  const inputPetitPlus = document.getElementsByClassName("input_petit_plus")
+  if(inputPetitPlus){
+    let btnPetitPlus = {}
+    setTimeout(()=>{
+      btnPetitPlus = document.getElementById("add_petit_plus")
+      console.log(typeof btnPetitPlus)
+    }, 100)
+    for (var i = inputPetitPlus.length - 1; i >= 0; i--) {
+      inputPetitPlus[i].addEventListener('keyup', () => {
+        if(event.key === "Enter"){
+          debugger
+          btnPetitPlus.click()
+        }
+      })
+    }
+  }
+</script>
+
 
 
 

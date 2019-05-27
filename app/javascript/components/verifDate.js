@@ -18,31 +18,20 @@ function verifDateWithMonthAndYear(){
             if(!helpMessage){
               dateModule.insertAdjacentHTML('beforeend', alterText );
             }
-            return date.value = null
+            // return date.value = null
           }
         })
         date.addEventListener('keyup', function(){
           const val = date.value
-          if (date.value.length === 2) {
+          if (event.key === "Backspace" && date.value.length === 2) {
+            date.value = val.substr(0,1)
+          }else if (date.value.length === 2) {
             date.value = val + "-"
-          } else if (event.key === "Backspace" & date.value.length === 3) {
-            return date.value = val.substr(0,2)
-          }
-        })
-        date.addEventListener('keydown', function(){
-          const val = date.value
-          if (event.key != "Backspace" & date.value.length === 2) {
-            console.log(date.value.length)
-            date.value = val + "-"
-          }
-          if (date.value.length >= 6) {
+          }else if (date.value.length >= 7) {
             if (event.key != "Shift" & event.key != "Backspace" ) {
-              console.log("Sup 6 " + event.key)
-              console.log("Count " + date.value.length)
-              return date.value = val.substr(0,6)
+              date.value = val.substr(0,7)
             }
           }
-
         })
       })
     }
