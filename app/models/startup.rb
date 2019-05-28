@@ -38,8 +38,6 @@ class Startup < ApplicationRecord
   def checking_name_available?
     if Startup.where(name: self.name).count > 0
       false
-    elsif Startup.where(name: self.name.capitalize).count > 0
-      false
     else
       true
     end

@@ -106,7 +106,7 @@ class Talent < ApplicationRecord
 
   # for mailboxer
   acts_as_messageable
-  before_destroy { Mailboxer::Conversation.destroy_all }
+  before_destroy { self.mailbox.conversations.destroy_all }
 
   mount_uploader :photo, PhotoUploader
   process_in_background :photo
@@ -121,6 +121,10 @@ class Talent < ApplicationRecord
   def witch_status?(headhunter)
     re = Relationship.where(headhunter_id: headhunter.id, talent_id: self.id)
     return re[0].status
+  end
+
+  def is_a_model
+    return "Talent"
   end
 
   def find_conversation(headhunter)
@@ -242,7 +246,7 @@ class Talent < ApplicationRecord
       talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{self.firstname} ! N'hésite pas si tu as des questions", nil, true, true, nil)
     else
       talentist.send_message(self, "Bonjour #{self.firstname}, bienvenue sur notre plateforme!", "#{self.id}")
-      self.send_accepted
+      # self.send_accepted
     end
   end
 
