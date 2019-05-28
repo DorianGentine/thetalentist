@@ -10,7 +10,7 @@ class Talentist < ApplicationRecord
 
   # for mailboxer
   acts_as_messageable
-  before_destroy { Mailboxer::Conversation.destroy_all }
+  before_destroy { self.mailbox.conversations.destroy_all }
 
   before_save :capitalize_name_firstname
 
@@ -34,6 +34,10 @@ class Talentist < ApplicationRecord
         @unread_conversations << conversation
       end
     end
+  end
+
+  def is_a_model
+    return "Talentist"
   end
 
   def count_unread_message

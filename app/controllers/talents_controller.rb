@@ -6,7 +6,6 @@ class TalentsController < ApplicationController
   def index
     # Delete after action
     # Talent.all.each { |talent| talent.save }
-
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent
     talents = policy_scope(Talent)
@@ -107,7 +106,7 @@ class TalentsController < ApplicationController
       if @talent.validated || @talent.validated.nil?
         @talent.update(declined_params)
         @talent.validated_action(false)
-        @talent.send_refused
+        # @talent.send_refused
       end
     end
     @talent.visible_action(false)
