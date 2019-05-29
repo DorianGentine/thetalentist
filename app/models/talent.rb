@@ -176,10 +176,13 @@ class Talent < ApplicationRecord
 
   def self.find_for_linkedin_oauth(auth)
     talent_params = auth.slice(:provider, :uid)
+    raise
     talent_params[:firstname] =  auth.info.first_name
     talent_params[:name] =  auth.info.last_name
-    talent_params[:city] =  auth.info.location
-    talent_params[:linkedin] =  auth.info.urls.public_profile
+    talent_params[:city] =  "paris"
+    # talent_params[:city] =  auth.info.location
+    talent_params[:linkedin] =  "ok"
+    # talent_params[:linkedin] =  auth.info.urls.public_profile
     talent_params.merge! auth.info.slice(:email)
     talent_params[:linkedin_picture_url] = auth.info.image
     talent_params[:token] = auth.credentials.token
@@ -192,12 +195,14 @@ class Talent < ApplicationRecord
       talent.update(talent_params)
     else
       talent = Talent.new(talent_params)
+
       talent.password = Devise.friendly_token[0,20]  # Fake password for validation
       talent.save
     end
     return talent
   end
-
+# http://localhost:3000/auth/linkedin/callback
+# http://localhost:3000/talents/auth/linkedin
   def send_new_user_to_talentist
     ApplicationMailer.new_user("talent", self.id).deliver_later
   end

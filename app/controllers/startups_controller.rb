@@ -4,7 +4,6 @@ class StartupsController < ApplicationController
     @startup.btob = false
     @startup.btoc = false
     if @startup.update_attributes(startup_params)
-
       redirect_to headhunter_path(@current_headhunter)
     end
     authorize @current_headhunter

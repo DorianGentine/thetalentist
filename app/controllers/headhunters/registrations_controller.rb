@@ -13,7 +13,6 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
     @headhunter = Headhunter.new(headhunter_params)
     startup_params = params.require(:headhunter).permit(:startup)[:startup]
     authorize @headhunter
-    message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme ! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
     @headhunter.validated = true
     if startup_params.to_i != 0
       @headhunter.startup_id = startup_params.to_i
@@ -25,13 +24,14 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
       end
     end
     if @headhunter.save
+      message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme ! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
+      @talentist = Talentist.last
+      @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
       if @headhunter.startup.address == "" || @headhunter.startup.address.nil?
         session[:headhunter_id] = @headhunter.id
         redirect_to steps_startup_info_path(:startup)
       else
         @headhunter.send_welcome_and_reminder_email
-        @talentist = Talentist.find_by_email("dimitri@ineva-partners.com")
-        @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
         session[:headhunter_id] = @headhunter.id
         sign_up(resource)
       end

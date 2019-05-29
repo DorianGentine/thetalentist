@@ -3,7 +3,7 @@ Devise.setup do |config|
 
 
   config.omniauth :linkedin, ENV["LINKEDIN_ID"], ENV["LINKEDIN_SECRET"],
-  :scope => 'r_basicprofile r_emailaddress rw_company_admin w_share'
+  :scope => 'r_liteprofile r_emailaddress w_member_social'
 
 
 
