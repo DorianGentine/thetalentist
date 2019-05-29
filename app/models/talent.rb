@@ -19,7 +19,7 @@ class Talent < ApplicationRecord
   validates_presence_of :firstname, :message => "Ton prénom doit être rempli"
   validates_presence_of :name, :message => "Ton nom doit être rempli"
 
-  attr_accessor :skip_city_validation, :skip_phone_validation, :skip_linkedin_validation, :skip_job_validation
+  attr_accessor :skip_city_validation, :skip_phone_validation, :skip_linkedin_validation
 
   geocoded_by :city
   after_validation :geocode
@@ -33,7 +33,7 @@ class Talent < ApplicationRecord
   has_many :your_small_plus, dependent: :destroy
   accepts_nested_attributes_for :your_small_plus, allow_destroy: true, reject_if: :all_blank
 
-  validates_associated :talent_job, unless: :skip_job_validation
+  validates_associated :talent_job
   has_one :talent_job, dependent: :destroy
   has_one :talent_second_job, dependent: :destroy
 
@@ -238,7 +238,6 @@ class Talent < ApplicationRecord
   def validated_action(action)
     self.validated = action
     self.skip_linkedin_validation = true
-    self.skip_job_validation = true
   end
 
   def set_conversation_between(talentist)
@@ -247,7 +246,7 @@ class Talent < ApplicationRecord
       talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{self.firstname} ! N'hésite pas si tu as des questions", nil, true, true, nil)
     else
       talentist.send_message(self, "Bonjour #{self.firstname}, bienvenue sur notre plateforme!", "#{self.id}")
-      # self.send_accepted
+      self.send_accepted
     end
   end
 
