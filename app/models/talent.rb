@@ -176,7 +176,6 @@ class Talent < ApplicationRecord
 
   def self.find_for_linkedin_oauth(auth)
     talent_params = auth.slice(:provider, :uid)
-    raise
     talent_params[:firstname] =  auth.info.first_name
     talent_params[:name] =  auth.info.last_name
     talent_params[:city] =  "paris"
