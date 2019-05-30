@@ -183,7 +183,7 @@ class Talent < ApplicationRecord
     talent_params[:linkedin] =  "ok"
     # talent_params[:linkedin] =  auth.info.urls.public_profile
     talent_params.merge! auth.info.slice(:email)
-    talent_params[:linkedin_picture_url] = auth.info.image
+    talent_params[:linkedin_picture_url] = auth.info.picture_url
     talent_params[:token] = auth.credentials.token
     talent_params[:phone] = "To fill it"
     talent_params = talent_params.to_h
