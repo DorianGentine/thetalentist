@@ -16,9 +16,6 @@ class Talentists::OmniauthCallbacksController < Devise::OmniauthCallbacksControl
   #   super
   # end
 
-  def
-
-  end
   # GET|POST /users/auth/twitter/callback
   # def failure
   #   super
