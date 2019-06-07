@@ -178,10 +178,6 @@ class Talent < ApplicationRecord
     talent_params = auth.slice(:provider, :uid)
     talent_params[:firstname] =  auth.info.first_name
     talent_params[:name] =  auth.info.last_name
-    talent_params[:city] =  "paris"
-    # talent_params[:city] =  auth.info.location
-    talent_params[:linkedin] =  "ok"
-    # talent_params[:linkedin] =  auth.info.urls.public_profile
     talent_params.merge! auth.info.slice(:email)
     talent_params[:linkedin_picture_url] = auth.info.picture_url
     talent_params[:token] = auth.credentials.token
@@ -194,7 +190,8 @@ class Talent < ApplicationRecord
       talent.update(talent_params)
     else
       talent = Talent.new(talent_params)
-
+      talent_params[:city] =  "paris"
+      talent_params[:linkedin] =  "ok"
       talent.password = Devise.friendly_token[0,20]  # Fake password for validation
       talent.save
     end
