@@ -26,7 +26,8 @@
     <% else %>
       <p class="x-commented"><%= receipt.message.sender.firstname %></p>
     <% end %>
-    <%= simple_format(receipt.message.body, class: 'the-message') %>
+    <%#= simple_format(receipt.message.body, class: 'the-message') %>
+    <p class="the-message"><%= receipt.message.body %></p>
     <% if receipt.message.attachment.url.present? %>
       <p class="the-message" id="message_link"><%= link_to  "Document envoyé", receipt.message.attachment.url, target: "_blank" %></p>
     <% end %>
@@ -44,7 +45,8 @@
       <% end %>
     </div>
     <p class="x-commented"><%= receipt.message.sender.firstname %></p>
-    <%= simple_format(receipt.message.body, class: 'the-message') %>
+    <p class="the-message"><%= receipt.message.body %></p>
+    <%#= simple_format(receipt.message.body, class: 'the-message') %>
     <% if receipt.message.attachment.url.present? %>
       <p class="the-message"><%= link_to  "Document envoyé", receipt.message.attachment.url, target: "_blank" %></p>
     <% end %>
