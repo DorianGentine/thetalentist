@@ -50,7 +50,7 @@ class HeadhunterMailer < ApplicationMailer
     mail(
       to: @user.email,
       cc: Talentist.all.collect(&:email).join(", "),
-      subject: "#{@firstname} a #{@status} ton inviation"
+      subject: "#{@firstname} a #{@status} ton invitation"
       )
   end
 
