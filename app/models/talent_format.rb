@@ -72,6 +72,7 @@ class TalentFormat
         next_aventure: {
           famous_person: talent.next_aventures.count > 0 && talent.next_aventures.first.famous_person.present? ? talent.next_aventures.first.famous_person : false,
           work_for_free: talent.next_aventures.count > 0 && talent.next_aventures.first.work_for_free.present? ? talent.next_aventures.first.work_for_free : false,
+          looking_for: talent.next_aventures.count > 0 && talent.next_aventures.first.looking_for.present? ? talent.next_aventures.first.looking_for : false,
           btob: talent.next_aventures.count > 0 && talent.next_aventures.first.btob.present? ? true : false,
           btoc: talent.next_aventures.count > 0 && talent.next_aventures.first.btoc.present? ? true : false,
         },

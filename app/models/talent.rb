@@ -186,9 +186,13 @@ class Talent < ApplicationRecord
 
     talent = Talent.find_by(provider: auth.provider, uid: auth.uid)
     talent ||= Talent.find_by(email: auth.info.email) # talent did a regular sign up in the past.
+    p "linkedin is trying to connect with => #{talent}"
+    p "linkedin is trying to connect with => #{talent.email}"
     if talent
+      p "alrealdy exciste"
       talent.update(talent_params)
     else
+      p "not exciste"
       talent = Talent.new(talent_params)
       talent_params[:city] =  "paris"
       talent_params[:linkedin] =  "ok"
