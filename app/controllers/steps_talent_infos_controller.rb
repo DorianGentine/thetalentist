@@ -53,6 +53,11 @@ class StepsTalentInfosController < ApplicationController
         set_new_technos(@talent)
       end
       @talent.attributes = talent_params
+      [*0..5].each do |index|
+        if need_to_create_formation?(index)
+          @talent.talent_formations[index].formation = set_new_formation(@talent, need_to_create_formation?(index) )
+        end
+      end
       @talent.skip_city_validation = true
       if @talent.save
         # @talent = current_user
@@ -106,6 +111,10 @@ class StepsTalentInfosController < ApplicationController
     end
   end
 
+  def set_new_formation(talent, formation)
+    formation = Formation.find_or_create_by(title: formation)
+    return formation
+  end
 
 
   def set_new_technos(talent)
@@ -123,11 +132,20 @@ class StepsTalentInfosController < ApplicationController
     end
   end
 
-  def compile_cities_of_next_aventure
-    cities = params.require(:talent).permit(next_aventures_attributes:[ city: []])[:next_aventures_attributes][:"0"][:city]
-    city = cities.join(', ')
-    return city
+  def need_to_create_formation?(index)
+    formation_params = params[:talent][:talent_formations_attributes][index.to_s]
+    if formation_params.nil?
+      return false
+    else
+      return formation_params[:formation_id].nil? ? false : formation_params[:formation_id]
+    end
   end
+
+  # def compile_cities_of_next_aventure
+  #   cities = params.require(:talent).permit(next_aventures_attributes:[ city: []])[:next_aventures_attributes][:"0"][:city]
+  #   city = cities.join(', ')
+  #   return city
+  # end
 
   def talent_params
      params.require(:talent).permit(
