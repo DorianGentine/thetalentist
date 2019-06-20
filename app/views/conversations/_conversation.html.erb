@@ -42,6 +42,7 @@
     </div>
   <% end %>
 <% else %>
+
   <%= link_to conversation_path(conversation) do %>
     <div class="conversation-card">
 
@@ -86,7 +87,11 @@
               <p class="prenom-contact">Talent</p>
               <p class="apercu-message"><%= conversation.last_message.body %></p>
             <% else %>
-              <p class="prenom-contact"><%= parti[0].firstname %></p>
+              <% if current_user.is_a?(Talentist) %>
+                <p class="prenom-contact"><%= parti[0].firstname %> <%= parti[0].name %> - <%= parti[0].is_a_model %></p>
+              <% else %>
+                <p class="prenom-contact"><%= parti[0].firstname %></p>
+              <% end %>
               <p class="apercu-message"><%= conversation.last_message.body %></p>
             <% end %>
           <% end %>

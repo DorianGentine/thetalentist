@@ -21,7 +21,9 @@
         <% talent[:experiences].each_with_index do |experience, index|  %>
           <% if index > 0 && index < 3 %>
             <p class="col-xs-12 no-padding">
-              <i style="min-width: 20px;" class="fas fa-briefcase margin-right-5"><sup style="font-family: 'Avenir', 'Open Sans', 'Helvetica', 'sans-serif'; font-weight: 500"><%= index == 1 ? "-1" : "-2" %></sup></i><%= experience[:position].truncate(45, separator: ' ', omission: '') %>
+              <% if experience[:position].present? %>
+                <i style="min-width: 20px;" class="fas fa-briefcase margin-right-5"><sup style="font-family: 'Avenir', 'Open Sans', 'Helvetica', 'sans-serif'; font-weight: 500"><%= index == 1 ? "-1" : "-2" %></sup></i><%= experience[:position].truncate(45, separator: ' ', omission: '') %>
+              <% end %>
             </p>
           <% end %>
         <% end %>

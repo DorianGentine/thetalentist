@@ -30,16 +30,15 @@
           </div>
         <% end %>
 
-        <% if current_headhunter.validated %>
-          <div class="lien-messagerie">
-            <%= link_to headhunter_path(current_headhunter), class:"navbar-wagon-item navbar-wagon-link" do %>
-              <i class="fa fa-user"></i> PROFIL
-              <% if current_headhunter.completed_totaly < 95 %>
-                <%= render "shared/notif_point" %>
-              <% end %>
+        <div class="lien-messagerie">
+          <%= link_to headhunter_path(current_headhunter), class:"navbar-wagon-item navbar-wagon-link" do %>
+            <i class="fa fa-user"></i> PROFIL
+            <% if current_headhunter.completed_totaly < 95 %>
+              <%= render "shared/notif_point" %>
             <% end %>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
+
 
         <!-- Avatar with dropdown menu -->
         <div class="navbar-wagon-item">

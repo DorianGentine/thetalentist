@@ -21,14 +21,12 @@ class Talent < ApplicationRecord
 
   attr_accessor :skip_city_validation, :skip_phone_validation, :skip_linkedin_validation
 
-
   geocoded_by :city
   after_validation :geocode
 
   after_create :send_welcome_email, :send_new_user_to_talentist
   before_save :capitalize_name_firstname, :save_completed_profil
 
-  # Tu devras ajouter les lignes has_many :xx through: :xx pour tous les champs que le talent devra remplir dans le questionnaire
   has_many :talent_sectors, dependent: :destroy
   has_many :sectors, through: :talent_sectors
 
@@ -42,6 +40,9 @@ class Talent < ApplicationRecord
   # ATTENTION IL MANQUE TALENT_SECOND_JOB
   has_many :jobs, through: :talent_job, class_name:"Job"
 
+  scope :all_with_startup, -> (name) { joins(:experiences).where(:visible => true).where(experiences: {company_name: name})}
+
+  scope :no_startup, -> (name) { where( in_this_startup?(name) )}
 
   scope :his_job_is, -> (job) { joins(:jobs).merge(Job.where(title: job)) }
 
@@ -102,20 +103,13 @@ class Talent < ApplicationRecord
   has_many :talentists, through: :relationships
 
   has_many :talent_messages, dependent: :destroy
-  # has_many :relationships, through: :talent_messages
 
   # for mailboxer
   acts_as_messageable
-  before_destroy { Mailboxer::Conversation.destroy_all }
+  before_destroy { self.mailbox.conversations.destroy_all }
 
-  # link with pdf_uploader
-  # mount_uploader :cv, PdfUploader
   mount_uploader :photo, PhotoUploader
   process_in_background :photo
-
-  # scope :is_comming_to, -> (point) { where( point: point, invited: true, status: "I'm in") }
-  # scope :activity_title, -> (current_title) { joins(:user_activity).merge(UserActivity.by_activity_title(current_title)) }
-  # scope :formation_missing_informations, -> { joins(:formations).merge(Formation.with_no_type_of_formation)}
 
   scope :completed_less_than, -> (number) { where('completing <=  ?', number)}
   scope :have_been_never_reminded, -> { where(reminder: nil)}
@@ -127,6 +121,10 @@ class Talent < ApplicationRecord
   def witch_status?(headhunter)
     re = Relationship.where(headhunter_id: headhunter.id, talent_id: self.id)
     return re[0].status
+  end
+
+  def is_a_model
+    return "Talent"
   end
 
   def find_conversation(headhunter)
@@ -180,26 +178,31 @@ class Talent < ApplicationRecord
     talent_params = auth.slice(:provider, :uid)
     talent_params[:firstname] =  auth.info.first_name
     talent_params[:name] =  auth.info.last_name
-    talent_params[:city] =  auth.info.location
-    talent_params[:linkedin] =  auth.info.urls.public_profile
     talent_params.merge! auth.info.slice(:email)
-    talent_params[:linkedin_picture_url] = auth.info.image
+    talent_params[:linkedin_picture_url] = auth.info.picture_url
     talent_params[:token] = auth.credentials.token
     talent_params[:phone] = "To fill it"
     talent_params = talent_params.to_h
 
     talent = Talent.find_by(provider: auth.provider, uid: auth.uid)
     talent ||= Talent.find_by(email: auth.info.email) # talent did a regular sign up in the past.
+    p "linkedin is trying to connect with => #{talent}"
+    p "linkedin is trying to connect with => #{talent.email}"
     if talent
+      p "alrealdy exciste"
       talent.update(talent_params)
     else
+      p "not exciste"
       talent = Talent.new(talent_params)
+      talent_params[:city] =  "paris"
+      talent_params[:linkedin] =  "ok"
       talent.password = Devise.friendly_token[0,20]  # Fake password for validation
       talent.save
     end
     return talent
   end
-
+# http://localhost:3000/auth/linkedin/callback
+# http://localhost:3000/talents/auth/linkedin
   def send_new_user_to_talentist
     ApplicationMailer.new_user("talent", self.id).deliver_later
   end
@@ -223,14 +226,85 @@ class Talent < ApplicationRecord
   end
 
   def send_refused
-    TalentMailer.refused(self.id).deliver_later
+    if self.declined.present?
+      TalentMailer.refused(self.id).deliver_later
+    end
   end
 
   def send_accepted
     TalentMailer.accepted(self.id).deliver_later
   end
 
+  def visible_action(action)
+    self.visible = action
+    self.save
+  end
 
+  def validated_action(action)
+    self.validated = action
+    self.skip_linkedin_validation = true
+  end
+
+  def set_conversation_between(talentist)
+    conversations = Mailboxer::Conversation.between(talentist, self)
+    if conversations.size > 0
+      talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{self.firstname} ! N'hésite pas si tu as des questions", nil, true, true, nil)
+    else
+      talentist.send_message(self, "Bonjour #{self.firstname}, bienvenue sur notre plateforme!", "#{self.id}")
+      self.send_accepted
+    end
+  end
+
+  def set_build_belong_tables
+    if self.talent_formations.count == 0
+      1.times { self.talent_formations.build }
+    else
+      0.times { self.talent_formations.build }
+    end
+    self.build_talent_job if self.jobs.count == 0
+    self.build_talent_second_job if self.jobs.count < 2
+    # if self.talent_jobs.count == 0
+    #   2.times { self.talent_jobs.build }
+    # elsif self.talent_jobs.count == 1
+    #   1.times { self.talent_jobs.build }
+    # else
+    #   0.times { self.talent_jobs }
+    # end
+    if self.talent_languages.count == 0
+      1.times { self.talent_languages.build }
+    else
+      0.times { self.talent_languages.build }
+    end
+    if self.experiences.count == 0
+      1.times { self.experiences.build }
+    else
+      0.times { self.experiences.build }
+    end
+    if self.next_aventures.count == 0
+      1.times { self.next_aventures.build }
+    else
+      0.times { self.next_aventures.build }
+    end
+    if self.your_small_plus.count == 0
+      1.times { self.your_small_plus.build }
+    else
+      0.times { self.your_small_plus.build }
+    end
+  end
+
+  def alerte_headhunters
+    jobs = self.jobs
+    jobs.each do |job|
+      job_alertes = JobAlerte.where(job: job)
+      headhunters = []
+      if job_alertes.count > 0
+        job_alertes.each do |job_alerte|
+          headhunter = Headhunter.find(job_alerte.headhunter_id)
+          HeadhunterMailer.alerte(headhunter.id).deliver_later
+        end
+      end
+    end
+  end
 
   def display_linkedin?
     if self.linkedin_picture_url.present? && self.display_linkedin_picture
@@ -243,22 +317,4 @@ class Talent < ApplicationRecord
   def save_completed_profil
     self.completing = CompletedTalent.new(self).completed_totaly
   end
-
-  def set_time_conextion
-    if self.last_sign_in_at < Date.yesterday
-      return self.last_sign_in_at.now.strftime('%m/%d/%Y')
-    elsif elf.last_sign_in_at < 30.day.ago
-      return self.last_sign_in_at.now.strftime('%m/%d/%Y')
-    else
-      return "Plus d'un mois"
-    end
-
-  end
-
-  private
-
-  def normalize_name_firstname
-    self.firstname = self.firstname.capitalize
-  end
-
 end

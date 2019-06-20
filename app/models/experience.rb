@@ -20,6 +20,7 @@ class Experience < ApplicationRecord
   :skip_currently_validation
 
   after_validation :date_save_format
+  before_save :upcase_company_name
 
   def nothing_to_save
     if self.position.blank? && self.starting.blank? && self.company_name.blank?
@@ -78,6 +79,9 @@ class Experience < ApplicationRecord
     end
   end
 
+  def upcase_company_name
+    self.company_name = self.company_name.lstrip.upcase
+  end
 
 end
 

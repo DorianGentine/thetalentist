@@ -18,7 +18,7 @@ class Headhunter < ApplicationRecord
 
   # for mailboxer
   acts_as_messageable
-  before_destroy { Mailboxer::Conversation.destroy_all }
+  before_destroy { self.mailbox.conversations.destroy_all }
 
   validates :name, :firstname, :job, :email, :terms_of_condition, :startup, presence: true
 
@@ -47,6 +47,9 @@ class Headhunter < ApplicationRecord
     CompletedHeadhunter.new(self).completed_totaly
   end
 
+  def is_a_model
+    return "Recruteur"
+  end
 
   def notif_of_unread
     conversations = self.mailbox.conversations
@@ -59,6 +62,24 @@ class Headhunter < ApplicationRecord
   end
 
 
+  def set_conversation_between(talentist)
+    message = "merci pour ton inscription sur The Talentist ! Les talents t'attendent, n'hésite pas à les contacter. Si tu as la moindre question, nous sommes là pour te guider. A très vite"
+    conversations = Mailboxer::Conversation.between(talentist, self)
+    if conversations.size > 0
+      talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{self.firstname} ! N'hésite pas si tu as des questions", nil, true, true, nil)
+    else
+      talentist.send_message(self, "Bonjour #{self.firstname}, #{message}", "#{self.id}")
+      HeadhunterMailer.accepted(self.id).deliver_later
+    end
+  end
+
+  def new_starting_set_conversation_between(talentist)
+    message = "merci pour ton inscription sur The Talentist ! Les talents t'attendent, n'hésite pas à les contacter. Si tu as la moindre question, nous sommes là pour te guider. A très vite"
+    conversations = Mailboxer::Conversation.between(talentist, self)
+    if conversations.size == 0
+      talentist.send_message(self, "Bonjour #{self.firstname}, #{message}", "#{self.id}")
+    end
+  end
 
   def send_new_user_to_talentist
     ApplicationMailer.new_user("headhunter", self.id).deliver_later

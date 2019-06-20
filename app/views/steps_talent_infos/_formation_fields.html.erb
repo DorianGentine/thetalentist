@@ -13,7 +13,7 @@
 
     <div class="col-xs-12 col-lg-4 no-padding">
       <div class="margin-right-15 no-margin-xs">
-        <%= f.association :formation, collection: Formation.all.order('title ASC'), prompt:"Établissement", label: false, input_html: { :class => "select2", style: "width: 100%" } %>
+        <%= f.association :formation, collection: Formation.all.order('title ASC'), prompt:"Établissement", label: false, input_html: { :class => "selectAndCreate", style: "width: 100%" } %>
       </div>
     </div>
 

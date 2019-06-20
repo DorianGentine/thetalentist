@@ -6,7 +6,7 @@ ActiveAdmin.register Startup do
   scope :with_headhunter
   scope :with_no_headhunter
 
-
+  permit_params :name, :overview, :year_of_creation, :collaborators, :parity, :average_age, :turnover, :link, :address, :logo, :btoc, :btob, :linkedin, :mission, :short_resume
   index do
     selectable_column
     column :id
@@ -17,6 +17,18 @@ ActiveAdmin.register Startup do
       end
     end
     column :created_at
+    actions
+  end
+
+  form title: "Ajouter une nouvelle Startup" do |f|
+    inputs 'Details' do
+      input :name
+      input :link
+      input :logo
+      input :linkedin
+      input :year_of_creation
+      input :mission
+    end
     actions
   end
 

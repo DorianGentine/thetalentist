@@ -65,10 +65,10 @@ gem 'activeadmin', '~> 1.4.2'
 gem 'inherited_resources', '~> 1.9.0'
 
 # linkedin connect
-gem 'omniauth'
-gem 'omniauth-linkedin'
-# gem 'omniauth-linkedin-oauth2'
-gem 'linkedin'
+# gem 'omniauth'
+# gem 'omniauth-linkedin'
+gem 'omniauth-linkedin-oauth2'
+# gem 'linkedin'
 
 #fixe cookie overflow
 gem 'activerecord-session_store'
