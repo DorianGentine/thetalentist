@@ -60,7 +60,7 @@ $('.selectizeTwo').selectize({
 
 
 // Requiring CSS! Path is relative to ./node_modules
-import 'select2/dist/css/select2.css';
-import 'selectize/dist/css/selectize.css';
+// import 'select2/dist/css/select2.css';
+// import 'selectize/dist/css/selectize.css';
 
 export { initSelect2 }

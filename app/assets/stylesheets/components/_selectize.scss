@@ -3,11 +3,15 @@
   width: calc(100% + 24px) !important;
   border: none !important;
   padding: 7px !important;
+  & > input:focus{
+    box-shadow: none !important;
+  }
 }
 .selectize-dropdown{
   margin-left: -12px !important;
   height: unset;
   color: $green;
+  border-top: none;
   .create{
     color: black !important;
     strong{
