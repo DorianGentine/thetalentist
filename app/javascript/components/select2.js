@@ -37,6 +37,19 @@ $('.selectAndCreate').selectize({
   }
 });
 
+$('.comp-cles').selectize({
+  plugins: ['remove_button'],
+  placeholder: 'Cherchez votre compétence',
+  delimiter: ',',
+  persist: false,
+  create: function(input) {
+    return {
+      value: input,
+      text: input
+    }
+  }
+});
+
 $('.selectizeTwo').selectize({
   plugins: ['remove_button'],
   delimiter: ',',

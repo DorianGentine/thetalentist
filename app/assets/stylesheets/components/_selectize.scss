@@ -8,6 +8,18 @@
   margin-left: -12px !important;
   height: unset;
   color: $green;
+  .create{
+    color: black !important;
+    strong{
+      color: black;
+    }
+  }
+  .create.active{
+    color: white;
+    strong{
+      color: white;
+    }
+  }
 }
 
 .selectize-dropdown .active {
