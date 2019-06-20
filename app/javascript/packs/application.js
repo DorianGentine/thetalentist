@@ -16,6 +16,8 @@ import '../components/inputSupMin';
 
 import '../components/select2_relaunch';
 
+import '../components/collapse_arrow';
+
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 

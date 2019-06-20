@@ -215,6 +215,9 @@ input, button, select, textarea {
   }
 
 // Text
+  .bold{
+    font-weight: bold !important;
+  }
   .capitalize{
     text-transform: capitalize;
   }

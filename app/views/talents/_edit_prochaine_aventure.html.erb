@@ -14,7 +14,7 @@
             <%= render 'steps_talent_infos/mobility_fields', :f => e %>
           <% end %>
           <div class="links margin-top-15">
-            <%= link_to_add_association 'Ajouter un +', u, :mobilities, :partial => 'steps_talent_infos/mobility_fields', :class => "form-hobby-add" %>
+            <%= link_to_add_association 'Ajouter une mobilité', u, :mobilities, :partial => 'steps_talent_infos/mobility_fields', :class => "form-hobby-add" %>
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@
       <h2 class="titre-section">Je me décris en <strong>quelques lignes</strong></h2>
       <div class="row">
         <div class="col-xs-12 col-lg-6">
-          <p class="label-edit no-margin requis">Quel est le rêve que tu remets toujours à demain ?</p>
+          <p class="label-edit no-margin requis bold" style="font-size: 15px;">Que recherches-tu ?</p>
           <div class="margin-right-15 no-margin-xs">
             <%= u.input :dream, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%" } %>
           </div>

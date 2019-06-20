@@ -44,10 +44,10 @@
               <p class="label-edit no-margin" style="opacity: 0">Branche</p>
               <div class="row">
                 <div class="col-lg-6 col-xs-6">
-                  <%= u.input :btoc, label: "BTOC" %>
+                  <%= u.input :btoc, label: "BTOC", class: "pointer" %>
                 </div>
                 <div class="col-lg-6 col-xs-6">
-                  <%= u.input :btob, label: "BTOB" %>
+                  <%= u.input :btob, label: "BTOB", class: "pointer" %>
                 </div>
               </div>
             </div>
@@ -129,7 +129,7 @@
         <div class="blue-background margin-top-background">
           <div class="row">
             <div class="col-xs-12 col-lg-5">
-              <p class="label-edit no-margin">Quel est le rêve que tu remets toujours à demain ?</p>
+              <p class="label-edit no-margin bold" style="font-size: 15px;">Que recherches-tu ?</p>
               <%= u.input :dream, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%" } %>
             </div>
             <div class="col-xs-12 col-lg-5 col-lg-offset-2 margin-top-15-xs">
@@ -170,7 +170,6 @@
       <%= link_to "Précedent", previous_wizard_path, class: "b-btn-link form-btn form-btn-precedent" %>
       <%= f.submit "Terminer", class: "b-btn form-btn form-btn-suivant" %>
     </div>
-
 
   <% end %>
 
