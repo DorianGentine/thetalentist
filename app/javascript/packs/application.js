@@ -50,8 +50,3 @@ verifDateWithMonthAndYear();
 
 import { initSelect2 } from '../components/select2';
 initSelect2()
-
-
-// TODO
-// import { addSelectTwo } from '../components/addSelectTwo';
-// addSelectTwo();
