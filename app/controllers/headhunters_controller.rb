@@ -20,7 +20,8 @@ class HeadhuntersController < ApplicationController
     @jobs = Job.all
 
     if @headhunter.present?
-      talents_visible = Talent.where(:visible => true).order(updated_at: :desc).all_with_startup(@headhunter.startup.name)
+      talents_visible = Talent.where(:visible => true).order(updated_at: :desc)
+      # talents_visible = Talent.where(:visible => true).order(updated_at: :desc).all_with_startup(@headhunter.startup.name)
     else
       talents_visible = Talent.where(:visible => true).order(updated_at: :desc)
     end
