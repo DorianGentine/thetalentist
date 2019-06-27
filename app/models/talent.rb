@@ -177,8 +177,10 @@ class Talent < ApplicationRecord
   def self.find_for_linkedin_oauth(auth)
     talent_params = auth.slice(:provider, :uid)
     talent_params[:firstname] =  auth.info.first_name
+    p "linkedin is trying to connect with auth.info.first_name => #{auth.info.first_name}"
     talent_params[:name] =  auth.info.last_name
     talent_params.merge! auth.info.slice(:email)
+    p "linkedin is trying to connect with auth.info.slice(:email) => #{auth.info.slice(:email)}"
     talent_params[:linkedin_picture_url] = auth.info.picture_url
     talent_params[:token] = auth.credentials.token
     talent_params[:phone] = "To fill it"
