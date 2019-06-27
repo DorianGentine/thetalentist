@@ -88,3 +88,7 @@ gem 'wicked_pdf'
 # job workers
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
+
+
+
+gem 'activerecord-session_store'

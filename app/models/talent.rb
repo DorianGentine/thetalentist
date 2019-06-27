@@ -191,9 +191,9 @@ class Talent < ApplicationRecord
       talent.update(talent_params)
     else
       p "not exciste"
-      talent = Talent.new(talent_params)
       talent_params[:city] =  "paris"
       talent_params[:linkedin] =  "ok"
+      talent = Talent.new(talent_params)
       talent.password = Devise.friendly_token[0,20]  # Fake password for validation
       talent.save
     end
