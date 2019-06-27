@@ -177,24 +177,15 @@ class Talent < ApplicationRecord
   def self.find_for_linkedin_oauth(auth)
     talent_params = auth.slice(:provider, :uid)
     talent_params[:firstname] =  auth.info.first_name
-    p "linkedin is trying to connect with auth.info.first_name => #{auth.info.first_name}"
     talent_params[:name] =  auth.info.last_name
     talent_params.merge! auth.info.slice(:email)
-    p "linkedin is trying to connect with auth.info.slice(:email) => #{auth.info.slice(:email)}"
     talent_params[:linkedin_picture_url] = auth.info.picture_url
     talent_params[:token] = auth.credentials.token
     talent_params[:phone] = "To fill it"
     talent_params = talent_params.to_h
-    p "linkedin is trying to connect with talent_params=> #{talent_params}"
-    p "linkedin is trying to connect with talent_params to Hash => #{talent_params}"
-    p "linkedin is trying to connect with => #{auth.info}"
 
     talent = Talent.find_by(provider: auth.provider, uid: auth.uid)
-    p "linkedin is trying to connect with => #{auth.info.email}"
-    email = auth.info.email
-    p "linkedin is trying to connect with => #{email}"
-    talent ||= Talent.find_by(email: email) # talent did a regular sign up in the past.
-    p "linkedin is trying to connect with => #{talent}"
+    talent ||= Talent.find_by(email: auth.info.email) # talent did a regular sign up in the past.
     if talent
       p "alrealdy exciste"
       talent.update(talent_params)
