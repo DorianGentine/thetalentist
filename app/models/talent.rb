@@ -182,12 +182,13 @@ class Talent < ApplicationRecord
     talent_params.merge! auth.info.slice(:email)
     p "linkedin is trying to connect with auth.info.slice(:email) => #{auth.info.slice(:email)}"
     talent_params[:linkedin_picture_url] = auth.info.picture_url
+    p "linkedin is trying to connect with talent_params => #{talent_params}"
     talent_params[:token] = auth.credentials.token
     talent_params[:phone] = "To fill it"
     talent_params = talent_params.to_h
 
     talent = Talent.find_by(provider: auth.provider, uid: auth.uid)
-    talent ||= Talent.find_by(email: auth.info.email) # talent did a regular sign up in the past.
+    talent ||= Talent.find_by(email: auth.info.slice(:email)) # talent did a regular sign up in the past.
     p "linkedin is trying to connect with => #{talent}"
     p "linkedin is trying to connect with => #{talent.email}"
     if talent
