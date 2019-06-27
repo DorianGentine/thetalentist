@@ -58,6 +58,7 @@ class StepsTalentInfosController < ApplicationController
           @talent.talent_formations[index].formation = set_new_formation(@talent, need_to_create_formation?(index) )
         end
       end
+
       @talent.skip_city_validation = true
       if @talent.save
         # @talent = current_user
@@ -133,11 +134,17 @@ class StepsTalentInfosController < ApplicationController
   end
 
   def need_to_create_formation?(index)
-    formation_params = params[:talent][:talent_formations_attributes][index.to_s]
-    if formation_params.nil?
+    formation_params_ok = params[:talent][:talent_formations_attributes]
+    formation_params = formation_params_ok.present? ? params[:talent][:talent_formations_attributes][index.to_s] : nil
+    return false if formation_params.nil?
+    if formation_params[:formation_id].to_i.to_s == formation_params[:formation_id]
       return false
     else
-      return formation_params[:formation_id].nil? ? false : formation_params[:formation_id]
+      if formation_params[:title].present?
+        return formation_params[:formation_id].nil? ? false : formation_params[:formation_id]
+      else
+        return false
+      end
     end
   end
 
