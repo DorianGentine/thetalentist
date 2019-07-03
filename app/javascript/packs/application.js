@@ -18,6 +18,8 @@ import '../components/select2_relaunch';
 
 import '../components/collapse_arrow';
 
+import '../components/openModalUrl';
+
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 
