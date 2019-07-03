@@ -80,7 +80,7 @@
       </div>
 
     <!-- Nos collaborateurs -->
-      <div class="blue-background margin-top-background">
+      <div class="blue-background margin-top-60">
         <div class="grid" style="grid: auto / 20% auto; align-items: center; grid-row-gap: 15px;">
           <p class="titre-rubrique-3" style="grid-column: 1 / span 2;">Nos collaborateurs :</p>
 
@@ -108,7 +108,7 @@
     <!-- Mes compétences techniques -->
       <% if !@startup.word_ids.present? && current_user.is_a?(Talent) %>
       <% else %>
-        <div class="blue-background margin-top-background">
+        <div class="blue-background margin-top-60">
           <p class="titre-rubrique-3 margin-bottom-30">Ce qui nous définit :</p>
           <% if @startup.word_ids.present? %>
             <div class="talent-competences">
@@ -125,7 +125,7 @@
     <!-- Me suivre sur -->
       <% if !@startup.linkedin.present? && current_user.is_a?(Talent) %>
       <% else %>
-        <div class="blue-background margin-top-background">
+        <div class="blue-background margin-top-60">
           <p class="titre-rubrique-3 margin-bottom-30">Nous suivre sur :</p>
 
           <div class="flex" style="flex-wrap: wrap;">
@@ -161,7 +161,7 @@
     <% end %>
 
     <!-- Section découverte de l'entreprise -->
-      <div class="blue-background <%= !@startup.pictures.present? && current_user.is_a?(Talent) ? "" : "margin-top-background" %>">
+      <div class="blue-background <%= !@startup.pictures.present? && current_user.is_a?(Talent) ? "" : "margin-top-60" %>">
 
         <!-- Titre section -->
           <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>

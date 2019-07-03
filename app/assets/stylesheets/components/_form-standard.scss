@@ -5,10 +5,6 @@
   box-shadow: -1px 1px 2px 1px rgba(0,0,0,0.1);
 }
 
-.margin-top-background {
-  margin-top: 60px !important;
-}
-
 // Mets les polices de select2 à 14px
 span.select2.select2-container.select2-container--default {
   font-size: 14px;
@@ -30,7 +26,8 @@ span.select2.select2-container.select2-container--default {
 .form-control{
   color: $black;
   display: block;
-  height: 35px;
+  min-height: 35px;
+  height: unset;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.428571429;

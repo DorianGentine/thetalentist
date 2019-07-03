@@ -103,14 +103,24 @@
                 data-target="#collapseDream<%= talent[:id] %>"
                 aria-expanded="false"
                 aria-controls="collapseDream<%= talent[:id] %>">
-                <h5>Ce que je recherche</h5>
+                <h5>
+                  <% if talent[:next_aventure].present? && talent[:next_aventure][:looking_for].present? %>
+                    Ce que je recherche
+                  <% else %>
+                    Le métier de mes rêves
+                  <% end %>
+                </h5>
                 <i class="fas fa-chevron-down green"></i>
               </div>
               <p class="collapse no-margin-xs texte-rubrique-3" id="collapseDream<%= talent[:id] %>">
-                <% if talent[:next_aventure].present? && talent[:next_aventure][:dream].present? %>
-                  <%= talent[:next_aventure][:dream] %>
+                <% if talent[:next_aventure].present? && talent[:next_aventure][:looking_for].present? %>
+                  <%= talent[:next_aventure][:looking_for] %>
                 <% else %>
-                  -
+                  <% if talent[:next_aventure].present? && talent[:next_aventure][:dream].present? %>
+                    <%= talent[:next_aventure][:dream] %>
+                  <% else %>
+                    -
+                  <% end %>
                 <% end %>
               </p>
 
@@ -119,12 +129,12 @@
                 data-target="#collapseFamousPerson<%= talent[:id] %>"
                 aria-expanded="false"
                 aria-controls="collapseFamousPerson<%= talent[:id] %>">
-                <h5>La personnalité qui m'inspire</h5>
+                <h5>Un bon manager selon moi</h5>
                 <i class="fas fa-chevron-down green"></i>
               </div>
               <p class="collapse no-margin-xs texte-rubrique-3" id="collapseFamousPerson<%= talent[:id] %>">
-                <% if talent[:next_aventure].present? && talent[:next_aventure][:famous_person].present? %>
-                  <%= talent[:next_aventure][:famous_person] %>
+                <% if talent[:next_aventure].present? && talent[:next_aventure][:good_manager].present? %>
+                  <%= talent[:next_aventure][:good_manager] %>
                 <% else %>
                   -
                 <% end %>
@@ -135,12 +145,12 @@
                 data-target="#collapseWorkFree<%= talent[:id] %>"
                 aria-expanded="false"
                 aria-controls="collapseWorkFree<%= talent[:id] %>">
-                <h5>Le job de mes rêves</h5>
+                <h5>Ma plus grande fierté</h5>
                 <i class="fas fa-chevron-down green"></i>
               </div>
               <p class="collapse no-margin-xs texte-rubrique-3" id="collapseWorkFree<%= talent[:id] %>">
-                <% if talent[:next_aventure].present? && talent[:next_aventure][:work_for_free].present? %>
-                  <%= talent[:next_aventure][:work_for_free] %>
+                <% if talent[:next_aventure].present? && talent[:next_aventure][:proud].present? %>
+                  <%= talent[:next_aventure][:proud] %>
                 <% else %>
                   -
                 <% end %>

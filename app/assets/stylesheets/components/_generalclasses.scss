@@ -6,13 +6,12 @@
     border-top: 1px solid $gray;
     border-bottom: 1px solid $gray;
   }
-  .padding-left{
-    padding-left: 20px;
+  .bordure-bas{
+    border-bottom: 1px solid $gray;
   }
-  .padding-top{
-    padding-top: 12.5px;
+  .gray-border{
+    border: 1px solid $gray;
   }
-
 
 // Cercle
   .cercle{
@@ -22,6 +21,12 @@
 // Color
   .black{
     color: $black !important;
+  }
+  .blue{
+    color: $blue !important;
+  }
+  .blue-background{
+    background-color: $blue-background !important;
   }
   .gray{
     color: $gray !important;
@@ -48,26 +53,33 @@
     color: white !important;
   }
   .white-background{
-    background-color: white;
+    background-color: white !important;
   }
 
 // Cursor
   .pointer{
-    cursor: pointer;
+    cursor: pointer !important;
+  }
+  .not-allowed{
+    cursor: not-allowed !important;
   }
 
 // Flex
   .flex{
-    display: flex;
+    display: flex !important;
   }
-
   .space-between{
-    justify-content: space-between;
+    justify-content: space-between !important;
   }
-
+  .space-evenly{
+    justify-content: space-evenly !important;
+  }
   .space-between-vertical{
     flex-direction: column;
     justify-content: space-between;
+  }
+  .align-items-center{
+    align-items: center;
   }
 
 // Float
@@ -79,18 +91,16 @@
     float: right;
   }
 
-// Focus
+// Focus & input
   input:focus, button:focus, select:focus, textarea:focus {
-    border-color: #4ECCA3 !important;
+    border-color: $blue !important;
     outline: 0 !important;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(78, 204, 163, 1) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $blue !important;
   }
 
-input, button, select, textarea {
-    font-size: 14px;
-}
-
-
+  input, button, select, textarea {
+      font-size: 18px;
+  }
 
 // Grid
   .grid{
@@ -126,11 +136,20 @@ input, button, select, textarea {
   .margin-auto{
     margin: auto;
   }
+  .margin-left-auto{
+    margin-left: auto;
+  }
   .no-margin{
     margin: 0 !important;
   }
+  .margin-top-120{
+    margin-top: 120px !important
+  }
   .margin-top-60{
     margin-top: 60px !important
+  }
+  .margin-bottom-60{
+    margin-bottom: 60px !important
   }
   .margin-bottom-30{
     margin-bottom: 30px !important
@@ -194,6 +213,15 @@ input, button, select, textarea {
   }
 
 // Padding
+  .padding-100{
+    padding: 100px;
+  }
+  .padding-horizontal-100{
+    padding: 0 100px;
+  }
+  .padding-horizontal-15{
+    padding: 0 15px;
+  }
   .no-padding{
     padding: unset !important;
   }
@@ -214,14 +242,15 @@ input, button, select, textarea {
     position: fixed;
   }
 
-// Text
-  .bold{
-    font-weight: bold !important;
+// Scroll
+  .scroll{
+    overflow-y: auto;
   }
+
+// Text
   .capitalize{
     text-transform: capitalize;
   }
-
   .uppercase{
     text-transform: uppercase;
   }
@@ -231,14 +260,26 @@ input, button, select, textarea {
     place-items: center center;
   }
 
+  .bold{
+    font-weight: bold;
+  }
+  .thin{
+    font-weight: 100;
+  }
+
+  .font-12{
+    font-size: 12px;
+  }
+  .font-14{
+    font-size: 14px;
+  }
+
   .text-align-right{
     text-align: right;
   }
-
   .text-align-center{
     text-align: center;
   }
-
   .text-align-justify{
     text-align: justify;
   }
@@ -263,12 +304,28 @@ input, button, select, textarea {
     align-self: center;
   }
 
+// Width
+  .min-width-25{
+    min-width: 25%;
+  }
+  .min-width-50{
+    min-width: 50%;
+  }
+  .min-width-75{
+    min-width: 75%;
+  }
+  .min-width-100{
+    min-width: 100%;
+  }
+  .width-fit-content{
+    width: fit-content;
+  }
+  .w-33{
+    width: 33.3333%;
+  }
 
 
 
-.col-lg-3{
-  width: 25% !important;
-}
 @media screen and (max-width: 770px) {
   .col-xs-12{
     width: 100% !important;

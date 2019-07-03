@@ -57,7 +57,7 @@
     </div>
 
 
-    <div class="row margin-top-background">
+    <div class="row margin-top-60">
       <div class="col-xs-12 col-lg-6">
         <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
         <h2 class="titre-section">Mes <strong>atouts</strong></h2>
@@ -95,7 +95,7 @@
       </div>
     </div>
 
-    <div class="margin-top-background">
+    <div class="margin-top-60">
       <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
       <h2 class="titre-section">Es-tu <strong>plutôt :</strong></h2>
       <div class="row">
@@ -122,36 +122,45 @@
       </div>
     </div>
 
-    <div class="margin-top-background">
+    <div class="margin-top-60">
       <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
       <h2 class="titre-section">Je me décris en <strong>quelques lignes</strong></h2>
       <div class="row">
+
+
         <div class="col-xs-12 col-lg-6">
-          <p class="label-edit no-margin requis bold" style="font-size: 15px;">Que recherches-tu ?</p>
-          <div class="margin-right-15 no-margin-xs">
-            <%= u.input :dream, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%" } %>
-          </div>
+          <p class="label-edit no-margin requis">Que recherches-tu ?</p>
+          <%= u.input :looking_for, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%", class: "margin-right-15 no-margin-xs" } %>
         </div>
+
         <div class="col-xs-12 col-lg-6 margin-top-15-xs">
           <p class="label-edit no-margin requis">Y a-t-il une personnalité qui t’inspire ? Pourquoi ?</p>
-          <%= u.input :famous_person, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%"} %>
+          <%= u.input :famous_person, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%", class: "margin-right-15 no-margin-xs" } %>
         </div>
-      </div>
-      <div class="row margin-top-15">
-        <div class="col-xs-12 col-lg-6">
+
+        <div class="col-xs-12 col-lg-6 margin-top-15">
           <p class="label-edit no-margin requis">Selon toi, qu’est-ce qu’un bon manager ?</p>
-          <div class="margin-right-15 no-margin-xs">
-            <%= u.input :good_manager, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%" } %>
-          </div>
+          <%= u.input :good_manager, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%", class: "margin-right-15 no-margin-xs"  } %>
         </div>
-        <div class="col-xs-12 col-lg-6 margin-top-15-xs">
+
+        <div class="col-xs-12 col-lg-6 margin-top-15">
           <p class="label-edit no-margin requis">Quel travail serais-tu prêt à effectuer gratuitement ?</p>
-          <%= u.input :work_for_free, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%"} %>
+          <%= u.input :work_for_free, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%", class: "margin-right-15 no-margin-xs" } %>
         </div>
-        <div class="col-xs-12 col-lg-6 margin-top-15-xs">
-          <p class="label-edit no-margin requis">Que recherches tu ?</p>
-          <%= u.input :looking_for, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%"} %>
+
+        <div class="col-xs-12 col-lg-6 margin-top-15">
+          <p class="label-edit no-margin">Quelle est ta plus grande fierté ?</p>
+          <%= u.input :proud, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%", class: "margin-right-15 no-margin-xs" } %>
         </div>
+
+        <div class="col-xs-12 col-lg-6 margin-top-15">
+          <p class="label-edit no-margin">Quelles sont tes entreprises préférées ? <i class="fas fa-info-circle gray font-12 tooltip">
+            <span class="tooltiptext" style='font-family: "Avenir", "Open Sans", "Helvetica", "sans-serif"; font-weight: 400;'>Seul notre équipe verra cette réponse</span>
+          </i></p>
+          <%= u.input :favourite_businesses, label: false, placeholder: "Description", as: :text, input_html: {rows: '4', style: "width: 100%", class: "margin-right-15 no-margin-xs" } %>
+        </div>
+
+
       </div>
     </div>
 

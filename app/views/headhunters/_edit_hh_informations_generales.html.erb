@@ -41,10 +41,10 @@
 
 <!-- Titre section -->
 <% if current_user.is_a? (Headhunter) %>
-  <div class="titre-section-icon margin-top-background">
+  <div class="titre-section-icon margin-top-60">
     <i class="titre-section-icon-illu fas fa-angle-double-right"></i>
   </div>
-  <h2 class="titre-section margin-top-background">Vos <strong>informations</strong></h2>
+  <h2 class="titre-section margin-top-60">Vos <strong>informations</strong></h2>
 
   <%= render "/shared/change_photo", f: f %>
 
@@ -74,8 +74,8 @@
 
 <!-- Titre section -->
   <% if @other_headhunters.length > 0 %>
-    <div class="titre-section-icon margin-top-background"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
-    <h2 class="titre-section margin-top-background">Vos <strong>collaborateurs</strong></h2>
+    <div class="titre-section-icon margin-top-b60"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+    <h2 class="titre-section margin-top-b60">Vos <strong>collaborateurs</strong></h2>
 
     <div class="row">
       <% @other_headhunters.each do |headhunter| %>
@@ -102,8 +102,8 @@
   <% end %>
 
 <!-- Titre section -->
-  <div class="titre-section-icon margin-top-background"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
-  <h2 class="titre-section margin-top-background">Nous <strong>suivre</strong></h2>
+  <div class="titre-section-icon margin-top-60"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section margin-top-60">Nous <strong>suivre</strong></h2>
 
   <div class="row margin-top-15">
     <div class="col-lg-6 col-xs-12 no-padding">

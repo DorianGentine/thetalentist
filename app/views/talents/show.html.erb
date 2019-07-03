@@ -109,7 +109,7 @@
     <!-- Mes compétences linguistiques -->
       <% if @talent.talent_languages.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
-        <div class="blue-background margin-top-background">
+        <div class="blue-background margin-top-60">
           <div class="grid" style="grid: auto / auto auto;">
             <p class="titre-rubrique-3 margin-bottom-30" style="grid-column: 1 / span 2;">Mes compétences linguistiques :</p>
 
@@ -135,7 +135,7 @@
     <!-- Mes compétences techniques -->
       <% if @talent.technos.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
-        <div class="blue-background margin-top-background">
+        <div class="blue-background margin-top-60">
           <p class="titre-rubrique-3 margin-bottom-30">Mes compétences techniques :</p>
           <% if @talent.technos.present? %>
             <div class="talent-competences">
@@ -152,7 +152,7 @@
     <!-- Me suivre sur -->
       <% if @talent.linkedin.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
-        <div class="blue-background margin-top-background">
+        <div class="blue-background margin-top-60">
           <p class="titre-rubrique-3 margin-bottom-30">Me suivre sur :</p>
 
           <% if @talent.linkedin.present? %>
@@ -289,18 +289,37 @@
 
           <!-- Rêve remis à demain -->
             <div class="col-lg-3 col-xs-12">
-              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" style="min-height: 44px">Ce que je recherche</h4>
-              <% if @next_aventures.present? %>
-                <% if @next_aventures.dream.present?  %>
-                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.dream %></p>
-                <% elsif !@next_aventures.dream.present? && current_user.is_a?(Headhunter) %>
-                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" style="min-height: 44px">
+                <% if @next_aventures.present? %>
+                  <% if @next_aventures.looking_for.present? %>
+                    Ce que je recherche
+                  <% elsif @next_aventures.dream.present?  %>
+                    Le métier de mes rêves
+                  <% else %>
+                    Ce que je recherche
+                  <% end %>
                 <% else %>
-                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                  Ce que je recherche
                 <% end %>
-              <% else %>
-                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
-              <% end %>
+              </h4>
+
+              <p class="margin-right-15 no-margin-xs texte-rubrique-3 more">
+                <% if @next_aventures.present? %>
+                  <% if @next_aventures.looking_for.present? %>
+                    <%= @next_aventures.looking_for %>
+                  <% elsif @next_aventures.dream.present?  %>
+                    <%= @next_aventures.dream %>
+                  <% elsif current_user.is_a?(Headhunter) %>
+                    <%= @talent.firstname %> n'a pas souhaité répondre à cette question.
+                  <% else %>
+                    <i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i>
+                  <% end %>
+                <% elsif current_user.is_a?(Headhunter) %>
+                  <%= @talent.firstname %> n'a pas souhaité répondre à cette question.
+                <% else %>
+                  <i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i>
+                <% end %>
+              </p>
             </div>
 
           <!-- La personnalité qui m'inspire -->
@@ -444,7 +463,7 @@
     <!-- SECTION Formations -->
       <% if @talent_formations.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
-        <div class="blue-background margin-top-background">
+        <div class="blue-background margin-top-60">
 
           <!-- Titre section -->
             <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-graduation-cap"></i></div>
@@ -474,7 +493,7 @@
     <!-- SECTION Expériences -->
       <% if @experiences.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
-        <div class="blue-background margin-top-background">
+        <div class="blue-background margin-top-60">
 
           <!-- Titre section -->
             <div class="titre-section-icon"><i class="titre-section-icon-illu far fa-file-alt"></i></div>
