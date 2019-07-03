@@ -12,7 +12,7 @@
         </div>
         <div class="col-lg-6 col-xs-12 margin-top-15-xs">
           <p class="label-edit no-margin">Intitulé du poste</p>
-          <%= f.input :position, label: false, placeholder:"Intitulé du poste", :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:position][0]  %>
+          <%= f.input :position, label: false, placeholder:"Intitulé du poste", :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:position][0], :input_html => { class: "limited-character" }, maxlength: 20  %>
         </div>
       </div>
 
