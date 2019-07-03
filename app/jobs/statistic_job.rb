@@ -8,7 +8,7 @@ class StatisticJob < ApplicationJob
     talent.save
     p "RESULTAT DE TEST: #{test_st}"
 
-    p "#{talent.cv}"
+
     puts "OK I'm done now"
     # Do something later
   end

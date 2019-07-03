@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_27_165422) do
+ActiveRecord::Schema.define(version: 2019_07_03_122116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,13 @@ ActiveRecord::Schema.define(version: 2019_06_27_165422) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "localisations", force: :cascade do |t|
+    t.string "zip_code"
+    t.string "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|
     t.string "unsubscriber_type"
     t.integer "unsubscriber_id"
@@ -259,6 +266,8 @@ ActiveRecord::Schema.define(version: 2019_06_27_165422) do
     t.integer "hunter_or_breeder"
     t.integer "creative_or_pragmatic"
     t.text "looking_for"
+    t.text "proud"
+    t.text "favourite_businesses"
     t.index ["talent_id"], name: "index_next_aventures_on_talent_id"
   end
 
@@ -508,7 +517,7 @@ ActiveRecord::Schema.define(version: 2019_06_27_165422) do
     t.text "overview"
     t.string "phone"
     t.string "linkedin"
-    t.string "cv"
+    t.string "zip_code"
     t.boolean "btob"
     t.boolean "btoc"
     t.boolean "validated"

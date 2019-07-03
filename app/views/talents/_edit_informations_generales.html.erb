@@ -23,7 +23,8 @@
       </div>
       <div class="col-lg-4 no-padding margin-top-15-xs">
         <p class="label-edit requis">Ville actuelle</p>
-        <%= f.input :city, label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:city][0] %>
+        <%= f.input :zip_code, placeholder: '75002', :input_html => { :id => "", style: "width: 100%" }, type:"number", label: false, error: f.object.errors.messages[:zip_code][0] %>
+        <%#= f.input :city, label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:city][0] %>
       </div>
     </div>
 
