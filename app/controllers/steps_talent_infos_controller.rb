@@ -148,11 +148,6 @@ class StepsTalentInfosController < ApplicationController
     end
   end
 
-  # def compile_cities_of_next_aventure
-  #   cities = params.require(:talent).permit(next_aventures_attributes:[ city: []])[:next_aventures_attributes][:"0"][:city]
-  #   city = cities.join(', ')
-  #   return city
-  # end
 
   def talent_params
      params.require(:talent).permit(
@@ -160,7 +155,7 @@ class StepsTalentInfosController < ApplicationController
       :firstname,
       :phone,
       :linkedin,
-      :city,
+      :zip_code,
       :btoc,
       :btob,
       :terms_of_condition,
