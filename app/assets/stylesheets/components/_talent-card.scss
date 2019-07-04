@@ -99,18 +99,23 @@
     right: 4px;
     display: flex;
     height: 26px;
-    a{
-      width: 50%;
+    a, i{
+      // width: 50%;
+      flex-grow: 1;
       text-align: center;
       border-top: 1px solid $violet;
       font-size: 14px;
       padding: 5px 0;
+      color: $black;
       transition: 0.15s;
     }
-    a:first-child{
+    a, i{
       border-right: 1px solid $violet;
     }
-    a:hover{
+    a:last-child, i:last-child{
+      border-right: none;
+    }
+    a:hover, i:hover{
       color: $green;
     }
   }
