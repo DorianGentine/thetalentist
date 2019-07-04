@@ -1,6 +1,11 @@
 function revealModal() {
   let triggerModal = (event) => {
-    let targetModalID = event.currentTarget.dataset.target
+    let targetModalID
+    if(typeof event === "string"){
+      targetModalID = `modal_${event}` // select modal from url
+    }else{
+      targetModalID = event.currentTarget.dataset.target
+    }
     let targetModal = document.getElementById(targetModalID)
 
     targetModal.style.display = "block";
@@ -34,6 +39,13 @@ function revealModal() {
       }
     })
     formations.forEach((formation) => {formation.style.height = maxHeight + "px"})
+  }
+
+
+  const url = new URL(window.location.href);
+  const modal_id = url.searchParams.get("talent");
+  if(modal_id){
+    triggerModal(modal_id)
   }
 
   let modalButtonsList = document.querySelectorAll('.modal-button')
