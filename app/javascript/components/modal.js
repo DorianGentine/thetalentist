@@ -24,7 +24,7 @@ function revealModal() {
     }
 
     window.onkeydown = function(event){
-      if (event.keyCode == 27 && targetModal.style.display == "block") {
+      if (event.key === "Escape" && targetModal.style.display == "block") {
         targetModal.style.display = "none";
       }
     };
