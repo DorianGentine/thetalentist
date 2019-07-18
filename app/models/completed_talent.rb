@@ -103,7 +103,6 @@ class CompletedTalent
       result = all_parts / 4.0
       return result.round(1)
     else
-    raise
       return 0
     end
   end
