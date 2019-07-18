@@ -88,7 +88,7 @@
               <p class="apercu-message"><%= conversation.last_message.body %></p>
             <% else %>
               <% if current_user.is_a?(Talentist) %>
-                <p class="prenom-contact"><%= parti[0].firstname %> <%= parti[0].name %> - <%= parti[0].is_a_model %></p>
+                <p class="prenom-contact"><%= parti[0].firstname %> <%= parti[0].last_name %> - <%= parti[0].is_a_model %></p>
               <% else %>
                 <p class="prenom-contact"><%= parti[0].firstname %></p>
               <% end %>

@@ -7,13 +7,14 @@ ActiveAdmin.register Startup do
   scope :with_no_headhunter
 
   permit_params :name, :overview, :year_of_creation, :collaborators, :parity, :average_age, :turnover, :link, :address, :logo, :btoc, :btob, :linkedin, :mission, :short_resume
+
   index do
     selectable_column
     column :id
     column :name
     column 'Recruteur', sortable: :headhunter_ids do |startup|
       startup.headhunter_ids.each do |headhunter_id|
-        Headhunter.find(headhunter_id).name
+        Headhunter.find(headhunter_id).last_name
       end
     end
     column :created_at

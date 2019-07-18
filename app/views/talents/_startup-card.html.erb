@@ -6,7 +6,7 @@
       <div class="border relative">
 
         <div class="talent-job" style="height: 80px;">
-          <h2><%= headhunter.firstname.present? ? headhunter.firstname : "Pas infos" %> <%= headhunter.name.present? ? headhunter.name : 'Pas infos' %></h2>
+          <h2><%= headhunter.firstname.present? ? headhunter.firstname : "Pas infos" %> <%= headhunter.last_name.present? ? headhunter.last_name : 'Pas infos' %></h2>
         </div>
 
         <p class="margin-top-15">de <%= !headhunter.startup.nil? && headhunter.startup.name.present? ? headhunter.startup.name : "Inconnu" %></p>

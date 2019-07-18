@@ -35,9 +35,11 @@ class ConversationsController < ApplicationController
       conversations = @user.mailbox.conversations
       conversations.each do |conversation|
         participant = (conversation.participants - [@user]).first
-        if pending_ids.include?(participant.id)
+        if pending_ids.include?(participant.id) && participant.is_a?(Talent)
+          raise if participant.id != 2
           @pending_conversations << conversation
         end
+      raise if @pending_conversations.count > 1
       end
     end
 

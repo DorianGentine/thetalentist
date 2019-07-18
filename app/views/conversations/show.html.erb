@@ -24,7 +24,7 @@
       <div class="col-lg-12 col-xs-10">
         <% if @participant.is_a?(Talent) %>
           <% if !@relationship.nil? && @relationship.status == "Accepter" %>
-            <h2 class="no-margin"><%= @participant.firstname.capitalize %> <%= @participant.name.capitalize %></h2>
+            <h2 class="no-margin"><%= @participant.firstname.capitalize %> <%= @participant.last_name.capitalize %></h2>
             <p class="no-margin"><%= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_" %></p>
           <% else %>
             <% if @participant.experiences.present? && @participant.experiences.first.position.present? %>
@@ -137,7 +137,7 @@
         <% end %>
         <% if @participant.is_a?(Talent) && !@participant.visible && !current_talentist %>
           <div class="accept-relation center-text">
-            <p>Vous ne pouvez pas écrire de message sur cette conversation, car <%= @participant.firstname %> <%= @participant.name %>n'a plus son profil actif</p>
+            <p>Vous ne pouvez pas écrire de message sur cette conversation, car <%= @participant.firstname %> <%= @participant.last_name %>n'a plus son profil actif</p>
           </div>
         <% end %>
     </div>

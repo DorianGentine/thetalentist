@@ -5,7 +5,7 @@ ActiveAdmin.register Headhunter do
     column :id
     column :email
     column :firstname
-    column :name
+    column :last_name
     column :startup
     column :created_at
     actions

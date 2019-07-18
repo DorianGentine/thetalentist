@@ -9,7 +9,7 @@ class UserInfoPdf < Prawn::Document
 
   def user_title
     text "----- The Talentist -----", size: 20, style: :bold, :align => :center
-    text "Informations enregistrées de #{@user.firstname} #{@user.name}", size: 15, style: :bold, :align => :center
+    text "Informations enregistrées de #{@user.firstname} #{@user.last_name}", size: 15, style: :bold, :align => :center
   end
   def info_general(array)
     move_down 20
@@ -34,7 +34,7 @@ class UserInfoPdf < Prawn::Document
 
   def line_profil_rows
     [["Talent"]] +
-    [["Nom:", present?(@user.name)]] +
+    [["Nom:", present?(@user.last_name)]] +
     [["Prenom:", present?(@user.firstname)]] +
     [["Email:", present?(@user.email)]] +
     [["Password:", "confidentiel"]] +

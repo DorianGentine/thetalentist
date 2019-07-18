@@ -17,7 +17,7 @@ class CompletedHeadhunter
     value_input = stat(headhunters_count + 6)
     @headhunter.startup.headhunters.each do |headhunter|
       headhunter.firstname.present? ? count += value_input : count
-      headhunter.name.present? ? count += value_input : count
+      headhunter.last_name.present? ? count += value_input : count
       headhunter.job.present? ? count += value_input : count
       headhunter.photo? ? count += value_input : count
     end

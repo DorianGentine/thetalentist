@@ -44,8 +44,8 @@ class Talents::RegistrationsController < Devise::RegistrationsController
   def talent_params
     params.require(:talent).permit(
       :firstname,
-      :name,
-      :zip_code,
+      :last_name,
+      :city,
       :phone,
       :email,
       :password,

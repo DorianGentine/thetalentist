@@ -2,7 +2,7 @@ ActiveAdmin.register Talentist do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :email, :firstname, :admin, :photo, :name
+permit_params :email, :firstname, :admin, :photo, :last_name
 #
 # or
 #
@@ -11,7 +11,7 @@ permit_params :email, :firstname, :admin, :photo, :name
     column :id
     column :email
     column :firstname
-    column :name
+    column :last_name
     column :admin
     column :created_at
     actions
@@ -20,10 +20,9 @@ permit_params :email, :firstname, :admin, :photo, :name
 
   form(:html => { :multipart => true }) do |f|
     f.inputs "Identity" do
-      f.input :name
       f.input :email
+      f.input :last_name
       f.input :firstname
-      f.input :name
       f.input :photo, :as => :file
     end
     f.inputs "Admin" do

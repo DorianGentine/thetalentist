@@ -1,5 +1,5 @@
 ActiveAdmin.register Talent do
-  permit_params :name,
+  permit_params :last_name,
                 :firstname,
                 :linkedin
 
@@ -8,7 +8,7 @@ ActiveAdmin.register Talent do
     selectable_column
     column :email
     column :firstname
-    column :name
+    column :last_name
     column :linkedin
     # column( "1er Metier", nil, sortable: :"jobs.title") {|talent| talent.jobs.first.title }
     column :created_at
@@ -17,7 +17,7 @@ ActiveAdmin.register Talent do
 
 
   form do |f|
-    f.inputs :name
+    f.inputs :last_name
     f.inputs :firstname
     f.inputs :linkedin
     f.actions

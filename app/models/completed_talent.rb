@@ -10,7 +10,7 @@ class CompletedTalent
     count = 0
     value_input = stat(8)
     @talent.firstname.present? ? count += value_input : count
-    @talent.name.present? ? count += value_input : count
+    @talent.last_name.present? ? count += value_input : count
     @talent.photo? || @talent.display_linkedin? ? count += value_input : count
     @talent.phone.present? ? count += value_input : count
     @talent.city.present? ? count += value_input : count
@@ -103,7 +103,6 @@ class CompletedTalent
       result = all_parts / 4.0
       return result.round(1)
     else
-    raise
       return 0
     end
   end

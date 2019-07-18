@@ -17,7 +17,7 @@ class Talentist < ApplicationRecord
   mount_uploader :photo, PhotoUploader
 
   def capitalize_name_firstname
-    self.name = self.name.capitalize if self.name && !self.name.blank?
+    self.last_name = self.last_name.capitalize if self.last_name && !self.last_name.blank?
     self.firstname = self.firstname.capitalize if self.firstname && !self.firstname.blank?
   end
 

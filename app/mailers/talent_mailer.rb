@@ -20,7 +20,7 @@ class TalentMailer < ApplicationMailer
   def pdf_of_user_information(user_id)
     @user = Talent.find(user_id)
     pdf = UserInfoPdf.new(@user)
-    attachments["#{@user.firstname}_#{@user.name}.pdf"] = { :mime_type => 'application/pdf', :content => pdf.render }
+    attachments["#{@user.firstname}_#{@user.last_name}.pdf"] = { :mime_type => 'application/pdf', :content => pdf.render }
     mail(
       to: @user.email,
       cc: Talentist.all.collect(&:email).join(", "),
