@@ -17,7 +17,7 @@ class Talent < ApplicationRecord
   validates_presence_of :linkedin, :message => "Ton linkedin doit être rempli", unless: :skip_linkedin_validation
   validates_presence_of :email, :message => "Ton email doit être rempli"
   validates_presence_of :firstname, :message => "Ton prénom doit être rempli"
-  validates_presence_of :name, :message => "Ton nom doit être rempli"
+  validates_presence_of :last_name, :message => "Ton nom doit être rempli"
 
   attr_accessor :skip_city_validation, :skip_phone_validation, :skip_linkedin_validation
 
@@ -171,14 +171,14 @@ class Talent < ApplicationRecord
   end
 
   def capitalize_name_firstname
-    self.name = self.name.capitalize if self.name && !self.name.blank?
+    self.last_name = self.last_name.capitalize if self.last_name && !self.last_name.blank?
     self.firstname = self.firstname.capitalize if self.firstname && !self.firstname.blank?
   end
 
   def self.find_for_linkedin_oauth(auth)
     talent_params = auth.slice(:provider, :uid)
     talent_params[:firstname] =  auth.info.first_name
-    talent_params[:name] =  auth.info.last_name
+    talent_params[:last_name] =  auth.info.last_name
     talent_params.merge! auth.info.slice(:email)
     talent_params[:linkedin_picture_url] = auth.info.picture_url
     talent_params[:token] = auth.credentials.token
@@ -200,8 +200,7 @@ class Talent < ApplicationRecord
     end
     return talent
   end
-# http://localhost:3000/auth/linkedin/callback
-# http://localhost:3000/talents/auth/linkedin
+
   def send_new_user_to_talentist
     ApplicationMailer.new_user("talent", self.id).deliver_later
   end

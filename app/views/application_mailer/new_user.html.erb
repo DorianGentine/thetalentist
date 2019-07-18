@@ -21,9 +21,9 @@
           </tr>
           <tr>
             <% if @user.is_a?(Talent) || @user.is_a?(Headhunter) %>
-              <%= @user.firstname %> <%= @user.name %> <%= @user.email %>
+              <%= @user.firstname %> <%= @user.last_name %> <%= @user.email %>
             <% else %>
-              <%= @user.name %>
+              <%= @user.last_name %>
             <% end %>
           </tr>
 <!-- Espace fin de la ligne -->

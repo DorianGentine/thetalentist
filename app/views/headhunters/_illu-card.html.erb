@@ -10,7 +10,7 @@
   <% else %>
     <div class="illu-card-talentist">
       <div class="initiale">
-        <%= talent.firstname.split(//).first.upcase %><%= talent.name.split(//).first.upcase %>
+        <%= talent.firstname.split(//).first.upcase %><%= talent.last_name.split(//).first.upcase %>
       </div>
       <div class="statut <%= talent.visible ? 'green-background' : 'red-background' %>" style="width: 20px; height: 20px; border: 2px solid;"></div>
     </div>

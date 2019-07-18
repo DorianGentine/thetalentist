@@ -40,7 +40,7 @@
 
             <div class="photo-profil margin-auto">
               <div class="initiale">
-                <%= @talent.firstname.split(//).first.upcase %><%= @talent.name.split(//).first.upcase %>
+                <%= @talent.firstname.split(//).first.upcase %><%= @talent.last_name.split(//).first.upcase %>
               </div>
               <div class="statut tooltip <%= @talent.visible ? 'green-background' : 'red-background' %>">
                 <span class="tooltiptext"><%= @talent.visible ? 'Profil visible' : "Profil pas visible" %></span>
@@ -49,7 +49,7 @@
           <% end %>
 
         <!-- Nom talent -->
-          <h1 class="titre-profil"><%= @talent.firstname %> <%= @talent.name %></h1>
+          <h1 class="titre-profil"><%= @talent.firstname %> <%= @talent.last_name %></h1>
 
         <!-- Poste -->
             <% if @experiences.count > 0 && @experiences.first.position.present? %>

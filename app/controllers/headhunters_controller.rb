@@ -180,7 +180,7 @@ class HeadhuntersController < ApplicationController
 
   def headhunter_params
     params.require(:headhunter).permit(
-      :photo, :remove_photo, :name, :firstname, :job,
+      :photo, :remove_photo, :last_name, :firstname, :job,
       startup_attributes: [ :id, :name, :link, :logo, :remove_logo, :address, :mission,
       :sector_ids, :btob, :btoc, :validated, :short_resume, :linkedin, :facebook,
       :average_age, :collaborators, :year_of_creation, :overview,

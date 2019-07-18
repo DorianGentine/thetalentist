@@ -19,8 +19,8 @@
       </div>
       <% if headhunter_signed_in? && current_headhunter %>
         <li>
-          <% if current_headhunter.firstname.present? && current_headhunter.name.present? %>
-            <p><%= current_headhunter.firstname.capitalize %> <%= current_headhunter.name.capitalize %> :</p>
+          <% if current_headhunter.firstname.present? && current_headhunter.last_name.present? %>
+            <p><%= current_headhunter.firstname.capitalize %> <%= current_headhunter.last_name.capitalize %> :</p>
           <% end %>
         </li>
         <li>
@@ -45,8 +45,8 @@
 
       <% elsif talent_signed_in? && current_talent %>
         <li>
-          <% if current_talent.firstname.present? && current_talent.name.present? %>
-            <p><%= current_talent.firstname.capitalize %> <%= current_talent.name.capitalize %> :</p>
+          <% if current_talent.firstname.present? && current_talent.last_name.present? %>
+            <p><%= current_talent.firstname.capitalize %> <%= current_talent.last_name.capitalize %> :</p>
           <% end %>
         </li>
         <% if current_talent.validated %>
@@ -82,8 +82,8 @@
 
       <% elsif talentist_signed_in? && current_talentist %>
         <li>
-          <% if current_talentist.firstname.present? && current_talentist.name.present? %>
-            <p><%= current_talentist.firstname.capitalize %> <%= current_talentist.name.capitalize %> :</p>
+          <% if current_talentist.firstname.present? && current_talentist.last_name.present? %>
+            <p><%= current_talentist.firstname.capitalize %> <%= current_talentist.last_name.capitalize %> :</p>
           <% end %>
         </li>
         <% if current_talentist.admin %>

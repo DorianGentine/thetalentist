@@ -12,7 +12,7 @@
 
       <div class="modal-header">
 
-        <h3><%= headhunter.firstname.present? ? headhunter.firstname.capitalize : "" %> <%= headhunter.name.present? ? headhunter.name.capitalize : '' %></h3>
+        <h3><%= headhunter.firstname.present? ? headhunter.firstname.capitalize : "" %> <%= headhunter.last_name.present? ? headhunter.last_name.capitalize : '' %></h3>
 
         <span class="close" id="close_modal_headhunter_<%= headhunter.id %>" >
           <p style="font-size: unset; background: none; padding: unset; margin: 0;">&times;</p>
@@ -29,7 +29,7 @@
           <% else %>
             <div class="photo-profil">
               <div class="initiale">
-                <%= headhunter.firstname.present? ? headhunter.firstname.split(//).first.upcase : "" %><%= headhunter.name.present? ? headhunter.name.split(//).first.upcase : "" %>
+                <%= headhunter.firstname.present? ? headhunter.firstname.split(//).first.upcase : "" %><%= headhunter.last_name.present? ? headhunter.last_name.split(//).first.upcase : "" %>
               </div>
             </div>
           <% end %>

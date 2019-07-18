@@ -92,12 +92,12 @@
 
               <div class="photo-profil profil-collaborateur">
                 <div class="initiale">
-                  <%= headhunter.firstname.split(//).first.upcase %><%= headhunter.name.split(//).first.upcase %>
+                  <%= headhunter.firstname.split(//).first.upcase %><%= headhunter.last_name.split(//).first.upcase %>
                 </div>
               </div>
             <% end %>
             <div>
-              <p class="texte-rubrique-3b no-margin"><%= headhunter.firstname %> <%= headhunter.name %></p>
+              <p class="texte-rubrique-3b no-margin"><%= headhunter.firstname %> <%= headhunter.last_name %></p>
               <p class="titre-rubrique-1 no-margin"><%= headhunter.job %></p>
             </div>
           <% end %>

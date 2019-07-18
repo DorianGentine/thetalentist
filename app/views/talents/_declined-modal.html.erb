@@ -14,7 +14,7 @@
     <%= simple_form_for talent, url: validation_talent_path(talent)  do |f| %>
       <div style="padding: 30px">
 
-        <h4><%= f.object.firstname %> <%= f.object.name %></h4>
+        <h4><%= f.object.firstname %> <%= f.object.last_name %></h4>
 
         <div class="row">
           <%= f.text_area :declined, placeholder: "En effet, malgré .... et ..., le ... est un critère extrêmement important pour nous.", label: false, :rows => 6, style: "width: 100%;" %>

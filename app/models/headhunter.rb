@@ -20,7 +20,7 @@ class Headhunter < ApplicationRecord
   acts_as_messageable
   before_destroy { self.mailbox.conversations.destroy_all }
 
-  validates :name, :firstname, :job, :email, :terms_of_condition, :startup, presence: true
+  validates :last_name, :firstname, :job, :email, :terms_of_condition, :startup, presence: true
 
   after_create :send_new_user_to_talentist
   before_save :capitalize_name_firstname
@@ -39,7 +39,7 @@ class Headhunter < ApplicationRecord
   end
 
   def capitalize_name_firstname
-    self.name = self.name.capitalize if self.name && !self.name.blank?
+    self.last_name = self.last_name.capitalize if self.last_name && !self.last_name.blank?
     self.firstname = self.firstname.capitalize if self.firstname && !self.firstname.blank?
   end
 

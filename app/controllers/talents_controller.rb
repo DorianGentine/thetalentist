@@ -179,7 +179,7 @@ private
 
   def talent_params
     params.require(:talent).permit(
-      :name,
+      :last_name,
       :firstname,
       :phone,
       :linkedin,
