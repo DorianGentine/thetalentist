@@ -20,10 +20,10 @@ class HeadhuntersController < ApplicationController
     @jobs = Job.all
 
     if @headhunter.present?
-      talents_visible = Talent.where(:visible => true).order(completing: :desc, last_sign_in_at: :desc)
+      talents_visible = Talent.where(:visible => true).reorder(completing: :desc, last_sign_in_at: :desc)
       # talents_visible = Talent.where(:visible => true).order(last_sign_in_at: :desc).all_with_startup(@headhunter.startup.name)
     else
-      talents_visible = Talent.where(:visible => true).order(completing: :desc, last_sign_in_at: :desc)
+      talents_visible = Talent.where(:visible => true).reorder(completing: :desc, last_sign_in_at: :desc)
     end
 
     if params[:jobs].blank? || params[:jobs] == "Tous"
