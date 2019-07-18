@@ -53,13 +53,13 @@ class HeadhuntersController < ApplicationController
 
 
     if params[:tag] == "Valider"
-      @headhunters = headhunters.where(:validated => true).order(completing: :desc, last_sign_in_at: :desc)
+      @headhunters = headhunters.where(:validated => true)
     elsif params[:tag] == "Refuser"
-      @headhunters = headhunters.where(:validated => false).order(completing: :desc, last_sign_in_at: :desc)
+      @headhunters = headhunters.where(:validated => false)
     elsif params[:tag] == "En attende"
-      @headhunters = headhunters.where(:validated => nil).order(completing: :desc, last_sign_in_at: :desc)
+      @headhunters = headhunters.where(:validated => nil)
     else
-      @headhunters = headhunters.order(completing: :desc, last_sign_in_at: :desc)
+      @headhunters = headhunters
     end
 
     respond_to do |format|

@@ -33,7 +33,7 @@ class TalentsController < ApplicationController
     elsif params[:tag] == "Invisible"
       @talents = talents.where(:visible => false)
     else
-      @talents = talents
+      @talents = talents.order(completing: :desc, last_sign_in_at: :desc)
     end
   end
 
