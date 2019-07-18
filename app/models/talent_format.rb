@@ -62,6 +62,7 @@ class TalentFormat
 
       talent_injected = {
         id: talent.id,
+        completing: talent.completing,
         position: talent.experiences.first.present? ? talent.experiences.first.position : nil,
         year_experience_job: talent.talent_job.present? ? talent.talent_job.year : "0",
         city: talent.city,
