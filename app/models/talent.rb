@@ -25,7 +25,7 @@ class Talent < ApplicationRecord
   geocoded_by :city
   after_validation :geocode
 
-  after_create :send_welcome_email, :send_new_user_to_talentist
+  after_create :send_welcome_email, :send_new_user_to_talentist, :fill_last_sign_at
   before_save :capitalize_name_firstname, :save_completed_profil
 
   has_many :talent_sectors, dependent: :destroy
@@ -168,6 +168,11 @@ class Talent < ApplicationRecord
       end
     end
     unreads.count
+  end
+
+  def fill_last_sign_at
+    self.last_sign_in_at = self.created_at
+    self.save
   end
 
   def capitalize_name_firstname
