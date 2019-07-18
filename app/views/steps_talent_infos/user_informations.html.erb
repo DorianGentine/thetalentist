@@ -37,10 +37,10 @@
 
         <div class="row margin-top-15">
           <label class="col-lg-2 label-edit text-align-right line-height-center requis no-padding-xs" for="talent_firstname">Tél.</label>
-          <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: false, :input_html => { :class => "col-lg-3 col-xs-12 margin-right-15 no-margin-xs margin-bottom-15-xs", value:"#{ f.object.phone == "To fill it" ? '' : f.object.phone }"} %>
+          <%= f.input :phone, required: true, autofocus: true, placeholder: "06 01 02 03 05", label: false, :input_html => { :class => "col-lg-3 col-xs-12 margin-right-15 no-margin-xs margin-bottom-15-xs", value:"#{ f.object.phone == "To fill it" ? '' : f.object.phone }"}, wrapper: false %>
           <label class="label-edit text-align-right text-align-left-xs line-height-center col-lg-3 col-xs-2 no-padding margin-right-15 requis" for="talent_city">Ville</label>
-          <%= f.input :zip_code, placeholder: '75002', :input_html => { :id => "", :class => "col-lg-3 col-xs-12" }, type:"number", label: false %>
-          <%#= f.input :city, placeholder: 'Nantes, France', :input_html => { :id => "talent_city", :class => "col-lg-3 col-xs-12" }, label: false %>
+          <%#= f.input :zip_code, placeholder: '75002', :input_html => { :id => "", :class => "col-lg-3 col-xs-12" }, type:"number", label: false %>
+          <%= f.input :city, placeholder: 'Paris, France', :input_html => { :id => "talent_city", :class => "col-lg-3 col-xs-12" }, label: false, wrapper: false %>
         </div>
       </div>
 
