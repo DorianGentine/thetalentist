@@ -14,6 +14,13 @@ const initSelect2 = () => {
     minimumResultsForSearch: -1,
     placeholder: "principal"
   });
+  $(".premier-domaine").on("change", function (e) {
+    console.log("change", e.target.value);
+    const selectedAnswer = e.target.value;
+    const secondDomaine = $(".second-domaine")[0]
+    console.log(secondDomaine.getElementByTagName('option'))
+    $(".second-domaine").attr('disabled', true)
+  });
 
   $(".second-domaine").select2({
     minimumResultsForSearch: -1,

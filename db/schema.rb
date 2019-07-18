@@ -29,25 +29,6 @@ ActiveRecord::Schema.define(version: 2019_07_18_042201) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "chat_rooms", force: :cascade do |t|
-    t.string "talent_ids"
-    t.string "headhunter_ids"
-    t.string "talentist_ids"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "chats", force: :cascade do |t|
-    t.bigint "talent_id"
-    t.bigint "headhunter_id"
-    t.bigint "talentist_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["headhunter_id"], name: "index_chats_on_headhunter_id"
-    t.index ["talent_id"], name: "index_chats_on_talent_id"
-    t.index ["talentist_id"], name: "index_chats_on_talentist_id"
-  end
-
   create_table "cities", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -234,15 +215,6 @@ ActiveRecord::Schema.define(version: 2019_07_18_042201) do
     t.string "message_id"
     t.index ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.string "content"
-    t.string "attachment"
-    t.bigint "chat_room_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
   end
 
   create_table "mobilities", force: :cascade do |t|
@@ -584,9 +556,6 @@ ActiveRecord::Schema.define(version: 2019_07_18_042201) do
     t.index ["talent_id"], name: "index_your_small_plus_on_talent_id"
   end
 
-  add_foreign_key "chats", "headhunters"
-  add_foreign_key "chats", "talentists"
-  add_foreign_key "chats", "talents"
   add_foreign_key "credentials", "talents"
   add_foreign_key "experiences", "company_types"
   add_foreign_key "experiences", "talents"
@@ -597,7 +566,6 @@ ActiveRecord::Schema.define(version: 2019_07_18_042201) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
-  add_foreign_key "messages", "chat_rooms"
   add_foreign_key "mobilities", "next_aventures"
   add_foreign_key "next_aventure_sectors", "next_aventures"
   add_foreign_key "next_aventure_sectors", "sectors"
