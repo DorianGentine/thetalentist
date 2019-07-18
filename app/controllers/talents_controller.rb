@@ -17,7 +17,7 @@ class TalentsController < ApplicationController
     #   talent.update_attributes(zip_code: zip_code)
     #   p "le talent #{talent.id} a été updated with #{talent.zip_code} from #{talent.city_changed?}"
     # end
-    Talent.all.each { |e| e.save  }
+
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent
     talents = policy_scope(Talent)
