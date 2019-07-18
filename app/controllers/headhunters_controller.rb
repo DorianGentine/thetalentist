@@ -47,11 +47,6 @@ class HeadhuntersController < ApplicationController
   end
 
   def index
-    # DO IT TIME delete after
-    # Startup.all.each do |startup|
-    #   startup.save
-    # end
-
     @talentist = current_talentist
     @startups = Startup.all
     headhunters = policy_scope(Headhunter)
@@ -65,6 +60,11 @@ class HeadhuntersController < ApplicationController
       @headhunters = headhunters.where(:validated => nil)
     else
       @headhunters = headhunters
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @headhunters.to_csv, filename: "Recruteurs - #{DateTime.now}.csv" }
     end
   end
 
