@@ -12,7 +12,7 @@ class Talent < ApplicationRecord
 
   validates_confirmation_of :password, message: "Vos mots de passe ne concordent pas"
 
-  validates_presence_of :zip_code, :message => "Votre code postal doit être rempli", unless: :skip_city_validation
+  validates_presence_of :city, :message => "Le lieu doit être rempli", unless: :skip_city_validation
   validates_presence_of :phone, :message => "Ton téléphone doit être rempli", unless: :skip_phone_validation
   validates_presence_of :linkedin, :message => "Ton linkedin doit être rempli", unless: :skip_linkedin_validation
   validates_presence_of :email, :message => "Ton email doit être rempli"
@@ -21,11 +21,12 @@ class Talent < ApplicationRecord
 
   attr_accessor :skip_city_validation, :skip_phone_validation, :skip_linkedin_validation
 
-  geocoded_by :zip_code
+  # geocoded_by :zip_code
+  geocoded_by :city
   after_validation :geocode
 
   after_create :send_welcome_email, :send_new_user_to_talentist
-  before_save :capitalize_name_firstname, :save_completed_profil, :set_new_city
+  before_save :capitalize_name_firstname, :save_completed_profil
 
   has_many :talent_sectors, dependent: :destroy
   has_many :sectors, through: :talent_sectors
@@ -191,8 +192,8 @@ class Talent < ApplicationRecord
       talent.update(talent_params)
     else
       p "not exciste"
-      talent_params[:zip_code] =  "75000"
-      talent_params[:linkedin] =  "ok"
+      talent_params[:city] =  "Paris"
+      talent_params[:linkedin] =  "NA"
       talent = Talent.new(talent_params)
       talent.password = Devise.friendly_token[0,20]  # Fake password for validation
       talent.save
@@ -316,15 +317,21 @@ class Talent < ApplicationRecord
     self.completing = CompletedTalent.new(self).completed_totaly
   end
 
-  def set_new_city
-    if self.latitude_changed?
-      city = Geocoder.search([self.latitude, self.longitude]).first.city
-      if city.nil?
-        city = Geocoder.search([self.latitude, self.longitude]).first.town
-        self.city = city
-      else
-        self.city = city
-      end
-    end
-  end
+  # def set_new_city
+  #   if self.latitude_changed?
+  #     city = Geocoder.search([self.latitude, self.longitude]).first.city
+  #     if city.nil?
+  #       city = Geocoder.search([self.latitude, self.longitude]).first.town
+  #       self.city = city
+  #     else
+  #       self.city = city
+  #     end
+  #   end
+  # end
+
+  # def city_is_filled?
+  #   if self.city.present?
+  #     true
+  #   end
+  # end
 end

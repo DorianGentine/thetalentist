@@ -183,7 +183,7 @@ private
       :firstname,
       :phone,
       :linkedin,
-      :zip_code,
+      :city,
       :job_ids,
       :btoc,
       :btob,
