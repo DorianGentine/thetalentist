@@ -20,10 +20,10 @@ class HeadhuntersController < ApplicationController
     @jobs = Job.all
 
     if @headhunter.present?
-      talents_visible = Talent.where(:visible => true).order(completing: :desc, last_sign_in_at: :asc)
+      talents_visible = Talent.where(:visible => true).order(completing: :desc, last_sign_in_at: :desc)
       # talents_visible = Talent.where(:visible => true).order(last_sign_in_at: :desc).all_with_startup(@headhunter.startup.name)
     else
-      talents_visible = Talent.where(:visible => true).order(completing: :desc, last_sign_in_at: :asc)
+      talents_visible = Talent.where(:visible => true).order(completing: :desc, last_sign_in_at: :desc)
     end
 
     if params[:jobs].blank? || params[:jobs] == "Tous"
@@ -53,13 +53,13 @@ class HeadhuntersController < ApplicationController
 
 
     if params[:tag] == "Valider"
-      @headhunters = headhunters.where(:validated => true)
+      @headhunters = headhunters.where(:validated => true).order(completing: :desc, last_sign_in_at: :desc)
     elsif params[:tag] == "Refuser"
-      @headhunters = headhunters.where(:validated => false)
+      @headhunters = headhunters.where(:validated => false).order(completing: :desc, last_sign_in_at: :desc)
     elsif params[:tag] == "En attende"
-      @headhunters = headhunters.where(:validated => nil)
+      @headhunters = headhunters.where(:validated => nil).order(completing: :desc, last_sign_in_at: :desc)
     else
-      @headhunters = headhunters
+      @headhunters = headhunters.order(completing: :desc, last_sign_in_at: :desc)
     end
 
     respond_to do |format|
