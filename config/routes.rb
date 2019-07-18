@@ -27,7 +27,6 @@ Rails.application.routes.draw do
     passwords: 'headhunters/passwords',
     registrations: 'headhunters/registrations'
   }
-  resources :startups, only: [ :update ]
   resources :headhunters, only: [:show, :update, :index, :edit, :destroy] do
     patch 'to_validate', :on => :member
     patch 'update_profile', :on => :member
@@ -40,6 +39,8 @@ Rails.application.routes.draw do
 
   get 'repertoire', to: "headhunters#repertory"
   put 'repertoire', to: "headhunters#update"
+
+  resources :startups, only: [ :update ]
 
   get 'repertoire_startup', to: "talents#repertory"
 

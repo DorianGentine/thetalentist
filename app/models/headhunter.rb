@@ -61,6 +61,9 @@ class Headhunter < ApplicationRecord
     end
   end
 
+  def name
+    "#{firstname} #{last_name}"
+  end
 
   def set_conversation_between(talentist)
     message = "merci pour ton inscription sur The Talentist ! Les talents t'attendent, n'hésite pas à les contacter. Si tu as la moindre question, nous sommes là pour te guider. A très vite"
@@ -109,6 +112,14 @@ class Headhunter < ApplicationRecord
     end
     unreads.count
   end
-
+  def self.to_csv
+    attributes = %w{id Email Nom Startup}
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+      all.reverse_each do |headhunter|
+        csv << [headhunter.id, headhunter.email, headhunter.name, headhunter.startup.name]
+      end
+    end
+  end
 end
 

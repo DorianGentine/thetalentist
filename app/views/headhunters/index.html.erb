@@ -5,7 +5,7 @@
 
   <!-- Division pour résultats de recherche -->
   <p class="search-results">
-    <strong><%= @headhunters.count %> Profils</strong> correspondent à votre recherche '<em><%= params[:tag] || 'Tous' %></em>'
+    <strong><%= @headhunters.count %> Profils</strong> correspondent à votre recherche '<em><%= params[:tag] || 'Tous' %></em>' - <%= link_to 'Télécharger', headhunters_path(format: "csv") %>
   </p>
 
 

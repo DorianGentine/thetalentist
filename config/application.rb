@@ -1,5 +1,6 @@
 require_relative 'boot'
 
+require 'csv'
 require 'rails/all'
 require 'pdfkit'
 
