@@ -155,7 +155,7 @@ class StepsTalentInfosController < ApplicationController
       :firstname,
       :phone,
       :linkedin,
-      :zip_code,
+      :city,
       :btoc,
       :btob,
       :terms_of_condition,
