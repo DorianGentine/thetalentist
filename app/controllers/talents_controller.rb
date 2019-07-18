@@ -17,10 +17,6 @@ class TalentsController < ApplicationController
     #   talent.update_attributes(zip_code: zip_code)
     #   p "le talent #{talent.id} a été updated with #{talent.zip_code} from #{talent.city_changed?}"
     # end
-    Talent.where(last_sign_in_at: nil).each do |t|
-      t.last_sign_in_at =  t.created_at
-      t.save
-    end
 
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent
