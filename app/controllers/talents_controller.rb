@@ -5,6 +5,7 @@ class TalentsController < ApplicationController
 
   def index
     # Delete after action
+
     # Talent.all.each do |talent|
     #   zip_code = Geocoder.search([talent.latitude, talent.longitude]).first.postal_code
     #   if zip_code.nil?
