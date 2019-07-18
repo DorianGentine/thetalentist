@@ -72,7 +72,8 @@ class CompletedTalent
     small_plu_count = @talent.your_small_plus.size > 0 ? @talent.your_small_plus.size * 1 : 1
     # skills_count = @talent.talent_skills.size * 1
     value_input = stat(next_aventure_count + small_plu_count)
-    @talent.next_aventures.each do |next_aventure|
+    next_aventure = @talent.next_aventures.first
+    if next_aventure
       next_aventure.mobilities.count > 0 ? count += value_input : count
       next_aventure.contrat.present? ? count += value_input : count
       next_aventure.remuneration.present? ? count += value_input : count
@@ -89,6 +90,7 @@ class CompletedTalent
       next_aventure.good_manager.present? ? count += value_input : count
       next_aventure.work_for_free.present? ? count += value_input : count
     end
+
     if @talent.your_small_plus.count > 0
       @talent.your_small_plus.each do |your_small_plu|
         your_small_plu.description.present? ? count += value_input : count
