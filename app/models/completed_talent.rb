@@ -85,10 +85,10 @@ class CompletedTalent
       next_aventure.waiting_for_three.present? ? count += value_input : count
       next_aventure.hunter_or_breeder.present? ? count += value_input : count
       next_aventure.creative_or_pragmatic.present? ? count += value_input : count
-      next_aventure.dream.present? ? count += value_input : count
+      next_aventure.looking_for.present? ? count += value_input : count
       next_aventure.famous_person.present? ? count += value_input : count
       next_aventure.good_manager.present? ? count += value_input : count
-      next_aventure.work_for_free.present? ? count += value_input : count
+      next_aventure.proud.present? ? count += value_input : count
     end
 
     if @talent.your_small_plus.count > 0
