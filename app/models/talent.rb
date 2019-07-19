@@ -115,6 +115,11 @@ class Talent < ApplicationRecord
   scope :completed_less_than, -> (number) { where('completing <=  ?', number)}
   scope :have_been_never_reminded, -> { where(reminder: nil)}
 
+
+  def full_name
+    "#{self.firstname} #{self.last_name}"
+  end
+
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
   end

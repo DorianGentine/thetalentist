@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_18_042201) do
+ActiveRecord::Schema.define(version: 2019_07_19_073002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,6 +182,13 @@ ActiveRecord::Schema.define(version: 2019_07_18_042201) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "localisations", force: :cascade do |t|
+    t.string "zip_code"
+    t.string "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|
     t.string "unsubscriber_type"
     t.integer "unsubscriber_id"
@@ -290,6 +297,12 @@ ActiveRecord::Schema.define(version: 2019_07_18_042201) do
     t.text "proud"
     t.text "favourite_businesses"
     t.index ["talent_id"], name: "index_next_aventures_on_talent_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pictures", force: :cascade do |t|

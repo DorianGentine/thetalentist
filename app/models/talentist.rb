@@ -40,6 +40,10 @@ class Talentist < ApplicationRecord
     return "Talentist"
   end
 
+  def full_name
+    "#{self.firstname} #{self.last_name}"
+  end
+
   def count_unread_message
     unreads = []
     messages = Mailboxer::Receipt.where(receiver_id: self.id)

@@ -4,21 +4,6 @@ class TalentsController < ApplicationController
     :update, :validation, :visible, :info_pdf, :update_photo ]
 
   def index
-    # Delete after action
-
-    # Talent.all.each do |talent|
-    #   zip_code = Geocoder.search([talent.latitude, talent.longitude]).first.postal_code
-    #   if zip_code.nil?
-    #     city = Geocoder.search([talent.latitude, talent.longitude]).first.city
-    #     zip_code = 75002 if city.downcase == "paris" || city == "Paris, France" || city == "Paris Area, France, FR" || city == "France, FR"
-    #     zip_code = 75002 if city.downcase == "paris" || city == "Zayed City" ||
-    #   end
-    #   raise if zip_code.nil?
-    #   talent.update_attributes(zip_code: zip_code)
-    #   p "le talent #{talent.id} a été updated with #{talent.zip_code} from #{talent.city_changed?}"
-    # end
-
-
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent
     talents = policy_scope(Talent)
@@ -35,6 +20,7 @@ class TalentsController < ApplicationController
     else
       @talents = talents
     end
+    @notifications = Notification.all
   end
 
   def repertory
