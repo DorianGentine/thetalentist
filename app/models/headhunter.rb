@@ -42,6 +42,9 @@ class Headhunter < ApplicationRecord
     self.last_name = self.last_name.capitalize if self.last_name && !self.last_name.blank?
     self.firstname = self.firstname.capitalize if self.firstname && !self.firstname.blank?
   end
+  def full_name
+    "#{self.firstname} #{self.last_name}"
+  end
 
   def completed_totaly
     CompletedHeadhunter.new(self).completed_totaly
