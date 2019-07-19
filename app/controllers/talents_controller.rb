@@ -41,20 +41,20 @@ class TalentsController < ApplicationController
       { lat: @talent.latitude, lng: @talent.longitude }
     end
     @experiences = @talent.experiences
-    @next_aventures = @talent.next_aventures.first
+    @next_aventure = @talent.next_aventure
     @talent_formations = @talent.talent_formations.order(:year)
-    if @talent.next_aventures.first.present?
-      @sectors = @talent.next_aventures.first.next_aventure_sectors
+    if @talent.next_aventure.present?
+      @sectors = @talent.next_aventure.next_aventure_sectors
     end
     @credentials = @talent.credentials
   end
 
   def edit
     @talent.set_build_belong_tables
-    if @talent.next_aventures.first.mobilities.count > 0
-      1.times {  @talent.next_aventures.first.mobilities.build }
+    if @talent.next_aventure.mobilities.count > 0
+      1.times {  @talent.next_aventure.mobilities.build }
     else
-      0.times {  @talent.next_aventures.first.mobilities.build }
+      0.times {  @talent.next_aventure.mobilities.build }
     end
     @choices = ["Ambiance", "International", "Produit", "Rémunération", "Sens", "Valeurs", "Mission", "Management", "Worklife balance", "Impact"]
   end
@@ -200,7 +200,7 @@ private
 
   def next_aventure_params
     params.require(:talent).permit(
-      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
+      next_aventure_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
       your_small_plus_attributes: [:id, :description, :_destroy]
     )
   end

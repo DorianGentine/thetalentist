@@ -94,8 +94,8 @@ class Talent < ApplicationRecord
 
   scope :without_same_current_startup, -> (startup) { joins(:experiences).merge(Experience.all.where.not(company_name: startup.name))}
 
-  has_many :next_aventures, dependent: :destroy
-  accepts_nested_attributes_for :next_aventures, allow_destroy: true, reject_if: :all_blank
+  has_one :next_aventure, dependent: :destroy
+  accepts_nested_attributes_for :next_aventure, allow_destroy: true, reject_if: :all_blank
 
 
   # messagerie
@@ -288,10 +288,10 @@ class Talent < ApplicationRecord
     else
       0.times { self.experiences.build }
     end
-    if self.next_aventures.count == 0
-      1.times { self.next_aventures.build }
+    if self.next_aventure.nil?
+      1.times { self.build_next_aventure }
     else
-      0.times { self.next_aventures.build }
+      0.times { self.build_next_aventure }
     end
     if self.your_small_plus.count == 0
       1.times { self.your_small_plus.build }

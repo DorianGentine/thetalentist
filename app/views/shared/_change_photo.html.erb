@@ -46,7 +46,7 @@
       </label>
     </div>
 
-    <% if f.object.is_a?(Talent) && !f.object.photo? %>
+    <% if f.object.is_a?(Talent) && !f.object.photo? && f.object.linkedin_picture_url.present? %>
       <div class="col-lg-5" style="display: flex" id="display-btn">
         <label for="talent_display_linkedin_picture" class=" label-edit no-margin no-padding btn-avatar" style="line-height: 70px; cursor: pointer;">Afficher ma photo Linkedin
         </label>
