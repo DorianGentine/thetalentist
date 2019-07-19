@@ -67,6 +67,10 @@ class HeadhunterPolicy < ApplicationPolicy
     end
   end
 
+  def repertoire?
+    user == record
+  end
+
   def repertory?
     user == record
   end
