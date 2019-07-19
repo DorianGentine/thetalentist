@@ -1,6 +1,6 @@
 <% if talentist_signed_in? && current_talentist %>
   <% if talent.photo.present? %>
-    <div class="illu-card-talentist" style="background-image: url('<%= cl_image_path talent.photo, :transformation=>[ :gravity=>"face"] %>');">
+    <div class="illu-card-talentist" style="background-image: url('<%= cl_image_path talent.photo.url(:small_bright_face), :transformation=>[ :gravity=>"face"] %>');">
       <div class="statut <%= talent.visible ? 'green-background' : 'red-background' %>" style="width: 20px; height: 20px; border: 2px solid;"></div>
     </div>
   <% elsif talent.linkedin_picture_url.present? %>
