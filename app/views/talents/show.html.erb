@@ -25,7 +25,7 @@
 
         <!-- Photo de profil -->
           <% if @talent.photo? %>
-            <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
+            <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @talent.photo.url(:big_bright_face), :transformation=>[ :gravity=>"face"] %>');">
               <div class="statut tooltip <%= @talent.visible ? 'green-background' : 'red-background' %>">
                 <span class="tooltiptext"><%= @talent.visible ? 'Profil visible' : "Profil pas visible" %></span>
               </div>

@@ -29,7 +29,7 @@
 
     <label for="avatar-upload<%= f.object.last_name %>" class="col-lg-1 no-padding btn-avatar" data-target="<%= f.object.last_name %>" id="edit-photo">
       <div class="cercle relative" id="div_img_prev<%= f.object.last_name %>" style="height: 70px; width: 70px; cursor: pointer;">
-        <img id="img_prev<%= f.object.last_name %>" src='<%= f.object.photo? ? f.object.photo_url : "https://images.homedepot-static.com/productImages/fc91cb23-b6db-4d32-b02a-f1ed61dd39a8/svn/folkstone-matte-formica-laminate-sheets-009271258408000-64_400_compressed.jpg" %>' alt="your image" class=" cercle " style="object-fit: fill; height: 100%; width: 100%;"/>
+        <img id="img_prev<%= f.object.last_name %>" src='<%= f.object.photo? ? f.object.photo.url(:small_bright_face) : "https://images.homedepot-static.com/productImages/fc91cb23-b6db-4d32-b02a-f1ed61dd39a8/svn/folkstone-matte-formica-laminate-sheets-009271258408000-64_400_compressed.jpg" %>' alt="your image" class=" cercle " style="object-fit: fill; height: 100%; width: 100%;"/>
         <i class="fas fa-edit white absolute-center" style="font-size: 25px"></i>
       </div>
     </label>
