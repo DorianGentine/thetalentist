@@ -1,7 +1,8 @@
 class Mailboxer::ConversationPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      p "coucou"
+      scope.all
     end
   end
 

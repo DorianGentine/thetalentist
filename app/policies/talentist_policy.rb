@@ -18,6 +18,13 @@ class TalentistPolicy < ApplicationPolicy
   end
   def show?
     user == record
+  end
 
+  def repertoire?
+    user == record
+  end
+
+  def all?
+    user == record
   end
 end
