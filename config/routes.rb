@@ -27,7 +27,6 @@ Rails.application.routes.draw do
     passwords: 'headhunters/passwords',
     registrations: 'headhunters/registrations'
   }
-  resources :startups, only: [ :update ]
   resources :headhunters, only: [:show, :update, :index, :edit, :destroy] do
     patch 'to_validate', :on => :member
     patch 'update_profile', :on => :member
@@ -40,6 +39,8 @@ Rails.application.routes.draw do
 
   get 'repertoire', to: "headhunters#repertory"
   put 'repertoire', to: "headhunters#update"
+
+  resources :startups, only: [ :update ]
 
   get 'repertoire_startup', to: "talents#repertory"
 
@@ -83,6 +84,22 @@ Rails.application.routes.draw do
   get 'cgu_employeurs', to: "pages#cgu_headhunters", as: "cgu_employeurs"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :conversations, only: [ :show ] do
+        collection do
+          get :all
+        end
+      end
+      resources :notifications, only: [ :index ]
+      resources :talents, only: [ :index, :show ] do
+        collection do
+          get :repertoire
+        end
+      end
+    end
+  end
 
 
 end

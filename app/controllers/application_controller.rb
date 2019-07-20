@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
         repertoire_path
       end
     elsif resource.is_a?(Talent)
-      if resource.next_aventures.first
+      if resource.next_aventure.present?
         if resource.validated
           sign_in(resource)
           talent_path(resource)

@@ -10,7 +10,7 @@
         <% end %>
       <% else %>
         <% if @participant.photo.present? %>
-          <%= cl_image_tag @participant.photo.url(:bright_face) %>
+          <%= cl_image_tag @participant.photo.url(:small_bright_face) %>
         <% elsif @participant.is_a?(Talent) && @participant.display_linkedin? %>
           <%= cl_image_tag @participant.linkedin_picture_url, style:"border-radius: 50%;" %>
         <% else %>
@@ -37,7 +37,7 @@
   <div class="message right">
     <div class="avatar">
       <% if @user.photo.present? %>
-        <%= cl_image_tag @user.photo.url(:bright_face) %>
+        <%= cl_image_tag @user.photo.url(:small_bright_face) %>
       <% elsif @user.is_a?(Talent) && @user.display_linkedin? %>
         <%= cl_image_tag @user.linkedin_picture_url, style:"border-radius: 50%;" %>
       <% else %>

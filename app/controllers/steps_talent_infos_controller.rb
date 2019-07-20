@@ -9,8 +9,8 @@ class StepsTalentInfosController < ApplicationController
 
   def show
     @talent.set_build_belong_tables
-    if @talent.next_aventures.first.mobilities.count > 0
-      @mobilities = @talent.next_aventures.first.mobilities
+    if @talent.next_aventure.mobilities.count > 0
+      @mobilities = @talent.next_aventure.mobilities
     else
       @mobilities = Mobility.new
     end
@@ -163,7 +163,7 @@ class StepsTalentInfosController < ApplicationController
       :sector_ids,
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
-      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[:id, :title, :_destroy]],
+      next_aventure_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[:id, :title, :_destroy]],
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       your_small_plus_attributes: [:id, :description, :_destroy],

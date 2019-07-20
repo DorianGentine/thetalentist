@@ -4,21 +4,6 @@ class TalentsController < ApplicationController
     :update, :validation, :visible, :info_pdf, :update_photo ]
 
   def index
-    # Delete after action
-
-    # Talent.all.each do |talent|
-    #   zip_code = Geocoder.search([talent.latitude, talent.longitude]).first.postal_code
-    #   if zip_code.nil?
-    #     city = Geocoder.search([talent.latitude, talent.longitude]).first.city
-    #     zip_code = 75002 if city.downcase == "paris" || city == "Paris, France" || city == "Paris Area, France, FR" || city == "France, FR"
-    #     zip_code = 75002 if city.downcase == "paris" || city == "Zayed City" ||
-    #   end
-    #   raise if zip_code.nil?
-    #   talent.update_attributes(zip_code: zip_code)
-    #   p "le talent #{talent.id} a été updated with #{talent.zip_code} from #{talent.city_changed?}"
-    # end
-
-
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent
     talents = policy_scope(Talent)
@@ -35,6 +20,7 @@ class TalentsController < ApplicationController
     else
       @talents = talents
     end
+    @notifications = Notification.all
   end
 
   def repertory
@@ -55,20 +41,20 @@ class TalentsController < ApplicationController
       { lat: @talent.latitude, lng: @talent.longitude }
     end
     @experiences = @talent.experiences
-    @next_aventures = @talent.next_aventures.first
+    @next_aventure = @talent.next_aventure
     @talent_formations = @talent.talent_formations.order(:year)
-    if @talent.next_aventures.first.present?
-      @sectors = @talent.next_aventures.first.next_aventure_sectors
+    if @talent.next_aventure.present?
+      @sectors = @talent.next_aventure.next_aventure_sectors
     end
     @credentials = @talent.credentials
   end
 
   def edit
     @talent.set_build_belong_tables
-    if @talent.next_aventures.first.mobilities.count > 0
-      1.times {  @talent.next_aventures.first.mobilities.build }
+    if @talent.next_aventure.mobilities.count > 0
+      1.times {  @talent.next_aventure.mobilities.build }
     else
-      0.times {  @talent.next_aventures.first.mobilities.build }
+      0.times {  @talent.next_aventure.mobilities.build }
     end
     @choices = ["Ambiance", "International", "Produit", "Rémunération", "Sens", "Valeurs", "Mission", "Management", "Worklife balance", "Impact"]
   end
@@ -214,7 +200,7 @@ private
 
   def next_aventure_params
     params.require(:talent).permit(
-      next_aventures_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
+      next_aventure_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
       your_small_plus_attributes: [:id, :description, :_destroy]
     )
   end

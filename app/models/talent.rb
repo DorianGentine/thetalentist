@@ -25,7 +25,7 @@ class Talent < ApplicationRecord
   geocoded_by :city
   after_validation :geocode
 
-  after_create :send_welcome_email, :send_new_user_to_talentist
+  after_create :send_welcome_email, :send_new_user_to_talentist, :fill_last_sign_at
   before_save :capitalize_name_firstname, :save_completed_profil
 
   has_many :talent_sectors, dependent: :destroy
@@ -94,8 +94,8 @@ class Talent < ApplicationRecord
 
   scope :without_same_current_startup, -> (startup) { joins(:experiences).merge(Experience.all.where.not(company_name: startup.name))}
 
-  has_many :next_aventures, dependent: :destroy
-  accepts_nested_attributes_for :next_aventures, allow_destroy: true, reject_if: :all_blank
+  has_one :next_aventure, dependent: :destroy
+  accepts_nested_attributes_for :next_aventure, allow_destroy: true, reject_if: :all_blank
 
 
   # messagerie
@@ -114,6 +114,11 @@ class Talent < ApplicationRecord
 
   scope :completed_less_than, -> (number) { where('completing <=  ?', number)}
   scope :have_been_never_reminded, -> { where(reminder: nil)}
+
+
+  def full_name
+    "#{self.firstname} #{self.last_name}"
+  end
 
   def is_connected_to?(headhunter)
     Relationship.where("headhunter_id = ? AND talent_id = ?", headhunter.id, self.id).size > 0
@@ -168,6 +173,11 @@ class Talent < ApplicationRecord
       end
     end
     unreads.count
+  end
+
+  def fill_last_sign_at
+    self.last_sign_in_at = self.created_at
+    self.save
   end
 
   def capitalize_name_firstname
@@ -278,10 +288,10 @@ class Talent < ApplicationRecord
     else
       0.times { self.experiences.build }
     end
-    if self.next_aventures.count == 0
-      1.times { self.next_aventures.build }
+    if self.next_aventure.nil?
+      1.times { self.build_next_aventure }
     else
-      0.times { self.next_aventures.build }
+      0.times { self.build_next_aventure }
     end
     if self.your_small_plus.count == 0
       1.times { self.your_small_plus.build }

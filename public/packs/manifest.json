@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "application.js": "/packs/application-af4cf858426a363ac982.js",
   "application.js.map": "/packs/application-af4cf858426a363ac982.js.map",
+=======
+  "application.js": "/packs/application-c8bcccb8e85105d06163.js",
+  "application.js.map": "/packs/application-c8bcccb8e85105d06163.js.map",
+>>>>>>> f4c93851c25a3a9431aa4a504b8a4f2b8003a025
   "map.js": "/packs/map-3d755799790b56511127.js",
   "map.js.map": "/packs/map-3d755799790b56511127.js.map"
 }

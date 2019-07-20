@@ -25,7 +25,7 @@
 
         <!-- Photo de profil -->
           <% if @talent.photo? %>
-            <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @talent.photo, :transformation=>[ :gravity=>"face"] %>');">
+            <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @talent.photo.url(:big_bright_face), :transformation=>[ :gravity=>"face"] %>');">
               <div class="statut tooltip <%= @talent.visible ? 'green-background' : 'red-background' %>">
                 <span class="tooltiptext"><%= @talent.visible ? 'Profil visible' : "Profil pas visible" %></span>
               </div>
@@ -177,18 +177,18 @@
         <div class="row margin-top-30">
             <div class="info-grid-1 col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Mobilité</p>
-              <% if @next_aventures.present? %>
+              <% if @next_aventure.present? %>
 
-                <% if @next_aventures.mobilities.count > 0 %>
-                  <% @next_aventures.mobilities.each do |mobility| %>
+                <% if @next_aventure.mobilities.count > 0 %>
+                  <% @next_aventure.mobilities.each do |mobility| %>
                     <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= mobility.title %></p>
                   <% end %>
-                <% elsif !@next_aventures.city.present? && current_user.is_a?(Headhunter) %>
+                <% elsif !@next_aventure.city.present? && current_user.is_a?(Headhunter) %>
                   <i class="far fa-question-circle green"></i>
                 <% else %>
                   <i class="red fas fa-exclamation-triangle"></i>
                 <% end %>
-              <% elsif !@next_aventures.present? && current_user.is_a?(Headhunter) %>
+              <% elsif !@next_aventure.present? && current_user.is_a?(Headhunter) %>
                 <i class="far fa-question-circle green"></i>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
@@ -199,10 +199,10 @@
           <!-- Type de contrat -->
             <div class="info-grid-1 col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Type de contrat</p>
-              <% if @next_aventures.present? %>
-                <% if @next_aventures.contrat.present? %>
-                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.contrat %></p>
-                <% elsif !@next_aventures.contrat.present? && current_user.is_a?(Headhunter) %>
+              <% if @next_aventure.present? %>
+                <% if @next_aventure.contrat.present? %>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventure.contrat %></p>
+                <% elsif !@next_aventure.contrat.present? && current_user.is_a?(Headhunter) %>
                   <i class="far fa-question-circle green"></i>
                 <% else %>
                   <i class="red fas fa-exclamation-triangle"></i>
@@ -215,10 +215,10 @@
           <!-- Attentes salariales -->
             <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Attentes salariales</p>
-              <% if @next_aventures.present? %>
-                <% if @next_aventures.remuneration.present? %>
-                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.remuneration %></p>
-                <% elsif !@next_aventures.remuneration.present? && current_user.is_a?(Headhunter) %>
+              <% if @next_aventure.present? %>
+                <% if @next_aventure.remuneration.present? %>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventure.remuneration %></p>
+                <% elsif !@next_aventure.remuneration.present? && current_user.is_a?(Headhunter) %>
                   <i class="far fa-question-circle green"></i>
                 <% else %>
                   <i class="red fas fa-exclamation-triangle"></i>
@@ -235,7 +235,7 @@
                 <% @sectors.each do |talent_sector| %>
                   <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= talent_sector.sector.title %></p>
                 <% end %>
-              <% elsif !@next_aventures.present? && current_user.is_a?(Headhunter) %>
+              <% elsif !@next_aventure.present? && current_user.is_a?(Headhunter) %>
                 <i class="far fa-question-circle green"></i>
               <% else %>
                 <i class="red fas fa-exclamation-triangle"></i>
@@ -246,10 +246,10 @@
           <!-- Disponibilité -->
             <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Disponibilité</p>
-              <% if @next_aventures.present? %>
-                <% if @next_aventures.availability.present? %>
-                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventures.availability %></p>
-                <% elsif !@next_aventures.availability.present? && current_user.is_a?(Headhunter) %>
+              <% if @next_aventure.present? %>
+                <% if @next_aventure.availability.present? %>
+                  <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2"><%= @next_aventure.availability %></p>
+                <% elsif !@next_aventure.availability.present? && current_user.is_a?(Headhunter) %>
                   <i class="far fa-question-circle green"></i>
                 <% else %>
                   <i class="red fas fa-exclamation-triangle"></i>
@@ -262,16 +262,16 @@
           <!-- Branche -->
             <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2" style="opacity:0">Branche</p>
-              <% if @next_aventures.present? %>
-                <% if @next_aventures.btoc || @next_aventures.btob %>
-                  <% if @next_aventures.btoc && @next_aventures.btob %>
+              <% if @next_aventure.present? %>
+                <% if @next_aventure.btoc || @next_aventure.btob %>
+                  <% if @next_aventure.btoc && @next_aventure.btob %>
                     <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;"> BtoB & BtoC</p>
-                  <% elsif @next_aventures.btob %>
+                  <% elsif @next_aventure.btob %>
                     <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;">BtoB</p>
                   <% else%>
                     <p class="texte-rubrique-1b no-margin uppercase grid-col-span-2" style="text-align: center;">BtoC</p>
                   <% end %>
-                <% elsif !@next_aventures.btoc && !@next_aventures.btob && current_user.is_a?(Headhunter) %>
+                <% elsif !@next_aventure.btoc && !@next_aventure.btob && current_user.is_a?(Headhunter) %>
                   <i class="far fa-question-circle green"></i>
                 <% else %>
                   <i class="red fas fa-exclamation-triangle"></i>
@@ -290,10 +290,10 @@
           <!-- Rêve remis à demain -->
             <div class="col-lg-3 col-xs-12">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" style="min-height: 44px">
-                <% if @next_aventures.present? %>
-                  <% if @next_aventures.looking_for.present? %>
+                <% if @next_aventure.present? %>
+                  <% if @next_aventure.looking_for.present? %>
                     Ce que je recherche
-                  <% elsif @next_aventures.dream.present?  %>
+                  <% elsif @next_aventure.dream.present?  %>
                     Le métier de mes rêves
                   <% else %>
                     Ce que je recherche
@@ -342,10 +342,10 @@
           <!-- Un bon manager, c'est -->
             <div class="col-lg-3 col-xs-12 margin-top-30-xs">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" style="min-height: 44px">Un bon manager, c'est</h4>
-              <% if @next_aventures.present? %>
-                <% if @next_aventures.good_manager.present?  %>
-                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.good_manager %></p>
-                <% elsif !@next_aventures.good_manager.present? && current_user.is_a?(Headhunter) %>
+              <% if @next_aventure.present? %>
+                <% if @next_aventure.good_manager.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventure.good_manager %></p>
+                <% elsif !@next_aventure.good_manager.present? && current_user.is_a?(Headhunter) %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
                 <% else %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
@@ -358,10 +358,10 @@
           <!-- Le travail effectué gratuitement serait -->
             <div class="col-lg-3 col-xs-12 margin-top-30-xs">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">Le travail effectué gratuitement serait</h4>
-              <% if @next_aventures.present? %>
-                <% if @next_aventures.work_for_free.present?  %>
-                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.work_for_free %></p>
-                <% elsif !@next_aventures.work_for_free.present? && current_user.is_a?(Headhunter) %>
+              <% if @next_aventure.present? %>
+                <% if @next_aventure.work_for_free.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventure.work_for_free %></p>
+                <% elsif !@next_aventure.work_for_free.present? && current_user.is_a?(Headhunter) %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
                 <% else %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
@@ -417,7 +417,7 @@
                     <% if @next_aventures.hunter_or_breeder.nil? && !current_user.is_a?(Headhunter) %>
                       <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
                     <% else %>
-                      <div class="range-slider-cursor" style="left: <%= @next_aventures.hunter_or_breeder.nil? ? "50" : @next_aventures.hunter_or_breeder %>%"></div>
+                      <div class="range-slider-cursor" style="left: <%= @next_aventure.hunter_or_breeder.nil? ? "50" : @next_aventure.hunter_or_breeder %>%"></div>
                     <% end %>
                   <% else %>
                     <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
@@ -435,7 +435,7 @@
                     <% if @next_aventures.creative_or_pragmatic.nil? && !current_user.is_a?(Headhunter) %>
                       <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
                     <% else %>
-                      <div class="range-slider-cursor" style="left: <%= @next_aventures.creative_or_pragmatic.nil? ? "50" : @next_aventures.creative_or_pragmatic %>%"></div>
+                      <div class="range-slider-cursor" style="left: <%= @next_aventure.creative_or_pragmatic.nil? ? "50" : @next_aventure.creative_or_pragmatic %>%"></div>
                     <% end %>
                   <% else %>
                     <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
@@ -450,10 +450,10 @@
             <h3 class="titre-rubrique-2">Je priorise:</h3>
 
             <ol class="priority-list text-align-center-xs">
-              <% if @next_aventures.present? %>
-                <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_one.nil? ? "À définir" : @next_aventures.waiting_for_one %></li>
-                <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_two.nil? ? "À définir" : @next_aventures.waiting_for_two %></li>
-                <li class="priority-list-item texte-rubrique-2b"><%= @next_aventures.waiting_for_three.nil? ? "À définir" : @next_aventures.waiting_for_three %></li>
+              <% if @next_aventure.present? %>
+                <li class="priority-list-item texte-rubrique-2b"><%= @next_aventure.waiting_for_one.nil? ? "À définir" : @next_aventure.waiting_for_one %></li>
+                <li class="priority-list-item texte-rubrique-2b"><%= @next_aventure.waiting_for_two.nil? ? "À définir" : @next_aventure.waiting_for_two %></li>
+                <li class="priority-list-item texte-rubrique-2b"><%= @next_aventure.waiting_for_three.nil? ? "À définir" : @next_aventure.waiting_for_three %></li>
               <% else %>
                 <li class="priority-list-item texte-rubrique-2b">À définir</li>
                 <li class="priority-list-item texte-rubrique-2b">À définir</li>

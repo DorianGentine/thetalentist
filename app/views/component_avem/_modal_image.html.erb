@@ -3,7 +3,7 @@
 
   <% @startup.pictures.first(5).each do |photo| %>
     <% if photo.photo? %>
-      <div data-target="modal_image_<%= photo.id %>" class="modal-button" style="background-image: url('<%= cl_image_path photo.photo  %>')"></div>
+      <div data-target="modal_image_<%= photo.id %>" class="modal-button" style="background-image: url('<%= cl_image_path photo.photo.url(:big_picture)  %>')"></div>
       <%= render 'component_avem/modal_image_apparition', photo: photo %>
     <% else %>
       <div class="center-text" style="background-color: gray; padding: 15px;">Ajoutez encore une photo</div>

@@ -86,7 +86,7 @@
 
           <% @startup.headhunters.each do |headhunter| %>
             <% if headhunter.photo.present? %>
-              <div class="photo-profil profil-collaborateur" style="background-image: url('<%= cl_image_path headhunter.photo, :transformation=>[ :gravity=>"face"] %>');">
+              <div class="photo-profil profil-collaborateur" style="background-image: url('<%= cl_image_path headhunter.photo.url(:small_bright_face), :transformation=>[ :gravity=>"face"] %>');">
               </div>
             <% else %>
 

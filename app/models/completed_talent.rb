@@ -66,13 +66,14 @@ class CompletedTalent
     return count.round(0)
   end
 
-  def completed_next_aventures
+  def completed_next_aventure
     count = 0
     next_aventure_count = 15
     small_plu_count = @talent.your_small_plus.size > 0 ? @talent.your_small_plus.size * 1 : 1
     # skills_count = @talent.talent_skills.size * 1
     value_input = stat(next_aventure_count + small_plu_count)
-    @talent.next_aventures.each do |next_aventure|
+    next_aventure = @talent.next_aventure
+    if next_aventure
       next_aventure.mobilities.count > 0 ? count += value_input : count
       next_aventure.contrat.present? ? count += value_input : count
       next_aventure.remuneration.present? ? count += value_input : count
@@ -84,11 +85,12 @@ class CompletedTalent
       next_aventure.waiting_for_three.present? ? count += value_input : count
       next_aventure.hunter_or_breeder.present? ? count += value_input : count
       next_aventure.creative_or_pragmatic.present? ? count += value_input : count
-      next_aventure.dream.present? ? count += value_input : count
+      next_aventure.looking_for.present? ? count += value_input : count
       next_aventure.famous_person.present? ? count += value_input : count
       next_aventure.good_manager.present? ? count += value_input : count
-      next_aventure.work_for_free.present? ? count += value_input : count
+      next_aventure.proud.present? ? count += value_input : count
     end
+
     if @talent.your_small_plus.count > 0
       @talent.your_small_plus.each do |your_small_plu|
         your_small_plu.description.present? ? count += value_input : count
@@ -98,8 +100,8 @@ class CompletedTalent
   end
 
   def completed_totaly
-    if completed_profil != nil && completed_formation_skill_language != nil && completed_experience != nil && completed_next_aventures != nil
-      all_parts = completed_profil + completed_formation_skill_language + completed_next_aventures + completed_experience
+    if completed_profil != nil && completed_formation_skill_language != nil && completed_experience != nil && completed_next_aventure != nil
+      all_parts = completed_profil + completed_formation_skill_language + completed_next_aventure + completed_experience
       result = all_parts / 4.0
       return result.round(1)
     else

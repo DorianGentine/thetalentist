@@ -48,7 +48,7 @@ class UserInfoPdf < Prawn::Document
   end
 
   def line_next_aventure_rows
-    next_aventure = @user.next_aventures.first
+    next_aventure = @user.next_aventure
     [["Ma prochaine avanture"]] +
     [["Ville:", present?(next_aventure.city)]] +
     [["Contrat:", present?(next_aventure.contrat)]] +

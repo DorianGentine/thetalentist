@@ -4,7 +4,7 @@
   <div class="navbar-wagon-item">
     <div class="dropdown">
       <% if current_headhunter.photo.present? %>
-        <%= cl_image_tag current_headhunter.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+        <%= cl_image_tag current_headhunter.photo.url(:small_bright_face) class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
       <% else %>
         <div class="photo-profil avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
           <div class="initiale">
@@ -33,7 +33,7 @@
   <div class="navbar-wagon-item">
     <div class="dropdown">
       <% if current_talent.photo.present? %>
-        <%= cl_image_tag current_talent.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+        <%= cl_image_tag current_talent.photo.url(:small_bright_face), class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
       <% elsif current_talent.display_linkedin? %>
         <%= cl_image_tag current_talent.linkedin_picture_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
       <% else %>

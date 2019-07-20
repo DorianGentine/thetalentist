@@ -20,10 +20,10 @@ class HeadhuntersController < ApplicationController
     @jobs = Job.all
 
     if @headhunter.present?
-      talents_visible = Talent.where(:visible => true).order(updated_at: :desc)
-      # talents_visible = Talent.where(:visible => true).order(updated_at: :desc).all_with_startup(@headhunter.startup.name)
+      talents_visible = Talent.where(:visible => true).reorder(completing: :desc, last_sign_in_at: :desc)
+      # talents_visible = Talent.where(:visible => true).order(last_sign_in_at: :desc).all_with_startup(@headhunter.startup.name)
     else
-      talents_visible = Talent.where(:visible => true).order(updated_at: :desc)
+      talents_visible = Talent.where(:visible => true).reorder(completing: :desc, last_sign_in_at: :desc)
     end
 
     if params[:jobs].blank? || params[:jobs] == "Tous"
@@ -47,11 +47,6 @@ class HeadhuntersController < ApplicationController
   end
 
   def index
-    # DO IT TIME delete after
-    # Startup.all.each do |startup|
-    #   startup.save
-    # end
-
     @talentist = current_talentist
     @startups = Startup.all
     headhunters = policy_scope(Headhunter)
@@ -65,6 +60,11 @@ class HeadhuntersController < ApplicationController
       @headhunters = headhunters.where(:validated => nil)
     else
       @headhunters = headhunters
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @headhunters.to_csv, filename: "Recruteurs - #{DateTime.now}.csv" }
     end
   end
 
