@@ -8,7 +8,7 @@
         <%= f.simple_fields_for :talent_formations do |u| %>
           <%= render 'steps_talent_infos/formation_fields', :f => u %>
         <% end %>
-        <div class='links margin-top-30-xs'>
+        <div class='links margin-top-30-xs col-lg-offset-2'>
           <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'steps_talent_infos/formation_fields', class: "form-hobby-add" %>
         </div>
       </div>
@@ -19,11 +19,9 @@
 
 
   <div class="row">
-    <div class="col-xs-12 no-padding" id="competence-form">
-      <div class="margin-competence">
-        <p class="label-edit requis">Compétences techniques</p>
-        <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class: "selectAndCreate height-unset", multiple: "multiple", style: "width: 100%;"}, multiple: true, required: true %>
-      </div>
+    <label class="col-lg-2 col-xs-12 label-edit requis" for="talent_techno_ids">Compétences techniques</label>
+    <div class="col-lg-10 col-xs-12" id="competence-form">
+      <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class: "selectAndCreate height-unset", multiple: "multiple", style: "width: 100%;"}, multiple: true, required: true %>
     </div>
   </div>
 
@@ -32,16 +30,14 @@
   <h2 class="titre-section margin-top-60">Mes compétences <strong>linguistiques</strong></h2>
 
   <div class="row">
-    <div id="add-language" class="col-xs-12 no-padding">
-      <p class="label-edit requis">Compétences linguistiques</p>
-      <div class="add-language-line">
-        <%= f.simple_fields_for :talent_languages do |u| %>
-          <%= render 'steps_talent_infos/language_fields', :f => u %>
-        <% end %>
-        <div class='links'>
-          <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields', class: "form-hobby-add" %>
-        </div>
-      </div>
+    <label class="col-lg-2 col-xs-12 label-edit requis" for="talent_techno_ids">Compétences linguistiques</label>
+    <div class="col-lg-10 col-xs-12" id="add-language">
+      <%= f.simple_fields_for :talent_languages do |u| %>
+        <%= render 'steps_talent_infos/language_fields', :f => u %>
+      <% end %>
+    </div>
+    <div class='links margin-top-30-xs col-lg-offset-2'>
+      <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields', class: "form-hobby-add" %>
     </div>
   </div>
 

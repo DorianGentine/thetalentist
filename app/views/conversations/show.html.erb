@@ -1,6 +1,6 @@
 
 
-<div class="row">
+<div class="row no-margin">
   <div class="colonne bordure-droite modal" id="modal_conversations" style="padding: 0 22% 0 0;">
     <span class="close" id="close_modal_conversations">
         <p>&times;</p>
@@ -14,37 +14,39 @@
     <%= render 'conversations' %>
   </div>
 
-  <div class="bordure-droite col-md-6 col-sm-9 col-xs-12 no-padding" style="height: calc(100vh - 70px);">
-    <div class="premiere-ligne nom-discussion row">
-      <!-- div Prénom Nom et poste  -->
-      <div class="modal-button visible-xs col-xs-2" style="text-align: center" data-target="modal_conversations">
-         <i class="fa fa-bars" style="color: black;"></i>
-      </div>
+  <div class="bordure-droite col-md-6 col-sm-9 col-xs-12 no-padding">
+    <div class="premiere-ligne nom-discussion">
+      <div class="row w-100">
+        <!-- div Prénom Nom et poste  -->
+        <div class="modal-button visible-xs col-xs-2" style="text-align: center" data-target="modal_conversations">
+           <i class="fa fa-bars" style="color: black;"></i>
+        </div>
 
-      <div class="col-lg-12 col-xs-10">
-        <% if @participant.is_a?(Talent) %>
-          <% if !@relationship.nil? && @relationship.status == "Accepter" %>
-            <h2 class="no-margin"><%= @participant.firstname.capitalize %> <%= @participant.last_name.capitalize %></h2>
-            <p class="no-margin"><%= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_" %></p>
+        <div class="col-lg-12 col-xs-10">
+          <% if @participant.is_a?(Talent) %>
+            <% if !@relationship.nil? && @relationship.status == "Accepter" %>
+              <h2 class="no-margin"><%= @participant.firstname.capitalize %> <%= @participant.last_name.capitalize %></h2>
+              <p class="no-margin"><%= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_" %></p>
+            <% else %>
+              <% if @participant.experiences.present? && @participant.experiences.first.position.present? %>
+                <h2 class="no-margin"><%= @participant.experiences.first.position.capitalize.truncate(45, separator:' ', omission:'') %></h2>
+              <% else %>
+                <h2 class="no-margin">Talent - Position inconnue</h2>
+              <% end %>
+              <% if !@relationship.nil? %>
+                <p class="no-margin"> <%= @relationship.status == "Refuser" ? "Le talent ne souhaite pas échanger pour le moment" : "En attente ..." %> </p>
+              <% else %>
+                <p class="no-margin"><%= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_/" %></p>
+              <% end %>
+            <% end %>
+          <% elsif @participant.is_a?(Headhunter)%>
+            <h2 class="no-margin"><%= @participant.firstname.capitalize %> de <%= @participant.startup.name.capitalize %></h2>
+            <p class="no-margin"> <%= @participant.job.capitalize %></p>
           <% else %>
-            <% if @participant.experiences.present? && @participant.experiences.first.position.present? %>
-              <h2 class="no-margin"><%= @participant.experiences.first.position.capitalize.truncate(45, separator:' ', omission:'') %></h2>
-            <% else %>
-              <h2 class="no-margin">Talent - Position inconnue</h2>
-            <% end %>
-            <% if !@relationship.nil? %>
-              <p class="no-margin"> <%= @relationship.status == "Refuser" ? "Le talent ne souhaite pas échanger pour le moment" : "En attente ..." %> </p>
-            <% else %>
-              <p class="no-margin"><%= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_/" %></p>
-            <% end %>
+            <h2 class="no-margin"><%= @participant.firstname.capitalize %></h2>
+            <p class="no-margin"> The Talentist </p>
           <% end %>
-        <% elsif @participant.is_a?(Headhunter)%>
-          <h2 class="no-margin"><%= @participant.firstname.capitalize %> de <%= @participant.startup.name.capitalize %></h2>
-          <p class="no-margin"> <%= @participant.job.capitalize %></p>
-        <% else %>
-          <h2 class="no-margin"><%= @participant.firstname.capitalize %></h2>
-          <p class="no-margin"> The Talentist </p>
-        <% end %>
+        </div>
       </div>
     </div>
 
@@ -84,9 +86,9 @@
         (current_user.is_a?(Talent) && !@participant.is_a?(Headhunter)) ||
         (current_user.is_a?(Headhunter) && @relationship && @relationship.status != "Accepter") ||
         (current_user.is_a?(Headhunter) && !@participant.is_a?(Talent)) %>
-        <div id="conversation" style="height: calc(100vh - 250px);">
+        <div id="conversation" style="height: calc(100vh - 280px);">
       <% else %>
-        <div id="conversation" style="height: calc(100vh - 320px);">
+        <div id="conversation" style="height: calc(100vh - 350px);">
       <% end %>
 
           <% @messages.each do |receipt| %>

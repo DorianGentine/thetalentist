@@ -58,13 +58,13 @@
               <h2 class="sous-titre-profil">Pas définit</h2>
             <% end %>
 
-        <hr class="separateur-show ligne-horizontal">
+        <hr class="ligne-horizontal">
 
         <!-- Secteur d'activité -->
           <div class="row margin-bottom-15">
-            <p class="titre-rubrique-1 col-xs-12 no-padding">Domaine d'activité</p>
-            <i class="far fa-compass green titre-rubrique-3 col-xs-1 no-padding"></i>
-            <p class="titre-rubrique-3 no-margin col-xs-11 no-padding">
+            <p class="titre-rubrique-1 col-xs-12">Domaine d'activité</p>
+            <i class="far fa-compass green titre-rubrique-3 col-xs-2"></i>
+            <p class="titre-rubrique-3 no-margin col-xs-10 no-padding">
               <% if @talent.jobs.first.present? && @talent.jobs.first.title.present? %>
                 <% @talent.jobs.each_with_index do |job, index| %>
                   <%= job.present? ? job.title : "" %>
@@ -81,9 +81,9 @@
         <!-- Téléphone -->
           <% if !current_user.is_a?(Headhunter) %>
             <div class="row margin-bottom-15">
-              <p class="titre-rubrique-1 col-xs-12 no-padding">Téléphone</p>
-              <i class="fas fa-code-branch green titre-rubrique-3 col-xs-1 no-padding" style="font-weight: 900"></i>
-              <p class="titre-rubrique-3 no-margin col-xs-11 no-padding">
+              <p class="titre-rubrique-1 col-xs-12">Téléphone</p>
+              <i class="fas fa-code-branch green titre-rubrique-3 col-xs-2" style="font-weight: 900"></i>
+              <p class="titre-rubrique-3 no-margin col-xs-10 no-padding">
                 <% if @talent.phone.present? %>
                   <%= @talent.phone %>
                 <% else%>
@@ -95,9 +95,9 @@
 
         <!-- Ville -->
           <div class="row margin-bottom-15">
-            <p class="titre-rubrique-1 col-xs-12 no-padding">Ville</p>
-            <i class="fas fa-map-marker-alt green titre-rubrique-3 col-xs-1 no-padding" style="font-weight: 900"></i>
-            <p class="titre-rubrique-3 no-margin col-xs-11 no-padding">
+            <p class="titre-rubrique-1 col-xs-12">Ville</p>
+            <i class="fas fa-map-marker-alt green titre-rubrique-3 col-xs-2" style="font-weight: 900"></i>
+            <p class="titre-rubrique-3 no-margin col-xs-10 no-padding">
               <%= @talent.city.present? ? @talent.city : "Dis-nous où tu habites" %>
             </p>
           </div>
@@ -282,7 +282,7 @@
             </div>
         </div>
 
-      <hr class="separateur-show ligne-horizontal">
+      <hr class="ligne-horizontal">
 
       <!-- Ligne texte -->
         <div class="row">
@@ -303,27 +303,29 @@
                 <% end %>
               </h4>
 
-              <p class="margin-right-15 no-margin-xs texte-rubrique-3"><% if @next_aventures.present? %>
-                  <% if @next_aventures.looking_for.present? %>
-                    <%= @next_aventures.looking_for %>
-                  <% elsif @next_aventures.dream.present?  %>
-                    <%= @next_aventures.dream %>
-                  <% elsif current_user.is_a?(Headhunter) %>
-                    <%= @talent.firstname %> n'a pas souhaité répondre à cette question.
-                  <% else %>
-                    <i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i>
-                  <% end %>
+              <% if @next_aventures.present? %>
+                <% if @next_aventures.looking_for.present? %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"><%= @next_aventures.looking_for %>
+                <% elsif @next_aventures.dream.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"><%= @next_aventures.dream %>
                 <% elsif current_user.is_a?(Headhunter) %>
-                  <%= @talent.firstname %> n'a pas souhaité répondre à cette question.
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.
                 <% else %>
-                  <i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i>
                 <% end %>
+              <% elsif current_user.is_a?(Headhunter) %>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.
+              <% else %>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i>
+              <% end %>
               </p>
             </div>
 
           <!-- La personnalité qui m'inspire -->
             <div class="col-lg-3 col-xs-12 margin-top-30-xs">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">La personnalité qui m'inspire</h4>
+
+
               <% if @next_aventures.present? %>
                 <% if @next_aventures.famous_person.present?  %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventures.famous_person %></p>
@@ -375,28 +377,31 @@
       <!-- Mes petits plus -->
         <% if !@talent.your_small_plus.present? && current_user.is_a?(Headhunter) %>
         <% else %>
-          <hr class="separateur-show ligne-horizontal">
+          <hr class="ligne-horizontal">
 
-          <h3 class="titre-rubrique-2" style="float: left;">Mes petits plus: </h3>
+          <div class="row">
 
-          <div class="talent-competences">
-            <% if !@talent.your_small_plus.present? %>
-              <i class="red fas fa-exclamation-triangle" style="margin: 0 10px 20px"></i>
-            <% else %>
-              <% @talent.your_small_plus.first(5).each do |hobby| %>
-                <p><%= hobby.description %></p>
-              <% end %>
-              <% if @talent.your_small_plus.length > 5 %>
-                <% @talent.your_small_plus.last(@talent.your_small_plus.length - 5).each do |hobby| %>
-                  <p class="read-more-content RMC-hobby"><%= hobby.description %></p>
+            <h3 class="titre-rubrique-2 col-xs-3">Mes petits plus: </h3>
+
+            <div class="row col-xs-9">
+              <% if !@talent.your_small_plus.present? %>
+                <i class="red fas fa-exclamation-triangle"></i>
+              <% else %>
+                <% @talent.your_small_plus.first(5).each do |hobby| %>
+                  <p><%= hobby.description %></p>
                 <% end %>
-                <p class="read-more" data-text-swap="Fermer" data-content-title="RMC-hobby"> + <%= @talent.your_small_plus.length - 5 %> </p>
+                <% if @talent.your_small_plus.length > 5 %>
+                  <% @talent.your_small_plus.last(@talent.your_small_plus.length - 5).each do |hobby| %>
+                    <p class="read-more-content RMC-hobby"><%= hobby.description %></p>
+                  <% end %>
+                  <p class="read-more" data-text-swap="Fermer" data-content-title="RMC-hobby"> + <%= @talent.your_small_plus.length - 5 %> </p>
+                <% end %>
               <% end %>
-            <% end %>
+            </div>
           </div>
         <% end %>
 
-      <hr class="separateur-show ligne-horizontal">
+      <hr class="ligne-horizontal">
 
       <div class="row">
         <!-- Je suis plutôt -->
@@ -405,9 +410,9 @@
 
             <!-- Chasseur / Eleveur -->
               <div class="row margin-top-15-xs margin-right-15 no-margin-xs">
-                <p class="texte-rubrique-2b no-margin no-padding col-lg-2 col-xs-6">Chasseur</p>
-                <p class="visible-xs texte-rubrique-2b no-margin no-padding col-xs-6" style="text-align: right;">Éleveur</p>
-                <div class="range-slider col-lg-7 no-padding col-xs-12 no-margin-xs">
+                <p class="texte-rubrique-2b no-margin col-lg-2 col-xs-6">Chasseur</p>
+                <p class="visible-xs texte-rubrique-2b no-margin col-xs-6" style="text-align: right;">Éleveur</p>
+                <div class="range-slider col-lg-7 col-xs-12 no-margin-xs">
                   <% if @next_aventures.present? %>
                     <% if @next_aventures.hunter_or_breeder.nil? && !current_user.is_a?(Headhunter) %>
                       <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
@@ -418,14 +423,14 @@
                     <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
                   <% end %>
                 </div>
-                <p class="hidden-xs texte-rubrique-2b no-margin no-padding col-lg-2">Éleveur</p>
+                <p class="hidden-xs texte-rubrique-2b no-margin col-lg-2">Éleveur</p>
               </div>
 
             <!-- Créatif / pragmatique -->
               <div class="row margin-top-15 margin-top-15-xs margin-right-15 no-margin-xs">
-                <p class="texte-rubrique-2b no-margin no-padding col-lg-2 col-xs-6">Créatif</p>
-                <p class="visible-xs texte-rubrique-2b no-margin no-padding col-xs-6" style="text-align: right;">Pragmatique</p>
-                <div class="range-slider col-lg-7 no-padding col-xs-12 no-margin-xs">
+                <p class="texte-rubrique-2b no-margin col-lg-2 col-xs-6">Créatif</p>
+                <p class="visible-xs texte-rubrique-2b no-margin col-xs-6" style="text-align: right;">Pragmatique</p>
+                <div class="range-slider col-lg-7 col-xs-12 no-margin-xs">
                   <% if @next_aventures.present? %>
                     <% if @next_aventures.creative_or_pragmatic.nil? && !current_user.is_a?(Headhunter) %>
                       <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
@@ -436,7 +441,7 @@
                     <p style="text-align: center; line-height: 18px; font-size: 12px;">À compléter</p>
                   <% end %>
                 </div>
-                <p class="hidden-xs texte-rubrique-2b no-margin no-padding col-lg-2">Pragmatique</p>
+                <p class="hidden-xs texte-rubrique-2b no-margin col-lg-2">Pragmatique</p>
               </div>
           </div>
 
