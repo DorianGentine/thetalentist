@@ -50,5 +50,6 @@ openOnglet();
 import { verifDateWithMonthAndYear } from '../components/verifDate';
 verifDateWithMonthAndYear();
 
-import { initSelect2 } from '../components/select2';
+import { initSelect2, initSelectize } from '../components/select2';
 initSelect2()
+initSelectize()

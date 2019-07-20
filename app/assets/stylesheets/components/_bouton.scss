@@ -359,23 +359,21 @@
   }
 
 // remove_fields
+  .remove_fields{
+    color: $red;
+  }
   .remove_fields::before{
     content: "<i class="fas fa-trash-alt"></i>"
-  }
-  .remove_fields{
   }
 
 // Form-hobby-add
   .form-hobby-add{
-    height: 39px;
-    min-height: 32px;
+    // height: 39px;
+    // min-height: 32px;
     border: 1px solid $green;
     border-radius: 4px;
     color: $green;
     padding: 0 15px;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
   }
   .form-hobby-add:hover{
     color: white;

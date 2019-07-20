@@ -1,13 +1,13 @@
-<div class='nested-fields row margin-bottom-15'>
-  <div class="col-xs-4 margin-right-15 no-padding">
+<div class='nested-fields margin-bottom-15 row align-items-baseline'>
+
+
+  <div class="col-lg-5 col-xs-12 margin-bottom-15-xs">
     <%= f.association :language, collection: Language.all, prompt: "Langue", label: false, input_html: { :class => "select2", style: "width: 100%" }  %>
   </div>
-  <div class="col-xs-4 margin-right-15 no-padding">
+  <div class="col-lg-5 col-xs-10 margin-bottom-30-xs">
     <%= f.input :level, collection: TalentLanguage.levels.map { |key, value| [key.humanize, key] }, prompt:"Niveau", label: false, :input_html => { :class => 'select2 no-search', style: "width: 100%" } %>
   </div>
-  <div class="col-xs-2 no-padding">
-    <%= link_to_remove_association f do %>
-      <i class="fas fa-trash-alt"></i>
-    <% end %>
-  </div>
+  <%= link_to_remove_association f do %>
+    <i class="fas fa-trash-alt"></i>
+  <% end %>
 </div>

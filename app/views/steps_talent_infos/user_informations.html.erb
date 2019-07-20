@@ -10,8 +10,8 @@
 
 <!-- line-height-center -->
 
-      <div class="blue-background margin-top-60">
-        <div class="row align-items-center">
+      <div class="blue-background margin-top-30">
+        <div class="row align-items-baseline">
           <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis" for="talent_firstname">Civilité</label>
 
           <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
@@ -39,8 +39,8 @@
       </div>
 
 
-      <div class="blue-background margin-top-60">
-        <div class="row align-items-center" id="talent_jobs">
+      <div class="blue-background margin-top-30">
+        <div class="row align-items-baseline" id="talent_jobs">
           <%= f.simple_fields_for :talent_job do |u| %>
             <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis" style="padding: 0 15px 0 0;">Mon&#8239;domaine&#8239;d'activité</label>
             <%= render 'talents/talent_job_fields', :u => u, f: f %>

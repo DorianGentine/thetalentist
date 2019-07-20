@@ -43,3 +43,8 @@
 .selectize-control.plugin-remove_button [data-value] .remove {
   line-height: unset;
 }
+
+// enlève le petit espace en-dessous des selectize
+.selectize-control{
+  padding-bottom: 0;
+}

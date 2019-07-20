@@ -175,7 +175,7 @@
 
       <!-- Ligne souhaits -->
         <div class="row margin-top-30">
-            <div class="info-grid-1 no-padding col-lg-2 col-xs-6">
+            <div class="info-grid-1 col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Mobilité</p>
               <% if @next_aventures.present? %>
 
@@ -197,7 +197,7 @@
 
 
           <!-- Type de contrat -->
-            <div class="info-grid-1 no-padding col-lg-2 col-xs-6">
+            <div class="info-grid-1 col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Type de contrat</p>
               <% if @next_aventures.present? %>
                 <% if @next_aventures.contrat.present? %>
@@ -213,7 +213,7 @@
             </div>
 
           <!-- Attentes salariales -->
-            <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
+            <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Attentes salariales</p>
               <% if @next_aventures.present? %>
                 <% if @next_aventures.remuneration.present? %>
@@ -229,7 +229,7 @@
             </div>
 
           <!-- Secteur -->
-            <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
+            <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Secteur</p>
               <% if @sectors.present? %>
                 <% @sectors.each do |talent_sector| %>
@@ -244,7 +244,7 @@
 
 
           <!-- Disponibilité -->
-            <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
+            <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Disponibilité</p>
               <% if @next_aventures.present? %>
                 <% if @next_aventures.availability.present? %>
@@ -260,7 +260,7 @@
             </div>
 
           <!-- Branche -->
-            <div class="info-grid-1 no-padding col-lg-2 col-xs-6 margin-top-15-xs">
+            <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2" style="opacity:0">Branche</p>
               <% if @next_aventures.present? %>
                 <% if @next_aventures.btoc || @next_aventures.btob %>
@@ -303,8 +303,7 @@
                 <% end %>
               </h4>
 
-              <p class="margin-right-15 no-margin-xs texte-rubrique-3 more">
-                <% if @next_aventures.present? %>
+              <p class="margin-right-15 no-margin-xs texte-rubrique-3"><% if @next_aventures.present? %>
                   <% if @next_aventures.looking_for.present? %>
                     <%= @next_aventures.looking_for %>
                   <% elsif @next_aventures.dream.present?  %>
