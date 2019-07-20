@@ -9,32 +9,24 @@
     <%= render "/shared/change_photo", f: u %>
 
     <div class="row margin-top-30">
-      <div class="col-lg-6 col-xs-12 no-padding">
+      <div class="col-lg-6 col-xs-12">
         <p class="label-edit requis">Nom de l'entreprise</p>
-        <div class="no-padding margin-right-15 no-margin-xs">
-          <%= u.input :name, label: false, :input_html => { style: "width: 100%" } %>
-        </div>
+        <%= u.input :name, label: false, :input_html => { style: "width: 100%" } %>
       </div>
-      <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
+      <div class="col-lg-6 col-xs-12 margin-top-15-xs">
         <p class="label-edit requis">Site internet</p>
-        <div class="no-padding">
-          <%= u.input :link, label: false, :input_html => { style: "width: 100%" } %>
-        </div>
+        <%= u.input :link, label: false, :input_html => { style: "width: 100%" } %>
       </div>
     </div>
 
     <div class="row margin-top-15">
-      <div class="col-lg-6 col-xs-12 no-padding">
+      <div class="col-lg-6 col-xs-12">
         <p class="label-edit requis">Adresse</p>
-        <div class="no-padding margin-right-15 no-margin-xs">
-          <%= u.input :address, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
-        </div>
+        <%= u.input :address, label: false, :input_html => { style: "width: 100%", :id => "startup_address" } %>
       </div>
-      <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
+      <div class="col-lg-6 col-xs-12 margin-top-15-xs">
         <p class="label-edit requis">Rapide descriptif</p>
-        <div class="no-padding">
-          <%= u.input :short_resume, label: false, :input_html => { style: "width: 100%", class: "limited-character" }, maxlength: 50 %>
-        </div>
+        <%= u.input :short_resume, label: false, :input_html => { style: "width: 100%", class: "limited-character" }, maxlength: 50 %>
     </div>
   </div>
 
@@ -49,24 +41,20 @@
   <%= render "/shared/change_photo", f: f %>
 
   <div class="row margin-top-15">
-    <div class="col-lg-8 col-xs-12 no-padding">
+    <div class="col-lg-8 col-xs-12">
       <p class="label-edit requis">Civilité</p>
-      <div class="col-lg-6 col-xs-12 no-padding">
-        <div class="margin-right-15 no-margin-xs">
+      <div class="row">
+        <div class="col-lg-6 col-xs-12">
           <%= f.input :firstname, required: true, label: false, :input_html => { style: "width: 100%" } %>
         </div>
-      </div>
-      <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
-        <div class="margin-right-15 no-margin-xs">
+        <div class="col-lg-6 col-xs-12 margin-top-15-xs">
           <%= f.input :last_name, required: true, label: false, :input_html => { style: "width: 100%" } %>
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-xs-12 no-padding margin-top-15-xs">
+    <div class="col-lg-4 col-xs-12 margin-top-15-xs">
       <p class="label-edit requis">Poste actuel</p>
-      <div class="no-padding">
-        <%= f.input :job, required: true, label: false, :input_html => { style: "width: 100%" } %>
-      </div>
+      <%= f.input :job, required: true, label: false, :input_html => { style: "width: 100%" } %>
     </div>
   </div>
 
@@ -106,18 +94,10 @@
   <h2 class="titre-section margin-top-60">Nous <strong>suivre</strong></h2>
 
   <div class="row margin-top-15">
-    <div class="col-lg-6 col-xs-12 no-padding">
+    <div class="col-lg-6 col-xs-12">
       <p class="label-edit">Linkedin</p>
-      <div class="no-padding margin-right-15 no-margin-xs">
-        <%= u.input :linkedin, label: false, :input_html => { style: "width: 100%" } %>
-      </div>
+      <%= u.input :linkedin, label: false, :input_html => { style: "width: 100%" } %>
     </div>
-<!--     <div class="col-lg-6 col-xs-12 no-padding margin-top-15-xs">
-      <p class="label-edit">Facebook</p>
-      <div class="no-padding">
-        <%= u.input :facebook, label: false, :input_html => { style: "width: 100%" } %>
-      </div>
-    </div> -->
   </div>
 
   <% end %>

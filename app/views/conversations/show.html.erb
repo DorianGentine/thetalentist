@@ -101,29 +101,27 @@
 
     <div class="boite-envoi">
       <%= form_for @message, url: conversation_messages_path(@conversation) do |f|  %>
-        <%= f.text_area :body, placeholder: "Écrivez votre message...", autofocus: true %>
+        <%= f.text_area :body, placeholder: "Écrivez votre message...", autofocus: true, disabled: current_user.is_a?(Talent) && @connexion && @relationship.status == "pending" %>
         <div id="send-bar">
           <label for="mailboxer_message_attachment" class="label-file-mailboxer" name="mailboxer_message[attachment]"><i class="fas fa-paperclip"></i></label>
           <%= f.file_field :attachment, :style => "display: none" %>
           <p href="#" id="uploadFile" style="margin: 0;">Aucun fichier</p>
-          <%= f.submit "Envoyer", :class => "btn-envoyer gray-button", id: "send-bar-btn" %>
+          <%= f.submit "Envoyer", :class => "btn-envoyer gray-button", id: "send-bar-btn", disabled: current_user.is_a?(Talent) && @connexion && @relationship.status == "pending" %>
         </div>
 
       <% end %>
 
 
       <!-- div accepter la relation -->
-        <% if current_user.is_a?(Talent) && @connexion %>
-          <% if @relationship.status == "pending"  %>
-            <div class="accept-relation">
-              <%= simple_form_for :current_user, method: :put do |f| %>
-                <%= f.simple_fields_for @relationship do |u| %>
-                  <%= u.submit "Accepter", class: "btn-envoyer" %>
-                  <%= u.submit "Refuser", class: "btn-envoyer" %>
-                <% end %>
+        <% if current_user.is_a?(Talent) && @connexion && @relationship.status == "pending" %>
+          <div class="accept-relation">
+            <%= simple_form_for :current_user, method: :put do |f| %>
+              <%= f.simple_fields_for @relationship do |u| %>
+                <%= u.submit "Accepter", class: "btn-envoyer" %>
+                <%= u.submit "Refuser", class: "btn-envoyer" %>
               <% end %>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         <% end %>
       <!-- bloqué pour Talentist -->
         <% if params[:headhunter_id] || params[:talent_id] %>

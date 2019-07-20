@@ -1,19 +1,30 @@
 const petitPlusInput = document.getElementsByClassName('input_petit_plus')
 
 if(petitPlusInput){
-  let petitPlusBtn
+  let petitPlusBtn = null
   let btnPushed = false
 
-  for (var i = petitPlusInput.length - 1; i >= 0; i--) {
-    petitPlusInput[i].addEventListener("keydown", (e, i) => {
-      if(e.key === "Enter" && !btnPushed){
-        btnPushed = true
+  const renderNewInput = (e, index) => {
+    if(e.key === "Enter" && !btnPushed){
+      console.log("launch", btnPushed)
+      btnPushed = true
+      if(petitPlusBtn === null){
         petitPlusBtn = document.getElementById('add_petit_plus')
-        e.preventDefault()
-        petitPlusBtn.click()
-        petitPlusInput[petitPlusInput.length - 1].focus()
       }
-    })
+      e.preventDefault()
+      petitPlusBtn.click()
+      defineEventListener()
+      petitPlusInput[petitPlusInput.length - 1].focus()
+    }
   }
-  btnPushed = false
+
+  const defineEventListener = () => {
+    btnPushed = false
+    for (let i = 0; i < petitPlusInput.length; i++) {
+      const index = i + 1
+      petitPlusInput[i].addEventListener("keydown", e => renderNewInput(e, index))
+    }
+  }
+
+  defineEventListener()
 }
