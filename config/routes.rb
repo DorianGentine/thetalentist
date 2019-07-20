@@ -93,7 +93,7 @@ Rails.application.routes.draw do
         end
       end
       resources :notifications, only: [ :index ]
-      resources :talents, only: [ :index ] do
+      resources :talents, only: [ :index, :show ] do
         collection do
           get :repertoire
         end
