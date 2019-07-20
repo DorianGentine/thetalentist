@@ -11,7 +11,7 @@ span.select2.select2-container.select2-container--default {
 }
 
 // Ajuste height selectize pour que les champs bougent avec leurs contenu
-.selectize-control.form-control.select.optional.selectAndCreate.multi.plugin-remove_button {
+.form-control.select.optional.selectAndCreate.multi.plugin-remove_button {
   height: unset;
 }
 
@@ -24,20 +24,19 @@ span.select2.select2-container.select2-container--default {
   }
 }
 .form-control{
-  color: $black;
-  display: block;
+//   display: block;
   min-height: 35px;
   height: unset;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.428571429;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  input {
-    color: #C9C9C9;
-  }
+//   padding: 6px 12px;
+//   font-size: 14px;
+//   line-height: 1.428571429;
+//   background-color: #fff;
+//   background-image: none;
+//   border: 1px solid #ccc;
+//   border-radius: 2px;
+//   input {
+//     color: #C9C9C9;
+//   }
 }
 .text-muted {
   color: #C9C9C9;
@@ -86,9 +85,8 @@ span.select2.select2-container.select2-container--default {
 }
 
 .row {
-  width: 100%;
-  margin-left: 0;
-  margin-right: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 .simple-new-talent .simple_form {
   width: 120%;

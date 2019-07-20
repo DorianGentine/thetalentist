@@ -1,65 +1,62 @@
+<div class="row" style="height: calc(100vh - 190px">
+  <div class="home-left col-xs-12 col-sm-6 col-lg-6">
+    <div class="margin-auto-talent">
+      <h1><strong>Bienvenue</strong> sur The Talentist !</h1>
+      <h2>Quelque soit ton talent, tu réussiras à intégrer la start-up qui te correspond et dans laquelle tu t’épanouiras</h2>
 
-
-<div class="home-container ">
-  <div class="row">
-    <div class="home-left col-xs-12 col-sm-6 col-lg-6">
-      <div class="margin-auto-talent">
-        <h1><strong>Bienvenue</strong> sur The Talentist !</h1>
-        <h2>Quelque soit ton talent, tu réussiras à intégrer la start-up qui te correspond et dans laquelle tu t’épanouiras</h2>
-
-        <div class="home-connexion">
-          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <%= f.error_notification %>
-            <div class="connexion-item" id="icon-input">
-              <div class="input-group">
-                <input class="form-control string email optional" autofocus="autofocus" placeholder="exemple@gmail.com" type="email" value="" name="talent[email]" id="talent_email">
-                <div class="input-group-addon">
-                  <i class='fas fa-envelope'></i>
-                </div>
-              </div>
-              <div class="input-group">
-
-                <input class="form-control password optional" placeholder="*********" type="password" name="talent[password]" id="talent_password">
-                <div class="input-group-addon">
-                  <i class="fas fa-key"></i>
-                </div>
-              </div>
-              <%= content_tag(:div, flash[:alert], :id => "flash_alert ", :style => "color: red; margin-left: 10%;") if flash[:alert] %>
-            </div>
-            <div class="connexion-btns btn-aline">
-              <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-                <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %>
-              <% end -%>
-            <div class="form-actions">
-              <%= f.button :submit, "Se connecter", { :class => "btn form-btn form-btn-suivant"} %>
-            </div>
-            </div>
-
-            <div class="choice-connexion margin-top-bottom-btn">
-              <hr>
-              <p>OU</p>
-            </div>
-            <div class="btn-aline margin-top-bottom-btn">
-              <div class="linkedin-btn">
-                <%= link_to omniauth_authorize_path(:talent, :linkedin), :class => "button-linkedin" do %>
-                  <p><i class="fab fa-linkedin"></i> Connect with Linkedin</p>
-                <% end %>
-              </div>
-              <div class="form-actions" id="regrister-talent-btn">
-                <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-                  <%= link_to "S'inscrire normalement", new_talent_registration_path, :class => "form-btn form-btn-precedent"  %>
-                <% end %>
+      <div class="home-connexion">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+          <div class="connexion-item" id="icon-input">
+            <div class="input-group">
+              <input class="form-control string email optional" autofocus="autofocus" placeholder="exemple@gmail.com" type="email" value="" name="talent[email]" id="talent_email">
+              <div class="input-group-addon">
+                <i class='fas fa-envelope'></i>
               </div>
             </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 hidden-xs col-sm-6">
-      <div class="image-register" style="background-image: url('<%= image_path "olu-eletu-134758-unsplash.jpg" %>');">
+            <div class="input-group">
 
+              <input class="form-control password optional" placeholder="*********" type="password" name="talent[password]" id="talent_password">
+              <div class="input-group-addon">
+                <i class="fas fa-key"></i>
+              </div>
+            </div>
+            <%= content_tag(:div, flash[:alert], :id => "flash_alert ", :style => "color: red; margin-left: 10%;") if flash[:alert] %>
+          </div>
+          <div class="connexion-btns btn-aline">
+            <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+              <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %>
+            <% end -%>
+          <div class="form-actions">
+            <%= f.button :submit, "Se connecter", { :class => "btn form-btn form-btn-suivant"} %>
+          </div>
+          </div>
+
+          <div class="choice-connexion margin-top-bottom-btn">
+            <hr>
+            <p>OU</p>
+          </div>
+          <div class="btn-aline margin-top-bottom-btn">
+            <div class="linkedin-btn">
+              <%= link_to omniauth_authorize_path(:talent, :linkedin), :class => "button-linkedin" do %>
+                <p><i class="fab fa-linkedin"></i> Connect with Linkedin</p>
+              <% end %>
+            </div>
+            <div class="form-actions" id="regrister-talent-btn">
+              <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+                <%= link_to "S'inscrire normalement", new_talent_registration_path, :class => "form-btn form-btn-precedent"  %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
+  <div class="col-lg-6 hidden-xs col-sm-6">
+    <div class="image-register" style="background-image: url('<%= image_path "olu-eletu-134758-unsplash.jpg" %>');">
+
+    </div>
+  </div>
 </div>
+
 

@@ -265,7 +265,7 @@ class Talent < ApplicationRecord
 
   def set_build_belong_tables
     if self.talent_formations.count == 0
-      1.times { self.talent_formations.build }
+      5.times { self.talent_formations.build }
     else
       0.times { self.talent_formations.build }
     end

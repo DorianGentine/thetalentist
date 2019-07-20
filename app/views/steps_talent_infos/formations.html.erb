@@ -1,11 +1,8 @@
-
-
 <div class="form-container simple-new-talent" data-page="2">
 
   <%= render 'shared/formprogression' %>
 
   <h2 class="form-titre-page"><i class="fas fa-graduation-cap"></i> Quel est votre parcours <strong>scolaire</strong> ?</h2>
-
 
   <%= simple_form_for @talent, url: wizard_path, method: :put do |f| %>
 
@@ -16,31 +13,45 @@
         <%= f.simple_fields_for :talent_formations do |u| %>
           <%= render 'formation_fields', :f => u %>
         <% end %>
-        <div class='links'>
-          <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'formation_fields', class: "form-hobby-add" %>
+        <div class="col-lg-offset-2">
+          <a href="#" class="form-hobby-add" id="add_formation">Ajouter formation</a>
+          <%= link_to_add_association 'Ajouter formation', f, :talent_formations, :partial => 'formation_fields', class: "form-hobby-add hidden", id: "add_formation2" %>
         </div>
       </div>
 
       <div class=" row">
-        <div class="col-xs-12 col-lg-6 no-padding">
-          <div id="add-language" class="blue-background margin-right-background margin-top-60">
-            <p class="label-edit no-margin">Compétences linguistiques</p>
-            <div class="add-language-line">
+
+
+        <div class="col-xs-12 col-lg-6 margin-top-30">
+          <div id="add-language" class="blue-background" style="min-height: 154px">
+
+              <p class="label-edit">Compétences linguistiques</p>
+
               <%= f.simple_fields_for :talent_languages do |u| %>
                 <%= render 'language_fields', :f => u %>
               <% end %>
-              <div class='links'>
+
+              <div>
                 <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'language_fields', :class => "form-hobby-add" %>
+              </div>
+
+
+          </div>
+        </div>
+
+
+        <div class="col-xs-12 col-lg-6 margin-top-30">
+          <div class="blue-background" style="min-height: 154px">
+            <div class="row">
+              <p class="label-edit col-xs-12">Compétences clés</p>
+              <div class="col-xs-12">
+                <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { :class => "comp-cles", multiple: "multiple"}, multiple: true, required: true %>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xs-12 col-lg-6 no-padding">
-          <div class="blue-background margin-left-background margin-top-60" style="min-height: 154px">
-            <p class="label-edit no-margin">Compétences clés</p>
-            <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { :class => "comp-cles", multiple: "multiple", style: "width: 100%"}, multiple: true, required: true %>
-          </div>
-        </div>
+
+
       </div>
     </div>
 

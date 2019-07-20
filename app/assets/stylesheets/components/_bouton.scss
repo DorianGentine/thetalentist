@@ -27,12 +27,16 @@
     border-radius: 15px;
     color: $green;
     border: 1px solid $green;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7px;
     transition: 0.5s;
     span{
       font-size: 14px;
       position: relative;
       display: inline-block;
-      padding: 0 7px;
+      // padding: 0 7px;
     }
     span:after{
       content: 'Modifier';
@@ -359,23 +363,21 @@
   }
 
 // remove_fields
+  .remove_fields{
+    color: $red;
+  }
   .remove_fields::before{
     content: "<i class="fas fa-trash-alt"></i>"
-  }
-  .remove_fields{
   }
 
 // Form-hobby-add
   .form-hobby-add{
-    height: 39px;
-    min-height: 32px;
+    // height: 39px;
+    // min-height: 32px;
     border: 1px solid $green;
     border-radius: 4px;
     color: $green;
     padding: 0 15px;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
   }
   .form-hobby-add:hover{
     color: white;

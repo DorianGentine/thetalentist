@@ -1,42 +1,31 @@
-<div class="nested-fields margin-bottom-15" id="diplome-form">
+<div class="nested-fields nf-formations margin-bottom-15 row align-items-center" id="diplome-form">
 
-    <div class="col-xs-10 no-padding line-height-center">
-      <p class="label-edit no-margin-xs margin-right-15">Diplôme</p>
-    </div>
+  <p class="col-xs-10 col-sm-2 label-edit no-margin-xs text-align-right text-align-left-xs">Diplôme</p>
 
-    <div class="visible-xs col-xs-2" id="align-sup-btn">
-      <%= link_to_remove_association f do %>
-        <i class="fas fa-trash-alt"></i>
-      <% end %>
-    </div>
-  <div class="row margin-top-30-xs">
-
-    <div class="col-xs-12 col-lg-4 no-padding">
-      <div class="margin-right-15 no-margin-xs">
-        <%# raise %>
-        <%= f.association :formation, collection: Formation.all.order('title ASC'), prompt:"Établissement", label: false, input_html: { :class => "selectAndCreate", style: "width: 100%" } %>
-      </div>
-    </div>
-
-    <div class="col-xs-12 <%= @talent.validated? ? "col-lg-5" : "col-lg-4" %> no-padding margin-top-15-xs">
-      <div class="margin-right-15 no-margin-xs">
-        <%= f.input :title, placeholder: "Formation", label: false, input_html: { style: "width: 100%" }, error: f.object.errors.messages[:title][0]  %>
-      </div>
-    </div>
-
-    <div class="col-xs-12 <%= @talent.validated? ? "col-lg-2" : "col-lg-3" %> no-padding margin-top-15-xs">
-      <div class="margin-right-15 no-margin-xs">
-        <%= f.input :year, collection: (1980..Date.today.year.to_i).to_a.reverse,  label: false, prompt:"Année d'obtention", input_html: { :class => "select2 no-search", style: "width: 100%" }, error: f.object.errors.messages[:title][0]  %>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-lg-1 no-padding hidden-xs" id="align-sup-btn">
-      <%= link_to_remove_association f do %>
-       <i class="fas fa-trash-alt"></i>
-      <% end %>
-    </div>
-
+  <div class="visible-xs" id="align-sup-btn">
+    <%= link_to_remove_association f do %>
+      <i class="fas fa-trash-alt"></i>
+    <% end %>
   </div>
+
+  <div class="col-xs-12 col-lg-3 ">
+    <%= f.association :formation, collection: Formation.all.order('title ASC'), prompt:"Établissement", label: false, input_html: { :class => "selectAndCreate", style: "width: 100%" }, wrapper: false %>
+  </div>
+
+  <div class="col-xs-12 col-lg-3 margin-top-15-xs">
+    <%= f.input :title, placeholder: "Formation", label: false, input_html: { style: "width: 100%" }, error: f.object.errors.messages[:title][0], wrapper: false  %>
+  </div>
+
+  <div class="col-xs-12 col-lg-3 margin-top-15-xs">
+    <%= f.input :year, collection: (1980..Date.today.year.to_i).to_a.reverse,  label: false, prompt:"Année d'obtention", input_html: { :class => "select2 no-search", style: "width: 100%" }, error: f.object.errors.messages[:title][0], wrapper: false  %>
+  </div>
+
+  <div class="col-lg-1  hidden-xs" id="align-sup-btn">
+    <%= link_to_remove_association f do %>
+     <i class="fas fa-trash-alt"></i>
+    <% end %>
+  </div>
+
 </div>
 
 

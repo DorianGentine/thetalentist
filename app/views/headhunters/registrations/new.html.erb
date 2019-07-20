@@ -5,57 +5,58 @@
     <%= f.error_notification %>
 
 
-  <!-- Line 1 -->
-    <div class="blue-background">
-      <div class="row">
-        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin requis col-lg-2 col-xs-12">Prénom</p>
-        <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs">
+  <div class="blue-background">
+    <!-- Line 1 -->
+      <div class="row align-items-baseline">
+        <p class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis">Prénom</p>
+        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
           <%= f.input :firstname, required: true, autofocus: true, label: false, input_html: { style: "width: 100%" } %>
         </div>
-        <label class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center col-lg-3 col-xs-12 requis margin-top-15-xs">Nom</label>
-        <div class="col-lg-3 col-xs-12 no-padding">
+
+        <label class="col-lg-3 col-xs-12 label-edit text-align-right text-align-left-xs requis">Nom</label>
+        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
           <%= f.input :last_name, required: true, autofocus: true, label: false, input_html: { style: "width: 100%" } %>
         </div>
       </div>
 
-  <!-- Line 2 -->
-      <div class="row margin-top-15">
-        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin requis col-lg-2 col-xs-12">Email</p>
-        <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs">
+    <!-- Line 2 -->
+      <div class="row align-items-baseline margin-top-15">
+        <p class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis">Email</p>
+        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
           <%= f.input :email, required: true, autofocus: true, label: false, input_html: { style: "width: 100%" } %>
         </div>
       </div>
     </div>
 
   <!-- Line 3 -->
-    <div class="blue-background margin-top-60">
-      <div class="row">
-        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin requis col-lg-2 col-xs-12">Mot de passe</p>
-        <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs">
+    <div class="blue-background margin-top-30">
+      <div class="row align-items-baseline">
+        <p class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis">Mot de passe</p>
+        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
           <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), label: false, input_html: { style: "width: 100%" } %>
         </div>
-        <div class="col-lg-3 col-xs-12 no-padding margin-top-15-xs">
+        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
           <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, input_html: { style: "width: 100%" } %>
         </div>
       </div>
     </div>
 
   <!-- Line 4 -->
-    <div class="blue-background margin-top-60">
-      <div class="row">
-        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin requis col-lg-2 col-xs-12">Votre entreprise</p>
-        <div class="col-lg-3 col-xs-12 no-padding margin-right-15 no-margin-xs">
+    <div class="blue-background margin-top-30">
+      <div class="row align-items-baseline">
+        <p class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis">Votre entreprise</p>
+        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
           <%= f.input :startup, collection: Startup.all, input_html: { style: "width: 100%", class:"selectAndCreate" }, label:false %>
         </div>
-        <p class="label-edit text-align-right text-align-left-xs no-padding margin-right-15 line-height-center no-margin requis col-lg-3 col-xs-12 margin-top-15-xs">Poste</p>
-        <div class="col-lg-3 col-xs-12 no-padding">
+        <p class="col-lg-3 col-xs-12 label-edit text-align-right text-align-left-xs requis">Poste</p>
+        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
           <%= f.input :job, required: true, autofocus: true, label: false, input_html: { style: "width: 100%" } %>
         </div>
       </div>
     </div>
 
   <!-- Line 5 -->
-    <div class="blue-background margin-top-60 row">
+    <div class="blue-background margin-top-30">
       <div class="row">
         <div class="col-xs-2 col-lg-offset-3 col-lg-1 no-padding">
           <%= f.input :terms_of_condition, as: :boolean, label: false, required: true %>

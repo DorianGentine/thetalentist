@@ -1,6 +1,6 @@
 <% if current_user.is_a?(Headhunter) || current_user.is_a?(Talentist)%>
   <%= link_to edit_headhunter_path(@headhunter), class:"btn-edition-container" do %>
-      <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="gray fas fa-exclamation-triangle margin-right-15"></i>profil complété à <strong class=" <%= CompletedHeadhunter.new(@headhunter).completed_totaly > 85 ? "green" : "red"  %>"><%= CompletedHeadhunter.new(@headhunter).completed_totaly %>%</strong></p>
+      <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="fas <%= CompletedHeadhunter.new(@headhunter).completed_totaly > 85 ? "fa-thumbs-up green" : "fa-exclamation-triangle red"  %> margin-right-15"></i>profil complété à <strong class="<%= CompletedHeadhunter.new(@headhunter).completed_totaly > 85 ? "green" : "red"  %>"><%= CompletedHeadhunter.new(@headhunter).completed_totaly %>%</strong></p>
       <div class="btn-edition">
         <span><i class="fas fa-edit"></i></span>
       </div>
@@ -44,13 +44,13 @@
         <!-- description entreprise -->
           <h2 class="sous-titre-profil"><%= @startup.short_resume.present? ? @startup.short_resume : "Ajoutez un petit résumé de votre entreprise" %></h2>
 
-        <hr class="separateur-show ligne-horizontal">
+        <hr class="ligne-horizontal">
 
         <!-- Domaine d'activité -->
           <div class="row margin-bottom-15">
-            <p class="titre-rubrique-1 col-xs-12 no-padding">Domaine d'activité</p>
-            <i class="far fa-compass green titre-rubrique-3 col-xs-1 no-padding"></i>
-            <p class="titre-rubrique-3 no-margin col-xs-11 no-padding">
+            <p class="titre-rubrique-1 col-xs-12">Domaine d'activité</p>
+            <i class="far fa-compass green titre-rubrique-3 col-xs-2"></i>
+            <p class="titre-rubrique-3 no-margin col-xs-10 no-padding">
               <% if @startup.sectors.present? %>
                 <%= @startup.sectors.last.title.present? ? @startup.sectors.last.title : "Ajoutez votre domaine d'activité" %>
               <% else %>
@@ -61,18 +61,20 @@
 
           <!-- Site internet -->
           <div class="row margin-bottom-15">
-            <p class="titre-rubrique-1 col-xs-12 no-padding">Site internet</p>
-            <i class="far fa-compass green titre-rubrique-3 col-xs-1 no-padding"></i>
+            <p class="titre-rubrique-1 col-xs-12">Site internet</p>
+            <i class="fas fa-link green titre-rubrique-3 col-xs-2" style="font-weight: 900"></i>
             <% if @startup.link.present? %>
-              <a class="titre-rubrique-3 no-margin col-xs-11 no-padding" href="https://<%= @startup.link.split("//").count > 1 ? @startup.link.split("//").second : @startup.link.split("//").first %>" target="_blank"><%= @startup.link.present? ? @startup.link : "Ajoutez votre site internet" %></a>
+              <a class="titre-rubrique-3 no-margin col-xs-10 no-padding" href="https://<%= @startup.link.split("//").count > 1 ? @startup.link.split("//").second : @startup.link.split("//").first %>" target="_blank"><%= @startup.link.present? ? @startup.link : "Ajoutez votre site internet" %></a>
+            <% else %>
+              <p class="titre-rubrique-3 no-margin col-xs-10 no-padding"> Ajoutez votre site internet</p>
             <% end %>
           </div>
 
         <!-- Adresse -->
           <div class="row margin-bottom-15">
-            <p class="titre-rubrique-1 col-xs-12 no-padding">Adresse</p>
-            <i class="fas fa-map-marker-alt green titre-rubrique-3 col-xs-1 no-padding" style="font-weight: 900"></i>
-            <p class="titre-rubrique-3 no-margin col-xs-11 no-padding"><%= @startup.address.present? ? @startup.address : "Ajoutez votre adresse" %></p>
+            <p class="titre-rubrique-1 col-xs-12">Adresse</p>
+            <i class="fas fa-map-marker-alt green titre-rubrique-3 col-xs-2" style="font-weight: 900"></i>
+            <p class="titre-rubrique-3 no-margin col-xs-10 no-padding"><%= @startup.address.present? ? @startup.address : "Ajoutez votre adresse" %></p>
           </div>
           <% if @startup.address.present? %>
             <div id="map" data-markers="<%= @markers.to_json %>"></div>
@@ -231,7 +233,7 @@
 
       </div>
 
-      <hr class="separateur-show ligne-horizontal">
+      <hr class="ligne-horizontal">
 
       <!-- Ligne texte -->
         <div class="row">

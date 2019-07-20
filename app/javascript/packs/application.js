@@ -20,6 +20,8 @@ import '../components/collapse_arrow';
 
 import '../components/copyLink';
 
+import '../components/petitPlusEnter';
+
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 
@@ -50,9 +52,9 @@ openOnglet();
 import { verifDateWithMonthAndYear } from '../components/verifDate';
 verifDateWithMonthAndYear();
 
-import { initSelect2 } from '../components/select2';
+import { initSelect2, initSelectize } from '../components/select2';
 initSelect2()
-
+initSelectize()
 
 import { fetchNotifications } from "../components/notification";
 fetchNotifications();

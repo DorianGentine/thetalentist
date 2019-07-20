@@ -6,31 +6,37 @@
 
     <%= render 'shared/change_photo', f: f %>
 
-    <div class="row margin-top-30">
-      <p class="label-edit requis">Civilité</p>
-      <div class="col-lg-4 no-padding margin-right-15 no-margin-xs">
-        <%= f.input :firstname, label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:firstname][0] %>
+    <div class="row align-items-baseline margin-top-30">
+
+      <label class="col-lg-2 col-xs-12 label-edit requis" for="talent_firstname">Civilité</label>
+
+      <div class="col-lg-5 col-xs-12 margin-bottom-15-xs">
+        <%= f.input :firstname, required: true, autofocus: false, placeholder: "Prénom", label: false, :input_html => { style: "width: 100%"}, error: f.object.errors.messages[:firstname][0] %>
       </div>
-      <div class="col-lg-4 no-padding margin-top-15-xs">
-        <%= f.input :last_name, label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:last_name][0] %>
+
+      <div class="col-lg-5 col-xs-12 margin-bottom-15-xs">
+        <%= f.input :last_name, required: true, autofocus: false, placeholder: "Nom", label: false, :input_html => { style: "width: 100%"}, error: f.object.errors.messages[:last_name][0] %>
       </div>
+
     </div>
 
-    <div class="row margin-top-30">
-      <div class="col-lg-4 no-padding margin-right-15 no-margin-xs">
-        <p class="label-edit requis">Téléphone</p>
+    <div class="row align-items-baseline margin-top-30">
+      <label class="col-lg-2 col-xs-12 label-edit requis" for="talent_phone">Téléphone</label>
+
+      <div class="col-lg-4 col-xs-12">
         <%= f.input :phone, label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:phone][0] %>
       </div>
-      <div class="col-lg-4 no-padding margin-top-15-xs">
-        <p class="label-edit requis">Ville actuelle</p>
-        <%#= f.input :zip_code, placeholder: '75002', :input_html => { :id => "", style: "width: 100%" }, type:"number", label: false, error: f.object.errors.messages[:zip_code][0] %>
+
+      <label class="col-lg-2 col-xs-12 margin-top-15-xs label-edit requis" for="talent_city">Ville actuelle</label>
+
+      <div class="col-lg-4 col-xs-12">
         <%= f.input :city, label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:city][0] %>
       </div>
     </div>
 
-    <div class="row margin-top-30">
+    <div class="row align-items-baseline margin-top-30">
       <%= f.simple_fields_for :talent_job do |u| %>
-        <label class="label-edit col-lg-2 col-xs-12 requis" style="padding: 0 15px 0 0;">Mon&#8239;domaine  d'activité</label>
+        <label class="label-edit col-lg-3 col-xs-12 requis">Mon&#8239;domaine  d'activité</label>
         <%= render 'talents/talent_job_fields', :u => u, f: f %>
       <% end %>
     </div>
@@ -39,9 +45,10 @@
     <div class="titre-section-icon margin-top-60"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
     <h2 class="titre-section margin-top-60">Me suivre <strong>sur :</strong></h2>
 
-      <div class="row margin-top-30">
-        <div class="col-lg-4 no-padding margin-right-15">
-          <p class="label-edit">Linkedin</p>
+      <div class="row align-items-baseline margin-top-30">
+        <label class="col-lg-2 col-xs-12 label-edit requis" for="talent_linkedin">Linkedin</label>
+
+        <div class="col-lg-4 col-xs-12">
           <%= f.input :linkedin, label: false, :input_html => { style: "width: 100%" } %>
         </div>
       </div>

@@ -1,9 +1,4 @@
 // Old landing
-.home-container {
-  .row {
-    height: calc(100vh - 190px);
-  }
-}
 .margin-auto-talent {
   width: 70%;
   margin-left: 27%;
@@ -39,10 +34,7 @@
 
 .image-register {
   margin-top: 100px;
-  margin-left: 14%;
-  margin-right: -15px;
-  height: calc(100vh - 200px);
-  max-height: 429px;
+  height: calc(100vh - 390px);
   background-size: cover !important;
   background-position: center;
 }
