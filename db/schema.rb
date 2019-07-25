@@ -29,12 +29,6 @@ ActiveRecord::Schema.define(version: 2019_07_19_073002) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "cities", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "company_types", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -358,15 +352,6 @@ ActiveRecord::Schema.define(version: 2019_07_19_073002) do
     t.string "short_resume"
   end
 
-  create_table "talent_cities", force: :cascade do |t|
-    t.bigint "talent_id"
-    t.bigint "city_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["city_id"], name: "index_talent_cities_on_city_id"
-    t.index ["talent_id"], name: "index_talent_cities_on_talent_id"
-  end
-
   create_table "talent_formations", force: :cascade do |t|
     t.integer "year"
     t.bigint "talent_id"
@@ -584,8 +569,6 @@ ActiveRecord::Schema.define(version: 2019_07_19_073002) do
   add_foreign_key "startup_sectors", "startups"
   add_foreign_key "startup_words", "startups"
   add_foreign_key "startup_words", "words"
-  add_foreign_key "talent_cities", "cities"
-  add_foreign_key "talent_cities", "talents"
   add_foreign_key "talent_formations", "formations"
   add_foreign_key "talent_formations", "talents"
   add_foreign_key "talent_hobbies", "hobbies"
