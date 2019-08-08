@@ -55,7 +55,7 @@
 
 
         <% if talent[:next_aventure][:btoc] && talent[:next_aventure][:btob] %>
-          <p class="col-xs-6 no-padding">
+          <p class="col-xs-12 no-padding">
             <i style="min-width: 20px;" class="fas fa-code-branch margin-right-5 green"></i>
             <%= "BtoB" if talent[:next_aventure][:btob] %>
             <%= " & " if talent[:next_aventure][:btob] && talent[:next_aventure][:btoc]%>
@@ -63,8 +63,9 @@
           </p>
           <% end %>
 
-        <p class="col-xs-6 no-padding">
-          <i style="min-width: 20px;" class="fas fa-map-marker-alt margin-right-5 green"></i><%= talent[:city].present? ? talent[:city].truncate(10, separator: ', ', omission: '') : "_" %>
+        <p class="col-xs-12 no-padding">
+          <i style="min-width: 20px;" class="fas fa-map-marker-alt margin-right-5 green"></i><%= talent[:city].present? ? talent[:city] : "_" %>
+          <!-- <i style="min-width: 20px;" class="fas fa-map-marker-alt margin-right-5 green"></i><%#= talent[:city].present? ? talent[:city].truncate(10, separator: ', ', omission: '') : "_" %> -->
         </p>
 
 
