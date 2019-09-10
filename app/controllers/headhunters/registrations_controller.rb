@@ -24,7 +24,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
       end
     end
     if @headhunter.save
-      message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme ! Nous allons vous contacter au plus vite pour vous confirmer l'utilisation de cette plateforme"
+      message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme !"
       @talentist = Talentist.last
       @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
       if @headhunter.startup.address == "" || @headhunter.startup.address.nil?
