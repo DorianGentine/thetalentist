@@ -31,8 +31,8 @@ require 'csv'
 
 p "Creating The Talenist part"
 
-dimitri = Talentist.create!(email: "dimitri@ineva-partners.com", password:"password", firstname: "dimitri", name:"mussat", admin: true)
-magdalena = Talentist.create!(email: "magdalena@ineva-partners.com", password:"password", firstname: "MAGDALENA", name:"mussat", admin: true)
+dimitri = Talentist.create!(email: "dimitri@ineva-partners.com", password:"password", firstname: "dimitri", last_name:"mussat", admin: true)
+magdalena = Talentist.create!(email: "magdalena@ineva-partners.com", password:"password", firstname: "MAGDALENA", last_name:"mussat", admin: true)
 
 # p "Creating talents"
 
