@@ -1,9 +1,11 @@
 class TalentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.is_a?(Talentist)
-        scope.all.order('created_at DESC')
-      elsif user.is_a?(Talent)
+
+
+      if user.is_a?(Talentist) || user.is_a?(Headhunter)
+        scope.all.where(:visible => true).order('created_at DESC')
+      else
         false
       end
     end
