@@ -4,32 +4,30 @@ class HeadhuntersController < ApplicationController
     :update_profile, :update_startup, :update_photos, :edit
   ]
 
-  # TODO : to change
-  after_action :verify_authorized, except: :repertory
-
   def repertory
-    # if current_user.is_a?(Talentist)
-    if current_talentist
-      @talentist = current_talentist
-      @headhunter = nil
-      authorize @talentist
-    elsif current_headhunter
-      @talentist = nil
-      @headhunter = current_headhunter
-      authorize @headhunter
+    if !current_user
+      authorize Headhunter.find(190)
+      # authorize Talentist.find(2)
+    else
+      if current_user.is_a?(Talentist)
+        @talentist = current_talentist
+        @headhunter = nil
+        authorize @talentist
+      elsif current_headhunter
+        @talentist = nil
+        @headhunter = current_headhunter
+        authorize @headhunter
+      end
     end
+
+    talents_scope = Talent.all.order('created_at DESC')
 
     @relationship = Relationship.new
     @job_alert = JobAlerte.new
 
     @jobs = Job.all
 
-    if @headhunter.present?
-      talents_visible = Talent.where(:visible => true).reorder(completing: :desc, last_sign_in_at: :desc)
-      # talents_visible = Talent.where(:visible => true).order(last_sign_in_at: :desc).all_with_startup(@headhunter.startup.name)
-    else
-      talents_visible = Talent.where(:visible => true).reorder(completing: :desc, last_sign_in_at: :desc)
-    end
+    talents_visible = talents_scope.reorder(completing: :desc, last_sign_in_at: :desc)
 
     if params[:jobs].blank? || params[:jobs] == "Tous"
       talents = talents_visible
