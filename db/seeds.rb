@@ -25,14 +25,17 @@ TalentLanguage.destroy_all
 TalentTechno.destroy_all
 
 Startup.destroy_all
-Talentist.destroy_all
+
 Headhunter.destroy_all
 Picture.destroy_all
+
+Talentist.destroy_all
 
 p "Creating The Talenist part"
 
 dimitri = Talentist.create!(email: "dimitri@ineva-partners.com", password:"password", firstname: "dimitri", last_name:"mussat", admin: true)
 magdalena = Talentist.create!(email: "magdalena@ineva-partners.com", password:"password", firstname: "MAGDALENA", last_name:"mussat", admin: true)
+
 
 # p "Creating talents"
 
