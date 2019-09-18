@@ -3,12 +3,17 @@ class HeadhuntersController < ApplicationController
     :show, :to_validate, :update,
     :update_profile, :update_startup, :update_photos, :edit
   ]
+
+  # TODO : to change
+  after_action :verify_authorized, except: :repertory
+
   def repertory
-    if current_user.is_a?(Talentist)
+    # if current_user.is_a?(Talentist)
+    if current_talentist
       @talentist = current_talentist
       @headhunter = nil
       authorize @talentist
-    else
+    elsif current_headhunter
       @talentist = nil
       @headhunter = current_headhunter
       authorize @headhunter
