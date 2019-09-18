@@ -24,10 +24,13 @@ const initSelect2 = () => {
 
 // Fonction domaines d'activité différents
   $(".premier-domaine").on("change", function (e) {
+    console.log("launched")
     const selectedAnswer = parseInt(e.target.value, 10);
+    console.log("selectedAnswer", selectedAnswer)
 
     // reset le deuxième domaine si le premier est changé pour le même
     let secondValue = document.getElementsByClassName('second-domaine')[0].value;
+    console.log("secondValue", secondValue)
     if(selectedAnswer == secondValue){
       $(".second-domaine").val(null).trigger('change')
     }

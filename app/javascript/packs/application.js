@@ -18,7 +18,7 @@ import '../components/select2_relaunch';
 
 import '../components/collapse_arrow';
 
-import '../components/copyLink';
+// import '../components/copyLink';
 
 import '../components/petitPlusEnter';
 
