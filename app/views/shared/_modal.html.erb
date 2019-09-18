@@ -112,7 +112,7 @@
                 </h5>
                 <i class="fas fa-chevron-down green"></i>
               </div>
-              <p class="collapse no-margin-xs texte-rubrique-3" id="collapseDream<%= talent[:id] %>">
+              <p class="collapse collapse-wth-2l no-margin-xs texte-rubrique-3" id="collapseDream<%= talent[:id] %>" style="white-space: unset;">
                 <% if talent[:next_aventure].present? && talent[:next_aventure][:looking_for].present? %>
                   <%= talent[:next_aventure][:looking_for] %>
                 <% else %>
@@ -132,7 +132,7 @@
                 <h5>Un bon manager selon moi</h5>
                 <i class="fas fa-chevron-down green"></i>
               </div>
-              <p class="collapse no-margin-xs texte-rubrique-3" id="collapseFamousPerson<%= talent[:id] %>">
+              <p class="collapse collapse-wth-2l no-margin-xs texte-rubrique-3" id="collapseFamousPerson<%= talent[:id] %>" style="white-space: unset;">
                 <% if talent[:next_aventure].present? && talent[:next_aventure][:good_manager].present? %>
                   <%= talent[:next_aventure][:good_manager] %>
                 <% else %>
@@ -148,7 +148,7 @@
                 <h5>Ma plus grande fierté</h5>
                 <i class="fas fa-chevron-down green"></i>
               </div>
-              <p class="collapse no-margin-xs texte-rubrique-3" id="collapseWorkFree<%= talent[:id] %>">
+              <p class="collapse collapse-wth-2l no-margin-xs texte-rubrique-3" id="collapseWorkFree<%= talent[:id] %>" style="white-space: unset;">
                 <% if talent[:next_aventure].present? && talent[:next_aventure][:proud].present? %>
                   <%= talent[:next_aventure][:proud] %>
                 <% else %>

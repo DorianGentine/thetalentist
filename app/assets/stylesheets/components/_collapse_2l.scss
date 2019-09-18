@@ -1,0 +1,10 @@
+.collapse-wth-2l{
+	display: block;
+	overflow: hidden;
+	height: calc(18px * 2) !important;
+}
+
+.collapse-wth-2l[aria-expanded="true"]{
+	overflow: unset;
+	height: unset !important;
+}
