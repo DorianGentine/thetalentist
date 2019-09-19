@@ -30,7 +30,6 @@ const initSelect2 = () => {
 
     // reset le deuxième domaine si le premier est changé pour le même
     let secondValue = document.getElementsByClassName('second-domaine')[0].value;
-    console.log("secondValue", secondValue)
     if(selectedAnswer == secondValue){
       $(".second-domaine").val(null).trigger('change')
     }
@@ -39,9 +38,11 @@ const initSelect2 = () => {
     const options = document.getElementsByClassName('second-domaine')[0].getElementsByTagName('option');
     // console.log(ocument.getElementsByClassName('second-domaine')[0])
     for (var i = 0; i <= selectedAnswer + 20; i++) {
+      console.log(options[i])
       if(options[i] != undefined){
         options[i].disabled = false
         if(i == selectedAnswer){
+          console.log("disabled")
           options[i].setAttribute("disabled", true)
         }
       }
