@@ -37,10 +37,13 @@ const initSelect2 = () => {
 
     // disable l'option sélectionnée dans 1
     const options = document.getElementsByClassName('second-domaine')[0].getElementsByTagName('option');
-    for (var i = options.length - 1; i >= 0; i--) {
-      options[i].disabled = false
-      if(i == selectedAnswer){
-        options[i].setAttribute("disabled", true)
+    // console.log(ocument.getElementsByClassName('second-domaine')[0])
+    for (var i = 0; i <= selectedAnswer + 20; i++) {
+      if(options[i] != undefined){
+        options[i].disabled = false
+        if(i == selectedAnswer){
+          options[i].setAttribute("disabled", true)
+        }
       }
     }
 
