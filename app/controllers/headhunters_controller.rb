@@ -20,7 +20,7 @@ class HeadhuntersController < ApplicationController
       end
     end
 
-    talents_scope = Talent.all.order('created_at DESC')
+    talents_scope = Talent.where(:visible => true).order('created_at DESC')
 
     @relationship = Relationship.new
     @job_alert = JobAlerte.new

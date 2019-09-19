@@ -4,7 +4,7 @@ class TalentPolicy < ApplicationPolicy
 
 
       if user.is_a?(Talentist) || user.is_a?(Headhunter)
-        scope.all.where(:visible => true).order('created_at DESC')
+        scope.all.order('created_at DESC')
       else
         false
       end
