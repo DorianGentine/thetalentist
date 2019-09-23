@@ -24,8 +24,8 @@ const initSelect2 = () => {
 
 // Fonction domaines d'activité différents
   $(".premier-domaine").on("change", function (e) {
-    console.log("launched")
     const selectedAnswer = parseInt(e.target.value, 10);
+    // const selectedAnswer = parseInt(e.target.dataset.select2Id, 10);
     console.log("selectedAnswer", selectedAnswer)
 
     // reset le deuxième domaine si le premier est changé pour le même
@@ -38,7 +38,6 @@ const initSelect2 = () => {
     const options = document.getElementsByClassName('second-domaine')[0].getElementsByTagName('option');
     // console.log(ocument.getElementsByClassName('second-domaine')[0])
     for (var i = 0; i <= selectedAnswer + 20; i++) {
-      console.log(options[i])
       if(options[i] != undefined){
         options[i].disabled = false
         if(i == selectedAnswer){
