@@ -6,13 +6,13 @@
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <div class="margin-auto-new-talent">
       <!-- <#%= f.error_notification %> -->
-      <div class="linkedin-btn blue-background center-text">
-        <%= link_to talent_linkedin_omniauth_authorize_path, :class => "button-linkedin" do %>
+      <!-- <div class="linkedin-btn blue-background center-text">
+        <%#= link_to talent_linkedin_omniauth_authorize_path, :class => "button-linkedin" do %>
           <p class="no-margin"><i class="fab fa-linkedin"></i> Connect with Linkedin</p>
-        <% end %>
-      </div>
+        <%# end %>
+      </div> -->
 
-      <div class="blue-background margin-top-30">
+      <div class="blue-background">
         <div class="row align-items-baseline">
 
           <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis" for="talent_firstname">Civilité</label>

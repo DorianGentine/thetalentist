@@ -1,4 +1,4 @@
-<div class="row" style="height: calc(100vh - 190px">
+<div class="row relative" style="min-height: calc(100vh - 190px)">
   <div class="home-left col-xs-12 col-sm-6 col-lg-6">
     <div class="margin-auto-talent">
       <h1><strong>Bienvenue</strong> sur The Talentist !</h1>
@@ -32,14 +32,14 @@
             </div>
           </div>
 
-          <div class="choice-connexion margin-top-bottom-btn">
+          <div class="choice-connexion margin-bottom-30 margin-top-30">
             <hr>
             <p>OU</p>
           </div>
           <div class="margin-top-bottom-btn">
             <div class="form-actions" id="regrister-talent-btn">
               <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-                <%= link_to "S'inscrire normalement", new_headhunter_registration_path, :class => "form-btn form-btn-precedent"  %>
+                <%= link_to "S'inscrire", new_headhunter_registration_path, :class => "form-btn form-btn-precedent"  %>
               <% end %>
             </div>
           </div>
@@ -52,13 +52,13 @@
 
     </div>
   </div>
+  <div id="popup_connexion" class="absolute green-background">
+    <i class="far fa-times-circle float-right pointer" id="close_popup_connexion"></i>
+    <p>Bienvenue sur The Talentist.</p>
+    <p>Pour rencontrer les talents sélectionnés par nos soins, il ne te reste plus qu'à créer ton compte ! Cela ne prend que quelques minutes 🙂</p>
+  </div>
 </div>
 
-<div id="popup_connexion" class="absolute green-background">
-  <i class="far fa-times-circle float-right" id="close_popup_connexion"></i>
-  <p>Bienvenue sur The Talentist.</p>
-  <p>Pour rencontrer les talents sélectionnés par nos soins, il ne te reste plus qu'à créer ton compte ! Cela ne prend que quelques minutes 🙂</p>
-</div>
 
 
 
