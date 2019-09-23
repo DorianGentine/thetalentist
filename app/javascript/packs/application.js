@@ -22,6 +22,8 @@ import '../components/collapse_arrow';
 
 import '../components/petitPlusEnter';
 
+import '../components/popup_connexion';
+
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 
