@@ -36,13 +36,13 @@
             <hr>
             <p>OU</p>
           </div>
-          <!-- <div class="btn-aline margin-bottom-30 margin-top-30"> -->
+          <!-- <div class="btn-aline"> -->
             <!-- <div class="linkedin-btn">
               <%#= link_to omniauth_authorize_path(:talent, :linkedin), :class => "button-linkedin" do %>
                 <p><i class="fab fa-linkedin"></i> Connect with Linkedin</p>
               <%# end %>
             </div> -->
-            <div class="form-actions" id="regrister-talent-btn">
+            <div class="form-actions margin-bottom-30 margin-top-30" id="regrister-talent-btn">
               <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
                 <%= link_to "S'inscrire", new_talent_registration_path, :class => "form-btn form-btn-precedent"  %>
               <% end %>
