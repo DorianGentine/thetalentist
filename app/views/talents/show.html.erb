@@ -175,6 +175,7 @@
 
       <!-- Ligne souhaits -->
         <div class="row margin-top-30">
+          <!-- Mobilité -->
             <div class="info-grid-1 col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Mobilité</p>
               <% if @next_aventure.present? %>
@@ -194,7 +195,6 @@
                 <i class="red fas fa-exclamation-triangle"></i>
               <% end %>
             </div>
-
 
           <!-- Type de contrat -->
             <div class="info-grid-1 col-lg-2 col-xs-6">
@@ -242,7 +242,6 @@
               <% end %>
             </div>
 
-
           <!-- Disponibilité -->
             <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Disponibilité</p>
@@ -285,11 +284,16 @@
       <hr class="ligne-horizontal">
 
       <!-- Ligne texte -->
+      
         <div class="row">
 
           <!-- Rêve remis à demain -->
-            <div class="col-lg-3 col-xs-12">
-              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" style="min-height: 44px">
+          <% if !current_user.is_a?(Headhunter) %>
+            <div class="col-lg-4 col-xs-12">
+          <% else %>
+            <div class="col-lg-6 col-xs-12">
+          <% end %>
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">
                 <% if @next_aventure.present? %>
                   <% if @next_aventure.looking_for.present? %>
                     Ce que je recherche
@@ -321,9 +325,56 @@
               </p>
             </div>
 
+          <!-- Ma plus grande fierté -->
+          <% if !current_user.is_a?(Headhunter) %>
+            <div class="col-lg-4 col-xs-12 margin-top-30-xs">
+          <% else %>
+            <div class="col-lg-6 col-xs-12 margin-top-30-xs">
+          <% end %>
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >Ma plus grande fierté</h4>
+
+              <% if @next_aventure.present? %>
+                <% if @next_aventure.proud.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventure.proud %></p>
+                <% elsif !@next_aventure.proud.present? && current_user.is_a?(Headhunter) %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
+                <% else %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                <% end %>
+              <% else %>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+              <% end %>
+            </div>
+
+          <!-- L'entreprise de mes rêves -->
+          <% if !current_user.is_a?(Headhunter) %>
+            <div class="col-lg-4 col-xs-12 margin-top-30-xs">
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >L'entreprise de mes rêves <i class="fas fa-info-circle gray font-12 tooltip">
+                <span class="tooltiptext" style='font-family: "Avenir", "Open Sans", "Helvetica", "sans-serif"; font-weight: 400;'>Les start-up ne voient pas cette réponse</span>
+              </i></h4>
+
+              <% if @next_aventure.present? %>
+                <% if @next_aventure.favourite_businesses.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventure.favourite_businesses %></p>
+                <% else %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                <% end %>
+              <% else %>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+              <% end %>
+            </div>
+          <% end %>
+
+
+        </div>
+        
+        <hr class="ligne-horizontal">
+        
+        <div class="row">
+
           <!-- La personnalité qui m'inspire -->
-            <div class="col-lg-3 col-xs-12 margin-top-30-xs">
-              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3"  style="min-height: 44px">La personnalité qui m'inspire</h4>
+            <div class="col-lg-4 col-xs-12 margin-top-30-xs">
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >La personnalité qui m'inspire</h4>
 
 
               <% if @next_aventure.present? %>
@@ -340,8 +391,8 @@
             </div>
 
           <!-- Un bon manager, c'est -->
-            <div class="col-lg-3 col-xs-12 margin-top-30-xs">
-              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" style="min-height: 44px">Un bon manager, c'est</h4>
+            <div class="col-lg-4 col-xs-12 margin-top-30-xs">
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">Un bon manager, c'est</h4>
               <% if @next_aventure.present? %>
                 <% if @next_aventure.good_manager.present?  %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventure.good_manager %></p>
@@ -356,8 +407,8 @@
             </div>
 
           <!-- Le travail effectué gratuitement serait -->
-            <div class="col-lg-3 col-xs-12 margin-top-30-xs">
-              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3"  style="min-height: 44px">Le travail effectué gratuitement serait</h4>
+            <div class="col-lg-4 col-xs-12 margin-top-30-xs">
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >Le travail effectué gratuitement serait</h4>
               <% if @next_aventure.present? %>
                 <% if @next_aventure.work_for_free.present?  %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventure.work_for_free %></p>
@@ -370,7 +421,6 @@
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
             </div>
-
         </div>
 
 
