@@ -1,11 +1,11 @@
 #popup_connexion{
-	bottom: 150px;
+	bottom: 30px;
   right: 30px;
   padding: 15px;
   border-radius: 5px;
   max-width: 250px;
   box-shadow: 3px 3px 9px rgba(0,0,0,0.5);
-  display: none;
+  // display: none;
   transition: 1s;
 	animation: popup-apparition 1s;
 	p{

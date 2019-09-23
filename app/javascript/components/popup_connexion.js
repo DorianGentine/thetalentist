@@ -1,10 +1,10 @@
 const popup = document.getElementById('popup_connexion')
 if(popup){
-	const url = new URL(window.location.href);
-	const info = url.searchParams.get("info");
-	if(info){
-		popup.style.display = "block"
-	}
+	// const url = new URL(window.location.href);
+	// const info = url.searchParams.get("info");
+	// if(info){
+	// 	popup.style.display = "block"
+	// }
 
 	const close = document.getElementById('close_popup_connexion')
 	close.addEventListener('click', ()=>{
