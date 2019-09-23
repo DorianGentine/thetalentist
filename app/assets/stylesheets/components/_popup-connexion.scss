@@ -1,0 +1,25 @@
+#popup_connexion{
+	bottom: 150px;
+  right: 30px;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 250px;
+  box-shadow: 3px 3px 9px rgba(0,0,0,0.5);
+  display: none;
+  transition: 1s;
+	animation: popup-apparition 1s;
+	p{
+		color: white;
+	}
+}
+
+@keyframes popup-apparition {
+  0% {
+  	opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+  	opacity: 1;
+    transform: translateY(0px);
+  }
+}
