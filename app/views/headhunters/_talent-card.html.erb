@@ -10,9 +10,9 @@
 
       <div class="talent-job">
           <% if !talent[:position].nil? %>
-            <% if current_user.is_a?(Talentist) %>
-              <p class="green margin-right-5">Nom talent</p>
-            <% end %>
+            <%# if current_user.is_a?(Talentist) %>
+              <!-- <p class="green margin-right-5">Nom talent</p> -->
+            <%# end %>
             <h2 style="text-align: center;"><%= talent[:position].truncate(45, separator: ' ', omission: '') %></h2>
           <% else %>
             <h2> - </h2>
