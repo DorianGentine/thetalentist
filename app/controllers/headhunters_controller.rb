@@ -6,6 +6,7 @@ class HeadhuntersController < ApplicationController
 
   def repertory
     if !current_user
+      session[:redirection_headhunter_sign_in] = "testavem"
       authorize Headhunter.find(190)
       # authorize Talentist.find(2)
     else
