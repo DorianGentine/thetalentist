@@ -11,7 +11,7 @@
       <div class="talent-job">
           <% if !talent[:position].nil? %>
             <% if current_user.is_a?(Talentist) %>
-              <h2 class="green margin-right-5">Nom talent</h2>
+              <p class="green margin-right-5">Nom talent</p>
             <% end %>
             <h2 style="text-align: center;"><%= talent[:position].truncate(45, separator: ' ', omission: '') %></h2>
           <% else %>
@@ -31,9 +31,11 @@
           <% end %>
         <% end %>
 
-        <p class="col-xs-12 no-padding">
-          <i style="min-width: 20px;" class="far fa-calendar margin-right-5"></i><%= pluralize(talent[:year_experience_job], 'an') %> d'expérience
-        </p>
+        <% if talent[:year_experience_job] != 0 %>
+          <p class="col-xs-12 no-padding">
+            <i style="min-width: 20px;" class="far fa-calendar margin-right-5"></i><%= pluralize(talent[:year_experience_job], 'an') %> d'expérience
+          </p>
+        <% end %>
 
         <% talent[:formations].first(2).each do |talent_formation| %>
           <% if talent_formation[:type_of_formation].present? %>
