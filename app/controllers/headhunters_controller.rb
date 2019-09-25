@@ -36,7 +36,21 @@ class HeadhuntersController < ApplicationController
       talents = talents_visible.his_job_is(params[:jobs]).to_a
     end
 
-    @talents = TalentFormat.new(talents).for_repository
+    if @headhunter.present?
+      finale_talents = []
+      talents.each do |talent|
+        talent.experiences.each do |experience|
+          if experience.company_name != @headhunter.startup.name
+            finale_talents << talent
+          end
+        end
+      end
+    else
+      finale_talents = talents
+    end
+
+
+    @talents = TalentFormat.new(finale_talents).for_repository
     respond_to do |format|
       format.html
       format.js
