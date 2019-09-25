@@ -58,8 +58,10 @@ const initSelect2 = () => {
 
 
 
-const initSelectize = () => {
-  const selectAndCreate = $('.selectAndCreate')
+const initSelectize = (nomClass) => {
+  console.log("yes", nomClass)
+  let selectAndCreate = $('.selectAndCreate')
+  if(nomClass){selectAndCreate = $(nomClass)}
   selectAndCreate.selectize({
     plugins: ['remove_button'],
     delimiter: ',',
@@ -78,30 +80,32 @@ const initSelectize = () => {
     },
   });
 
-  $('.comp-cles').selectize({
-    plugins: ['remove_button'],
-    placeholder: 'Ajouter [...]',
-    delimiter: ',',
-    persist: false,
-    create: function(input) {
-      return {
-        value: input,
-        text: input
-      }
-    },
-    render: {
-      option_create: function(data, escape) {
-        let addString = 'Ajouter';
-        return '<div class="create">' + addString + ' <strong>' + escape(data.input) + '</strong>&hellip;</div>';
-      }
-    },
-  });
+  if(nomClass == undefined){
+    $('.comp-cles').selectize({
+      plugins: ['remove_button'],
+      placeholder: 'Ajouter [...]',
+      delimiter: ',',
+      persist: false,
+      create: function(input) {
+        return {
+          value: input,
+          text: input
+        }
+      },
+      render: {
+        option_create: function(data, escape) {
+          let addString = 'Ajouter';
+          return '<div class="create">' + addString + ' <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+        }
+      },
+    });
 
-  $('.selectizeTwo').selectize({
-    plugins: ['remove_button'],
-    delimiter: ',',
-    maxItems: 2
-  });
+    $('.selectizeTwo').selectize({
+      plugins: ['remove_button'],
+      delimiter: ',',
+      maxItems: 2
+    });
+  }
 }
 
 export { initSelect2, initSelectize }
