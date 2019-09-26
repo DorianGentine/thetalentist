@@ -59,7 +59,6 @@ const initSelect2 = () => {
 
 
 const initSelectize = (nomClass) => {
-  console.log("yes", nomClass)
   let selectAndCreate = $('.selectAndCreate')
   if(nomClass){selectAndCreate = $(nomClass)}
   selectAndCreate.selectize({
