@@ -12,14 +12,12 @@ if (addForm.length > 0) {
     tablinkAll.forEach((tablink) => {
       tablink.addEventListener('click', ()=>{
         idtab = event.currentTarget.dataset.idtab
-        console.log(idtab)
       })
     })
   }
 
   for (var i = addForm.length - 1; i >= 0; i--) {
     addForm[i].addEventListener("click", () => {
-      console.log("launched")
       setTimeout(()=>{
         initSelect2()
         let classgenJQuery = "non"
