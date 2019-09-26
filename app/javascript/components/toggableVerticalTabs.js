@@ -3,7 +3,7 @@ function openOnglet() {
 
   // Show the current tab, and add an "active" class to the link that opened the tab
   function actionLink(event){
-    var i, tabcontent, tablinks;
+    let i, tabcontent, tablinks;
 
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");

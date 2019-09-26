@@ -13,7 +13,7 @@
   </div> -->
 
   <div class="col-xs-12 col-lg-3 ">
-    <%= f.association :formation, collection: Formation.all.order('title ASC'), prompt:"Établissement", label: false, input_html: { :class => "selectAndCreate", style: "width: 100%" }, wrapper: false %>
+    <%= f.association :formation, collection: Formation.all.order('title ASC'), prompt:"Établissement", label: false, input_html: { :class => "selectAndCreate selectFormations", style: "width: 100%" }, wrapper: false %>
   </div>
 
   <div class="col-xs-12 col-lg-3 margin-top-15-xs">

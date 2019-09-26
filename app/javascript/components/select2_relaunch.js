@@ -2,60 +2,51 @@ import { initSelect2, initSelectize } from '../components/select2';
 const addForm = document.getElementsByClassName("form-hobby-add")
 
 if (addForm.length > 0) {
+  
+  const url = new URL(window.location.href);
+  let idtab
+  
+
+  if(url.href.endsWith("edit")){
+    let tablinkAll = document.querySelectorAll(".tablinks");
+    tablinkAll.forEach((tablink) => {
+      tablink.addEventListener('click', ()=>{
+        idtab = event.currentTarget.dataset.idtab
+        console.log(idtab)
+      })
+    })
+  }
+
   for (var i = addForm.length - 1; i >= 0; i--) {
     addForm[i].addEventListener("click", () => {
       console.log("launched")
       setTimeout(()=>{
         initSelect2()
+        let classgenJQuery = "non"
 
-        const numero = document.getElementsByClassName('selectAndCreate').length - 1
-        console.log(document.getElementsByClassName('selectAndCreate'))
-        const selectAndCreateRE = document.getElementsByClassName('selectAndCreate')[numero]
-        const classgen = "selectAndCreate" + numero
-        const classgenJQuery = "." + classgen
-        selectAndCreateRE.classList.add(classgen)
+        if(!url.href.endsWith("edit")){
+          const numero = document.getElementsByClassName('selectAndCreate').length - 1
+          const selectAndCreateRE = document.getElementsByClassName('selectAndCreate')[numero]
+          const classgen = "selectAndCreate" + numero
+          classgenJQuery = "." + classgen
+          selectAndCreateRE.classList.add(classgen)
+        }else if (idtab == "formations_et_competences"){
+          const numero = document.getElementsByClassName('selectFormations').length - 1
+          const selectAndCreateRE = document.getElementsByClassName('selectFormations')[numero]
+          const classgen = "selectFormations" + numero
+          classgenJQuery = "." + classgen
+          selectAndCreateRE.classList.add(classgen)
+        }else if (idtab == "experiences_professionnelles"){
+          const numero = document.getElementsByClassName('selectExperiences').length - 1
+          const selectAndCreateRE = document.getElementsByClassName('selectExperiences')[numero]
+          const classgen = "selectExperiences" + numero
+          classgenJQuery = "." + classgen
+          selectAndCreateRE.classList.add(classgen)          
+        }
+
 
         initSelectize(classgenJQuery)
       }, 1);
     })
   }
 }
-
-// const addFormation = document.getElementById('add_formation')
-// if(addFormation){
-  // let nbApparu = 0
-  // const nfFormations = document.getElementsByClassName('nf-formations')
-//   const addFormation2 = document.getElementById('add_formation2')
-
-//   for (let i = 0; i < nfFormations.length; i++) {
-//     if(nfFormations[i].getElementsByTagName('select')[0].value != ""){
-//       console.log(nfFormations[i].getElementsByTagName('select')[0].value)
-//       nbApparu = nbApparu + 1
-//     }
-//   }
-
-  // const renderFormations = () => {
-    // for (let i = 0; i < nfFormations.length; i++) {
-    //   if(i <= 0){
-    //     nfFormations[i].style.display = "flex"
-    //   }else{
-    //     nfFormations[i].style.display = "none"
-    //   }
-    // }
-  // }
-
-//   addFormation.addEventListener("click", ()=>{
-//     console.log("nbApparu", nbApparu)
-//     if(nbApparu < 3){
-//       nbApparu = nbApparu + 1
-//       renderFormations()
-//     }else if(nbApparu = 3){
-//       nbApparu = nbApparu + 1
-//       renderFormations()
-//       addFormation.style.display = "none"
-//       addFormation2.classList.remove('hidden')
-//     }
-//   })
-
-  // renderFormations()
-// }
