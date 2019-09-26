@@ -38,7 +38,7 @@ class ConversationsController < ApplicationController
         if pending_ids.include?(participant.id) && participant.is_a?(Talent)
           @pending_conversations << conversation
         end
-      raise if @pending_conversations.count > 1
+      # raise if @pending_conversations.count > 1
       end
     end
 

@@ -17,7 +17,7 @@
         <%= simple_form_for @headhunter do |f| %>
           <div class="row">
             <div class="col-xs-12 col-md-6 no-padding">
-              <%= f.input :job_ids, collection: Job.all, label: false, input_html: { class: "select2", multiple: "multiple", style: "width: 100%;" } %>
+              <%= f.input :job_ids, collection: Job.all.order(:id), label: false, input_html: { class: "select2", multiple: "multiple", style: "width: 100%;" } %>
             </div>
             <div class="col-xs-12 col-md-6 no-padding">
               <%= f.submit "Créer une alerte", input_html: { class: "col-xs-12 col-md-6" } %>

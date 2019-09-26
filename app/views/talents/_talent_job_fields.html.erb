@@ -1,10 +1,10 @@
 <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-  <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", class: "select2 premier-domaine" }, error: u.object.errors.messages[:job_id][0] %>
+  <%= u.input :job_id, collection: Job.all.order(:id), label: false, :input_html => { style: "width: 100%", class: "select2 premier-domaine" }, error: u.object.errors.messages[:job_id][0] %>
 </div>
 
 <%= f.simple_fields_for :talent_second_job do |e| %>
   <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-    <%= e.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", class: "select2 second-domaine" }, error: e.object.errors.messages[:job_id][0] %>
+    <%= e.input :job_id, collection: Job.all.order(:id), label: false, :input_html => { style: "width: 100%", class: "select2 second-domaine" }, error: e.object.errors.messages[:job_id][0] %>
   </div>
 <% end %>
 
