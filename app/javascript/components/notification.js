@@ -1,9 +1,11 @@
 
 const notification = document.getElementById("notifications")
 
-notification.addEventListener("click", ()=>{
-  notification.classList.toggle("closed")
-})
+if(notification){
+  notification.addEventListener("click", ()=>{
+    notification.classList.toggle("closed")
+  })
+}
 
 const display = (data) => {
   data.forEach((notif) => {
