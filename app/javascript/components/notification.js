@@ -1,10 +1,13 @@
 
 const notification = document.getElementById("notifications")
 
+notification.addEventListener("click", ()=>{
+  notification.classList.toggle("closed")
+})
 
 const display = (data) => {
   data.forEach((notif) => {
-    let p = `<p>${notif.title} il y a ${notif.created_at} </p>`
+    let p = `<p>${notif.title}<br>il y a ${notif.created_at} </p>`
     notifications.insertAdjacentHTML("afterbegin", p)
   })
 }
