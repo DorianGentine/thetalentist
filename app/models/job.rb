@@ -8,6 +8,7 @@ class Job < ApplicationRecord
   has_many :job_alertes, dependent: :destroy
   has_many :headhunters, through: :job_alertes
 
+  default_scope { order(id: :ASC) }
 
   accepts_nested_attributes_for :talent_jobs, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :talents, allow_destroy: true, reject_if: :all_blank

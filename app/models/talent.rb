@@ -269,6 +269,7 @@ class Talent < ApplicationRecord
     else
       0.times { self.talent_formations.build }
     end
+    self.talent_formations.build if self.talent_formations.count == 0
     self.build_talent_job if self.jobs.count == 0
     self.build_talent_second_job if self.jobs.count < 2
     # if self.talent_jobs.count == 0

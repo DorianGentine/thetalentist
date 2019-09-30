@@ -41,6 +41,7 @@ class HeadhuntersController < ApplicationController
       talents.each do |talent|
         talent.experiences.each do |experience|
           if experience.company_name != @headhunter.startup.name
+            p "/// OUI /// #{experience.company_name} VS #{ @headhunter.startup.name}" if experience.company_name == "360LEARNING - LMS & CORPORATE UNIVERSITIES"
             finale_talents << talent
           end
         end
