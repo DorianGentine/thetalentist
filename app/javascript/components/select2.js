@@ -24,8 +24,7 @@ const initSelect2 = () => {
 
 // Fonction domaines d'activité différents
   $(".premier-domaine").on("change", function (e) {
-    const selectedAnswer = parseInt(e.target.value, 10);
-    // const selectedAnswer = parseInt(e.target.dataset.select2Id, 10);
+    let selectedAnswer = parseInt(e.target.value, 10);
     console.log("selectedAnswer", selectedAnswer)
 
     // reset le deuxième domaine si le premier est changé pour le même
@@ -36,8 +35,18 @@ const initSelect2 = () => {
 
     // disable l'option sélectionnée dans 1
     const options = document.getElementsByClassName('second-domaine')[0].getElementsByTagName('option');
-    // console.log(ocument.getElementsByClassName('second-domaine')[0])
-    for (var i = 0; i <= selectedAnswer + 20; i++) {
+
+    // adapte selectedAnswer en prod
+    const valueFirstJob = document.getElementsByClassName('premier-domaine')[0].getElementsByTagName('option')[1].value
+    const nbJobs = document.getElementsByClassName('premier-domaine')[0].getElementsByTagName('option').length - 1
+    const valueLastJob = document.getElementsByClassName('premier-domaine')[0].getElementsByTagName('option')[nbJobs].value
+    const nbIds = valueLastJob - valueFirstJob + 1
+
+    console.log('valueFirstJob', valueFirstJob)
+    selectedAnswer = selectedAnswer - valueFirstJob + 1
+    console.log("selectedAnswer", selectedAnswer)
+    
+    for (var i = 0; i <= selectedAnswer + nbIds; i++) {
       if(options[i] != undefined){
         options[i].disabled = false
         if(i == selectedAnswer){
@@ -58,8 +67,9 @@ const initSelect2 = () => {
 
 
 
-const initSelectize = () => {
-  const selectAndCreate = $('.selectAndCreate')
+const initSelectize = (nomClass) => {
+  let selectAndCreate = $('.selectAndCreate')
+  if(nomClass){selectAndCreate = $(nomClass)}
   selectAndCreate.selectize({
     plugins: ['remove_button'],
     delimiter: ',',
@@ -78,30 +88,32 @@ const initSelectize = () => {
     },
   });
 
-  $('.comp-cles').selectize({
-    plugins: ['remove_button'],
-    placeholder: 'Ajouter [...]',
-    delimiter: ',',
-    persist: false,
-    create: function(input) {
-      return {
-        value: input,
-        text: input
-      }
-    },
-    render: {
-      option_create: function(data, escape) {
-        let addString = 'Ajouter';
-        return '<div class="create">' + addString + ' <strong>' + escape(data.input) + '</strong>&hellip;</div>';
-      }
-    },
-  });
+  if(nomClass == undefined){
+    $('.comp-cles').selectize({
+      plugins: ['remove_button'],
+      placeholder: 'Ajouter [...]',
+      delimiter: ',',
+      persist: false,
+      create: function(input) {
+        return {
+          value: input,
+          text: input
+        }
+      },
+      render: {
+        option_create: function(data, escape) {
+          let addString = 'Ajouter';
+          return '<div class="create">' + addString + ' <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+        }
+      },
+    });
 
-  $('.selectizeTwo').selectize({
-    plugins: ['remove_button'],
-    delimiter: ',',
-    maxItems: 2
-  });
+    $('.selectizeTwo').selectize({
+      plugins: ['remove_button'],
+      delimiter: ',',
+      maxItems: 2
+    });
+  }
 }
 
 export { initSelect2, initSelectize }

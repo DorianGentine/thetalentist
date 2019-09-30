@@ -264,11 +264,11 @@ class Talent < ApplicationRecord
   end
 
   def set_build_belong_tables
-    if self.talent_formations.count == 0
-      5.times { self.talent_formations.build }
-    else
-      0.times { self.talent_formations.build }
-    end
+    # if self.talent_formations.count == 0
+    #   5.times { self.talent_formations.build }
+    # else
+    #   0.times { self.talent_formations.build }
+    # end
     self.talent_formations.build if self.talent_formations.count == 0
     self.build_talent_job if self.jobs.count == 0
     self.build_talent_second_job if self.jobs.count < 2

@@ -1,17 +1,27 @@
 <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-  <%= u.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", class: "select2 premier-domaine" }, error: u.object.errors.messages[:job_id][0] %>
+  <%= u.input :job_id, collection: Job.all.order(:id), label: false, :input_html => { style: "width: 100%", class: "select2 premier-domaine" }, error: u.object.errors.messages[:job_id][0] %>
 </div>
 
 <%= f.simple_fields_for :talent_second_job do |e| %>
   <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-    <%= e.input :job_id, collection: Job.all, label: false, :input_html => { style: "width: 100%", class: "select2 second-domaine" }, error: e.object.errors.messages[:job_id][0] %>
+    <%= e.input :job_id, collection: Job.all.order(:id), label: false, :input_html => { style: "width: 100%", class: "select2 second-domaine" }, error: e.object.errors.messages[:job_id][0] %>
   </div>
 <% end %>
 
 <div class="col-lg-3 col-xs-12">
-  <%= u.input :year, placeholder: "Années d'expérience", label: false, :input_html => { style: "width: 100%", min: "0", :onchange => "zeroInput(this.value, 'yearPositif')" }, error: u.object.errors.messages[:year][0] %>
+  <%= u.input :year, placeholder: "Années d'expérience", label: false, :input_html => { style: "width: 100%", min: "0", :onchange => "zeroInput(this.value, 'yearPositif')", id: "yearPositif" }, error: u.object.errors.messages[:year][0] %>
+  <p class="red hidden" id="textErrExp">un an d'expérience minimum 😉</p>
 </div>
 
 <%= u.input :position, as: :hidden %>
+
+<script>
+  function zeroInput(val, id){
+    if (val < 1) {
+      document.getElementById(id).value = 1
+      document.getElementById("textErrExp").classList.remove("hidden")
+    }
+  }
+</script>
 
 <!-- script dans select2.js -->

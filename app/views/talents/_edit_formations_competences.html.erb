@@ -21,7 +21,7 @@
   <div class="row">
     <label class="col-lg-2 col-xs-12 label-edit requis" for="talent_techno_ids">Compétences techniques</label>
     <div class="col-lg-10 col-xs-12" id="competence-form">
-      <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class: "selectAndCreate height-unset", multiple: "multiple", style: "width: 100%;"}, multiple: true, required: true %>
+      <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class: "comp-cles height-unset", multiple: "multiple", style: "width: 100%;"}, multiple: true, required: true %>
     </div>
   </div>
 
@@ -35,9 +35,9 @@
       <%= f.simple_fields_for :talent_languages do |u| %>
         <%= render 'steps_talent_infos/language_fields', :f => u %>
       <% end %>
-    </div>
-    <div class='links margin-top-30-xs col-lg-offset-2'>
-      <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields', class: "form-hobby-add" %>
+      <div class='links margin-top-30-xs'>
+        <%= link_to_add_association 'Ajouter langue', f, :talent_languages, :partial => 'steps_talent_infos/language_fields', class: "form-hobby-add" %>
+      </div>
     </div>
   </div>
 

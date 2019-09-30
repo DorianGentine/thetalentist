@@ -26,7 +26,7 @@ class HeadhuntersController < ApplicationController
     @relationship = Relationship.new
     @job_alert = JobAlerte.new
 
-    @jobs = Job.all
+    @jobs = Job.all.order(:id)
 
     talents_visible = talents_scope.reorder(completing: :desc, last_sign_in_at: :desc)
 
