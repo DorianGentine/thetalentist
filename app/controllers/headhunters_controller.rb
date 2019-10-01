@@ -36,20 +36,21 @@ class HeadhuntersController < ApplicationController
       talents = talents_visible.his_job_is(params[:jobs]).to_a
     end
 
-    if @headhunter.present?
-      finale_talents = []
-      talents.each do |talent|
-        talent.experiences.each do |experience|
-          if experience.company_name != @headhunter.startup.name
-            p "/// OUI /// #{experience.company_name} VS #{ @headhunter.startup.name}" if experience.company_name == "360LEARNING - LMS & CORPORATE UNIVERSITIES"
-            finale_talents << talent
-          end
-        end
-      end
-    else
-      finale_talents = talents
-    end
+    # if @headhunter.present?
+    #   finale_talents = []
+    #   talents.each do |talent|
+    #     talent.experiences.each do |experience|
+    #       if experience.company_name != @headhunter.startup.name
+    #         p "/// OUI /// #{experience.company_name} VS #{ @headhunter.startup.name}" if experience.company_name == "360LEARNING - LMS & CORPORATE UNIVERSITIES"
+    #         finale_talents << talent
+    #       end
+    #     end
+    #   end
+    # else
+    #   finale_talents = talents
+    # end
 
+      finale_talents = talents
 
     @talents = TalentFormat.new(finale_talents).for_repository
     respond_to do |format|
