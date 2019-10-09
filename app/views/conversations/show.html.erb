@@ -92,7 +92,6 @@
       <% end %>
 
           <% @messages.each do |receipt| %>
-
               <%= render 'conversations/messages', receipt: receipt, cached: true %>
 
           <% end %>
@@ -108,7 +107,6 @@
           <p href="#" id="uploadFile" style="margin: 0;">Aucun fichier</p>
           <%= f.submit "Envoyer", :class => "btn-envoyer gray-button", id: "send-bar-btn", disabled: current_user.is_a?(Talent) && @connexion && @relationship.status == "pending" %>
         </div>
-
       <% end %>
 
 
