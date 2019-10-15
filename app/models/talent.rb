@@ -294,10 +294,14 @@ class Talent < ApplicationRecord
     else
       0.times { self.build_next_aventure }
     end
-    if self.your_small_plus.count == 0
-      1.times { self.your_small_plus.build }
-    else
-      0.times { self.your_small_plus.build }
+
+    i = self.your_small_plus.count
+    loop do
+      i += 1
+      self.your_small_plus.build
+      if i > 2
+        break
+      end
     end
   end
 
