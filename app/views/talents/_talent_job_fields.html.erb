@@ -9,7 +9,9 @@
 <% end %>
 
 <div class="col-lg-3 col-xs-12">
-  <%= u.input :year, placeholder: "Années d'expérience", label: false, :input_html => { style: "width: 100%", min: "0", :onchange => "zeroInput(this.value, 'yearPositif')", id: "yearPositif" }, error: u.object.errors.messages[:year][0] %>
+  <%= u.input :year, placeholder: "Années d'expérience", label: false, :input_html => { style: "width: 100%", min: "0", 
+    # :onchange => "zeroInput(this.value, 'yearPositif')", 
+    id: "yearPositif" }, error: u.object.errors.messages[:year][0] %>
   <p class="red hidden" id="textErrExp">un an d'expérience minimum 😉</p>
 </div>
 
@@ -17,11 +19,22 @@
 
 <script>
   function zeroInput(val, id){
+    console.log('Wesh', val, id)
     if (val < 1) {
       document.getElementById(id).value = 1
       document.getElementById("textErrExp").classList.remove("hidden")
+    } else {
+      document.getElementById("textErrExp").classList.add("hidden")
     }
   }
+
+  const yearPositif = document.getElementById('yearPositif')
+  console.log(yearPositif)
+  yearPositif.addEventListener('change', ()=>{
+    zeroInput(yearPositif.value, 'yearPositif')
+  })
+    // console.log('la', yearPositif.value)
+
 </script>
 
 <!-- script dans select2.js -->
