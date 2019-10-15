@@ -15,11 +15,11 @@
 
 <!-- Titre section -->
   <div class="titre-section-icon margin-top-60"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
-  <h2 class="titre-section margin-top-60">Mes compétences <strong>techniques</strong></h2>
+  <h2 class="titre-section margin-top-60">Mes compétences <strong>clés</strong></h2>
 
 
   <div class="row">
-    <label class="col-lg-2 col-xs-12 label-edit requis" for="talent_techno_ids">Compétences techniques</label>
+    <label class="col-lg-2 col-xs-12 label-edit requis" for="talent_techno_ids">Compétences clés</label>
     <div class="col-lg-10 col-xs-12" id="competence-form">
       <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { class: "comp-cles height-unset", multiple: "multiple", style: "width: 100%;"}, multiple: true, required: true %>
     </div>
