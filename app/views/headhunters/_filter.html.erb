@@ -35,6 +35,19 @@
         <%= link_to talents_path(tag: "Invisible") do %>
           <i class="far fa-eye-slash"></i> Invisible
         <% end %>
+
+        <div class="dropdown">
+          <a class="dropdown-toggle pointer" id="dropdownMetiers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-suitcase"></i> Métiers
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMetiers">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+
+
       <% elsif conditioning == 'headhunters' %>
         <%= link_to headhunters_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
           <i class="fas fa-infinity"></i> Tous
