@@ -1,4 +1,4 @@
-<div class="col-xs-12 col-md-3 margin-bottom-30 placement-talentist">
+<div class="col-xs-12 col-md-3 margin-bottom-30 placement-talentist talentCard">
   <div class="relative talent-card">
 
     <%= render 'headhunters/illu-card', talent: talent %>
@@ -8,6 +8,9 @@
 
       <div class="card-title">
         <p><%= talent.jobs.first.nil? ? "pas renseigné" : talent.jobs.first.title %></p>
+        <%# if talent.jobs.second.present? %>
+          <!-- <p style="font-size: 10px; font-weight: 100; letter-spacing: unset"><%= talent.jobs.second.title %></p> -->
+        <%# end %>
       </div>
 
       <div class="talent-job" style="height: 80px">
