@@ -71,15 +71,16 @@
   box-shadow: 1px 1px 4px $gray;
   border-color: $gray;
 }
-.navbar-wagon-dropdown-menu li > a {
+.navbar-wagon-dropdown-menu li > a, .navbar-wagon-dropdown-menu li > p {
   transition: color 0.3s ease;
   font-weight: lighter !important;
-  color: $gray !important;
+  color: $gray;
   font-size: 15px !important;
   line-height: 22px !important;
   padding: 10px 20px;
+  cursor: pointer;
 }
-.navbar-wagon-dropdown-menu li > a:hover {
+.navbar-wagon-dropdown-menu li > a:hover, .navbar-wagon-dropdown-menu li > p:hover {
   background: transparent !important;
   color: black !important;
 }
