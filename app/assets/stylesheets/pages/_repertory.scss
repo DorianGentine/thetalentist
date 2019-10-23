@@ -11,9 +11,9 @@
   }
   .filter-item {
     border-left: 1px solid $gray;
-    label, a{
+    label, > a{
       padding: 0 20px;
-      line-height: 50px;
+      // max-height: 50px;
     }
     .category-choice:hover{
       color: $green;
@@ -52,7 +52,7 @@
   width: calc(16.6666666667% + 1px) !important;
 }
 
-.search-results{
+#search-results{
   line-height: 150px;
   text-align: center;
   strong{

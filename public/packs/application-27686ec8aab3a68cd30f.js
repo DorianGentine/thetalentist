@@ -10756,6 +10756,7 @@ var initSelectize = function initSelectize(nomClass) {
     plugins: ['remove_button'],
     delimiter: ',',
     persist: false,
+    maxItems: '1',
     create: function create(input) {
       return {
         value: input,
@@ -10766,6 +10767,17 @@ var initSelectize = function initSelectize(nomClass) {
       option_create: function option_create(data, escape) {
         var addString = 'Ajouter';
         return '<div class="create">' + addString + ' <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+      }
+    },
+    onDropdownOpen: function onDropdownOpen($dropdown) {
+      // Manually prevent dropdown from opening when there is no search term
+      if (!this.lastQuery.length) {
+        this.close();
+      }
+    },
+    onType: function onType(str) {
+      if (str === "") {
+        this.close();
       }
     }
   });
@@ -10833,17 +10845,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_petitPlusEnter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_petitPlusEnter__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_popup_connexion__ = __webpack_require__(/*! ../components/popup_connexion */ 29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_popup_connexion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_popup_connexion__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_autocomplete__ = __webpack_require__(/*! ../components/autocomplete */ 30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_modal__ = __webpack_require__(/*! ../components/modal */ 31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_job_choice__ = __webpack_require__(/*! ../components/job_choice */ 32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_formprogression__ = __webpack_require__(/*! ../components/formprogression */ 33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_scrollToBottom__ = __webpack_require__(/*! ../components/scrollToBottom */ 34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_check_box__ = __webpack_require__(/*! ../components/check_box */ 35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_readMore__ = __webpack_require__(/*! ../components/readMore */ 36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_readMoreText__ = __webpack_require__(/*! ../components/readMoreText */ 37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_toggableVerticalTabs__ = __webpack_require__(/*! ../components/toggableVerticalTabs */ 38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_verifDate__ = __webpack_require__(/*! ../components/verifDate */ 39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_notification__ = __webpack_require__(/*! ../components/notification */ 40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_filterMetier__ = __webpack_require__(/*! ../components/filterMetier */ 30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_filterMetier___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_filterMetier__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_autocomplete__ = __webpack_require__(/*! ../components/autocomplete */ 31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_modal__ = __webpack_require__(/*! ../components/modal */ 32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_job_choice__ = __webpack_require__(/*! ../components/job_choice */ 33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_formprogression__ = __webpack_require__(/*! ../components/formprogression */ 34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_scrollToBottom__ = __webpack_require__(/*! ../components/scrollToBottom */ 35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_check_box__ = __webpack_require__(/*! ../components/check_box */ 36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_readMore__ = __webpack_require__(/*! ../components/readMore */ 37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_readMoreText__ = __webpack_require__(/*! ../components/readMoreText */ 38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_toggableVerticalTabs__ = __webpack_require__(/*! ../components/toggableVerticalTabs */ 39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_verifDate__ = __webpack_require__(/*! ../components/verifDate */ 40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_notification__ = __webpack_require__(/*! ../components/notification */ 41);
 
 
 
@@ -10871,41 +10885,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-Object(__WEBPACK_IMPORTED_MODULE_12__components_autocomplete__["a" /* autocomplete */])();
 
 
-Object(__WEBPACK_IMPORTED_MODULE_13__components_modal__["a" /* revealModal */])();
+Object(__WEBPACK_IMPORTED_MODULE_13__components_autocomplete__["a" /* autocomplete */])();
 
 
-Object(__WEBPACK_IMPORTED_MODULE_14__components_job_choice__["a" /* jobFilter */])();
+Object(__WEBPACK_IMPORTED_MODULE_14__components_modal__["a" /* revealModal */])();
 
 
-Object(__WEBPACK_IMPORTED_MODULE_15__components_formprogression__["a" /* dynamicFormBar */])();
+Object(__WEBPACK_IMPORTED_MODULE_15__components_job_choice__["a" /* jobFilter */])();
 
 
-Object(__WEBPACK_IMPORTED_MODULE_16__components_scrollToBottom__["a" /* scrollToBottom */])();
+Object(__WEBPACK_IMPORTED_MODULE_16__components_formprogression__["a" /* dynamicFormBar */])();
 
 
-Object(__WEBPACK_IMPORTED_MODULE_17__components_check_box__["a" /* checkBox */])();
+Object(__WEBPACK_IMPORTED_MODULE_17__components_scrollToBottom__["a" /* scrollToBottom */])();
 
 
-Object(__WEBPACK_IMPORTED_MODULE_18__components_readMore__["a" /* readMore */])();
+Object(__WEBPACK_IMPORTED_MODULE_18__components_check_box__["a" /* checkBox */])();
 
 
-Object(__WEBPACK_IMPORTED_MODULE_19__components_readMoreText__["a" /* readMoreText */])();
+Object(__WEBPACK_IMPORTED_MODULE_19__components_readMore__["a" /* readMore */])();
 
 
-Object(__WEBPACK_IMPORTED_MODULE_20__components_toggableVerticalTabs__["a" /* openOnglet */])();
+Object(__WEBPACK_IMPORTED_MODULE_20__components_readMoreText__["a" /* readMoreText */])();
 
 
-Object(__WEBPACK_IMPORTED_MODULE_21__components_verifDate__["a" /* verifDateWithMonthAndYear */])();
+Object(__WEBPACK_IMPORTED_MODULE_21__components_toggableVerticalTabs__["a" /* openOnglet */])();
+
+
+Object(__WEBPACK_IMPORTED_MODULE_22__components_verifDate__["a" /* verifDateWithMonthAndYear */])();
 
 
 Object(__WEBPACK_IMPORTED_MODULE_1__components_select2__["a" /* initSelect2 */])();
 Object(__WEBPACK_IMPORTED_MODULE_1__components_select2__["b" /* initSelectize */])();
 
 
-Object(__WEBPACK_IMPORTED_MODULE_22__components_notification__["a" /* fetchNotifications */])();
+Object(__WEBPACK_IMPORTED_MODULE_23__components_notification__["a" /* fetchNotifications */])();
 
 /***/ }),
 /* 3 */
@@ -23811,6 +23827,16 @@ if (popup) {
 /***/ }),
 /* 30 */
 /*!***************************************************!*\
+  !*** ./app/javascript/components/filterMetier.js ***!
+  \***************************************************/
+/*! dynamic exports provided */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: SyntaxError: Unexpected token, expected , (29:4)\n\n  27 | \t\t}\n  28 |     searchResults.innerHTML = \"<strong>\" + nbActifs + \" profils</strong> correspondent à votre recherche '\" + filtreActifs.map(a => a.charAt(0).toUpperCase() + a.slice(1).join(\" ,\") + \"'\"\n> 29 |     console.log(filtreActifs.map(a => a.charAt(0).toUpperCase() + a.slice(1)));\n     |     ^\n  30 | \t}\n  31 | \n  32 | \tfor (var i = btnFiltres.length - 1; i >= 0; i--) {\n");
+
+/***/ }),
+/* 31 */
+/*!***************************************************!*\
   !*** ./app/javascript/components/autocomplete.js ***!
   \***************************************************/
 /*! exports provided: autocomplete */
@@ -23854,7 +23880,7 @@ function autocomplete() {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /*!********************************************!*\
   !*** ./app/javascript/components/modal.js ***!
   \********************************************/
@@ -23923,7 +23949,7 @@ function revealModal() {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /*!*************************************************!*\
   !*** ./app/javascript/components/job_choice.js ***!
   \*************************************************/
@@ -23956,7 +23982,7 @@ function jobFilter() {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(/*! jquery */ 0)))
 
 /***/ }),
-/* 33 */
+/* 34 */
 /*!******************************************************!*\
   !*** ./app/javascript/components/formprogression.js ***!
   \******************************************************/
@@ -23987,7 +24013,7 @@ function dynamicFormBar() {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /*!*****************************************************!*\
   !*** ./app/javascript/components/scrollToBottom.js ***!
   \*****************************************************/
@@ -24012,7 +24038,7 @@ function scrollToBottom() {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(/*! jquery */ 0)))
 
 /***/ }),
-/* 35 */
+/* 36 */
 /*!************************************************!*\
   !*** ./app/javascript/components/check_box.js ***!
   \************************************************/
@@ -24045,7 +24071,7 @@ function checkBox() {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /*!***********************************************!*\
   !*** ./app/javascript/components/readMore.js ***!
   \***********************************************/
@@ -24091,7 +24117,7 @@ function readMore() {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /*!***************************************************!*\
   !*** ./app/javascript/components/readMoreText.js ***!
   \***************************************************/
@@ -24145,7 +24171,7 @@ function readMoreText() {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(/*! jquery */ 0)))
 
 /***/ }),
-/* 38 */
+/* 39 */
 /*!***********************************************************!*\
   !*** ./app/javascript/components/toggableVerticalTabs.js ***!
   \***********************************************************/
@@ -24192,7 +24218,7 @@ function openOnglet() {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /*!************************************************!*\
   !*** ./app/javascript/components/verifDate.js ***!
   \************************************************/
@@ -24251,7 +24277,7 @@ if (document.getElementById("add_experience")) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /*!***************************************************!*\
   !*** ./app/javascript/components/notification.js ***!
   \***************************************************/
@@ -24292,4 +24318,4 @@ function fetchNotifications() {
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=application-e62b1d14e1a1bfa3dd53.js.map
+//# sourceMappingURL=application-27686ec8aab3a68cd30f.js.map

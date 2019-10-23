@@ -132,11 +132,11 @@
         </div>
       <% end %>
 
-    <!-- Mes compétences techniques -->
+    <!-- Mes compétences clés -->
       <% if @talent.technos.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
         <div class="blue-background margin-top-60">
-          <p class="titre-rubrique-3 margin-bottom-30">Mes compétences techniques :</p>
+          <p class="titre-rubrique-3 margin-bottom-30">Mes compétences clés :</p>
           <% if @talent.technos.present? %>
             <div class="talent-competences">
               <% @talent.technos.each do |techno| %>
@@ -349,7 +349,7 @@
           <!-- L'entreprise de mes rêves -->
           <% if !current_user.is_a?(Headhunter) %>
             <div class="col-lg-4 col-xs-12 margin-top-30-xs">
-              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >L'entreprise de mes rêves <i class="fas fa-info-circle gray font-12 tooltip">
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >L'entreprise de mes rêves <i class="fas fa-info-circle gray font-12 tooltip" style="z-index: 1">
                 <span class="tooltiptext" style='font-family: "Avenir", "Open Sans", "Helvetica", "sans-serif"; font-weight: 400;'>Les start-up ne voient pas cette réponse</span>
               </i></h4>
 
@@ -571,7 +571,6 @@
             <% end %>
         </div>
       <% end %>
-
 
   </div>
 </div>

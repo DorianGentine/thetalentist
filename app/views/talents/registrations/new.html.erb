@@ -13,7 +13,7 @@
       </div> -->
 
       <div class="blue-background">
-        <div class="row align-items-baseline">
+        <div class="row align-items-center">
 
           <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis" for="talent_firstname">Civilité</label>
 
@@ -43,7 +43,7 @@
           </div>
 
         </div>
-        <div class="row align-items-baseline margin-top-15">
+        <div class="row align-items-center margin-top-15">
 
           <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis" for="talent_phone">Tel.</label>
 
@@ -62,7 +62,7 @@
       </div>
 
       <div class="blue-background margin-top-30">
-        <div class="row align-items-baseline" id="talent_jobs">
+        <div class="row align-items-center" id="talent_jobs">
           <%= f.simple_fields_for :talent_job do |u| %>
             <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis">Mon&#8239;domaine&#8239;d'activité</label>
             <%= render 'talents/talent_job_fields', :u => u, f: f %>

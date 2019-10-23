@@ -5,7 +5,7 @@
       <!-- <p><i class="fas fa-filter"></i> Filtrer par MÉTIER</p> -->
     </div>
 
-    <div class="col-lg-9 filter-item">
+    <div class="flex align-items-center filter-item">
 
       <% if conditioning == 'repertoire' %>
 
@@ -32,9 +32,22 @@
         <%= link_to talents_path(tag: "Visible") do %>
           <i class="far fa-eye"></i> Visible
         <% end %>
-        <%= link_to talents_path(tag: "Invisible") do %>
+        <%= link_to talents_path(tag: "Invisible"), { :class=> "bordure-droite"} do %>
           <i class="far fa-eye-slash"></i> Invisible
         <% end %>
+
+        <div class="dropdown" style="padding: 0 20px;">
+          <a class="dropdown-toggle pointer" id="dropdownMetiers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-suitcase"></i> Métiers
+          </a>
+          <ul class="dropdown-menu navbar-wagon-dropdown-menu" id="filterMetiers" aria-labelledby="dropdownMetiers">
+            <% Job.all.each do |job| %>
+              <li><p class="btn-filtre" data-metier="<%= job.title %>"><%= job.title %></a></li>
+            <% end %>
+          </ul>
+        </div>
+
+
       <% elsif conditioning == 'headhunters' %>
         <%= link_to headhunters_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
           <i class="fas fa-infinity"></i> Tous
