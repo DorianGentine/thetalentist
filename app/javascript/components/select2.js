@@ -45,7 +45,7 @@ const initSelect2 = () => {
     console.log('valueFirstJob', valueFirstJob)
     selectedAnswer = selectedAnswer - valueFirstJob + 1
     console.log("selectedAnswer", selectedAnswer)
-    
+
     for (var i = 0; i <= selectedAnswer + nbIds; i++) {
       if(options[i] != undefined){
         options[i].disabled = false
@@ -74,6 +74,7 @@ const initSelectize = (nomClass) => {
     plugins: ['remove_button'],
     delimiter: ',',
     persist: false,
+    maxItems: '1',
     create: function(input) {
       return {
         value: input,
@@ -84,6 +85,17 @@ const initSelectize = (nomClass) => {
       option_create: function(data, escape) {
         let addString = 'Ajouter';
         return '<div class="create">' + addString + ' <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+      }
+    },
+    onDropdownOpen: function ($dropdown) {
+      // Manually prevent dropdown from opening when there is no search term
+      if (!this.lastQuery.length) {
+        this.close();
+      }
+    },
+    onType: function (str) {
+      if (str === "") {
+          this.close();
       }
     },
   });
