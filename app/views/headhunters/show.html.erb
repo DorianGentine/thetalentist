@@ -77,7 +77,8 @@
             <p class="titre-rubrique-3 no-margin col-xs-10 no-padding"><%= @startup.address.present? ? @startup.address : "Ajoutez votre adresse" %></p>
           </div>
           <% if @startup.address.present? %>
-            <div id="map" data-markers="<%= @markers.to_json %>"></div>
+            <!-- <div id="map" data-markers="<%= @markers.to_json %>"></div> -->
+            <div id="map" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="pk.eyJ1IjoidGFsZW50aXN0IiwiYSI6ImNrMjNkZHc5eTB6N2ozbG55MDJ6Nnlqd2cifQ.-gN3Zvab3Yxqr7xfxktk7w"></div>
           <% end %>
       </div>
 
