@@ -55,7 +55,7 @@
 
           <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
             <%#= f.input :zip_code, placeholder: '75007', :input_html => { :id => "", style: "width: 100%", type:"number"  }, label: false %>
-            <%= f.input :city, placeholder: 'Paris, France', :input_html => { :id => "talent_city", style: "width: 100%" }, label: false, error: f.object.errors.messages[:city][0] %>
+            <%= f.input :city, placeholder: 'Paris, France', :input_html => { :id => "user_address", style: "width: 100%"}, label: false, error: f.object.errors.messages[:city][0]%>
           </div>
 
         </div>

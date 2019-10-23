@@ -21,12 +21,6 @@ class TalentsController < ApplicationController
       @talents = talents
     end
 
-    # if params[:jobs].blank? || params[:jobs] == "Tous"
-    #   talents = talents
-    # else
-    #   talents = talents.his_job_is(params[:jobs]).to_a
-    # end
-
     @notifications = Notification.all
   end
 

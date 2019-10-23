@@ -89,3 +89,4 @@ gem 'wicked_pdf'
 # job workers
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
+
