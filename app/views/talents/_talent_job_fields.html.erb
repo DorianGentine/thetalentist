@@ -9,8 +9,8 @@
 <% end %>
 
 <div class="col-lg-3 col-xs-12">
-  <%= u.input :year, placeholder: "Années d'expérience", label: false, :input_html => { style: "width: 100%", min: "0", 
-    # :onchange => "zeroInput(this.value, 'yearPositif')", 
+  <%= u.input :year, placeholder: "Années d'expérience*", label: false, :input_html => { style: "width: 100%", min: "0",
+    # :onchange => "zeroInput(this.value, 'yearPositif')",
     id: "yearPositif" }, error: u.object.errors.messages[:year][0] %>
   <p class="red hidden" id="textErrExp">un an d'expérience minimum 😉</p>
 </div>
