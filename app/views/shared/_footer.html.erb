@@ -21,7 +21,7 @@
     <div class="footer-right footer-small-case">
       <a href="http://www.ineva-partners.com/equipe/" target="_blank">Équipe</a>
       <a class="modal-button" data-target= "modal_contact">Contact</a>
-      <%= link_to "Mentions legales", mentions_legales_path, target: "_blank" %>
+      <%= link_to "Mentions légales", mentions_legales_path, target: "_blank" %>
       <% if headhunter_signed_in? && current_headhunter %>
         <%= link_to "Conditions générales", cgu_employeurs_path, target: "_blank" %>
       <% elsif talent_signed_in? && current_talent.validated %>
