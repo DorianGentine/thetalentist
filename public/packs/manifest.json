@@ -1,4 +1,11 @@
 {
+  "application.css": "/packs/application-ca1458ffcb48f9e1bd04431f9d15f665.css",
+  "application.css.map": "/packs/application-ca1458ffcb48f9e1bd04431f9d15f665.css.map",
+//   "application.js": "/packs/application-d609f52eb9ba78753140.js",
+//   "application.js.map": "/packs/application-d609f52eb9ba78753140.js.map",
+//   "map.js": "/packs/map-e57e8aa66db0f2b930ac.js",
+//   "map.js.map": "/packs/map-e57e8aa66db0f2b930ac.js.map"
+// =======
   "application.js": "/packs/application-f3dcb90161a64adc2de1.js",
   "application.js.map": "/packs/application-f3dcb90161a64adc2de1.js.map",
   "map.js": "/packs/map-fabfc06c54f3d7996e58.js",

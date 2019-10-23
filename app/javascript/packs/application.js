@@ -62,3 +62,8 @@ initSelectize()
 
 import { fetchNotifications } from "../components/notification";
 fetchNotifications();
+
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import { initAutocomplete } from '../components/init_autocomplete';
+
+initAutocomplete();
