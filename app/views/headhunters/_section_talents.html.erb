@@ -16,10 +16,12 @@
   <div class="row">
 
     <% @talents.each do |talent| %>
-      <%= render 'shared/modal', talent: talent, cached: true %>
-      <%#= cache talent do %>
-        <%= render 'headhunters/talent-card', talent: talent, cached: true %>
-      <%# end %>
+      <% if @headhunter.nil? || talent[:company_id] != @headhunter.startup.id%>
+        <%= render 'shared/modal', talent: talent, cached: true %>
+        <%#= cache talent do %>
+          <%= render 'headhunters/talent-card', talent: talent, cached: true %>
+        <%# end %>
+      <% end %>
     <% end %>
 
   </div>
