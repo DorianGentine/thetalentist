@@ -28,7 +28,7 @@ class HttpErrorsController < ApplicationController
   private
 
   def set_email_error(current_page, type_erreur)
-    ApplicationMailer.erreur_message(current_page, type_erreur).deliver_later
+    # ApplicationMailer.erreur_message(current_page, type_erreur).deliver_later
   end
 
   # def set_errors_infos
