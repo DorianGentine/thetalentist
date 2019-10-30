@@ -83,8 +83,8 @@ class TalentFormat
           btoc: talent.next_aventure.present? && talent.next_aventure.btoc.present? ? true : false,
         },
         sectors: talent_sectors,
-        formations: talent_formations,
-        experiences: talent_experiences,
+        # formations: talent_formations,
+        # experiences: talent_experiences,
         technos: talent_technos,
         talent_small_plus: your_small_plus,
       }
