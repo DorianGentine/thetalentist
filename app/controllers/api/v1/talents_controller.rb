@@ -3,7 +3,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def repertoire
     talents = Talent.where(:visible => true).reorder(completing: :desc, last_sign_in_at: :desc)
-    @talents = TalentFormat.new(talents).for_repository
+    @talents = TalentFormat.new(talents).for_repository.first(20)
   end
 
   private
