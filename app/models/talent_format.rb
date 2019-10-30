@@ -86,10 +86,11 @@ class TalentFormat
         formations: talent_formations,
         experiences: talent_experiences,
         technos: talent_technos,
-        talent_small_plus: your_small_plus,
+        # talent_small_plus: your_small_plus,
       }
 
       @new_talents << talent_injected
+      p "injected talent #{talent.id}"
     end
     return @new_talents
   end
