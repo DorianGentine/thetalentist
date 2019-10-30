@@ -1,4 +1,6 @@
 import "bootstrap";
+import 'mapbox-gl/dist/mapbox-gl.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 import '../components/select2';
 
@@ -62,3 +64,10 @@ initSelectize()
 
 import { fetchNotifications } from "../components/notification";
 fetchNotifications();
+
+
+import { initAutocomplete } from '../components/init_autocomplete';
+initAutocomplete();
+
+import { initMapbox } from '../plugins/map';
+initMapbox();
