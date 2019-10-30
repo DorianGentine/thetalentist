@@ -65,7 +65,11 @@ class TalentFormat
         first_name: talent.firstname,
         last_name: talent.last_name,
         position: talent.experiences.first.present? ? talent.experiences.first.position : nil,
-        company_id: talent.experiences.first.present? ? Startup.where(name:talent.experiences.first.company_name).first.id : nil,
+
+        startup = Startup.where(name:talent.experiences.first.company_name).first
+        startup_name = startup.present? ? startup.id : nil
+
+        company_id: talent.experiences.first.present? ? startup_name : nil,
         year_experience_job: talent.talent_job.present? ? talent.talent_job.year : "0",
         city: talent.city,
         job: talent.jobs.first.present? ? talent.jobs.first.title : nil,
