@@ -65,11 +65,7 @@ class TalentFormat
         first_name: talent.firstname,
         last_name: talent.last_name,
         position: talent.experiences.first.present? ? talent.experiences.first.position : nil,
-
-        startup = Startup.where(name:talent.experiences.first.company_name).first
-        startup_name = startup.present? ? startup.id : nil
-
-        company_id: talent.experiences.first.present? ? startup_name : nil,
+        company_id: talent.experiences.first.present? ? talent.startup_id : nil,
         year_experience_job: talent.talent_job.present? ? talent.talent_job.year : "0",
         city: talent.city,
         job: talent.jobs.first.present? ? talent.jobs.first.title : nil,
@@ -90,7 +86,7 @@ class TalentFormat
         formations: talent_formations,
         experiences: talent_experiences,
         technos: talent_technos,
-        # talent_small_plus: your_small_plus,
+        talent_small_plus: your_small_plus,
       }
 
       @new_talents << talent_injected
@@ -98,4 +94,5 @@ class TalentFormat
     end
     return @new_talents
   end
+
 end

@@ -264,6 +264,15 @@ class Talent < ApplicationRecord
     end
   end
 
+
+  def startup_id
+    company_name = self.experiences.first.company_name
+    startup = Startup.where(name: company_name).first
+    startup_id = startup.present? ? startup.id : nil
+    return startup_id
+  end
+
+
   def set_build_belong_tables
     # if self.talent_formations.count == 0
     #   5.times { self.talent_formations.build }
