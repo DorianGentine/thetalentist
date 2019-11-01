@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   require "sidekiq/web"
-  authenticate :talentist, lambda { |u| u.admin } do
     mount Sidekiq::Web => '/sidekiq'
+  authenticate :talentist, lambda { |u| u.admin } do
   end
 
   # get 'contact_forms/create'

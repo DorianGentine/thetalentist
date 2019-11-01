@@ -16,7 +16,7 @@
   <div class="row">
 
     <% @talents.each do |talent| %>
-      <% if @headhunter.nil? || talent[:company_id] != @headhunter.startup.id%>
+      <% if @headhunter.nil? || talent[:company_id] == "" || talent[:company_id].nil? || talent[:company_id] != @headhunter.startup.id %>
         <%= render 'shared/modal', talent: talent, cached: true %>
         <%#= cache talent do %>
           <%= render 'headhunters/talent-card', talent: talent, cached: true %>

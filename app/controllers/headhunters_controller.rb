@@ -28,7 +28,8 @@ class HeadhuntersController < ApplicationController
 
     @jobs = Job.all.order(:id)
 
-    talents_visible = talents_scope.reorder(completing: :desc, last_sign_in_at: :desc)
+    talents_visible = talents_scope.reorder(last_sign_in_at: :desc, completing: :desc)
+    # talents_visible = talents_scope.reorder(completing: :desc, last_sign_in_at: :desc)
 
     if params[:jobs].blank? || params[:jobs] == "Tous"
       talents = talents_visible
