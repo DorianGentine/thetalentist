@@ -11,7 +11,7 @@ class SubscribeToNewsletterService
         email_address: @user.email,
         status: "subscribed",
         merge_fields: {
-          FNAME: @user.first_name,
+          FNAME: @user.firstname,
         #   LNAME: @user.last_name
         }
       }
