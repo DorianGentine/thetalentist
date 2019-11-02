@@ -102,7 +102,8 @@
             </p>
           </div>
           <% if @talent.city.present? %>
-            <div id="map" data-markers="<%= @markers.to_json %>"></div>
+            <!-- <div id="map" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY']%>"></div> -->
+            <div id="map" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="pk.eyJ1IjoidGFsZW50aXN0IiwiYSI6ImNrMjNkZHc5eTB6N2ozbG55MDJ6Nnlqd2cifQ.-gN3Zvab3Yxqr7xfxktk7w"></div>
           <% end %>
       </div>
 
@@ -284,7 +285,7 @@
       <hr class="ligne-horizontal">
 
       <!-- Ligne texte -->
-      
+
         <div class="row">
 
           <!-- Rêve remis à demain -->
@@ -367,9 +368,9 @@
 
 
         </div>
-        
+
         <hr class="ligne-horizontal">
-        
+
         <div class="row">
 
           <!-- La personnalité qui m'inspire -->

@@ -1,4 +1,6 @@
 import "bootstrap";
+import 'mapbox-gl/dist/mapbox-gl.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 import '../components/select2';
 
@@ -25,6 +27,8 @@ import '../components/petitPlusEnter';
 import '../components/popup_connexion';
 
 import '../components/filterMetier';
+
+import '../components/sendSubscriber';
 
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
@@ -62,3 +66,10 @@ initSelectize()
 
 import { fetchNotifications } from "../components/notification";
 fetchNotifications();
+
+
+import { initAutocomplete } from '../components/init_autocomplete';
+initAutocomplete();
+
+import { initMapbox } from '../plugins/map';
+initMapbox();

@@ -23,7 +23,8 @@ class Talent < ApplicationRecord
 
   # geocoded_by :zip_code
   geocoded_by :city
-  after_validation :geocode
+  after_validation :geocode, if: ->(obj){ obj.city.present? and obj.city_changed? }
+
 
   after_create :send_welcome_email, :send_new_user_to_talentist, :fill_last_sign_at
   before_save :capitalize_name_firstname, :save_completed_profil
@@ -262,6 +263,15 @@ class Talent < ApplicationRecord
       self.send_accepted
     end
   end
+
+
+  def startup_id
+    company_name = self.experiences.first.company_name
+    startup = Startup.where(name: company_name).first
+    startup_id = startup.present? ? startup.id : nil
+    return startup_id
+  end
+
 
   def set_build_belong_tables
     # if self.talent_formations.count == 0
