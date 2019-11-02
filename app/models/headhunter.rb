@@ -23,6 +23,8 @@ class Headhunter < ApplicationRecord
   validates :last_name, :firstname, :job, :email, :terms_of_condition, :startup, presence: true
 
   after_create :send_new_user_to_talentist
+  after_create :subscribe_to_newsletter
+
   before_save :capitalize_name_firstname
 
   mount_uploader :photo, PhotoUploader
@@ -123,6 +125,10 @@ class Headhunter < ApplicationRecord
         csv << [headhunter.id, headhunter.email, headhunter.name, headhunter.startup.name]
       end
     end
+  end
+
+  def subscribe_to_newsletter
+    SubscribeToNewsletterService.new(self).call
   end
 end
 
