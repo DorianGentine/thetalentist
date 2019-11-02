@@ -213,7 +213,7 @@ class Talent < ApplicationRecord
   end
 
   def send_new_user_to_talentist
-    # ApplicationMailer.new_user("talent", self.id).deliver_later
+    ApplicationMailer.new_user("talent", self.id).deliver_later
   end
 
   def new_message(message, receveur)
@@ -226,12 +226,12 @@ class Talent < ApplicationRecord
   end
 
   def send_candidate_and_user_information
-    # TalentMailer.candidate(self.id).deliver_later(wait_until: Date.tomorrow.noon + 9.hours)
-    # TalentMailer.pdf_of_user_information(self.id).deliver_later(wait_until: Date.tomorrow.noon + 2.hours)
+    TalentMailer.candidate(self.id).deliver_later(wait_until: Date.tomorrow.noon + 9.hours)
+    TalentMailer.pdf_of_user_information(self.id).deliver_later(wait_until: Date.tomorrow.noon + 2.hours)
   end
 
   def send_welcome_email
-    # TalentMailer.welcome(self.id).deliver_later
+    TalentMailer.welcome(self.id).deliver_later
   end
 
   def send_refused
