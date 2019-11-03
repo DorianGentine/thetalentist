@@ -6,6 +6,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
 
   def new
     @headhunter = Headhunter.new
+    @headhunter.build_headhunter_email
     authorize @headhunter
   end
 
@@ -27,14 +28,15 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
       message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme !"
       @talentist = Talentist.last
       @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
-      if @headhunter.startup.address == "" || @headhunter.startup.address.nil?
-        session[:headhunter_id] = @headhunter.id
-        redirect_to steps_startup_info_path(:startup)
-      else
+
+      # if @headhunter.startup.address == "" || @headhunter.startup.address.nil?
+      #   session[:headhunter_id] = @headhunter.id
+      #   redirect_to steps_startup_info_path(:startup)
+      # else
         @headhunter.send_welcome_and_reminder_email
         session[:headhunter_id] = @headhunter.id
         sign_up(resource)
-      end
+      # end
     else
       return render :new
     end
@@ -94,7 +96,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
 
     def headhunter_params
       params.require(:headhunter).permit(:firstname, :last_name,
-        :job, :email, :password, :password_confirmation, :terms_of_condition
+        :job, :email, :password, :password_confirmation, :terms_of_condition, headhunter_email_attributes: [:newletter]
       )
     end
 
