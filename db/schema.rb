@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_19_073002) do
+ActiveRecord::Schema.define(version: 2019_11_03_135707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 2019_07_19_073002) do
     t.datetime "updated_at", null: false
     t.string "type_of_formation"
     t.string "ranking"
+  end
+
+  create_table "headhunter_emails", force: :cascade do |t|
+    t.boolean "newletter"
+    t.bigint "headhunter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["headhunter_id"], name: "index_headhunter_emails_on_headhunter_id"
   end
 
   create_table "headhunter_messages", force: :cascade do |t|
@@ -550,6 +558,7 @@ ActiveRecord::Schema.define(version: 2019_07_19_073002) do
   add_foreign_key "credentials", "talents"
   add_foreign_key "experiences", "company_types"
   add_foreign_key "experiences", "talents"
+  add_foreign_key "headhunter_emails", "headhunters"
   add_foreign_key "headhunter_messages", "headhunters"
   add_foreign_key "headhunter_messages", "relationships"
   add_foreign_key "job_alertes", "headhunters"
