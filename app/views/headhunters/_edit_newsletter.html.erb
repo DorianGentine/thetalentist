@@ -1,0 +1,26 @@
+<!-- Titre section -->
+  <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+  <h2 class="titre-section">Abonné à la <strong>newsletter</strong></h2>
+
+<!-- info general -->
+<%= simple_form_for @headhunter, url: update_profile_headhunter_path(@headhunter), method: :patch, remote: false   do |f| %>
+  <%= f.simple_fields_for :startup do |u| %>
+
+    <div class="row margin-top-30">
+      <div class="col-lg-3 col-xs-12">
+        <div class="btn-validate margin-bottom-15">
+          <div class="<%= "green_validation" if true %>">
+            <%= f.submit "Abonné" %>
+          </div>
+          <div class="<%= "red_validation" if false %>">
+            <%= f.submit "Non-abonné" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+
+  <%#= render '/talents/edit_validations_buttons', f: f %>
+<% end %>
+
