@@ -11,6 +11,9 @@ class Headhunter < ApplicationRecord
   has_many :talents, through: :relationships
   has_many :talentists, through: :relationships
 
+  has_one :headhunter_email, dependent: :destroy
+  accepts_nested_attributes_for :headhunter_email
+
   has_many :job_alertes, dependent: :destroy
   has_many :jobs, through: :job_alertes
   accepts_nested_attributes_for :job_alertes, allow_destroy: true, reject_if: :all_blank
@@ -20,10 +23,10 @@ class Headhunter < ApplicationRecord
   acts_as_messageable
   before_destroy { self.mailbox.conversations.destroy_all }
 
-  validates :last_name, :firstname, :job, :email, :terms_of_condition, :startup, presence: true
+  validates :firstname, :email, :terms_of_condition, :startup, presence: true
+  # validates :last_name, :firstname, :job, :email, :terms_of_condition, :startup, presence: true
 
   after_create :send_new_user_to_talentist
-  after_create :subscribe_to_newsletter
 
   before_save :capitalize_name_firstname
 
@@ -46,6 +49,9 @@ class Headhunter < ApplicationRecord
   end
   def full_name
     "#{self.firstname} #{self.last_name}"
+  end
+  def initial
+    "#{self.firstname.split(//).first.upcase}#{self.last_name.split(//).first.upcase if self.last_name }"
   end
 
   def completed_totaly
@@ -125,10 +131,6 @@ class Headhunter < ApplicationRecord
         csv << [headhunter.id, headhunter.email, headhunter.name, headhunter.startup.name]
       end
     end
-  end
-
-  def subscribe_to_newsletter
-    SubscribeToNewsletterService.new(self).call
   end
 end
 

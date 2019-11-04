@@ -28,8 +28,6 @@ import '../components/popup_connexion';
 
 import '../components/filterMetier';
 
-import '../components/sendSubscriber';
-
 import { autocomplete } from '../components/autocomplete';
 autocomplete();
 

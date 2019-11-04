@@ -167,6 +167,10 @@
       color: white;
       background-color: $green;
     }
+    .disabled_validation:hover input, p{
+      color: unset;
+      background-color: transparent;
+    }
     div:last-child:hover input, p{
       background-color: $red;
     }
@@ -180,6 +184,13 @@
       input, p{
         color: white !important;
         background-color: $red !important;
+      }
+    }
+    .disabled_validation {
+      input, p{
+        color: $gray !important;
+        border: 1px solid $gray;
+        cursor: not-allowed;
       }
     }
   }

@@ -29,7 +29,7 @@
           <% else %>
             <div class="photo-profil">
               <div class="initiale">
-                <%= headhunter.firstname.present? ? headhunter.firstname.split(//).first.upcase : "" %><%= headhunter.last_name.present? ? headhunter.last_name.split(//).first.upcase : "" %>
+                <%= headhunter.initial %>
               </div>
             </div>
           <% end %>

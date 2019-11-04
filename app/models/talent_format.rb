@@ -64,6 +64,7 @@ class TalentFormat
         id: talent.id,
         first_name: talent.firstname,
         last_name: talent.last_name,
+        completing: talent.completing,
         position: talent.experiences.first.present? ? talent.experiences.first.position : nil,
         company_id: talent.experiences.first.present? ? talent.startup_id : nil,
         year_experience_job: talent.talent_job.present? ? talent.talent_job.year : "0",

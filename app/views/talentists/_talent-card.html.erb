@@ -19,8 +19,8 @@
       <div class="margin-bottom-15 margin-top-15">
         <%= simple_form_for talent , url: validation_talent_path(talent) do |f| %>
           <div class="btn-validate margin-bottom-15">
-            <div class="<%= "green_validation" if talent.validated %>">
-              <%= f.submit "Accepter" %>
+            <div class="<%= "green_validation" if talent.validated %> <%= "disabled_validation" if talent.completing < 85 %>">
+              <%= f.submit "Accepter", disabled: talent.completing > 85 ? false : true, title: talent.completing < 85 ? "Seuls les profils à plus de 85% peuvent être validés" : "" %>
             </div>
             <div class="<%= "red_validation" if !talent.validated && !talent.validated.nil? %>">
               <p class="modal-button no-margin"  data-target= "modal_declined_<%= talent.id %>">Refuser</p>
