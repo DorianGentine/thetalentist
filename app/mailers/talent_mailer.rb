@@ -54,7 +54,7 @@ class TalentMailer < ApplicationMailer
     mail(
       to: @user.email,
       cc: Talentist.all.collect(&:email).join(", "),
-      subject: "#{@user.firstname}, ton profil a été refusé"
+      subject: "#{@user.firstname}, malheureusement ton profil n'a pas été retenu 😔"
       )
   end
 
