@@ -24,6 +24,10 @@ class TalentistPolicy < ApplicationPolicy
     user == record
   end
 
+  def analytics?
+    user == record
+  end
+
   def all?
     user == record
   end

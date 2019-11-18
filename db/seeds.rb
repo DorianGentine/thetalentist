@@ -113,21 +113,21 @@ CSV.foreach(csv_file_school) do |row|
   end
 end
 
-hec = Formation.create!( title: "HEC")
-icam = Formation.create!( title: "Icam")
-agroparistech = Formation.create!( title: "AgroParisTech")
-audencia = Formation.create!( title: "Audencia")
-celsa = Formation.create!( title: "CELSA")
-centrale_lyon = Formation.create!( title: "Centrale Lyon")
-centrale_paris = Formation.create!( title: "Centrale Paris")
-dauphine = Formation.create!( title: "Dauphine")
-ecole_42 = Formation.create!( title: "Ecole 42")
-ensae = Formation.create!( title: "ENSAE")
-edhec = Formation.create!( title: "EDHEC")
-em_lyon = Formation.create!( title: "EM Lyon")
-ens = Formation.create!( title: "ENS")
-escp_europe = Formation.create!( title: "ESCP Europe")
-agroparistech = Formation.create!( title: "AgroParisTech")
+# hec = Formation.create!( title: "HEC")
+# icam = Formation.create!( title: "Icam")
+# agroparistech = Formation.create!( title: "AgroParisTech")
+# audencia = Formation.create!( title: "Audencia")
+# celsa = Formation.create!( title: "CELSA")
+# centrale_lyon = Formation.create!( title: "Centrale Lyon")
+# centrale_paris = Formation.create!( title: "Centrale Paris")
+# dauphine = Formation.create!( title: "Dauphine")
+# ecole_42 = Formation.create!( title: "Ecole 42")
+# ensae = Formation.create!( title: "ENSAE")
+# edhec = Formation.create!( title: "EDHEC")
+# em_lyon = Formation.create!( title: "EM Lyon")
+# ens = Formation.create!( title: "ENS")
+# escp_europe = Formation.create!( title: "ESCP Europe")
+# agroparistech = Formation.create!( title: "AgroParisTech")
 
 # p "Creating talent_formations"
 
@@ -143,13 +143,13 @@ agroparistech = Formation.create!( title: "AgroParisTech")
 # TalentFormation.create!(year: "2009 2014", talent: louis, formation: agroparistech, title:"Master agro spécialiste BIO")
 
 
-p "Creating keywords"
+# p "Creating keywords"
 
-motivé = Keyword.create!(title: "motivé(e)")
-aimable = Keyword.create!(title: "aimable")
-actif = Keyword.create!(title: "actif(ve)")
-communicatif = Keyword.create!(title: "communicatif(ve)")
-intuitif = Keyword.create!(title: "intuitif(ve)")
+# motivé = Keyword.create!(title: "motivé(e)")
+# aimable = Keyword.create!(title: "aimable")
+# actif = Keyword.create!(title: "actif(ve)")
+# communicatif = Keyword.create!(title: "communicatif(ve)")
+# intuitif = Keyword.create!(title: "intuitif(ve)")
 
 # p "Creating talent_keywords"
 
@@ -166,13 +166,13 @@ intuitif = Keyword.create!(title: "intuitif(ve)")
 # TalentKeyword.create!(talent: erwan, keyword: aimable)
 # TalentKeyword.create!(talent: erwan, keyword: intuitif)
 
-p "Creating knowns"
+# p "Creating knowns"
 
-bouche_a_oreille = Known.create!(title: "Bouche à oreille")
-facebook = Known.create!(title: "facebook")
-twitter = Known.create!(title: "Twitter")
-linkedin = Known.create!(title: "Linkedin")
-evenement = Known.create!(title: "Evénement")
+# bouche_a_oreille = Known.create!(title: "Bouche à oreille")
+# facebook = Known.create!(title: "facebook")
+# twitter = Known.create!(title: "Twitter")
+# linkedin = Known.create!(title: "Linkedin")
+# evenement = Known.create!(title: "Evénement")
 
 # p "Creating talent_knowns"
 
@@ -193,10 +193,10 @@ CSV.foreach(csv_file_language) do |row|
 end
 
 
-english = Language.first
-francais = Language.second
-spanish = Language.last
-german = Language.first
+# english = Language.first
+# francais = Language.second
+# spanish = Language.last
+# german = Language.first
 
 
 # p "Creating talent_languages"
@@ -219,11 +219,11 @@ german = Language.first
 p "Creating sectors"
 
 saas = Sector.create!(title: "Saas")
-marketplace = Sector.create!(title: "Marketplace", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-iot = Sector.create!(title: "IOT", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-marketing = Sector.create!(title: "Marketing", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-finance = Sector.create!(title: "Finance", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
-sante = Sector.create!(title: "Santé", description: "Suis deflecti sub nec rebus fatorum apparuit praemiis ulla quos rebus posse beneficiis repente ubi.")
+marketplace = Sector.create!(title: "Marketplace")
+iot = Sector.create!(title: "IOT")
+marketing = Sector.create!(title: "Marketing")
+finance = Sector.create!(title: "Finance")
+sante = Sector.create!(title: "Santé")
 
 # p "Creating next_aventure_sectors"
 
