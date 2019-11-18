@@ -96,6 +96,7 @@ Rails.application.routes.draw do
       resources :talents, only: [ :index, :show ] do
         collection do
           get :repertoire
+          get :analytics
         end
       end
     end

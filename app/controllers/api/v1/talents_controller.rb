@@ -1,9 +1,12 @@
 class Api::V1::TalentsController < Api::V1::BaseController
-  before_action :autorize_call, only: [:repertoire]
+  before_action :autorize_call, only: [:repertoire, :analytics]
 
   def repertoire
     talents = Talent.where(:visible => true).reorder(completing: :desc, last_sign_in_at: :desc)
     @talents = TalentFormat.new(talents).for_repository
+  end
+
+  def analytics
   end
 
   private
