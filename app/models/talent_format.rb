@@ -1,10 +1,6 @@
 class TalentFormat
-
-  def initialize(talents)
+  def for_repository(talents)
     @talents = talents
-  end
-
-  def for_repository
     @new_talents = []
     @talents.each do |talent|
 
@@ -96,4 +92,13 @@ class TalentFormat
     return @new_talents
   end
 
+  def talent(talent)
+    talent_json = {
+      talent: talent,
+      experiences: talent.experiences,
+      talent_formations: talent.talent_formations,
+      languages: talent.languages
+    }
+    return talent_json
+  end
 end
