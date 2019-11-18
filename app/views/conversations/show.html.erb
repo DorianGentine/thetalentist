@@ -41,7 +41,7 @@
             <% end %>
           <% elsif @participant.is_a?(Headhunter)%>
             <h2 class="no-margin"><%= @participant.firstname.capitalize %> de <%= @participant.startup.name.capitalize %></h2>
-            <!-- <p class="no-margin"> <%= @participant.job.capitalize %></p> -->
+            <!-- <p class="no-margin"> <%#= @participant.job.capitalize %></p> -->
           <% else %>
             <h2 class="no-margin"><%= @participant.firstname.capitalize %></h2>
             <p class="no-margin"> The Talentist </p>
