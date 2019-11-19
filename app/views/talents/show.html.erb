@@ -157,7 +157,7 @@
           <p class="titre-rubrique-3 margin-bottom-30">Me suivre sur :</p>
 
           <% if @talent.linkedin.present? %>
-            <a class="social-media-link" href="<%= @talent.linkedin %>" target="_blank"><i class="social-media-link-icon fab fa-linkedin-in"></i></a>
+            <a id="linkedin-talent" class="social-media-link" href="<%= @talent.linkedin %>" target="_blank"><i class="social-media-link-icon fab fa-linkedin-in"></i></a>
           <% else %>
             <p style="text-align: center;"><i class="red fas fa-exclamation-triangle"></i> Désolé on accepte plus les skyblogs &#128533; <i class="red fas fa-exclamation-triangle"></i></p>
           <% end %>
@@ -576,3 +576,12 @@
   </div>
 </div>
 
+
+<!-- <script>
+  const link = document.getElementById('linkedin-talent')
+  console.log(link.href)
+  console.log(link.href.includes("talents"))
+  if(link.href.includes("talents")){
+    // link.setAttribute('href', "linkedin.com");
+  }
+</script> -->
