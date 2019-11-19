@@ -53,7 +53,7 @@ class HeadhuntersController < ApplicationController
 
       # finale_talents = talents
 
-    @talents = TalentFormat.new(talents).for_repository
+    @talents = TalentFormat.new.for_repository(talents)
     respond_to do |format|
       format.html
       format.js

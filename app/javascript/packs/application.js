@@ -71,3 +71,7 @@ initAutocomplete();
 
 import { initMapbox } from '../plugins/map';
 initMapbox();
+
+
+import { talents } from "../components/talents"
+talents();
