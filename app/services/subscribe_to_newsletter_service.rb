@@ -1,7 +1,7 @@
 class SubscribeToNewsletterService
   def initialize(user)
     @user = user
-    @gibbon = Gibbon::Request.new(api_key: ENV['MAILCHIMP_API_KEY'])
+    @gibbon = Gibbon::Request.new(api_key: ENV['MAILCHIMP_API_KEY_VALID'])
     @audience_id = ENV['MAILCHIMP_AUDIENCE_ID']
   end
 
