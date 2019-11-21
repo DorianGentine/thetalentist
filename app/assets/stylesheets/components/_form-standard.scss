@@ -56,26 +56,31 @@ span.select2.select2-container.select2-container--default {
   margin: 45px 0;
   display: flex;
   justify-content: center;
-  .form-btn{
-    height: 40px;
-    width: 170px;
-    border-radius: 10px;
-    border: 2px solid $green;
-    color: $green;
-    padding: 0;
-    margin: 0 30px;
-  }
-  .form-btn-precedent{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-  }
-  .form-btn-suivant{
-    background-color: $green;
-    color: white;
-    font-size: 18px;
-  }
+}
+.form-btn{
+  height: 40px;
+  width: 170px;
+  border-radius: 10px;
+  border: 2px solid $green;
+  color: $green;
+  padding: 0;
+  margin: 0 30px;
+}
+.form-btn-precedent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.form-btn-suivant{
+  background-color: $green;
+  color: white;
+  font-size: 18px;
+}
+.form-btn-suivant:hover{
+  background-color: transparent !important;
+  color: $green !important;
+  font-size: 18px;
 }
 
 .form-label-font-size {
