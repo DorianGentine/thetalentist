@@ -1,43 +1,43 @@
-<%= link_to welcome_talents_path do  %>
-  <%= render "shared/switch_button" %>
-<% end %>
+<%#= link_to welcome_talents_path do  %>
+  <%#= render "shared/switch_button" %>
+<%# end %>
 
-<h1 style="display: none">Marketing, Product, Sales, Opérations, recrutez les meilleurs.</h1>
-<div class="new_landing container-fluid" id="talent-landing">
+<!-- <h1 style="display: none">Marketing, Product, Sales, Opérations, recrutez les meilleurs.</h1> -->
+<!-- <div class="new_landing container-fluid" id="talent-landing"> -->
 
   <!-- navbar -->
-    <div class="row margin-top-30 margin-bottom-30">
+    <!-- <div class="row margin-top-30 margin-bottom-30">
       <div class="col-xs-2 text-align-center">
-        <%= render "shared/top_menu" %>
+        <%#= render "shared/top_menu" %>
       </div>
       <div class="col-xs-4 col-xs-offset-2 text-align-center">
-        <%= link_to root_path do %>
-          <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
-        <% end %>
+        <%#= link_to root_path do %>
+          <%#= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
+        <%# end %>
       </div>
       <div class="col-xs-4">
-        <%= render "shared/connexion-btns" %>
+        <%#= render "shared/connexion-btns" %>
       </div>
-    </div>
+    </div> -->
 
   <!-- box grise -->
-    <div class="absolute hidden-xs hidden-sm" style="top: 0; right: 0; left: 0; z-index: -1;">
+<!--     <div class="absolute hidden-xs hidden-sm" style="top: 0; right: 0; left: 0; z-index: -1;">
       <div class="col-xs-offset-2 col-xs-10 landing-top"></div>
     </div>
-
+ -->
   <!-- intérieur box -->
-    <div class="row">
+<!--     <div class="row">
       <div class="col-xs-offset-2 col-xs-10 image-habillage">
         <div class="row">
-          <!-- image de fond -->
-            <div class="col-lg-offset-4 col-lg-8 col-xs-12 compartiment-image relative" style="background-image: url('<%= image_path "olu-eletu-134758-unsplash.jpg" %>');">
+ -->          <!-- image de fond -->
+<!--             <div class="col-lg-offset-4 col-lg-8 col-xs-12 compartiment-image relative" style="background-image: url('<%#= image_path "olu-eletu-134758-unsplash.jpg" %>');">
               <div class="quatre-metiers hidden-xs hidden-sm hidden-md">
                 <h3>Rencontrez les meilleurs profils Marketing, Produit, Sales, Opérations, RH et Finance du marché digital !</h3>
               </div>
             </div>
-
+ -->
           <!-- texte principal -->
-            <div class="col-lg-11 col-xs-12 margin-top-60 position-top texte-principal">
+<!--             <div class="col-lg-11 col-xs-12 margin-top-60 position-top texte-principal">
               <div class="texte-principal-gauche">
                 <h1>Je suis une start-up</h1>
               </div>
@@ -45,60 +45,18 @@
                 <h1 class="green">Je suis une start-up</h1>
               </div>
             </div>
-
-          <!-- <div class="home-connexion">
-            <%#= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <div class="connexion-item" id="icon-input">
-                <div class="input-group">
-                  <input class="form-control string email optional" autofocus="autofocus" placeholder="exemple@gmail.com" type="email" name="headhunter[email]" id="headhunter_email">
-                  <div class="input-group-addon">
-                    <i class='fas fa-envelope'></i>
-                  </div>
-                </div>
-
-
-                <div class="input-group">
-                  <input class="form-control password optional" placeholder="*********" type="password" name="headhunter[password]" id="headhunter_password">
-                  <div class="input-group-addon">
-                    <i class="fas fa-key"></i>
-                  </div>
-                </div>
-                <%#= content_tag(:div, flash[:alert], :id => "flash_alert ", :style => "color: red; margin-left: 10%;") if flash[:alert] %>
-              </div>
-              <div class="connexion-btns btn-aline">
-                <%#- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-                  <%#= link_to "Mot de passe oublié ?", new_password_path(resource_name) %>
-                <%# end %>
-                <div class="form-actions">
-                  <%#= f.button :submit, "Se connecter", { :class => "btn form-btn form-btn-suivant"} %>
-                </div>
-              </div>
-
-              <div class="choice-connexion margin-bottom-30 margin-top-30">
-                <hr>
-                <p>OU</p>
-              </div>
-              <div class="margin-top-bottom-btn">
-                <div class="form-actions" id="regrister-talent-btn">
-                  <%#- if devise_mapping.registerable? && controller_name != 'registrations' %>
-                    <%#= link_to "S'inscrire", new_headhunter_registration_path, :class => "form-btn form-btn-precedent"  %>
-                  <%# end %>
-                </div>
-              </div>
-            <%# end %>
-          </div> -->
-
+ -->
           <!-- btns inscription -->
-            <div class="col-lg-4 margin-btn-inscription-lp">
+<!--             <div class="col-lg-4 margin-btn-inscription-lp">
               <div class="col-xs-5 btn btn-inscription">
-                <%= link_to new_headhunter_registration_path do  %>
+                <%#= link_to new_headhunter_registration_path do  %>
                   <p>S'inscrire</p>
-                <% end %>
+                <%# end %>
               </div>
               <div class="col-xs-6 col-xs-offset-1 btn btn-inscription">
-                <%= link_to new_headhunter_session_path do %>
+                <%#= link_to new_headhunter_session_path do %>
                   <p>Se connecter</p>
-                <% end %>
+                <%# end %>
               </div>
             </div>
         </div>
@@ -134,41 +92,15 @@
     <div class="banniere-inscription hidden-xs" style="position: relative;">
       <p>Recrute les meilleurs pour ta start-up</p>
       <div class="btn-connexion">
-        <%= link_to("S'inscrire", new_headhunter_registration_path)  %>
+        <%#= link_to("S'inscrire", new_headhunter_registration_path)  %>
       </div>
       <div class="btn-connexion">
-        <%= link_to("Se connecter", new_headhunter_session_path) %>
+        <%#= link_to("Se connecter", new_headhunter_session_path) %>
       </div>
-
-      <!-- <div class="citation-Wilde">
-        <i class="fas fa-quote-left"></i>
-        <div class="cit-OW">
-          <p class="iladit">Soyez vous-<br>même,<br> les autres<br> sont déja<br> pris.</p>
-          <p class="auteur">Oscar WILDE</p>
-        </div>
-      </div> -->
     </div>
 
     <div class="grid-chiffres-destine">
-      <!-- <div class="nos-chiffres">
-        <h2>Nos chiffres</h2>
-        <div class="row">
-          <div class="col-lg-4 col-xs-12">
-            <p class="chiffre">80</p>
-            <p class="desc-chiffre">personnes<br>placées</p>
-          </div>
-          <div class="col-lg-4 col-xs-12">
-            <p class="chiffre">24</p>
-            <p class="desc-chiffre">candidatures<br>en cours</p>
-          </div>
-          <div class="col-lg-4 col-xs-12">
-            <p class="chiffre">75</p>
-            <p class="desc-chiffre">utilisateurs de<br>la plateforme</p>
-          </div>
-        </div>
-      </div>
-      <%= image_tag "image-home1.png", class: "hidden-xs image-home1" %> -->
-      <%= image_tag "image-home1.png", class: "hidden-xs image-home2" %>
+      <%#= image_tag "image-home1.png", class: "hidden-xs image-home2" %>
       <div class="destine">
         <h2>À qui cela est destiné</h2>
         <div class="grid-container">
@@ -192,10 +124,10 @@
     <div class="banniere-inscription hidden-xs">
       <p>You drive a beautiful startup ?</p>
       <div class="btn-connexion">
-        <%= link_to("S'inscrire", new_headhunter_registration_path)  %>
+        <%#= link_to("S'inscrire", new_headhunter_registration_path)  %>
       </div>
       <div class="btn-connexion">
-        <%= link_to("Se connecter", new_headhunter_session_path) %>
+        <%#= link_to("Se connecter", new_headhunter_session_path) %>
       </div>
     </div>
 
@@ -230,7 +162,7 @@
       <div class="ligne-client">
         <div class="bloc-client">
           <a class="client" href="https://www.agriconomie.com/" target="_blank">
-            <%= image_tag "agriconomie-logo.jpg", class: "logo" %>
+            <%#= image_tag "agriconomie-logo.jpg", class: "logo" %>
             <div class="clientmask">
               <p>“Fondée par deux fils et un petit-fils d’agriculteurs, Agriconomie a créé la première marketplace agricole mondiale.”</p>
             </div>
@@ -238,7 +170,7 @@
         </div>
         <div class="bloc-client">
           <a class="client" href="https://www.backmarket.fr/" target="_blank">
-            <%= image_tag "backmarket-logo.jpg", class: "logo" %>
+            <%#= image_tag "backmarket-logo.jpg", class: "logo" %>
             <div class="clientmask">
               <p>“Fort de plus de 150 000 clients dès 2016, Back Market s’inscrit déjà comme un acteur important du marché des produits reconditionnés.”</p>
             </div>
@@ -246,7 +178,7 @@
         </div>
         <div class="bloc-client">
           <a class="client" href="https://www.doctolib.fr/" target="_blank">
-            <%= image_tag "doctolib-logo.png", class: "logo" %>
+            <%#= image_tag "doctolib-logo.png", class: "logo" %>
             <div class="clientmask">
               <p>“En quelques années, Doctolib a révolutionné la prise de RDV médicaux en fournissant un service en ligne qui facilite la vie de millions de patients et de médecins.”</p>
             </div>
@@ -254,7 +186,7 @@
         </div>
         <div class="bloc-client">
           <a class="client" href="https://www.idecsi.com/fr/" target="_blank">
-            <%= image_tag "IDECSI-logo.jpg", class: "logo" %>
+            <%#= image_tag "IDECSI-logo.jpg", class: "logo" %>
             <div class="clientmask">
               <p>“Auréolée du Label French Tech EIP, Idecsi protège vos données de façon intelligente et innovante.”</p>
             </div>
@@ -262,7 +194,7 @@
         </div>
         <div class="bloc-client">
           <a class="client" href="https://www.intuit.com/" target="_blank">
-            <%= image_tag "intuit-logo.png", class: "logo" %>
+            <%#= image_tag "intuit-logo.png", class: "logo" %>
             <div class="clientmask">
               <p>“Grâce à son logiciel de comptabilité, Intuit facilite le quotidien de milliers d'entreprises et de particuliers.”</p>
             </div>
@@ -270,7 +202,7 @@
         </div>
         <div class="bloc-client">
           <a class="client" href="https://www.lafourchette.com/" target="_blank">
-            <%= image_tag "lafourchette-logo.jpg", class: "logo" %>
+            <%#= image_tag "lafourchette-logo.jpg", class: "logo" %>
             <div class="clientmask">
               <p>“Plus de 40 000 restaurants, c’est ce qui fait de LaFourchette la première plateforme de réservation de restaurants en Europe.”</p>
             </div>
@@ -278,7 +210,7 @@
         </div>
         <div class="bloc-client">
           <a class="client" href="https://www.manomano.fr/" target="_blank">
-            <%= image_tag "manomano-logo.png", class: "logo" %>
+            <%#= image_tag "manomano-logo.png", class: "logo" %>
             <div class="clientmask">
               <p>“ManoMano est devenue la première plateforme de bricolage et jardinage en Europe en moins de deux ans.”</p>
             </div>
@@ -286,7 +218,7 @@
         </div>
         <div class="bloc-client">
           <a class="client" href="https://myelefant.com/" target="_blank">
-            <%= image_tag "my-elefant-logo.png", class: "logo" %>
+            <%#= image_tag "my-elefant-logo.png", class: "logo" %>
             <div class="clientmask">
               <p>“Spécialiste du marketing mobile par messaging! La solution MyElefant permet aux équipes marketing d’être 100% autonomes sur le design, l’envoi et l’analyse des campagnes de messaging mobile enrichi.”</p>
             </div>
@@ -294,7 +226,7 @@
         </div>
         <div class="bloc-client">
           <a class="client" href="https://compte-nickel.fr/" target="_blank">
-            <%= image_tag "NICKEL-logo.png", class: "logo" %>
+            <%#= image_tag "NICKEL-logo.png", class: "logo" %>
             <div class="clientmask">
               <p>“Simple, efficace et peu coûteux, Compte Nickel a déjà séduit plus de 600 000 utilisateurs grâce à son service de compte sans banque qui s'ouvre en quelques minutes.”</p>
             </div>
@@ -302,7 +234,7 @@
         </div>
         <div class="bloc-client">
           <a class="client" href="https://www.prestashop.com/fr" target="_blank">
-            <%= image_tag "Prestashop-logo.png", class: "logo" %>
+            <%#= image_tag "Prestashop-logo.png", class: "logo" %>
             <div class="clientmask">
               <p>“Prestashop est un éditeur de solutions e-commerce accompagnant les commerçants dans la création de leur boutique en ligne.”</p>
             </div>
@@ -310,7 +242,7 @@
         </div>
         <div class="bloc-client">
           <a class="client" href="https://fr.eatwith.com/?c=EUR" target="_blank">
-            <%= image_tag "vizeat_logo.png", class: "logo" %>
+            <%#= image_tag "vizeat_logo.png", class: "logo" %>
             <div class="clientmask">
               <p>“Plus de 20 000 hôtes qui accueillent chez eux des milliers de voyageurs à travers le monde, pour partager leurs passions communes pour la cuisine, l’art de vivre et les rencontres.”</p>
             </div>
@@ -318,7 +250,7 @@
         </div>
         <div class="bloc-client">
           <a class="client" href="https://www.welcometothejungle.co/" target="_blank">
-            <%= image_tag "wtj-logo.png", class: "logo" %>
+            <%#= image_tag "wtj-logo.png", class: "logo" %>
             <div class="clientmask">
               <p>“Une équipe jeune et soudée qui a pour volonté d’offrir la meilleure expérience de recrutement, aussi bien pour les candidats, que pour les recruteurs !”</p>
             </div>
@@ -329,15 +261,15 @@
 
     <div class="citations" style="min-height: 435px;">
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
+ -->        <!-- Indicators -->
+<!--         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           <li data-target="#myCarousel" data-slide-to="1"></li>
           <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
+ -->        <!-- Wrapper for slides -->
+<!--         <div class="carousel-inner">
           <div class="item active">
             <div class="item-display">
               <i class="fas fa-quote-left"></i>
@@ -376,28 +308,28 @@
     <div class="banniere-inscription hidden-xs">
       <p>Trouve ton prochain talent en t'inscrivant !</p>
       <div class="btn-connexion">
-        <%= link_to("S'inscrire", new_headhunter_registration_path)  %>
+        <%#= link_to("S'inscrire", new_headhunter_registration_path)  %>
       </div>
       <div class="btn-connexion">
-        <%= link_to("Se connecter", new_headhunter_session_path) %>
+        <%#= link_to("Se connecter", new_headhunter_session_path) %>
       </div>
     </div>
 
     <h3 class="vous-prenez-decision">IL NE TIENT QU’À VOUS DE PRENDRE LA DECISION</h3>
     <div class="inscription-grid">
-      <%= link_to new_headhunter_registration_path do  %>
+      <%#= link_to new_headhunter_registration_path do  %>
         <div class="inscription-grid-item">
           <i class="fas fa-user"></i>
           <p>JE VEUX RECRUTER</p>
         </div>
-      <% end %>
+      <%# end %>
       <hr>
-      <%= link_to new_talent_registration_path do  %>
+      <%#= link_to new_talent_registration_path do  %>
         <div class="inscription-grid-item">
           <i class="fas fa-rocket"></i>
           <p>JE VEUX ETRE EMBAUCHÉ</p>
         </div>
-      <% end %>
+      <%# end %>
     </div>
 
   </div>
@@ -405,9 +337,10 @@
 
 </div>
 
-<% content_for :title, "Talentist - Recruteurs" %>
-<% content_for :meta, "Marketing, Product, Sales, Opérations, recrutez les meilleurs." %>
+<%# content_for :title, "Talentist - Recruteurs" %>
+<%# content_for :meta, "Marketing, Product, Sales, Opérations, recrutez les meilleurs." %>
 
 <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us5.list-manage.com","uuid":"4b2cb08c3e51185788ded0f32","lid":"0a00cf81b3","uniqueMethods":true}) })</script>
 
 
+ -->

@@ -38,16 +38,16 @@
   background-size: cover !important;
   background-position: center;
 }
-  .connexion-item{
-    margin: 30px 0 15px;
-    .form-group{
-      width: calc(100% - 30px);
-    }
-  }
-  .connexion-item:focus {
-    border: solid #4ECCA3 1px !important;
-    box-shadow: 0 0 8px rgba(78, 204, 163, 0.6);
-  }
+  // .connexion-item{
+  //   margin: 30px 0 15px;
+  //   .form-group{
+  //     width: calc(100% - 30px);
+  //   }
+  // }
+  // .connexion-item:focus {
+  //   border: solid #4ECCA3 1px !important;
+  //   box-shadow: 0 0 8px rgba(78, 204, 163, 0.6);
+  // }
 .connexion-btns{
   align-items: center;
   margin: 30px 0;
@@ -115,7 +115,7 @@
   }
   p {
     position: absolute;
-    background-color: white;
+    background-color: #f2f3f6;
     left: 37%;
     right: 37%;
   }
