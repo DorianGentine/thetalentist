@@ -77,8 +77,6 @@ Rails.application.routes.draw do
   resources :steps_startup_infos
 
   get 'waiting_for_validation', to: "pages#waiting_for_validation"
-  get 'welcome_talents', to: "pages#talent_home"
-  get 'welcome_startups', to: "pages#headhunter_home", as: "welcome_headhunters"
   get 'legal_informations', to: "pages#legal_informations", as: "mentions_legales"
   get 'cgu_talents', to: "pages#cgu_talents", as: "cgu_talents"
   get 'cgu_employeurs', to: "pages#cgu_headhunters", as: "cgu_employeurs"
