@@ -24,8 +24,6 @@ import '../components/collapse_arrow';
 
 import '../components/petitPlusEnter';
 
-import '../components/popup_connexion';
-
 import '../components/filterMetier';
 
 import { autocomplete } from '../components/autocomplete';
