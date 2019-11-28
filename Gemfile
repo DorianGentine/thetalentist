@@ -15,7 +15,7 @@ gem 'bootstrap-sass', '~> 3.3'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
-gem 'webpacker'
+gem 'webpacker', '~> 3.0'
 
 # changed version of font-awesome gem
 gem 'font-awesome-sass', '~> 5.5.0.1'
