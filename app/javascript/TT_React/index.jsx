@@ -6,8 +6,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
-// import { Provider } from 'react-redux';
-// import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 // import logger from 'redux-logger';
 // import reduxPromise from 'redux-promise';
 // import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
@@ -21,13 +21,21 @@ import App from './components/app';
 // import '../assets/stylesheets/messagerie.scss';
 
 // State and reducers
-// import apiReducer from './reducers/api_reducer';
+// import talentsReducer from './reducers/talents_reducer';
 
 const app = document.getElementById('app')
 if(app){
+  console.log(app.dataset.company_id)
   const identityReducer = (state = null) => state;
-  // const initialState = {};
-  // const reducers = combineReducers({});
+
+  const initialState = {
+    talents: {},
+    companyId: app.dataset.company_id
+  };
+
+  // const reducers = combineReducers({
+  //   talents: talentsReducer,
+  // });
 
 
   // Middlewares
@@ -36,7 +44,7 @@ if(app){
 
 // render an instance of the component in the DOM
   ReactDOM.render(
-    <App name="Dorian" />,
+    <App companyId={app.dataset.company_id} />,
     app
   );
 }
