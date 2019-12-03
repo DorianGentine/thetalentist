@@ -1,7 +1,8 @@
 import "babel-polyfill";
 
 export const FETCH_TALENTS = 'FETCH_TALENTS';
-export const TEST = 'TEST';
+export const FETCH_JOBS = 'FETCH_JOBS';
+export const UPDATE_FILTER = 'UPDATE_FILTER';
 
 export async function fetchGET(url, type) {
   let response = await fetch(url)
@@ -17,3 +18,16 @@ export async function fetchGET(url, type) {
     type: type,
     payload: promise
   };}
+
+export function updateFilter(job){
+  // if(!e.target.classList.contains('green-background')){
+  //   filtreActifs.push(job)
+  // }else{
+  //   const indexMetier = filtreActifs.indexOf(job)
+  //   filtreActifs.splice(indexMetier, 1);
+  // }
+  return {
+    type: UPDATE_FILTER,
+    payload: job
+  }
+}

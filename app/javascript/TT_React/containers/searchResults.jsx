@@ -25,7 +25,7 @@ class TalentRepertoire extends Component {
 
     return(
       <div className="container margin-bottom-30">
-        <p id="search-results"><strong>{textStrong}</strong>{text}</p>
+        <p className="margin-top-60 margin-bottom-60 text-align-center"><strong>{textStrong}</strong>{text}</p>
       </div>
     );
   }

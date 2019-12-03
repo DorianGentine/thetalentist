@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // import { fetchAPI } from '../actions';
 
+import Filtre from '../containers/filtre'
 import TalentRepertoire from '../containers/talentRepertoire'
 import SearchResults from '../containers/searchResults'
 
@@ -13,6 +14,7 @@ class App extends Component {
     // style={{minHeight: "calc(100vh - 240px)"}}
     return(
       <div id="all-talents">
+        <Filtre />
         <SearchResults />
         <TalentRepertoire />
       </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { fetchGET, actionTest } from '../actions';
+import { fetchGET } from '../actions';
 
 import TalentCard from './talentCard'
 
@@ -32,7 +32,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchGET: fetchGET,
-    actionTest: actionTest,
   }, dispatch);
 }
 

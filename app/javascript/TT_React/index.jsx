@@ -21,6 +21,8 @@ import App from './components/app';
 // import '../assets/stylesheets/messagerie.scss';
 
 // State and reducers
+import jobsReducer from './reducers/jobs_reducer';
+import filterReducer from './reducers/filter_reducer';
 import talentsReducer from './reducers/talents_reducer';
 
 const app = document.getElementById('app')
@@ -28,13 +30,17 @@ if(app){
   const identityReducer = (state = null) => state;
 
   const initialState = {
-    talents: null,
     companyId: app.dataset.company_id,
+    filter: [],
+    jobs: null,
+    talents: null,
   };
 
   const reducers = combineReducers({
-    talents: talentsReducer,
     companyId: identityReducer,
+    filter: filterReducer,
+    jobs: jobsReducer,
+    talents: talentsReducer,
   });
 
 
