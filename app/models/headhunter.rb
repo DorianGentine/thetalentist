@@ -105,7 +105,7 @@ class Headhunter < ApplicationRecord
 
   def send_welcome_and_reminder_email
     HeadhunterMailer.welcome(self.id).deliver_later(wait_until: 2.hours)
-    HeadhunterMailer.reminder(self.id).deliver_later(wait_until: self.created_at.next_week.tomorrow + 9.hours)
+    # HeadhunterMailer.reminder(self.id).deliver_later(wait_until: self.created_at.next_week.tomorrow + 9.hours)
   end
 
   def new_message(message, receveur)
