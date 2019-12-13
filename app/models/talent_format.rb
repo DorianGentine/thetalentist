@@ -71,6 +71,7 @@ class TalentFormat
         overview: talent.overview,
         connection: talent.last_sign_in_at.present? ? talent.last_sign_in_at : 1.month.ago,
         next_aventure: {
+          remuneration: talent.next_aventure.present? && talent.next_aventure.remuneration.present? ? talent.next_aventure.remuneration : false,
           famous_person: talent.next_aventure.present? && talent.next_aventure.famous_person.present? ? talent.next_aventure.famous_person : false,
           work_for_free: talent.next_aventure.present? && talent.next_aventure.work_for_free.present? ? talent.next_aventure.work_for_free : false,
           looking_for: talent.next_aventure.present? && talent.next_aventure.looking_for.present? ? talent.next_aventure.looking_for : false,
