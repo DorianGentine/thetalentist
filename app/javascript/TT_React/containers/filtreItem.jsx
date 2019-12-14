@@ -8,33 +8,40 @@ class FiltreItem extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      classList: "pointer",
+      checked: false,
     };
-  }
-
-  handleClick = () => {
-    this.props.updateFilter(this.props.job.title.toLowerCase())
-    if(this.props.filter.includes(this.props.job.title.toLowerCase())){
-      this.setState(prevState => ({this.state.classList: prevState.classList + " green"}))
-    }
-    console.log()
   }
 
   render () {
     const job = this.props.job
+    const handleChange = (checked) => {
+      this.setState({ checked: event.target.checked })
+      this.props.updateFilter(this.props.job.title.toLowerCase())
+    }
 
-    return <label onClick={this.handleClick} className={this.state.classList}>{job.title.toUpperCase()}</label>;
+    return (
+      <div>
+        <input
+            type="checkbox"
+            className="no-margin margin-right-15"
+            checked={this.state.checked}
+            id={job.title}
+            onChange={() => {handleChange(this.state.checked)}}
+          />
+        <label className="pointer" htmlFor={job.title}>{job.title}</label>
+      </div>
+    )
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    filter: state.filter,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     filter: state.filter,
+//   };
+// }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ updateFilter }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FiltreItem);
+export default connect(null, mapDispatchToProps)(FiltreItem);

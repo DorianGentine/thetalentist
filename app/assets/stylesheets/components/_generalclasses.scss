@@ -1,3 +1,8 @@
+#app{
+  min-height: calc(100vh - 190px);
+  background-color: #F5F7FA
+}
+
 // Bordure
   .bordure-droite{
     border-right: 1px solid $gray;
@@ -70,6 +75,9 @@
   }
   .flex-wrap{
     flex-wrap: wrap !important;
+  }
+  .flex-column{
+    flex-direction: column !important;
   }
   .flex-grow-1{
     flex-grow: 1 !important;

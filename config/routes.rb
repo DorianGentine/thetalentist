@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'talents/omniauth_callbacks',
     sessions: 'talents/sessions',
     passwords: 'talents/passwords',
-    registrations: 'talents/registrations'
+    registrations: 'talents/registrations',
   }
 
   resources :relationships, only: [ :create ]

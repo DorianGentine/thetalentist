@@ -4,13 +4,34 @@ import { connect } from 'react-redux';
 
 // import { fetchGET, actionTest } from '../actions';
 
-class TalentRepertoire extends Component {
-  render () {
-    let nbTalents = 0
-    let text, textStrong
-    if(this.props.talents != null){
-      nbTalents = this.props.talents.talents.length
+class SearchResults extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      textFilter: [],
+      nbTalents: 0,
+    };
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    console.log(this.props.filter)
+    console.log(nextProps.filter)
+    if(this.props.filter != nextProps.filter){
+      this.setState({ textFilter: nextProps.filter})
+      console.log("next", this.state.textFilter.stringify())
     }
+
+    if(this.props.talents != nextProps.talents){
+      this.setState({ nbTalents: nextProps.talents.talents.length})
+    }
+  }
+
+  render () {
+    let nbTalents = this.state.nbTalents
+    let text, textStrong
+    // if(this.props.talents != null){
+    //   nbTalents = this.props.talents.talents.length
+    // }
 
     if(nbTalents > 1){
       textStrong = `${nbTalents} profils`
@@ -24,8 +45,8 @@ class TalentRepertoire extends Component {
     }
 
     return(
-      <div className="container margin-bottom-30">
-        <p className="margin-top-60 margin-bottom-60 text-align-center"><strong>{textStrong}</strong>{text}</p>
+      <div className="">
+        <p>{`Résultats: ${nbTalents} talents filtrés`}</p>
       </div>
     );
   }
@@ -34,6 +55,7 @@ class TalentRepertoire extends Component {
 function mapStateToProps(state) {
   return {
     talents: state.talents,
+    filter: state.filter,
   };
 }
 
@@ -43,4 +65,4 @@ function mapStateToProps(state) {
 //   }, dispatch);
 // }
 
-export default connect(mapStateToProps, null)(TalentRepertoire);
+export default connect(mapStateToProps, null)(SearchResults);

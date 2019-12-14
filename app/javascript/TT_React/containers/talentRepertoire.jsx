@@ -16,7 +16,7 @@ class TalentRepertoire extends Component {
     const renderTalents = () => this.props.talents.talents.map((talent, index) => <TalentCard talent={talent} key={index} />)
 
     return(
-      <div>
+      <div className="row">
         {this.props.talents != null ? renderTalents() : <p className="text-align-center">Chargement...</p>}
       </div>
     );

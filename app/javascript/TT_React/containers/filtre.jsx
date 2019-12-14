@@ -14,13 +14,18 @@ class Filtre extends Component {
 
   render () {
     const renderJobs = () => this.props.jobs.jobs.map((job, index) => {
-      return( <FiltreItem job={job} key={index} />)
+      return(
+        <div className="flex flex-column" key={index}>
+          <FiltreItem job={job}/>
+        </div>
+      )
     })
 
     return(
-      <div className="filter flex flex-wrap">
-        <i className="fas fa-filter col-lg-1"></i>
-        <div className="align-items-center filter-item flex flex-grow-1">
+      <div className="col-md-3 col-xs-12" style={{padding: "0 50px"}}>
+        <h4>Filtres Avancés</h4>
+        <div>
+          <h5>Spécialisation</h5>
           {this.props.jobs != null ? renderJobs() : <p className="flex-grow-1">Chargement...</p>}
         </div>
       </div>
