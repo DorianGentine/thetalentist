@@ -227,7 +227,7 @@ class Talent < ApplicationRecord
 
   def send_candidate_and_user_information
     TalentMailer.candidate(self.id).deliver_later(wait_until: Date.tomorrow.noon + 9.hours)
-    TalentMailer.pdf_of_user_information(self.id).deliver_later(wait_until: Date.tomorrow.noon + 2.hours)
+    TalentMailer.pdf_of_user_information(self.id).deliver_later(wait_until: Date.tomorrow.noon + 9.hours)
   end
 
   def send_welcome_email
