@@ -1,6 +1,26 @@
 class TalentFormat
 
   def for_repository(talents)
+    return set_talents(talents, false)
+  end
+
+  def for_api_repository(talents, headhunter)
+    return set_talents(talents, headhunter)
+  end
+
+  def talent(talent)
+    talent_json = {
+      talent: talent,
+      experiences: talent.experiences,
+      talent_formations: talent.talent_formations,
+      languages: talent.languages
+    }
+    return talent_json
+  end
+
+  private
+
+  def set_talents(talents, headhunter)
     @talents = talents
     @new_talents = []
     @talents.each do |talent|
@@ -66,6 +86,7 @@ class TalentFormat
         company_id: talent.experiences.first.present? ? talent.startup_id : nil,
         year_experience_job: talent.talent_job.present? ? talent.talent_job.year : "0",
         city: talent.city,
+        pin: headhunter.present? ? set_pin(talent, headhunter) : nil,
         job: talent.jobs.first.present? ? talent.jobs.first.title : nil,
         job2: talent.jobs.second.present? ? talent.jobs.second.title : nil,
         overview: talent.overview,
@@ -88,19 +109,13 @@ class TalentFormat
         talent_small_plus: your_small_plus,
       }
 
+      # p "injected talent #{talent_injected}"
       @new_talents << talent_injected
-      p "injected talent #{talent.id}"
     end
     return @new_talents
   end
-
-  def talent(talent)
-    talent_json = {
-      talent: talent,
-      experiences: talent.experiences,
-      talent_formations: talent.talent_formations,
-      languages: talent.languages
-    }
-    return talent_json
+  def set_pin(talent, headhunter)
+    Pin.where(talent: talent, headhunter: headhunter).count > 0 ? true : false
   end
+
 end
