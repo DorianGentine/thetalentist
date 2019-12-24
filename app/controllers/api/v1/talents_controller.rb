@@ -3,7 +3,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def repertoire
     talents = Talent.where(:visible => true).reorder(completing: :desc, last_sign_in_at: :desc)
-    @talents = TalentFormat.new.for_repository(talents)
+    @talents = TalentFormat.new.for_api_repository(talents, current_headhunter)
+    p "TEST => #{current_headhunter}"
   end
 
   def analytics
