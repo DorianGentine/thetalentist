@@ -86,6 +86,7 @@ class TalentFormat
         company_id: talent.experiences.first.present? ? talent.startup_id : nil,
         year_experience_job: talent.talent_job.present? ? talent.talent_job.year : "0",
         city: talent.city,
+        relationship: headhunter.present? ? set_relationship(talent, headhunter) : nil,
         pin: headhunter.present? ? set_pin(talent, headhunter) : nil,
         job: talent.jobs.first.present? ? talent.jobs.first.title : nil,
         job2: talent.jobs.second.present? ? talent.jobs.second.title : nil,
@@ -113,6 +114,11 @@ class TalentFormat
       @new_talents << talent_injected
     end
     return @new_talents
+  end
+
+  def set_relationship(talent, headhunter)
+    relationship = Relationship.where(talent: talent, headhunter: headhunter)
+    relationship.present? ? relationship.first.status : false
   end
   def set_pin(talent, headhunter)
     Pin.where(talent: talent, headhunter: headhunter).count > 0 ? true : false
