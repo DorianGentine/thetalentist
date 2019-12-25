@@ -90,6 +90,8 @@ class Talent < ApplicationRecord
   # relation one to many
   has_many :credentials, dependent: :destroy
 
+  has_many :pins, dependent: :destroy
+
   has_many :experiences, dependent: :destroy
   accepts_nested_attributes_for :experiences, allow_destroy: true, reject_if: :all_blank
 
@@ -227,7 +229,7 @@ class Talent < ApplicationRecord
 
   def send_candidate_and_user_information
     TalentMailer.candidate(self.id).deliver_later(wait_until: Date.tomorrow.noon + 9.hours)
-    TalentMailer.pdf_of_user_information(self.id).deliver_later(wait_until: Date.tomorrow.noon + 2.hours)
+    TalentMailer.pdf_of_user_information(self.id).deliver_later(wait_until: Date.tomorrow.noon + 9.hours)
   end
 
   def send_welcome_email
