@@ -90,6 +90,8 @@ class Talent < ApplicationRecord
   # relation one to many
   has_many :credentials, dependent: :destroy
 
+  has_many :pins, dependent: :destroy
+
   has_many :experiences, dependent: :destroy
   accepts_nested_attributes_for :experiences, allow_destroy: true, reject_if: :all_blank
 
