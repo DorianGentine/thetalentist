@@ -10,6 +10,10 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import reduxPromise from 'redux-promise';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
 // import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 // import { createBrowserHistory as history } from 'history';
 // import { reducer as formReducer } from 'redux-form';
@@ -21,8 +25,10 @@ import App from './components/app';
 // import '../assets/stylesheets/messagerie.scss';
 
 // State and reducers
-import jobsReducer from './reducers/jobs_reducer';
 import filterReducer from './reducers/filter_reducer';
+import jobsReducer from './reducers/jobs_reducer';
+import modalSelectedReducer from './reducers/modal_selected_reducer';
+import modalOpenedReducer from './reducers/modal_opened_reducer';
 import talentsReducer from './reducers/talents_reducer';
 
 const app = document.getElementById('app')
@@ -33,6 +39,8 @@ if(app){
     companyId: app.dataset.company_id,
     filter: [],
     jobs: null,
+    modalSelected: null,
+    modalOpened: false,
     talents: null,
   };
 
@@ -40,6 +48,8 @@ if(app){
     companyId: identityReducer,
     filter: filterReducer,
     jobs: jobsReducer,
+    modalSelected: modalSelectedReducer,
+    modalOpened: modalOpenedReducer,
     talents: talentsReducer,
   });
 
@@ -47,6 +57,7 @@ if(app){
   // Middlewares
   const middlewares = applyMiddleware(reduxPromise, createLogger());
   const store = createStore(reducers, initialState, middlewares);
+  library.add(fab, fasBookmark, farBookmark, faShareAlt, faUserPlus)
 
 // render an instance of the component in the DOM
   ReactDOM.render(

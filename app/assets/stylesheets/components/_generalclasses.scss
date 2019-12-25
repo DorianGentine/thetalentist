@@ -2,6 +2,10 @@
   min-height: calc(100vh - 190px);
   background-color: #F5F7FA
 }
+.svg-inline--fa{
+  color: black;
+  font-size: 18px;
+}
 
 // Bordure
   .bordure-droite{
@@ -53,6 +57,15 @@
   }
   .red-border{
     border-color: $red !important;
+  }
+  .violet{
+    color: $violet !important;
+  }
+  .violet-background{
+    background-color: $violet !important;
+  }
+  .violet-border{
+    border-color: $violet !important;
   }
   .white{
     color: white !important;

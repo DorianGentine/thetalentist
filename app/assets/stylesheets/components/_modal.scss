@@ -1,11 +1,37 @@
 /* The Modal (background) */
 .modal {
   display: none; /* !!!!! remettre display: none; !!!!*/ /* Hidden by default */
-  padding: 2% 4%; /* Location of the box */
+  padding: calc(2% + 70px) 4% 2%; /* Location of the box */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  .active {
-    display: block !important;
+  // .active {
+  //   display: block !important;
+  // }
+}
+
+.modal.active{
+  display: block !important;
+}
+
+.modal-content-react{
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 40px;
+  border: 1px solid #888;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+.add-user{
+  cursor: pointer;
+  background-color: $violet;
+  border-radius: 30px;
+  padding: 8px;
+  .add-user-icon{
+    color: white !important;
   }
 }
 

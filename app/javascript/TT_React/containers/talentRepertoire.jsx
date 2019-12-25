@@ -13,7 +13,13 @@ class TalentRepertoire extends Component {
   }
 
   render () {
-    const renderTalents = () => this.props.talents.talents.map((talent, index) => <TalentCard talent={talent} key={index} />)
+    const filter = this.props.filter
+
+    const renderTalents = () => this.props.talents.talents.map((talent, index) => {
+      if (filter.length === 0 || filter.includes(talent.job.toLowerCase())) {
+        return <TalentCard talent={talent} key={index} />
+      }
+    })
 
     return(
       <div className="row">
@@ -26,6 +32,7 @@ class TalentRepertoire extends Component {
 function mapStateToProps(state) {
   return {
     talents: state.talents,
+    filter: state.filter,
   };
 }
 

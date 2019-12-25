@@ -14,11 +14,9 @@ class SearchResults extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    console.log(this.props.filter)
-    console.log(nextProps.filter)
     if(this.props.filter != nextProps.filter){
       this.setState({ textFilter: nextProps.filter})
-      console.log("next", this.state.textFilter.stringify())
+      console.log("next", nextProps.textFilter)
     }
 
     if(this.props.talents != nextProps.talents){
@@ -29,9 +27,6 @@ class SearchResults extends Component {
   render () {
     let nbTalents = this.state.nbTalents
     let text, textStrong
-    // if(this.props.talents != null){
-    //   nbTalents = this.props.talents.talents.length
-    // }
 
     if(nbTalents > 1){
       textStrong = `${nbTalents} profils`

@@ -1,7 +1,9 @@
-import "babel-polyfill";
+import "@babel/polyfill";
 
 export const FETCH_TALENTS = 'FETCH_TALENTS';
 export const FETCH_JOBS = 'FETCH_JOBS';
+export const MODAL_CLOSED = 'MODAL_CLOSED';
+export const MODAL_OPENED = 'MODAL_OPENED';
 export const UPDATE_FILTER = 'UPDATE_FILTER';
 
 export async function fetchGET(url, type) {
@@ -20,14 +22,23 @@ export async function fetchGET(url, type) {
   };}
 
 export function updateFilter(job){
-  // if(!e.target.classList.contains('green-background')){
-  //   filtreActifs.push(job)
-  // }else{
-  //   const indexMetier = filtreActifs.indexOf(job)
-  //   filtreActifs.splice(indexMetier, 1);
-  // }
   return {
     type: UPDATE_FILTER,
     payload: job
   }
 }
+
+export function openModalTalent(talent){
+  return {
+    type: MODAL_OPENED,
+    payload: talent
+  }
+}
+
+export function closeModalTalent(talent){
+  return {
+    type: MODAL_CLOSED,
+    payload: talent
+  }
+}
+
