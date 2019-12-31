@@ -9,7 +9,7 @@ class TalentCard extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      checked: false,
+      checked: this.props.talent.pin,
       icon: ["far", "bookmark"],
     };
   }
@@ -23,7 +23,7 @@ class TalentCard extends PureComponent {
   render () {
     const talent = this.props.talent
     const jobs = this.props.jobs
-    const relation = ""
+    const relation = talent.relationship
     let border
     let color = {
       backgroundColor: "lightgray",
@@ -52,11 +52,11 @@ class TalentCard extends PureComponent {
       }
     }
 
-    if(relation === "pending"){
+    if(relation === "Pending"){
       border = {
         borderTop: "3px solid lightgray"
       }
-    }else if(relation === "connected"){
+    }else if(relation === "Accepter"){
       border = {
         borderTop: "3px solid #000748"
       }
@@ -81,7 +81,7 @@ class TalentCard extends PureComponent {
     return(
       <div className="col-xs-12 col-md-4">
         <div className="relative card" style={border}>
-          {relation !== "" &&
+          {relation !== false &&
             <p className={`text-test absolute ${relation === "pending" ? "gray-background" : "violet-background"}`}>{
               relation === "pending" ? "EN ATTENTE" : `${talent.first_name.toUpperCase()} ${talent.last_name.toUpperCase()}`
             }</p>

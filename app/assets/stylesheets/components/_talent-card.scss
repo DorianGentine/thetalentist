@@ -26,7 +26,7 @@
   font-size: 16px;
   font-weight: 700;
   font-family: "avenir";
-  color: #273243;
+  color: $dark-blue;
 }
 
 .card-position{
@@ -34,7 +34,7 @@
   font-weight: 700;
   font-family: "avenir";
   margin-bottom: 0;
-  color: #273243;
+  color: $dark-blue;
 }
 
 .card-formation{
@@ -55,7 +55,7 @@
     margin-bottom: 0;
   }
   .grid-info{
-    color: #273243;
+    color: $dark-blue;
     font-size: 14px;
     font-family: "avenir";
     font-weight: 700;

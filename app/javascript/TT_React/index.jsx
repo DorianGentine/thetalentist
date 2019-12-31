@@ -12,7 +12,7 @@ import { createLogger } from 'redux-logger';
 import reduxPromise from 'redux-promise';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
 // import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 // import { createBrowserHistory as history } from 'history';
@@ -57,7 +57,7 @@ if(app){
   // Middlewares
   const middlewares = applyMiddleware(reduxPromise, createLogger());
   const store = createStore(reducers, initialState, middlewares);
-  library.add(fab, fasBookmark, farBookmark, faShareAlt, faUserPlus)
+  library.add(fab, fasBookmark, farBookmark, faShareAlt, faUserPlus, faUserCheck)
 
 // render an instance of the component in the DOM
   ReactDOM.render(

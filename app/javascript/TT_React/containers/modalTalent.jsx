@@ -78,6 +78,31 @@ class ModalTalent extends Component {
         }
       })
 
+      const renderFormations = () => talent.formations.map((formation, index) => {
+        return(
+          <div className="light-gray-background padding-10 margin-bottom-15" key={index}>
+            <p className="no-margin dark-gray italic">{formation.year} • {formation.title}</p>
+            <p className="no-margin dark-gray">{formation.type_of_formation} {formation.ranking}</p>
+          </div>
+        )
+      })
+
+      const renderExperiences = () => talent.experiences.map((experience, index) => {
+        return(
+          <div className="light-gray-background padding-10 margin-bottom-15" key={index}>
+            <p className="no-margin dark-gray italic">{experience.position}</p>
+            <p className="no-margin dark-gray">{experience.company_type}</p>
+            <p className="no-margin dark-gray">{experience.starting} - {experience.currently ? experience.currently : experience.years}</p>
+          </div>
+        )
+      })
+
+      // const renderSkills = () => talent.skills.map((skill, index) =>  <p className="small-plus" key={index}>{skill.title}</p>)
+
+      const renderTools = () => talent.technos.map((techno, index) => <p className="small-plus" key={index}>{techno.title}</p>)
+
+      const renderBehaviours = () => talent.talent_small_plus.map((smallPlu, index) => <p className="small-plus" key={index}>{smallPlu.description}</p>)
+
       return(
         <div className='modal active'>
           <div className="modal-content-react">
@@ -90,9 +115,9 @@ class ModalTalent extends Component {
               <FontAwesomeIcon className="card-bookmark margin-right-5" icon={this.state.icon} onClick={toggleIcon} />
               <p className="margin-right-15 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>
               <FontAwesomeIcon className="margin-right-5" icon={["fas", "share-alt"]} />
-              <p className="margin-right-15 no-margin">Partager</p>
-              <div className="add-user">
-                <FontAwesomeIcon className="add-user-icon" icon={["fas", "user-plus"]} />
+              <p className="margin-right-30 no-margin">Partager</p>
+              <div className="add-user" style={!talent.relationship ? {backgroundColor: "#000748"} : {backgroundColor: "#4ECCA3"}}>
+                <FontAwesomeIcon className="add-user-icon" icon={!talent.relationship ? ["fas", "user-plus"] : ["fas", "user-check"]} />
               </div>
             </div>
 
@@ -101,9 +126,36 @@ class ModalTalent extends Component {
             <div className="flex align-items-center space-between">
               <p className="no-margin">Expérience : <strong>{talent.year_experience_job} {talent.year_experience_job === 1 ? "an" : "ans"}</strong></p>
               <p className="no-margin">Secteur : <strong>{renderSectors()}</strong></p>
-              <p className="no-margin">Rémunération : <strong>{talent.next_aventure.remuneration}</strong></p>
+              <p className="no-margin">Rémunération : <strong>{talent.next_aventure.remuneration}k/an</strong></p>
               <p className="no-margin">Disponibilité : <strong>{talent.year_experience_job} {talent.year_experience_job === 1 ? "an" : "ans"}</strong></p>
             </div>
+
+            <hr className="ligne-horizontal"/>
+
+            <div className="container-fluid row">
+              <div className="col-md-3">
+                <p className="title-modal">Formations</p>
+                <div>{renderFormations()}</div>
+                <p className="title-modal">Expériences professionnelles</p>
+                <div>{renderExperiences()}</div>
+              </div>
+              <div className="col-md-5">
+                <p className="title-modal">Ce que ce talent recherche</p>
+                <p>{talent.next_aventure.looking_for}</p>
+                <p className="title-modal">Comment je vois mon métier</p>
+                <p>{talent.next_aventure.good_manager}</p>
+                <p className="title-modal">Un bon manager selon ce talent</p>
+                <p>{talent.next_aventure.good_manager}</p>
+              </div>
+              <div className="col-md-4 light-gray-background padding-30">
+                <p className="title-modal">Compétences clefs</p>
+                <p className="title-modal">Outils</p>
+                <div className="flex flex-wrap">{renderTools()}</div>
+                <p className="title-modal">Savoir-être</p>
+                <div className="flex flex-wrap">{renderBehaviours()}</div>
+              </div>
+            </div>
+
 
 
           </div>

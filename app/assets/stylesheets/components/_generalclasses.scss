@@ -37,6 +37,12 @@
   .blue-background{
     background-color: $blue-background !important;
   }
+  .dark-gray{
+    color: $dark-gray !important;
+  }
+  .dark-gray-background{
+    background-color: $dark-gray !important;
+  }
   .gray{
     color: $gray !important;
   }
@@ -48,6 +54,12 @@
   }
   .green-background{
     background-color: $green !important;
+  }
+  .light-gray{
+    color: $light-gray !important;
+  }
+  .light-gray-background{
+    background-color: $light-gray !important;
   }
   .red{
     color: $red !important;
@@ -243,6 +255,12 @@
   }
 
 // Padding
+  .padding-10{
+    padding: 10px;
+  }
+  .padding-30{
+    padding: 30px;
+  }
   .padding-100{
     padding: 100px;
   }
@@ -283,6 +301,9 @@
   }
   .uppercase{
     text-transform: uppercase;
+  }
+  .italic{
+    font-style: italic;
   }
 
   .center-text{
