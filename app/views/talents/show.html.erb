@@ -289,11 +289,7 @@
         <div class="row">
 
           <!-- Rêve remis à demain -->
-          <% if !current_user.is_a?(Headhunter) %>
             <div class="col-lg-4 col-xs-12">
-          <% else %>
-            <div class="col-lg-6 col-xs-12">
-          <% end %>
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">
                 <% if @next_aventure.present? %>
                   <% if @next_aventure.looking_for.present? %>
@@ -327,11 +323,7 @@
             </div>
 
           <!-- Ma plus grande fierté -->
-          <% if !current_user.is_a?(Headhunter) %>
             <div class="col-lg-4 col-xs-12 margin-top-30-xs">
-          <% else %>
-            <div class="col-lg-6 col-xs-12 margin-top-30-xs">
-          <% end %>
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >Ma plus grande fierté</h4>
 
               <% if @next_aventure.present? %>
@@ -347,16 +339,15 @@
               <% end %>
             </div>
 
-          <!-- L'entreprise de mes rêves -->
-          <% if !current_user.is_a?(Headhunter) %>
+          <!-- Comment je vois mon métier -->
             <div class="col-lg-4 col-xs-12 margin-top-30-xs">
-              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >L'entreprise de mes rêves <i class="fas fa-info-circle gray font-12 tooltip" style="z-index: 1">
-                <span class="tooltiptext" style='font-family: "Avenir", "Open Sans", "Helvetica", "sans-serif"; font-weight: 400;'>Les start-up ne voient pas cette réponse</span>
-              </i></h4>
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >Comment je vois mon métier</h4>
 
               <% if @next_aventure.present? %>
-                <% if @next_aventure.favourite_businesses.present?  %>
-                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventure.favourite_businesses %></p>
+                <% if @next_aventure.see_my_job.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventure.see_my_job %></p>
+                <% elsif !@next_aventure.see_my_job.present? && current_user.is_a?(Headhunter) %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><%= @talent.firstname %> n'a pas souhaité répondre à cette question.</p>
                 <% else %>
                   <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
                 <% end %>
@@ -364,8 +355,6 @@
                 <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
               <% end %>
             </div>
-          <% end %>
-
 
         </div>
 
@@ -423,6 +412,29 @@
               <% end %>
             </div>
         </div>
+
+        <!-- L'entreprise de mes rêves -->
+        <% if !current_user.is_a?(Headhunter) %>
+          <hr class="ligne-horizontal">
+
+          <div class="row">
+            <div class="col-xs-12">
+              <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >L'entreprise de mes rêves <i class="fas fa-info-circle gray font-12 tooltip" style="z-index: 1">
+                <span class="tooltiptext" style='font-family: "Avenir", "Open Sans", "Helvetica", "sans-serif"; font-weight: 400;'>Les start-up ne voient pas cette réponse</span>
+              </i></h4>
+
+              <% if @next_aventure.present? %>
+                <% if @next_aventure.favourite_businesses.present?  %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3 more"> <%= @next_aventure.favourite_businesses %></p>
+                <% else %>
+                  <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+                <% end %>
+              <% else %>
+                <p class="margin-right-15 no-margin-xs texte-rubrique-3"><i class="red fas fa-exclamation-triangle"></i> À compléter <i class="red fas fa-exclamation-triangle"></i></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
 
 
       <!-- Mes petits plus -->
