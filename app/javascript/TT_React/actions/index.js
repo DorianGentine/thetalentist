@@ -4,6 +4,7 @@ export const FETCH_TALENTS = 'FETCH_TALENTS';
 export const FETCH_JOBS = 'FETCH_JOBS';
 export const MODAL_CLOSED = 'MODAL_CLOSED';
 export const MODAL_OPENED = 'MODAL_OPENED';
+export const POST_COMPTE = 'POST_COMPTE';
 export const UPDATE_FILTER = 'UPDATE_FILTER';
 
 export async function fetchGET(url, type) {
@@ -19,6 +20,31 @@ export async function fetchGET(url, type) {
   return {
     type: type,
     payload: promise
+  };}
+
+export function fetchPost(url, body, method, callback) {
+  let request
+  if(body != null){
+    request = fetch(url,
+    {
+      method: method,
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    })
+    .then(response => response.json())
+    .then(callback)
+  }else if(body === null){
+    request = fetch(url,
+    {
+      method: method,
+      headers: { 'Content-Type': 'application/json'},
+    })
+    .then(callback)
+  }
+
+  return {
+    type: POST_COMPTE,
+    payload: body
   };}
 
 export function updateFilter(job){

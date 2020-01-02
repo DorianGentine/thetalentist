@@ -3,13 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { openModalTalent } from '../actions';
+import { openModalTalent, fetchPost, fetchGET } from '../actions';
 
 class TalentCard extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      checked: this.props.talent.pin,
+      checked: this.props.talent.pin != false,
       icon: ["far", "bookmark"],
     };
   }
@@ -22,33 +22,50 @@ class TalentCard extends PureComponent {
 
   render () {
     const talent = this.props.talent
-    const jobs = this.props.jobs
     const relation = talent.relationship
+    const pin = {
+      talent_id: talent.id,
+      headhunter_id: this.props.headhunterId,
+    }
+    let jobs = this.props.jobs
     let border
     let color = {
       backgroundColor: "lightgray",
       color: "gray",
     }
 
-    if(talent.job.toLowerCase() === "product"){
-      color = {
-        backgroundColor: "#FCEBEB",
-        color: "#FE7373",
-      }
-    }else if(talent.job.toLowerCase() === "finances"){
-      color = {
-        backgroundColor: "#DFDEFE",
-        color: "#5F5DDA",
-      }
-    }else if(talent.job.toLowerCase() === "market"){
-      color = {
-        backgroundColor: "#FFF7E2",
-        color: "#FFAC4B",
-      }
-    }else if(talent.job.toLowerCase() === "operations"){
-      color = {
-        backgroundColor: "#EDF4FE",
-        color: "#6A9FE2",
+    if(jobs != null){
+      jobs = this.props.jobs.jobs
+      if(talent.job.toLowerCase() === jobs[0].title.toLowerCase()){
+        color = {
+          backgroundColor: "#FCEBEB",
+          color: "#FE7373",
+        }
+      }else if(talent.job.toLowerCase() === jobs[1].title.toLowerCase()){
+        color = {
+          backgroundColor: "#DFDEFE",
+          color: "#5F5DDA",
+        }
+      }else if(talent.job.toLowerCase() === jobs[2].title.toLowerCase()){
+        color = {
+          backgroundColor: "#FFF7E2",
+          color: "#FFAC4B",
+        }
+      }else if(talent.job.toLowerCase() === jobs[3].title.toLowerCase()){
+        color = {
+          backgroundColor: "#EDF4FE",
+          color: "#6A9FE2",
+        }
+      }else if(talent.job.toLowerCase() === jobs[4].title.toLowerCase()){
+        color = {
+          backgroundColor: "#FCEBEB",
+          color: "#FE7373",
+        }
+      }else if(talent.job.toLowerCase() === jobs[5].title.toLowerCase()){
+        color = {
+          backgroundColor: "#DFDEFE",
+          color: "#5F5DDA",
+        }
       }
     }
 
@@ -66,11 +83,19 @@ class TalentCard extends PureComponent {
 
     const toggleIcon = () => {
       if(this.state.checked){
+        const url = `/api/v1/pins/${talent.pin}`
+        this.props.fetchPost(url, null, "DELETE")
         this.setState({
           checked: false,
           icon: ["far", "bookmark"]
         })
       }else{
+        this.props.fetchPost(
+          '/api/v1/pins',
+          pin,
+          "POST",
+          this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS")
+        )
         this.setState({
           checked: true,
           icon: ["fas", "bookmark"]
@@ -109,11 +134,12 @@ class TalentCard extends PureComponent {
 function mapStateToProps(state) {
   return {
     jobs: state.jobs,
+    headhunterId: state.headhunterId,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ openModalTalent }, dispatch);
+  return bindActionCreators({ openModalTalent, fetchPost, fetchGET }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(TalentCard);
+export default connect(mapStateToProps, mapDispatchToProps)(TalentCard);

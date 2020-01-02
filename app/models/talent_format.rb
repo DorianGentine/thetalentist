@@ -121,7 +121,7 @@ class TalentFormat
     relationship.present? ? relationship.first.status : false
   end
   def set_pin(talent, headhunter)
-    Pin.where(talent: talent, headhunter: headhunter).count > 0 ? true : false
+    Pin.where(talent: talent, headhunter: headhunter).count > 0 ? Pin.where(talent: talent, headhunter: headhunter).first.id : false
   end
 
 end
