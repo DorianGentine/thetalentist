@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "application.js": "/packs/js/application-e0b305e16eea3c84415a.js",
   "application.js.map": "/packs/js/application-e0b305e16eea3c84415a.js.map",
   "entrypoints": {
@@ -31,4 +32,12 @@
   "hello_react.js.map": "/packs/js/hello_react-6f2fc2580359bd002e77.js.map",
   "map.js": "/packs/js/map-0a18af546f3fe7b4f23a.js",
   "map.js.map": "/packs/js/map-0a18af546f3fe7b4f23a.js.map"
+=======
+  "application.css": "/packs/application-87fb667e1d843303a79ec44d5e7f9c93.css",
+  "application.css.map": "/packs/application-87fb667e1d843303a79ec44d5e7f9c93.css.map",
+  "application.js": "/packs/application-b8d504145340ce78ab49.js",
+  "application.js.map": "/packs/application-b8d504145340ce78ab49.js.map",
+  "map.js": "/packs/map-c9e97186036e25e5b8d8.js",
+  "map.js.map": "/packs/map-c9e97186036e25e5b8d8.js.map"
+>>>>>>> master
 }
