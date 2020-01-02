@@ -69,6 +69,14 @@ class TalentFormat
         talent_technos << techno_injected
       end
 
+      talent_skills = []
+      talent.skills.each do |talent_skill|
+        skill_injected = {
+          title: talent_skill.title
+        }
+        talent_skills << skill_injected
+      end
+
       your_small_plus = []
       talent.your_small_plus.each do |small_plu|
         small_plu_injected = {
@@ -107,6 +115,7 @@ class TalentFormat
         formations: talent_formations,
         experiences: talent_experiences,
         technos: talent_technos,
+        skills: talent_skills,
         talent_small_plus: your_small_plus,
       }
 

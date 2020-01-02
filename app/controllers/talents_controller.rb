@@ -71,6 +71,7 @@ class TalentsController < ApplicationController
 
   def update_formation_and_skill
     set_new_technos(@talent)
+    set_new_skills(@talent)
     if @talent.update_attributes(formation_and_skill_params)
       redirect_to edit_talent_path(@talent)
     else
@@ -140,6 +141,12 @@ private
       startup = Startup.create(name: param)
       return startup.id
     end
+  end
+
+  def set_new_skills(talent)
+    skill_params = params[:talent][:skill_ids]
+    skill_ids = create_new_data_with_only_title(skill_params, "skill")
+    talent.skill_ids = skill_ids
   end
 
   def set_new_technos(talent)
