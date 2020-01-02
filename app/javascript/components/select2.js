@@ -25,7 +25,6 @@ const initSelect2 = () => {
 // Fonction domaines d'activité différents
   $(".premier-domaine").on("change", function (e) {
     let selectedAnswer = parseInt(e.target.value, 10);
-    console.log("selectedAnswer", selectedAnswer)
 
     // reset le deuxième domaine si le premier est changé pour le même
     let secondValue = document.getElementsByClassName('second-domaine')[0].value;
@@ -42,15 +41,12 @@ const initSelect2 = () => {
     const valueLastJob = document.getElementsByClassName('premier-domaine')[0].getElementsByTagName('option')[nbJobs].value
     const nbIds = valueLastJob - valueFirstJob + 1
 
-    console.log('valueFirstJob', valueFirstJob)
     selectedAnswer = selectedAnswer - valueFirstJob + 1
-    console.log("selectedAnswer", selectedAnswer)
 
     for (var i = 0; i <= selectedAnswer + nbIds; i++) {
       if(options[i] != undefined){
         options[i].disabled = false
         if(i == selectedAnswer){
-          console.log("disabled")
           options[i].setAttribute("disabled", true)
         }
       }

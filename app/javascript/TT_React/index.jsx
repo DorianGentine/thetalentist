@@ -37,6 +37,7 @@ if(app){
 
   const initialState = {
     companyId: app.dataset.company_id,
+    headhunterId: app.dataset.headhunter_id,
     filter: [],
     jobs: null,
     modalSelected: null,
@@ -46,6 +47,7 @@ if(app){
 
   const reducers = combineReducers({
     companyId: identityReducer,
+    headhunterId: identityReducer,
     filter: filterReducer,
     jobs: jobsReducer,
     modalSelected: modalSelectedReducer,
