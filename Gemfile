@@ -92,3 +92,6 @@ gem 'sidekiq-failures', '~> 1.0'
 
 # For mailchimp
 gem 'gibbon'
+
+#for react
+gem 'nokogiri', '~> 1.6', '>= 1.6.8'
