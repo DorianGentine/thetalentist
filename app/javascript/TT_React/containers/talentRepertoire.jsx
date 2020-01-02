@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { ReactSortable } from "react-sortablejs";
+// import { ReactSortable } from "react-sortablejs";
 
 import { fetchGET } from '../actions';
 
