@@ -430,6 +430,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   mailboxer
   mini_magick
+  nokogiri (~> 1.6, >= 1.6.8)
   omniauth-linkedin-oauth2
   pdfkit
   pg (~> 0.21)
