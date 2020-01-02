@@ -24,6 +24,7 @@ class Filtre extends Component {
     return(
       <div className="col-md-3 col-xs-12" style={{padding: "0 50px"}}>
         <h4>Filtres Avancés</h4>
+        <h5>Talents épinglés</h5>
         <div>
           <h5>Spécialisation</h5>
           {this.props.jobs != null ? renderJobs() : <p className="flex-grow-1">Chargement...</p>}

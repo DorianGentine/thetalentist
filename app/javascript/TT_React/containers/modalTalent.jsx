@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { closeModalTalent } from '../actions';
+import { closeModalTalent, fetchPost, fetchGET } from '../actions';
 
 class ModalTalent extends Component {
   constructor(props) {
@@ -11,12 +11,19 @@ class ModalTalent extends Component {
     this.state = {
       checked: false,
       icon: ["far", "bookmark"],
+      relationship: false
     };
   }
 
   componentDidMount(){
     if(this.state.checked){
       this.setState({ icon: ["fas", "bookmark"] })
+    }
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if(this.props.modalOpened != nextProps.modalOpened && nextProps.modalOpened){
+      this.setState({relationship: nextProps.modalSelected.relationship})
     }
   }
 
@@ -27,26 +34,40 @@ class ModalTalent extends Component {
         backgroundColor: "lightgray",
         color: "gray",
       }
+      let jobs = this.props.jobs
 
-      if(talent.job.toLowerCase() === "product"){
-        color = {
-          backgroundColor: "#FCEBEB",
-          color: "#FE7373",
-        }
-      }else if(talent.job.toLowerCase() === "finances"){
-        color = {
-          backgroundColor: "#DFDEFE",
-          color: "#5F5DDA",
-        }
-      }else if(talent.job.toLowerCase() === "market"){
-        color = {
-          backgroundColor: "#FFF7E2",
-          color: "#FFAC4B",
-        }
-      }else if(talent.job.toLowerCase() === "operations"){
-        color = {
-          backgroundColor: "#EDF4FE",
-          color: "#6A9FE2",
+      if(jobs != null){
+        jobs = this.props.jobs.jobs
+        if(talent.job.toLowerCase() === jobs[0].title.toLowerCase()){
+          color = {
+            backgroundColor: "#FCEBEB",
+            color: "#FE7373",
+          }
+        }else if(talent.job.toLowerCase() === jobs[1].title.toLowerCase()){
+          color = {
+            backgroundColor: "#DFDEFE",
+            color: "#5F5DDA",
+          }
+        }else if(talent.job.toLowerCase() === jobs[2].title.toLowerCase()){
+          color = {
+            backgroundColor: "#FFF7E2",
+            color: "#FFAC4B",
+          }
+        }else if(talent.job.toLowerCase() === jobs[3].title.toLowerCase()){
+          color = {
+            backgroundColor: "#EDF4FE",
+            color: "#6A9FE2",
+          }
+        }else if(talent.job.toLowerCase() === jobs[4].title.toLowerCase()){
+          color = {
+            backgroundColor: "#FCEBEB",
+            color: "#FE7373",
+          }
+        }else if(talent.job.toLowerCase() === jobs[5].title.toLowerCase()){
+          color = {
+            backgroundColor: "#DFDEFE",
+            color: "#5F5DDA",
+          }
         }
       }
 
@@ -58,14 +79,39 @@ class ModalTalent extends Component {
 
       const toggleIcon = () => {
         if(this.state.checked){
+          const url = `/api/v1/pins/${talent.pin}`
+          this.props.fetchPost(url, null, "DELETE")
           this.setState({
             checked: false,
             icon: ["far", "bookmark"]
           })
         }else{
+          const pin = {
+            talent_id: talent.id,
+            headhunter_id: this.props.headhunterId,
+          }
+          this.props.fetchPost(
+            '/api/v1/pins',
+            pin,
+            "POST",
+            this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS")
+          )
           this.setState({
             checked: true,
             icon: ["fas", "bookmark"]
+          })
+        }
+      }
+
+      const addRelation = () => {
+        if(!this.state.relationship){
+          const newRelationship = {
+            headhunter_id: parseInt(this.props.headhunterId, 10),
+            talent_id: talent.id,
+          }
+          this.props.fetchPost("/api/v1/relationships", newRelationship, "POST", this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS"))
+          this.setState({
+            relationship: true
           })
         }
       }
@@ -116,8 +162,8 @@ class ModalTalent extends Component {
               <p className="margin-right-15 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>
               <FontAwesomeIcon className="margin-right-5" icon={["fas", "share-alt"]} />
               <p className="margin-right-30 no-margin">Partager</p>
-              <div className="add-user" style={!talent.relationship ? {backgroundColor: "#000748"} : {backgroundColor: "#4ECCA3"}}>
-                <FontAwesomeIcon className="add-user-icon" icon={!talent.relationship ? ["fas", "user-plus"] : ["fas", "user-check"]} />
+              <div className="add-user" style={!this.state.relationship ? {backgroundColor: "#000748"} : {backgroundColor: "#4ECCA3"}} onClick={addRelation}>
+                <FontAwesomeIcon className="add-user-icon" icon={!this.state.relationship ? ["fas", "user-plus"] : ["fas", "user-check"]}/>
               </div>
             </div>
 
@@ -170,12 +216,14 @@ class ModalTalent extends Component {
 function mapStateToProps(state) {
   return {
     modalOpened: state.modalOpened,
-    modalSelected: state.modalSelected
+    modalSelected: state.modalSelected,
+    headhunterId: state.headhunterId,
+    jobs: state.jobs,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ closeModalTalent }, dispatch);
+  return bindActionCreators({ closeModalTalent, fetchPost, fetchGET }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalTalent);
