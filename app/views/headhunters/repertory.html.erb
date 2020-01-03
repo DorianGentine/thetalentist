@@ -6,14 +6,15 @@
   <%= render 'modal_welcome' %>
 <% end %>
 
-<%= render 'filter', conditioning: 'repertoire' %>
+<%#= render 'filter', conditioning: 'repertoire' %>
 
-<div id="all-talents" data-company_id="<%= @headhunter.startup.id if @headhunter.present? %>">
+<div id="app" data-company_id="<%= @headhunter.startup.id if @headhunter.present? %>" data-headhunter_id="<%= @headhunter.id if @headhunter.present? %>"></div>
+<!-- <div id="all-talents" data-company_id="<%#= @headhunter.startup.id if @headhunter.present? %>">
 
-    <%= render 'section_talents'%>
+    <%#= render 'section_talents'%>
 
 </div>
-
+ -->
 
 
 
