@@ -143,11 +143,11 @@ class ModalTalent extends Component {
         )
       })
 
-      // const renderSkills = () => talent.skills.map((skill, index) =>  <p className="small-plus" key={index}>{skill.title}</p>)
+      const renderSkills = () => talent.skills.map((skill, index) =>  <p className="small-plus" key={index}>{skill}</p>)
 
-      const renderTools = () => talent.technos.map((techno, index) => <p className="small-plus" key={index}>{techno.title}</p>)
+      const renderTools = () => talent.technos.map((techno, index) => <p className="small-plus" key={index}>{techno}</p>)
 
-      const renderBehaviours = () => talent.talent_small_plus.map((smallPlu, index) => <p className="small-plus" key={index}>{smallPlu.description}</p>)
+      const renderBehaviours = () => talent.talent_small_plus.map((smallPlu, index) => <p className="small-plus" key={index}>{smallPlu}</p>)
 
       const share = () => {
         const shareLink = document.getElementById("share-input");
@@ -184,7 +184,7 @@ class ModalTalent extends Component {
               <p className="no-margin">Expérience : <strong>{talent.year_experience_job} {talent.year_experience_job === 1 ? "an" : "ans"}</strong></p>
               <p className="no-margin">Secteur : <strong>{renderSectors()}</strong></p>
               <p className="no-margin">Rémunération : <strong>{talent.next_aventure.remuneration}k/an</strong></p>
-              <p className="no-margin">Disponibilité : <strong>{talent.year_experience_job} {talent.year_experience_job === 1 ? "an" : "ans"}</strong></p>
+              <p className="no-margin">Disponibilité : <strong>{talent.next_aventure.availability}</strong></p>
             </div>
 
             <hr className="ligne-horizontal"/>

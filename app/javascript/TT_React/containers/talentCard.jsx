@@ -85,7 +85,7 @@ class TalentCard extends PureComponent {
       }
     }
 
-    const renderSmallPlus = () => talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus.description}</p>)
+    const renderSmallPlus = () => talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus}</p>)
 
     const toggleIcon = () => {
       if(this.state.checked){
