@@ -17,8 +17,12 @@ class TalentRepertoire extends Component {
     const filter = this.props.filter
 
     const renderTalents = () => this.props.talents.talents.map((talent, index) => {
-      if (filter.length === 0 || filter.includes(talent.job.toLowerCase())) {
+      if(filter.length === 0 || filter.includes(talent.job.toLowerCase())){
         return <TalentCard talent={talent} key={index} />
+      }else if(filter.includes("pinned") && talent.pin != false){
+        if(filter.length === 1 || filter.includes(talent.job.toLowerCase())){
+          return <TalentCard talent={talent} key={index} />
+        }
       }
     })
 

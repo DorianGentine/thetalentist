@@ -15,15 +15,15 @@ class ModalTalent extends Component {
     };
   }
 
-  componentDidMount(){
-    if(this.state.checked){
-      this.setState({ icon: ["fas", "bookmark"] })
-    }
-  }
-
   UNSAFE_componentWillReceiveProps(nextProps) {
     if(this.props.modalOpened != nextProps.modalOpened && nextProps.modalOpened){
-      this.setState({relationship: nextProps.modalSelected.relationship})
+      this.setState({
+        checked: nextProps.modalSelected.pin != false,
+        relationship: nextProps.modalSelected.relationship,
+      })
+      if(nextProps.modalSelected.pin != false){
+        this.setState({ icon: ["fas", "bookmark"] })
+      }
     }
   }
 
@@ -80,7 +80,7 @@ class ModalTalent extends Component {
       const toggleIcon = () => {
         if(this.state.checked){
           const url = `/api/v1/pins/${talent.pin}`
-          this.props.fetchPost(url, null, "DELETE")
+          this.props.fetchPost(url, null, "DELETE", this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS"))
           this.setState({
             checked: false,
             icon: ["far", "bookmark"]
@@ -149,8 +149,21 @@ class ModalTalent extends Component {
 
       const renderBehaviours = () => talent.talent_small_plus.map((smallPlu, index) => <p className="small-plus" key={index}>{smallPlu.description}</p>)
 
+      const share = () => {
+        const shareLink = document.getElementById("share-input");
+        console.log(shareLink.value)
+        shareLink.select()
+        shareLink.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        alert("Copied the text: " + shareLink.value);
+      }
+
+              // <input type="text" className="hidden" id="share-input" defaultValue={`/repertoire/?talent=${talent.id}`}/>
+              // <FontAwesomeIcon className="margin-right-5 pointer" icon={["fas", "share-alt"]} />
+              // <p className="margin-right-30 no-margin pointer" onClick={share}>Partager</p>
       return(
         <div className='modal active'>
+          <div className="close-modal" onClick={this.props.closeModalTalent}></div>
           <div className="modal-content-react">
             <div className="flex align-items-center">
               <p className="card-job margin-right-30" style={color}>{talent.job}</p>
@@ -159,9 +172,7 @@ class ModalTalent extends Component {
                 <p className="card-formation">{talent.city}</p>
               </div>
               <FontAwesomeIcon className="card-bookmark margin-right-5" icon={this.state.icon} onClick={toggleIcon} />
-              <p className="margin-right-15 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>
-              <FontAwesomeIcon className="margin-right-5" icon={["fas", "share-alt"]} />
-              <p className="margin-right-30 no-margin">Partager</p>
+              <p className="margin-right-30 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>
               <div className="add-user" style={!this.state.relationship ? {backgroundColor: "#000748"} : {backgroundColor: "#4ECCA3"}} onClick={addRelation}>
                 <FontAwesomeIcon className="add-user-icon" icon={!this.state.relationship ? ["fas", "user-plus"] : ["fas", "user-check"]}/>
               </div>

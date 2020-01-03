@@ -18,6 +18,12 @@ class TalentCard extends PureComponent {
     if(this.state.checked){
       this.setState({ icon: ["fas", "bookmark"] })
     }
+
+    const url = new URL(window.location.href);
+    const modal_id = url.searchParams.get("talent");
+    if(modal_id == this.props.talent.id){
+      this.props.openModalTalent(this.props.talent)
+    }
   }
 
   render () {
@@ -84,7 +90,7 @@ class TalentCard extends PureComponent {
     const toggleIcon = () => {
       if(this.state.checked){
         const url = `/api/v1/pins/${talent.pin}`
-        this.props.fetchPost(url, null, "DELETE")
+        this.props.fetchPost(url, null, "DELETE", this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS"))
         this.setState({
           checked: false,
           icon: ["far", "bookmark"]

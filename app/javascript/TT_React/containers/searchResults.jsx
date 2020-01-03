@@ -8,15 +8,16 @@ class SearchResults extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      textFilter: [],
       nbTalents: 0,
     };
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if(this.props.filter != nextProps.filter){
-      this.setState({ textFilter: nextProps.filter})
-      console.log("next", nextProps.textFilter)
+      setTimeout(() => {
+        const nbCards = document.getElementsByClassName('card').length
+        this.setState({ nbTalents: nbCards})
+      }, 100);
     }
 
     if(this.props.talents != nextProps.talents){
@@ -26,22 +27,19 @@ class SearchResults extends Component {
 
   render () {
     let nbTalents = this.state.nbTalents
-    let text, textStrong
+    let text
 
     if(nbTalents > 1){
-      textStrong = `${nbTalents} profils`
-      text = " correspondent à votre recherche"
+      text = `${nbTalents} profils correspondent à votre recherche`
     }else if(nbTalents == 1){
-      textStrong = `${nbTalents} profil`
-      text = " correspond à votre recherche"
+      text = `${nbTalents} profil correspond à votre recherche`
     }else{
-      textStrong = "Aucun profil"
-      text = " ne correspond à votre recherche"
+      text = "Aucun profil ne correspond à votre recherche"
     }
 
     return(
       <div className="">
-        <p>{`Résultats: ${nbTalents} talents filtrés`}</p>
+        <p>{`Résultats: ${text}`}</p>
       </div>
     );
   }

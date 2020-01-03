@@ -21,14 +21,16 @@ class FiltreItem extends Component {
 
     return (
       <div>
-        <input
-            type="checkbox"
-            className="no-margin margin-right-15"
-            checked={this.state.checked}
-            id={job.title}
-            onChange={() => {handleChange(this.state.checked)}}
-          />
-        <label className="pointer" htmlFor={job.title}>{job.title}</label>
+        <label className="checkbox-react">{job.title}
+          <input
+              type="checkbox"
+              className="no-margin margin-right-15"
+              checked={this.state.checked}
+              id={job.title}
+              onChange={() => {handleChange(this.state.checked)}}
+            />
+          <span className="checkmark"></span>
+        </label>
       </div>
     )
   }

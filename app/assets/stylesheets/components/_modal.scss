@@ -13,6 +13,14 @@
   display: block !important;
 }
 
+.close-modal{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
 .modal-content-react{
   position: relative;
   background-color: #fefefe;
@@ -120,8 +128,6 @@
   }
 }
 
-
-
 .talent-school-item{
   padding: 10px 5px 10px 10px;
   border-radius: 5px;
@@ -147,12 +153,12 @@
 }
 
 
-h4{
-  color: $black;
-  font-size: 26px;
-  font-weight: 900;
-  margin: 0 0 40px 0;
-}
+// h4{
+//   color: $black;
+//   font-size: 26px;
+//   font-weight: 900;
+//   margin: 0 0 40px 0;
+// }
 
 
 .lower-left-body h5{
@@ -179,12 +185,6 @@ h4{
     font-weight: 300;
   }
 }
-
-// .en-relation{
-//   width: 240px;
-//   background-color: rgba(0, 0, 0, 0);
-//   border: 2px solid white;
-// }
 
 .talent-competences{
   display: flex;
