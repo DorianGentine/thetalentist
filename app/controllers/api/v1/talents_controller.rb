@@ -3,7 +3,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def repertoire
     talents = Talent.where(:visible => true).reorder(completing: :desc, last_sign_in_at: :desc)
-    @talents = TalentFormat.new.for_repository(talents)
+    @talents = TalentFormat.new.for_api_repository(talents, current_headhunter)
+    p "TEST => #{current_headhunter}"
   end
 
   def analytics
@@ -23,7 +24,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
     def autorize_call
       user = current_talentist if current_talentist
       user = current_talent if current_talent
-      user = current_headhunter if current_headhunter
+      user = current_user if current_headhunter
       authorize user
     end
 end

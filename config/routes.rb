@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'talents/omniauth_callbacks',
     sessions: 'talents/sessions',
     passwords: 'talents/passwords',
-    registrations: 'talents/registrations'
+    registrations: 'talents/registrations',
   }
 
   resources :relationships, only: [ :create ]
@@ -86,6 +86,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :jobs, only: [ :index ]
+      resources :relationships, only: [ :create ]
+      resources :pins, only: [ :create, :destroy ]
       resources :conversations, only: [ :show ] do
         collection do
           get :all
