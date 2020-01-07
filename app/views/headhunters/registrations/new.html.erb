@@ -1,11 +1,27 @@
 <div class="form-container">
 
-  <div class="colonne bordure-droite modal" id="modal_modalites_fin">
-    <span class="close" id="close_modal_modalites_fin">
-        <p>&times;</p>
-      </span>
-    <div class="modal-content" style="padding: 0; height: 100%; animation-name: animateleft; border: none;">
-      Salut
+  <div id="modal_modalites_fin" class="modal">
+
+    <div class="modal-content">
+
+      <div class="modal-header" id="close_modal_modalites_fin">
+        <h3>Modalités financières</h3>
+
+        <span class="close">
+          <p>&times;</p>
+        </span>
+
+      </div>
+      <div class="modal-body margin-top-30">
+        <p><em>Ce document vous permet de mieux comprendre les modalités en cas de recrutement d’un Talent, contacté sur notre plateforme. Cependant, seules les CGU (ci-dessous) ont valeur contractuelle.</em></p>
+
+        <p>The Talentist, met en relation Talents &amp; Recruteurs sur notre plateforme. Cette <strong>offre est gratuite pour les candidats et au succès pour les recruteurs.</strong></p>
+        <p>L’accès au Site <a href="https://www.thetalentist.com/">https://www.thetalentist.com/</a> est gratuit ainsi que l’utilisation de la plateforme. The Talentist facture des honoraires au recruteur seulement lorsque le recruteur et le candidat concluent un contrat de recrutement.</p>
+        <p>The Talentist facture <strong>10% (dix pourcent) de la rémunération annuelle brute du Talent</strong> à l’acceptation de l’offre par le Talent.</p>
+        <%= link_to cgu_employeurs_path, target: "_blank" do %>
+          <a class="btn btn-connexion">Accéder aux CGU</a>
+        <% end %>
+      </div>
     </div>
   </div>
 
