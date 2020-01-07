@@ -44,22 +44,34 @@
           <div class="blue-background" style="min-height: 154px">
             <div class="row">
               <p class="label-edit col-xs-12">Compétences clés</p>
-              <!-- ATTENTION J'AI LAISSÉ LA MÊME CLASS: COMP-CLES -->
               <div class="col-xs-12">
                 <%= f.input :skill_ids, collection: Skill.all, label: false, input_html: { :class => "comp-cles", multiple: "multiple"}, multiple: true, required: true %>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-lg-6 margin-top-30">
+          <div class="blue-background">
+            <div class="row">
               <p class="label-edit col-xs-12">Outils clés</p>
               <div class="col-xs-12">
                 <%= f.input :techno_ids, collection: Techno.all, label: false, input_html: { :class => "comp-cles", multiple: "multiple"}, multiple: true, required: true %>
               </div>
-              <!-- <p class="label-edit col-xs-12">Savoir être</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-lg-6 margin-top-30">
+          <div class="blue-background">
+            <div class="row">
+              <p class="label-edit col-xs-12">Savoir être</p>
               <div class="col-xs-12">
-                <#%= f.input :known_ids, collection: Known.all, label: false, input_html: { :class => "comp-cles", multiple: "multiple"}, multiple: true, required: true %>
-              </div> -->
+                <%= f.input :known_ids, collection: Known.all, label: false, input_html: { :class => "comp-cles", multiple: "multiple"}, multiple: true, required: true %>
+              </div>
             </div>
           </div>s
         </div>
-
 
       </div>
     </div>
