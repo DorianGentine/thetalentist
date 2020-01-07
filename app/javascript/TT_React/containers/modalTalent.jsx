@@ -206,6 +206,7 @@ class ModalTalent extends Component {
               </div>
               <div className="col-md-4 light-gray-background padding-30">
                 <p className="title-modal">Compétences clefs</p>
+                <div className="flex flex-wrap">{renderSkills()}</div>
                 <p className="title-modal">Outils</p>
                 <div className="flex flex-wrap">{renderTools()}</div>
                 <p className="title-modal">Savoir-être</p>
