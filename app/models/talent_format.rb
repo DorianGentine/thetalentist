@@ -71,6 +71,11 @@ class TalentFormat
         talent_knowns << talent_known.title
       end
 
+      talent_your_small_plus = []
+      talent.your_small_plus.each do |talent_your_small_plu|
+        talent_your_small_plus << talent_your_small_plu.description
+      end
+
       talent_skills = []
       talent.skills.each do |talent_skill|
         talent_skills << talent_skill.title
