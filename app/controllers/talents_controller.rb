@@ -72,7 +72,6 @@ class TalentsController < ApplicationController
   def update_formation_and_skill
     set_new_technos(@talent)
     set_new_skills(@talent)
-    set_new_knowns(@talent)
     if @talent.update_attributes(formation_and_skill_params)
       redirect_to edit_talent_path(@talent)
     else
@@ -92,6 +91,7 @@ class TalentsController < ApplicationController
   end
 
   def update_next_aventure
+    set_new_knowns(@talent)
     if @talent.update_attributes(next_aventure_params)
       redirect_to edit_talent_path(@talent)
     else
