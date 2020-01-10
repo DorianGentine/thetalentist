@@ -51,6 +51,8 @@ class StepsTalentInfosController < ApplicationController
     else
       if need_to_create_data?
         set_new_technos(@talent)
+        set_new_skills(@talent)
+        # set_new_knowns(@talent)
       end
       @talent.attributes = talent_params
       [*0..5].each do |index|
@@ -124,9 +126,23 @@ class StepsTalentInfosController < ApplicationController
     talent.techno_ids = techno_ids
   end
 
+  def set_new_skills(talent)
+    skill_params = params.require(:talent).permit(skill_ids: [])[:skill_ids]
+    skill_ids = create_new_data_with_only_title(skill_params, "skill")
+    talent.skill_ids = skill_ids
+  end
+
+  # def set_new_knowns(talent)
+  #   known_params = params.require(:talent).permit(known_ids: [])[:known_ids]
+  #   known_ids = create_new_data_with_only_title(known_params, "known")
+  #   talent.known_ids = known_ids
+  # end
+
   def need_to_create_data?
     techno_params = params.require(:talent).permit(techno_ids: [])[:techno_ids]
-    if techno_params.nil?
+    skill_params = params.require(:talent).permit(skill_ids: [])[:skill_ids]
+    # known_params = params.require(:talent).permit(known_ids: [])[:known_ids]
+    if skill_params.nil? || techno_params.nil?
       return false
     else
       return true

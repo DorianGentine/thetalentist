@@ -1,18 +1,26 @@
 // FONT Basics
   h1 {
-    color: $black
+    color: $black;
   }
   h2 {
     color: $black
   }
   h3 {
-    color: $black
+    color: $black;
   }
   h4 {
-    color: $black
+    color: #1F2430;
+    font-size: 21px;
+    font-family: avenir;
+    font-weight: 500;
+    line-height: 1.1;
   }
   h5 {
-    color: $black
+    color: #1F2430;
+    font-size: 16px;
+    font-family: avenir;
+    font-weight: 700;
+    line-height: 1.1;
   }
   p {
     color: $black
@@ -26,6 +34,7 @@
   label {
     color: $black;
     margin: 0;
+    font-weight: 300;
   }
   input {
     color: $black
