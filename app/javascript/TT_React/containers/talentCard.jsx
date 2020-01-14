@@ -34,7 +34,9 @@ class TalentCard extends PureComponent {
       headhunter_id: this.props.headhunterId,
     }
     let jobs = this.props.jobs
-    let border
+    let border = {
+      border: "3px solid #FCEBEB"
+    }
     let color = {
       backgroundColor: "lightgray",
       color: "gray",
