@@ -19,6 +19,8 @@ class Headhunter < ApplicationRecord
   accepts_nested_attributes_for :job_alertes, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :jobs, allow_destroy: true, reject_if: :all_blank
 
+  has_many :pins, dependent: :destroy
+
   # for mailboxer
   acts_as_messageable
   before_destroy { self.mailbox.conversations.destroy_all }
@@ -105,7 +107,7 @@ class Headhunter < ApplicationRecord
 
   def send_welcome_and_reminder_email
     HeadhunterMailer.welcome(self.id).deliver_later(wait_until: 2.hours)
-    HeadhunterMailer.reminder(self.id).deliver_later(wait_until: self.created_at.next_week.tomorrow + 9.hours)
+    # HeadhunterMailer.reminder(self.id).deliver_later(wait_until: self.created_at.next_week.tomorrow + 9.hours)
   end
 
   def new_message(message, receveur)

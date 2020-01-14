@@ -15,7 +15,7 @@ gem 'bootstrap-sass', '~> 3.3'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
-gem 'webpacker'
+gem 'webpacker', '>= 4.0.x'
 
 # changed version of font-awesome gem
 gem 'font-awesome-sass', '~> 5.5.0.1'
@@ -92,3 +92,6 @@ gem 'sidekiq-failures', '~> 1.0'
 
 # For mailchimp
 gem 'gibbon'
+
+#for react
+gem 'nokogiri', '~> 1.6', '>= 1.6.8'
