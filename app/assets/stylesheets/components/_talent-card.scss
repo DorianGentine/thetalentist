@@ -74,11 +74,26 @@
 }
 
 .card-cta{
-  color: #000748;
+  color: white;
+  background-color: $green;
+  border-radius: 15px;
+  padding: 3px 0px 3px 10px;
   font-size: 14px;
   font-family: "avenir";
   font-weight: 700;
   cursor: pointer;
+  transition: 0.5s;
+}
+.card-cta::after{
+  content: " >";
+  opacity: 0;
+  transition: 0.5s;
+}
+.card-cta:hover{
+  padding-right: 10px;
+}
+.card-cta:hover::after{
+  opacity: 1;
 }
 
 .text-test{

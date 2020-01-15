@@ -38,10 +38,31 @@
   background-color: $violet;
   border-radius: 30px;
   padding: 8px;
+  padding-right: 0;
+  display: flex;
+  transition: .5s;
   .add-user-icon{
     color: white !important;
   }
 }
+.add-user:hover{
+  padding-right: 8px;
+}
+.contacter::after{
+  content: "Contacter";
+  max-width: 6px;
+  opacity: 0;
+  margin-left: 5px;
+}
+.contacter:hover::after{
+  max-width: unset;
+  opacity: 1;
+  transition: .5s;
+}
+.contacter.pending::after{
+  content: "Contacté";
+}
+
 
 .title-modal{
   color: $dark-blue;

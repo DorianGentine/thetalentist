@@ -34,9 +34,6 @@ class TalentCard extends PureComponent {
       headhunter_id: this.props.headhunterId,
     }
     let jobs = this.props.jobs
-    let border = {
-      border: "3px solid #FCEBEB"
-    }
     let color = {
       backgroundColor: "lightgray",
       color: "gray",
@@ -77,17 +74,23 @@ class TalentCard extends PureComponent {
       }
     }
 
-    if(relation === "Pending"){
+    let border = {
+      border: `3px solid ${color.backgroundColor}`,
+    }
+    if(relation === "pending"){
       border = {
+        border: `3px solid ${color.backgroundColor}`,
         borderTop: "3px solid lightgray"
       }
     }else if(relation === "Accepter"){
       border = {
+        border: `3px solid ${color.backgroundColor}`,
         borderTop: "3px solid #000748"
       }
     }
 
     const renderSmallPlus = () => talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus}</p>)
+    const renderKnowns = () => talent.knowns.map((known, index) => <p className="small-plus" key={index}>{known}</p>)
 
     const toggleIcon = () => {
       if(this.state.checked){
@@ -128,10 +131,10 @@ class TalentCard extends PureComponent {
             <p className="grid-title">Rémunération:</p>
             <p className="grid-info">{talent.next_aventure.remuneration}</p>
           </div>
-          <div className="margin-top-15 flex flex-wrap card-small-plus">{renderSmallPlus()}</div>
+          <div className="margin-top-15 flex flex-wrap card-small-plus">{talent.knowns.length != 0 ? renderKnowns() : renderSmallPlus()}</div>
           <div className="flex space-between">
             <FontAwesomeIcon className="card-bookmark" icon={this.state.icon} onClick={toggleIcon} />
-            <p className="no-margin card-cta" onClick={() => this.props.openModalTalent(talent)}>Afficher davantage ></p>
+            <p className="no-margin card-cta" onClick={() => this.props.openModalTalent(talent)}>Afficher davantage</p>
           </div>
         </div>
       </div>

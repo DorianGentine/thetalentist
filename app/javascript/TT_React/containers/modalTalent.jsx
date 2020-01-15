@@ -147,7 +147,9 @@ class ModalTalent extends Component {
 
       const renderTools = () => talent.technos.map((techno, index) => <p className="small-plus" key={index}>{techno}</p>)
 
-      const renderBehaviours = () => talent.talent_small_plus.map((smallPlu, index) => <p className="small-plus" key={index}>{smallPlu}</p>)
+      const renderSmallPlus = () => talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus}</p>)
+      const renderKnowns = () => talent.knowns.map((known, index) => <p className="small-plus" key={index}>{known}</p>)
+
 
       const share = () => {
         const shareLink = document.getElementById("share-input");
@@ -173,7 +175,7 @@ class ModalTalent extends Component {
               </div>
               <FontAwesomeIcon className="card-bookmark margin-right-5" icon={this.state.icon} onClick={toggleIcon} />
               <p className="margin-right-30 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>
-              <div className="add-user" style={!this.state.relationship ? {backgroundColor: "#000748"} : {backgroundColor: "#4ECCA3"}} onClick={addRelation}>
+              <div className={`add-user contacter${this.state.relationship ? " pending" : ""}`} style={!this.state.relationship ? {backgroundColor: "#000748"} : {backgroundColor: "#4ECCA3"}} onClick={addRelation}>
                 <FontAwesomeIcon className="add-user-icon" icon={!this.state.relationship ? ["fas", "user-plus"] : ["fas", "user-check"]}/>
               </div>
             </div>
@@ -197,20 +199,20 @@ class ModalTalent extends Component {
                 <div>{renderExperiences()}</div>
               </div>
               <div className="col-md-5">
-                <p className="title-modal">Ce que ce talent recherche</p>
+                <p className="title-modal" style={{color: color.color}}>Ce que ce talent recherche</p>
                 <p>{talent.next_aventure.looking_for}</p>
-                <p className="title-modal">Comment je vois mon métier</p>
+                <p className="title-modal" style={{color: color.color}}>Comment je vois mon métier</p>
                 <p>{talent.next_aventure.good_manager}</p>
-                <p className="title-modal">Un bon manager selon ce talent</p>
+                <p className="title-modal" style={{color: color.color}}>Un bon manager selon ce talent</p>
                 <p>{talent.next_aventure.good_manager}</p>
               </div>
               <div className="col-md-4 light-gray-background padding-30">
-                <p className="title-modal">Compétences clefs</p>
+                <p className="title-modal">{talent.skills.length != 0 ? "Compétences clefs" : ""}</p>
                 <div className="flex flex-wrap">{renderSkills()}</div>
-                <p className="title-modal">Outils</p>
+                <p className="title-modal">{talent.technos.length != 0 ? "Outils" : ""}</p>
                 <div className="flex flex-wrap">{renderTools()}</div>
-                <p className="title-modal">Savoir-être</p>
-                <div className="flex flex-wrap">{renderBehaviours()}</div>
+                <p className="title-modal">{talent.knowns.length != 0 || talent.talent_small_plus.length != 0 ? "Savoir-être" : ""}</p>
+                <div className="flex flex-wrap">{talent.knowns.length != 0 ? renderKnowns() : renderSmallPlus()}</div>
               </div>
             </div>
 
