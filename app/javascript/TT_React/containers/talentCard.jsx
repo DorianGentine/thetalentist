@@ -75,17 +75,17 @@ class TalentCard extends PureComponent {
     }
 
     let border = {
-      border: `3px solid ${color.backgroundColor}`,
+      border: `2px solid ${color.color}`,
     }
     if(relation === "pending"){
       border = {
-        border: `3px solid ${color.backgroundColor}`,
-        borderTop: "3px solid lightgray"
+        border: `2px solid ${color.color}`,
+        borderTop: "2px solid lightgray"
       }
     }else if(relation === "Accepter"){
       border = {
-        border: `3px solid ${color.backgroundColor}`,
-        borderTop: "3px solid #000748"
+        border: `2px solid ${color.color}`,
+        borderTop: "2px solid #000748"
       }
     }
 

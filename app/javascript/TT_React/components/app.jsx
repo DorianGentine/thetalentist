@@ -14,10 +14,10 @@ class App extends Component {
   render () {
     // style={{minHeight: "calc(100vh - 240px)"}}
     return(
-      <div id="all-talents" className="row" style={{padding: "40px 0"}}>
+      <div id="all-talents" className="row no-margin" style={{padding: "40px 0"}}>
         <ModalTalent />
         <Filtre />
-        <div className="col-md-9 col-xs-12" style={{padding: "0 50px"}}>
+        <div className="col-md-10 col-xs-12" style={{padding: "0 40px"}}>
           <SearchResults />
           <TalentRepertoire />
         </div>
