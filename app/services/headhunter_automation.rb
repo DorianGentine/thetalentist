@@ -5,11 +5,11 @@ class HeadhunterAutomation
     @audience_id = ENV['MAILCHIMP_AUDIENCE_STARTUP_ID']
   end
 
-  def call
+  def welcome
     @gibbon.lists(@audience_id).members.create(
       body: {
         email_address: @user.email,
-        status: "subscribed",
+        status: "Bienvenue #{@user.firstname} sur The Talentist!",
         merge_fields: {
           FNAME: @user.firstname,
         #   LNAME: @user.last_name
