@@ -5,7 +5,7 @@ class SubscribeToNewsletterService
     @audience_id = ENV['MAILCHIMP_AUDIENCE_ID']
   end
 
-  def call
+  def newletter
     @gibbon.lists(@audience_id).members.create(
       body: {
         email_address: @user.email,
@@ -17,4 +17,6 @@ class SubscribeToNewsletterService
       }
     )
   end
+
+
 end
