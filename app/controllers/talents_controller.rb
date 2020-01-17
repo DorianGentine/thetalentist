@@ -6,7 +6,7 @@ class TalentsController < ApplicationController
   def index
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent
-    talents = policy_scope(Talent).where.not(:validated => false)
+    talents = policy_scope(Talent).where(validated: [nil, true])
     if params[:tag] == "Valider"
       @talents = talents.where(:validated => true)
     elsif params[:tag] == "Refuser"
