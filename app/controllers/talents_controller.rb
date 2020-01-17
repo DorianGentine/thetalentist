@@ -6,11 +6,11 @@ class TalentsController < ApplicationController
   def index
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent
-    talents = policy_scope(Talent)
+    talents = policy_scope(Talent).where(:validated => true)
     if params[:tag] == "Valider"
       @talents = talents.where(:validated => true)
     elsif params[:tag] == "Refuser"
-      @talents = talents.where(:validated => false)
+      @talents =  policy_scope(Talent).where(:validated => false)
     elsif params[:tag] == "En attende"
       @talents = talents.where(:validated => nil)
     elsif params[:tag] == "Visible"
@@ -71,6 +71,8 @@ class TalentsController < ApplicationController
 
   def update_formation_and_skill
     set_new_technos(@talent)
+    set_new_skills(@talent)
+    set_new_knowns(@talent)
     if @talent.update_attributes(formation_and_skill_params)
       redirect_to edit_talent_path(@talent)
     else
@@ -106,7 +108,7 @@ class TalentsController < ApplicationController
       if @talent.validated || @talent.validated.nil?
         @talent.update(declined_params)
         @talent.validated_action(false)
-        @talent.send_refused
+        # @talent.send_refused
       end
     end
     @talent.visible_action(false)
@@ -140,6 +142,18 @@ private
       startup = Startup.create(name: param)
       return startup.id
     end
+  end
+
+  def set_new_skills(talent)
+    skill_params = params[:talent][:skill_ids]
+    skill_ids = create_new_data_with_only_title(skill_params, "skill")
+    talent.skill_ids = skill_ids
+  end
+
+  def set_new_knowns(talent)
+    known_params = params[:talent][:known_ids]
+    known_ids = create_new_data_with_only_title(known_params, "known")
+    talent.known_ids = known_ids
   end
 
   def set_new_technos(talent)
