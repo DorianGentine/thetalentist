@@ -108,7 +108,7 @@ class TalentsController < ApplicationController
       if @talent.validated || @talent.validated.nil?
         @talent.update(declined_params)
         @talent.validated_action(false)
-        # @talent.send_refused
+        @talent.send_refused
       end
     end
     @talent.visible_action(false)
