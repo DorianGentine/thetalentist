@@ -108,8 +108,8 @@ class TalentsController < ApplicationController
       if @talent.validated || @talent.validated.nil?
         @talent.update(declined_params)
         @talent.validated = false
-        @talent.skip_linkedin_validation = true
         if @talent.save
+          p "ITS SAVE!!!!!!!!!!!"
           # @talent.validated_action(false)
           @talent.send_refused
         end

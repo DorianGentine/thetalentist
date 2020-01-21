@@ -96,6 +96,7 @@ class Talent < ApplicationRecord
   scope :without_same_current_startup, -> (startup) { joins(:experiences).merge(Experience.all.where.not(company_name: startup.name))}
 
   has_one :next_aventure, dependent: :destroy
+  has_many :mobilities, through: :next_aventure
   accepts_nested_attributes_for :next_aventure, allow_destroy: true, reject_if: :all_blank
 
 
