@@ -101,20 +101,18 @@ class TalentsController < ApplicationController
 
   def validation
     @talentist = current_talentist
-    p "YOU ARE IN VALIDATION FONCTION"
     if params[:commit] == "Accepter" && !@talent.validated
       @talent.validated_action(true)
       @talent.set_conversation_between(@talentist)
     elsif params[:commit] == "Refuser"
-      p "YOU ARE IN Refused SECTION"
       if @talent.validated || @talent.validated.nil?
-        p "YOU ARE IN UPDATE SECTION TO REFUSED"
-        # @talent.update(declined_params)
-        @talent.update_attributes(talent_params)
-        p "YOU PASS THE UPDATE"
-        @talent.validated_action(false)
-        p "YOU PASS VALIDATION FONCTION"
-        # @talent.send_refused
+        @talent.update(declined_params)
+        @talent.validated = false
+        @talent.skip_linkedin_validation = true
+        if @talent.save
+          # @talent.validated_action(false)
+          @talent.send_refused
+        end
       end
     end
     @talent.visible_action(false)
@@ -196,7 +194,6 @@ private
       :btoc,
       :btob,
       :photo,
-      :declined,
       :photo_cache,
       :remove_photo,
       :terms_of_condition,
