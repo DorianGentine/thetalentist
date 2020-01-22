@@ -33,7 +33,7 @@ class Filtre extends Component {
     }
 
     return(
-      <div className="col-md-2 col-xs-12" style={{padding: "0 20px 0 30px"}}>
+      <div className="col-md-2 col-xs-12" style={{padding: "0 10px 0 30px"}}>
         <h4>Filtres Avancés</h4>
         <div className="flex space-between align-items-center">
           <h5 htmlFor="pin-filter">Talents épinglés</h5>

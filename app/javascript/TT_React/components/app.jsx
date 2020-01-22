@@ -17,7 +17,7 @@ class App extends Component {
       <div id="all-talents" className="row no-margin" style={{padding: "40px 0"}}>
         <ModalTalent />
         <Filtre />
-        <div className="col-md-10 col-xs-12" style={{padding: "0 40px"}}>
+        <div className="col-md-10 col-xs-12" style={{padding: "0 50px 0 60px"}}>
           <SearchResults />
           <TalentRepertoire />
         </div>

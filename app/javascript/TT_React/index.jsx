@@ -27,6 +27,7 @@ import App from './components/app';
 // State and reducers
 import filterReducer from './reducers/filter_reducer';
 import jobsReducer from './reducers/jobs_reducer';
+import guideSuReducer from './reducers/guide_su_reducer';
 import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
 import talentsReducer from './reducers/talents_reducer';
@@ -39,6 +40,7 @@ if(app){
     companyId: app.dataset.company_id,
     headhunterId: app.dataset.headhunter_id,
     filter: [],
+    guideSu: 0,
     jobs: null,
     modalSelected: null,
     modalOpened: false,
@@ -49,6 +51,7 @@ if(app){
     companyId: identityReducer,
     headhunterId: identityReducer,
     filter: filterReducer,
+    guideSu: guideSuReducer,
     jobs: jobsReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,

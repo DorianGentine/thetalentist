@@ -2,6 +2,7 @@ import "@babel/polyfill";
 
 export const FETCH_TALENTS = 'FETCH_TALENTS';
 export const FETCH_JOBS = 'FETCH_JOBS';
+export const GUIDE_SU = 'GUIDE_SU';
 export const MODAL_CLOSED = 'MODAL_CLOSED';
 export const MODAL_OPENED = 'MODAL_OPENED';
 export const POST_COMPTE = 'POST_COMPTE';
@@ -46,6 +47,15 @@ export function fetchPost(url, body, method, callback) {
     type: POST_COMPTE,
     payload: body
   };}
+
+export function nextGuideSu(step){
+  const nextStep = step + 1
+
+  return {
+    type: GUIDE_SU,
+    payload: nextStep
+  }
+}
 
 export function updateFilter(job){
   return {
