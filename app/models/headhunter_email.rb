@@ -18,6 +18,6 @@ class HeadhunterEmail < ApplicationRecord
   end
 
   def subscribe_to_newsletter
-    SubscribeToNewsletterService.new(self.headhunter).call
+    SubscribeToNewsletterService.new(self.headhunter).newletter
   end
 end
