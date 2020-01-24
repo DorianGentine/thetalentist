@@ -20,23 +20,53 @@
         <% end %>
 
         <% if current_headhunter.mailbox.conversations.count > 0 %>
-          <div class="lien-messagerie">
+          <div class="lien-messagerie relative">
             <%= link_to conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
               <i class="fas fa-envelope"></i> MESSAGERIE
               <% if current_user.count_unread_message > 0 %>
                 <%= render "shared/notif_message" %>
               <% end %>
             <% end %>
+            <div class="fixed guide-su" id="guide-su-5">
+              <div class="guide-point"></div>
+              <div class="guide-text">
+                <div class="flex space-between">
+                  <h5 class="no-margin margin-bottom-15">Etape  5 : Messagerie</h5>
+                  <span class="black pointer" id="close_guide_5">X</span>
+                </div>
+                <p>Bienvenue dans la messagerie. C’est le lieu d’échange avec les candidats, une fois que ceux-ci ont accepté ta demande de mise en relation. Si tu as la moindre question sur la plateforme, n’hésite pas à nous écrire, on est dispos !</p>
+                <hr class="ligne-horizontal no-margin"/>
+                <div class="flex">
+                  <a class="flex-grow-1 padding-vertical-5 text-center bordure-droite" href="/repertoire?query=new_member">Précédent</a>
+                  <a class="flex-grow-1 padding-vertical-5 text-center" href="/headhunters/9?query=new_member6">Suivant</a>
+                </div>
+              </div>
+            </div>
           </div>
         <% end %>
 
-        <div class="lien-messagerie">
+        <div class="lien-messagerie relative">
           <%= link_to headhunter_path(current_headhunter), class:"navbar-wagon-item navbar-wagon-link" do %>
             <i class="fa fa-user"></i> PROFIL
             <% if current_headhunter.completed_totaly < 95 %>
               <%= render "shared/notif_point" %>
             <% end %>
           <% end %>
+          <div class="fixed guide-su" id="guide-su-6">
+            <div class="guide-point"></div>
+            <div class="guide-text">
+              <div class="flex space-between">
+                <h5 class="no-margin margin-bottom-15">Etape 6 : Profil</h5>
+                <span class="black pointer close_guide_6">X</span>
+              </div>
+              <p>Enfin, voici ton profil : plus il est complet, plus ton entreprise est attractive auprès des talents !</p>
+              <hr class="ligne-horizontal no-margin"/>
+              <div class="flex">
+                <a class="flex-grow-1 padding-vertical-5 text-center bordure-droite" href="/conversations/1?query=new_member5">Précédent</a>
+                <a class="flex-grow-1 padding-vertical-5 text-center close_guide_6">Fermer</a>
+              </div>
+            </div>
+          </div>
         </div>
 
 

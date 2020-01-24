@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { closeModalTalent, fetchPost, fetchGET } from '../actions';
 
+import ModalGuide from './modalGuide'
+
 class ModalTalent extends Component {
   constructor(props) {
     super(props)
@@ -167,7 +169,7 @@ class ModalTalent extends Component {
         <div className='modal active'>
           <div className="close-modal" onClick={this.props.closeModalTalent}></div>
           <div className="modal-content-react">
-            <div className="flex align-items-center">
+            <div className={`flex align-items-center${this.props.guideSu == 4 ? " relative" : ""}`}>
               <p className="card-job margin-right-30" style={color}>{talent.job}</p>
               <div className="flex-grow-1">
                 <p className="card-position">{talent.position}</p>
@@ -175,8 +177,10 @@ class ModalTalent extends Component {
               </div>
               <FontAwesomeIcon className="card-bookmark margin-right-5" icon={this.state.icon} onClick={toggleIcon} />
               <p className="margin-right-30 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>
-              <div className={`add-user contacter${this.state.relationship ? " pending" : ""}`} style={!this.state.relationship ? {backgroundColor: "#000748"} : {backgroundColor: "#4ECCA3"}} onClick={addRelation}>
-                <FontAwesomeIcon className="add-user-icon" icon={!this.state.relationship ? ["fas", "user-plus"] : ["fas", "user-check"]}/>
+              {this.props.guideSu == 4 ? <ModalGuide /> : null}
+              <div className="add-user" style={!this.state.relationship ? {backgroundColor: "#000748"} : {backgroundColor: "#4ECCA3"}} onClick={addRelation}>
+                <FontAwesomeIcon className="add-user-icon margin-right-5" icon={!this.state.relationship ? ["fas", "user-plus"] : ["fas", "user-check"]}/>
+                <p className="white no-margin">{!this.state.relationship ? "Contacter" : "Contacté"}</p>
               </div>
             </div>
 
@@ -233,6 +237,7 @@ function mapStateToProps(state) {
     modalSelected: state.modalSelected,
     headhunterId: state.headhunterId,
     jobs: state.jobs,
+    guideSu: state.guideSu,
   };
 }
 

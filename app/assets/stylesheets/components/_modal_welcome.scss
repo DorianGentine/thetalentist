@@ -1,12 +1,26 @@
 @media screen and (max-width: 770px) {
   #modal-welcome{
-    display: block;
+    // display: block;
     padding: 3vh 2vw;
   }
 }
 @media screen and (min-width: 771px) {
   #modal-welcome{
-    display: block;
+    // display: block;
     padding: 15vh 30vw;
   }
+}
+
+#modal-welcome a {
+  color: #4ECCA3;
+  background: transparent;
+  border: 1px solid #4ECCA3;
+  border-radius: 15px;
+  padding: 5px 20px;
+  transition: 0.3s;
+  text-align: center;
+}
+ #modal-welcome a:hover {
+  color: white;
+  background: #4ECCA3;
 }

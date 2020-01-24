@@ -107,6 +107,9 @@
   .flex-grow-1{
     flex-grow: 1 !important;
   }
+  .flex-end{
+    justify-content: flex-end !important;
+  }
   .space-between{
     justify-content: space-between !important;
   }
@@ -217,6 +220,9 @@
   .margin-right-15{
     margin-right: 15px !important
   }
+  .margin-bottom-5{
+    margin-bottom: 5px !important
+  }
   .margin-right-5{
     margin-right: 5px !important
   }
@@ -269,6 +275,9 @@
   }
   .padding-horizontal-15{
     padding: 0 15px;
+  }
+  .padding-vertical-5{
+    padding: 5px 0;
   }
   .no-padding{
     padding: unset !important;

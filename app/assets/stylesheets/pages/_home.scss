@@ -770,18 +770,6 @@ to {top: 87vh;}
 
 
 
-
-a:hover{
-  color: $green;
-}
-
-*, a:hover{
-  // color: $green;
-  text-decoration: none;
-}
-
-
-
 @media screen and (min-width: 768px){
   .carousel-indicators {
     bottom: -44px;

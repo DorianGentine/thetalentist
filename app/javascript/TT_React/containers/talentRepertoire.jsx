@@ -37,7 +37,7 @@ class TalentRepertoire extends Component {
             }
           >
             {this.state.talents.map((talent, index) => (
-              <TalentCard talent={talent} key={index} />
+              <TalentCard talent={talent} index={index} key={index} />
             ))}
           </ReactSortable>
     }
@@ -47,10 +47,10 @@ class TalentRepertoire extends Component {
         return null
       }else if(filter.includes("pinned") && talent.pin != false){
         if(filter.length === 1 || filter.includes(talent.job.toLowerCase())){
-          return <TalentCard talent={talent} key={index} />
+          return <TalentCard talent={talent} index={index} key={index} />
         }
       }else if(filter.length === 0 || filter.includes(talent.job.toLowerCase())){
-        return <TalentCard talent={talent} key={index} />
+        return <TalentCard talent={talent} index={index} key={index} />
       }
     })
 

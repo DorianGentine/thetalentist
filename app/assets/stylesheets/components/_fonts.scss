@@ -26,7 +26,18 @@
     color: $black
   }
   a {
-    color: $black
+    color: $black;
+    cursor: pointer;
+  }
+  a:disabled, a[disabled]{
+    color: $gray !important;
+    cursor: not-allowed !important;
+  }
+  a:hover{
+    color: $green;
+  }
+  *, a:hover{
+    text-decoration: none;
   }
   strong{
     color: $green;
