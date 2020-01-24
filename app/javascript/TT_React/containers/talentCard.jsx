@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { openModalTalent, fetchPost, fetchGET } from '../actions';
 
+import ModalGuide from './modalGuide'
+
 class TalentCard extends PureComponent {
   constructor(props) {
     super(props)
@@ -122,7 +124,10 @@ class TalentCard extends PureComponent {
               relation === "pending" ? "EN ATTENTE" : `${talent.first_name.toUpperCase()} ${talent.last_name.toUpperCase()}`
             }</p>
           }
-          <p className="card-job" style={color}>{talent.job}</p>
+          <div className="flex space-between">
+            <p className="card-job" style={color}>{talent.job}</p>
+            <FontAwesomeIcon className="card-bookmark" icon={this.state.icon} onClick={toggleIcon} />
+          </div>
           <p className="card-position">{talent.position}</p>
           <p className="card-formation">{`${talent.formations[0].title}${talent.formations[0].type_of_formation != null ? ` - ${talent.formations[0].type_of_formation}` : "" }`}</p>
           <div className="card-grid">
@@ -132,9 +137,9 @@ class TalentCard extends PureComponent {
             <p className="grid-info">{talent.next_aventure.remuneration}</p>
           </div>
           <div className="margin-top-15 flex flex-wrap card-small-plus">{talent.knowns.length != 0 ? renderKnowns() : renderSmallPlus()}</div>
-          <div className="flex space-between">
-            <FontAwesomeIcon className="card-bookmark" icon={this.state.icon} onClick={toggleIcon} />
+          <div className="flex flex-end relative">
             <p className="no-margin card-cta" onClick={() => this.props.openModalTalent(talent)}>Afficher davantage</p>
+            {this.props.guideSu == 3 && this.props.index == 0 ? <ModalGuide /> : null}
           </div>
         </div>
       </div>
@@ -146,6 +151,7 @@ function mapStateToProps(state) {
   return {
     jobs: state.jobs,
     headhunterId: state.headhunterId,
+    guideSu: state.guideSu,
   };
 }
 

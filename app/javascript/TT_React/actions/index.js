@@ -48,12 +48,28 @@ export function fetchPost(url, body, method, callback) {
     payload: body
   };}
 
+export function closeGuideSu(){
+  const nextStep = 0
+
+  return {
+    type: GUIDE_SU,
+    payload: nextStep
+  }
+}
 export function nextGuideSu(step){
   const nextStep = step + 1
 
   return {
     type: GUIDE_SU,
     payload: nextStep
+  }
+}
+export function prevGuideSu(step){
+  const prevStep = step - 1
+
+  return {
+    type: GUIDE_SU,
+    payload: prevStep
   }
 }
 

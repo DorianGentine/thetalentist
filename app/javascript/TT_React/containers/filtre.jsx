@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { fetchGET, updateFilter } from '../actions';
 
 import FiltreItem from './filtreItem'
+import ModalGuide from './modalGuide'
 
 class Filtre extends Component {
   constructor(props) {
@@ -33,7 +34,8 @@ class Filtre extends Component {
     }
 
     return(
-      <div className="col-md-2 col-xs-12" style={{padding: "0 10px 0 30px"}}>
+      <div className="col-md-2 col-xs-12 relative" style={{padding: "0 10px 0 30px"}}>
+        {this.props.guideSu == 2 ? <ModalGuide /> : null}
         <h4>Filtres Avancés</h4>
         <div className="flex space-between align-items-center">
           <h5 htmlFor="pin-filter">Talents épinglés</h5>
@@ -60,6 +62,7 @@ class Filtre extends Component {
 function mapStateToProps(state) {
   return {
     jobs: state.jobs,
+    guideSu: state.guideSu,
   };
 }
 
