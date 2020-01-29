@@ -32,7 +32,12 @@ class TalentRepertoire extends Component {
       return <ReactSortable
             list={this.state.talents}
             setList={newState => {
-              console.log("newState", newState)
+              let newOrder = []
+              for (var i = 0; i < newState.length - 1; i++) {
+                newOrder.push(newState[i].id)
+              }
+              console.log("newOrder", newOrder)
+              // console.log("newState", newState)
               this.setState({ talents: newState })}
             }
           >
