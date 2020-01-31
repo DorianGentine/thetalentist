@@ -40,6 +40,10 @@ class TalentCard extends PureComponent {
       backgroundColor: "lightgray",
       color: "gray",
     }
+    let width = {
+      maxWidth:  '300px',
+      minWidth:  '200px'
+    }
 
     if(jobs != null){
       jobs = this.props.jobs.jobs
@@ -117,7 +121,7 @@ class TalentCard extends PureComponent {
     }
 
     return(
-      <div className="col-xs-12 col-md-4">
+      <div className="col-xs-12 col-md-4" style={width}>
         <div className="relative card" style={border}>
           {relation !== false &&
             <p className={`text-test absolute ${relation === "pending" ? "gray-background" : "violet-background"}`}>{
