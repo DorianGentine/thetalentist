@@ -41,7 +41,7 @@ class TalentCard extends PureComponent {
       color: "gray",
     }
     let width = {
-      maxWidth:  '300px',
+      maxWidth:  '400px',
       minWidth:  '200px'
     }
 
