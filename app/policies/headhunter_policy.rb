@@ -59,6 +59,14 @@ class HeadhunterPolicy < ApplicationPolicy
     # user.is_a?(Talent) && user.is_connected_to?(record) --> créer une méthode is_connected_to?(headhunter)
   end
 
+  def conversations?
+    true
+  end
+
+  def set_conversation?
+    true
+  end
+
   def to_validate?
     if user.is_a?(Talentist)
       true
