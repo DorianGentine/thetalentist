@@ -33,7 +33,7 @@ class TalentRepertoire extends Component {
             list={this.state.talents}
             setList={newState => {
               let newOrder = []
-              for (var i = 0; i < newState.length - 1; i++) {
+              for (var i = 0; i < newState.length; i++) {
                 newOrder.push(newState[i].id)
               }
               this.props.fetchPost("/api/v1/talents/sort", newOrder, "PATCH")
