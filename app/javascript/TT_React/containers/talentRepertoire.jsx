@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ReactSortable } from "react-sortablejs";
 
-import { fetchGET } from '../actions';
+import { fetchGET, fetchPost } from '../actions';
 
 import TalentCard from './talentCard'
 
@@ -36,6 +36,7 @@ class TalentRepertoire extends Component {
               for (var i = 0; i < newState.length - 1; i++) {
                 newOrder.push(newState[i].id)
               }
+              this.props.fetchPost("/api/v1/talents/sort", newOrder, "PATCH")
               console.log("newOrder", newOrder)
               // console.log("newState", newState)
               this.setState({ talents: newState })}
@@ -86,9 +87,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    fetchGET: fetchGET,
-  }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TalentRepertoire);
