@@ -37,7 +37,6 @@ class TalentRepertoire extends Component {
                 newOrder.push(newState[i].id)
               }
               console.log("newOrder", newOrder)
-              // console.log("newState", newState)
               this.setState({ talents: newState })}
             }
           >
