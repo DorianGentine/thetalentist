@@ -88,16 +88,23 @@ Rails.application.routes.draw do
       resources :jobs, only: [ :index ]
       resources :relationships, only: [ :create ]
       resources :pins, only: [ :create, :destroy ]
-      resources :conversations, only: [ :show ] do
+      resources :conversations, only: [ :show, :index ] do
         collection do
           get :all
         end
       end
       resources :notifications, only: [ :index ]
+      resources :headhunters, only: [ :index, :show] do
+        member do
+          get :conversations
+          patch :set_conversation
+        end
+      end
       resources :talents, only: [ :index, :show ] do
         collection do
           get :repertoire
           get :analytics
+          patch :sort
         end
       end
     end

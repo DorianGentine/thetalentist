@@ -6,11 +6,11 @@ class TalentsController < ApplicationController
   def index
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent
-    talents = policy_scope(Talent)
+    talents = policy_scope(Talent).where(validated: [true, nil])
     if params[:tag] == "Valider"
       @talents = talents.where(:validated => true)
     elsif params[:tag] == "Refuser"
-      @talents = talents.where(:validated => false)
+      @talents = policy_scope(Talent).where(:validated => false)
     elsif params[:tag] == "En attende"
       @talents = talents.where(:validated => nil)
     elsif params[:tag] == "Visible"

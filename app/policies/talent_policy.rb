@@ -18,7 +18,9 @@ class TalentPolicy < ApplicationPolicy
   def create?
     true
   end
-
+  def sort?
+    true
+  end
   # def show?
   #   # record = le talent de la page à afficher
   #   # user = l'utilisateur connecté

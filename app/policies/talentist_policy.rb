@@ -13,6 +13,9 @@ class TalentistPolicy < ApplicationPolicy
     user == record
   end
 
+  def sort?
+    true
+  end
   def index?
     # scope.where(:id => record.id).exists? && user == record
   end
