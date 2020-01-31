@@ -44,8 +44,7 @@
                 <hr class="ligne-horizontal no-margin"/>
                 <div class="flex">
                   <a class="flex-grow-1 padding-vertical-5 text-center bordure-droite" href="/repertoire?query=new_member">Précédent</a>
-                  <%= link_to "Suivant", headhunter_path(current_headhunter), class:"flex-grow-1 padding-vertical-5 text-center" %>
-                  <!-- <a class="flex-grow-1 padding-vertical-5 text-center" href="/headhunters/9?query=new_member6">Suivant</a> -->
+                  <%= link_to "Suivant", headhunter_path(current_headhunter, query: "new_member6"), class:"flex-grow-1 padding-vertical-5 text-center" %>
                 </div>
               </div>
             </div>

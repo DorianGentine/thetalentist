@@ -37,7 +37,6 @@ class TalentRepertoire extends Component {
                 newOrder.push(newState[i].id)
               }
               this.props.fetchPost("/api/v1/talents/sort", newOrder, "PATCH")
-              console.log("newOrder", newOrder)
               this.setState({ talents: newState })}
             }
           >

@@ -82,7 +82,7 @@ class ModalGuide extends Component {
           <hr className="ligne-horizontal no-margin"/>
           <div className="flex">
             <a className="flex-grow-1 padding-vertical-5 text-center bordure-droite" disabled={step == 1} onClick={prevStep}>Précédent</a>
-            <a className="flex-grow-1 padding-vertical-5 text-center" onClick={step < 4 ? nextStep : ()=>{}} href={step == 4 ? `/conversations/${1}?query=new_member5` : false}>Suivant</a>
+            <a className="flex-grow-1 padding-vertical-5 text-center" onClick={step < 4 ? nextStep : ()=>{}} href={step == 4 ? `/conversations/${this.props.talents.conversation_id}?query=new_member5` : false}>Suivant</a>
           </div>
         </div>
       </div>
