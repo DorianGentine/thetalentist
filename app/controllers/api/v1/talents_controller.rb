@@ -2,8 +2,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
   before_action :autorize_call, only: [:repertoire, :analytics, :show, :sort]
 
   def repertoire
-    # talents = Talent.where(:visible => true).reorder(completing: :desc, last_sign_in_at: :desc)
-    talents = Talent.where(:visible => true).reorder(position: :asc)
+    talents = Talent.where(:visible => true).reorder(position: :asc, completing: :desc, last_sign_in_at: :desc)
     @talents = TalentFormat.new.for_api_repository(talents, current_headhunter)
     @conversation_id = current_user.mailbox.conversations.first.id
     @user = current_user
@@ -23,9 +22,6 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
 
   def sort
-    p "coucou"
-    p "#{params}"
-    p "#{params[:_json]}"
     params[:_json].each_with_index do |id, index|
       Talent.where(id: id).update_all(position: index + 1)
     end
