@@ -1,7 +1,7 @@
 class TalentsController < ApplicationController
   before_action :set_talent, only: [ :show, :edit,
     :update_experience, :update_next_aventure, :update_formation_and_skill,
-    :update, :validation, :visible, :info_pdf, :update_photo ]
+    :update, :validation, :visible, :info_pdf, :update_photo, :refused ]
 
   def index
     @talentist = current_talentist
@@ -104,14 +104,24 @@ class TalentsController < ApplicationController
     if params[:commit] == "Accepter" && !@talent.validated
       @talent.validated_action(true)
       @talent.set_conversation_between(@talentist)
-    elsif params[:commit] == "Refuser"
-      if @talent.validated || @talent.validated.nil?
-        @talent.update(declined_params)
-        @talent.validated_action(false)
-        @talent.send_refused
-      end
+    # elsif params[:commit] == "Refuser"
+    #   if @talent.validated || @talent.validated.nil?
+    #     @talent.update(declined_params)
+    #     @talent.validated_action(false)
+    #     @talent.send_refused
+    #   end
     end
     @talent.visible_action(false)
+    redirect_to talents_path
+  end
+
+  def refused
+    @talentist = current_talentist
+    @talent.declined = params[:talent][:declined]
+    @talent.validated = false
+    if @talent.save
+      @talent.send_refused
+    end
     redirect_to talents_path
   end
 
