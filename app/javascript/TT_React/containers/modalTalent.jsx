@@ -13,7 +13,9 @@ class ModalTalent extends Component {
     this.state = {
       checked: false,
       icon: ["far", "bookmark"],
-      relationship: false
+      relationship: false,
+      value: false,
+      message: false
     };
   }
 
@@ -22,6 +24,7 @@ class ModalTalent extends Component {
       this.setState({
         checked: nextProps.modalSelected.pin != false,
         relationship: nextProps.modalSelected.relationship,
+        value: `${this.props.talents.user.firstname} souhaite rentrer en contact avec toi`,
       })
       if(nextProps.modalSelected.pin != false){
         this.setState({ icon: ["fas", "bookmark"] })
@@ -90,7 +93,7 @@ class ModalTalent extends Component {
         }else{
           const pin = {
             talent_id: talent.id,
-            headhunter_id: this.props.headhunterId,
+            headhunter_id: this.props.talents.user.id,
           }
           this.props.fetchPost(
             '/api/v1/pins',
@@ -107,14 +110,11 @@ class ModalTalent extends Component {
 
       const addRelation = () => {
         if(!this.state.relationship){
-          const newRelationship = {
-            headhunter_id: parseInt(this.props.headhunterId, 10),
-            talent_id: talent.id,
-          }
-          this.props.fetchPost("/api/v1/relationships", newRelationship, "POST", this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS"))
           this.setState({
-            relationship: true
+            message: !this.state.message
           })
+        }else if(this.state.relationship === "Accepter"){
+          location.replace(`/${talent.relationship_url}`)
         }
       }
 
@@ -152,19 +152,28 @@ class ModalTalent extends Component {
       const renderSmallPlus = () => talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus}</p>)
       const renderKnowns = () => talent.knowns.map((known, index) => <p className="small-plus" key={index}>{known}</p>)
 
-
-      const share = () => {
-        const shareLink = document.getElementById("share-input");
-        console.log(shareLink.value)
-        shareLink.select()
-        shareLink.setSelectionRange(0, 99999)
-        document.execCommand("copy");
-        alert("Copied the text: " + shareLink.value);
+      const handleOnChange = value => {
+        this.setState({ value: value })
       }
 
-              // <input type="text" className="hidden" id="share-input" defaultValue={`/repertoire/?talent=${talent.id}`}/>
-              // <FontAwesomeIcon className="margin-right-5 pointer" icon={["fas", "share-alt"]} />
-              // <p className="margin-right-30 no-margin pointer" onClick={share}>Partager</p>
+      const sendMessage = (event, onoff) => {
+        event.preventDefault()
+        if(onoff === "close"){
+          this.setState({message: !this.state.message})
+        }else if(onoff === "send"){
+          const newRelationship = {
+            headhunter_id: parseInt(this.props.talents.user.id, 10),
+            talent_id: talent.id,
+            message: document.getElementById('first_message').value
+          }
+          console.log(newRelationship)
+          this.props.fetchPost("/api/v1/relationships", newRelationship, "POST", this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS"))
+          this.setState({
+            relationship: "pending"
+          })
+        }
+      }
+
       return(
         <div className='modal active'>
           <div className="close-modal" onClick={this.props.closeModalTalent}></div>
@@ -178,11 +187,24 @@ class ModalTalent extends Component {
               <FontAwesomeIcon className="card-bookmark margin-right-5" icon={this.state.icon} onClick={toggleIcon} />
               <p className="margin-right-30 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>
               {this.props.guideSu == 4 ? <ModalGuide /> : null}
-              <div className="add-user" style={!this.state.relationship ? {backgroundColor: "#000748"} : {backgroundColor: "#4ECCA3"}} onClick={addRelation}>
+              <div className="add-user" style={!this.state.relationship ? {backgroundColor: "#000748"} : this.state.relationship === "pending" ? {backgroundColor: "#C9C9C9"} : {backgroundColor: "#4ECCA3"}} onClick={addRelation}>
                 <FontAwesomeIcon className="add-user-icon margin-right-5" icon={!this.state.relationship ? ["fas", "user-plus"] : ["fas", "user-check"]}/>
-                <p className="white no-margin">{!this.state.relationship ? "Contacter" : "Contacté"}</p>
+                <p className="white no-margin">{!this.state.relationship ? "Contacter" : this.state.relationship === "pending" ? "En attente" : "Contacté"}</p>
               </div>
             </div>
+
+            <form action="">
+              <textarea
+                name="first_message"
+                id="first_message"
+                rows="5"
+                value={this.state.value}
+                className={this.state.message ? "w-100" : "hidden"}
+                onChange={(textarea) => {handleOnChange(textarea.target.value)}}>
+              </textarea>
+              <button onClick={event => {sendMessage(event, "close")}} className={this.state.message ? "btn-envoyer gray-background" : "hidden"}>Fermer</button>
+              <button onClick={event => {sendMessage(event, "send")}} className={this.state.message ? "btn-envoyer" : "hidden"}>Envoyer</button>
+            </form>
 
             <hr className="ligne-horizontal"/>
 
@@ -235,7 +257,7 @@ function mapStateToProps(state) {
   return {
     modalOpened: state.modalOpened,
     modalSelected: state.modalSelected,
-    headhunterId: state.headhunterId,
+    talents: state.talents,
     jobs: state.jobs,
     guideSu: state.guideSu,
   };
@@ -246,3 +268,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalTalent);
+
+// const share = () => {
+//   const shareLink = document.getElementById("share-input");
+//   console.log(shareLink.value)
+//   shareLink.select()
+//   shareLink.setSelectionRange(0, 99999)
+//   document.execCommand("copy");
+//   alert("Copied the text: " + shareLink.value);
+// }
+// <input type="text" className="hidden" id="share-input" defaultValue={`/repertoire/?talent=${talent.id}`}/>
+// <FontAwesomeIcon className="margin-right-5 pointer" icon={["fas", "share-alt"]} />
+// <p className="margin-right-30 no-margin pointer" onClick={share}>Partager</p>
