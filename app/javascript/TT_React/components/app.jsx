@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { nextGuideSu } from '../actions';
 
+import Navbar from '../containers/navbar'
 import Filtre from '../containers/filtre'
 import TalentRepertoire from '../containers/talentRepertoire'
 import SearchResults from '../containers/searchResults'
@@ -22,14 +23,17 @@ class App extends Component {
 
   render () {
     // style={{minHeight: "calc(100vh - 240px)"}}
+        // <Navbar />
     return(
-      <div id="all-talents" className="row no-margin" style={{padding: "40px 0"}}>
-        <ModalTalent />
-        {this.props.guideSu == 1 ? <ModalGuide /> : null}
-        <Filtre />
-        <div className="col-md-10 col-xs-12" style={{padding: "0 50px 0 60px"}}>
-          <SearchResults />
-          <TalentRepertoire />
+      <div>
+        <div id="all-talents" className="row no-margin" style={{padding: "40px 0"}}>
+          <ModalTalent />
+          {this.props.guideSu == 1 ? <ModalGuide /> : null}
+          <Filtre />
+          <div className="col-md-10 col-xs-12" style={{padding: "0 50px 0 60px"}}>
+            <SearchResults />
+            <TalentRepertoire />
+          </div>
         </div>
       </div>
     );
