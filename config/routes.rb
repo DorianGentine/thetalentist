@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     patch 'update_experience', :on => :member
     patch 'update_next_aventure', :on => :member
     patch 'validation', :on => :member
+    patch 'refused', :on => :member
     patch 'visible', :on => :member
     resources :conversations, only: [ :show ]
   end
