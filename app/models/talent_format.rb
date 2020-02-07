@@ -131,7 +131,9 @@ class TalentFormat
 
   def set_relationship_url(talent, headhunter)
     if set_relationship(talent, headhunter) != false
-      url = "conversations/#{Mailboxer::Conversation.between(talent, headhunter).first.id}"
+      if Mailboxer::Conversation.between(talent, headhunter).count > 0
+        url = "conversations/#{Mailboxer::Conversation.between(talent, headhunter).first.id}"
+      end
     end
   end
 
