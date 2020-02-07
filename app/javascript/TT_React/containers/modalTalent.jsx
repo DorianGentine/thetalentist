@@ -113,7 +113,7 @@ class ModalTalent extends Component {
           this.setState({
             message: !this.state.message
           })
-        }else if(this.state.relationship === "Accepter"){
+        }else if(this.state.relationship === "Accepter" || this.state.relationship === "pending"){
           location.replace(`/${talent.relationship_url}`)
         }
       }
@@ -169,7 +169,8 @@ class ModalTalent extends Component {
           console.log(newRelationship)
           this.props.fetchPost("/api/v1/relationships", newRelationship, "POST", this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS"))
           this.setState({
-            relationship: "pending"
+            relationship: "pending",
+            message: !this.state.message,
           })
         }
       }
