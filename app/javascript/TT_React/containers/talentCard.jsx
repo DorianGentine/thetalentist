@@ -123,11 +123,11 @@ class TalentCard extends PureComponent {
     return(
       <div className="col-xs-12 col-md-4" style={width}>
         <div className="relative card" style={border}>
-          {relation !== false &&
+          {relation !== false && relation !== null ?
             <p className={`text-test absolute ${relation === "pending" ? "gray-background" : "violet-background"}`}>{
               relation === "pending" ? "EN ATTENTE" : `${talent.first_name.toUpperCase()} ${talent.last_name.toUpperCase()}`
             }</p>
-          }
+          : null }
           <div className="flex space-between">
             <p className="card-job" style={color}>{talent.job}</p>
             <FontAwesomeIcon className="card-bookmark" icon={this.state.icon} onClick={toggleIcon} />
