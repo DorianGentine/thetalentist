@@ -113,7 +113,7 @@ class ModalTalent extends Component {
           this.setState({
             message: !this.state.message
           })
-        }else if(this.state.relationship === "Accepter"){
+        }else if(this.state.relationship === "Accepter" || this.state.relationship === "pending"){
           location.replace(`/${talent.relationship_url}`)
         }
       }
