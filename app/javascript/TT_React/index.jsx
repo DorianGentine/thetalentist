@@ -11,7 +11,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import reduxPromise from 'redux-promise';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import { createHistory as history} from 'history';
+// import { createHistory as history} from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck } from '@fortawesome/free-solid-svg-icons'
@@ -67,14 +67,15 @@ if(app){
   library.add(fab, fasBookmark, farBookmark, faShareAlt, faUserPlus, faUserCheck)
 
 // render an instance of the component in the DOM
+      // <Router history={history}>
+      //   <Switch>
+      //     <Route path="/repertoire" component={App} />
+      //     <Redirect from="/" to="/" />
+      //   </Switch>
+      // </Router>
   ReactDOM.render(
     <Provider store={store}>
-      <Router history={history}>
-        <Switch>
-          <Route path="/repertoire" component={App} />
-          <Redirect from="/" to="/" />
-        </Switch>
-      </Router>
+      <App/>
     </Provider>,
     app
   );
