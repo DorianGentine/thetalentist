@@ -10,6 +10,8 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import reduxPromise from 'redux-promise';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { createHistory as history} from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck } from '@fortawesome/free-solid-svg-icons'
@@ -67,7 +69,12 @@ if(app){
 // render an instance of the component in the DOM
   ReactDOM.render(
     <Provider store={store}>
-      <App companyId={app.dataset.company_id} />
+      <Router history={history}>
+        <Switch>
+          <Route path="/repertoire" component={App} />
+          <Redirect from="/" to="/" />
+        </Switch>
+      </Router>
     </Provider>,
     app
   );
