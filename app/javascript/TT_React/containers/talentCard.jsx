@@ -133,7 +133,7 @@ class TalentCard extends PureComponent {
             <FontAwesomeIcon className="card-bookmark" icon={this.state.icon} onClick={toggleIcon} />
           </div>
           <p className="card-position">{talent.position}</p>
-          <p className="card-formation">{`${talent.formations[0].title != null ? talent.formations[0].title : ""}${talent.formations[0].type_of_formation != null ? ` - ${talent.formations[0].type_of_formation}` : "" }`}</p>
+          <p className="card-formation">{`${talent.formations[0] != undefined ? talent.formations[0].title : ""}${talent.formations[0].type_of_formation != null ? ` - ${talent.formations[0].type_of_formation}` : "" }`}</p>
           <div className="card-grid">
             <p className="grid-title">Expérience:</p>
             <p className="grid-info">{talent.year_experience_job} {talent.year_experience_job === 1 ? "an" : "ans"}</p>
