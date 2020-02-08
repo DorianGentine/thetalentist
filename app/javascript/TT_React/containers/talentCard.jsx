@@ -44,9 +44,6 @@ class TalentCard extends PureComponent {
       maxWidth:  '400px',
       minWidth:  '200px'
     }
-    const talent_small_plus = [
-      "Perseverant, Creatif, Proactif, Solution Minded, Decision Maker"
-    ]
 
     if(jobs != null){
       jobs = this.props.jobs.jobs
