@@ -76,13 +76,13 @@ class ModalGuide extends Component {
         <div className="guide-text" style={guideTextStyle}>
           <div className="flex space-between">
             <h5 className="no-margin margin-bottom-15">{titre}</h5>
-            <span className="black pointer" onClick={() => this.props.closeGuideSu()}>X</span>
+            <span className="white pointer" onClick={() => this.props.closeGuideSu()}>X</span>
           </div>
           <p>{text}</p>
-          <hr className="ligne-horizontal no-margin"/>
+          <hr className="ligne-horizontal no-margin white-background"/>
           <div className="flex">
-            <a className="flex-grow-1 padding-vertical-5 text-center bordure-droite" disabled={step == 1} onClick={prevStep}>Précédent</a>
-            <a className="flex-grow-1 padding-vertical-5 text-center" onClick={step < 4 ? nextStep : ()=>{}} href={step == 4 ? `/conversations/${this.props.talents.conversation_id}?query=new_member5` : false}>Suivant</a>
+            <a className="white flex-grow-1 padding-vertical-5 text-center bordure-droite-white" disabled={step == 1} onClick={prevStep}>Précédent</a>
+            <a className="white flex-grow-1 padding-vertical-5 text-center" onClick={step < 4 ? nextStep : ()=>{}} href={step == 4 ? `/conversations/${this.props.talents.conversation_id}?query=new_member5` : false}>Suivant</a>
           </div>
         </div>
       </div>

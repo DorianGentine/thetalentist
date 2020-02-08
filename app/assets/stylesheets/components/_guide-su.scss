@@ -7,17 +7,20 @@
   border-radius: 20px;
   height: 24px;
   width: 24px;
-  background-color: $violet;
+  background-color: $green;
   border: 2px solid white;
 }
 .guide-text {
   margin-top: 15px;
-  background-color: white;
+  background-color: $green;
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid $violet;
+  // border: 1px solid $violet;
   box-shadow: 0 0 30px rgba(152, 156, 157, 0.15);
   animation: guide-appearance 1s ease-out;
+  p, h5{
+    color: white
+  }
 }
 @keyframes guide-appearance {
   0% {
