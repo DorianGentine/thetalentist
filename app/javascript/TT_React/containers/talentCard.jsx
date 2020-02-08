@@ -96,7 +96,7 @@ class TalentCard extends PureComponent {
     }
 
     const renderSmallPlus = () => {
-      if(talent.talent_small_plus.length !== 0){
+      if(talent.talent_small_plus.length !== 0 && !talent.talent_small_plus.includes(null)){
         console.log(talent.talent_small_plus)
         console.log(talent.talent_small_plus[0])
         if(talent.talent_small_plus.length == 1 && talent.talent_small_plus[0].includes(',')){
