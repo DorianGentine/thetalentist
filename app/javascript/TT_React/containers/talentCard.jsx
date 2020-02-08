@@ -44,6 +44,9 @@ class TalentCard extends PureComponent {
       maxWidth:  '400px',
       minWidth:  '200px'
     }
+    const talent_small_plus = [
+      "Perseverant, Creatif, Proactif, Solution Minded, Decision Maker"
+    ]
 
     if(jobs != null){
       jobs = this.props.jobs.jobs
@@ -95,7 +98,15 @@ class TalentCard extends PureComponent {
       }
     }
 
-    const renderSmallPlus = () => talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus}</p>)
+    const renderSmallPlus = () => {
+      if(talent.talent_small_plus.length == 1 && talent.talent_small_plus[0].includes(',')){
+        const small_plus = talent.talent_small_plus[0].split(", ")
+        return small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus}</p>)
+      }else{
+        return talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus}</p>)
+      }
+    }
+    // const renderSmallPlus = () => talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus}</p>)
     const renderKnowns = () => talent.knowns.map((known, index) => <p className="small-plus" key={index}>{known}</p>)
 
     const toggleIcon = () => {
