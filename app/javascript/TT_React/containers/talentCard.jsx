@@ -42,7 +42,6 @@ class TalentCard extends PureComponent {
       color: "gray",
     }
     if(talent.position !== null && talent.position.length >= 30){
-      console.log("done", talent.position)
       $('[data-toggle="tooltip"]').tooltip()
     }
 
