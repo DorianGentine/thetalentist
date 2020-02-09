@@ -41,7 +41,7 @@ class TalentCard extends PureComponent {
       backgroundColor: "lightgray",
       color: "gray",
     }
-    if(talent.position.length >= 30){
+    if(talent.position !== null && talent.position.length >= 30){
       $('[data-toggle="tooltip"]').tooltip()
     }
 
@@ -150,7 +150,7 @@ class TalentCard extends PureComponent {
             <p className="card-job" style={color}>{talent.job}</p>
             <FontAwesomeIcon className="card-bookmark" icon={this.state.icon} onClick={toggleIcon} />
           </div>
-          {talent.position.length >= 30 ?
+          {talent.position !== null && talent.position.length >= 30 ?
             <p className="card-position" data-toggle="tooltip" data-placement="top" title={talent.position}>{talent.position.substr(0, 30)}</p>
           : <p className="card-position">{talent.position}</p> }
           <p className="card-formation">{`${talent.formations[0] != undefined ?
