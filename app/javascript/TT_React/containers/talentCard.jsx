@@ -41,10 +41,10 @@ class TalentCard extends PureComponent {
       backgroundColor: "lightgray",
       color: "gray",
     }
-    if(talent.position !== null && talent.position.length >= 30){
-      console.log("done")
+    // if(talent.position !== null && talent.position.length >= 30){
+      // console.log("done")
       $('[data-toggle="tooltip"]').tooltip()
-    }
+    // }
 
     if(jobs != null){
       jobs = this.props.jobs.jobs
