@@ -162,9 +162,9 @@ class ModalTalent extends Component {
                 }
               }
             }
-            return small_plus.map((smallPlus, index) => <p className="small-plus-modal small-plus" key={index}>{smallPlus.substr(0, 35)}</p>)
+            return small_plus.map((smallPlus, index) => <p className="small-plus-modal small-plus" key={index}>{smallPlus}</p>)
           }else{
-            return talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus-modal small-plus" key={index}>{smallPlus.substr(0, 35)}</p>)
+            return talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus-modal small-plus" key={index}>{smallPlus}</p>)
           }
         }
       }
