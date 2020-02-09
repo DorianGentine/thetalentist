@@ -159,7 +159,7 @@ class ModalTalent extends Component {
             for (let i = small_plus.length - 1; i >= 0; i--) {
               console.log(`small-plus[${i}]`, small_plus[i])
               if(small_plus[i].includes('○')){
-                let small_with_round = small_plus[i].split(' ○ ')
+                let small_with_round = small_plus[i].split('○ ')
                 console.log("yo", small_with_round)
                 small_plus.splice(i, 1)
                 for (var j = small_with_round.length - 1; j >= 0; j--) {
