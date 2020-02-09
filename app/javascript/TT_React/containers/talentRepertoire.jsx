@@ -12,6 +12,7 @@ class TalentRepertoire extends Component {
     super(props)
     this.state = {
       talents: null,
+      admin: false,
     };
   }
 
@@ -21,7 +22,10 @@ class TalentRepertoire extends Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if(this.props.talents != nextProps.talents && this.props.talents === null){
-      this.setState({talents: nextProps.talents.talents})
+      this.setState({
+        talents: nextProps.talents.talents,
+        admin: nextProps.talents.user.admin,
+      })
     }
   }
 
@@ -58,7 +62,7 @@ class TalentRepertoire extends Component {
       }
     })
 
-    if(this.state.talents != null && this.props.headhunterId == "" && filter.length === 0){
+    if(this.state.talents != null && this.state.admin && filter.length === 0){
       return(
         <div className="row">
           {renderSortable()}
@@ -80,7 +84,6 @@ function mapStateToProps(state) {
   return {
     talents: state.talents,
     filter: state.filter,
-    headhunterId: state.headhunterId,
   };
 }
 

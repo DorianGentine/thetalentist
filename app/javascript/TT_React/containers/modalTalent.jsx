@@ -145,12 +145,30 @@ class ModalTalent extends Component {
         )
       })
 
-      const renderSkills = () => talent.skills.map((skill, index) =>  <p className="small-plus" key={index}>{skill}</p>)
+      const renderSkills = () => talent.skills.map((skill, index) =>  <p className="small-plus-modal small-plus" key={index}>{skill}</p>)
 
-      const renderTools = () => talent.technos.map((techno, index) => <p className="small-plus" key={index}>{techno}</p>)
+      const renderTools = () => talent.technos.map((techno, index) => <p className="small-plus-modal small-plus" key={index}>{techno}</p>)
 
-      const renderSmallPlus = () => talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus}</p>)
-      const renderKnowns = () => talent.knowns.map((known, index) => <p className="small-plus" key={index}>{known}</p>)
+      const renderSmallPlus = () => {
+        if(talent.talent_small_plus.length !== 0 && !talent.talent_small_plus.includes(null)){
+          if(talent.talent_small_plus.length == 1 && talent.talent_small_plus[0].includes(',')){
+            let small_plus = talent.talent_small_plus[0].split(", ")
+            for (let i = small_plus.length - 1; i >= 0; i--) {
+              if(small_plus[i].includes('○')){
+                let small_with_round = small_plus[i].split(' ○ ')
+                small_plus.splice(i, 1)
+                for (var j = small_with_round.length - 1; j >= 0; j--) {
+                  small_plus.splice(i, 0, small_with_round[j])
+                }
+              }
+            }
+            return small_plus.map((smallPlus, index) => <p className="small-plus-modal small-plus" key={index}>{smallPlus.substr(0, 35)}</p>)
+          }else{
+            return talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus-modal small-plus" key={index}>{smallPlus.substr(0, 35)}</p>)
+          }
+        }
+      }
+      const renderKnowns = () => talent.knowns.map((known, index) => <p className="small-plus-modal small-plus" key={index}>{known}</p>)
 
       const handleOnChange = value => {
         this.setState({ value: value })
