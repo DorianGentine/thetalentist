@@ -40,6 +40,9 @@ class ModalTalent extends Component {
         color: "gray",
       }
       let jobs = this.props.jobs
+      // let ftalent_small_plus = [
+      //   "Capacité d’adaptation rapide dans un environnement en perpétuel mouvement ○ Création de poste/filiale/département/offres/marques ○ Innovation dans les startups et grandes entreprises, conseil en Marketing à des entrepreneurs, B2B"
+      // ]
 
       if(jobs != null){
         jobs = this.props.jobs.jobs
@@ -154,8 +157,10 @@ class ModalTalent extends Component {
           if(talent.talent_small_plus.length == 1 && talent.talent_small_plus[0].includes(',')){
             let small_plus = talent.talent_small_plus[0].split(", ")
             for (let i = small_plus.length - 1; i >= 0; i--) {
+              console.log(`small-plus[${i}]`, small_plus[i])
               if(small_plus[i].includes('○')){
                 let small_with_round = small_plus[i].split(' ○ ')
+                console.log("yo", small_with_round)
                 small_plus.splice(i, 1)
                 for (var j = small_with_round.length - 1; j >= 0; j--) {
                   small_plus.splice(i, 0, small_with_round[j])
