@@ -30,19 +30,19 @@ class TalentCard extends PureComponent {
 
   render () {
     const talent = this.props.talent
+    const user = this.props.talents.user
     const relation = talent.relationship
     const pin = {
       talent_id: talent.id,
-      headhunter_id: this.props.headhunterId,
+      headhunter_id: user.id,
     }
     let jobs = this.props.jobs
     let color = {
       backgroundColor: "lightgray",
       color: "gray",
     }
-    let width = {
-      maxWidth:  '400px',
-      minWidth:  '200px'
+    if(talent.position !== null && talent.position.length >= 30){
+      $('[data-toggle="tooltip"]').tooltip()
     }
 
     if(jobs != null){
@@ -95,7 +95,25 @@ class TalentCard extends PureComponent {
       }
     }
 
-    const renderSmallPlus = () => talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus}</p>)
+    const renderSmallPlus = () => {
+      if(talent.talent_small_plus.length !== 0 && !talent.talent_small_plus.includes(null)){
+        if(talent.talent_small_plus.length == 1 && talent.talent_small_plus[0].includes(',')){
+          let small_plus = talent.talent_small_plus[0].split(", ")
+          for (let i = small_plus.length - 1; i >= 0; i--) {
+            if(small_plus[i].includes('○')){
+              let small_with_round = small_plus[i].split(' ○ ')
+              small_plus.splice(i, 1)
+              for (var j = small_with_round.length - 1; j >= 0; j--) {
+                small_plus.splice(i, 0, small_with_round[j])
+              }
+            }
+          }
+          return small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus.substr(0, 35)}</p>)
+        }else{
+          return talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus" key={index}>{smallPlus.substr(0, 35)}</p>)
+        }
+      }
+    }
     const renderKnowns = () => talent.knowns.map((known, index) => <p className="small-plus" key={index}>{known}</p>)
 
     const toggleIcon = () => {
@@ -121,9 +139,9 @@ class TalentCard extends PureComponent {
     }
 
     return(
-      <div className="col-xs-12 col-md-4" style={width}>
+      <div className="col-xs-12 col-md-4 card-width">
         <div className="relative card" style={border}>
-          {relation !== false && relation !== null ?
+          {relation !== false && relation !== null || user.admin ?
             <p className={`text-test absolute ${relation === "pending" ? "gray-background" : "violet-background"}`}>{
               relation === "pending" ? "EN ATTENTE" : `${talent.first_name.toUpperCase()} ${talent.last_name.toUpperCase()}`
             }</p>
@@ -132,8 +150,12 @@ class TalentCard extends PureComponent {
             <p className="card-job" style={color}>{talent.job}</p>
             <FontAwesomeIcon className="card-bookmark" icon={this.state.icon} onClick={toggleIcon} />
           </div>
-          <p className="card-position">{talent.position}</p>
-          <p className="card-formation">{`${talent.formations[0].title}${talent.formations[0].type_of_formation != null ? ` - ${talent.formations[0].type_of_formation}` : "" }`}</p>
+          {talent.position !== null && talent.position.length >= 30 ?
+            <p className="card-position" data-toggle="tooltip" data-placement="top" title={talent.position}>{talent.position.substr(0, 30)}</p>
+          : <p className="card-position">{talent.position}</p> }
+          <p className="card-formation">{`${talent.formations[0] != undefined ?
+            `${talent.formations[0].title}${talent.formations[0].type_of_formation != null ? ` - ${talent.formations[0].type_of_formation}` : "" }`
+            : ""}`}</p>
           <div className="card-grid">
             <p className="grid-title">Expérience:</p>
             <p className="grid-info">{talent.year_experience_job} {talent.year_experience_job === 1 ? "an" : "ans"}</p>
@@ -154,7 +176,7 @@ class TalentCard extends PureComponent {
 function mapStateToProps(state) {
   return {
     jobs: state.jobs,
-    headhunterId: state.headhunterId,
+    talents: state.talents,
     guideSu: state.guideSu,
   };
 }

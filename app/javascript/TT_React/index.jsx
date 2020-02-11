@@ -11,13 +11,12 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import reduxPromise from 'redux-promise';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { createBrowserHistory as history } from 'history';
 // import { createHistory as history} from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
-// import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-// import { createBrowserHistory as history } from 'history';
 // import { reducer as formReducer } from 'redux-form';
 
 // import { fetchAPI } from './actions';
@@ -40,7 +39,6 @@ if(app){
 
   const initialState = {
     companyId: app.dataset.company_id,
-    headhunterId: app.dataset.headhunter_id,
     filter: [],
     guideSu: 0,
     jobs: null,
@@ -51,7 +49,6 @@ if(app){
 
   const reducers = combineReducers({
     companyId: identityReducer,
-    headhunterId: identityReducer,
     filter: filterReducer,
     guideSu: guideSuReducer,
     jobs: jobsReducer,
