@@ -1,3 +1,8 @@
+.card-width{
+  max-width: 400px;
+  min-width: 200px;
+}
+
 .card{
   background-color: white;
   padding: 40px 30px;
@@ -10,6 +15,9 @@
   box-shadow: 0 0 0 rgba(152, 156, 157, 0.15);
 }
 
+.small-plus-modal{
+  max-height: unset !important;
+}
 .small-plus{
   margin: 0 10px 10px 0;
   border-radius: 20px;
@@ -35,6 +43,8 @@
   font-family: "avenir";
   margin-bottom: 0;
   color: $dark-blue;
+  height: 22px;
+  overflow-y: hidden;
 }
 
 .card-formation{
@@ -42,6 +52,8 @@
   font-weight: 300;
   font-family: "avenir";
   font-style: italic;
+  height: 44px;
+  overflow-y: hidden;
 }
 
 .card-grid{
