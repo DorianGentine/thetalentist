@@ -6,19 +6,11 @@ class TalentsController < ApplicationController
   def index
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent
-<<<<<<< HEAD
     talents = policy_scope(Talent).where(validated: [true, nil])
     if params[:tag] == "Valider"
       @talents = talents.where(:validated => true)
     elsif params[:tag] == "Refuser"
       @talents = policy_scope(Talent).where(:validated => false)
-=======
-    talents = policy_scope(Talent).where(validated: [nil, true])
-    if params[:tag] == "Valider"
-      @talents = talents.where(:validated => true)
-    elsif params[:tag] == "Refuser"
-      @talents =  policy_scope(Talent).where(:validated => false)
->>>>>>> 6b4fa584d3a3db26aaf8aaf7b918d9d29358bc02
     elsif params[:tag] == "En attende"
       @talents = talents.where(:validated => nil)
     elsif params[:tag] == "Visible"
@@ -80,10 +72,6 @@ class TalentsController < ApplicationController
   def update_formation_and_skill
     set_new_technos(@talent)
     set_new_skills(@talent)
-<<<<<<< HEAD
-=======
-    set_new_knowns(@talent)
->>>>>>> 6b4fa584d3a3db26aaf8aaf7b918d9d29358bc02
     if @talent.update_attributes(formation_and_skill_params)
       redirect_to edit_talent_path(@talent)
     else
@@ -116,25 +104,12 @@ class TalentsController < ApplicationController
     if params[:commit] == "Accepter" && !@talent.validated
       @talent.validated_action(true)
       @talent.set_conversation_between(@talentist)
-<<<<<<< HEAD
     # elsif params[:commit] == "Refuser"
     #   if @talent.validated || @talent.validated.nil?
     #     @talent.update(declined_params)
     #     @talent.validated_action(false)
     #     @talent.send_refused
     #   end
-=======
-    elsif params[:commit] == "Refuser"
-      if @talent.validated || @talent.validated.nil?
-        @talent.update(declined_params)
-        @talent.validated = false
-        if @talent.save
-          p "ITS SAVE!!!!!!!!!!!"
-          # @talent.validated_action(false)
-          @talent.send_refused
-        end
-      end
->>>>>>> 6b4fa584d3a3db26aaf8aaf7b918d9d29358bc02
     end
     @talent.visible_action(false)
     redirect_to talents_path

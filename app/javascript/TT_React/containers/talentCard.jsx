@@ -163,7 +163,7 @@ class TalentCard extends PureComponent {
             <p className="grid-info">{talent.next_aventure.remuneration}</p>
           </div>
           <div className="margin-top-15 flex flex-wrap card-small-plus">{talent.knowns.length != 0 ? renderKnowns() : renderSmallPlus()}</div>
-          <div className="flex flex-end relative">
+          <div className="flex flex-end relative margin-top-15">
             <p className="no-margin card-cta" onClick={() => this.props.openModalTalent(talent)}>Afficher davantage</p>
             {this.props.guideSu == 3 && this.props.index == 0 ? <ModalGuide /> : null}
           </div>

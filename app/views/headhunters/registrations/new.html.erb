@@ -57,6 +57,14 @@
           <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, input_html: { style: "width: 100%" } %>
         </div>
       </div>
+
+      <div class="row align-items-center margin-top-15">
+        <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis" for="talent_phone">Tel.</label>
+
+        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
+          <%= f.input :firstname, required: true, autofocus: false, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:phone][0] %>
+        </div>
+      </div>
     </div>
 
   <!-- Line 5 -->
