@@ -70,6 +70,17 @@
             <% end %>
           </div>
 
+          <!-- Téléphone -->
+          <div class="row margin-bottom-15">
+            <p class="titre-rubrique-1 col-xs-12">Téléphone</p>
+            <i class="fas fa-phone green titre-rubrique-3 col-xs-2" style="font-weight: 900"></i>
+            <% if @headhunter.phone.present? %>
+              <a class="titre-rubrique-3 no-margin col-xs-10 no-padding" target="_blank"><%= @headhunter.phone.present? ? @headhunter.phone : "Ajoutez votre numéro" %></a>
+            <% else %>
+              <p class="titre-rubrique-3 no-margin col-xs-10 no-padding"> Ajoutez votre numéro</p>
+            <% end %>
+          </div>
+
         <!-- Adresse -->
           <div class="row margin-bottom-15">
             <p class="titre-rubrique-1 col-xs-12">Adresse</p>
