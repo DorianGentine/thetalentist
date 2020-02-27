@@ -11,7 +11,7 @@ import SearchResults from '../containers/searchResults'
 import ModalGuide from '../containers/modalGuide'
 import ModalTalent from '../containers/modalTalent'
 
-class App extends Component {
+class Repertory extends Component {
 
   componentDidMount(){
     const url = new URL(window.location.href);
@@ -50,4 +50,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ nextGuideSu }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Repertory);

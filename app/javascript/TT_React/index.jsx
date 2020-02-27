@@ -22,7 +22,8 @@ import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
 // import { fetchAPI } from './actions';
 
 // internal modules
-import App from './components/app';
+import repertory from './components/repertory';
+import conversation from './components/conversation';
 // import '../assets/stylesheets/messagerie.scss';
 
 // State and reducers
@@ -64,15 +65,15 @@ if(app){
   library.add(fab, fasBookmark, farBookmark, faShareAlt, faUserPlus, faUserCheck)
 
 // render an instance of the component in the DOM
-      // <Router history={history}>
-      //   <Switch>
-      //     <Route path="/repertoire" component={App} />
-      //     <Redirect from="/" to="/" />
-      //   </Switch>
-      // </Router>
   ReactDOM.render(
     <Provider store={store}>
-      <App/>
+      <Router history={history}>
+        <Switch>
+          <Route path="/repertoire" component={repertory} />
+          <Route path="/conversations/:id" component={conversation} />
+          <Redirect from="/" to="/" />
+        </Switch>
+      </Router>
     </Provider>,
     app
   );

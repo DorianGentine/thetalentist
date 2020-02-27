@@ -1,170 +1,168 @@
 
-
 <div class="row no-margin">
-  <div class="colonne bordure-droite modal" id="modal_conversations" style="padding: 0 22% 0 0;">
+  <div id="app" style="padding: 50px 100px; width: 100%;"></div>
+</div>
+  <!-- <div class="colonne bordure-droite modal" id="modal_conversations" style="padding: 0 22% 0 0;">
     <span class="close" id="close_modal_conversations">
         <p>&times;</p>
       </span>
     <div class="modal-content" style="padding: 0; height: 100%; animation-name: animateleft; border: none;">
-      <%= render 'conversations' %>
+      <%#= render 'conversations' %>
     </div>
-  </div>
+  </div> -->
 
-  <div class="bordure-droite col-xs-3 hidden-xs no-padding">
-    <%= render 'conversations' %>
-  </div>
+  <!-- <div class="bordure-droite col-xs-3 hidden-xs no-padding">
+    <%#= render 'conversations' %>
+  </div> -->
 
-  <div class="bordure-droite col-md-6 col-sm-9 col-xs-12 no-padding">
+        <!-- div Prénom Nom et poste  -->
+  <!-- <div class="bordure-droite col-md-6 col-sm-9 col-xs-12 no-padding">
     <div class="premiere-ligne nom-discussion">
       <div class="row w-100">
-        <!-- div Prénom Nom et poste  -->
         <div class="modal-button visible-xs col-xs-2" style="text-align: center" data-target="modal_conversations">
            <i class="fa fa-bars" style="color: black;"></i>
         </div>
 
         <div class="col-lg-12 col-xs-10">
-          <% if @participant.is_a?(Talent) %>
-            <% if !@relationship.nil? && @relationship.status == "Accepter" %>
-              <h2 class="no-margin"><%= @participant.firstname.capitalize %> <%= @participant.last_name.capitalize %></h2>
-              <p class="no-margin"><%= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_" %></p>
-            <% else %>
-              <% if @participant.experiences.present? && @participant.experiences.first.position.present? %>
-                <h2 class="no-margin"><%= @participant.experiences.first.position.capitalize.truncate(45, separator:' ', omission:'') %></h2>
-              <% else %>
+          <%# if @participant.is_a?(Talent) %>
+            <%# if !@relationship.nil? && @relationship.status == "Accepter" %>
+              <h2 class="no-margin"><%#= @participant.firstname.capitalize %> <%#= @participant.last_name.capitalize %></h2>
+              <p class="no-margin"><%#= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_" %></p>
+            <%# else %>
+              <%# if @participant.experiences.present? && @participant.experiences.first.position.present? %>
+                <h2 class="no-margin"><%#= @participant.experiences.first.position.capitalize.truncate(45, separator:' ', omission:'') %></h2>
+              <%# else %>
                 <h2 class="no-margin">Talent - Position inconnue</h2>
-              <% end %>
-              <% if !@relationship.nil? %>
-                <p class="no-margin"> <%= @relationship.status == "Refuser" ? "Le talent ne souhaite pas échanger pour le moment" : "En attente ..." %> </p>
-              <% else %>
-                <p class="no-margin"><%= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_/" %></p>
-              <% end %>
-            <% end %>
-          <% elsif @participant.is_a?(Headhunter)%>
-            <h2 class="no-margin"><%= @participant.firstname.capitalize %> de <%= @participant.startup.name.capitalize %></h2>
-            <% if @participant.job.present? %>
-              <p class="no-margin"> <%= @participant.job.capitalize %></p>
-            <% end %>
-          <% else %>
-            <h2 class="no-margin"><%= @participant.firstname.capitalize %></h2>
+              <%# end %>
+              <%# if !@relationship.nil? %>
+                <p class="no-margin"> <%#= @relationship.status == "Refuser" ? "Le talent ne souhaite pas échanger pour le moment" : "En attente ..." %> </p>
+              <%# else %>
+                <p class="no-margin"><%#= @participant.experiences.last.present? ? @participant.experiences.last.position.capitalize : "_/" %></p>
+              <%# end %>
+            <%# end %>
+          <%# elsif @participant.is_a?(Headhunter)%>
+            <h2 class="no-margin"><%#= @participant.firstname.capitalize %> de <%#= @participant.startup.name.capitalize %></h2>
+            <%# if @participant.job.present? %>
+              <p class="no-margin"> <%#= @participant.job.capitalize %></p>
+            <%# end %>
+          <%# else %>
+            <h2 class="no-margin"><%#= @participant.firstname.capitalize %></h2>
             <p class="no-margin"> The Talentist </p>
-          <% end %>
+          <%# end %>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- div link vers profil -->
-    <div class="link-profil">
-      <% if current_user.is_a?(Talent) %>
-        <% if @participant.is_a?(Headhunter) %>
-          <%= link_to headhunter_path(@participant) do %>
-            <p>Vous pouvez accéder au profil de <%= @participant.startup.name.capitalize %></p>
+<!--     <div class="link-profil">
+      <%# if current_user.is_a?(Talent) %>
+        <%# if @participant.is_a?(Headhunter) %>
+          <%#= link_to headhunter_path(@participant) do %>
+            <p>Vous pouvez accéder au profil de <%#= @participant.startup.name.capitalize %></p>
             <p>Visiter le profil > </p>
-          <% end %>
-        <% end %>
-      <% elsif current_user.is_a?(Headhunter) %>
-        <% if @relationship && @relationship.status == "Accepter" %>
-          <%= link_to talent_path(@participant) do %>
-            <p class="hidden-xs">Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
+          <%# end %>
+        <%# end %>
+      <%# elsif current_user.is_a?(Headhunter) %>
+        <%# if @relationship && @relationship.status == "Accepter" %>
+          <%#= link_to talent_path(@participant) do %>
+            <p class="hidden-xs">Vous pouvez accéder au profil de <%#= @participant.firstname.capitalize %></p>
             <p>Visiter le profil > </p>
-          <% end %>
-        <% end %>
-      <% else params[:headhunter_id] || params[:talent_id] || current_user.is_a?(Talentist)%>
-        <% if @participant.is_a?(Headhunter) %>
-            <%= link_to headhunter_path(@participant) do %>
-              <p>Vous pouvez accéder au profil de <%= @participant.startup.name.capitalize %></p>
+          <%# end %>
+        <%# end %>
+      <%# else params[:headhunter_id] || params[:talent_id] || current_user.is_a?(Talentist)%>
+        <%# if @participant.is_a?(Headhunter) %>
+            <%#= link_to headhunter_path(@participant) do %>
+              <p>Vous pouvez accéder au profil de <%#= @participant.startup.name.capitalize %></p>
               <p>Visiter le profil > </p>
-            <% end %>
-        <% else @participant.is_a?(Talent)%>
-          <%= link_to talent_path(@participant) do %>
-            <p>Vous pouvez accéder au profil de <%= @participant.firstname.capitalize %></p>
+            <%# end %>
+        <%# else @participant.is_a?(Talent)%>
+          <%#= link_to talent_path(@participant) do %>
+            <p>Vous pouvez accéder au profil de <%#= @participant.firstname.capitalize %></p>
             <p>Visiter le profil > </p>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
+          <%# end %>
+        <%# end %>
+      <%# end %>
+    </div> -->
 
     <!-- div conversation -->
-      <% if
+<!--       <%# if
         (current_user.is_a?(Talent) && !@participant.is_a?(Headhunter)) ||
         (current_user.is_a?(Headhunter) && @relationship && @relationship.status != "Accepter") ||
         (current_user.is_a?(Headhunter) && !@participant.is_a?(Talent)) %>
         <div id="conversation" style="height: calc(100vh - 360px);">
-      <% else %>
+      <%# else %>
         <div id="conversation" style="height: calc(100vh - 430px);">
-      <% end %>
+      <%# end %>
 
-          <% @messages.each do |receipt| %>
-              <%= render 'conversations/messages', receipt: receipt, cached: true %>
+          <%# @messages.each do |receipt| %>
+              <%#= render 'conversations/messages', receipt: receipt, cached: true %>
 
-          <% end %>
-        </div>
+          <%# end %>
+        </div> -->
 
 
-    <div class="boite-envoi">
-      <%= form_for @message, url: conversation_messages_path(@conversation) do |f|  %>
-        <%= f.text_area :body, placeholder: "Écrivez votre message...", autofocus: true, rows: 7, disabled: current_user.is_a?(Talent) && @connexion && @relationship.status == "pending" %>
+<!--     <div class="boite-envoi">
+      <%#= form_for @message, url: conversation_messages_path(@conversation) do |f|  %>
+        <%#= f.text_area :body, placeholder: "Écrivez votre message...", autofocus: true, rows: 7, disabled: current_user.is_a?(Talent) && @connexion && @relationship.status == "pending" %>
         <div id="send-bar">
           <label for="mailboxer_message_attachment" class="label-file-mailboxer" name="mailboxer_message[attachment]"><i class="fas fa-paperclip"></i></label>
-          <%= f.file_field :attachment, :style => "display: none" %>
+          <%#= f.file_field :attachment, :style => "display: none" %>
           <p href="#" id="uploadFile" style="margin: 0;">Aucun fichier</p>
-          <%= f.submit "Envoyer", :class => "btn-envoyer gray-button", id: "send-bar-btn", disabled: current_user.is_a?(Talent) && @connexion && @relationship.status == "pending" %>
+          <%#= f.submit "Envoyer", :class => "btn-envoyer gray-button", id: "send-bar-btn", disabled: current_user.is_a?(Talent) && @connexion && @relationship.status == "pending" %>
         </div>
-      <% end %>
+      <%# end %> -->
 
 
       <!-- div accepter la relation -->
-        <% if current_user.is_a?(Talent) && @connexion && @relationship.status == "pending" %>
+<!--         <%# if current_user.is_a?(Talent) && @connexion && @relationship.status == "pending" %>
           <div class="accept-relation">
-            <%= simple_form_for :current_user, method: :put do |f| %>
-              <%= f.simple_fields_for @relationship do |u| %>
-                <%= u.submit "Accepter", class: "btn-envoyer" %>
-                <%= u.submit "Refuser", class: "btn-envoyer" %>
-              <% end %>
-            <% end %>
+            <%#= simple_form_for :current_user, method: :put do |f| %>
+              <%#= f.simple_fields_for @relationship do |u| %>
+                <%#= u.submit "Accepter", class: "btn-envoyer" %>
+                <%#= u.submit "Refuser", class: "btn-envoyer" %>
+              <%# end %>
+            <%# end %>
           </div>
-        <% end %>
-      <!-- bloqué pour Talentist -->
-        <% if params[:headhunter_id] || params[:talent_id] %>
+        <%# end %>
+      bloqué pour Talentist
+        <%# if params[:headhunter_id] || params[:talent_id] %>
           <div class="accept-relation center-text">
             <p>Vous ne pouvez pas écrire de message sur cette conversation car votre profil n'est pas 'visible'</p>
           </div>
-        <% end %>
+        <%# end %>
 
-        <% if current_user.is_a?(Talent) && !current_user.visible && !@participant.is_a?(Talentist) %>
+        <%# if current_user.is_a?(Talent) && !current_user.visible && !@participant.is_a?(Talentist) %>
           <div class="accept-relation center-text">
-            <p>Vous ne pouvez plus écrire de message, car votre profil n'est plus visible. Si vous souhaitez changer votre status contactez <%= Talentist.where(admin: true).first.firstname.capitalize %> via la plateforme</p>
+            <p>Vous ne pouvez plus écrire de message, car votre profil n'est plus visible. Si vous souhaitez changer votre status contactez <%#= Talentist.where(admin: true).first.firstname.capitalize %> via la plateforme</p>
           </div>
-        <% end %>
-        <% if @participant.is_a?(Talent) && !@participant.visible && !current_talentist %>
+        <%# end %>
+        <%# if @participant.is_a?(Talent) && !@participant.visible && !current_talentist %>
           <div class="accept-relation center-text">
-            <p>Vous ne pouvez pas écrire de message sur cette conversation, car <%= @participant.firstname %> <%= @participant.last_name %>n'a plus son profil actif</p>
+            <p>Vous ne pouvez pas écrire de message sur cette conversation, car <%#= @participant.firstname %> <%#= @participant.last_name %>n'a plus son profil actif</p>
           </div>
-        <% end %>
+        <%# end %>
     </div>
-  </div>
+  </div> -->
 
-  <div class="col-xs-3 colonne hidden-sm hidden-xs no-padding">
+<!--   <div class="col-xs-3 colonne hidden-sm hidden-xs no-padding">
     <div class="premiere-ligne">
       <h4>Documents échangés</h4>
 
     </div>
     <div class="doc-echanges">
-      <% @conversation.messages.each do |message| %>
-        <% if message.attachment.url.present? %>
-          <%= link_to message.attachment.url, target: "_blank", :format => 'pdf' do %>
+      <%# @conversation.messages.each do |message| %>
+        <%# if message.attachment.url.present? %>
+          <%#= link_to message.attachment.url, target: "_blank", :format => 'pdf' do %>
             <i class="far fa-file-pdf"></i>
             <p>Document envoyé</p>
             <br>
-          <% end %>
-        <% end %>
-      <% end %>
+          <%# end %>
+        <%# end %>
+      <%# end %>
     </div>
-  </div>
+  </div> -->
 
-
-</div>
-
-<script>
+<!-- <script>
   var message = document.getElementById("mailboxer_message_body")
   var sendButton = document.getElementById("send-bar-btn")
   sendButton.disabled = true
@@ -179,7 +177,7 @@
     }
   })
 
-</script>
+</script> -->
 
 
 
