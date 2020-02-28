@@ -36,6 +36,25 @@ class Talentist < ApplicationRecord
     end
   end
 
+  def phone
+    return "0142567051"
+  end
+  def avatar
+    self.photo
+  end
+
+  def profil_url
+    return "/talentists/#{self.id}"
+  end
+
+  def his_profession
+    return "Talentist"
+  end
+
+  def witch_status?(null)
+    return "Accepter"
+  end
+
   def is_a_model
     return "Talentist"
   end
