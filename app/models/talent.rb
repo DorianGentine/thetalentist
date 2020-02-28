@@ -133,6 +133,22 @@ class Talent < ApplicationRecord
     return re[0].status
   end
 
+  def his_profession
+    self.experiences.last.position
+  end
+
+  def avatar
+    if self.linkedin_picture_url.present? && self.display_linkedin_picture
+      return self.linkedin_picture_url
+    else
+      return self.photo
+    end
+  end
+
+  def profil_url
+    return "/talents/#{self.id}"
+  end
+
   def is_a_model
     return "Talent"
   end
@@ -317,6 +333,7 @@ class Talent < ApplicationRecord
       end
     end
   end
+
 
   def alerte_headhunters
     jobs = self.jobs

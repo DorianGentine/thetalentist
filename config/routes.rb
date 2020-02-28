@@ -93,6 +93,9 @@ Rails.application.routes.draw do
         collection do
           get :all
         end
+        member do
+          get :left
+        end
       end
       resources :notifications, only: [ :index ]
       resources :headhunters, only: [ :index, :show] do
