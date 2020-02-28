@@ -96,6 +96,7 @@ Rails.application.routes.draw do
         member do
           get :left
         end
+        resources :messages, only: [ :create ]
       end
       resources :notifications, only: [ :index ]
       resources :headhunters, only: [ :index, :show] do
