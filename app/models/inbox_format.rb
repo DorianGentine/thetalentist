@@ -57,7 +57,6 @@ class InboxFormat
             answer_2: answer_2(participant),
             test_3: question_3(participant),
             answer_3: answer_3(participant),
-
           },
           attachments: files(@conversation),
           conversation_id: @conversation.id,
