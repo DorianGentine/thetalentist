@@ -114,7 +114,7 @@ class TalentCard extends PureComponent {
         }
       }
     }
-    const renderKnowns = () => talent.knowns.map((known, index) => <p className="small-plus" key={index}>{known}</p>)
+    const renderSkills = () => talent.skills.map((skill, index) => <p className="small-plus" key={index}>{skill}</p>)
 
     const toggleIcon = () => {
       if(this.state.checked){
@@ -162,7 +162,7 @@ class TalentCard extends PureComponent {
             <p className="grid-title">Rémunération:</p>
             <p className="grid-info">{talent.next_aventure.remuneration}</p>
           </div>
-          <div className="margin-top-15 flex flex-wrap card-small-plus">{talent.knowns.length != 0 ? renderKnowns() : renderSmallPlus()}</div>
+          <div className="margin-top-15 flex flex-wrap card-small-plus">{talent.skills.length != 0 ? renderSkills() : renderSmallPlus()}</div>
           <div className="flex flex-end relative margin-top-15">
             <p className="no-margin card-cta" onClick={() => this.props.openModalTalent(talent)}>Afficher davantage</p>
             {this.props.guideSu == 3 && this.props.index == 0 ? <ModalGuide /> : null}

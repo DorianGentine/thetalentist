@@ -73,6 +73,15 @@
 
         </div>
       </div>
+      <div class="col-xs-12 col-lg-6">
+        <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
+        <h2 class="titre-section">Savoir <strong>être</strong></h2>
+        <!-- <div class="row">
+          <div class="col-xs-12"> -->
+            <%= f.input :known_ids, collection: Known.all, label: false, input_html: { :class => "comp-cles", multiple: "multiple"}, multiple: true, required: true %>
+          <!-- </div>
+        </div> -->
+      </div>
       <div class="col-xs-12 col-lg-6 margin-top-60-xs">
         <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
         <h2 class="titre-section">Mon <strong>environnement</strong></h2>
