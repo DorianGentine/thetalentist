@@ -1,5 +1,5 @@
 class Api::V1::ConversationsController < Api::V1::BaseController
-  # before_action :autorize_call, only: [ :all ]
+  before_action :autorize_call, only: [ :show, :left]
   before_action :get_mailbox
   # before_action :get_conversation, except: [:index]
 
@@ -14,6 +14,14 @@ class Api::V1::ConversationsController < Api::V1::BaseController
     @conversations = policy_scope(Conversation)
   end
 
+  def left
+    @conversations = InboxFormat.new.discussions(@user)
+  end
+
+  def show
+    @conversation = InboxFormat.new.discussion(@user, params[:id])
+  end
+
   private
 
     def get_conversation
@@ -26,9 +34,9 @@ class Api::V1::ConversationsController < Api::V1::BaseController
 
 
     def autorize_call
-      user = current_talentist if current_talentist
-      user = current_talent if current_talent
-      user = current_headhunter if current_headhunter
-      authorize user
+      @user = current_talentist if current_talentist
+      @user = current_talent if current_talent
+      @user = current_headhunter if current_headhunter
+      authorize @user
     end
 end
