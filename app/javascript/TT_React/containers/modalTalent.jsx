@@ -247,7 +247,7 @@ class ModalTalent extends Component {
                 <p className="title-modal" style={{color: color.color}}>Ce que ce talent recherche</p>
                 <p>{talent.next_aventure.looking_for}</p>
                 <p className="title-modal" style={{color: color.color}}>Comment je vois mon métier</p>
-                <p>{talent.next_aventure.good_manager}</p>
+                <p>{talent.next_aventure.see_my_job}</p>
                 <p className="title-modal" style={{color: color.color}}>Un bon manager selon ce talent</p>
                 <p>{talent.next_aventure.good_manager}</p>
               </div>

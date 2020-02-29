@@ -104,6 +104,7 @@ class TalentFormat
           work_for_free: talent.next_aventure.present? && talent.next_aventure.work_for_free.present? ? talent.next_aventure.work_for_free : false,
           looking_for: talent.next_aventure.present? && talent.next_aventure.looking_for.present? ? talent.next_aventure.looking_for : false,
           dream: talent.next_aventure.present? && talent.next_aventure.dream.present? ? talent.next_aventure.dream : false,
+          see_my_job: talent.next_aventure.present? && talent.next_aventure.see_my_job.present? ? talent.next_aventure.see_my_job : false,
           good_manager: talent.next_aventure.present? && talent.next_aventure.good_manager.present? ? talent.next_aventure.good_manager : false,
           proud: talent.next_aventure.present? && talent.next_aventure.proud.present? ? talent.next_aventure.proud : false,
           btob: talent.next_aventure.present? && talent.next_aventure.btob.present? ? true : false,
