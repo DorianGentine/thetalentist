@@ -10,7 +10,7 @@ class listmessagerie extends Component {
   render () {
     return(
       <div className="col-md-3">
-        <input className="w-100" type="text"/>
+        <input className="w-100" style={{height: "40px"}} type="text"/>
         <hr className="ligne-horizontal"/>
         <div className="flex space-between">
           <p>Tous mes messages</p>
