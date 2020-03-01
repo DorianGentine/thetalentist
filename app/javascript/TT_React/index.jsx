@@ -27,6 +27,8 @@ import conversation from './components/conversation';
 // import '../assets/stylesheets/messagerie.scss';
 
 // State and reducers
+import conversationActiveReducer from './reducers/conversation_active_reducer';
+import conversationsReducer from './reducers/conversations_reducer';
 import filterReducer from './reducers/filter_reducer';
 import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
@@ -40,6 +42,8 @@ if(app){
 
   const initialState = {
     companyId: app.dataset.company_id,
+    conversationActive: [],
+    conversations: [],
     filter: [],
     guideSu: 0,
     jobs: null,
@@ -50,6 +54,8 @@ if(app){
 
   const reducers = combineReducers({
     companyId: identityReducer,
+    conversationActive: conversationActiveReducer,
+    conversations: conversationsReducer,
     filter: filterReducer,
     guideSu: guideSuReducer,
     jobs: jobsReducer,
