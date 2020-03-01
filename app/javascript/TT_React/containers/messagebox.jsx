@@ -6,13 +6,15 @@ import { connect } from 'react-redux';
 
 class messagebox extends Component {
   render () {
+    const conversation = this.props.conversation
+    const participant = conversation.participant
     return(
       <div className="message-box">
         <div className="photo-conv"></div>
         <div>
-          <p className="no-margin">Donatien Rolland</p>
-          <p className="gray font-12 italic">Développeur Front-end</p>
-          <p className="no-margin font-12">We advice startups and build strategies and execute according...</p>
+          <p className="no-margin">{participant.full_name}</p>
+          <p className="gray font-12 italic">{participant.job}</p>
+          <p className="no-margin font-12">{conversation.sender === "Vous" ? "Vous : " : ""}{conversation.body}</p>
         </div>
       </div>
     );
