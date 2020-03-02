@@ -93,6 +93,10 @@ Rails.application.routes.draw do
         collection do
           get :all
         end
+        member do
+          get :left
+        end
+        resources :messages, only: [ :create ]
       end
       resources :notifications, only: [ :index ]
       resources :headhunters, only: [ :index, :show] do

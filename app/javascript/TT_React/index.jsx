@@ -15,17 +15,20 @@ import { createBrowserHistory as history } from 'history';
 // import { createHistory as history} from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck } from '@fortawesome/free-solid-svg-icons'
-import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as farBookmark, faPaperPlane, faUser } from '@fortawesome/free-regular-svg-icons'
 // import { reducer as formReducer } from 'redux-form';
 
 // import { fetchAPI } from './actions';
 
 // internal modules
-import App from './components/app';
+import repertory from './components/repertory';
+import conversation from './components/conversation';
 // import '../assets/stylesheets/messagerie.scss';
 
 // State and reducers
+import conversationActiveReducer from './reducers/conversation_active_reducer';
+import conversationsReducer from './reducers/conversations_reducer';
 import filterReducer from './reducers/filter_reducer';
 import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
@@ -39,6 +42,8 @@ if(app){
 
   const initialState = {
     companyId: app.dataset.company_id,
+    conversationActive: [],
+    conversations: [],
     filter: [],
     guideSu: 0,
     jobs: null,
@@ -49,6 +54,8 @@ if(app){
 
   const reducers = combineReducers({
     companyId: identityReducer,
+    conversationActive: conversationActiveReducer,
+    conversations: conversationsReducer,
     filter: filterReducer,
     guideSu: guideSuReducer,
     jobs: jobsReducer,
@@ -61,18 +68,18 @@ if(app){
   // Middlewares
   const middlewares = applyMiddleware(reduxPromise, createLogger());
   const store = createStore(reducers, initialState, middlewares);
-  library.add(fab, fasBookmark, farBookmark, faShareAlt, faUserPlus, faUserCheck)
+  library.add(fab, fasBookmark, farBookmark, faShareAlt, faUserPlus, faUserCheck, faPaperPlane, faUser, faPhone)
 
 // render an instance of the component in the DOM
-      // <Router history={history}>
-      //   <Switch>
-      //     <Route path="/repertoire" component={App} />
-      //     <Redirect from="/" to="/" />
-      //   </Switch>
-      // </Router>
   ReactDOM.render(
     <Provider store={store}>
-      <App/>
+      <Router history={history}>
+        <Switch>
+          <Route path="/repertoire" component={repertory} />
+          <Route path="/conversations/:id" component={conversation} />
+          <Redirect from="/" to="/" />
+        </Switch>
+      </Router>
     </Provider>,
     app
   );
