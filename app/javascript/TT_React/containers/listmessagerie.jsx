@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { fetchGET } from '../actions';
 
 import MessageBox from './messagebox'
 
 class listmessagerie extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: "",
+    };
+  }
 
   componentDidMount(){
     this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}/left`, "FETCH_CONVERSATIONS")
@@ -15,11 +22,28 @@ class listmessagerie extends Component {
   render () {
     const conversations = this.props.conversations
 
-    const renderMessageBox = () => this.props.conversations.conversations.map((conversation, index) => <MessageBox conversation={conversation} key={index} />)
+    const renderMessageBox = () => this.props.conversations.conversations.map((conversation, index) => {
+      if(this.state.value == "" ||
+        conversation.participant.full_name.toLowerCase().includes(this.state.value.toLowerCase()) && conversation.in_relation == "Accepter"){
+        return <MessageBox conversation={conversation} key={index} />
+      }
+    })
+
+    const handleOnChange = value => {
+      this.setState({ value: value })
+    }
 
     return(
       <div className="col-md-3">
-        <input className="w-100" style={{height: "40px"}} type="text"/>
+        <div className="input-icon">
+          <FontAwesomeIcon icon={["fas", "search"]}/>
+          <input
+            className="w-100"
+            type="text"
+            placeholder="Rechercher"
+            value={this.state.value}
+            onChange={(input) => {handleOnChange(input.target.value)}}/>
+        </div>
         <hr className="ligne-horizontal"/>
         <div className="flex space-between">
           <p>Tous mes messages</p>
