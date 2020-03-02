@@ -25,7 +25,9 @@ class listmessagerie extends Component {
           <p>Tous mes messages</p>
           <p>Classer par: Date</p>
         </div>
-        {conversations.length != 0 ? renderMessageBox() : <p>Chargement...</p> }
+        <div className="scroll" style={{maxHeight: "calc(100vh - 76px)"}}>
+          {conversations.length != 0 ? renderMessageBox() : <p>Chargement...</p> }
+        </div>
       </div>
     );
   }

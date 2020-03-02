@@ -8,8 +8,13 @@ class messagebox extends Component {
   render () {
     const conversation = this.props.conversation
     const participant = conversation.participant
+
+    const changeConv = () => {
+      window.location.replace(`/conversations/${conversation.conversation_id}`)
+    }
+
     return(
-      <div className="message-box">
+      <div className="message-box" onClick={changeConv}>
         <div className="photo-conv"></div>
         <div>
           <p className="no-margin">{participant.full_name}</p>

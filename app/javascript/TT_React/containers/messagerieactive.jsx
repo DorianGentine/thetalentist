@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { fetchGET, fetchPost } from '../actions';
 
-import Navbar from '../containers/navbar'
-import ListMessagerie from '../containers/listmessagerie'
-import MessagerieActive from '../containers/messagerieactive'
+import Message from './message'
 
 class Conversation extends Component {
   constructor(props) {
@@ -27,7 +26,7 @@ class Conversation extends Component {
       participant = conversationActive.participant
     }
 
-    const renderMessages = () => conversationActive.messages.map((message, index) => <p key={index}>{message.body}</p>)
+    const renderMessages = () => conversationActive.messages.map((message, index) => <Message key={index} message={message} />)
 
     const handleOnChange = value => {
       this.setState({ value: value })
@@ -49,27 +48,52 @@ class Conversation extends Component {
 
     return(
       <div className="col-md-9">
-        <div className="flex">
+        <div className="flex align-items-center">
           <div className="photo-conv"></div>
           <div className="flex-grow-1">
             <p className="bold no-margin">{participant != undefined ? participant.full_name : ""}</p>
             <p className="no-margin"><span className="green">•</span> En ligne</p>
           </div>
+          <a className="profil-url" href={participant != undefined ? participant.profil_url : ""}>
+            <FontAwesomeIcon icon={["far", "user"]}/>
+          </a>
         </div>
-        <hr className="ligne-horizontal"/>
-        {conversationActive != undefined ? renderMessages() : <p>Chargement...</p>}
+        <hr className="ligne-horizontal" style={{ marginBottom: "0" }}/>
+        <div className="row">
+          <div className="col-md-8">
+            <div className="messages-box">
+              {conversationActive != undefined ? renderMessages() : <p>Chargement...</p>}
+            </div>
 
-        <form action="">
-          <textarea
-            name="message"
-            id="message"
-            rows="5"
-            placeholder="Écrivez votre message ici"
-            value={this.state.value}
-            onChange={(textarea) => {handleOnChange(textarea.target.value)}}>
-          </textarea>
-          <button className="btn-envoyer" onClick={event => {sendMessage(event)}} >Envoyer</button>
-        </form>
+            <form className="flex space-between bordure-droite padding-vertical-30">
+              <textarea
+                name="message"
+                id="message"
+                rows="5"
+                placeholder="Écrivez votre message ici"
+                value={this.state.value}
+                onChange={(textarea) => {handleOnChange(textarea.target.value)}}>
+              </textarea>
+              <button className="send-message-btn" onClick={event => {sendMessage(event)}} >
+                <FontAwesomeIcon icon={["far", "paper-plane"]}/>
+              </button>
+            </form>
+          </div>
+          <div className="col-md-4 padding-vertical-30">
+            <div className="photo-conv photo-conv-lg margin-auto margin-bottom-30"></div>
+            <p className="text-align-center font-16">{participant != undefined ? participant.full_name : ""}</p>
+            <p className="gray text-align-center font-16">{participant != undefined ? participant.job : ""}</p>
+            <hr className="ligne-horizontal margin-top-30 margin-bottom-30"/>
+            <p className="criteres">{participant != undefined ? participant.test_1 : ""}</p>
+            <p className="criteres-reponses">{participant != undefined ? participant.answer_1 : ""}</p>
+            <p className="criteres">{participant != undefined ? participant.test_2 : ""}</p>
+            <p className="criteres-reponses">{participant != undefined ? participant.answer_2 : ""}</p>
+            <p className="criteres">{participant != undefined ? participant.test_3 : ""}</p>
+            <p className="criteres-reponses">{participant != undefined ? participant.answer_3 : ""}</p>
+            <p className="font-16 margin-top-30">Documents échangés</p>
+            <hr className="ligne-horizontal"/>
+          </div>
+        </div>
 
       </div>
     );
