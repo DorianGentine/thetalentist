@@ -21,12 +21,34 @@ class Conversation extends Component {
 
   render () {
     const conversationActive = this.props.conversationActive.conversation
-    let participant
-    if(conversationActive != undefined){
-      participant = conversationActive.participant
+    let participant, relationship
+    let info = {
+      image: null,
+      full_name: "Talent",
+      answer_1: "Tu n'y as pas encore accès",
+      answer_2: "Tu n'y as pas encore accès",
+      answer_3: "Tu n'y as pas encore accès",
+      profil_url: "",
+      phone: null,
     }
 
-    const renderMessages = () => conversationActive.messages.map((message, index) => <Message key={index} message={message} />)
+    if(conversationActive != undefined){
+      participant = conversationActive.participant
+      relationship = conversationActive.in_relation
+      if(relationship == "Accepter"){
+        info = {
+          image: participant.avatar.url,
+          full_name: participant.full_name,
+          answer_1: participant.answer_1,
+          answer_2: participant.answer_2,
+          answer_3: participant.answer_3,
+          profil_url: participant.profil_url,
+          phone: participant.phone,
+        }
+      }
+    }
+
+    const renderMessages = () => conversationActive.messages.reverse().map((message, index) => <Message key={index} message={message} />)
 
     const handleOnChange = value => {
       this.setState({ value: value })
@@ -46,17 +68,25 @@ class Conversation extends Component {
       })
     }
 
+
     return(
       <div className="col-md-9">
         <div className="flex align-items-center">
-          <div className="photo-conv"></div>
+          {info.image != null ? <img className="photo-conv" src={info.image} alt="avatar"></img> : <div className="photo-conv">{info.full_name.slice(0, 1)}</div>}
           <div className="flex-grow-1">
-            <p className="bold no-margin">{participant != undefined ? participant.full_name : ""}</p>
+            <p className="bold no-margin">{info.full_name}</p>
             <p className="no-margin"><span className="green">•</span> En ligne</p>
           </div>
-          <a className="profil-url" href={participant != undefined ? participant.profil_url : ""}>
-            <FontAwesomeIcon icon={["far", "user"]}/>
-          </a>
+          {relationship == "Accepter" && participant.user_model != "Talentist" ?
+            <a className="profil-url" href={info.profil_url}>
+              <FontAwesomeIcon icon={["far", "user"]}/>
+            </a>
+          : ""}
+          {info.phone != null ?
+            <a className="phone-link margin-left-15" href={`tel:${info.phone}`}>
+              <FontAwesomeIcon icon={["fas", "phone"]}/>
+            </a>
+          : ""}
         </div>
         <hr className="ligne-horizontal" style={{ marginBottom: "0" }}/>
         <div className="row">
@@ -80,16 +110,18 @@ class Conversation extends Component {
             </form>
           </div>
           <div className="col-md-4 padding-vertical-30">
-            <div className="photo-conv photo-conv-lg margin-auto margin-bottom-30"></div>
-            <p className="text-align-center font-16">{participant != undefined ? participant.full_name : ""}</p>
+            <div className="flex justify-center margin-bottom-30">
+              {info.image != null ? <img className="photo-conv photo-conv-lg" src={info.image} alt="avatar"></img> : <div className="photo-conv photo-conv-lg">{info.full_name.slice(0, 1)}</div>}
+            </div>
+            <p className="text-align-center font-16">{info.full_name}</p>
             <p className="gray text-align-center font-16">{participant != undefined ? participant.job : ""}</p>
             <hr className="ligne-horizontal margin-top-30 margin-bottom-30"/>
             <p className="criteres">{participant != undefined ? participant.test_1 : ""}</p>
-            <p className="criteres-reponses">{participant != undefined ? participant.answer_1 : ""}</p>
+            <p className="criteres-reponses">{info.answer_1}</p>
             <p className="criteres">{participant != undefined ? participant.test_2 : ""}</p>
-            <p className="criteres-reponses">{participant != undefined ? participant.answer_2 : ""}</p>
+            <p className="criteres-reponses">{info.answer_2}</p>
             <p className="criteres">{participant != undefined ? participant.test_3 : ""}</p>
-            <p className="criteres-reponses">{participant != undefined ? participant.answer_3 : ""}</p>
+            <p className="criteres-reponses">{info.answer_3}</p>
             <p className="font-16 margin-top-30">Documents échangés</p>
             <hr className="ligne-horizontal"/>
           </div>

@@ -13,7 +13,7 @@ class Message extends Component {
 
     if(message.sender === "Vous"){
       return(
-        <div className="col-md-offset-3 message-right-position margin-bottom-15">
+        <div className="col-md-offset-3 col-md-9 message-right-position margin-bottom-15">
           <div className="message-right">
             <p>{message.sender_name}</p>
             <p className="no-margin">{message.body}</p>
