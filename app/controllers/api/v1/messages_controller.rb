@@ -1,5 +1,6 @@
 class Api::V1::MessagesController < ApplicationController
   before_action :set_conversation
+  skip_before_action :verify_authenticity_token
 
   def create
     p "IN CREATED MESSAGe"
@@ -22,12 +23,9 @@ class Api::V1::MessagesController < ApplicationController
       if Mailboxer::Conversation.participant(@participant).count > 0
         @user.new_message(@receipt, @participant)
       end
-      render :show
-    else
-      flash[:notice] = "Attention, vous n'avez pas de text"
-      redirect_to conversation_path(@conversation)
+      head :no_content
     end
-    authorize @conversation
+    authorize @user
   end
 
   private
