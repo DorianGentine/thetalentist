@@ -15,8 +15,8 @@ import { createBrowserHistory as history } from 'history';
 // import { createHistory as history} from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck } from '@fortawesome/free-solid-svg-icons'
-import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as farBookmark, faPaperPlane, faUser } from '@fortawesome/free-regular-svg-icons'
 // import { reducer as formReducer } from 'redux-form';
 
 // import { fetchAPI } from './actions';
@@ -68,7 +68,7 @@ if(app){
   // Middlewares
   const middlewares = applyMiddleware(reduxPromise, createLogger());
   const store = createStore(reducers, initialState, middlewares);
-  library.add(fab, fasBookmark, farBookmark, faShareAlt, faUserPlus, faUserCheck)
+  library.add(fab, fasBookmark, farBookmark, faShareAlt, faUserPlus, faUserCheck, faPaperPlane, faUser, faPhone, faSearch)
 
 // render an instance of the component in the DOM
   ReactDOM.render(

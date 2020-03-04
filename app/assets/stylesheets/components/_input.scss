@@ -1,12 +1,30 @@
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #696767 !important;
+  color: $gray !important;
   opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #696767 !important;
+  color: $gray !important;
 }
 
 ::-ms-input-placeholder { /* Microsoft Edge */
-  color: #696767 !important;
+  color: $gray !important;
+}
+
+.input-icon{
+  position: relative;
+  svg{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+    color: $gray;
+  }
+  input{
+    height: 40px;
+    padding-left: 40px;
+    border-radius: 2px;
+    border: 1px solid #C1C4CB;
+    color: $dark-gray;
+  }
 }
