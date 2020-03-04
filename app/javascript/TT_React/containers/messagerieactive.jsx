@@ -17,6 +17,11 @@ class Conversation extends Component {
 
   componentDidMount(){
     this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+    const objDiv = document.getElementById("messages-box");
+    // setTimeout( () => {
+    //   console.log(objDiv.scrollHeight)
+    //   objDiv.scrollTop = objDiv.scrollHeight
+    // }, 1000);
   }
 
   render () {
@@ -91,7 +96,7 @@ class Conversation extends Component {
         <hr className="ligne-horizontal" style={{ marginBottom: "0" }}/>
         <div className="row">
           <div className="col-md-8">
-            <div className="messages-box">
+            <div id="messages-box">
               {conversationActive != undefined ? renderMessages() : <p>Chargement...</p>}
             </div>
 
@@ -100,7 +105,7 @@ class Conversation extends Component {
                 name="message"
                 id="message"
                 rows="5"
-                placeholder="Écrivez votre message ici"
+                placeholder="Envoyer un message..."
                 value={this.state.value}
                 onChange={(textarea) => {handleOnChange(textarea.target.value)}}>
               </textarea>
