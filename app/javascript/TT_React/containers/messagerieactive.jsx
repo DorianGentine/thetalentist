@@ -17,6 +17,11 @@ class Conversation extends Component {
 
   componentDidMount(){
     this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+    const objDiv = document.getElementById("messages-box");
+    // setTimeout( () => {
+    //   console.log(objDiv.scrollHeight)
+    //   objDiv.scrollTop = objDiv.scrollHeight
+    // }, 1000);
   }
 
   render () {
@@ -48,14 +53,7 @@ class Conversation extends Component {
       }
     }
 
-    const renderMessages = () => conversationActive.messages.reverse().map((message, index) => {
-      const objDiv = document.getElementById("messages-box");
-      setTimeout( () => {
-        console.log(objDiv.scrollHeight)
-        objDiv.scrollTop = objDiv.scrollHeight
-      }, 1000);
-      return <Message key={index} message={message} />
-    })
+    const renderMessages = () => conversationActive.messages.reverse().map((message, index) => <Message key={index} message={message} />)
 
     const handleOnChange = value => {
       this.setState({ value: value })
