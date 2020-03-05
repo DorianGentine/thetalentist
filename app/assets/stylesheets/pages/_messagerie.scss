@@ -1,3 +1,9 @@
+.messagerie-title{
+  color: #000748;
+  font-size: 24px;
+  font-weight: 800;
+}
+
 .message-box{
   background-color: white;
   width: 100%;
@@ -10,6 +16,23 @@
 .message-box:hover{
   border: 1px solid #BFC6D4;
   background-color: transparent;
+}
+.message-box.active{
+  border: 1px solid #BFC6D4;
+  background-color: transparent;
+}
+
+.messagebox-title{
+  color: #273243;
+  font-size: 15px;
+  font-weight: 800;
+}
+.messageriebox-subtitle{
+  color: #B0B4BF;
+  font-size: 13px;
+  font-style: oblique;
+  font-weight: 500;
+  line-height: 18px;
 }
 
 .photo-conv{
@@ -58,7 +81,7 @@
 }
 
 #messages-box{
-  // height: calc(100vh - 401px);
+  height: calc(100vh - 401px);
   overflow-y: scroll;
   border-right: 1px solid $gray;
   border-bottom: 1px solid $gray;
