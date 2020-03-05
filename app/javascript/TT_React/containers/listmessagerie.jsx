@@ -25,7 +25,7 @@ class listmessagerie extends Component {
     const renderMessageBox = () => this.props.conversations.conversations.map((conversation, index) => {
       if(this.state.value == "" ||
         conversation.participant.full_name.toLowerCase().includes(this.state.value.toLowerCase()) && conversation.in_relation == "Accepter"){
-        return <MessageBox conversation={conversation} key={index} />
+        return <MessageBox conversation={conversation} idActive={this.props.params.id} key={index} />
       }
     })
 
@@ -40,15 +40,12 @@ class listmessagerie extends Component {
           <input
             className="w-100"
             type="text"
-            placeholder="Rechercher"
+            placeholder="rechercher"
             value={this.state.value}
             onChange={(input) => {handleOnChange(input.target.value)}}/>
         </div>
         <hr className="ligne-horizontal"/>
-        <div className="flex space-between">
-          <p>Tous mes messages</p>
-          <p>Classer par: Date</p>
-        </div>
+        <p>Tous mes messages</p>
         <div className="scroll" style={{maxHeight: "calc(100vh - 310px)"}}>
           {conversations.length != 0 ? renderMessageBox() : <p>Chargement...</p> }
         </div>
