@@ -104,18 +104,18 @@ class InboxFormat
 
   def question_1(user)
     if user.is_a?(Talent)
-      return "Ville actuelle :"
+      return "Disponibilité :"
     elsif user.is_a?(Headhunter)
-      return "Entreprise :"
+      return "Nombre d'employés :"
     else
       return "Talentist"
     end
   end
   def question_2(user)
     if user.is_a?(Talent)
-      return "Dernière formation :"
+      return "Attentes salariales :"
     elsif user.is_a?(Headhunter)
-      return "Description :"
+      return "Domaines d'activités :"
     else
       return "Talentist"
     end
@@ -125,7 +125,7 @@ class InboxFormat
     if user.is_a?(Talent)
       return "Expérience :"
     elsif user.is_a?(Headhunter)
-      return "Lien :"
+      return "Année de création :"
     else
       return "Talentist"
     end
@@ -133,9 +133,9 @@ class InboxFormat
 
   def question_2(user)
     if user.is_a?(Talent)
-      return "Dernière formation :"
+      return "Attentes salariales :"
     elsif user.is_a?(Headhunter)
-      return "Entreprise :"
+      return "Domaines d'activités :"
     else
       return "Talentist"
     end
@@ -143,7 +143,7 @@ class InboxFormat
 
   def answer_1(user)
     if user.is_a?(Talent)
-      return user.city
+      return user.next_aventure.availability
     elsif user.is_a?(Headhunter)
       return user.startup.name
     else
@@ -153,7 +153,7 @@ class InboxFormat
 
   def answer_2(user)
     if user.is_a?(Talent)
-      return user.talent_formations.last.formation.title
+      return user.next_aventure.remuneration
     elsif user.is_a?(Headhunter)
       return user.startup.overview
     else
