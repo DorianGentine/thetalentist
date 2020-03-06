@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_19_183906) do
+ActiveRecord::Schema.define(version: 2020_03_04_054709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,8 @@ ActiveRecord::Schema.define(version: 2020_02_19_183906) do
     t.boolean "validated"
     t.boolean "terms_of_condition", default: false, null: false
     t.string "phone"
+    t.string "authentication_token", limit: 30
+    t.index ["authentication_token"], name: "index_headhunters_on_authentication_token", unique: true
     t.index ["email"], name: "index_headhunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_headhunters_on_reset_password_token", unique: true
     t.index ["startup_id"], name: "index_headhunters_on_startup_id"
@@ -499,6 +501,8 @@ ActiveRecord::Schema.define(version: 2020_02_19_183906) do
     t.datetime "updated_at", null: false
     t.string "photo"
     t.boolean "admin", default: false, null: false
+    t.string "authentication_token", limit: 30
+    t.index ["authentication_token"], name: "index_talentists_on_authentication_token", unique: true
     t.index ["email"], name: "index_talentists_on_email", unique: true
     t.index ["reset_password_token"], name: "index_talentists_on_reset_password_token", unique: true
   end
@@ -541,6 +545,8 @@ ActiveRecord::Schema.define(version: 2020_02_19_183906) do
     t.string "reminder"
     t.boolean "display_linkedin_picture", default: true
     t.integer "position"
+    t.string "authentication_token", limit: 30
+    t.index ["authentication_token"], name: "index_talents_on_authentication_token", unique: true
     t.index ["email"], name: "index_talents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_talents_on_reset_password_token", unique: true
   end
