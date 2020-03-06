@@ -1,13 +1,9 @@
 class Mailboxer::ConversationPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      p "coucou"
-      scope.all
+      # scope.all
+      user.mailbox.conversations
     end
-  end
-
-  def index?
-    true
   end
 
   def create?
@@ -15,11 +11,11 @@ class Mailboxer::ConversationPolicy < ApplicationPolicy
   end
 
   def update?
-    true
+    raise
   end
 
 
   def show?
-    true
+    record.participants.include?(user)
   end
 end

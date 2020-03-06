@@ -1,18 +1,17 @@
 class InboxFormat
 
-  def discussions(user)
-    conversations(user)
+  def discussions(conversations, user)
+    conversations(conversations, user)
   end
 
-  def discussion(user, conversation_id)
-    conversation(user, conversation_id)
+  def discussion(user, conversation)
+    conversation(user, conversation)
   end
 
   private
 
-  def conversations(user)
+  def conversations(conversations, user)
     arra_conversations = []
-    conversations = user.mailbox.conversations
     conversations.each do |conversation|
         participant = (conversation.participants - [user]).first
         conversation = {
@@ -36,8 +35,8 @@ class InboxFormat
     return arra_conversations
   end
 
-  def conversation(user, conversation_id)
-    @conversation =  Mailboxer::Conversation.find(conversation_id)
+  def conversation(user, conversation)
+    @conversation =  conversation
     participant = (@conversation.participants - [user]).first
         conversation = {
           participant: {
@@ -62,6 +61,8 @@ class InboxFormat
           conversation_id: @conversation.id,
           archived: nil,
           pin: nil,
+          full_name: user.full_name,
+          email: user.email,
           in_relation: user.witch_status?(participant),
           count: @conversation.messages.count,
           messages: messages(user, @conversation)
