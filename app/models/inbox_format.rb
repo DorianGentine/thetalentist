@@ -145,7 +145,7 @@ class InboxFormat
     if user.is_a?(Talent)
       return user.next_aventure.availability
     elsif user.is_a?(Headhunter)
-      return user.startup.name
+      return user.startup.collaborators
     else
       return "Talentist"
     end
@@ -155,7 +155,7 @@ class InboxFormat
     if user.is_a?(Talent)
       return user.next_aventure.remuneration
     elsif user.is_a?(Headhunter)
-      return user.startup.overview
+      return user.startup.sectors.last.present? ? user.startup.sectors.last.title : nil
     else
       return "Talentist"
     end
@@ -165,7 +165,7 @@ class InboxFormat
     if user.is_a?(Talent)
       return user.talent_job.year
     elsif user.is_a?(Headhunter)
-      return user.startup.link
+      return user.startup.year_of_creation
     else
       return "Talentist"
     end
