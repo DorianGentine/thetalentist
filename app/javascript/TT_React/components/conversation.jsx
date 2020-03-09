@@ -13,7 +13,7 @@ class Conversation extends Component {
   render () {
     return(
       <div style={{padding: "50px 100pw"}}>
-        <h3 className="margin-left-15">Messagerie</h3>
+        <h3 className="margin-left-15 messagerie-title">Messagerie</h3>
         <ListMessagerie params={this.props.match.params} />
         <MessagerieActive params={this.props.match.params} />
       </div>

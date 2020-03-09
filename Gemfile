@@ -95,3 +95,6 @@ gem 'gibbon'
 
 #for react
 gem 'nokogiri', '~> 1.6', '>= 1.6.8'
+
+# add token to all user
+gem 'simple_token_authentication'

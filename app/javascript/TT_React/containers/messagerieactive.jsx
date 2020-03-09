@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchGET, fetchPost } from '../actions';
 
 import Message from './message'
+import SendBox from './sendbox'
 
 class Conversation extends Component {
   constructor(props) {
@@ -17,11 +18,12 @@ class Conversation extends Component {
 
   componentDidMount(){
     this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+
     const objDiv = document.getElementById("messages-box");
-    // setTimeout( () => {
-    //   console.log(objDiv.scrollHeight)
-    //   objDiv.scrollTop = objDiv.scrollHeight
-    // }, 1000);
+    setTimeout( () => {
+      console.log(objDiv.scrollHeight)
+      objDiv.scrollTop = objDiv.scrollHeight
+    }, 1000);
   }
 
   render () {
@@ -34,7 +36,7 @@ class Conversation extends Component {
       answer_2: "Tu n'y as pas encore accès",
       answer_3: "Tu n'y as pas encore accès",
       profil_url: "",
-      phone: null,
+      // phone: null,
     }
 
     if(conversationActive != undefined){
@@ -48,31 +50,18 @@ class Conversation extends Component {
           answer_2: participant.answer_2,
           answer_3: participant.answer_3,
           profil_url: participant.profil_url,
-          phone: participant.phone,
+          // phone: participant.phone,
         }
       }
     }
 
-    const renderMessages = () => conversationActive.messages.reverse().map((message, index) => <Message key={index} message={message} />)
-
-    const handleOnChange = value => {
-      this.setState({ value: value })
-    }
-
-    const sendMessage = (event) => {
-      event.preventDefault()
-      const newMessage = {
-        conversation_id: this.props.params.id,
-        body: document.getElementById('message').value,
-        attachment: null
+    const renderMessages = () => {
+      if(this.state.newMessage){
+        return this.state.messages.map((message, index) => <Message key={index} message={message} />)
+      }else{
+        return conversationActive.messages.reverse().map((message, index) => <Message key={index} message={message} />)
       }
-      console.log(newMessage)
-      this.props.fetchPost(`/api/v1/conversations/${this.props.params.id}/messages`, newMessage, "POST", this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE"))
-      this.setState({
-        value: "",
-      })
     }
-
 
     return(
       <div className="col-md-9">
@@ -87,11 +76,6 @@ class Conversation extends Component {
               <FontAwesomeIcon icon={["far", "user"]}/>
             </a>
           : ""}
-          {info.phone != null ?
-            <a className="phone-link margin-left-15" href={`tel:${info.phone}`}>
-              <FontAwesomeIcon icon={["fas", "phone"]}/>
-            </a>
-          : ""}
         </div>
         <hr className="ligne-horizontal" style={{ marginBottom: "0" }}/>
         <div className="row">
@@ -100,19 +84,7 @@ class Conversation extends Component {
               {conversationActive != undefined ? renderMessages() : <p>Chargement...</p>}
             </div>
 
-            <form className="flex space-between bordure-droite padding-vertical-30">
-              <textarea
-                name="message"
-                id="message"
-                rows="5"
-                placeholder="Envoyer un message..."
-                value={this.state.value}
-                onChange={(textarea) => {handleOnChange(textarea.target.value)}}>
-              </textarea>
-              <button className="send-message-btn" onClick={event => {sendMessage(event)}} >
-                <FontAwesomeIcon icon={["far", "paper-plane"]}/>
-              </button>
-            </form>
+            <SendBox params={this.props.params} />
           </div>
           <div className="col-md-4 padding-vertical-30">
             <div className="flex justify-center margin-bottom-30">
@@ -121,12 +93,16 @@ class Conversation extends Component {
             <p className="text-align-center font-16">{info.full_name}</p>
             <p className="gray text-align-center font-16">{participant != undefined ? participant.job : ""}</p>
             <hr className="ligne-horizontal margin-top-30 margin-bottom-30"/>
-            <p className="criteres">{participant != undefined ? participant.test_1 : ""}</p>
-            <p className="criteres-reponses">{info.answer_1}</p>
-            <p className="criteres">{participant != undefined ? participant.test_2 : ""}</p>
-            <p className="criteres-reponses">{info.answer_2}</p>
-            <p className="criteres">{participant != undefined ? participant.test_3 : ""}</p>
-            <p className="criteres-reponses">{info.answer_3}</p>
+            {relationship != "Accepter" ? null :
+              <div>
+                <p className="criteres">{participant != undefined ? participant.test_1 : ""}</p>
+                <p className="criteres-reponses">{info.answer_1}</p>
+                <p className="criteres">{participant != undefined ? participant.test_2 : ""}</p>
+                <p className="criteres-reponses">{info.answer_2}</p>
+                <p className="criteres">{participant != undefined ? participant.test_3 : ""}</p>
+                <p className="criteres-reponses">{info.answer_3}</p>
+              </div>
+            }
             <p className="font-16 margin-top-30">Documents échangés</p>
             <hr className="ligne-horizontal"/>
           </div>

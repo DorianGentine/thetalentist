@@ -1,6 +1,6 @@
 class Api::V1::ConversationsController < Api::V1::BaseController
-  before_action :autorize_call, only: [ :show, :left]
-  before_action :get_mailbox
+  before_action :autorize_call, only: [ :left]
+  # before_action :get_mailbox
   # before_action :get_conversation, except: [:index]
 
   def all
@@ -11,15 +11,19 @@ class Api::V1::ConversationsController < Api::V1::BaseController
   def index
     # @unread_messages = @mailbox.inbox(unread: true).count
     # @conversations = @mailbox.inbox({page: params[:page], per_page: 10})
-    @conversations = policy_scope(Conversation)
+    conversations = policy_scope(Mailboxer::Conversation)
+    @conversations = InboxFormat.new.discussions(conversations, current_user)
   end
 
   def left
-    @conversations = InboxFormat.new.discussions(@user)
+    @conversations = InboxFormat.new.discussions(conversations, @user)
   end
 
   def show
-    @conversation = InboxFormat.new.discussion(@user, params[:id])
+    @conv =  Mailboxer::Conversation.find(params[:id])
+    @conversation = InboxFormat.new.discussion(current_user, @conv)
+    p "/////////// #{@conv}"
+    authorize @conv
   end
 
   private

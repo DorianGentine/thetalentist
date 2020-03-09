@@ -1,18 +1,17 @@
 class InboxFormat
 
-  def discussions(user)
-    conversations(user)
+  def discussions(conversations, user)
+    conversations(conversations, user)
   end
 
-  def discussion(user, conversation_id)
-    conversation(user, conversation_id)
+  def discussion(user, conversation)
+    conversation(user, conversation)
   end
 
   private
 
-  def conversations(user)
+  def conversations(conversations, user)
     arra_conversations = []
-    conversations = user.mailbox.conversations
     conversations.each do |conversation|
         participant = (conversation.participants - [user]).first
         conversation = {
@@ -36,8 +35,8 @@ class InboxFormat
     return arra_conversations
   end
 
-  def conversation(user, conversation_id)
-    @conversation =  Mailboxer::Conversation.find(conversation_id)
+  def conversation(user, conversation)
+    @conversation =  conversation
     participant = (@conversation.participants - [user]).first
         conversation = {
           participant: {
@@ -62,6 +61,8 @@ class InboxFormat
           conversation_id: @conversation.id,
           archived: nil,
           pin: nil,
+          full_name: user.full_name,
+          email: user.email,
           in_relation: user.witch_status?(participant),
           count: @conversation.messages.count,
           messages: messages(user, @conversation)
@@ -103,18 +104,18 @@ class InboxFormat
 
   def question_1(user)
     if user.is_a?(Talent)
-      return "Ville actuelle :"
+      return "Disponibilité :"
     elsif user.is_a?(Headhunter)
-      return "Entreprise :"
+      return "Nombre d'employés :"
     else
       return "Talentist"
     end
   end
   def question_2(user)
     if user.is_a?(Talent)
-      return "Dernière formation :"
+      return "Attentes salariales :"
     elsif user.is_a?(Headhunter)
-      return "Description :"
+      return "Domaines d'activités :"
     else
       return "Talentist"
     end
@@ -124,7 +125,7 @@ class InboxFormat
     if user.is_a?(Talent)
       return "Expérience :"
     elsif user.is_a?(Headhunter)
-      return "Lien :"
+      return "Année de création :"
     else
       return "Talentist"
     end
@@ -132,9 +133,9 @@ class InboxFormat
 
   def question_2(user)
     if user.is_a?(Talent)
-      return "Dernière formation :"
+      return "Attentes salariales :"
     elsif user.is_a?(Headhunter)
-      return "Entreprise :"
+      return "Domaines d'activités :"
     else
       return "Talentist"
     end
@@ -142,9 +143,9 @@ class InboxFormat
 
   def answer_1(user)
     if user.is_a?(Talent)
-      return user.city
+      return user.next_aventure.availability
     elsif user.is_a?(Headhunter)
-      return user.startup.name
+      return user.startup.collaborators
     else
       return "Talentist"
     end
@@ -152,9 +153,9 @@ class InboxFormat
 
   def answer_2(user)
     if user.is_a?(Talent)
-      return user.talent_formations.last.formation.title
+      return user.next_aventure.remuneration
     elsif user.is_a?(Headhunter)
-      return user.startup.overview
+      return user.startup.sectors.last.present? ? user.startup.sectors.last.title : nil
     else
       return "Talentist"
     end
@@ -164,7 +165,7 @@ class InboxFormat
     if user.is_a?(Talent)
       return user.talent_job.year
     elsif user.is_a?(Headhunter)
-      return user.startup.link
+      return user.startup.year_of_creation
     else
       return "Talentist"
     end
