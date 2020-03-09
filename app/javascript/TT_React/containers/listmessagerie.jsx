@@ -16,7 +16,7 @@ class listmessagerie extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}/left`, "FETCH_CONVERSATIONS")
+    this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
   }
 
   render () {
