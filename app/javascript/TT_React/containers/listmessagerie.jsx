@@ -16,7 +16,7 @@ class listmessagerie extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}/left`, "FETCH_CONVERSATIONS")
+    this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
   }
 
   render () {
@@ -47,7 +47,7 @@ class listmessagerie extends Component {
         <hr className="ligne-horizontal"/>
         <p>Tous mes messages</p>
         <div className="scroll" style={{maxHeight: "calc(100vh - 310px)"}}>
-          {conversations.length != 0 ? renderMessageBox() : <p>Chargement...</p> }
+          {conversations != null && conversations.length != 0 ? renderMessageBox() : <p>Chargement...</p> }
         </div>
       </div>
     );

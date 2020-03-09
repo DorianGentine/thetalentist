@@ -32,6 +32,8 @@ class MessagesController < ApplicationController
   private
 
   def set_conversation
+    p "CONVERSATION_ID is #{params}"
+    p "CONVERSATION_ID is #{params[:conversation_id]}"
     @conversation = current_user.mailbox.conversations.find(params[:conversation_id])
   end
 end

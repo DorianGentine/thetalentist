@@ -130,8 +130,12 @@ class Talent < ApplicationRecord
   end
 
   def witch_status?(headhunter)
-    re = Relationship.where(headhunter_id: headhunter.id, talent_id: self.id)
-    return re[0].status
+    if headhunter.is_a?(Headhunter)
+      re = Relationship.where(headhunter_id: headhunter.id, talent_id: self.id)
+      return re[0].status
+    else
+      return "Accepter"
+    end
   end
 
   def his_profession

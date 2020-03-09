@@ -28,7 +28,7 @@ class Conversation extends Component {
 
   render () {
     const conversationActive = this.props.conversationActive.conversation
-    let participant, relationship
+    let participant, relationship, email
     let info = {
       image: null,
       full_name: "Talent",
@@ -42,6 +42,7 @@ class Conversation extends Component {
     if(conversationActive != undefined){
       participant = conversationActive.participant
       relationship = conversationActive.in_relation
+      email = conversationActive.email
       if(relationship == "Accepter"){
         info = {
           image: participant.avatar.url,
@@ -84,7 +85,7 @@ class Conversation extends Component {
               {conversationActive != undefined ? renderMessages() : <p>Chargement...</p>}
             </div>
 
-            <SendBox params={this.props.params} />
+            <SendBox params={this.props.params} email={email} />
           </div>
           <div className="col-md-4 padding-vertical-30">
             <div className="flex justify-center margin-bottom-30">
