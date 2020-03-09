@@ -41,6 +41,7 @@ class SendBox extends Component {
       event.preventDefault()
       const newMessage = {
         conversation_id: this.props.params.id,
+        email: this.props.email,
         body: document.getElementById('message').value,
         attachment: null
       }
