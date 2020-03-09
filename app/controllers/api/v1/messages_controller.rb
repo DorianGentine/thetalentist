@@ -33,7 +33,9 @@ class Api::V1::MessagesController < ApplicationController
   private
 
   def set_conversation
-    @conversation = Mailboxer::Conversation.find(params[:id])
+    p "CONVERSATION_ID is #{params}"
+    p "CONVERSATION_ID is #{params[:conversation_id]}"
+    @conversation = Mailboxer::Conversation.find(params[:conversation_id])
   end
 
   def message_params
