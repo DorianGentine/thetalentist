@@ -22,7 +22,6 @@ class Api::V1::ConversationsController < Api::V1::BaseController
   def show
     @conv =  Mailboxer::Conversation.find(params[:id])
     @conversation = InboxFormat.new.discussion(current_user, @conv)
-    p "/////////// #{@conv}"
     authorize @conv
   end
 
