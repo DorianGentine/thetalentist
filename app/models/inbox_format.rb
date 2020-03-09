@@ -14,6 +14,7 @@ class InboxFormat
     arra_conversations = []
     conversations.each do |conversation|
         participant = (conversation.participants - [user]).first
+        p " coucou ICI participants #{ participant }"
         conversation = {
           participant: {
             full_name: participant.full_name,
