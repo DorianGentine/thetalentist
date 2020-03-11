@@ -7,15 +7,16 @@ import { connect } from 'react-redux';
 import Navbar from '../containers/navbar'
 import ListMessagerie from '../containers/listmessagerie'
 import MessagerieActive from '../containers/messagerieactive'
+import MessagerieSideBar from '../containers/messageriesidebar'
 
 class Conversation extends Component {
 
   render () {
     return(
-      <div style={{padding: "50px 100pw"}}>
-        <h3 className="margin-left-15 messagerie-title">Messagerie</h3>
+      <div className="container">
         <ListMessagerie params={this.props.match.params} />
         <MessagerieActive params={this.props.match.params} />
+        <MessagerieSideBar params={this.props.match.params} />
       </div>
     );
   }

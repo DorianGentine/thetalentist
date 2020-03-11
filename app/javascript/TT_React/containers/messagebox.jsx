@@ -28,8 +28,11 @@ class messagebox extends Component {
       <div className={`message-box${conversation.conversation_id == idActive ? " active" : ""}`} onClick={changeConv}>
         {infos.image != null ? <img className="photo-conv" src={infos.image} alt="avatar"></img> : <div className="photo-conv">{infos.full_name.slice(0, 1)}</div>}
         <div>
-          <p className="no-margin messagebox-title">{infos.full_name}</p>
-          <p className="gray font-12 italic">{participant.job}</p>
+          <div className="flex space-between">
+            <p className="no-margin messagebox-title flex-grow-1">{infos.full_name}</p>
+            <p className="no-margin messageriebox-subtitle">{`5min`}</p>
+          </div>
+          <p className="messageriebox-subtitle">{participant.job}</p>
           <p className="no-margin font-12">{conversation.sender === "Vous" ? "Vous : " : ""}{conversation.body}</p>
         </div>
       </div>

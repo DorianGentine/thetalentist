@@ -12,6 +12,8 @@ class listmessagerie extends Component {
     super(props)
     this.state = {
       value: "",
+      opened: false,
+      chevron: ["fas", "chevron-down"],
     };
   }
 
@@ -33,9 +35,24 @@ class listmessagerie extends Component {
       this.setState({ value: value })
     }
 
+    const dropDown = () => {
+      if(this.state.opened){
+        this.setState({
+          opened: false,
+          chevron: ["fas", "chevron-down"],
+        })
+      }else{
+        this.setState({
+          opened: true,
+          chevron: ["fas", "chevron-up"],
+        })
+      }
+    }
+
     return(
-      <div className="col-md-3">
-        <div className="input-icon">
+      <div className="col-md-4">
+        <h3 className="messagerie-title">Messagerie</h3>
+        <div className="input-icon no-background">
           <FontAwesomeIcon icon={["fas", "search"]}/>
           <input
             className="w-100"
@@ -44,10 +61,11 @@ class listmessagerie extends Component {
             value={this.state.value}
             onChange={(input) => {handleOnChange(input.target.value)}}/>
         </div>
-        <hr className="ligne-horizontal"/>
-        <p>Tous mes messages</p>
-        <div className="scroll" style={{maxHeight: "calc(100vh - 310px)"}}>
-          {conversations != null && conversations.length != 0 ? renderMessageBox() : <p>Chargement...</p> }
+        <div className="border-lines-2">
+          <p className="tous-mes-messages" onClick={dropDown}>Tous mes messages <span><FontAwesomeIcon icon={this.state.chevron}/></span></p>
+          <div className="scroll" style={{maxHeight: "calc(100vh - 310px)"}}>
+            {conversations != null && conversations.length != 0 ? renderMessageBox() : <p>Chargement...</p> }
+          </div>
         </div>
       </div>
     );
