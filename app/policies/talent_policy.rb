@@ -2,7 +2,6 @@ class TalentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
 
-
       if user.is_a?(Talentist) || user.is_a?(Headhunter)
         scope.all.order('created_at DESC')
       else

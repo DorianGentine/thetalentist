@@ -58,7 +58,7 @@ class SendBox extends Component {
     }
 
     return(
-      <form className="flex space-between bordure-droite padding-vertical-30">
+      <form className="flex space-between">
         <textarea
           name="message"
           id="message"

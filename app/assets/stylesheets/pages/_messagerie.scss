@@ -2,6 +2,25 @@
   color: #000748;
   font-size: 24px;
   font-weight: 800;
+  margin: 0 0 30px;
+}
+
+.border-lines-2{
+  margin-top: 25px;
+  border: 1px solid $lines-2;
+  padding: 30px 20px;
+}
+
+.tous-mes-messages {
+  color: $dark-blue;
+  font-family: Avenir;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  cursor: pointer;
+  span > svg{
+    font-size: 12px;
+  }
 }
 
 .message-box{
@@ -23,12 +42,13 @@
 }
 
 .messagebox-title{
-  color: #273243;
-  font-size: 15px;
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 900;
+  color: $dark-blue;
+  text-decoration: underline;
 }
 .messageriebox-subtitle{
-  color: #B0B4BF;
+  color: $subtitle;
   font-size: 13px;
   font-style: oblique;
   font-weight: 500;
@@ -68,7 +88,7 @@
   }
 }
 .phone-link{
-  background-color: $light-gray2;
+  background-color: $lines-2;
   width: 35px;
   height: 35px;
   border-radius: 35px;
@@ -83,9 +103,7 @@
 #messages-box{
   height: calc(100vh - 401px);
   overflow-y: scroll;
-  border-right: 1px solid $gray;
-  border-bottom: 1px solid $gray;
-  padding: 15px 0;
+  padding: 30px 0;
 }
 
 .message-left-position {
@@ -94,7 +112,7 @@
   align-items: flex-end;
 }
 .message-left {
-  background-color: $light-gray2;
+  background-color: $lines-2;
   padding: 15px;
   border-radius: 5px;
   p{
@@ -132,11 +150,11 @@
   min-width: 35px;
   margin: 15px;
   border-radius: 100px;
-  background-color: $light-gray2;
+  background-color: $violet;
   padding: unset;
   border: 0;
   svg{
-    color: $dark-gray;
+    color: white;
   }
 }
 
@@ -152,6 +170,17 @@
   font-size: 14px;
   font-weight: 900;
   line-height: 20px;
+}
+
+textarea{
+  color: black;
+}
+
+.white-box{
+  border-radius: 15px 0 0 15px;
+  background-color: white;
+  box-shadow: -6px 0 16px 0 rgba(39,50,67,0.05);
+  padding: 40px;
 }
 
 //OLD VERSION
@@ -363,9 +392,6 @@
 //   }
 // }
 
-// textarea{
-//   color: black;
-// }
 
 // .boite-envoi{
 //   // height: calc(30% - 90px);

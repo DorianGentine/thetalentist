@@ -94,7 +94,10 @@ gem 'sidekiq-failures', '~> 1.0'
 gem 'gibbon'
 
 #for react
-gem 'nokogiri', '~> 1.6', '>= 1.6.8'
+gem 'nokogiri', '~> 1.10'
+
 
 # add token to all user
 gem 'simple_token_authentication'
+
+
