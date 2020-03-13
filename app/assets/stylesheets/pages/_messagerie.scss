@@ -157,6 +157,21 @@
     color: white;
   }
 }
+.participant-fullname{
+  color: $dark-blue;
+  font-family: Avenir;
+  font-size: 16px;
+  font-weight: 900;
+  // line-height: 22px;
+  text-align: center;
+}
+.participant-job{
+  color: $dark-blue;
+  font-size: 14px;
+  font-weight: 500;
+  // line-height: 19px;
+  text-align: center;
+}
 
 .criteres {
   color: #525A6D;

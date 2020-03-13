@@ -47,8 +47,8 @@ class Conversation extends Component {
         <div className="flex justify-center margin-bottom-30">
           {info.image != null ? <img className="photo-conv photo-conv-lg" src={info.image} alt="avatar"></img> : <div className="photo-conv photo-conv-lg">{info.full_name.slice(0, 1)}</div>}
         </div>
-        <p className="text-align-center font-16">{info.full_name}</p>
-        <p className="gray text-align-center font-16">{participant != undefined ? participant.job : ""}</p>
+        <p className="participant-fullname margin-bottom-5">{info.full_name}</p>
+        <p className="participant-job">{participant != undefined ? participant.job : ""}</p>
         <hr className="ligne-horizontal margin-top-30 margin-bottom-30"/>
         {relationship != "Accepter" ? null :
           <div>
