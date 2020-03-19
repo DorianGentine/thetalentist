@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // import { nextGuideSu } from '../actions';
+import { diffTime } from '../../components/renderDate';
 
 class messagebox extends Component {
   render () {
@@ -30,7 +31,7 @@ class messagebox extends Component {
         <div>
           <div className="flex space-between">
             <p className="no-margin messagebox-title flex-grow-1">{infos.full_name}</p>
-            <p className="no-margin messageriebox-subtitle">{`5min`}</p>
+            <p className="no-margin messageriebox-subtitle">{diffTime(conversation.update_at)}</p>
           </div>
           <p className="messageriebox-subtitle">{participant.job}</p>
           <p className="no-margin font-12">{conversation.sender === "Vous" ? "Vous : " : ""}{conversation.body}</p>
