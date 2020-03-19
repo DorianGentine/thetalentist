@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { fetchGET } from '../actions';
 
@@ -20,11 +19,14 @@ class Conversation extends Component {
   }
 
   render () {
-    const conversationActive = this.props.conversationActive.conversation
-    let participant, relationship, email
+    let conversationActive, participant, relationship, email
     let info = {
       image: null,
       full_name: "Talent",
+    }
+
+    if(this.props.conversationActive != null){
+      conversationActive = this.props.conversationActive.conversation
     }
 
     if(conversationActive != undefined){

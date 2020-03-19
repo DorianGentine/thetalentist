@@ -76,18 +76,6 @@
 }
 
 .profil-url{
-  background-color: $violet;
-  width: 35px;
-  height: 35px;
-  border-radius: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  svg{
-    color: white;
-  }
-}
-.phone-link{
   background-color: $lines-2;
   width: 35px;
   height: 35px;
@@ -96,12 +84,12 @@
   justify-content: center;
   align-items: center;
   svg{
-    color: $dark-gray;
+    color: $subtitle;
   }
 }
 
 #messages-box{
-  height: calc(100vh - 401px);
+  height: calc(100vh - 350px);
   overflow-y: scroll;
   padding: 30px 0;
 }
@@ -114,7 +102,7 @@
 .message-left {
   background-color: $lines-2;
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 5px 5px 5px 0;
   p{
     color: $dark-gray;
   }
@@ -124,15 +112,27 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  .message-date{
+    margin-right: 15px;
+    text-align: end;
+  }
 }
 .message-right {
   background-color: $violet;
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 5px 5px 0;
   margin-right: 15px;
   p{
     color: white;
   }
+}
+
+.message-date{
+  color: $subtitle;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  margin-bottom: 0;
 }
 
 #message{
@@ -157,6 +157,12 @@
     color: white;
   }
 }
+.send-doc-btn {
+  height: 2em;
+  min-width: 1em;
+  margin-top: 13px;
+  color: $subtitle !important;
+}
 .participant-fullname{
   color: $dark-blue;
   font-family: Avenir;
@@ -172,19 +178,39 @@
   // line-height: 19px;
   text-align: center;
 }
+.participant-place {
+  color: $subtitle;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 24px;
+  svg{
+    color: $subtitle;
+    margin-right: 5px;
+  }
+}
 
 .criteres {
   color: #525A6D;
   font-size: 13px;
   font-weight: 500;
   line-height: 20px;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 .criteres-reponses {
-  color: #273243;
+  color: $label;
   font-family: Avenir;
   font-size: 14px;
   font-weight: 900;
   line-height: 20px;
+}
+
+.sidebar-title{
+  color: $label;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 22px;
 }
 
 textarea{
@@ -196,6 +222,8 @@ textarea{
   background-color: white;
   box-shadow: -6px 0 16px 0 rgba(39,50,67,0.05);
   padding: 40px;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
 }
 
 //OLD VERSION
