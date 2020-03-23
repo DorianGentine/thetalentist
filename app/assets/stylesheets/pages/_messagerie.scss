@@ -135,13 +135,16 @@
   margin-bottom: 0;
 }
 
-#message{
+#message, #message_refus{
   color: black;
   border: none;
   background-color: transparent;
   width: 100%;
 }
-#message:focus {
+#message:disabled{
+  cursor: not-allowed;
+}
+#message:focus, #message_refus:focus {
   box-shadow: none !important;
 }
 
@@ -157,11 +160,21 @@
     color: white;
   }
 }
+.send-message-btn:disabled{
+  background-color: $lines-2;
+  cursor: not-allowed;
+  svg{
+    color: $subtitle;
+  }
+}
 .send-doc-btn {
   height: 2em;
   min-width: 1em;
   margin-top: 13px;
   color: $subtitle !important;
+}
+.send-doc-btn:disabled{
+  cursor: not-allowed;
 }
 .participant-fullname{
   color: $dark-blue;
@@ -224,6 +237,41 @@ textarea{
   padding: 40px;
   max-height: calc(100vh - 110px);
   overflow-y: auto;
+}
+
+.text-pf{
+  padding: 0 45px;
+  p{
+    color: $label;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    text-align: center;
+  }
+  .text-pf-1{
+    font-weight: 900;
+  }
+}
+.text-pf-btn{
+  margin: 0 30px;
+  border-radius: 50px;
+  border: 1px solid $green;
+  color: $green;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: .5s;
+}
+.text-pf-btn-refuser{
+  border-color: $red;
+  color: $red;
+}
+.text-pf-btn:hover{
+  background-color: $green;
+  color: white
+}
+.text-pf-btn-refuser:hover{
+  background-color: $red;
+  color: white
 }
 
 //OLD VERSION

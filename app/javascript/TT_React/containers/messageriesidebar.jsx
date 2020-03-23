@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Conversation extends Component {
   render () {
-    let conversationActive, participant, relationship, email, online
+    let conversationActive, participant, relationship, email, online, user_model
     let attachments = []
     let info = {
       image: null,
@@ -29,7 +29,8 @@ class Conversation extends Component {
       email = conversationActive.email
       online = participant.online
       attachments = conversationActive.attachments
-      if(relationship == "Accepter"){
+      user_model = participant.user_model
+      if(relationship == "Accepter" || user_model === "Headhunter"){
         info = {
           image: participant.avatar.url,
           full_name: participant.full_name,
@@ -53,12 +54,12 @@ class Conversation extends Component {
         <p className="participant-fullname margin-bottom-5">{info.full_name}</p>
         <p className="participant-job margin-bottom-5">{participant != undefined ? participant.job : ""}</p>
         <p className="participant-place"><FontAwesomeIcon icon={["fas", "map-marker-alt"]}/>{online}</p>
-        {relationship == "Accepter" && participant.user_model != "Talentist" ?
+        {relationship == "Accepter" || user_model === "Headhunter" && participant.user_model != "Talentist" ?
           <a className="profil-url margin-auto" href={info.profil_url}>
             <FontAwesomeIcon icon={["far", "user"]}/>
           </a>
         : ""}
-        {relationship != "Accepter" ? null :
+        {relationship == "Accepter" || user_model === "Headhunter" ?
           <div className="margin-top-30">
             <p className="criteres">{participant != undefined ? participant.test_1 : ""}</p>
             <p className="criteres-reponses">{info.answer_1}</p>
@@ -67,7 +68,7 @@ class Conversation extends Component {
             <p className="criteres">{participant != undefined ? participant.test_3 : ""}</p>
             <p className="criteres-reponses">{info.answer_3}</p>
           </div>
-        }
+        : null }
         <p className="sidebar-title margin-top-30">Documents échangés</p>
         <div>{attachments.length > 0 ? renderDocs() : null}</div>
         <p className="sidebar-title margin-top-30">Note personnelle</p>
