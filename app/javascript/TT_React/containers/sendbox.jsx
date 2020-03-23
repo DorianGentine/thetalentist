@@ -32,7 +32,6 @@ class SendBox extends Component {
         inRelation = true
       }
     }
-    console.log(inRelation)
 
 
     const handleOnChange = value => {
@@ -49,13 +48,11 @@ class SendBox extends Component {
 
     const sendMessage = (event) => {
       event.preventDefault()
-      let formPayLoad = new FormData();
-      formPayLoad.append('uploaded_doc', this.state.docs);
       const newMessage = {
         conversation_id: this.props.params.id,
         email: this.props.email,
         body: document.getElementById('message').value,
-        attachment: formPayLoad,
+        attachment: this.state.docs,
       }
       console.log(newMessage)
       this.props.fetchPost(
@@ -70,14 +67,31 @@ class SendBox extends Component {
     }
 
     const addDoc = acceptedFiles => {
-      this.setState({docs: this.state.docs.concat(acceptedFiles)})
+      acceptedFiles.forEach((file) => {
+        const reader = new FileReader()
+
+        reader.onabort = () => console.log('file reading was aborted')
+        reader.onerror = () => console.log('file reading has failed')
+        reader.onload = () => {
+          const binaryStr = reader.result
+          file[binaryStr] = binaryStr
+          this.setState({
+            docs: this.state.docs.concat(file),
+          })
+        }
+        reader.readAsArrayBuffer(file)
+        console.log("addState", this.state.docs)
+      })
+
     }
 
     const removeDoc = (docIndex) => {
       const checkDocs = (doc, index) => {
         return index !== docIndex
       }
-      this.setState({docs: this.state.docs.filter(checkDocs)})
+      this.setState({
+        docs: this.state.docs.filter(checkDocs),
+      })
       console.log("newState", this.state.docs)
     }
 

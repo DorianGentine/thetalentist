@@ -134,29 +134,35 @@ class Conversation extends Component {
         <div id="messages-box">
           {conversationActive != undefined ? renderMessages() : <p>Chargement...</p>}
           {conversationActive != undefined && relationship == "pending" ?
-          <div className="col-md-12 text-pf">
-            <p className="text-pf-1">Ce recruteur ne voit pas vos informations.</p>
-            <p>Vous pouvez accepter sa demande de contact et engager la conversation ou refuser cette dernière et lui envoyer un message pour lui expliquer la raison de ce refus.</p>
-            {this.state.in_relation == "Refuser" ?
-              <form>
-                <textarea
-                  name="message_refus"
-                  id="message_refus"
-                  rows="5"
-                  placeholder="Expliquer la raison de votre refus... (facultatif)"
-                  value={this.state.value}
-                  onChange={(textarea) => {handleOnChange(textarea.target.value)}}>
-                </textarea>
-                <button onClick={event => {sendMessage(event, "close")}} className="btn-envoyer gray-background">Fermer</button>
-                <button onClick={event => {sendMessage(event, "send")}} className="btn-envoyer">Envoyer</button>
-              </form>
-              :
-              <div className="flex space-between">
-                <p className="text-pf-btn" onClick={acceptRelation}>👍 Accepter</p>
-                <p className="text-pf-btn text-pf-btn-refuser" onClick={refuseBox}>👎 Refuser</p>
+            participant.user_model == "Headhunter" ?
+              <div className="col-md-12 text-pf">
+                <p className="text-pf-1">Ce recruteur ne voit pas vos informations.</p>
+                <p>Vous pouvez accepter sa demande de contact et engager la conversation ou refuser cette dernière et lui envoyer un message pour lui expliquer la raison de ce refus.</p>
+                {this.state.in_relation == "Refuser" ?
+                  <form>
+                    <textarea
+                      name="message_refus"
+                      id="message_refus"
+                      rows="5"
+                      placeholder="Expliquer la raison de votre refus... (facultatif)"
+                      value={this.state.value}
+                      onChange={(textarea) => {handleOnChange(textarea.target.value)}}>
+                    </textarea>
+                    <button onClick={event => {sendMessage(event, "close")}} className="btn-envoyer gray-background">Fermer</button>
+                    <button onClick={event => {sendMessage(event, "send")}} className="btn-envoyer">Envoyer</button>
+                  </form>
+                :
+                  <div className="flex space-between">
+                    <p className="text-pf-btn" onClick={acceptRelation}>👍 Accepter</p>
+                    <p className="text-pf-btn text-pf-btn-refuser" onClick={refuseBox}>👎 Refuser</p>
+                  </div>
+                }
               </div>
-            }
-          </div>
+            :
+              <div className="col-md-12 text-pf">
+                <p className="text-pf-1">Ce talent n'a pas encore accepté votre requête</p>
+                <p>Vous accéderez à ses informations lorsqu'il vous en aura donné l'accès</p>
+              </div>
           : null}
         </div>
         <hr className="ligne-horizontal-lines-2" style={{ marginTop: "0" }}/>
