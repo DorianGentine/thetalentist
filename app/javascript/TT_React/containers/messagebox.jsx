@@ -14,7 +14,7 @@ class messagebox extends Component {
       full_name: "Talent",
       image: null,
     }
-    if(conversation.in_relation == "Accepter"){
+    if(conversation.in_relation == "Accepter" || participant.user_model == "Headhunter"){
       infos = {
         full_name: participant.full_name,
         image: participant.avatar.url,
@@ -28,7 +28,7 @@ class messagebox extends Component {
     return(
       <div className={`message-box${conversation.conversation_id == idActive ? " active" : ""}`} onClick={changeConv}>
         {infos.image != null ? <img className="photo-conv" src={infos.image} alt="avatar"></img> : <div className="photo-conv">{infos.full_name.slice(0, 1)}</div>}
-        <div>
+        <div className="flex-grow-1">
           <div className="flex space-between">
             <p className="no-margin messagebox-title flex-grow-1">{infos.full_name}</p>
             <p className="no-margin messageriebox-subtitle">{diffTime(conversation.update_at)}</p>

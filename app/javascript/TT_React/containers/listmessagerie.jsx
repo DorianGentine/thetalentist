@@ -63,7 +63,7 @@ class listmessagerie extends Component {
         </div>
         <div className="border-lines-2">
           <p className="tous-mes-messages" onClick={dropDown}>Tous mes messages <span><FontAwesomeIcon icon={this.state.chevron}/></span></p>
-          <div className="scroll" style={{maxHeight: "calc(100vh - 357px)"}}>
+          <div className="scroll" style={{height: "calc(100vh - 354px)"}}>
             {conversations != null && conversations.length != 0 ? renderMessageBox() : <p>Chargement...</p> }
           </div>
         </div>

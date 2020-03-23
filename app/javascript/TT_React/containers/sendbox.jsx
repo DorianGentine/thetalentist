@@ -25,10 +25,14 @@ class SendBox extends Component {
   }
 
   render () {
-    let conversationActive
+    let conversationActive, inRelation = false
     if(this.props.conversationActive != undefined){
       conversationActive = this.props.conversationActive.conversation
+      if(conversationActive != undefined && conversationActive.in_relation == "Accepter"){
+        inRelation = true
+      }
     }
+    console.log(inRelation)
 
 
     const handleOnChange = value => {
@@ -36,20 +40,22 @@ class SendBox extends Component {
     }
 
     const setIntervalMessages = () => {
-      console.log("DONE")
       let intervalMessages = setInterval(() => {
         this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+        this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
       }, 1000)
       this.setState({ intervalMessages: intervalMessages })
     }
 
     const sendMessage = (event) => {
       event.preventDefault()
+      let formPayLoad = new FormData();
+      formPayLoad.append('uploaded_doc', this.state.docs);
       const newMessage = {
         conversation_id: this.props.params.id,
         email: this.props.email,
         body: document.getElementById('message').value,
-        attachment: this.state.docs
+        attachment: formPayLoad,
       }
       console.log(newMessage)
       this.props.fetchPost(
@@ -92,19 +98,20 @@ class SendBox extends Component {
             rows="5"
             placeholder="Envoyer un message..."
             value={this.state.value}
+            disabled={!inRelation}
             onChange={(textarea) => {handleOnChange(textarea.target.value)}}>
           </textarea>
           <Dropzone onDrop={acceptedFiles => addDoc(acceptedFiles)}>
             {({getRootProps, getInputProps}) => (
               <section>
                 <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <FontAwesomeIcon className="send-doc-btn" icon={["fas", "paperclip"]}/>
+                  <input {...getInputProps()} disabled={!inRelation} />
+                  <FontAwesomeIcon className="send-doc-btn" disabled={!inRelation} icon={["fas", "paperclip"]}/>
                 </div>
               </section>
             )}
           </Dropzone>
-          <button className="send-message-btn" onClick={event => {sendMessage(event)}} >
+          <button className="send-message-btn" disabled={!inRelation} onClick={event => {sendMessage(event)}} >
             <FontAwesomeIcon icon={["far", "paper-plane"]}/>
           </button>
         </form>
