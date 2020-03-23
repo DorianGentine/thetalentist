@@ -53,7 +53,7 @@ class Headhunter < ApplicationRecord
   end
 
   def his_profession
-    self.job
+    return "#{self.job} de #{self.startup.name}"
   end
   def avatar
     self.photo
