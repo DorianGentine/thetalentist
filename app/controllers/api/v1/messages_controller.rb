@@ -9,6 +9,11 @@ class Api::V1::MessagesController < ApplicationController
   def create
     @user = Talent.find_by_email(params[:email]) || Headhunter.find_by_email(params[:email]) || Talentist.find_by_email(params[:email])
     authorize @conversation
+    rela = Relationship.where(conversation_id: @conversation.id).first
+    p "RELATION IS => #{rela}"
+    rela.status = params[:in_relation]
+    rela.save
+    p "RELATION IS =========> #{rela}"
     if params[:body].present? || @user.present?
       @receipt = @user.reply_to_conversation(
         @conversation,
