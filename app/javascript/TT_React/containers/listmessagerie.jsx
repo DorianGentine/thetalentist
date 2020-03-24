@@ -27,7 +27,7 @@ class listmessagerie extends Component {
     const filterActive = this.state.filterActive
 
     const renderMessageBox = () => this.props.conversations.conversations.map((conversation, index) => {
-      if(filterActive == "Tous mes messages" ||
+      if(filterActive == "Tous mes messages" && conversation.archived == false ||
         filterActive == "Messages épinglés" && conversation.pin == true ||
         filterActive == "Messages archivés" && conversation.archived == true){
         if(this.state.value == "" ||
