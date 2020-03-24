@@ -21,16 +21,14 @@ class Conversation extends Component {
     this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
 
     const objDiv = document.getElementById("messages-box");
-    setTimeout( () => {
+    let i = 0
+    let intervalBottom = setInterval(() => {
+      i++
       objDiv.scrollTop = objDiv.scrollHeight
-      console.log(objDiv.scrollTop)
-    }, 1000);
-    // do {
-    //   console.log(this.props.conversationActive)
-    //   objDiv.scrollTop = objDiv.scrollHeight
-    //   console.log(objDiv.scrollTop)
-    // }
-    // while(this.props.conversationActive == undefined)
+      if(i > 5 || objDiv.scrollTop != 0){
+        clearInterval(intervalBottom)
+      }
+    }, 1000)
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
