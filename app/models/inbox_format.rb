@@ -39,6 +39,8 @@ class InboxFormat
   def conversation(user, conversation)
     @conversation =  conversation
     participant = (@conversation.participants - [user]).first
+    config_conv = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
+
         conversation = {
           participant: {
             id: participant.id,
@@ -60,8 +62,9 @@ class InboxFormat
           },
           attachments: files(@conversation),
           conversation_id: @conversation.id,
-          archived: nil,
-          pin: nil,
+          config_conv_id: config_conv.first.id,
+          archived: config_conv.first.archived,
+          pin: config_conv.first.pin,
           full_name: user.full_name,
           email: user.email,
           in_relation: user.witch_status?(participant),
