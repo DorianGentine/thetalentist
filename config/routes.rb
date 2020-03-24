@@ -88,6 +88,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :jobs, only: [ :index ]
       resources :relationships, only: [ :create ]
+      resources :config_conversations, only: [ :update ]
       resources :pins, only: [ :create, :destroy ]
       resources :conversations, only: [ :show, :index ] do
         collection do

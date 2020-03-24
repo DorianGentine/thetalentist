@@ -284,6 +284,9 @@ class Talent < ApplicationRecord
       talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{self.firstname} ! N'hésite pas si tu as des questions", nil, true, true, nil)
     else
       talentist.send_message(self, "Bonjour #{self.firstname}, bienvenue sur notre plateforme!", "#{self.id}")
+      conversation = Mailboxer::Conversation.between(talentist, self).first
+      ConfigConversation.create(conversation_id: conversation.id, user_id: talentist.id, user_email: talentist.email)
+      ConfigConversation.create(conversation_id: conversation.id, user_id: self.id, user_email: self.email)
       self.send_accepted
     end
   end

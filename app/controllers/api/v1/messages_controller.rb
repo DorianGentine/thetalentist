@@ -9,17 +9,21 @@ class Api::V1::MessagesController < ApplicationController
   def create
     @user = Talent.find_by_email(params[:email]) || Headhunter.find_by_email(params[:email]) || Talentist.find_by_email(params[:email])
     authorize @conversation
-    rela = Relationship.where(conversation_id: @conversation.id).first
-    p "RELATION IS => #{rela}"
-    rela.status = params[:in_relation]
-    rela.save
-    p "RELATION IS =========> #{rela}"
+    if params[:in_relation]
+      rela = Relationship.where(conversation_id: @conversation.id).first
+      rela.status = params[:in_relation]
+      rela.save
+    end
     if params[:body].present? || @user.present?
+    p "Attachment is #{params[:attachment]}"
       @receipt = @user.reply_to_conversation(
         @conversation,
         params[:body],
         params[:attachment]
         )
+      p "MESSAGE IS #{@receipt.message.attachment.url}"
+
+      # document.file = params["attachment"]
       # pour récupérer le fichier attaché :
       # receipt.message.attachment.url --> "http://res.cloudinary.com/da4nnrzbu/image/upload/v1528733299/jhwimkdrds6gs4pxhvyw.jpg"
       participant = @conversation.participants - [@user]
@@ -38,7 +42,6 @@ class Api::V1::MessagesController < ApplicationController
   private
 
   def set_conversation
-    p "CONVERSATION_ID is #{params}"
     p "CONVERSATION_ID is #{params[:conversation_id]}"
     @conversation = Mailboxer::Conversation.find(params[:conversation_id])
   end

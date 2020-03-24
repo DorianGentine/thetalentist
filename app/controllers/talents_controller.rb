@@ -21,6 +21,13 @@ class TalentsController < ApplicationController
       @talents = talents
     end
 
+
+    # A supprimer Après MEP
+    Mailboxer::Conversation.all.each do |conv|
+      ConfigConversation.find_or_create_by(conversation_id: conv.id, user_id: conv.participants.first.id, user_email:conv.participants.first.email)
+      ConfigConversation.find_or_create_by(conversation_id: conv.id, user_id: conv.participants.second.id, user_email:conv.participants.second.email)
+    end
+
     @notifications = Notification.all
   end
 

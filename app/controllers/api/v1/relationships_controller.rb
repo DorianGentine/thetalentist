@@ -10,7 +10,8 @@ class Api::V1::RelationshipsController < Api::V1::BaseController
     headhunter = @relationship.headhunter
     talent = @relationship.talent
     headhunter.send_message(talent, params[:message], "#{headhunter.firstname}")
-    @relationship.conversation_id = Mailboxer::Conversation.between(talent, headhunter).last.id
+    conversation = Mailboxer::Conversation.between(talent, headhunter).last
+    @relationship.conversation_id = conversation.id
     talent.send_invitation(headhunter)
     p "=> Message as been created and send"
     if @relationship.save
