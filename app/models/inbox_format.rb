@@ -14,7 +14,7 @@ class InboxFormat
     arra_conversations = []
     conversations.each do |conversation|
         participant = (conversation.participants - [user]).first
-        p " coucou ICI participants #{ participant }"
+        config_conv = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
         conversation = {
           participant: {
             full_name: participant.full_name,
@@ -25,8 +25,8 @@ class InboxFormat
             avatar: participant.avatar.small_bright_face,
           },
           conversation_id: conversation.id,
-          archived: participant.firstname == "Amélie" ? true : nil,
-          pin: participant.firstname == "Léonard" ? true : nil,
+          archived: config_conv.first.archived,
+          pin: config_conv.first.pin,
           in_relation: user.witch_status?(participant),
           sender: sender(conversation.last_message, user),
           unread: conversation.is_unread?(user),
@@ -52,7 +52,7 @@ class InboxFormat
             user_model: participant.class.name,
             online: participant.current_sign_in_at,
             job: participant.his_profession,
-            city: participant.class.name != "Talentist" ? participant.city : nil,
+            city: city(participant),
             avatar: participant.avatar.big_bright_face,
             phone: participant.phone,
             profil_url: participant.profil_url,
@@ -175,6 +175,16 @@ class InboxFormat
       return user.startup.year_of_creation
     else
       return "Talentist"
+    end
+  end
+
+  def city(user)
+    if user.is_a?(Talentist)
+      "Paris"
+    elsif user.is_a?(Headhunter)
+      user.startup.address
+    else
+      user.city
     end
   end
 end
