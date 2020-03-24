@@ -6,8 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { fetchGET, fetchPost } from '../actions';
 
 class Conversation extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      opened: false,
+    };
+  }
+
   render () {
-    let conversationActive, participant, relationship, email, online, user_model
+    let conversationActive, participant, relationship, email, city, user_model
     let attachments = []
     let info = {
       image: null,
@@ -16,7 +23,6 @@ class Conversation extends Component {
       answer_2: "Tu n'y as pas encore accès",
       answer_3: "Tu n'y as pas encore accès",
       profil_url: "",
-      // phone: null,
     }
 
     if(this.props.conversationActive != null){
@@ -27,7 +33,7 @@ class Conversation extends Component {
       participant = conversationActive.participant
       relationship = conversationActive.in_relation
       email = conversationActive.email
-      online = participant.online
+      city = participant.city
       attachments = conversationActive.attachments
       user_model = participant.user_model
       if(relationship == "Accepter" || user_model === "Headhunter"){
@@ -38,22 +44,48 @@ class Conversation extends Component {
           answer_2: participant.answer_2,
           answer_3: participant.answer_3,
           profil_url: participant.profil_url,
-          // phone: participant.phone,
         }
       }
     }
 
     const renderDocs = () => attachments.map((attachment, index) => <p key={index}><FontAwesomeIcon icon={["far", "file"]}/></p>)
 
+    const openDropdown = () => {
+      if(this.state.opened){
+        this.setState({opened: false})
+      }else{
+        this.setState({opened: true})
+        window.onClick = () => {
+          this.setState({opened: false})
+        }
+      }
+    }
 
-   return(
-      <div className="col-md-3 white-box">
+    const pin = () => {
+      console.log('To do: épingler')
+    }
+    const archive = () => {
+      console.log('To do: archiver')
+    }
+
+
+    return(
+      <div className="col-md-3 white-box relative">
+        <p className="absolute more-messagerie" onClick={openDropdown}>...</p>
+        {this.state.opened ?
+          <div className="absolute dropdown-tsmesmsg position-more">
+            <p onClick={pin}>Épingler</p>
+            <p onClick={archive}>Archiver</p>
+          </div>
+        : null}
         <div className="flex justify-center margin-bottom-30">
           {info.image != null ? <img className="photo-conv photo-conv-lg" src={info.image} alt="avatar"></img> : <div className="photo-conv photo-conv-lg">{info.full_name.slice(0, 1)}</div>}
         </div>
         <p className="participant-fullname margin-bottom-5">{info.full_name}</p>
         <p className="participant-job margin-bottom-5">{participant != undefined ? participant.job : ""}</p>
-        <p className="participant-place"><FontAwesomeIcon icon={["fas", "map-marker-alt"]}/>{online}</p>
+        {city != null ?
+          <p className="participant-place"><FontAwesomeIcon icon={["fas", "map-marker-alt"]}/>{city}</p>
+        : null }
         {relationship == "Accepter" || user_model === "Headhunter" && participant.user_model != "Talentist" ?
           <a className="profil-url margin-auto" href={info.profil_url}>
             <FontAwesomeIcon icon={["far", "user"]}/>
