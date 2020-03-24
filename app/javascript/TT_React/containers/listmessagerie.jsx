@@ -27,7 +27,7 @@ class listmessagerie extends Component {
     const filterActive = this.state.filterActive
 
     const renderMessageBox = () => this.props.conversations.conversations.map((conversation, index) => {
-      if(filterActive == "Tous mes messages" ||
+      if(filterActive == "Tous mes messages" && conversation.archived == false ||
         filterActive == "Messages épinglés" && conversation.pin == true ||
         filterActive == "Messages archivés" && conversation.archived == true){
         if(this.state.value == "" ||
@@ -35,17 +35,6 @@ class listmessagerie extends Component {
           return <MessageBox conversation={conversation} idActive={this.props.params.id} key={index} />
         }
       }
-      // else if(filterActive == "Messages épinglés" && conversation.pin == true){
-      //   if(this.state.value == "" ||
-      //     conversation.participant.full_name.toLowerCase().includes(this.state.value.toLowerCase()) && conversation.in_relation == "Accepter"){
-      //     return <MessageBox conversation={conversation} idActive={this.props.params.id} key={index} />
-      //   }
-      // }else if(filterActive == "Messages archivés" && conversation.archived == true){
-      //   if(this.state.value == "" ||
-      //     conversation.participant.full_name.toLowerCase().includes(this.state.value.toLowerCase()) && conversation.in_relation == "Accepter"){
-      //     return <MessageBox conversation={conversation} idActive={this.props.params.id} key={index} />
-      //   }
-      // }
     })
 
     const handleOnChange = value => {

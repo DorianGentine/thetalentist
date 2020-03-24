@@ -3,18 +3,27 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// import { fetchGET, fetchPost } from '../actions';
+import { fetchPost, fetchGET } from '../actions';
 
 class Conversation extends Component {
   constructor(props) {
     super(props)
     this.state = {
       opened: false,
+      intervalMessages: null,
     };
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if(this.props.conversationActive.conversation != undefined && this.props.conversationActive.conversation.pin != nextProps.conversationActive.conversation.pin ||
+      this.props.conversationActive.conversation != undefined && this.props.conversationActive.conversation.archived != nextProps.conversationActive.conversation.archived){
+      clearInterval(this.state.intervalMessages)
+      this.setState({ intervalMessages: null })
+    }
+  }
+
   render () {
-    let conversationActive, participant, relationship, email, city, user_model
+    let conversationActive, participant, relationship, email, city, user_model, config_conv_id, pin, archived
     let attachments = []
     let info = {
       image: null,
@@ -36,6 +45,9 @@ class Conversation extends Component {
       city = participant.city
       attachments = conversationActive.attachments
       user_model = participant.user_model
+      config_conv_id = conversationActive.config_conv_id
+      pin = conversationActive.pin
+      archived = conversationActive.archived
       if(relationship == "Accepter" || user_model === "Headhunter"){
         info = {
           image: participant.avatar.url,
@@ -61,11 +73,39 @@ class Conversation extends Component {
       }
     }
 
-    const pin = () => {
-      console.log('To do: épingler')
+    const setIntervalMessages = () => {
+      let intervalMessages = setInterval(() => {
+        this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+        this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
+      }, 1000)
+      this.setState({ intervalMessages: intervalMessages })
     }
-    const archive = () => {
-      console.log('To do: archiver')
+
+    const handlePin = () => {
+      const newConfig = {
+        config_conversation: {pin: !pin},
+        email: email,
+      }
+      console.log(newConfig)
+      this.props.fetchPost(
+        `/api/v1/config_conversations/${config_conv_id}`,
+        newConfig,
+        "PATCH",
+        setIntervalMessages()
+      )
+    }
+    const handleArchive = () => {
+      const newConfig = {
+        config_conversation: {archived: !archived},
+        email: email,
+      }
+      console.log(newConfig)
+      this.props.fetchPost(
+        `/api/v1/config_conversations/${config_conv_id}`,
+        newConfig,
+        "PATCH",
+        setIntervalMessages()
+      )
     }
 
 
@@ -74,8 +114,8 @@ class Conversation extends Component {
         <p className="absolute more-messagerie" onClick={openDropdown}>...</p>
         {this.state.opened ?
           <div className="absolute dropdown-tsmesmsg position-more">
-            <p onClick={pin}>Épingler</p>
-            <p onClick={archive}>Archiver</p>
+            <p onClick={handlePin}>{pin ? "Enlever" : "Épingler"}</p>
+            <p onClick={handleArchive}>{archived ? "Rétablir" : "Archiver"}</p>
           </div>
         : null}
         <div className="flex justify-center margin-bottom-30">
@@ -115,8 +155,8 @@ function mapStateToProps(state) {
   };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ fetchGET, fetchPost }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchPost, fetchGET }, dispatch);
+}
 
-export default connect(mapStateToProps, null)(Conversation);
+export default connect(mapStateToProps, mapDispatchToProps)(Conversation);
