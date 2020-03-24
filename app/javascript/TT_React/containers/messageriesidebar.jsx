@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// import { fetchGET, fetchPost } from '../actions';
+import { fetchPost } from '../actions';
 
 class Conversation extends Component {
   constructor(props) {
@@ -62,7 +62,19 @@ class Conversation extends Component {
     }
 
     const pin = () => {
-      console.log('To do: épingler')
+      const newConfig = {
+        conversation_id: this.props.params.id,
+        email: this.props.email,
+        body: document.getElementById('message').value,
+        attachment: this.state.docs,
+      }
+      this.props.fetchPost(
+        `/api/v1/config_conversations/45`
+        `/api/v1/conversations/${this.props.params.id}/messages`,
+        newConfig,
+        "PATCH",
+        setIntervalMessages()
+      )
     }
     const archive = () => {
       console.log('To do: archiver')
@@ -115,8 +127,8 @@ function mapStateToProps(state) {
   };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ fetchGET, fetchPost }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchPost }, dispatch);
+}
 
-export default connect(mapStateToProps, null)(Conversation);
+export default connect(mapStateToProps, mapDispatchToProps)(Conversation);
