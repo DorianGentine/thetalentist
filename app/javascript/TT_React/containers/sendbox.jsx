@@ -53,8 +53,8 @@ class SendBox extends Component {
       event.preventDefault()
       if(this.state.docs.length != 0){
         const newConfig = {
-          // email: this.props.email,
-          files: this.state.docs,
+          email: this.props.email,
+          config_conversation: this.state.docsPath,
         }
         console.log(newConfig)
         this.props.fetchPost(
@@ -77,16 +77,29 @@ class SendBox extends Component {
           "POST",
           setIntervalMessages()
         )
-        this.setState({
-          value: "",
-        })
       }
+      this.setState({
+        value: "",
+        docs: [],
+      })
     }
 
     const addDoc = acceptedFiles => {
-      acceptedFiles.forEach((file) => {
+      console.log(acceptedFiles)
+      acceptedFiles.forEach((fichier) => {
+        const reader = new FileReader()
+        reader.onabort = () => console.log('file reading was aborted')
+        reader.onerror = () => console.log('file reading has failed')
+        reader.onload = () => {
+          const binaryStr = reader.result
+          console.log(binaryStr)
+          fichier[binaryStr] = binaryStr
+        }
+        reader.readAsArrayBuffer(fichier)
+        const filePath = fichier.path
+        console.log(filePath)
         this.setState({
-          docs: this.state.docs.concat(file),
+          docs: this.state.docs.concat(fichier),
         })
       })
 
@@ -108,19 +121,19 @@ class SendBox extends Component {
       this.setState({
         docs: this.state.docs.filter(checkDocs),
       })
-      console.log("newState", this.state.docs)
     }
 
     const renderDocs = () => this.state.docs.map((doc, index) => {
-      const name = doc.name
       return <div className="flex space-between" key={index}>
-        <p>{name}</p>
+        <p>{doc.name}</p>
         <FontAwesomeIcon onClick={() => removeDoc(index)} icon={["far", "times-circle"]} />
       </div>
     })
 
     return(
       <div>
+        {renderDocs()}
+        {this.state.docs.length != 0 ? <hr className="ligne-horizontal-lines-2" style={{ marginTop: "0", marginBottom: "0" }}/> : null}
         <form className="flex space-between">
           <textarea
             name="message"
@@ -145,7 +158,6 @@ class SendBox extends Component {
             <FontAwesomeIcon icon={["far", "paper-plane"]}/>
           </button>
         </form>
-        {renderDocs()}
       </div>
     );
   }

@@ -110,7 +110,7 @@ class Conversation extends Component {
 
 
     return(
-      <div className="col-md-3 white-box relative">
+      <div className="col-md-3 white-box relative" style={{maxWidth: "294px"}}>
         <p className="absolute more-messagerie" onClick={openDropdown}>...</p>
         {this.state.opened ?
           <div className="absolute dropdown-tsmesmsg position-more">
@@ -133,12 +133,24 @@ class Conversation extends Component {
         : ""}
         {relationship == "Accepter" || user_model === "Headhunter" ?
           <div className="margin-top-30">
-            <p className="criteres">{participant != undefined ? participant.test_1 : ""}</p>
-            <p className="criteres-reponses">{info.answer_1}</p>
-            <p className="criteres">{participant != undefined ? participant.test_2 : ""}</p>
-            <p className="criteres-reponses">{info.answer_2}</p>
-            <p className="criteres">{participant != undefined ? participant.test_3 : ""}</p>
-            <p className="criteres-reponses">{info.answer_3}</p>
+            {info.answer_1 != null ?
+              <div>
+                <p className="criteres">{participant != undefined ? participant.test_1 : ""}</p>
+                <p className="criteres-reponses">{info.answer_1}</p>
+              </div>
+            : null }
+            {info.answer_2 != null ?
+              <div>
+                <p className="criteres">{participant != undefined ? participant.test_2 : ""}</p>
+                <p className="criteres-reponses">{info.answer_2}</p>
+              </div>
+            : null }
+            {info.answer_3 != null ?
+              <div>
+                <p className="criteres">{participant != undefined ? participant.test_3 : ""}</p>
+                <p className="criteres-reponses">{info.answer_3}</p>
+              </div>
+            : null }
           </div>
         : null }
         <p className="sidebar-title margin-top-30">Documents échangés</p>
