@@ -115,15 +115,16 @@ class SendBox extends Component {
     }
 
     const renderDocs = () => this.state.docs.map((doc, index) => {
-      const name = doc.name
       return <div className="flex space-between" key={index}>
-        <p>{name}</p>
+        <p>{doc.name}</p>
         <FontAwesomeIcon onClick={() => removeDoc(index)} icon={["far", "times-circle"]} />
       </div>
     })
 
     return(
       <div>
+        {renderDocs()}
+        {this.state.docs.length != 0 ? <hr className="ligne-horizontal-lines-2" style={{ marginTop: "0", marginBottom: "0" }}/> : null}
         <form className="flex space-between">
           <textarea
             name="message"
@@ -148,7 +149,6 @@ class SendBox extends Component {
             <FontAwesomeIcon icon={["far", "paper-plane"]}/>
           </button>
         </form>
-        {renderDocs()}
       </div>
     );
   }
