@@ -41,8 +41,7 @@ class InboxFormat
   def conversation(user, conversation)
     @conversation =  conversation
     participant = (@conversation.participants - [user]).first
-    config_conv = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
-
+    config_conv = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email).first
         conversation = {
           participant: {
             id: participant.id,
@@ -63,11 +62,11 @@ class InboxFormat
             test_3: question_3(participant),
             answer_3: answer_3(participant),
           },
-          attachments: files(@conversation),
+          attachments: files(config_conv),
           conversation_id: @conversation.id,
-          config_conv_id: config_conv.first.id,
-          archived: config_conv.first.archived,
-          pin: config_conv.first.pin,
+          config_conv_id: config_conv.id,
+          archived: config_conv.archived,
+          pin: config_conv.pin,
           full_name: user.full_name,
           email: user.email,
           in_relation: user.witch_status?(participant),
@@ -99,15 +98,14 @@ class InboxFormat
       return message.sender_type.constantize.find(message.sender_id).firstname
     end
   end
-  def files(conversation)
-    files_send = []
-    conversation.messages.each do |message|
-      if message.attachment.url.present?
-        files_send << attachment.url
-      end
+  def files(config_conv)
+    config_conv.files.map do |file|
+      {name: file.filename,
+      url: "https://res.cloudinary.com/da4nnrzbu/image/upload/#{file.key}"
+      }
     end
-    return files_send
   end
+
 
   def question_1(user)
     if user.is_a?(Talent)
