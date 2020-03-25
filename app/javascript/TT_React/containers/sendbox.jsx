@@ -25,9 +25,12 @@ class SendBox extends Component {
   }
 
   render () {
-    let conversationActive, inRelation = false
+    let conversationActive, inRelation = false, config_conv_id
     if(this.props.conversationActive != undefined){
       conversationActive = this.props.conversationActive.conversation
+      if(conversationActive != undefined){
+        config_conv_id = conversationActive.config_conv_id
+      }
       if(conversationActive != undefined && conversationActive.in_relation == "Accepter"){
         inRelation = true
       }
@@ -48,22 +51,36 @@ class SendBox extends Component {
 
     const sendMessage = (event) => {
       event.preventDefault()
-      const newMessage = {
-        conversation_id: this.props.params.id,
-        email: this.props.email,
-        body: document.getElementById('message').value,
-        attachment: this.state.docs,
+      if(this.state.docs.length != 0){
+        const newConfig = {
+          email: this.props.email,
+          config_conversation: this.state.docs,
+        }
+        console.log(newConfig)
+        this.props.fetchPost(
+          `/api/v1/config_conversations/${config_conv_id}`,
+          newConfig,
+          "PATCH",
+          setIntervalMessages()
+        )
       }
-      console.log(newMessage)
-      this.props.fetchPost(
-        `/api/v1/conversations/${this.props.params.id}/messages`,
-        newMessage,
-        "POST",
-        setIntervalMessages()
-      )
-      this.setState({
-        value: "",
-      })
+      if(this.state.value != ""){
+        const newMessage = {
+          conversation_id: this.props.params.id,
+          email: this.props.email,
+          body: this.state.value,
+        }
+        console.log(newMessage)
+        this.props.fetchPost(
+          `/api/v1/conversations/${this.props.params.id}/messages`,
+          newMessage,
+          "POST",
+          setIntervalMessages()
+        )
+        this.setState({
+          value: "",
+        })
+      }
     }
 
     const addDoc = acceptedFiles => {
