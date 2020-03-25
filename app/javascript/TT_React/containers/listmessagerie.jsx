@@ -64,7 +64,7 @@ class listmessagerie extends Component {
     }
 
     return(
-      <div className="col-md-4">
+      <div className="col-md-4" style={{maxWidth: "392px"}}>
         <h3 className="messagerie-title">Messagerie</h3>
         <div className="input-icon no-background">
           <FontAwesomeIcon icon={["fas", "search"]}/>

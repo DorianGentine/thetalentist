@@ -110,7 +110,7 @@ class Conversation extends Component {
 
 
     return(
-      <div className="col-md-3 white-box relative">
+      <div className="col-md-3 white-box relative" style={{maxWidth: "294px"}}>
         <p className="absolute more-messagerie" onClick={openDropdown}>...</p>
         {this.state.opened ?
           <div className="absolute dropdown-tsmesmsg position-more">

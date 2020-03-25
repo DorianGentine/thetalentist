@@ -54,7 +54,7 @@ class SendBox extends Component {
       if(this.state.docs.length != 0){
         const newConfig = {
           email: this.props.email,
-          config_conversation: this.state.docs,
+          config_conversation: this.state.docsPath,
         }
         console.log(newConfig)
         this.props.fetchPost(
@@ -77,27 +77,30 @@ class SendBox extends Component {
           "POST",
           setIntervalMessages()
         )
-        this.setState({
-          value: "",
-        })
       }
+      this.setState({
+        value: "",
+        docs: [],
+      })
     }
 
     const addDoc = acceptedFiles => {
-      acceptedFiles.forEach((file) => {
+      console.log(acceptedFiles)
+      acceptedFiles.forEach((fichier) => {
         const reader = new FileReader()
-
         reader.onabort = () => console.log('file reading was aborted')
         reader.onerror = () => console.log('file reading has failed')
         reader.onload = () => {
           const binaryStr = reader.result
-          file[binaryStr] = binaryStr
-          this.setState({
-            docs: this.state.docs.concat(file),
-          })
+          console.log(binaryStr)
+          fichier[binaryStr] = binaryStr
         }
-        reader.readAsArrayBuffer(file)
-        console.log("addState", this.state.docs)
+        reader.readAsArrayBuffer(fichier)
+        const filePath = fichier.path
+        console.log(filePath)
+        this.setState({
+          docs: this.state.docs.concat(fichier),
+        })
       })
 
     }
@@ -109,7 +112,6 @@ class SendBox extends Component {
       this.setState({
         docs: this.state.docs.filter(checkDocs),
       })
-      console.log("newState", this.state.docs)
     }
 
     const renderDocs = () => this.state.docs.map((doc, index) => {
