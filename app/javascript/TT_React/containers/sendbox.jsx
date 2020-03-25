@@ -61,7 +61,7 @@ class SendBox extends Component {
           `/api/v1/config_conversations/${config_conv_id}`,
           newConfig,
           "PATCH",
-          // setIntervalMessages()
+          setIntervalMessages()
         )
       }
       if(this.state.value != ""){
@@ -84,37 +84,28 @@ class SendBox extends Component {
       })
     }
 
+    const messagesBox = document.getElementById('messages-box')
     const addDoc = acceptedFiles => {
-      console.log(acceptedFiles)
+      messagesBox.style.maxHeight = `calc(100vh - ${351 + ((acceptedFiles.length + this.state.docs.length) * 30)}px)`;
       acceptedFiles.forEach((fichier) => {
         const reader = new FileReader()
         reader.onabort = () => console.log('file reading was aborted')
         reader.onerror = () => console.log('file reading has failed')
         reader.onload = () => {
           const binaryStr = reader.result
-          console.log(binaryStr)
           fichier[binaryStr] = binaryStr
         }
         reader.readAsArrayBuffer(fichier)
         const filePath = fichier.path
-        console.log(filePath)
         this.setState({
           docs: this.state.docs.concat(fichier),
         })
       })
 
-        // const reader = new FileReader()
-        // reader.onabort = () => console.log('file reading was aborted')
-        // reader.onerror = () => console.log('file reading has failed')
-        // reader.onload = () => {
-        //   const binaryStr = reader.result
-        //   file[binaryStr] = binaryStr
-        // }
-        // reader.readAsArrayBuffer(file)
-        // console.log("addState", this.state.docs)
-
     }
+
     const removeDoc = (docIndex) => {
+      messagesBox.style.maxHeight = `calc(100vh - ${351 + ((this.state.docs.length - 1) * 30)}px)`;
       const checkDocs = (doc, index) => {
         return index !== docIndex
       }
@@ -124,16 +115,29 @@ class SendBox extends Component {
     }
 
     const renderDocs = () => this.state.docs.map((doc, index) => {
-      return <div className="flex space-between" key={index}>
+      return <div className="flex space-between doc-sending" key={index}>
         <p>{doc.name}</p>
         <FontAwesomeIcon onClick={() => removeDoc(index)} icon={["far", "times-circle"]} />
       </div>
     })
 
+    if(this.state.docs.length != 0){
+      const divdoc = document.getElementById('doc-to-send')
+      setTimeout(() => {
+        messagesBox.style.maxHeight = `calc(100vh - ${351 + divdoc.offsetHeight}px)`;
+      }, 501)
+    }else{
+      setTimeout(() => {
+        messagesBox.style.maxHeight = "calc(100vh - 350px)";
+      }, 501)
+    }
+
     return(
       <div>
-        {renderDocs()}
-        {this.state.docs.length != 0 ? <hr className="ligne-horizontal-lines-2" style={{ marginTop: "0", marginBottom: "0" }}/> : null}
+        <div id="doc-to-send">
+          {renderDocs()}
+        </div>
+        {this.state.docs.length != 0 ? <hr className="ligne-horizontal-lines-2 no-margin" /> : null}
         <form className="flex space-between">
           <textarea
             name="message"
