@@ -53,15 +53,15 @@ class SendBox extends Component {
       event.preventDefault()
       if(this.state.docs.length != 0){
         const newConfig = {
-          email: this.props.email,
-          config_conversation: this.state.docs,
+          // email: this.props.email,
+          files: this.state.docs,
         }
         console.log(newConfig)
         this.props.fetchPost(
           `/api/v1/config_conversations/${config_conv_id}`,
           newConfig,
           "PATCH",
-          setIntervalMessages()
+          // setIntervalMessages()
         )
       }
       if(this.state.value != ""){
@@ -85,23 +85,22 @@ class SendBox extends Component {
 
     const addDoc = acceptedFiles => {
       acceptedFiles.forEach((file) => {
-        const reader = new FileReader()
-
-        reader.onabort = () => console.log('file reading was aborted')
-        reader.onerror = () => console.log('file reading has failed')
-        reader.onload = () => {
-          const binaryStr = reader.result
-          file[binaryStr] = binaryStr
-          this.setState({
-            docs: this.state.docs.concat(file),
-          })
-        }
-        reader.readAsArrayBuffer(file)
-        console.log("addState", this.state.docs)
+        this.setState({
+          docs: this.state.docs.concat(file),
+        })
       })
 
-    }
+        // const reader = new FileReader()
+        // reader.onabort = () => console.log('file reading was aborted')
+        // reader.onerror = () => console.log('file reading has failed')
+        // reader.onload = () => {
+        //   const binaryStr = reader.result
+        //   file[binaryStr] = binaryStr
+        // }
+        // reader.readAsArrayBuffer(file)
+        // console.log("addState", this.state.docs)
 
+    }
     const removeDoc = (docIndex) => {
       const checkDocs = (doc, index) => {
         return index !== docIndex
