@@ -61,7 +61,7 @@ class SendBox extends Component {
           `/api/v1/config_conversations/${config_conv_id}`,
           newConfig,
           "PATCH",
-          setIntervalMessages()
+          // setIntervalMessages()
         )
       }
       if(this.state.value != ""){
@@ -103,8 +103,17 @@ class SendBox extends Component {
         })
       })
 
-    }
+        // const reader = new FileReader()
+        // reader.onabort = () => console.log('file reading was aborted')
+        // reader.onerror = () => console.log('file reading has failed')
+        // reader.onload = () => {
+        //   const binaryStr = reader.result
+        //   file[binaryStr] = binaryStr
+        // }
+        // reader.readAsArrayBuffer(file)
+        // console.log("addState", this.state.docs)
 
+    }
     const removeDoc = (docIndex) => {
       const checkDocs = (doc, index) => {
         return index !== docIndex

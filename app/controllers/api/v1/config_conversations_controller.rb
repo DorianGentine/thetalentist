@@ -21,6 +21,8 @@ class Api::V1::ConfigConversationsController < Api::V1::BaseController
 
 
   def config_conversation_params
+    p "////////////// #{params[:config_conversation]}"
+
     params.permit(:pin, :archived, {files: []})
     # params.require(:config_conversation).permit(:pin, :archived, {files: []})
   end
