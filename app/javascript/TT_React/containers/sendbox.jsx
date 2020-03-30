@@ -122,7 +122,9 @@ class SendBox extends Component {
     }
 
     const renderDocs = () => this.state.docs.map((doc, index) => {
-      return <div className="flex space-between doc-sending" key={index}>
+      return <div className="flex space-between doc-sending relative" key={index}>
+        <div className="background-doc-sending"></div>
+        <FontAwesomeIcon className="margin-right-5" icon={["fas", "file"]} />
         <p>{doc.name}</p>
         <FontAwesomeIcon onClick={() => removeDoc(index)} icon={["far", "times-circle"]} />
       </div>
@@ -140,11 +142,11 @@ class SendBox extends Component {
     }
 
     return(
-      <div>
+      <div className="absolute" style={{bottom: "0px", left: "15px", right: "15px"}}>
         <div id="doc-to-send">
           {renderDocs()}
         </div>
-        {this.state.docs.length != 0 ? <hr className="ligne-horizontal-lines-2 no-margin" /> : null}
+        <hr className="ligne-horizontal-lines-2" style={{ marginTop: "0" }}/>
         <form className="flex space-between">
           <textarea
             name="message"
