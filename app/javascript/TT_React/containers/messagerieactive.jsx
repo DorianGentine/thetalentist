@@ -175,7 +175,6 @@ class Conversation extends Component {
               </div>
           : null}
         </div>
-        <hr className="ligne-horizontal-lines-2" style={{ marginTop: "0" }}/>
         <SendBox params={this.props.params} email={email} />
 
       </div>
