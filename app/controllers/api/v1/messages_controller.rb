@@ -21,7 +21,7 @@ class Api::V1::MessagesController < ApplicationController
         params[:body],
         params[:attachment]
         )
-      p "MESSAGE IS #{@receipt.message.attachment.url}"
+      p "MESSAGE IS #{@receipt.message.attachment}"
 
       # document.file = params["attachment"]
       # pour récupérer le fichier attaché :
