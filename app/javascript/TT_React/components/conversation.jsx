@@ -13,7 +13,7 @@ class Conversation extends Component {
 
   render () {
     return(
-      <div className="container">
+      <div className="flex">
         <ListMessagerie params={this.props.match.params} />
         <MessagerieActive params={this.props.match.params} />
         <MessagerieSideBar params={this.props.match.params} />

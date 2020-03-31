@@ -39,6 +39,8 @@ import '../TT_React/index.jsx';
 
 import '../components/renderDate';
 
+import '../components/customScrollBar';
+
 import { revealModal } from "../components/modal";
 revealModal();
 

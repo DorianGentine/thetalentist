@@ -68,9 +68,16 @@ class Conversation extends Component {
     }
 
     const setIntervalMessages = () => {
+      let i = 0
       let intervalMessages = setInterval(() => {
+        i++
         this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
         this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
+        console.log(i)
+        if(i > 4){
+          clearInterval(this.state.intervalMessages)
+          this.setState({ intervalMessages: null })
+        }
       }, 1000)
       this.setState({ intervalMessages: intervalMessages })
     }
@@ -120,7 +127,7 @@ class Conversation extends Component {
     }
 
     return(
-      <div className="col-md-5" style={{paddingTop: "56px"}}>
+      <div className="col-md-5 flex-grow-1 flex-column" style={{paddingTop: "56px"}}>
         <div className="flex align-items-center">
           {info.image != null ? <img className="photo-conv" src={info.image} alt="avatar"></img> : <div className="photo-conv">{info.full_name.slice(0, 1)}</div>}
           <div className="flex-grow-1">
@@ -129,7 +136,12 @@ class Conversation extends Component {
           </div>
         </div>
         <hr className="ligne-horizontal-lines-2" style={{ marginBottom: "0" }}/>
-        <div id="messages-box">
+        <div id="messages-box" className="flex-grow-1 scroll">
+          <div className="col-md-12 text-pf">
+            <p style={{fontSize: "30px"}}>👋</p>
+            <p className="text-pf-1">Bienvenue dans votre espace messagerie!</p>
+            <p className="margin-bottom-45">Centralisez tous vos échanges et documents. Vous conservez ainsi en un seul endroit l’historique de votre relation.</p>
+          </div>
           {conversationActive != undefined ? renderMessages() : <p>Chargement...</p>}
           {conversationActive != undefined && relationship == "pending" ?
             participant.user_model == "Headhunter" ?
@@ -163,7 +175,6 @@ class Conversation extends Component {
               </div>
           : null}
         </div>
-        <hr className="ligne-horizontal-lines-2" style={{ marginTop: "0" }}/>
         <SendBox params={this.props.params} email={email} />
 
       </div>
