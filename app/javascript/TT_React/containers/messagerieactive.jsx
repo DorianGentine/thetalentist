@@ -136,7 +136,7 @@ class Conversation extends Component {
           </div>
         </div>
         <hr className="ligne-horizontal-lines-2" style={{ marginBottom: "0" }}/>
-        <div id="messages-box" className="flex-grow-1">
+        <div id="messages-box" className="flex-grow-1 scroll">
           <div className="col-md-12 text-pf">
             <p style={{fontSize: "30px"}}>👋</p>
             <p className="text-pf-1">Bienvenue dans votre espace messagerie!</p>

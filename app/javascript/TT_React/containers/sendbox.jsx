@@ -135,7 +135,7 @@ class SendBox extends Component {
       setTimeout(() => {
         messagesBox.style.maxHeight = `calc(100vh - ${351 + divdoc.offsetHeight}px)`;
       }, 501)
-    }else{
+    }else if(messagesBox != null){
       setTimeout(() => {
         messagesBox.style.maxHeight = "calc(100vh - 350px)";
       }, 501)
