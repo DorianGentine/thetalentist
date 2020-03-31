@@ -83,7 +83,7 @@ class Conversation extends Component {
 
     const handlePin = () => {
       const newConfig = {
-        config_conversation: {pin: !pin},
+        pin: !pin,
         email: email,
       }
       console.log(newConfig)
@@ -96,7 +96,7 @@ class Conversation extends Component {
     }
     const handleArchive = () => {
       const newConfig = {
-        config_conversation: {archived: !archived},
+        archived: !archived,
         email: email,
       }
       console.log(newConfig)
