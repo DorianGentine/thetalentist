@@ -7,6 +7,36 @@
   font-size: 18px;
 }
 
+//scrollBar
+::-webkit-scrollbar {
+  width: 0;
+  transition: .5s
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $gray;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $dark-gray;
+}
+
+.on-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.scroll{
+  scrollbar-gutter: always;
+}
+
+
 // Bordure
   .bordure-droite{
     border-right: 1px solid $gray;

@@ -74,9 +74,16 @@ class Conversation extends Component {
     }
 
     const setIntervalMessages = () => {
+      let i = 0
       let intervalMessages = setInterval(() => {
+        i++
         this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
         this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
+        console.log(i)
+        if(i > 4){
+          clearInterval(this.state.intervalMessages)
+          this.setState({ intervalMessages: null })
+        }
       }, 1000)
       this.setState({ intervalMessages: intervalMessages })
     }
@@ -110,7 +117,7 @@ class Conversation extends Component {
 
 
     return(
-      <div className="col-md-3 white-box relative" style={{maxWidth: "294px"}}>
+      <div className="col-md-3 white-box relative scroll" style={{maxWidth: "294px"}}>
         <p className="absolute more-messagerie" onClick={openDropdown}>...</p>
         {this.state.opened ?
           <div className="absolute dropdown-tsmesmsg position-more">

@@ -68,9 +68,16 @@ class Conversation extends Component {
     }
 
     const setIntervalMessages = () => {
+      let i = 0
       let intervalMessages = setInterval(() => {
+        i++
         this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
         this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
+        console.log(i)
+        if(i > 4){
+          clearInterval(this.state.intervalMessages)
+          this.setState({ intervalMessages: null })
+        }
       }, 1000)
       this.setState({ intervalMessages: intervalMessages })
     }
@@ -129,7 +136,7 @@ class Conversation extends Component {
           </div>
         </div>
         <hr className="ligne-horizontal-lines-2" style={{ marginBottom: "0" }}/>
-        <div id="messages-box" className="flex-grow-1">
+        <div id="messages-box" className="flex-grow-1 scroll">
           <div className="col-md-12 text-pf">
             <p style={{fontSize: "30px"}}>👋</p>
             <p className="text-pf-1">Bienvenue dans votre espace messagerie!</p>
@@ -168,7 +175,6 @@ class Conversation extends Component {
               </div>
           : null}
         </div>
-        <hr className="ligne-horizontal-lines-2" style={{ marginTop: "0" }}/>
         <SendBox params={this.props.params} email={email} />
 
       </div>

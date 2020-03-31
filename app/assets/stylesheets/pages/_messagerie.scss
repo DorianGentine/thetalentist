@@ -123,9 +123,10 @@
 }
 
 #messages-box{
-  max-height: calc(100vh - 350px);
+  // max-height: calc(100vh - 350px);
   overflow-y: scroll;
   padding: 30px 0;
+  transition: .5s;
 }
 
 .message-left-position {
@@ -167,6 +168,43 @@
   font-weight: 500;
   line-height: 16px;
   margin-bottom: 0;
+}
+
+.doc-sending{
+  overflow-y: hidden;
+  padding: 10px;
+  border-radius: 2px;
+  background-color: #2C3167;
+  animation: apparition .5s ease-out;
+  p{
+    flex-grow: 1;
+    margin: 0;
+    color: white;
+    z-index: 1;
+  }
+  svg{
+    color: white;
+    z-index: 1;
+  }
+}
+@keyframes apparition {
+  0% {max-height: 0}
+  100% {max-height: 100px}
+}
+.background-doc-sending{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  background-color: $violet;
+  border-radius: 2px;
+  animation: fill 2s ease-out;
+}
+@keyframes fill {
+  0% {width: 0}
+  100% {width: 100%}
 }
 
 #message, #message_refus{
