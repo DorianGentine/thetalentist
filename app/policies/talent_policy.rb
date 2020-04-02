@@ -29,6 +29,10 @@ class TalentPolicy < ApplicationPolicy
     true
   end
 
+  def navbar?
+    true
+  end
+
   def show?
     if user.is_a?(Headhunter)
       Relationship.where(talent: record).where(headhunter: user).where(status: "Accepter").first.present?

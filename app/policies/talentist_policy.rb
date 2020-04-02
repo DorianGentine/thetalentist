@@ -29,6 +29,10 @@ class TalentistPolicy < ApplicationPolicy
     user == record
   end
 
+  def navbar?
+    true
+  end
+
   def analytics?
     user == record
   end
