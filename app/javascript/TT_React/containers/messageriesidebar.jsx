@@ -134,9 +134,7 @@ class Conversation extends Component {
           <p className="participant-place"><FontAwesomeIcon icon={["fas", "map-marker-alt"]}/>{city}</p>
         : null }
         {relationship == "Accepter" || user_model === "Headhunter" && participant.user_model != "Talentist" ?
-          <a className="profil-url margin-auto" href={info.profil_url}>
-            <FontAwesomeIcon icon={["far", "user"]}/>
-          </a>
+          <a className="profil-url" href={info.profil_url}>Voir le profil</a>
         : ""}
         {relationship == "Accepter" || user_model === "Headhunter" ?
           <div className="margin-top-30">
