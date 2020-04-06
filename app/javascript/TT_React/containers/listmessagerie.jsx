@@ -19,8 +19,9 @@ class listmessagerie extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
+    this.props.fetchGET('/api/v1/conversations', "FETCH_CONVERSATIONS")
   }
+
 
   render () {
     const conversations = this.props.conversations

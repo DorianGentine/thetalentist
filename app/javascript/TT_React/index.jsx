@@ -15,8 +15,8 @@ import { createBrowserHistory as history } from 'history';
 // import { createHistory as history} from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile } from '@fortawesome/free-solid-svg-icons'
-import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle } from '@fortawesome/free-regular-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 // import { reducer as formReducer } from 'redux-form';
 
 // import { fetchAPI } from './actions';
@@ -41,7 +41,6 @@ if(app){
   const identityReducer = (state = null) => state;
 
   const initialState = {
-    companyId: app.dataset.company_id,
     conversationActive: [],
     conversations: [],
     filter: [],
@@ -50,10 +49,11 @@ if(app){
     modalSelected: null,
     modalOpened: false,
     talents: null,
+    userId: app.dataset.user_id,
+    userType: app.dataset.usertype,
   };
 
   const reducers = combineReducers({
-    companyId: identityReducer,
     conversationActive: conversationActiveReducer,
     conversations: conversationsReducer,
     filter: filterReducer,
@@ -62,6 +62,8 @@ if(app){
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,
     talents: talentsReducer,
+    userId: identityReducer,
+    userType: identityReducer,
   });
 
 
@@ -74,16 +76,23 @@ if(app){
     fasBookmark,
     faChevronDown,
     faChevronUp,
+    faCogs,
+    faEnvelope,
     faFile,
     fasFile,
     faMapMarkerAlt,
     faPaperclip,
     faPaperPlane,
     faPhone,
+    faQuestionCircle,
     faSearch,
     faShareAlt,
+    faSignOutAlt,
+    faSlidersH,
     faTimesCircle,
     faUser,
+    fasUser,
+    faUserFriends,
     faUserCheck,
     faUserPlus,
   )

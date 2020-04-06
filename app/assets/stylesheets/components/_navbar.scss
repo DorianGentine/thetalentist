@@ -48,10 +48,19 @@
 .navbar-wagon-link {
   color: white;
   font-size: 14px;
+  transition: .5s;
+  svg{
+    color: white;
+    font-size: 14px;
+    transition: .5s;
+  }
 }
 .navbar-wagon-link:hover {
   color: $red;
   text-decoration: none;
+  svg{
+    color: $red;
+  }
 }
 
 .lien-messagerie{
@@ -71,7 +80,7 @@
   box-shadow: 1px 1px 4px $gray;
   border-color: $gray;
 }
-.navbar-wagon-dropdown-menu li > a, .navbar-wagon-dropdown-menu li > p {
+.navbar-wagon-dropdown-menu li > a, .navbar-wagon-dropdown-menu li > p, {
   transition: color 0.3s ease;
   font-weight: lighter !important;
   color: $gray;
@@ -80,9 +89,17 @@
   padding: 10px 20px;
   cursor: pointer;
 }
+.navbar-wagon-dropdown-menu li > a > svg{
+  color: $gray;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
 .navbar-wagon-dropdown-menu li > a:hover, .navbar-wagon-dropdown-menu li > p:hover {
   background: transparent !important;
   color: black !important;
+  svg{
+    color: black;
+  }
 }
 .bottom-menu{
   display: none;

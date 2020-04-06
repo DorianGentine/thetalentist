@@ -59,11 +59,13 @@
 
 .message-box{
   background-color: white;
+  border: 1px solid white;
   width: 100%;
   display: flex;
   padding: 15px;
   margin-bottom: 15px;
   cursor: pointer;
+  overflow-x: hidden;
   transition: 0.5s;
 }
 .message-box:hover{
@@ -110,16 +112,20 @@
 }
 
 .profil-url{
-  background-color: $lines-2;
-  width: 35px;
-  height: 35px;
-  border-radius: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  svg{
-    color: $subtitle;
-  }
+  display: block;
+  background-color: $violet;
+  border: 1px solid $violet;
+  border-radius: 2px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-weight: 800;
+  transition: .5s
+}
+.profil-url:hover{
+  background-color: transparent;
+  border: 1px solid $violet;
+  color: $violet;
 }
 
 #messages-box{
