@@ -33,6 +33,11 @@ class HeadhunterPolicy < ApplicationPolicy
     update?
   end
 
+
+  def navbar?
+    true
+  end
+
   def update_photos?
     update?
   end
