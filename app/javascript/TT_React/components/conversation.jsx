@@ -11,10 +11,10 @@ import MessagerieSideBar from '../containers/messageriesidebar'
 
 class Conversation extends Component {
 
-        // <Navbar />
   render () {
     return(
       <div>
+        <Navbar path="conv" />
         <div className="flex" style={{padding: "40px 20px 0 85px", width: "100%"}}>
           <ListMessagerie params={this.props.match.params} />
           <MessagerieActive params={this.props.match.params} />

@@ -10,50 +10,63 @@ class Navbar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      opened: false,
-      intervalMessages: null,
+      envelope: ["fas", "envelope-open"],
+      chevron: ["fas", "chevron-down"],
     };
   }
 
   componentDidMount(){
-    this.props.fetchGET('/api/v1/conversations', "FETCH_CONVERSATIONS")
+    this.props.fetchGET('/api/v1/current_user', "FETCH_USER")
+
+    if(this.state.user && this.state.user.count_unread_message != 0){
+      this.setState({envelope: ["fas", "envelope"]})
+    }
   }
 
   render () {
-    const userType = this.props.userType
-    const userId = this.props.userId
-    const conversations = this.props.conversations
-    let lastConvUrl = "/conversations"
-    let image
-    let fullName = "Boris Test"
-    if(conversations.length != 0){
-      lastConvUrl = `/conversations/${conversations.conversations[0].conversation_id}`
+    const path = this.props.path
+    let user, userType, userId, convUrl, firstName, fullName, image = null, unreadMessages
+    if(this.props.user != null){
+      user = this.props.user
+      userType = user.is_a_model
+      userId = user.id
+      convUrl = user.url.conv
+      firstName = user.firstname
+      fullName = user.full_name
+      image = user.photo
+      unreadMessages = user.count_unread_message
     }
 
-    const openDropdown = () => {
-      if(this.state.opened){
-        this.setState({opened: false})
+    const toggleChevron = () => {
+      console.log(this.state.chevron[1])
+      if(this.state.chevron[1] == "chevron-down"){
+        this.setState({chevron: ["fas", "chevron-up"]})
       }else{
-        this.setState({opened: true})
+        this.setState({chevron: ["fas", "chevron-down"]})
       }
     }
+    // <p className="notif" title="Pensez à compléter votre profil !"></p>
 
     return(
       <div className="navbar-wagon">
         <a href="/" className="navbar-talentist-logo">
           <img src={mainLogo} style={{height: "50px"}} alt="Logo talentist"/>
         </a>
-        {userType == "Headhunter" ?
+        {userType == "Recruteur" ?
           <div className="navbar-talentist-right hidden-xs hidden-sm">
             <a href="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
               <FontAwesomeIcon icon={["far", "question-circle"]}/>
             </a>
-            <a className="navbar-wagon-item navbar-wagon-link" href="/repertoire">
-              <FontAwesomeIcon icon={["fas", "user-friends"]}/> RÉPERTOIRE
-            </a>
+            <a className="navbar-wagon-item navbar-wagon-link" href="/repertoire">RÉPERTOIRE</a>
+
+            <hr className="ligne-vertical white-background margin-left-30 margin-right-30" style={{height: "30px"}} />
+
             <div className="lien-messagerie relative">
-              <a className="navbar-wagon-item navbar-wagon-link" href={lastConvUrl}>
-                <FontAwesomeIcon icon={["fas", "envelope"]}/> MESSAGERIE
+              <a className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : null}`} href={convUrl}>
+                <FontAwesomeIcon icon={this.state.envelope}/>
+                {unreadMessages != 0 ?
+                  <div className="notif" title={`${unreadMessages} non lus`}></div>
+                : null}
               </a>
               <div className="fixed guide-su" id="guide-su-5">
                 <div className="guide-point"></div>
@@ -71,44 +84,55 @@ class Navbar extends Component {
                 </div>
               </div>
             </div>
-            <div className="lien-messagerie relative">
-              <a className="navbar-wagon-item navbar-wagon-link" href={`/headhunters/${userId}`}>
-                <FontAwesomeIcon icon={["fas", "user"]}/> PROFIL
-                  <p className="notif" title="Pensez à compléter votre profil !"></p>
-              </a>
-              <div className="fixed guide-su" id="guide-su-6">
-                <div className="guide-point"></div>
-                <div className="guide-text">
-                  <div className="flex space-between">
-                    <h5 className="no-margin margin-bottom-15">Etape 6 : Profil</h5>
-                    <span className="black pointer close_guide_6">X</span>
+            <div className="navbar-wagon-item" >
+              <div className="dropdown" onClick={toggleChevron}>
+                {image != null ?
+                  <div className="flex dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+                    <img className="photo-conv" src={image} alt="avatar"></img>
+                    <p className="white align-center no-margin">{`Hi, ${firstName}`}</p>
+                    <FontAwesomeIcon className="white align-center font-12 margin-left-5" icon={this.state.chevron}/>
                   </div>
-                  <p>Enfin, voici ton profil : plus il est complet, plus ton entreprise est attractive auprès des talents !</p>
-                  <hr className="ligne-horizontal no-margin white-background" />
-                  <div className="flex">
-                    <a className="white flex-grow-1 padding-vertical-5 text-center bordure-droite-white" href={`${lastConvUrl}?query=new_member5`}>Précédent</a>
-                    <a className="white flex-grow-1 padding-vertical-5 text-center close_guide_6">Fermer</a>
+                  :
+                  <div className="flex dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+                    <div className="photo-conv">{fullName.slice(0, 1)}</div>
+                    <p className="white align-center no-margin">{`Hi, ${firstName}`}</p>
+                    <FontAwesomeIcon className="white align-center font-12 margin-left-5" icon={this.state.chevron}/>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="navbar-wagon-item">
-              <div className="dropdown">
-                  {image != null ? <img className="photo-conv dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown" src={image} alt="avatar"></img> : <div className="photo-conv dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">{fullName.slice(0, 1)}</div>}
+                }
                 <ul className="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
                   <li>
+                    <a className={`navbar-wagon-item navbar-wagon-link${path == "profil" ? " active" : ""}`} href={`/headhunters/${userId}`}>
+                      Mon profil
+                    </a>
+                    <div className="fixed guide-su" id="guide-su-6">
+                      <div className="guide-point"></div>
+                      <div className="guide-text">
+                        <div className="flex space-between">
+                          <h5 className="no-margin margin-bottom-15">Etape 6 : Profil</h5>
+                          <span className="black pointer close_guide_6">X</span>
+                        </div>
+                        <p>Enfin, voici ton profil : plus il est complet, plus ton entreprise est attractive auprès des talents !</p>
+                        <hr className="ligne-horizontal no-margin white-background" />
+                        <div className="flex">
+                          <a className="white flex-grow-1 padding-vertical-5 text-center bordure-droite-white" href={`${convUrl}?query=new_member5`}>Précédent</a>
+                          <a className="white flex-grow-1 padding-vertical-5 text-center close_guide_6">Fermer</a>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
                     <a href={`/headhunters/${userId}/edit`}>
-                      <FontAwesomeIcon icon={["fas", "sliders-h"]}/> Editer mon compte
+                      Editer mon compte
                     </a>
                   </li>
                   <li>
                     <a href="/headhunters/edit">
-                      <FontAwesomeIcon icon={["fas", "cogs"]}/> Configuration
+                      Configuration
                     </a>
                   </li>
                   <li>
                     <a rel="nofollow" data-method="delete" href="/headhunters/sign_out">
-                      <FontAwesomeIcon icon={["fas", "sign-out-alt"]}/>  Log out
+                      Déconnexion
                     </a>
                   </li>
                 </ul>
@@ -126,8 +150,7 @@ class Navbar extends Component {
 function mapStateToProps(state) {
   return {
     conversations: state.conversations,
-    userType: state.userType,
-    userId: state.userId,
+    user: state.user,
   };
 }
 

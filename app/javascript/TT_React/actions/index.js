@@ -3,6 +3,7 @@ import "@babel/polyfill";
 export const FETCH_CONVERSATION_ACTIVE = 'FETCH_CONVERSATION_ACTIVE';
 export const FETCH_CONVERSATIONS = 'FETCH_CONVERSATIONS';
 export const FETCH_TALENTS = 'FETCH_TALENTS';
+export const FETCH_USER = 'FETCH_USER';
 export const FETCH_JOBS = 'FETCH_JOBS';
 export const GUIDE_SU = 'GUIDE_SU';
 export const MODAL_CLOSED = 'MODAL_CLOSED';
