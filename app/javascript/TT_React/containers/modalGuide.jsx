@@ -14,9 +14,11 @@ class ModalGuide extends Component {
       titre = "Etape 1 : Répertoire"
       text = "Bienvenue dans le répertoire. C’est ici que tu découvriras les talents."
       position = {
-        top: "22px",
-        left: "1000px",
+        top: "-3px",
+        left: "50%",
         zIndex: "25",
+        minWidth: "300px",
+        transform: "translateX(-11px)",
       }
     }else if(step == 2){
       titre = "Etape 2 : Filtres"
@@ -97,7 +99,7 @@ class ModalGuide extends Component {
     }
 
     return(
-      <div className={`${step == 1 ? "fixed" : "absolute"} guide-su`} id={`guide-su-${step}`} style={position}>
+      <div className="absolute guide-su" id={`guide-su-${step}`} style={position}>
         <div className="guide-point" style={guidePointStyle}></div>
         <div className="guide-text" style={guideTextStyle}>
           <div className="flex space-between">
@@ -107,8 +109,19 @@ class ModalGuide extends Component {
           <p>{text}</p>
           <hr className="ligne-horizontal no-margin white-background"/>
           <div className="flex">
-            <a className="white flex-grow-1 padding-vertical-5 text-center bordure-droite-white" disabled={step == 1} onClick={prevStep}>Précédent</a>
-            <a className="white flex-grow-1 padding-vertical-5 text-center" onClick={step < 4 ? nextStep : step == 6 ? this.props.closeGuideSu : ()=>{}} href={step == 4 ? `/conversations/${this.props.talents.conversation_id}?query=new_member5` : undefined}>{step == 6 ? "Fermer" : "Suivant"}</a>
+            <a
+              className="white flex-grow-1 padding-vertical-5 text-center bordure-droite-white"
+              disabled={step == 1}
+              onClick={step < 5 ? prevStep : () => {}}
+              href={step == 5 ? `/repertoire?query=new_member4` : step == 6 ? `${this.props.user.url.conv}?query=new_member` : undefined}>
+              Précédent
+            </a>
+            <a
+              className="white flex-grow-1 padding-vertical-5 text-center"
+              onClick={step < 4 ? nextStep : step == 6 ? this.props.closeGuideSu : ()=>{}}
+              href={step == 4 ? `${this.props.user.url.conv}?query=new_member` : step == 5 ? `${this.props.user.url.profil}?query=new_member` : undefined}>
+              {step == 6 ? "Fermer" : "Suivant"}
+            </a>
           </div>
         </div>
       </div>
@@ -120,6 +133,7 @@ function mapStateToProps(state) {
   return {
     guideSu: state.guideSu,
     talents: state.talents,
+    user: state.user,
   };
 }
 

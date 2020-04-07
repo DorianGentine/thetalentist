@@ -201,7 +201,7 @@ class ModalTalent extends Component {
               <p className="card-job margin-right-30" style={color}>{talent.job}</p>
               <div className="flex-grow-1">
                 <p className="card-position">{talent.position}</p>
-                <p className="card-formation">{talent.city}</p>
+                <p className="card-formation" style={{height: "unset"}}>{talent.city}</p>
               </div>
               <FontAwesomeIcon className="card-bookmark margin-right-5" icon={this.state.icon} onClick={toggleIcon} />
               <p className="margin-right-30 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>

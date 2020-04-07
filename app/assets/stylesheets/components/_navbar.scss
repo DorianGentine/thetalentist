@@ -47,6 +47,7 @@
   color: #878E9E;
   font-size: 14px;
   transition: .5s;
+  margin-bottom: 0;
   svg{
     color: #878E9E;
     font-size: 14px;
@@ -95,6 +96,32 @@
 }
 .bottom-menu{
   display: none;
+}
+.progression-span{
+  color: white;
+  background-color: $red;
+  padding: 0 5px;
+  align-self: center;
+  border-radius: 2px;
+  line-height: 22px;
+}
+.notifications-dropdown{
+  width: 250px;
+  max-height: 50vh;
+  li{
+    border-bottom: 1px solid $lines-2;
+    p{
+      margin-bottom: 0;
+      padding-bottom: 20px;
+    }
+  }
+}
+.notification-date{
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  font-size: 10px;
+  color: $lines-1
 }
 
 @media screen and (max-width: 450px) {

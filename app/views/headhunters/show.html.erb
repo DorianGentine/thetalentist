@@ -1,3 +1,5 @@
+<div id="app" class="no-background"></div>
+
 <% if current_user.is_a?(Headhunter) || current_user.is_a?(Talentist)%>
   <%= link_to edit_headhunter_path(@headhunter), class:"btn-edition-container" do %>
       <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="fas <%= @headhunter.completing > 85 ? "fa-thumbs-up green" : "fa-exclamation-triangle red"  %> margin-right-15"></i>profil complété à <strong class="<%= @headhunter.completing > 85 ? "green" : "red"  %>"><%= @headhunter.completing %>%</strong></p>
