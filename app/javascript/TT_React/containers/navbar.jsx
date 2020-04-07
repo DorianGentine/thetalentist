@@ -3,8 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchGET } from '../actions';
+import { fetchGET, nextGuideSu } from '../actions';
 import mainLogo from'../../../assets/images/Logo The talentist-02.png';
+import ModalGuide from './modalGuide'
 
 class Navbar extends Component {
   constructor(props) {
@@ -20,6 +21,16 @@ class Navbar extends Component {
 
     if(this.state.user && this.state.user.count_unread_message != 0){
       this.setState({envelope: ["fas", "envelope"]})
+    }
+
+    const url = new URL(window.location.href);
+    const newMember = url.searchParams.get("query");
+    if(newMember && this.props.path == "conv"){
+      this.props.nextGuideSu(4)
+    }
+    if(newMember && this.props.path == "profil"){
+      this.props.nextGuideSu(5)
+      this.setState({chevron: ["fas", "chevron-up"]})
     }
   }
 
@@ -38,7 +49,6 @@ class Navbar extends Component {
     }
 
     const toggleChevron = () => {
-      console.log(this.state.chevron[1])
       if(this.state.chevron[1] == "chevron-down"){
         this.setState({chevron: ["fas", "chevron-up"]})
       }else{
@@ -68,24 +78,11 @@ class Navbar extends Component {
                   <div className="notif" title={`${unreadMessages} non lus`}></div>
                 : null}
               </a>
-              <div className="fixed guide-su" id="guide-su-5">
-                <div className="guide-point"></div>
-                <div className="guide-text">
-                  <div className="flex space-between">
-                    <h5 className="no-margin margin-bottom-15">Etape  5 : Messagerie</h5>
-                    <span className="black pointer" id="close_guide_5">X</span>
-                  </div>
-                  <p>Bienvenue dans la messagerie. C’est le lieu d’échange avec les candidats, une fois que ceux-ci ont accepté ta demande de mise en relation. Si tu as la moindre question sur la plateforme, n’hésite pas à nous écrire, on est dispos !</p>
-                  <hr className="ligne-horizontal no-margin white-background" />
-                  <div className="flex">
-                    <a className="white flex-grow-1 padding-vertical-5 text-center bordure-droite-white" href="/repertoire?query=new_member">Précédent</a>
-                    <a className="white flex-grow-1 padding-vertical-5 text-center" href={`/headhunters/${userId}?query=new_member6`}>Suivant</a>
-                  </div>
-                </div>
-              </div>
+              {this.props.guideSu == 5 ? <ModalGuide /> : null}
             </div>
+
             <div className="navbar-wagon-item" >
-              <div className="dropdown" onClick={toggleChevron}>
+              <div className={`dropdown${this.props.guideSu == 6 ? " open" : ""}`} onClick={toggleChevron}>
                 {image != null ?
                   <div className="flex dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
                     <img className="photo-conv" src={image} alt="avatar"></img>
@@ -104,21 +101,7 @@ class Navbar extends Component {
                     <a className={`navbar-wagon-item navbar-wagon-link${path == "profil" ? " active" : ""}`} href={`/headhunters/${userId}`}>
                       Mon profil
                     </a>
-                    <div className="fixed guide-su" id="guide-su-6">
-                      <div className="guide-point"></div>
-                      <div className="guide-text">
-                        <div className="flex space-between">
-                          <h5 className="no-margin margin-bottom-15">Etape 6 : Profil</h5>
-                          <span className="black pointer close_guide_6">X</span>
-                        </div>
-                        <p>Enfin, voici ton profil : plus il est complet, plus ton entreprise est attractive auprès des talents !</p>
-                        <hr className="ligne-horizontal no-margin white-background" />
-                        <div className="flex">
-                          <a className="white flex-grow-1 padding-vertical-5 text-center bordure-droite-white" href={`${convUrl}?query=new_member5`}>Précédent</a>
-                          <a className="white flex-grow-1 padding-vertical-5 text-center close_guide_6">Fermer</a>
-                        </div>
-                      </div>
-                    </div>
+                    {this.props.guideSu == 6 ? <ModalGuide /> : null}
                   </li>
                   <li>
                     <a href={`/headhunters/${userId}/edit`}>
@@ -150,12 +133,13 @@ class Navbar extends Component {
 function mapStateToProps(state) {
   return {
     conversations: state.conversations,
+    guideSu: state.guideSu,
     user: state.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET }, dispatch);
+  return bindActionCreators({ fetchGET, nextGuideSu }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
