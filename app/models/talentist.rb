@@ -65,6 +65,10 @@ class Talentist < ApplicationRecord
     "#{self.firstname} #{self.last_name}"
   end
 
+  def completing
+    return 100
+  end
+
   def count_unread_message
     unreads = []
     messages = Mailboxer::Receipt.where(receiver_id: self.id)
