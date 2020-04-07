@@ -34,75 +34,94 @@
 }
 
 .notif {
-  background-color: #ff4c4c;
-  line-height: 15px;
-  min-width: 15px;
-  min-height: 15px;
-  font-size: 11px;
-  color: white !important;
-  border-radius: 30px;
-  padding: 0px 5px;
+  box-sizing: border-box;
+  background-color: $green;
+  min-width: 11px;
+  min-height: 11px;
+  border: 2px solid $violet;
+  border-radius: 10px;
 }
 
 /* Navbar link */
 .navbar-wagon-link {
-  color: white;
+  color: #878E9E;
   font-size: 14px;
   transition: .5s;
+  margin-bottom: 0;
   svg{
-    color: white;
+    color: #878E9E;
     font-size: 14px;
     transition: .5s;
   }
 }
-.navbar-wagon-link:hover {
-  color: $red;
+.navbar-wagon-link:hover, .navbar-wagon-link.active {
+  color: white;
   text-decoration: none;
   svg{
-    color: $red;
+    color: white;
   }
 }
 
 .lien-messagerie{
-  position: relative;
-  display: flex;
-  align-items: center;
   .notif{
     position: absolute;
-    top: -8px;
-    right: 6px;
+    top: 0px;
+    right: 20px;
+    transform: translate(50%, -25%);
   }
 }
 
 /* Dropdown menu */
 .navbar-wagon-dropdown-menu {
-  margin-top: 15px;
-  box-shadow: 1px 1px 4px $gray;
-  border-color: $gray;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.14);
+  margin-top: 10px;
+  border: none;
 }
 .navbar-wagon-dropdown-menu li > a, .navbar-wagon-dropdown-menu li > p, {
-  transition: color 0.3s ease;
   font-weight: lighter !important;
-  color: $gray;
-  font-size: 15px !important;
-  line-height: 22px !important;
-  padding: 10px 20px;
+  color: $dark-blue;
+  font-size: 14px !important;
+  line-height: 32px !important;
+  padding: 10px 15px;
   cursor: pointer;
+  transition: 0.3s ease;
 }
-.navbar-wagon-dropdown-menu li > a > svg{
-  color: $gray;
-  font-size: 15px;
-  transition: color 0.3s ease;
-}
-.navbar-wagon-dropdown-menu li > a:hover, .navbar-wagon-dropdown-menu li > p:hover {
-  background: transparent !important;
-  color: black !important;
-  svg{
-    color: black;
-  }
+.navbar-wagon-dropdown-menu li > a:hover,
+.navbar-wagon-dropdown-menu li > p:hover,
+.navbar-wagon-dropdown-menu li > a.active,
+.navbar-wagon-dropdown-menu li > p.active, {
+  background-color: $bground !important;
+  color: $dark-blue;
 }
 .bottom-menu{
   display: none;
+}
+.progression-span{
+  color: white;
+  background-color: $red;
+  padding: 0 5px;
+  align-self: center;
+  border-radius: 2px;
+  line-height: 22px;
+}
+.notifications-dropdown{
+  width: 250px;
+  max-height: 50vh;
+  li{
+    border-bottom: 1px solid $lines-2;
+    p{
+      margin-bottom: 0;
+      padding-bottom: 20px;
+    }
+  }
+}
+.notification-date{
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  font-size: 10px;
+  color: $lines-1
 }
 
 @media screen and (max-width: 450px) {

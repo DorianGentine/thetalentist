@@ -15,7 +15,7 @@ import { createBrowserHistory as history } from 'history';
 // import { createHistory as history} from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 // import { reducer as formReducer } from 'redux-form';
 
@@ -24,6 +24,10 @@ import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle,
 // internal modules
 import repertory from './components/repertory';
 import conversation from './components/conversation';
+import dashboardHeadhunter from './components/dashboardHeadhunter';
+import dashboardTalent from './components/dashboardTalent';
+import profilRecruteur from './components/profilRecruteur';
+import profilTalent from './components/profilTalent';
 // import '../assets/stylesheets/messagerie.scss';
 
 // State and reducers
@@ -34,7 +38,9 @@ import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
 import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
+import notificationsReducer from './reducers/notifications_reducer';
 import talentsReducer from './reducers/talents_reducer';
+import userReducer from './reducers/user_reducer';
 
 const app = document.getElementById('app')
 if(app){
@@ -48,9 +54,9 @@ if(app){
     jobs: null,
     modalSelected: null,
     modalOpened: false,
+    notifications: [],
     talents: null,
-    userId: app.dataset.user_id,
-    userType: app.dataset.usertype,
+    user: null,
   };
 
   const reducers = combineReducers({
@@ -61,9 +67,9 @@ if(app){
     jobs: jobsReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,
+    notifications: notificationsReducer,
     talents: talentsReducer,
-    userId: identityReducer,
-    userType: identityReducer,
+    user: userReducer,
   });
 
 
@@ -74,10 +80,12 @@ if(app){
     fab,
     farBookmark,
     fasBookmark,
+    faChartLine,
     faChevronDown,
     faChevronUp,
     faCogs,
     faEnvelope,
+    faEnvelopeOpen,
     faFile,
     fasFile,
     faMapMarkerAlt,
@@ -103,7 +111,11 @@ if(app){
       <Router history={history}>
         <Switch>
           <Route path="/repertoire" component={repertory} />
+          <Route path="/talents" component={dashboardTalent} />
+          <Route path="/headhunters" component={dashboardHeadhunter} />
           <Route path="/conversations/:id" component={conversation} />
+          <Route path="/headhunters/:id" component={profilRecruteur} />
+          <Route path="/talents/:id" component={profilTalent} />
           <Redirect from="/" to="/" />
         </Switch>
       </Router>

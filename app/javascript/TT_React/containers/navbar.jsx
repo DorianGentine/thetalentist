@@ -3,119 +3,186 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchGET } from '../actions';
+import { fetchGET, nextGuideSu, openModalTalent } from '../actions';
 import mainLogo from'../../../assets/images/Logo The talentist-02.png';
+import ModalGuide from './modalGuide'
 
 class Navbar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      opened: false,
-      intervalMessages: null,
+      envelope: ["fas", "envelope-open"],
+      chevron: ["fas", "chevron-down"],
     };
   }
 
   componentDidMount(){
-    this.props.fetchGET('/api/v1/conversations', "FETCH_CONVERSATIONS")
+    this.props.fetchGET('/api/v1/current_user', "FETCH_USER")
+
+    let enveloppeInterval = setInterval(() => {
+      if(this.props.user){
+        if(this.props.user.count_unread_message != 0){
+          this.setState({envelope: ["fas", "envelope"]})
+        }
+        if(this.props.user.is_a_model == "Talentist"){
+          this.props.fetchGET('/api/v1/notifications', "FETCH_NOTIFICATIONS")
+        }
+        clearInterval(enveloppeInterval);
+      }
+    }, 500)
+
+    const url = new URL(window.location.href);
+    const newMember = url.searchParams.get("query");
+    if(newMember && this.props.path == "repertoire"){
+      if(newMember == "new_member4"){
+        let openModal = setInterval(() => {
+          if(this.props.talents != null){
+            this.props.openModalTalent(this.props.talents.talents[0])
+            setTimeout(() => {
+              this.props.nextGuideSu(3)
+            }, 500);
+            clearInterval(openModal);
+          }
+        }, 500)
+      }else{
+        this.props.nextGuideSu(0)
+      }
+    }
+    if(newMember && this.props.path == "conv"){
+      this.props.nextGuideSu(4)
+    }
+    if(newMember && this.props.path == "profil"){
+      this.props.nextGuideSu(5)
+      this.setState({chevron: ["fas", "chevron-up"]})
+    }
   }
 
   render () {
-    const userType = this.props.userType
-    const userId = this.props.userId
-    const conversations = this.props.conversations
-    let lastConvUrl = "/conversations"
-    let image
-    let fullName = "Boris Test"
-    if(conversations.length != 0){
-      lastConvUrl = `/conversations/${conversations.conversations[0].conversation_id}`
+    const path = this.props.path
+    let user, userType, userId, convUrl, profilUrl, firstName, fullName = "Test", image = null, unreadMessages, completing, notifications
+    if(this.props.user != null){
+      user = this.props.user
+      userType = user.is_a_model
+      userId = user.id
+      convUrl = user.url.conv
+      profilUrl = user.url.profil
+      firstName = user.firstname
+      fullName = user.full_name
+      image = user.photo
+      unreadMessages = user.count_unread_message
+      completing = user.completing
+    }
+    if(this.props.notifications.length != 0){
+      notifications = this.props.notifications
+      console.log(notifications)
     }
 
-    const openDropdown = () => {
-      if(this.state.opened){
-        this.setState({opened: false})
+    const toggleChevron = () => {
+      if(this.state.chevron[1] == "chevron-down"){
+        this.setState({chevron: ["fas", "chevron-up"]})
       }else{
-        this.setState({opened: true})
+        this.setState({chevron: ["fas", "chevron-down"]})
       }
     }
+
+    const renderNotifications = () => notifications.reverse().map((notification, index) => {
+      return <li className="relative" key={notification.id}>
+        <p>{notification.title} <span className="notification-date">il y a {notification.created_at}</span></p>
+      </li>
+    })
+
 
     return(
       <div className="navbar-wagon">
         <a href="/" className="navbar-talentist-logo">
           <img src={mainLogo} style={{height: "50px"}} alt="Logo talentist"/>
         </a>
-        {userType == "Headhunter" ?
-          <div className="navbar-talentist-right hidden-xs hidden-sm">
-            <a href="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
-              <FontAwesomeIcon icon={["far", "question-circle"]}/>
-            </a>
-            <a className="navbar-wagon-item navbar-wagon-link" href="/repertoire">
-              <FontAwesomeIcon icon={["fas", "user-friends"]}/> RÉPERTOIRE
-            </a>
-            <div className="lien-messagerie relative">
-              <a className="navbar-wagon-item navbar-wagon-link" href={lastConvUrl}>
-                <FontAwesomeIcon icon={["fas", "envelope"]}/> MESSAGERIE
+        <div className="navbar-talentist-right hidden-xs hidden-sm">
+          {userType == "Recruteur" ?
+            <div class="flex align-items-center">
+              <a href="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
+                <FontAwesomeIcon icon={["far", "question-circle"]}/>
               </a>
-              <div className="fixed guide-su" id="guide-su-5">
-                <div className="guide-point"></div>
-                <div className="guide-text">
-                  <div className="flex space-between">
-                    <h5 className="no-margin margin-bottom-15">Etape  5 : Messagerie</h5>
-                    <span className="black pointer" id="close_guide_5">X</span>
-                  </div>
-                  <p>Bienvenue dans la messagerie. C’est le lieu d’échange avec les candidats, une fois que ceux-ci ont accepté ta demande de mise en relation. Si tu as la moindre question sur la plateforme, n’hésite pas à nous écrire, on est dispos !</p>
-                  <hr className="ligne-horizontal no-margin white-background" />
-                  <div className="flex">
-                    <a className="white flex-grow-1 padding-vertical-5 text-center bordure-droite-white" href="/repertoire?query=new_member">Précédent</a>
-                    <a className="white flex-grow-1 padding-vertical-5 text-center" href={`/headhunters/${userId}?query=new_member6`}>Suivant</a>
-                  </div>
-                </div>
+              <div className="relative">
+                <a className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} href="/repertoire">RÉPERTOIRE</a>
+                {this.props.guideSu == 1 ? <ModalGuide /> : null}
               </div>
+
+              <hr className="ligne-vertical white-background margin-left-30 margin-right-30" style={{height: "30px"}} />
             </div>
-            <div className="lien-messagerie relative">
-              <a className="navbar-wagon-item navbar-wagon-link" href={`/headhunters/${userId}`}>
-                <FontAwesomeIcon icon={["fas", "user"]}/> PROFIL
-                  <p className="notif" title="Pensez à compléter votre profil !"></p>
-              </a>
-              <div className="fixed guide-su" id="guide-su-6">
-                <div className="guide-point"></div>
-                <div className="guide-text">
-                  <div className="flex space-between">
-                    <h5 className="no-margin margin-bottom-15">Etape 6 : Profil</h5>
-                    <span className="black pointer close_guide_6">X</span>
-                  </div>
-                  <p>Enfin, voici ton profil : plus il est complet, plus ton entreprise est attractive auprès des talents !</p>
-                  <hr className="ligne-horizontal no-margin white-background" />
-                  <div className="flex">
-                    <a className="white flex-grow-1 padding-vertical-5 text-center bordure-droite-white" href={`${lastConvUrl}?query=new_member5`}>Précédent</a>
-                    <a className="white flex-grow-1 padding-vertical-5 text-center close_guide_6">Fermer</a>
-                  </div>
-                </div>
-              </div>
+          : userType == "Talentist" ?
+            <div className="flex align-items-center">
+              <a className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} href="/repertoire">RÉPERTOIRE</a>
+              <a className={`navbar-wagon-item navbar-wagon-link${path == "dashboardTalent" ? " active" : ""}`} href="/talents">TALENTS</a>
+              <a className={`navbar-wagon-item navbar-wagon-link${path == "dashboardHeadhunter" ? " active" : ""}`} href="/headhunters">START-UPS</a>
+              <a className="navbar-wagon-item navbar-wagon-link" href="/admin">ADMIN</a>
+              <hr className="ligne-vertical white-background margin-left-30 margin-right-30" style={{height: "30px"}} />
             </div>
-            <div className="navbar-wagon-item">
-              <div className="dropdown">
-                  {image != null ? <img className="photo-conv dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown" src={image} alt="avatar"></img> : <div className="photo-conv dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">{fullName.slice(0, 1)}</div>}
-                <ul className="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-                  <li>
-                    <a href={`/headhunters/${userId}/edit`}>
-                      <FontAwesomeIcon icon={["fas", "sliders-h"]}/> Editer mon compte
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/headhunters/edit">
-                      <FontAwesomeIcon icon={["fas", "cogs"]}/> Configuration
-                    </a>
-                  </li>
-                  <li>
-                    <a rel="nofollow" data-method="delete" href="/headhunters/sign_out">
-                      <FontAwesomeIcon icon={["fas", "sign-out-alt"]}/>  Log out
-                    </a>
-                  </li>
-                </ul>
+          : null}
+
+          {userType == "Talentist" ?
+            <div className="lien-messagerie relative dropdown">
+              <p className="navbar-wagon-item navbar-wagon-link dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+                <FontAwesomeIcon icon={["fas", "chart-line"]}/>
+              </p>
+              <ul className="dropdown-menu navbar-wagon-dropdown-menu notifications-dropdown scroll">
+                {notifications != undefined ? renderNotifications() : null}
+              </ul>
+            </div>
+          : null}
+          <div className="lien-messagerie relative">
+            <a className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} href={convUrl}>
+              <FontAwesomeIcon icon={this.state.envelope}/>
+              {unreadMessages != 0 ?
+                <div className="notif" title={`${unreadMessages} non lus`}></div>
+              : null}
+            </a>
+            {this.props.guideSu == 5 ? <ModalGuide /> : null}
+          </div>
+
+          <div className="navbar-wagon-item" >
+            <div className={`dropdown${this.props.guideSu == 6 ? " open" : ""}`} onClick={toggleChevron}>
+              <div className="flex dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+                {image != null ?
+                  <img className="photo-conv" src={image} alt="avatar"></img>
+                :
+                  <div className="photo-conv">{fullName.slice(0, 1)}</div>
+                }
+                <p className="white align-center no-margin">{`Hi, ${firstName}`}</p>
+                <FontAwesomeIcon className="white align-center font-12 margin-left-5" icon={this.state.chevron}/>
               </div>
+              <ul className="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+                {userType != "Talentist" ?
+                  <li>
+                    <a className={`navbar-wagon-item navbar-wagon-link flex space-between${path == "profil" ? " active" : ""}`} href={profilUrl}>
+                      Mon profil {completing != 100 ? <span className={`progression-span${completing >= 85 ? " green-background" : ""}`}>{`${completing}%`}</span> : null }
+                    </a>
+                    {this.props.guideSu == 6 ? <ModalGuide /> : null}
+                  </li>
+                : null }
+                {userType != "Talentist" ?
+                <li>
+                  <a href={`${profilUrl}/edit`}>
+                    Editer mon compte
+                  </a>
+                </li>
+                : null }
+                {userType != "Talentist" ?
+                <li>
+                  <a href={userType == "Recruteur" ? "/headhunters/edit" : userType == "Talent" ? "/talents/edit" : "talentists/edit"}>
+                    Configuration
+                  </a>
+                </li>
+                : null }
+                <li>
+                  <a rel="nofollow" data-method="delete" href={userType == "Recruteur" ? "/headhunters/sign_out" : userType == "Talent" ? "/talents/sign_out" : "talentists/sign_out"}>
+                    Déconnexion
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
-        : null}
+        </div>
       </div>
     );
   }
@@ -126,13 +193,15 @@ class Navbar extends Component {
 function mapStateToProps(state) {
   return {
     conversations: state.conversations,
-    userType: state.userType,
-    userId: state.userId,
+    guideSu: state.guideSu,
+    user: state.user,
+    talents: state.talents,
+    notifications: state.notifications,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET }, dispatch);
+  return bindActionCreators({ fetchGET, nextGuideSu, openModalTalent }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
