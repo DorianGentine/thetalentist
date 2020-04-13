@@ -13,6 +13,7 @@ class Navbar extends Component {
     this.state = {
       envelope: ["fas", "envelope-open"],
       chevron: ["fas", "chevron-down"],
+      menuMobile: false,
     };
   }
 
@@ -91,98 +92,140 @@ class Navbar extends Component {
       </li>
     })
 
+    const openMenu = () => {
+      this.setState(prevState => ({menuMobile: !prevState.menuMobile}))
+      console.log(this.state.menuMobile)
+    }
+
 
     return(
       <div className="navbar-wagon">
         <a href="/" className="navbar-talentist-logo">
           <img src={mainLogo} style={{height: "50px"}} alt="Logo talentist"/>
         </a>
-        <div className="navbar-talentist-right hidden-xs hidden-sm">
-          {userType == "Recruteur" ?
-            <div class="flex align-items-center">
-              <a href="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
-                <FontAwesomeIcon icon={["far", "question-circle"]}/>
-              </a>
-              <div className="relative">
-                <a className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} href="/repertoire">RÉPERTOIRE</a>
-                {this.props.guideSu == 1 ? <ModalGuide /> : null}
-              </div>
-
-              <hr className="ligne-vertical white-background margin-left-30 margin-right-30" style={{height: "30px"}} />
-            </div>
-          : userType == "Talentist" ?
-            <div className="flex align-items-center">
-              <a className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} href="/repertoire">RÉPERTOIRE</a>
-              <a className={`navbar-wagon-item navbar-wagon-link${path == "dashboardTalent" ? " active" : ""}`} href="/talents">TALENTS</a>
-              <a className={`navbar-wagon-item navbar-wagon-link${path == "dashboardHeadhunter" ? " active" : ""}`} href="/headhunters">START-UPS</a>
-              <a className="navbar-wagon-item navbar-wagon-link" href="/admin">ADMIN</a>
-              <hr className="ligne-vertical white-background margin-left-30 margin-right-30" style={{height: "30px"}} />
-            </div>
-          : null}
-
-          {userType == "Talentist" ?
-            <div className="lien-messagerie relative dropdown">
-              <p className="navbar-wagon-item navbar-wagon-link dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
-                <FontAwesomeIcon icon={["fas", "chart-line"]}/>
-              </p>
-              <ul className="dropdown-menu navbar-wagon-dropdown-menu notifications-dropdown scroll">
-                {notifications != undefined ? renderNotifications() : null}
-              </ul>
-            </div>
-          : null}
-          <div className="lien-messagerie relative">
-            <a className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} href={convUrl}>
-              <FontAwesomeIcon icon={this.state.envelope}/>
-              {unreadMessages != 0 ?
-                <div className="notif" title={`${unreadMessages} non lus`}></div>
-              : null}
-            </a>
-            {this.props.guideSu == 5 ? <ModalGuide /> : null}
-          </div>
-
-          <div className="navbar-wagon-item" >
-            <div className={`dropdown${this.props.guideSu == 6 ? " open" : ""}`} onClick={toggleChevron}>
-              <div className="flex dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+        {this.props.isMobile ?
+          <div>
+            <FontAwesomeIcon className="white font-16" icon={["fas", "bars"]} onClick={openMenu}/>
+            <div className={`menu-mobile${this.state.menuMobile ? "" : " hidden-menu"}`}>
+              <a className="flex" href={userType != "Talentist" ? profilUrl : undefined}>
                 {image != null ?
                   <img className="photo-conv" src={image} alt="avatar"></img>
                 :
                   <div className="photo-conv">{fullName.slice(0, 1)}</div>
                 }
-                <p className="white align-center no-margin">{`Hi, ${firstName}`}</p>
-                <FontAwesomeIcon className="white align-center font-12 margin-left-5" icon={this.state.chevron}/>
-              </div>
-              <ul className="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-                {userType != "Talentist" ?
-                  <li>
-                    <a className={`navbar-wagon-item navbar-wagon-link flex space-between${path == "profil" ? " active" : ""}`} href={profilUrl}>
-                      Mon profil {completing != 100 ? <span className={`progression-span${completing >= 85 ? " green-background" : ""}`}>{`${completing}%`}</span> : null }
-                    </a>
-                    {this.props.guideSu == 6 ? <ModalGuide /> : null}
-                  </li>
-                : null }
-                {userType != "Talentist" ?
-                <li>
-                  <a href={`${profilUrl}/edit`}>
-                    Editer mon compte
-                  </a>
-                </li>
-                : null }
-                {userType != "Talentist" ?
-                <li>
-                  <a href={userType == "Recruteur" ? "/headhunters/edit" : userType == "Talent" ? "/talents/edit" : "talentists/edit"}>
-                    Configuration
-                  </a>
-                </li>
-                : null }
-                <li>
-                  <a rel="nofollow" data-method="delete" href={userType == "Recruteur" ? "/headhunters/sign_out" : userType == "Talent" ? "/talents/sign_out" : "talentists/sign_out"}>
-                    Déconnexion
-                  </a>
-                </li>
-              </ul>
+                <p className="align-center no-margin">{`Hi, ${firstName}`}</p>
+              </a>
+              <hr className="ligne-horizontal"/>
+              {userType != "Talentist" ? <a className="menu-mobile-link" href={profilUrl}>Mon profil</a> : null}
+              <a className="menu-mobile-link flex space-between" href={convUrl}>
+                Messagerie {unreadMessages != 0 ? <span className="progression-span">{unreadMessages}</span> : null}
+              </a>
+              {userType != "Talent" ?
+                <div className="flex flex-column">
+                  <hr className="ligne-horizontal"/>
+                  <a className="menu-mobile-link" href="/repertoire">Répertoire</a>
+                  {userType == "Talentist" ?
+                    <div className="flex flex-column">
+                      <a className="menu-mobile-link" href="/talents">Talents</a>
+                      <a className="menu-mobile-link" href="/headhunters">Start-ups</a>
+                      <a className="menu-mobile-link" href="/admin">Admin</a>
+                    </div>
+                  :null }
+                </div>
+              :null }
+              <hr className="ligne-horizontal"/>
+              <a className="menu-mobile-link" rel="nofollow" data-method="delete" href={userType == "Recruteur" ? "/headhunters/sign_out" : userType == "Talent" ? "/talents/sign_out" : "talentists/sign_out"}>Déconnexion</a>
+
             </div>
           </div>
-        </div>
+        :
+          <div className="navbar-talentist-right">
+            {userType == "Recruteur" ?
+              <div class="flex align-items-center">
+                <a href="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
+                  <FontAwesomeIcon icon={["far", "question-circle"]}/>
+                </a>
+                <div className="relative">
+                  <a className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} href="/repertoire">RÉPERTOIRE</a>
+                  {this.props.guideSu == 1 ? <ModalGuide /> : null}
+                </div>
+
+                <hr className="ligne-vertical white-background margin-left-30 margin-right-30" style={{height: "30px"}} />
+              </div>
+            : userType == "Talentist" ?
+              <div className="flex align-items-center">
+                <a className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} href="/repertoire">RÉPERTOIRE</a>
+                <a className={`navbar-wagon-item navbar-wagon-link${path == "dashboardTalent" ? " active" : ""}`} href="/talents">TALENTS</a>
+                <a className={`navbar-wagon-item navbar-wagon-link${path == "dashboardHeadhunter" ? " active" : ""}`} href="/headhunters">START-UPS</a>
+                <a className="navbar-wagon-item navbar-wagon-link" href="/admin">ADMIN</a>
+                <hr className="ligne-vertical white-background margin-left-30 margin-right-30" style={{height: "30px"}} />
+              </div>
+            : null}
+
+            {userType == "Talentist" ?
+              <div className="lien-messagerie relative dropdown">
+                <p className="navbar-wagon-item navbar-wagon-link dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+                  <FontAwesomeIcon icon={["fas", "chart-line"]}/>
+                </p>
+                <ul className="dropdown-menu navbar-wagon-dropdown-menu notifications-dropdown scroll">
+                  {notifications != undefined ? renderNotifications() : null}
+                </ul>
+              </div>
+            : null}
+            <div className="lien-messagerie relative">
+              <a className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} href={convUrl}>
+                <FontAwesomeIcon icon={this.state.envelope}/>
+                {unreadMessages != 0 ?
+                  <div className="notif" title={`${unreadMessages} non lus`}></div>
+                : null}
+              </a>
+              {this.props.guideSu == 5 ? <ModalGuide /> : null}
+            </div>
+
+            <div className="navbar-wagon-item" >
+              <div className={`dropdown${this.props.guideSu == 6 ? " open" : ""}`} onClick={toggleChevron}>
+                <div className="flex dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
+                  {image != null ?
+                    <img className="photo-conv" src={image} alt="avatar"></img>
+                  :
+                    <div className="photo-conv">{fullName.slice(0, 1)}</div>
+                  }
+                  <p className="white align-center no-margin">{`Hi, ${firstName}`}</p>
+                  <FontAwesomeIcon className="white align-center font-12 margin-left-5" icon={this.state.chevron}/>
+                </div>
+                <ul className="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+                  {userType != "Talentist" ?
+                    <li>
+                      <a className={`navbar-wagon-item navbar-wagon-link flex space-between${path == "profil" ? " active" : ""}`} href={profilUrl}>
+                        Mon profil {completing != 100 ? <span className={`progression-span${completing >= 85 ? " green-background" : ""}`}>{`${completing}%`}</span> : null }
+                      </a>
+                      {this.props.guideSu == 6 ? <ModalGuide /> : null}
+                    </li>
+                  : null }
+                  {userType != "Talentist" ?
+                  <li>
+                    <a href={`${profilUrl}/edit`}>
+                      Editer mon compte
+                    </a>
+                  </li>
+                  : null }
+                  {userType != "Talentist" ?
+                  <li>
+                    <a href={userType == "Recruteur" ? "/headhunters/edit" : userType == "Talent" ? "/talents/edit" : "talentists/edit"}>
+                      Configuration
+                    </a>
+                  </li>
+                  : null }
+                  <li>
+                    <a rel="nofollow" data-method="delete" href={userType == "Recruteur" ? "/headhunters/sign_out" : userType == "Talent" ? "/talents/sign_out" : "talentists/sign_out"}>
+                      Déconnexion
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        }
       </div>
     );
   }
@@ -194,6 +237,7 @@ function mapStateToProps(state) {
   return {
     conversations: state.conversations,
     guideSu: state.guideSu,
+    isMobile: state.isMobile,
     user: state.user,
     talents: state.talents,
     notifications: state.notifications,
