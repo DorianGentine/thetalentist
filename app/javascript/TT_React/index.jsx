@@ -15,7 +15,7 @@ import { createBrowserHistory as history } from 'history';
 // import { createHistory as history} from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 // import { reducer as formReducer } from 'redux-form';
 
@@ -46,11 +46,18 @@ const app = document.getElementById('app')
 if(app){
   const identityReducer = (state = null) => state;
 
+  let isMobileState = false
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    isMobileState = true
+  }
+  console.log("mobile :", isMobileState)
+
   const initialState = {
     conversationActive: [],
     conversations: [],
     filter: [],
     guideSu: 0,
+    isMobile: isMobileState,
     jobs: null,
     modalSelected: null,
     modalOpened: false,
@@ -64,6 +71,7 @@ if(app){
     conversations: conversationsReducer,
     filter: filterReducer,
     guideSu: guideSuReducer,
+    isMobile: identityReducer,
     jobs: jobsReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,
@@ -78,6 +86,7 @@ if(app){
   const store = createStore(reducers, initialState, middlewares);
   library.add(
     fab,
+    faBars,
     farBookmark,
     fasBookmark,
     faChartLine,
