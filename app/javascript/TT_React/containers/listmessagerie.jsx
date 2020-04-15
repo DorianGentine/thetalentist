@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchGET } from '../actions';
+import { fetchGET, } from '../actions';
 
 import MessageBox from './messagebox'
 
@@ -24,6 +24,7 @@ class listmessagerie extends Component {
 
 
   render () {
+    const isMobile = this.props.isMobile
     const conversations = this.props.conversations
     const filterActive = this.state.filterActive
 
@@ -65,7 +66,7 @@ class listmessagerie extends Component {
     }
 
     return(
-      <div className="col-md-4" style={{maxWidth: "392px"}}>
+      <div className="col-md-4" style={isMobile ? {width: "100%"} : {maxWidth: "392px"}}>
         <h3 className="messagerie-title">Messagerie</h3>
         <div className="input-icon no-background">
           <FontAwesomeIcon icon={["fas", "search"]}/>
@@ -76,8 +77,8 @@ class listmessagerie extends Component {
             value={this.state.value}
             onChange={(input) => {handleOnChange(input.target.value)}}/>
         </div>
-        <div className="border-lines-2">
-          <div className="relative">
+        <div className={isMobile ? null : "border-lines-2"}>
+          <div className={`relative${isMobile ? " margin-top-30" : ""}`}>
             <p className="tous-mes-messages" onClick={dropDown}>{filterActive} <span><FontAwesomeIcon icon={this.state.chevron}/></span></p>
             {this.state.opened ?
               <div className="absolute dropdown-tsmesmsg">
@@ -87,7 +88,7 @@ class listmessagerie extends Component {
               </div>
             : null}
           </div>
-          <div className="scroll" style={{height: "calc(100vh - 354px)"}}>
+          <div className="scroll" style={isMobile ? {height: "calc(100vh - 277px)"} : {height: "calc(100vh - 354px)"}}>
             {conversations != null && conversations.length != 0 ? renderMessageBox() : <p>Chargement...</p> }
           </div>
         </div>
@@ -99,11 +100,12 @@ class listmessagerie extends Component {
 function mapStateToProps(state) {
   return {
     conversations: state.conversations,
+    isMobile: state.isMobile,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET }, dispatch);
+  return bindActionCreators({ fetchGET, }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(listmessagerie);

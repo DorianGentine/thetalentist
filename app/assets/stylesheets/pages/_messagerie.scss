@@ -129,6 +129,20 @@
   color: $violet;
 }
 
+.messagerie-active-mobile{
+  position: fixed;
+  top: 70px;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background-color: $bground;
+  padding: 20px 20px 0;
+  transition: .5s;
+}
+.messagerie-active-mobile.hidden-messagerie{
+  left: -100vw;
+}
+
 #messages-box{
   // max-height: calc(100vh - 350px);
   overflow-y: scroll;
@@ -252,6 +266,7 @@
   min-width: 1em;
   margin-top: 13px;
   color: $subtitle !important;
+  cursor: pointer;
 }
 .send-doc-btn:disabled{
   cursor: not-allowed;
@@ -316,12 +331,34 @@ textarea{
   max-height: calc(100vh - 110px);
   overflow-y: auto;
 }
+.white-box-mobile{
+  position: fixed;
+  z-index: 21;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background-color: white;
+  padding: 30px 20px 0;
+  transition: .5s;
+}
+.white-box-mobile.hidden-wbm{
+  left: 100vw;
+}
 
 .more-messagerie{
   top: 5px;
   left: 20px;
   font-size: 20px;
   color: $dark-blue;
+  cursor: pointer;
+}
+
+.close-sidebar{
+  top: 20px;
+  right: 20px;
+  font-size: 20px !important;
+  color: $dark-blue !important;
   cursor: pointer;
 }
 

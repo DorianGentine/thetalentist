@@ -1,6 +1,6 @@
 #app{
   min-height: calc(100vh - 190px);
-  background-color: #F5F7FA
+  background-color: $bground;
 }
 #app.no-background{
   min-height: unset;
@@ -10,36 +10,6 @@
   color: black;
   font-size: 18px;
 }
-
-//scrollBar
-::-webkit-scrollbar {
-  width: 0;
-  transition: .5s
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  border-radius: 5px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: $gray;
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: $dark-gray;
-}
-
-.on-scrollbar::-webkit-scrollbar {
-  width: 5px;
-}
-.scroll{
-  scrollbar-gutter: always;
-}
-
 
 // Bordure
   .bordure-droite{
@@ -312,6 +282,11 @@
     }
   }
 
+// Overflow
+  .overflow-x-hidden{
+    overflow-x: hidden;
+  }
+
 // Padding
   .padding-10{
     padding: 10px;
@@ -359,6 +334,35 @@
 // Scroll
   .scroll{
     overflow-y: auto;
+  }
+
+// ScrollBar
+  ::-webkit-scrollbar {
+    width: 0;
+    transition: .5s
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $gray;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: $dark-gray;
+  }
+
+  .on-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .scroll{
+    scrollbar-gutter: always;
   }
 
 // Text

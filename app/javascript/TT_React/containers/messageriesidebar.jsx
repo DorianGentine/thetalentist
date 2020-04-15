@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchPost, fetchGET } from '../actions';
+import { fetchPost, fetchGET, openSidebar } from '../actions';
 
 class Conversation extends Component {
   constructor(props) {
@@ -23,6 +23,8 @@ class Conversation extends Component {
   }
 
   render () {
+    const isMobile = this.props.isMobile
+    const sidebarActiveMobile = this.props.sidebarActiveMobile
     let conversationActive, participant, relationship, email, city, user_model, config_conv_id, pin, archived
     let attachments = []
     let info = {
@@ -116,7 +118,7 @@ class Conversation extends Component {
 
 
     return(
-      <div className="col-md-3 white-box relative scroll" style={{maxWidth: "294px"}}>
+      <div className={`col-md-3 scroll${isMobile ? " white-box-mobile" : " white-box relative"}${sidebarActiveMobile ? "" : " hidden-wbm"}`} style={isMobile ? null : {maxWidth: "294px"}}>
         <p className="absolute more-messagerie" onClick={openDropdown}>...</p>
         {this.state.opened ?
           <div className="absolute dropdown-tsmesmsg position-more">
@@ -124,6 +126,7 @@ class Conversation extends Component {
             <p onClick={handleArchive}>{archived ? "Rétablir" : "Archiver"}</p>
           </div>
         : null}
+        {isMobile ? <FontAwesomeIcon className="absolute close-sidebar" onClick={() => this.props.openSidebar(sidebarActiveMobile)} icon={["far", "times-circle"]} /> : null }
         <div className="flex justify-center margin-bottom-30">
           {info.image != null ? <img className="photo-conv photo-conv-lg" src={info.image} alt="avatar"></img> : <div className="photo-conv photo-conv-lg">{info.full_name.slice(0, 1)}</div>}
         </div>
@@ -168,11 +171,13 @@ class Conversation extends Component {
 function mapStateToProps(state) {
   return {
     conversationActive: state.conversationActive,
+    isMobile: state.isMobile,
+    sidebarActiveMobile: state.sidebarActiveMobile,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPost, fetchGET }, dispatch);
+  return bindActionCreators({ fetchPost, fetchGET, openSidebar }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Conversation);
