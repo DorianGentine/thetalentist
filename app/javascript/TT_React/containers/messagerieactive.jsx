@@ -36,10 +36,31 @@ class Conversation extends Component {
     if(mobileMessagerie){
       this.props.openMessagerie(this.props.messagerieActiveMobile)
     }
-
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
+    if(nextProps.params.id != this.props.params.id){
+      this.props.fetchGET(`/api/v1/conversations/${nextProps.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+      const objDiv = document.getElementById("messages-box");
+      let i = 0
+      let intervalBottom = setInterval(() => {
+        i++
+        objDiv.scrollTop = objDiv.scrollHeight
+        if(i > 5 || objDiv.scrollTop != 0){
+          clearInterval(intervalBottom)
+        }
+      }, 1000)
+
+    }
+
+    if(this.props.isMobile){
+      const url = new URL(window.location.href);
+      const mobileMessagerie = url.searchParams.get("messagerie");
+      if(mobileMessagerie){
+        this.props.openMessagerie(this.props.messagerieActiveMobile)
+      }
+    }
+
     if(this.props.conversationActive.in_relation != undefined && this.props.conversationActive.in_relation != nextProps.conversationActive.in_relation){
       clearInterval(this.state.intervalMessages)
       this.setState({ intervalMessages: null })
@@ -72,7 +93,7 @@ class Conversation extends Component {
       }
     }
 
-    const renderMessages = () => conversationActive.messages.reverse().map((message, index) => <Message key={index} message={message} />)
+    const renderMessages = () => conversationActive.messages.map((message, index) => <Message key={index} message={message} />)
 
     const handleOnChange = value => {
       this.setState({ value: value })
