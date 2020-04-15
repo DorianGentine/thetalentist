@@ -94,7 +94,6 @@ class Navbar extends Component {
 
     const openMenu = () => {
       this.setState(prevState => ({menuMobile: !prevState.menuMobile}))
-      console.log(this.state.menuMobile)
     }
 
 
@@ -113,10 +112,10 @@ class Navbar extends Component {
                 :
                   <div className="photo-conv">{fullName.slice(0, 1)}</div>
                 }
-                <p className="align-center no-margin">{`Hi, ${firstName}`}</p>
+                <p className="align-center no-margin">{`Hi,\u00a0${firstName}`}</p>
               </a>
               <hr className="ligne-horizontal"/>
-              {userType != "Talentist" ? <a className="menu-mobile-link" href={profilUrl}>Mon profil</a> : null}
+              {userType != "Talentist" ? <a className="menu-mobile-link" href={profilUrl}>Mon&nbsp;profil</a> : null}
               <a className="menu-mobile-link flex space-between" href={convUrl}>
                 Messagerie {unreadMessages != 0 ? <span className="progression-span">{unreadMessages}</span> : null}
               </a>
@@ -141,7 +140,7 @@ class Navbar extends Component {
         :
           <div className="navbar-talentist-right">
             {userType == "Recruteur" ?
-              <div class="flex align-items-center">
+              <div className="flex align-items-center">
                 <a href="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
                   <FontAwesomeIcon icon={["far", "question-circle"]}/>
                 </a>

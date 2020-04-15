@@ -15,7 +15,7 @@ import { createBrowserHistory as history } from 'history';
 // import { createHistory as history} from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, faChevronLeft, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 // import { reducer as formReducer } from 'redux-form';
 
@@ -36,10 +36,12 @@ import conversationsReducer from './reducers/conversations_reducer';
 import filterReducer from './reducers/filter_reducer';
 import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
+import messagerieActiveMobileReducer from './reducers/messagerie_active_mobile_reducer';
 import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
 import notificationsReducer from './reducers/notifications_reducer';
 import talentsReducer from './reducers/talents_reducer';
+import sidebarActiveMobileReducer from './reducers/sidebar_active_mobile_reducer';
 import userReducer from './reducers/user_reducer';
 
 const app = document.getElementById('app')
@@ -59,9 +61,11 @@ if(app){
     guideSu: 0,
     isMobile: isMobileState,
     jobs: null,
+    messagerieActiveMobile: false,
     modalSelected: null,
     modalOpened: false,
     notifications: [],
+    sidebarActiveMobile: false,
     talents: null,
     user: null,
   };
@@ -73,10 +77,12 @@ if(app){
     guideSu: guideSuReducer,
     isMobile: identityReducer,
     jobs: jobsReducer,
+    messagerieActiveMobile: messagerieActiveMobileReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,
     notifications: notificationsReducer,
     talents: talentsReducer,
+    sidebarActiveMobile: sidebarActiveMobileReducer,
     user: userReducer,
   });
 
@@ -91,12 +97,14 @@ if(app){
     fasBookmark,
     faChartLine,
     faChevronDown,
+    faChevronLeft,
     faChevronUp,
     faCogs,
     faEnvelope,
     faEnvelopeOpen,
     faFile,
     fasFile,
+    faInfoCircle,
     faMapMarkerAlt,
     faPaperclip,
     faPaperPlane,
@@ -119,12 +127,14 @@ if(app){
     <Provider store={store}>
       <Router history={history}>
         <Switch>
-          <Route path="/repertoire" component={repertory} />
-          <Route path="/talents" component={dashboardTalent} />
-          <Route path="/headhunters" component={dashboardHeadhunter} />
+          <Route path="/messagerie/:id" component={conversation} />
           <Route path="/conversations/:id" component={conversation} />
           <Route path="/headhunters/:id" component={profilRecruteur} />
           <Route path="/talents/:id" component={profilTalent} />
+          <Route path="/messagerie" component={conversation} />
+          <Route path="/repertoire" component={repertory} />
+          <Route path="/talents" component={dashboardTalent} />
+          <Route path="/headhunters" component={dashboardHeadhunter} />
           <Redirect from="/" to="/" />
         </Switch>
       </Router>
