@@ -17,7 +17,14 @@ class TalentRepertoire extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS")
+    if(this.props.talents === null){
+      this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS")
+    }else{
+      this.setState({
+        talents: this.props.talents.talents,
+        admin: this.props.talents.user.admin,
+      })
+    }
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {

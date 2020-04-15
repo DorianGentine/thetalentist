@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { fetchGET, nextGuideSu, openModalTalent } from '../actions';
@@ -18,7 +19,9 @@ class Navbar extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchGET('/api/v1/current_user', "FETCH_USER")
+    if(this.props.user == null){
+      this.props.fetchGET('/api/v1/current_user', "FETCH_USER")
+    }
 
     let enveloppeInterval = setInterval(() => {
       if(this.props.user){
@@ -58,9 +61,38 @@ class Navbar extends Component {
     }
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if(nextProps.params != this.props.params){
+      const url = new URL(window.location.href);
+      const newMember = url.searchParams.get("query");
+      if(newMember && this.props.path == "repertoire"){
+        if(newMember == "new_member4"){
+          let openModal = setInterval(() => {
+            if(this.props.talents != null){
+              this.props.openModalTalent(this.props.talents.talents[0])
+              setTimeout(() => {
+                this.props.nextGuideSu(3)
+              }, 500);
+              clearInterval(openModal);
+            }
+          }, 500)
+        }else{
+          this.props.nextGuideSu(0)
+        }
+      }
+      if(newMember && this.props.path == "conv"){
+        this.props.nextGuideSu(4)
+      }
+      if(newMember && this.props.path == "profil"){
+        this.props.nextGuideSu(5)
+        this.setState({chevron: ["fas", "chevron-up"]})
+      }
+    }
+  }
+
   render () {
     const path = this.props.path
-    let user, userType, userId, convUrl, profilUrl, firstName, fullName = "Test", image = null, unreadMessages, completing, notifications
+    let user, userType, userId, convUrl = "/conv", profilUrl = "/profil", firstName, fullName = "Test", image = null, unreadMessages, completing, notifications
     if(this.props.user != null){
       user = this.props.user
       userType = user.is_a_model
@@ -141,11 +173,11 @@ class Navbar extends Component {
           <div className="navbar-talentist-right">
             {userType == "Recruteur" ?
               <div className="flex align-items-center">
-                <a href="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
+                <Link to="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
                   <FontAwesomeIcon icon={["far", "question-circle"]}/>
-                </a>
+                </Link>
                 <div className="relative">
-                  <a className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} href="/repertoire">RÉPERTOIRE</a>
+                  <Link className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} to="/repertoire">RÉPERTOIRE</Link>
                   {this.props.guideSu == 1 ? <ModalGuide /> : null}
                 </div>
 
@@ -153,7 +185,7 @@ class Navbar extends Component {
               </div>
             : userType == "Talentist" ?
               <div className="flex align-items-center">
-                <a className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} href="/repertoire">RÉPERTOIRE</a>
+                <Link className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} to="/repertoire">RÉPERTOIRE</Link>
                 <a className={`navbar-wagon-item navbar-wagon-link${path == "dashboardTalent" ? " active" : ""}`} href="/talents">TALENTS</a>
                 <a className={`navbar-wagon-item navbar-wagon-link${path == "dashboardHeadhunter" ? " active" : ""}`} href="/headhunters">START-UPS</a>
                 <a className="navbar-wagon-item navbar-wagon-link" href="/admin">ADMIN</a>
@@ -172,12 +204,12 @@ class Navbar extends Component {
               </div>
             : null}
             <div className="lien-messagerie relative">
-              <a className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} href={convUrl}>
+              <Link className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} to={convUrl} disabled={convUrl == "/conv"}>
                 <FontAwesomeIcon icon={this.state.envelope}/>
                 {unreadMessages != 0 ?
                   <div className="notif" title={`${unreadMessages} non lus`}></div>
                 : null}
-              </a>
+              </Link>
               {this.props.guideSu == 5 ? <ModalGuide /> : null}
             </div>
 
@@ -195,9 +227,12 @@ class Navbar extends Component {
                 <ul className="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
                   {userType != "Talentist" ?
                     <li>
-                      <a className={`navbar-wagon-item navbar-wagon-link flex space-between${path == "profil" ? " active" : ""}`} href={profilUrl}>
+                      <a href={profilUrl} disabled={profilUrl == "/profil"} className={`navbar-wagon-item navbar-wagon-link flex space-between${path == "profil" ? " active" : ""}`}>
                         Mon profil {completing != 100 ? <span className={`progression-span${completing >= 85 ? " green-background" : ""}`}>{`${completing}%`}</span> : null }
                       </a>
+                      // <Link to={profilUrl} disabled={profilUrl == "/profil"} className={`navbar-wagon-item navbar-wagon-link flex space-between${path == "profil" ? " active" : ""}`}>
+                      //   Mon profil {completing != 100 ? <span className={`progression-span${completing >= 85 ? " green-background" : ""}`}>{`${completing}%`}</span> : null }
+                      // </Link>
                       {this.props.guideSu == 6 ? <ModalGuide /> : null}
                     </li>
                   : null }
