@@ -25,6 +25,7 @@ class SendBox extends Component {
   }
 
   render () {
+    const isMobile = this.props.isMobile
     let conversationActive, inRelation = false, config_conv_id
     if(this.props.conversationActive != undefined){
       conversationActive = this.props.conversationActive.conversation
@@ -93,7 +94,11 @@ class SendBox extends Component {
 
     const messagesBox = document.getElementById('messages-box')
     const addDoc = acceptedFiles => {
-      messagesBox.style.maxHeight = `calc(100vh - ${351 + ((acceptedFiles.length + this.state.docs.length) * 30)}px)`;
+      if(isMobile){
+        messagesBox.style.maxHeight = `calc(100vh - ${277 + ((acceptedFiles.length + this.state.docs.length) * 30)}px)`;
+      }else{
+        messagesBox.style.maxHeight = `calc(100vh - ${351 + ((acceptedFiles.length + this.state.docs.length) * 30)}px)`;
+      }
       acceptedFiles.forEach((fichier) => {
         const reader = new FileReader()
         reader.onabort = () => console.log('file reading was aborted')
@@ -112,7 +117,11 @@ class SendBox extends Component {
     }
 
     const removeDoc = (docIndex) => {
-      messagesBox.style.maxHeight = `calc(100vh - ${351 + ((this.state.docs.length - 1) * 30)}px)`;
+      if(isMobile){
+        messagesBox.style.maxHeight = `calc(100vh - ${277 + ((this.state.docs.length - 1) * 30)}px)`;
+      }else{
+        messagesBox.style.maxHeight = `calc(100vh - ${351 + ((this.state.docs.length - 1) * 30)}px)`;
+      }
       const checkDocs = (doc, index) => {
         return index !== docIndex
       }
@@ -133,11 +142,19 @@ class SendBox extends Component {
     if(this.state.docs.length != 0){
       const divdoc = document.getElementById('doc-to-send')
       setTimeout(() => {
-        messagesBox.style.maxHeight = `calc(100vh - ${351 + divdoc.offsetHeight}px)`;
+        if(isMobile){
+          messagesBox.style.maxHeight = `calc(100vh - ${277 + divdoc.offsetHeight}px)`;
+        }else{
+          messagesBox.style.maxHeight = `calc(100vh - ${351 + divdoc.offsetHeight}px)`;
+        }
       }, 501)
     }else if(messagesBox != null){
       setTimeout(() => {
-        messagesBox.style.maxHeight = "calc(100vh - 350px)";
+        if(isMobile){
+          messagesBox.style.maxHeight = "calc(100vh - 277px)";
+        }else{
+          messagesBox.style.maxHeight = "calc(100vh - 350px)";
+        }
       }, 501)
     }
 
@@ -179,6 +196,7 @@ class SendBox extends Component {
 function mapStateToProps(state) {
   return {
     conversationActive: state.conversationActive,
+    isMobile: state.isMobile,
   };
 }
 

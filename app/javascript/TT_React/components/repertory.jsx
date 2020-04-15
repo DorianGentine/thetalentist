@@ -13,22 +13,12 @@ import ModalTalent from '../containers/modalTalent'
 
 class Repertory extends Component {
 
-  componentDidMount(){
-    const url = new URL(window.location.href);
-    const newMember = url.searchParams.get("query");
-    if(newMember && this.props.guideSu == 0){
-      this.props.nextGuideSu(this.props.guideSu)
-    }
-  }
-
   render () {
-    // style={{minHeight: "calc(100vh - 240px)"}}
-        // <Navbar />
     return(
       <div>
+        <Navbar path="repertoire" />
         <div id="all-talents" className="row no-margin" style={{padding: "40px 0"}}>
           <ModalTalent />
-          {this.props.guideSu == 1 ? <ModalGuide /> : null}
           <Filtre />
           <div className="col-md-10 col-xs-12" style={{padding: "0 50px 0 60px"}}>
             <SearchResults />

@@ -74,7 +74,7 @@ class Headhunter < ApplicationRecord
     "#{self.firstname.split(//).first.upcase if !self.firstname.blank? }#{self.last_name.split(//).first.upcase if !self.last_name.blank? }"
   end
 
-  def completed_totaly
+  def completing
     CompletedHeadhunter.new(self).completed_totaly
   end
 

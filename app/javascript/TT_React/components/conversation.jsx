@@ -12,24 +12,39 @@ import MessagerieSideBar from '../containers/messageriesidebar'
 class Conversation extends Component {
 
   render () {
+    const isMobile = this.props.isMobile
+    let styleContainer = {
+      padding: "40px 20px 0 85px",
+      width: "100%"
+    }
+    if(isMobile){
+      styleContainer = {
+        padding: "30px 5px 0",
+        width: "100%"
+      }
+    }
+
     return(
-      <div className="flex">
-        <ListMessagerie params={this.props.match.params} />
-        <MessagerieActive params={this.props.match.params} />
-        <MessagerieSideBar params={this.props.match.params} />
+      <div>
+        <Navbar path="conv" />
+        <div className={isMobile ? "overflow-x-hidden" : "flex"} style={styleContainer}>
+          <ListMessagerie params={this.props.match.params} />
+          <MessagerieActive params={this.props.match.params} />
+          <MessagerieSideBar params={this.props.match.params} />
+        </div>
       </div>
     );
   }
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     conversations: state.conversations,
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    isMobile: state.isMobile,
+  };
+}
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ fetchGET }, dispatch);
 // }
 
-export default connect(null, null)(Conversation);
+export default connect(mapStateToProps, null)(Conversation);

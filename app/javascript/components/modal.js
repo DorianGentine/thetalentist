@@ -45,23 +45,6 @@ function revealModal() {
   const url = new URL(window.location.href);
   // const modal_id = url.searchParams.get("talent");
   const newMember = url.searchParams.get("query");
-  if(newMember == "new_member5"){
-    const guide_5 = document.getElementById('guide-su-5')
-    guide_5.style.display = "block";
-    const closeGuide = document.getElementById('close_guide_5')
-    closeGuide.addEventListener('click', () => {
-      guide_5.style.display = "none"
-    })
-  }else if(newMember == "new_member6"){
-    const guide_6 = document.getElementById('guide-su-6')
-    guide_6.style.display = "block";
-    const closeGuide = document.getElementsByClassName('close_guide_6')
-    for (var i = closeGuide.length - 1; i >= 0; i--) {
-      closeGuide[i].addEventListener('click', () => {
-        guide_6.style.display = "none"
-      })
-    }
-  }
 
   let modalButtonsList = document.querySelectorAll('.modal-button')
   modalButtonsList.forEach((button) => {

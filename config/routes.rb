@@ -70,6 +70,8 @@ Rails.application.routes.draw do
 
 
   # pour la messagerie
+  get '/messagerie', to: "pages#messagerie"
+    get '/messagerie/:id', to: "pages#messagerie"
   resources :conversations, only: [ :show, :update] do
     resources :messages, only: [ :create ]
   end
@@ -86,6 +88,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      get :current_user, to: "pages#navbar"
+
       resources :jobs, only: [ :index ]
       resources :relationships, only: [ :create ]
       resources :config_conversations, only: [ :update ]
