@@ -230,9 +230,6 @@ class Navbar extends Component {
                       <a href={profilUrl} disabled={profilUrl == "/profil"} className={`navbar-wagon-item navbar-wagon-link flex space-between${path == "profil" ? " active" : ""}`}>
                         Mon profil {completing != 100 ? <span className={`progression-span${completing >= 85 ? " green-background" : ""}`}>{`${completing}%`}</span> : null }
                       </a>
-                      // <Link to={profilUrl} disabled={profilUrl == "/profil"} className={`navbar-wagon-item navbar-wagon-link flex space-between${path == "profil" ? " active" : ""}`}>
-                      //   Mon profil {completing != 100 ? <span className={`progression-span${completing >= 85 ? " green-background" : ""}`}>{`${completing}%`}</span> : null }
-                      // </Link>
                       {this.props.guideSu == 6 ? <ModalGuide /> : null}
                     </li>
                   : null }

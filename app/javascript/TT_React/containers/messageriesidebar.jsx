@@ -135,7 +135,7 @@ class Conversation extends Component {
         {city != null ?
           <p className="participant-place"><FontAwesomeIcon icon={["fas", "map-marker-alt"]}/>{city}</p>
         : null }
-        {relationship == "Accepter" || user_model === "Headhunter" && participant.user_model != "Talentist" ?
+        {user_model != "Talentist" && relationship == "Accepter" || user_model === "Headhunter" ?
           <a className="profil-url" href={info.profil_url}>Voir le profil</a>
         : ""}
         {relationship == "Accepter" || user_model === "Headhunter" ?
