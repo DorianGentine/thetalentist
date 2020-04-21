@@ -92,7 +92,7 @@ class Navbar extends Component {
 
   render () {
     const path = this.props.path
-    let user, userType, userId, convUrl = "/conv", profilUrl = "/profil", firstName, fullName = "Test", image = null, unreadMessages, completing, notifications
+    let user, userType, userId, convUrl = "/conv", profilUrl = "/profil", firstName, fullName = "Test", image = null, unreadMessages, completing, notifications, pageReact = true
     if(this.props.user != null){
       user = this.props.user
       userType = user.is_a_model
@@ -108,6 +108,9 @@ class Navbar extends Component {
     if(this.props.notifications.length != 0){
       notifications = this.props.notifications
       console.log(notifications)
+    }
+    if(path == "dashboardHeadhunter" || path == "dashboardTalent" || path == "profil"){
+      pageReact = false
     }
 
     const toggleChevron = () => {
@@ -173,11 +176,21 @@ class Navbar extends Component {
           <div className="navbar-talentist-right">
             {userType == "Recruteur" ?
               <div className="flex align-items-center">
-                <Link to="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
-                  <FontAwesomeIcon icon={["far", "question-circle"]}/>
-                </Link>
+                {pageReact ?
+                  <Link to="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
+                    <FontAwesomeIcon icon={["far", "question-circle"]}/>
+                  </Link>
+                :
+                  <a href="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
+                    <FontAwesomeIcon icon={["far", "question-circle"]}/>
+                  </a>
+                }
                 <div className="relative">
-                  <Link className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} to="/repertoire">RÉPERTOIRE</Link>
+                  {pageReact ?
+                    <Link className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} to="/repertoire">RÉPERTOIRE</Link>
+                  :
+                    <a className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} href="/repertoire">RÉPERTOIRE</a>
+                  }
                   {this.props.guideSu == 1 ? <ModalGuide /> : null}
                 </div>
 
@@ -185,7 +198,11 @@ class Navbar extends Component {
               </div>
             : userType == "Talentist" ?
               <div className="flex align-items-center">
-                <Link className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} to="/repertoire">RÉPERTOIRE</Link>
+                {pageReact ?
+                  <Link className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} to="/repertoire">RÉPERTOIRE</Link>
+                :
+                  <a className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} href="/repertoire">RÉPERTOIRE</a>
+                }
                 <a className={`navbar-wagon-item navbar-wagon-link${path == "dashboardTalent" ? " active" : ""}`} href="/talents">TALENTS</a>
                 <a className={`navbar-wagon-item navbar-wagon-link${path == "dashboardHeadhunter" ? " active" : ""}`} href="/headhunters">START-UPS</a>
                 <a className="navbar-wagon-item navbar-wagon-link" href="/admin">ADMIN</a>
@@ -204,12 +221,21 @@ class Navbar extends Component {
               </div>
             : null}
             <div className="lien-messagerie relative">
-              <Link className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} to={convUrl} disabled={convUrl == "/conv"}>
-                <FontAwesomeIcon icon={this.state.envelope}/>
-                {unreadMessages != 0 ?
-                  <div className="notif" title={`${unreadMessages} non lus`}></div>
-                : null}
-              </Link>
+              {pageReact ?
+                <Link className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} to={convUrl} disabled={convUrl == "/conv"}>
+                  <FontAwesomeIcon icon={this.state.envelope}/>
+                  {unreadMessages != 0 ?
+                    <div className="notif" title={`${unreadMessages} non lus`}></div>
+                  : null}
+                </Link>
+              :
+                <a className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} href={convUrl} disabled={convUrl == "/conv"}>
+                  <FontAwesomeIcon icon={this.state.envelope}/>
+                  {unreadMessages != 0 ?
+                    <div className="notif" title={`${unreadMessages} non lus`}></div>
+                  : null}
+                </a>
+              }
               {this.props.guideSu == 5 ? <ModalGuide /> : null}
             </div>
 

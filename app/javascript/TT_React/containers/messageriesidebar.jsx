@@ -122,7 +122,7 @@ class Conversation extends Component {
         <p className="absolute more-messagerie" onClick={openDropdown}>...</p>
         {this.state.opened ?
           <div className="absolute dropdown-tsmesmsg position-more">
-            <p onClick={handlePin}>{pin ? "Enlever" : "Épingler"}</p>
+            <p onClick={handlePin}>{pin ? "Enlever" : "Marquer"}</p>
             <p onClick={handleArchive}>{archived ? "Rétablir" : "Archiver"}</p>
           </div>
         : null}
