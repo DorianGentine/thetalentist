@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchGET, fetchPost } from '../actions';
+import { fetchGET, fetchPost, openMessagerie, openSidebar } from '../actions';
 
 import Message from './message'
 import SendBox from './sendbox'
@@ -29,9 +30,37 @@ class Conversation extends Component {
         clearInterval(intervalBottom)
       }
     }, 1000)
+
+    const url = new URL(window.location.href);
+    const mobileMessagerie = url.searchParams.get("messagerie");
+    if(mobileMessagerie){
+      this.props.openMessagerie(this.props.messagerieActiveMobile)
+    }
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
+    if(nextProps.params.id != this.props.params.id){
+      this.props.fetchGET(`/api/v1/conversations/${nextProps.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+      const objDiv = document.getElementById("messages-box");
+      let i = 0
+      let intervalBottom = setInterval(() => {
+        i++
+        objDiv.scrollTop = objDiv.scrollHeight
+        if(i > 5 || objDiv.scrollTop != 0){
+          clearInterval(intervalBottom)
+        }
+      }, 1000)
+
+    }
+
+    if(this.props.isMobile){
+      const url = new URL(window.location.href);
+      const mobileMessagerie = url.searchParams.get("messagerie");
+      if(mobileMessagerie){
+        this.props.openMessagerie(this.props.messagerieActiveMobile)
+      }
+    }
+
     if(this.props.conversationActive.in_relation != undefined && this.props.conversationActive.in_relation != nextProps.conversationActive.in_relation){
       clearInterval(this.state.intervalMessages)
       this.setState({ intervalMessages: null })
@@ -39,6 +68,9 @@ class Conversation extends Component {
   }
 
   render () {
+    const isMobile = this.props.isMobile
+    const messagerieActiveMobile = this.props.messagerieActiveMobile
+    const sidebarActiveMobile = this.props.sidebarActiveMobile
     let conversationActive, participant, relationship, email
     let info = {
       image: null,
@@ -61,7 +93,7 @@ class Conversation extends Component {
       }
     }
 
-    const renderMessages = () => conversationActive.messages.reverse().map((message, index) => <Message key={index} message={message} />)
+    const renderMessages = () => conversationActive.messages.map((message, index) => <Message key={index} message={message} />)
 
     const handleOnChange = value => {
       this.setState({ value: value })
@@ -127,13 +159,15 @@ class Conversation extends Component {
     }
 
     return(
-      <div className="col-md-5 flex-grow-1 flex-column" style={{paddingTop: "56px"}}>
+      <div className={`col-md-5 flex-column${isMobile ? " messagerie-active-mobile" : " flex-grow-1"}${messagerieActiveMobile ? "" : " hidden-messagerie"}`} style={isMobile ? null : {paddingTop: "56px"}}>
         <div className="flex align-items-center">
+          {isMobile ? <FontAwesomeIcon className="violet margin-right-15" icon={["fas", "chevron-left"]} onClick={() => this.props.openMessagerie(messagerieActiveMobile)} /> : null}
           {info.image != null ? <img className="photo-conv" src={info.image} alt="avatar"></img> : <div className="photo-conv">{info.full_name.slice(0, 1)}</div>}
           <div className="flex-grow-1">
             <p className="bold no-margin">{info.full_name}</p>
             <p className="no-margin"><span className="green">•</span> En ligne</p>
           </div>
+          {isMobile ? <FontAwesomeIcon className="violet" icon={["fas", "info-circle"]} onClick={() => this.props.openSidebar(sidebarActiveMobile)} /> : null}
         </div>
         <hr className="ligne-horizontal-lines-2" style={{ marginBottom: "0" }}/>
         <div id="messages-box" className="flex-grow-1 scroll">
@@ -185,11 +219,14 @@ class Conversation extends Component {
 function mapStateToProps(state) {
   return {
     conversationActive: state.conversationActive,
+    isMobile: state.isMobile,
+    messagerieActiveMobile: state.messagerieActiveMobile,
+    sidebarActiveMobile: state.sidebarActiveMobile,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, openMessagerie, openSidebar }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Conversation);

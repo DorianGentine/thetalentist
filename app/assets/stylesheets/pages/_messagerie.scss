@@ -59,11 +59,13 @@
 
 .message-box{
   background-color: white;
+  border: 1px solid white;
   width: 100%;
   display: flex;
   padding: 15px;
   margin-bottom: 15px;
   cursor: pointer;
+  overflow-x: hidden;
   transition: 0.5s;
 }
 .message-box:hover{
@@ -73,6 +75,10 @@
 .message-box.active{
   border: 1px solid #BFC6D4;
   background-color: transparent;
+}
+.message-box:focus {
+  text-decoration: none;
+  outline: none;
 }
 
 .messagebox-title{
@@ -94,6 +100,7 @@
   height: 40px;
   border-radius: 100px;
   margin-right: 15px;
+  color: white;
   background-color: $gray;
   text-align: center;
   font-size: 2em;
@@ -110,16 +117,34 @@
 }
 
 .profil-url{
-  background-color: $lines-2;
-  width: 35px;
-  height: 35px;
-  border-radius: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  svg{
-    color: $subtitle;
-  }
+  display: block;
+  background-color: $violet;
+  border: 1px solid $violet;
+  border-radius: 2px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-weight: 800;
+  transition: .5s
+}
+.profil-url:hover{
+  background-color: transparent;
+  border: 1px solid $violet;
+  color: $violet;
+}
+
+.messagerie-active-mobile{
+  position: fixed;
+  top: 70px;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background-color: $bground;
+  padding: 20px 20px 0;
+  transition: .5s;
+}
+.messagerie-active-mobile.hidden-messagerie{
+  left: -100vw;
 }
 
 #messages-box{
@@ -245,6 +270,7 @@
   min-width: 1em;
   margin-top: 13px;
   color: $subtitle !important;
+  cursor: pointer;
 }
 .send-doc-btn:disabled{
   cursor: not-allowed;
@@ -309,12 +335,34 @@ textarea{
   max-height: calc(100vh - 110px);
   overflow-y: auto;
 }
+.white-box-mobile{
+  position: fixed;
+  z-index: 21;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background-color: white;
+  padding: 30px 20px 0;
+  transition: .5s;
+}
+.white-box-mobile.hidden-wbm{
+  left: 100vw;
+}
 
 .more-messagerie{
   top: 5px;
   left: 20px;
   font-size: 20px;
   color: $dark-blue;
+  cursor: pointer;
+}
+
+.close-sidebar{
+  top: 20px;
+  right: 20px;
+  font-size: 20px !important;
+  color: $dark-blue !important;
   cursor: pointer;
 }
 

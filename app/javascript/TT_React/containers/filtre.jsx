@@ -16,7 +16,9 @@ class Filtre extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchGET('/api/v1/jobs', "FETCH_JOBS")
+    if (this.props.jobs === null) {
+      this.props.fetchGET('/api/v1/jobs', "FETCH_JOBS")
+    }
   }
 
   render () {

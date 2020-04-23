@@ -12,6 +12,12 @@ class SearchResults extends Component {
     };
   }
 
+  componentDidMount(){
+    if(this.props.talents != null){
+      this.setState({ nbTalents: this.props.talents.talents.length})
+    }
+  }
+
   UNSAFE_componentWillReceiveProps(nextProps) {
     if(this.props.filter != nextProps.filter){
       setTimeout(() => {

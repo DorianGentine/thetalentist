@@ -71,7 +71,8 @@ Rails.application.routes.draw do
 
   # pour la messagerie
   get 'messagerie', to: "pages#messagerie"
-  resources :conversations, only: [ :update] do
+  get '/messagerie/:id', to: "pages#messagerie"
+  resources :conversations, only: [ :show, :update] do
     resources :messages, only: [ :create ]
   end
 

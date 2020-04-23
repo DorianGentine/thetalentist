@@ -5,7 +5,7 @@ class Api::V1::PagesController < Api::V1::BaseController
     @user = current_user
     @photo = @user.photo.small_bright_face.url
     @urls =  {
-      conv: api_v1_conversation_path(@user.mailbox.conversations.last),
+      conv: conversation_path(@user.mailbox.conversations.first),
       profil: @user.profil_url,
       admin: admin_root_path,
       talents: talents_path,
