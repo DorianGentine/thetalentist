@@ -72,10 +72,6 @@ import { initSelect2, initSelectize } from '../components/select2';
 initSelect2()
 initSelectize()
 
-import { fetchNotifications } from "../components/notification";
-fetchNotifications();
-
-
 import { initAutocomplete } from '../components/init_autocomplete';
 initAutocomplete();
 
