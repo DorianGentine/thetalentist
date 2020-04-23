@@ -122,7 +122,7 @@ class Conversation extends Component {
         <p className="absolute more-messagerie" onClick={openDropdown}>...</p>
         {this.state.opened ?
           <div className="absolute dropdown-tsmesmsg position-more">
-            <p onClick={handlePin}>{pin ? "Enlever" : "Épingler"}</p>
+            <p onClick={handlePin}>{pin ? "Enlever" : "Marquer"}</p>
             <p onClick={handleArchive}>{archived ? "Rétablir" : "Archiver"}</p>
           </div>
         : null}
@@ -135,7 +135,7 @@ class Conversation extends Component {
         {city != null ?
           <p className="participant-place"><FontAwesomeIcon icon={["fas", "map-marker-alt"]}/>{city}</p>
         : null }
-        {relationship == "Accepter" || user_model === "Headhunter" && participant.user_model != "Talentist" ?
+        {user_model != "Talentist" && relationship == "Accepter" || user_model === "Headhunter" ?
           <a className="profil-url" href={info.profil_url}>Voir le profil</a>
         : ""}
         {relationship == "Accepter" || user_model === "Headhunter" ?

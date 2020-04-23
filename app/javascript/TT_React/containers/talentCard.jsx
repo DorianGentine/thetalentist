@@ -148,7 +148,11 @@ class TalentCard extends PureComponent {
           : null }
           <div className="flex space-between">
             <p className="card-job" style={color}>{talent.job}</p>
-            <FontAwesomeIcon className="card-bookmark" icon={this.state.icon} onClick={toggleIcon} />
+            { user.admin ?
+              <FontAwesomeIcon icon={["fas", "arrows-alt"]} style={{cursor: "all-scroll"}} />
+            :
+              <FontAwesomeIcon className="card-bookmark" icon={this.state.icon} onClick={toggleIcon} />
+            }
           </div>
           {talent.position !== null && talent.position.length >= 30 ?
             <p className="card-position" data-toggle="tooltip" data-placement="top" title={talent.position}>{talent.position.substr(0, 30)}</p>
@@ -175,9 +179,10 @@ class TalentCard extends PureComponent {
 
 function mapStateToProps(state) {
   return {
+    guideSu: state.guideSu,
     jobs: state.jobs,
     talents: state.talents,
-    guideSu: state.guideSu,
+    user: state.user,
   };
 }
 
