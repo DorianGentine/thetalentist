@@ -2,7 +2,7 @@ class Mailboxer::ConversationPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       # scope.all
-      user.mailbox.conversations
+      user.mailbox.conversations.map{|c| c if c.participants.count > 1 }
     end
   end
 
