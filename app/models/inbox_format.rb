@@ -18,6 +18,7 @@ class InboxFormat
 
       if conversation.participants.count > 1 && config_conv.present?
         participant = (conversation.participants - [user]).first
+        avatar = participant.avatar.present? ? participant.avatar.small_bright_face : nil
         conversation = {
             participant: {
               full_name: participant.full_name,
@@ -25,7 +26,7 @@ class InboxFormat
               last_name: participant.last_name,
               user_model: participant.class.name,
               job: participant.his_profession,
-              avatar: participant.avatar.small_bright_face,
+              avatar: avatar,
             },
             conversation_id: conversation.id,
             archived: config_conv.archived,
@@ -49,6 +50,7 @@ class InboxFormat
   def conversation(user, conversation)
     @conversation =  conversation
     participant = (@conversation.participants - [user]).first
+    avatar = participant.avatar.present? ? participant.avatar.small_bright_face : nil
     config_conv = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email).first
         conversation = {
           participant: {
@@ -60,7 +62,7 @@ class InboxFormat
             online: participant.current_sign_in_at,
             job: participant.his_profession,
             city: city(participant),
-            avatar: participant.avatar.big_bright_face,
+            avatar: avatar,
             phone: participant.phone,
             profil_url: participant.profil_url,
             test_1: question_1(participant),
