@@ -86,8 +86,6 @@ if(app){
 
 
   // Middlewares
-  console.log(process.env.NODE_ENV)
-  console.log(window.location.origin.includes("staging"))
   let middlewares = applyMiddleware(reduxPromise);
 
   if (process.env.NODE_ENV === `development` || window.location.origin.includes("staging")) {

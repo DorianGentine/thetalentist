@@ -17,22 +17,11 @@ class messagebox extends Component {
       full_name: "Talent",
       image: null,
     }
+
     if(conversation.in_relation == "Accepter" || participant.user_model == "Headhunter"){
       infos = {
         full_name: participant.full_name,
-        image: participant.avatar.url,
-      }
-    }
-
-    const changeConv = () => {
-      if(isMobile){
-        if(conversation.conversation_id == idActive){
-          this.props.openMessagerie(this.props.messagerieActiveMobile)
-        }else{
-          window.location.replace(`/conversations/${conversation.conversation_id}?messagerie=active`)
-        }
-      }else{
-        window.location.replace(`/conversations/${conversation.conversation_id}`)
+        image: participant.avatar.small_bright_face.url || participant.avatar,
       }
     }
 
