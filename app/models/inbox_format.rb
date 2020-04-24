@@ -13,26 +13,34 @@ class InboxFormat
   def conversations(conversations, user)
     arra_conversations = []
     conversations.each do |conversation|
+      config_convs = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
+      config_conv = config_convs.first.nil? ?  nil : config_convs.first
+
+      if conversation.participants.count > 1 && config_conv.present?
         participant = (conversation.participants - [user]).first
-        config_conv = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
         conversation = {
-          participant: {
-            full_name: participant.full_name,
-            first_name: participant.firstname,
-            last_name: participant.last_name,
-            user_model: participant.class.name,
-            job: participant.his_profession,
-            avatar: participant.avatar.small_bright_face,
-          },
-          conversation_id: conversation.id,
-          archived: config_conv.first.archived,
-          pin: config_conv.first.pin,
-          in_relation: user.witch_status?(participant),
-          sender: sender(conversation.last_message, user),
-          unread: conversation.is_unread?(user),
-          update_at: conversation.last_message.updated_at,
-          body: conversation.last_message.body,
+            participant: {
+              full_name: participant.full_name,
+              first_name: participant.firstname,
+              last_name: participant.last_name,
+              user_model: participant.class.name,
+              job: participant.his_profession,
+              avatar: participant.avatar.small_bright_face,
+            },
+            conversation_id: conversation.id,
+            archived: config_conv.archived,
+            pin: config_conv.pin,
+            in_relation: user.witch_status?(participant),
+            sender: sender(conversation.last_message, user),
+            unread: conversation.is_unread?(user),
+            update_at: conversation.last_message.updated_at,
+            body: conversation.last_message.body,
+          }
+      else
+        conversation = {
+          error: "La conversation #{conversation.id}porte un default pour InboxFormat"
         }
+      end
       arra_conversations << conversation
     end
     return arra_conversations
