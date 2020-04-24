@@ -14,7 +14,7 @@ class InboxFormat
     arra_conversations = []
     conversations.each do |conversation|
       config_convs = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
-      config_conv = config_convs.first.nil? ?  nil : config_convs.first
+      config_conv = config_convs.nil? || config_convs.first.nil? ?  nil : config_convs.first
 
       if conversation.participants.count > 1 && config_conv.present?
         participant = (conversation.participants - [user]).first
