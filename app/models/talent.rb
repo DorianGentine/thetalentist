@@ -139,7 +139,11 @@ class Talent < ApplicationRecord
   end
 
   def his_profession
-    self.experiences.last.position
+    if self.experiences.count > 0
+      self.experiences.last.position
+    else
+      "NaN"
+    end
   end
 
   def avatar
