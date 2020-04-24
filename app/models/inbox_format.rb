@@ -60,7 +60,7 @@ class InboxFormat
             online: participant.current_sign_in_at,
             job: participant.his_profession,
             city: city(participant),
-            avatar: participant.avatar.big_bright_face,
+            avatar: participant.avatar,
             phone: participant.phone,
             profil_url: participant.profil_url,
             test_1: question_1(participant),
