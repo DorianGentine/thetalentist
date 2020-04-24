@@ -51,7 +51,6 @@ if(app){
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
     isMobileState = true
   }
-  console.log("mobile :", isMobileState)
 
   const initialState = {
     conversationActive: [],
@@ -87,8 +86,23 @@ if(app){
 
 
   // Middlewares
-  const middlewares = applyMiddleware(reduxPromise, createLogger());
+  console.log(process.env.NODE_ENV)
+  let middlewares = applyMiddleware(reduxPromise);
+
+  if (process.env.NODE_ENV === `development`) {
+    const logger = createLogger({
+      duration: true,
+    });
+
+    middlewares = applyMiddleware(reduxPromise, logger);
+  }
   const store = createStore(reducers, initialState, middlewares);
+  // const store = compose(applyMiddleware(...middlewares))(createStore)(reducer);
+
+
+
+  // const middlewares = applyMiddleware(reduxPromise, createLogger());
+  // const store = createStore(reducers, initialState, middlewares);
   library.add(
     fab,
     faArrowsAlt,
