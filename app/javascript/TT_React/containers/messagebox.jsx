@@ -12,6 +12,7 @@ class messagebox extends Component {
     const isMobile = this.props.isMobile
     const conversation = this.props.conversation
     const participant = conversation.participant
+    const avatar = participant.avatar
     const idActive = this.props.idActive
     let infos = {
       full_name: "Talent",
@@ -21,7 +22,7 @@ class messagebox extends Component {
     if(conversation.in_relation == "Accepter" || participant.user_model == "Headhunter"){
       infos = {
         full_name: participant.full_name,
-        image: participant.avatar.small_bright_face.url || participant.avatar,
+        image: typeof avatar == "string" ? avatar : avatar.small_bright_face.url,
       }
     }
 
@@ -39,7 +40,7 @@ class messagebox extends Component {
             <p className="no-margin messageriebox-subtitle">{diffTime(conversation.update_at)}</p>
           </div>
           <p className="messageriebox-subtitle">{participant.job}</p>
-          <p className={`no-margin font-12${conversation.unread ? " bold" : ""}`}>{conversation.sender === "Vous" ? "Vous : " : ""}{conversation.body}</p>
+          <p className={`no-margin font-12${conversation.unread ? " bold" : ""}`}>{conversation.sender === "Vous" ? "Vous : " : ""}{conversation.body.length > 50 ? `${conversation.body.slice(0, 50)}...` : conversation.body}</p>
         </div>
       </Link>
     );
