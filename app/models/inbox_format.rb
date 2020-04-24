@@ -40,7 +40,7 @@ class InboxFormat
             }
         else
           conversation = {
-            error: "La conversation #{conversation.id}porte un default pour InboxFormat"
+            error: "La conversation #{conversation.id} porte un default pour InboxFormat"
           }
         end
         arra_conversations << conversation
