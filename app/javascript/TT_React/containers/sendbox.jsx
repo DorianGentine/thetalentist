@@ -26,11 +26,12 @@ class SendBox extends Component {
 
   render () {
     const isMobile = this.props.isMobile
-    let conversationActive, inRelation = false, config_conv_id
+    let conversationActive, inRelation = false, config_conv_id, user_model
     if(this.props.conversationActive != undefined){
       conversationActive = this.props.conversationActive.conversation
       if(conversationActive != undefined){
         config_conv_id = conversationActive.config_conv_id
+        user_model = conversationActive.participant.user_model
       }
       if(conversationActive != undefined && conversationActive.in_relation == "Accepter"){
         inRelation = true
@@ -62,6 +63,7 @@ class SendBox extends Component {
       if(this.state.docs.length != 0){
         const newConfig = {
           email: this.props.email,
+          user_model: user_model,
           config_conversation: this.state.docsPath,
         }
         console.log(newConfig)
@@ -76,6 +78,7 @@ class SendBox extends Component {
         const newMessage = {
           conversation_id: this.props.params.id,
           email: this.props.email,
+          user_model: user_model,
           body: this.state.value,
         }
         console.log(newMessage)
