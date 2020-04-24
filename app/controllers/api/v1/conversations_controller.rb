@@ -1,5 +1,5 @@
 class Api::V1::ConversationsController < Api::V1::BaseController
-  before_action :autorize_call, only: [ :show]
+  # before_action :autorize_call, only: [ :show]
   # before_action :get_mailbox
   # before_action :get_conversation, except: [:index]
 
@@ -15,8 +15,8 @@ class Api::V1::ConversationsController < Api::V1::BaseController
 
   def show
     @conv =  Mailboxer::Conversation.find(params[:id])
-    @conversation = InboxFormat.new.discussion(@user, @conv)
-    # authorize @conv
+    @conversation = InboxFormat.new.discussion(current_user, @conv)
+    authorize @conv
   end
 
   # private
@@ -30,10 +30,10 @@ class Api::V1::ConversationsController < Api::V1::BaseController
   #   end
 
 
-    def autorize_call
-      @user = current_talentist if current_talentist
-      @user = current_talent if current_talent
-      @user = current_headhunter if current_headhunter
-      authorize @user
-    end
+  #   def autorize_call
+  #     @user = current_talentist if current_talentist
+  #     @user = current_talent if current_talent
+  #     @user = current_headhunter if current_headhunter
+  #     authorize @user
+  #   end
 end
