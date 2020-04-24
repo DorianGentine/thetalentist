@@ -22,7 +22,7 @@ class messagebox extends Component {
     if(conversation.in_relation == "Accepter" || participant.user_model == "Headhunter"){
       infos = {
         full_name: participant.full_name,
-        image: typeof avatar == "string" ? avatar : avatar.small_bright_face.url,
+        image: typeof avatar == "string" ? null : avatar.small_bright_face.url,
       }
     }
 
