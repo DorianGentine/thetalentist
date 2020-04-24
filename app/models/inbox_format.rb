@@ -88,6 +88,7 @@ class InboxFormat
   def messages(user, conversation)
     arr_messages = []
     conversation.messages.each do |message|
+      sender_message = message.sender_type.constantize.find(message.sender_id)
       message_details = {
         sender_name: message.sender_type.constantize.find(message.sender_id).full_name,
         sender: sender(message, user),
