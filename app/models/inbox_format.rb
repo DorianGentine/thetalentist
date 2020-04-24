@@ -8,17 +8,17 @@ class InboxFormat
     conversation(user, conversation)
   end
 
-  private
+  # private
 
   def conversations(conversations, user)
     arra_conversations = []
     conversations.each do |conversation|
       config_convs = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
-      config_conv = config_convs.first.nil? ?  nil : config_convs.first
+      config_conv = config_convs.nil? || config_convs.first.nil? ?  nil : config_convs.first
 
       if conversation.participants.count > 1 && config_conv.present?
         participant = (conversation.participants - [user]).first
-        avatar = participant.avatar.present? ? participant.avatar.small_bright_face : nil
+        avatar = !participant.avatar.nil? ? participant.avatar : nil
         conversation = {
             participant: {
               full_name: participant.full_name,
@@ -50,7 +50,7 @@ class InboxFormat
   def conversation(user, conversation)
     @conversation =  conversation
     participant = (@conversation.participants - [user]).first
-    avatar = participant.avatar.present? ? participant.avatar.small_bright_face : nil
+    avatar = !participant.avatar.nil? ? participant.avatar : nil
     config_conv = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email).first
         conversation = {
           participant: {
