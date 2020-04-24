@@ -90,9 +90,9 @@ class InboxFormat
     conversation.messages.each do |message|
       sender_message = message.sender_type.constantize.find(message.sender_id)
       message_details = {
-        sender_name: message.sender_type.constantize.find(message.sender_id).full_name,
-        sender: sender(message, user),
-        avatar: message.sender_type.constantize.find(message.sender_id).avatar,
+        sender_name: sender_message.full_name,
+        sender: sender(sender_message, user),
+        avatar: sender_message.avatar,
         body: message.body,
         attachment: message.attachment,
         update_at: message.updated_at,
@@ -102,11 +102,11 @@ class InboxFormat
     return arr_messages
   end
 
-  def sender(message, user)
-    if message.sender_type.constantize.find(message.sender_id) == user
+  def sender(sender_message, user)
+    if sender_message == user
       return "Vous"
     else
-      return message.sender_type.constantize.find(message.sender_id).firstname
+      return sender_message.firstname
     end
   end
   def files(config_conv)
