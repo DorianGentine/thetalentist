@@ -13,36 +13,38 @@ class InboxFormat
   def conversations(conversations, user)
     arra_conversations = []
     conversations.each do |conversation|
-      config_convs = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
-      config_conv = config_convs.nil? || config_convs.first.nil? ?  nil : config_convs.first
-      sennder_message = conversation.last_message.sender_type.constantize.find(conversation.last_message.sender_id)
-      if conversation.participants.count > 1 && config_conv.present?
-        participant = (conversation.participants - [user]).first
-        avatar = !participant.avatar.nil? ? participant.avatar : nil
-        conversation = {
-            participant: {
-              full_name: participant.full_name,
-              first_name: participant.firstname,
-              last_name: participant.last_name,
-              user_model: participant.class.name,
-              job: participant.his_profession,
-              avatar: avatar,
-            },
-            conversation_id: conversation.id,
-            archived: config_conv.archived,
-            pin: config_conv.pin,
-            in_relation: user.witch_status?(participant),
-            sender: sender(sennder_message, user),
-            unread: conversation.is_unread?(user),
-            update_at: conversation.last_message.updated_at,
-            body: conversation.last_message.body,
+      if conversation.participants.count > 1
+        config_convs = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
+        config_conv = config_convs.nil? || config_convs.first.nil? ?  nil : config_convs.first
+        sennder_message = conversation.last_message.sender_type.constantize.find(conversation.last_message.sender_id)
+        if config_conv.present?
+          participant = (conversation.participants - [user]).first
+          avatar = !participant.avatar.nil? ? participant.avatar : nil
+          conversation = {
+              participant: {
+                full_name: participant.full_name,
+                first_name: participant.firstname,
+                last_name: participant.last_name,
+                user_model: participant.class.name,
+                job: participant.his_profession,
+                avatar: avatar,
+              },
+              conversation_id: conversation.id,
+              archived: config_conv.archived,
+              pin: config_conv.pin,
+              in_relation: user.witch_status?(participant),
+              sender: sender(sennder_message, user),
+              unread: conversation.is_unread?(user),
+              update_at: conversation.last_message.updated_at,
+              body: conversation.last_message.body,
+            }
+        else
+          conversation = {
+            error: "La conversation #{conversation.id}porte un default pour InboxFormat"
           }
-      else
-        conversation = {
-          error: "La conversation #{conversation.id}porte un default pour InboxFormat"
-        }
+        end
+        arra_conversations << conversation
       end
-      arra_conversations << conversation
     end
     return arra_conversations
   end
