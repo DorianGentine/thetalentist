@@ -168,7 +168,7 @@ class Navbar extends Component {
                 </div>
               :null }
               <hr className="ligne-horizontal"/>
-              <a className="menu-mobile-link" rel="nofollow" data-method="delete" href={userType == "Recruteur" ? "/headhunters/sign_out" : userType == "Talent" ? "/talents/sign_out" : "/talentists/sign_out"}>Déconnexion</a>
+              <a className="menu-mobile-link" rel="nofollow" data-method="delete" href={userType == "Recruteur" ? "/headhunters/sign_out" : userType == "Talent" ? "/talents/sign_out" : "talentists/sign_out"}>Déconnexion</a>
 
             </div>
           </div>
