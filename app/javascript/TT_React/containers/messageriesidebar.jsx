@@ -52,7 +52,7 @@ class Conversation extends Component {
       archived = conversationActive.archived
       if(relationship == "Accepter" || user_model === "Headhunter"){
         info = {
-          image: participant.avatar.url,
+          image: typeof participant.avatar == "string" ? participant.avatar : participant.avatar.small_bright_face.url,
           full_name: participant.full_name,
           answer_1: participant.answer_1,
           answer_2: participant.answer_2,

@@ -10,7 +10,8 @@ import { renderDate } from '../../components/renderDate';
 class Message extends Component {
   render () {
     const message = this.props.message
-    const image = message.avatar.url
+    const avatar = message.avatar
+    const image = typeof avatar == "string" ? avatar : avatar.small_bright_face.url
 
     if(message.sender === "Vous"){
       return(

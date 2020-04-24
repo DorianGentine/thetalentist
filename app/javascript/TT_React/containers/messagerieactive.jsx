@@ -87,7 +87,7 @@ class Conversation extends Component {
       email = conversationActive.email
       if(relationship == "Accepter" || participant.user_model == "Headhunter"){
         info = {
-          image: participant.avatar.url,
+          image: typeof participant.avatar == "string" ? participant.avatar : participant.avatar.small_bright_face.url,
           full_name: participant.full_name,
         }
       }
