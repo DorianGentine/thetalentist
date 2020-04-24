@@ -10,9 +10,6 @@ class Mailboxer::ConversationPolicy < ApplicationPolicy
     true
   end
 
-  def update?
-    raise
-  end
 
 
   def show?
