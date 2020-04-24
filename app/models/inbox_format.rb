@@ -89,15 +89,17 @@ class InboxFormat
     arr_messages = []
     conversation.messages.each do |message|
       sender_message = message.sender_type.constantize.find(message.sender_id)
-      message_details = {
-        sender_name: sender_message.full_name,
-        sender: sender(sender_message, user),
-        avatar: sender_message.avatar,
-        body: message.body,
-        attachment: message.attachment,
-        update_at: message.updated_at,
-      }
-      arr_messages << message_details
+      if sender_message.present?
+        message_details = {
+          sender_name: sender_message.full_name,
+          sender: sender(sender_message, user),
+          avatar: sender_message.avatar,
+          body: message.body,
+          attachment: message.attachment,
+          update_at: message.updated_at,
+        }
+        arr_messages << message_details
+      end
     end
     return arr_messages
   end
