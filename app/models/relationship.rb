@@ -5,7 +5,8 @@ class Relationship < ApplicationRecord
 
   before_destroy :destroy_conversation
 
-  after_create :create_a_notofication, :send_message
+  after_create :create_a_notofication, :create_config_conversations
+  # after_create :create_a_notofication, :send_message
   after_save :modification_status_notification
 
   validates_uniqueness_of :talent_id, scope: :headhunter_id,  :message => "Cette relation existe déjà"
@@ -29,6 +30,12 @@ class Relationship < ApplicationRecord
       elsif self.status == "Refuser"
         refused_a_notofication
       end
+    end
+
+    def create_config_conversations
+      conversation = Mailboxer::Conversation.find(self.conversation_id)
+      ConfigConversation.create(conversation_id: conversation.id, user_id: conversation.participants.first.id, user_email: conversation.participants.first.email)
+      ConfigConversation.create(conversation_id: conversation.id, user_id: conversation.participants.second.id, user_email: conversation.participants.second.email)
     end
 
     def send_message

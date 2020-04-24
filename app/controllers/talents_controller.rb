@@ -1,16 +1,16 @@
 class TalentsController < ApplicationController
   before_action :set_talent, only: [ :show, :edit,
     :update_experience, :update_next_aventure, :update_formation_and_skill,
-    :update, :validation, :visible, :info_pdf, :update_photo ]
+    :update, :validation, :visible, :info_pdf, :update_photo, :refused ]
 
   def index
     @talentist = current_talentist
     @formations = Formation.missing_type_with_talent
-    talents = policy_scope(Talent)
+    talents = policy_scope(Talent).where(validated: [true, nil])
     if params[:tag] == "Valider"
       @talents = talents.where(:validated => true)
     elsif params[:tag] == "Refuser"
-      @talents = talents.where(:validated => false)
+      @talents = policy_scope(Talent).where(:validated => false)
     elsif params[:tag] == "En attende"
       @talents = talents.where(:validated => nil)
     elsif params[:tag] == "Visible"
@@ -19,6 +19,15 @@ class TalentsController < ApplicationController
       @talents = talents.where(:visible => false)
     else
       @talents = talents
+    end
+
+
+    # A supprimer Après MEP
+    Mailboxer::Conversation.all.each do |conv|
+      if conv.participants.count > 1
+        ConfigConversation.find_or_create_by(conversation_id: conv.id, user_id: conv.participants.first.id, user_email:conv.participants.first.email)
+        ConfigConversation.find_or_create_by(conversation_id: conv.id, user_id: conv.participants.second.id, user_email:conv.participants.second.email)
+      end
     end
 
     @notifications = Notification.all
@@ -72,7 +81,6 @@ class TalentsController < ApplicationController
   def update_formation_and_skill
     set_new_technos(@talent)
     set_new_skills(@talent)
-    set_new_knowns(@talent)
     if @talent.update_attributes(formation_and_skill_params)
       redirect_to edit_talent_path(@talent)
     else
@@ -92,6 +100,7 @@ class TalentsController < ApplicationController
   end
 
   def update_next_aventure
+    set_new_knowns(@talent)
     if @talent.update_attributes(next_aventure_params)
       redirect_to edit_talent_path(@talent)
     else
@@ -104,14 +113,24 @@ class TalentsController < ApplicationController
     if params[:commit] == "Accepter" && !@talent.validated
       @talent.validated_action(true)
       @talent.set_conversation_between(@talentist)
-    elsif params[:commit] == "Refuser"
-      if @talent.validated || @talent.validated.nil?
-        @talent.update(declined_params)
-        @talent.validated_action(false)
-        @talent.send_refused
-      end
+    # elsif params[:commit] == "Refuser"
+    #   if @talent.validated || @talent.validated.nil?
+    #     @talent.update(declined_params)
+    #     @talent.validated_action(false)
+    #     @talent.send_refused
+    #   end
     end
     @talent.visible_action(false)
+    redirect_to talents_path
+  end
+
+  def refused
+    @talentist = current_talentist
+    @talent.declined = params[:talent][:declined]
+    @talent.validated = false
+    if @talent.save
+      @talent.send_refused
+    end
     redirect_to talents_path
   end
 

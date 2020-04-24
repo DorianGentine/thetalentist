@@ -1,6 +1,8 @@
+<div id="app" class="no-background"></div>
+
 <% if current_user.is_a?(Headhunter) || current_user.is_a?(Talentist)%>
   <%= link_to edit_headhunter_path(@headhunter), class:"btn-edition-container" do %>
-      <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="fas <%= CompletedHeadhunter.new(@headhunter).completed_totaly > 85 ? "fa-thumbs-up green" : "fa-exclamation-triangle red"  %> margin-right-15"></i>profil complété à <strong class="<%= CompletedHeadhunter.new(@headhunter).completed_totaly > 85 ? "green" : "red"  %>"><%= CompletedHeadhunter.new(@headhunter).completed_totaly %>%</strong></p>
+      <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="fas <%= @headhunter.completing > 85 ? "fa-thumbs-up green" : "fa-exclamation-triangle red"  %> margin-right-15"></i>profil complété à <strong class="<%= @headhunter.completing > 85 ? "green" : "red"  %>"><%= @headhunter.completing %>%</strong></p>
       <div class="btn-edition">
         <span><i class="fas fa-edit"></i></span>
       </div>
@@ -67,6 +69,17 @@
               <a class="titre-rubrique-3 no-margin col-xs-10 no-padding" href="https://<%= @startup.link.split("//").count > 1 ? @startup.link.split("//").second : @startup.link.split("//").first %>" target="_blank"><%= @startup.link.present? ? @startup.link : "Ajoutez votre site internet" %></a>
             <% else %>
               <p class="titre-rubrique-3 no-margin col-xs-10 no-padding"> Ajoutez votre site internet</p>
+            <% end %>
+          </div>
+
+          <!-- Téléphone -->
+          <div class="row margin-bottom-15">
+            <p class="titre-rubrique-1 col-xs-12">Téléphone</p>
+            <i class="fas fa-phone green titre-rubrique-3 col-xs-2" style="font-weight: 900"></i>
+            <% if @headhunter.phone.present? %>
+              <a class="titre-rubrique-3 no-margin col-xs-10 no-padding" target="_blank"><%= @headhunter.phone.present? ? @headhunter.phone : "Ajoutez votre numéro" %></a>
+            <% else %>
+              <p class="titre-rubrique-3 no-margin col-xs-10 no-padding"> Ajoutez votre numéro</p>
             <% end %>
           </div>
 

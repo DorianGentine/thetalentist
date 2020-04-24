@@ -1,6 +1,8 @@
 class Talentist < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  acts_as_token_authenticatable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -36,12 +38,35 @@ class Talentist < ApplicationRecord
     end
   end
 
+  def phone
+    return "0142567051"
+  end
+  def avatar
+    self.photo
+  end
+
+  def profil_url
+    return "/talentists/#{self.id}"
+  end
+
+  def his_profession
+    return "Talentist"
+  end
+
+  def witch_status?(null)
+    return "Accepter"
+  end
+
   def is_a_model
     return "Talentist"
   end
 
   def full_name
     "#{self.firstname} #{self.last_name}"
+  end
+
+  def completing
+    return 100
   end
 
   def count_unread_message

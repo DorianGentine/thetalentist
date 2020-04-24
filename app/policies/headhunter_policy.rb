@@ -33,6 +33,11 @@ class HeadhunterPolicy < ApplicationPolicy
     update?
   end
 
+
+  def navbar?
+    true
+  end
+
   def update_photos?
     update?
   end
@@ -40,7 +45,9 @@ class HeadhunterPolicy < ApplicationPolicy
   def update_startup?
     update?
   end
-
+  def left?
+    true
+  end
   def show?
     if user.is_a?(Talent)
       Relationship.where(talent_id: user.id).where(headhunter_id: record.id).where(status: "accepted").first
@@ -57,6 +64,14 @@ class HeadhunterPolicy < ApplicationPolicy
     # si le talent est connecté au headhunter alors on veut afficher la page du headhunter
 
     # user.is_a?(Talent) && user.is_connected_to?(record) --> créer une méthode is_connected_to?(headhunter)
+  end
+
+  def conversations?
+    true
+  end
+
+  def set_conversation?
+    true
   end
 
   def to_validate?

@@ -11,14 +11,14 @@
   h4 {
     color: #1F2430;
     font-size: 21px;
-    font-family: avenir;
+    font-family: avenir, roboto;
     font-weight: 500;
     line-height: 1.1;
   }
   h5 {
     color: #1F2430;
     font-size: 16px;
-    font-family: avenir;
+    font-family: avenir, roboto;
     font-weight: 700;
     line-height: 1.1;
   }
@@ -26,7 +26,18 @@
     color: $black
   }
   a {
-    color: $black
+    color: $black;
+    cursor: pointer;
+  }
+  a:disabled, a[disabled]{
+    color: $gray !important;
+    cursor: not-allowed !important;
+  }
+  a:hover{
+    color: $green;
+  }
+  *, a:hover{
+    text-decoration: none;
   }
   strong{
     color: $green;

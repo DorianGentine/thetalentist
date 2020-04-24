@@ -43,10 +43,8 @@ function revealModal() {
 
 
   const url = new URL(window.location.href);
-  const modal_id = url.searchParams.get("talent");
-  if(modal_id){
-    // triggerModal(modal_id)
-  }
+  // const modal_id = url.searchParams.get("talent");
+  const newMember = url.searchParams.get("query");
 
   let modalButtonsList = document.querySelectorAll('.modal-button')
   modalButtonsList.forEach((button) => {

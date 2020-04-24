@@ -1,25 +1,18 @@
 class Mailboxer::ConversationPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      p "coucou"
-      scope.all
+      # scope.all
+      user.mailbox.conversations.map{|c| c if c.participants.count > 1 }
     end
-  end
-
-  def index?
-    true
   end
 
   def create?
     true
   end
 
-  def update?
-    true
-  end
 
 
   def show?
-    true
+    record.participants.include?(user)
   end
 end

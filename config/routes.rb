@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     patch 'update_experience', :on => :member
     patch 'update_next_aventure', :on => :member
     patch 'validation', :on => :member
+    patch 'refused', :on => :member
     patch 'visible', :on => :member
     resources :conversations, only: [ :show ]
   end
@@ -69,6 +70,8 @@ Rails.application.routes.draw do
 
 
   # pour la messagerie
+  get 'messagerie', to: "pages#messagerie"
+  get '/messagerie/:id', to: "pages#messagerie"
   resources :conversations, only: [ :show, :update] do
     resources :messages, only: [ :create ]
   end
@@ -85,19 +88,33 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      get :current_user, to: "pages#navbar"
+
       resources :jobs, only: [ :index ]
       resources :relationships, only: [ :create ]
+      resources :config_conversations, only: [ :update ]
       resources :pins, only: [ :create, :destroy ]
-      resources :conversations, only: [ :show ] do
+      resources :conversations, only: [ :show, :index ] do
         collection do
           get :all
         end
+        member do
+          get :left
+        end
+        resources :messages, only: [ :create ]
       end
       resources :notifications, only: [ :index ]
+      resources :headhunters, only: [ :index, :show] do
+        member do
+          get :conversations
+          patch :set_conversation
+        end
+      end
       resources :talents, only: [ :index, :show ] do
         collection do
           get :repertoire
           get :analytics
+          patch :sort
         end
       end
     end

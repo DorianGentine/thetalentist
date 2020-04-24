@@ -5,13 +5,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { closeModalTalent, fetchPost, fetchGET } from '../actions';
 
+import ModalGuide from './modalGuide'
+
 class ModalTalent extends Component {
   constructor(props) {
     super(props)
     this.state = {
       checked: false,
       icon: ["far", "bookmark"],
-      relationship: false
+      relationship: false,
+      value: false,
+      message: false
     };
   }
 
@@ -20,6 +24,7 @@ class ModalTalent extends Component {
       this.setState({
         checked: nextProps.modalSelected.pin != false,
         relationship: nextProps.modalSelected.relationship,
+        value: `${this.props.talents.user.firstname} souhaite rentrer en contact avec toi`,
       })
       if(nextProps.modalSelected.pin != false){
         this.setState({ icon: ["fas", "bookmark"] })
@@ -88,7 +93,7 @@ class ModalTalent extends Component {
         }else{
           const pin = {
             talent_id: talent.id,
-            headhunter_id: this.props.headhunterId,
+            headhunter_id: this.props.talents.user.id,
           }
           this.props.fetchPost(
             '/api/v1/pins',
@@ -105,14 +110,11 @@ class ModalTalent extends Component {
 
       const addRelation = () => {
         if(!this.state.relationship){
-          const newRelationship = {
-            headhunter_id: parseInt(this.props.headhunterId, 10),
-            talent_id: talent.id,
-          }
-          this.props.fetchPost("/api/v1/relationships", newRelationship, "POST", this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS"))
           this.setState({
-            relationship: true
+            message: !this.state.message
           })
+        }else if(this.state.relationship === "Accepter" || this.state.relationship === "pending"){
+          location.replace(`/${talent.relationship_url}`)
         }
       }
 
@@ -143,40 +145,85 @@ class ModalTalent extends Component {
         )
       })
 
-      const renderSkills = () => talent.skills.map((skill, index) =>  <p className="small-plus" key={index}>{skill}</p>)
+      const renderSkills = () => talent.skills.map((skill, index) =>  <p className="small-plus-modal small-plus" key={index}>{skill}</p>)
 
-      const renderTools = () => talent.technos.map((techno, index) => <p className="small-plus" key={index}>{techno}</p>)
+      const renderTools = () => talent.technos.map((techno, index) => <p className="small-plus-modal small-plus" key={index}>{techno}</p>)
 
-      const renderBehaviours = () => talent.talent_small_plus.map((smallPlu, index) => <p className="small-plus" key={index}>{smallPlu}</p>)
+      const renderSmallPlus = () => {
+        if(talent.talent_small_plus.length !== 0 && !talent.talent_small_plus.includes(null)){
+          if(talent.talent_small_plus.length == 1 && talent.talent_small_plus[0].includes(',')){
+            let small_plus = talent.talent_small_plus[0].split(", ")
+            for (let i = small_plus.length - 1; i >= 0; i--) {
+              if(small_plus[i].includes('○')){
+                let small_with_round = small_plus[i].split('○ ')
+                small_plus.splice(i, 1)
+                for (var j = small_with_round.length - 1; j >= 0; j--) {
+                  small_plus.splice(i, 0, small_with_round[j])
+                }
+              }
+            }
+            return small_plus.map((smallPlus, index) => <p className="small-plus-modal small-plus" key={index}>{smallPlus}</p>)
+          }else{
+            return talent.talent_small_plus.map((smallPlus, index) => <p className="small-plus-modal small-plus" key={index}>{smallPlus}</p>)
+          }
+        }
+      }
+      const renderKnowns = () => talent.knowns.map((known, index) => <p className="small-plus-modal small-plus" key={index}>{known}</p>)
 
-      const share = () => {
-        const shareLink = document.getElementById("share-input");
-        console.log(shareLink.value)
-        shareLink.select()
-        shareLink.setSelectionRange(0, 99999)
-        document.execCommand("copy");
-        alert("Copied the text: " + shareLink.value);
+      const handleOnChange = value => {
+        this.setState({ value: value })
       }
 
-              // <input type="text" className="hidden" id="share-input" defaultValue={`/repertoire/?talent=${talent.id}`}/>
-              // <FontAwesomeIcon className="margin-right-5 pointer" icon={["fas", "share-alt"]} />
-              // <p className="margin-right-30 no-margin pointer" onClick={share}>Partager</p>
+      const sendMessage = (event, onoff) => {
+        event.preventDefault()
+        if(onoff === "close"){
+          this.setState({message: !this.state.message})
+        }else if(onoff === "send"){
+          const newRelationship = {
+            headhunter_id: parseInt(this.props.talents.user.id, 10),
+            talent_id: talent.id,
+            message: document.getElementById('first_message').value
+          }
+          console.log(newRelationship)
+          this.props.fetchPost("/api/v1/relationships", newRelationship, "POST", this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS"))
+          this.setState({
+            relationship: "pending",
+            message: !this.state.message,
+          })
+        }
+      }
+
       return(
         <div className='modal active'>
           <div className="close-modal" onClick={this.props.closeModalTalent}></div>
           <div className="modal-content-react">
-            <div className="flex align-items-center">
+            <div className={`flex align-items-center${this.props.guideSu == 4 ? " relative" : ""}`}>
               <p className="card-job margin-right-30" style={color}>{talent.job}</p>
               <div className="flex-grow-1">
                 <p className="card-position">{talent.position}</p>
-                <p className="card-formation">{talent.city}</p>
+                <p className="card-formation" style={{height: "unset"}}>{talent.city}</p>
               </div>
               <FontAwesomeIcon className="card-bookmark margin-right-5" icon={this.state.icon} onClick={toggleIcon} />
               <p className="margin-right-30 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>
-              <div className="add-user" style={!this.state.relationship ? {backgroundColor: "#000748"} : {backgroundColor: "#4ECCA3"}} onClick={addRelation}>
-                <FontAwesomeIcon className="add-user-icon" icon={!this.state.relationship ? ["fas", "user-plus"] : ["fas", "user-check"]}/>
+              {this.props.guideSu == 4 ? <ModalGuide /> : null}
+              <div className="add-user" style={!this.state.relationship ? {backgroundColor: "#000748"} : this.state.relationship === "pending" ? {backgroundColor: "#C9C9C9"} : {backgroundColor: "#4ECCA3"}} onClick={addRelation}>
+                <FontAwesomeIcon className="add-user-icon margin-right-5" icon={!this.state.relationship ? ["fas", "user-plus"] : ["fas", "user-check"]}/>
+                <p className="white no-margin">{!this.state.relationship ? "Contacter" : this.state.relationship === "pending" ? "En attente" : "Contacté"}</p>
               </div>
             </div>
+
+            <form action="">
+              <textarea
+                name="first_message"
+                id="first_message"
+                rows="5"
+                value={this.state.value}
+                className={this.state.message ? "w-100" : "hidden"}
+                onChange={(textarea) => {handleOnChange(textarea.target.value)}}>
+              </textarea>
+              <button onClick={event => {sendMessage(event, "close")}} className={this.state.message ? "btn-envoyer gray-background" : "hidden"}>Fermer</button>
+              <button onClick={event => {sendMessage(event, "send")}} className={this.state.message ? "btn-envoyer" : "hidden"}>Envoyer</button>
+            </form>
 
             <hr className="ligne-horizontal"/>
 
@@ -197,19 +244,20 @@ class ModalTalent extends Component {
                 <div>{renderExperiences()}</div>
               </div>
               <div className="col-md-5">
-                <p className="title-modal">Ce que ce talent recherche</p>
+                <p className="title-modal" style={{color: color.color}}>{talent.next_aventure.looking_for != false ? "Ce que ce talent recherche" : ""}</p>
                 <p>{talent.next_aventure.looking_for}</p>
-                <p className="title-modal">Comment je vois mon métier</p>
-                <p>{talent.next_aventure.good_manager}</p>
-                <p className="title-modal">Un bon manager selon ce talent</p>
+                <p className="title-modal" style={{color: color.color}}>{talent.next_aventure.see_my_job != false ? "Comment je vois mon métier" : ""}</p>
+                <p>{talent.next_aventure.see_my_job}</p>
+                <p className="title-modal" style={{color: color.color}}>{talent.next_aventure.good_manager != false ? "Un bon manager selon ce talent" : ""}</p>
                 <p>{talent.next_aventure.good_manager}</p>
               </div>
               <div className="col-md-4 light-gray-background padding-30">
-                <p className="title-modal">Compétences clefs</p>
-                <p className="title-modal">Outils</p>
+                <p className="title-modal">{talent.skills.length != 0 ? "Compétences clefs" : ""}</p>
+                <div className="flex flex-wrap">{renderSkills()}</div>
+                <p className="title-modal">{talent.technos.length != 0 ? "Outils" : ""}</p>
                 <div className="flex flex-wrap">{renderTools()}</div>
-                <p className="title-modal">Savoir-être</p>
-                <div className="flex flex-wrap">{renderBehaviours()}</div>
+                <p className="title-modal">{talent.knowns.length != 0 || talent.talent_small_plus.length != 0 ? "Savoir-être" : ""}</p>
+                <div className="flex flex-wrap">{talent.knowns.length != 0 ? renderKnowns() : renderSmallPlus()}</div>
               </div>
             </div>
 
@@ -228,8 +276,9 @@ function mapStateToProps(state) {
   return {
     modalOpened: state.modalOpened,
     modalSelected: state.modalSelected,
-    headhunterId: state.headhunterId,
+    talents: state.talents,
     jobs: state.jobs,
+    guideSu: state.guideSu,
   };
 }
 
@@ -238,3 +287,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalTalent);
+
+// const share = () => {
+//   const shareLink = document.getElementById("share-input");
+//   console.log(shareLink.value)
+//   shareLink.select()
+//   shareLink.setSelectionRange(0, 99999)
+//   document.execCommand("copy");
+//   alert("Copied the text: " + shareLink.value);
+// }
+// <input type="text" className="hidden" id="share-input" defaultValue={`/repertoire/?talent=${talent.id}`}/>
+// <FontAwesomeIcon className="margin-right-5 pointer" icon={["fas", "share-alt"]} />
+// <p className="margin-right-30 no-margin pointer" onClick={share}>Partager</p>
