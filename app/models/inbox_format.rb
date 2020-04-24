@@ -15,7 +15,7 @@ class InboxFormat
     conversations.each do |conversation|
       config_convs = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
       config_conv = config_convs.nil? || config_convs.first.nil? ?  nil : config_convs.first
-
+      sennder_message = conversation.last_message.sender_type.constantize.find(conversation.last_message.sender_id)
       if conversation.participants.count > 1 && config_conv.present?
         participant = (conversation.participants - [user]).first
         avatar = !participant.avatar.nil? ? participant.avatar : nil
@@ -32,7 +32,7 @@ class InboxFormat
             archived: config_conv.archived,
             pin: config_conv.pin,
             in_relation: user.witch_status?(participant),
-            sender: sender(conversation.last_message, user),
+            sender: sender(sennder_message, user),
             unread: conversation.is_unread?(user),
             update_at: conversation.last_message.updated_at,
             body: conversation.last_message.body,
@@ -89,17 +89,15 @@ class InboxFormat
     arr_messages = []
     conversation.messages.each do |message|
       sender_message = message.sender_type.constantize.find(message.sender_id)
-      if sender_message.present?
-        message_details = {
-          sender_name: sender_message.full_name,
-          sender: sender(sender_message, user),
-          avatar: sender_message.avatar,
-          body: message.body,
-          attachment: message.attachment,
-          update_at: message.updated_at,
-        }
-        arr_messages << message_details
-      end
+      message_details = {
+        sender_name: sender_message.full_name,
+        sender: sender(sender_message, user),
+        avatar: sender_message.avatar,
+        body: message.body,
+        attachment: message.attachment,
+        update_at: message.updated_at,
+      }
+      arr_messages << message_details
     end
     return arr_messages
   end
@@ -108,6 +106,7 @@ class InboxFormat
     if sender_message == user
       return "Vous"
     else
+      p "Sender >>>>>>>>>>> #{sender_message}"
       return sender_message.firstname
     end
   end
