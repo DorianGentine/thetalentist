@@ -91,7 +91,7 @@ class InboxFormat
       message_details = {
         sender_name: message.sender_type.constantize.find(message.sender_id).full_name,
         sender: sender(message, user),
-        avatar: message.sender_type.constantize.find(message.sender_id).avatar.small_bright_face,
+        avatar: message.sender_type.constantize.find(message.sender_id).avatar,
         body: message.body,
         attachment: message.attachment,
         update_at: message.updated_at,

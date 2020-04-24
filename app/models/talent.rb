@@ -139,7 +139,7 @@ class Talent < ApplicationRecord
   end
 
   def his_profession
-    if self.experiences.count > 0
+    if self.experiences.count > 0 && !self.experiences.last.position.nil?
       self.experiences.last.position
     else
       "NaN"
