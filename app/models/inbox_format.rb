@@ -8,17 +8,17 @@ class InboxFormat
     conversation(user, conversation)
   end
 
-  private
+  # private
 
   def conversations(conversations, user)
     arra_conversations = []
     conversations.each do |conversation|
       config_convs = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
-      config_conv = config_convs.first.nil? ?  nil : config_convs.first
+      config_conv = config_convs.nil? || config_convs.first.nil? ?  nil : config_convs.first
 
       if conversation.participants.count > 1 && config_conv.present?
         participant = (conversation.participants - [user]).first
-        avatar = participant.avatar.present? ? participant.avatar.small_bright_face : nil
+        avatar = !participant.avatar.nil? ? participant.avatar : nil
         conversation = {
             participant: {
               full_name: participant.full_name,
@@ -50,7 +50,7 @@ class InboxFormat
   def conversation(user, conversation)
     @conversation =  conversation
     participant = (@conversation.participants - [user]).first
-    avatar = participant.avatar.present? ? participant.avatar.small_bright_face : nil
+    avatar = !participant.avatar.nil? ? participant.avatar : nil
     config_conv = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email).first
         conversation = {
           participant: {
@@ -91,7 +91,7 @@ class InboxFormat
       message_details = {
         sender_name: message.sender_type.constantize.find(message.sender_id).full_name,
         sender: sender(message, user),
-        avatar: message.sender_type.constantize.find(message.sender_id).avatar.small_bright_face,
+        avatar: message.sender_type.constantize.find(message.sender_id).avatar,
         body: message.body,
         attachment: message.attachment,
         update_at: message.updated_at,
