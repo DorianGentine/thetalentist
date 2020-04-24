@@ -24,17 +24,17 @@ class messagebox extends Component {
       }
     }
 
-    const changeConv = () => {
-      if(isMobile){
-        if(conversation.conversation_id == idActive){
-          this.props.openMessagerie(this.props.messagerieActiveMobile)
-        }else{
-          window.location.replace(`/conversations/${conversation.conversation_id}?messagerie=active`)
-        }
-      }else{
-        window.location.replace(`/conversations/${conversation.conversation_id}`)
-      }
-    }
+    // const changeConv = () => {
+    //   if(isMobile){
+    //     if(conversation.conversation_id == idActive){
+    //       this.props.openMessagerie(this.props.messagerieActiveMobile)
+    //     }else{
+    //       window.location.replace(`/conversations/${conversation.conversation_id}?messagerie=active`)
+    //     }
+    //   }else{
+    //     window.location.replace(`/conversations/${conversation.conversation_id}`)
+    //   }
+    // }
 
     return(
       <Link
