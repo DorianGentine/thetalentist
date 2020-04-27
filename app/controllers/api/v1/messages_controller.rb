@@ -7,7 +7,7 @@ class Api::V1::MessagesController < ApplicationController
   before_action :set_conversation
 
   def create
-    @user = Talent.find_by_email(params[:email]) || Headhunter.find_by_email(params[:email]) || Talentist.find_by_email(params[:email])
+    @user = sender_authentification
     authorize @conversation
     if params[:in_relation]
       rela = Relationship.where(conversation_id: @conversation.id).first
@@ -40,6 +40,20 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   private
+
+  def sender_authentification
+    p "sender_id is #{params[:sender_id]}"
+    p "email is #{params[:email]}"
+    user = Talent.where(email: params[:email], id: params[:sender_id])
+    if user.empty?
+      user = Talentist.where(email: params[:email], id: params[:sender_id])
+    end
+    if user.empty?
+      user = Headhunter.where(email: params[:email], id: params[:sender_id])
+    end
+    p "USER sender is #{user}"
+    return user.first
+  end
 
   def set_conversation
     p "CONVERSATION_ID is #{params[:conversation_id]}"
