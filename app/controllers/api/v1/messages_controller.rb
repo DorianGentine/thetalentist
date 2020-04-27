@@ -59,11 +59,6 @@ class Api::V1::MessagesController < ApplicationController
     p "CONVERSATION_ID is #{params[:conversation_id]}"
     @conversation = Mailboxer::Conversation.find(params[:conversation_id])
   end
-
-  def message_params
-    params.require(:message).permit(:body, :attachment)
-  end
-
   def render_error
     render json: { errors: @conversation.errors.full_messages },
       status: :unprocessable_entity
