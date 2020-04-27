@@ -274,7 +274,7 @@ class Navbar extends Component {
                   </li>
                   : null }
                   <li>
-                    <a rel="nofollow" data-method="delete" href={userType == "Recruteur" ? "/headhunters/sign_out" : userType == "Talent" ? "/talents/sign_out" : "talentists/sign_out"}>
+                    <a rel="nofollow" data-method="delete" href={userType == "Recruteur" ? "/headhunters/sign_out" : userType == "Talent" ? "/talents/sign_out" : "/talentists/sign_out"}>
                       Déconnexion
                     </a>
                   </li>
