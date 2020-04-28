@@ -38,6 +38,7 @@ import guideSuReducer from './reducers/guide_su_reducer';
 import messagerieActiveMobileReducer from './reducers/messagerie_active_mobile_reducer';
 import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
+import nbTalentsReducer from './reducers/nb_talents_reducer';
 import notificationsReducer from './reducers/notifications_reducer';
 import talentsReducer from './reducers/talents_reducer';
 import sidebarActiveMobileReducer from './reducers/sidebar_active_mobile_reducer';
@@ -62,6 +63,7 @@ if(app){
     messagerieActiveMobile: false,
     modalSelected: null,
     modalOpened: false,
+    nbTalents: 0,
     notifications: [],
     sidebarActiveMobile: false,
     talents: null,
@@ -78,6 +80,7 @@ if(app){
     messagerieActiveMobile: messagerieActiveMobileReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,
+    nbTalents: nbTalentsReducer,
     notifications: notificationsReducer,
     talents: talentsReducer,
     sidebarActiveMobile: sidebarActiveMobileReducer,
