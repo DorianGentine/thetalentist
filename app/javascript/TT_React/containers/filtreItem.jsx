@@ -25,7 +25,7 @@ class FiltreItem extends Component {
           this.setState({ checked: true })
           this.props.updateFilter(this.props.job.title.toLowerCase())
           clearInterval(intervalFilter)
-        }else if(this.props.talents != null || i > 4){
+        }else if(this.props.talents != null || i > 10){
           clearInterval(intervalFilter)
         }
       }, 1000)
