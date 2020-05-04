@@ -131,7 +131,6 @@ class Navbar extends Component {
       this.setState(prevState => ({menuMobile: !prevState.menuMobile}))
     }
 
-
     return(
       <div className="navbar-wagon">
         <a href="/" className="navbar-talentist-logo">

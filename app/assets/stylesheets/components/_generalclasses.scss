@@ -1,5 +1,5 @@
 #app{
-  min-height: calc(100vh - 190px);
+  min-height: 100vh;
   background-color: $bground;
 }
 #app.no-background{
@@ -76,6 +76,9 @@
   }
   .red-border{
     border-color: $red !important;
+  }
+  .subtitle{
+    color: $subtitle !important;
   }
   .violet{
     color: $violet !important;
@@ -211,6 +214,9 @@
   }
   .margin-bottom-60{
     margin-bottom: 60px !important
+  }
+  .margin-left-55{
+    margin-left: 55px !important
   }
   .margin-bottom-45{
     margin-bottom: 45px !important

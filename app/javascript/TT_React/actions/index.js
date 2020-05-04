@@ -13,6 +13,7 @@ export const MODAL_OPENED = 'MODAL_OPENED';
 export const NB_TALENTS = 'NB_TALENTS';
 export const POST_COMPTE = 'POST_COMPTE';
 export const SIDEBAR_ACTIVE_MOBILE = 'SIDEBAR_ACTIVE_MOBILE';
+export const STEP_FORM = 'STEP_FORM';
 export const UPDATE_FILTER = 'UPDATE_FILTER';
 
 export async function fetchGET(url, type) {
@@ -118,6 +119,19 @@ export function openSidebar(opened){
   return {
     type: SIDEBAR_ACTIVE_MOBILE,
     payload: !opened
+  }
+}
+
+export function switchStepFrom(step, iteration = "add"){
+  if(iteration == "sub"){
+    step--
+  }else{
+    step++
+  }
+
+  return {
+    type: STEP_FORM,
+    payload: step
   }
 }
 

@@ -15,12 +15,10 @@ class FiltreItem extends Component {
   componentDidMount(){
     const url = new URL(window.location.href);
     const metierActif = url.searchParams.get("metier");
-    console.log(metierActif)
     if(metierActif){
       let i = 0
       let intervalFilter = setInterval(() => {
         i++
-        console.log(i)
         if(metierActif.toLowerCase() == this.props.job.title.toLowerCase() && this.props.talents != null){
           this.setState({ checked: true })
           this.props.updateFilter(this.props.job.title.toLowerCase())
