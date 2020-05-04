@@ -43,28 +43,3 @@
   background-color: $green;
   border: 0px solid $violet;
 }
-
-/* Create the checkmark/indicator (hidden when not checked) */
-// .checkmark:after {
-//   content: "";
-//   position: absolute;
-//   display: none;
-// }
-
-/* Show the checkmark when checked */
-// .checkbox-react input:checked ~ .checkmark:after {
-//   display: none;
-// }
-
-/* Style the checkmark/indicator */
-// .checkbox-react .checkmark:after {
-//   left: 9px;
-//   top: 5px;
-//   width: 5px;
-//   height: 10px;
-//   border: solid white;
-//   border-width: 0 3px 3px 0;
-//   -webkit-transform: rotate(45deg);
-//   -ms-transform: rotate(45deg);
-//   transform: rotate(45deg);
-// }

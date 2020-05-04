@@ -10,7 +10,6 @@ class MessageMagda extends Component {
     const image = "http:\/\/res.cloudinary.com/da4nnrzbu/image/upload/v1583140180/ff0cntbasziwmlmmfuet.jpg"
     const text1 = this.props.text1
     const text2 = this.props.text2 || false
-    console.log(text2)
 
     return(
       <div className="margin-bottom-30">

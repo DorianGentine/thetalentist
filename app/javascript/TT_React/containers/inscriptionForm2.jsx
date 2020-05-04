@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { switchStepFrom } from '../actions';
 
-import InputForm from './inputForm'
+import MultipleChoiceForm from './form/multipleChoiceForm'
 import MessageMagda from './messageMagda'
 
 
@@ -13,7 +13,12 @@ class InscriptionForm2 extends Component {
   render () {
     const actualStep = this.props.stepForm
     const formStep = 2
-    const image = "http:\/\/res.cloudinary.com/da4nnrzbu/image/upload/v1583140180/ff0cntbasziwmlmmfuet.jpg"
+    const choices = [
+      this.props.formValue.city != undefined && this.props.formValue.city.toLowerCase() == "paris" ? undefined : this.props.formValue.city,
+      "Paris",
+      "Nationale",
+      "Internationale"
+    ]
 
     const handleClick = () => {
       this.props.switchStepFrom(actualStep)
@@ -34,8 +39,8 @@ class InscriptionForm2 extends Component {
 
     return(
       <div className={formContainerClass}>
-        <MessageMagda text1={`Ok c'est noté ! En habitant sur ${"Paris"} tu restes ouvert à la mobilité ?`}/>
-        <InputForm title="Ville" placeholder="Paris, 15e arrondissement" name="city"/>
+        <MessageMagda text1={`Ok c'est noté ! En habitant sur ${this.props.formValue.city || "Paris"} tu restes ouvert à la mobilité ?`}/>
+        <MultipleChoiceForm name="mobility" choices={choices}/>
         <button className="btn-violet-square margin-left-55" onClick={handleClick}>Étape suivante</button>
       </div>
     );
