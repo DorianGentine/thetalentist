@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Field } from 'react-final-form';
 
-class MultipleChoiceForm extends Component {
+class RadioForm extends Component {
   render () {
 
     const renderFields = () => this.props.choices.map((choice, index) => {
@@ -13,8 +13,8 @@ class MultipleChoiceForm extends Component {
           <label className="checkbox-form" key={index}>
             <Field
               component="input"
-              name={this.props.name}
               type="radio"
+              name={this.props.name}
               value={choice}
             />
             <div className="check-form">
@@ -26,8 +26,9 @@ class MultipleChoiceForm extends Component {
       }
     })
 
+
     return(
-      <div className="flex margin-left-55 margin-bottom-30">
+      <div className="flex flex-wrap margin-left-55 margin-bottom-30">
         {renderFields()}
       </div>
     );
@@ -44,4 +45,4 @@ class MultipleChoiceForm extends Component {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(null, null)(MultipleChoiceForm);
+export default connect(null, null)(RadioForm);

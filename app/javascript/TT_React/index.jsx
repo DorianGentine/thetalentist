@@ -68,7 +68,7 @@ if(app){
     nbTalents: 0,
     notifications: [],
     sidebarActiveMobile: false,
-    stepForm: 1,
+    stepForm: 11,
     talents: null,
     user: null,
   };

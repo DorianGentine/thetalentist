@@ -1,18 +1,18 @@
 <div id="app"></div>
 
-<div class="form-container simple-new-talent" data-page="1" id="new-talent">
+<!-- <div class="form-container simple-new-talent" data-page="1" id="new-talent">
 
-  <%= render 'shared/formprogression' %>
+  <%#= render 'shared/formprogression' %>
   <h2 class="form-titre-page"><i class="far fa-id-badge"></i> Qui se cache derrière <strong>ce Talent</strong> ?</h2>
 
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%#= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <div class="margin-auto-new-talent">
-      <!-- <#%= f.error_notification %> -->
-      <!-- <div class="linkedin-btn blue-background center-text">
+      <%#= f.error_notification %>
+      <div class="linkedin-btn blue-background center-text">
         <%#= link_to talent_linkedin_omniauth_authorize_path, :class => "button-linkedin" do %>
           <p class="no-margin"><i class="fab fa-linkedin"></i> Connect with Linkedin</p>
         <%# end %>
-      </div> -->
+      </div>
 
       <div class="blue-background">
         <div class="row align-items-center">
@@ -20,11 +20,11 @@
           <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis" for="talent_firstname">Civilité</label>
 
           <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-            <%= f.input :firstname, required: true, autofocus: false, placeholder: "Prénom", label: false, :input_html => { style: "width: 100%"}, error: f.object.errors.messages[:firstname][0] %>
+            <%#= f.input :firstname, required: true, autofocus: false, placeholder: "Prénom", label: false, :input_html => { style: "width: 100%"}, error: f.object.errors.messages[:firstname][0] %>
           </div>
 
           <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-            <%= f.input :last_name, required: true, autofocus: false, placeholder: "Nom", label: false, :input_html => { style: "width: 100%"}, error: f.object.errors.messages[:last_name][0] %>
+            <%#= f.input :last_name, required: true, autofocus: false, placeholder: "Nom", label: false, :input_html => { style: "width: 100%"}, error: f.object.errors.messages[:last_name][0] %>
           </div>
 
         </div>
@@ -33,15 +33,15 @@
           <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis" for="talent_email">Identifiants</label>
 
           <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-            <%= f.input :email, required: true, autofocus: false, placeholder: "exemple@gmail.com", label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:email][1] %>
+            <%#= f.input :email, required: true, autofocus: false, placeholder: "exemple@gmail.com", label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:email][1] %>
           </div>
 
           <div class="col-lg-3 col-xs-12">
-            <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", :input_html => { id: "margin-bottom-mdp", style: "width: 100%" }, label: false, error: f.object.errors.messages[:password][1] %>
+            <%#= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), placeholder: "Mot de passe", :input_html => { id: "margin-bottom-mdp", style: "width: 100%" }, label: false, error: f.object.errors.messages[:password][1] %>
           </div>
 
           <div class="col-lg-3 col-xs-12">
-            <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, :input_html => { :class => "no-margin-xs", style: "width: 100%" }, error: f.object.errors.messages[:password_confirmation][1] %>
+            <%#= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, :input_html => { :class => "no-margin-xs", style: "width: 100%" }, error: f.object.errors.messages[:password_confirmation][1] %>
           </div>
 
         </div>
@@ -50,14 +50,14 @@
           <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis" for="talent_phone">Tel.</label>
 
           <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-            <%= f.input :phone, required: true, autofocus: false, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:phone][0] %>
+            <%#= f.input :phone, required: true, autofocus: false, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:phone][0] %>
           </div>
 
           <label class="col-lg-3 col-xs-12 label-edit text-align-right text-align-left-xs requis" for="talent_city">Ville</label>
 
           <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
             <%#= f.input :zip_code, placeholder: '75007', :input_html => { :id => "", style: "width: 100%", type:"number"  }, label: false %>
-            <%= f.input :city, placeholder: 'Paris, France', :input_html => { :id => "user_address", style: "width: 100%"}, label: false, error: f.object.errors.messages[:city][0]%>
+            <%#= f.input :city, placeholder: 'Paris, France', :input_html => { :id => "user_address", style: "width: 100%"}, label: false, error: f.object.errors.messages[:city][0]%>
           </div>
 
         </div>
@@ -65,15 +65,15 @@
 
       <div class="blue-background margin-top-30">
         <div class="row align-items-center" id="talent_jobs">
-          <%= f.simple_fields_for :talent_job do |u| %>
+          <%#= f.simple_fields_for :talent_job do |u| %>
             <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis">Mon&#8239;domaine&#8239;d'activité</label>
-            <%= render 'talents/talent_job_fields', :u => u, f: f %>
-          <% end %>
-        <!-- </div>
-        <div class="row margin-top-15"> -->
+            <%#= render 'talents/talent_job_fields', :u => u, f: f %>
+          <%# end %>
+        </div>
+        <div class="row margin-top-15">
           <label class="col-lg-2 col-xs-12 margin-top-15 label-edit text-align-right text-align-left-xs requis">Linkedin</label>
           <div class="col-lg-3 col-xs-12 margin-top-15 no-margin-xs">
-            <%= f.input :linkedin, required: true, autofocus: false, placeholder: "https://linkedin.com/demoi", label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:linkedin][0] %>
+            <%#= f.input :linkedin, required: true, autofocus: false, placeholder: "https://linkedin.com/demoi", label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:linkedin][0] %>
           </div>
         </div>
       </div>
@@ -81,8 +81,9 @@
 
 
     <div class="form-actions">
-      <%= link_to 'Précédent', new_session_path(resource_name), { :class => "form-btn form-btn-precedent"} %>
-      <%= f.button :submit, "Suivant", { :class => "form-btn form-btn-suivant"} %>
+      <%#= link_to 'Précédent', new_session_path(resource_name), { :class => "form-btn form-btn-precedent"} %>
+      <%#= f.button :submit, "Suivant", { :class => "form-btn form-btn-suivant"} %>
     </div>
-  <% end %>
+  <%# end %>
 </div>
+ -->

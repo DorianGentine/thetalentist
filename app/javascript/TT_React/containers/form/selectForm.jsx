@@ -6,14 +6,20 @@ import { Field } from 'react-final-form';
 class InputForm extends Component {
   render () {
 
+    const renderOptions = () => this.props.options.map((option, index) => {
+      if(option != undefined){
+        return(
+          <option value={option} key={index}>{option}</option>
+        )
+      }
+    })
+
+
     return(
-      <div className="input-form margin-left-55 margin-bottom-30">
-        <label className="requis" htmlFor={this.props.name}>{this.props.title}</label>
-        <Field
-          component="input"
-          name={this.props.name}
-          placeholder={this.props.placeholder}
-        />
+      <div className="margin-left-55 margin-bottom-30">
+        <Field name="toppings" type="select" component="select" multiple>
+          {renderOptions()}
+        </Field>
       </div>
     );
   }

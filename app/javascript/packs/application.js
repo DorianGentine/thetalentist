@@ -41,6 +41,8 @@ import '../components/renderDate';
 
 import '../components/customScrollBar';
 
+import '../components/formContainerClass';
+
 import { revealModal } from "../components/modal";
 revealModal();
 

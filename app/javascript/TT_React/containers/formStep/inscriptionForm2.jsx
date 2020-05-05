@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { switchStepFrom } from '../actions';
+import { switchStepFrom } from '../../actions';
+import { setFormContainerClass } from '../../../components/formContainerClass';
 
-import MultipleChoiceForm from './form/multipleChoiceForm'
+import RadioForm from '../form/radioForm'
 import MessageMagda from './messageMagda'
 
 
@@ -24,23 +25,10 @@ class InscriptionForm2 extends Component {
       this.props.switchStepFrom(actualStep)
     }
 
-    let formContainerClass = "form-container form-appearance hidden"
-    if(actualStep == formStep + 1){
-      formContainerClass = "form-container form-hidden"
-    }else if(actualStep == formStep){
-      formContainerClass = "form-container"
-    }else if(actualStep == formStep - 1){
-      formContainerClass = "form-container form-appearance"
-      setTimeout(()=>{
-        const formHidden = document.getElementsByClassName("form-container")[1]
-        formHidden.classList.add('hidden')
-      }, 1000)
-    }
-
     return(
-      <div className={formContainerClass}>
+      <div className={setFormContainerClass(actualStep, formStep)}>
         <MessageMagda text1={`Ok c'est noté ! En habitant sur ${this.props.formValue.city || "Paris"} tu restes ouvert à la mobilité ?`}/>
-        <MultipleChoiceForm name="mobility" choices={choices}/>
+        <RadioForm name="mobilities" choices={choices}/>
         <button className="btn-violet-square margin-left-55" onClick={handleClick}>Étape suivante</button>
       </div>
     );

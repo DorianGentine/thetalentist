@@ -25,7 +25,7 @@ class NavbarForm extends Component {
           </a>
           <a href="/" className="navbar-wagon-item navbar-wagon-link">Sauvegarder et quitter</a>
         </div>
-        <hr className="progression-bar" style={{width: `${(step/8)*100}%`}}/>
+        <hr className="progression-bar" style={{width: `${(step/11)*100}%`}}/>
       </div>
     );
   }
