@@ -6,12 +6,17 @@ class Api::V1::ConversationsController < Api::V1::BaseController
 
   def index
     conversations = policy_scope(Mailboxer::Conversation)
-    @conversations = InboxFormat.new.discussions(conversations, current_user)
+    user = current_user
+    if current_user.is_a?(Talentist)
+      if params[:talent_id].present?
+        user = Talent.find(params[:talent_id])
+      elsif params[:headhunter_id].present?
+        user = Headhunter.find(params[:headhunter_id])
+      end
+      conversations = user.mailbox.conversations
+    end
+    @conversations = InboxFormat.new.discussions(conversations, user)
   end
-
-  # def left
-  #   @conversations = InboxFormat.new.discussions(conversations, @user)
-  # end
 
   def show
     @conv =  Mailboxer::Conversation.find(params[:id])

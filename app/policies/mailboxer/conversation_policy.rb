@@ -2,7 +2,11 @@ class Mailboxer::ConversationPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       # scope.all
-      user.mailbox.conversations
+      if user.is_a?(Talentist)
+        scope.all
+      else
+        user.mailbox.conversations
+      end
     end
   end
 

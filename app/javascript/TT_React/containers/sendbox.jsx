@@ -40,7 +40,6 @@ class SendBox extends Component {
     if(this.props.user != null){
       sender_id = this.props.user.id
     }
-    console.log(sender_id)
 
 
     const handleOnChange = value => {
