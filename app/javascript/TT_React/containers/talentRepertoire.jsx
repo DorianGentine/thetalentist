@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ReactSortable } from "react-sortablejs";
 
-import { fetchGET, fetchPost } from '../actions';
+import { fetchGET, fetchPost, updateTalents } from '../actions';
 
 import TalentCard from './talentCard'
 
@@ -11,21 +11,47 @@ class TalentRepertoire extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      talents: null,
       admin: false,
+      talents: null,
     };
   }
 
   componentDidMount(){
-    this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS")
+    if(this.props.talents === null){
+      this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS")
+    }else{
+      this.setState({
+        admin: this.props.talents.user.admin,
+        talents: this.props.talents.talents,
+      })
+      this.props.updateTalents(this.props.talents.talents.length)
+    }
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if(this.props.talents != nextProps.talents && this.props.talents === null){
       this.setState({
-        talents: nextProps.talents.talents,
         admin: nextProps.talents.user.admin,
+        talents: nextProps.talents.talents,
       })
+      this.props.updateTalents(nextProps.talents.talents.length)
+    }
+    if(this.props.filter != nextProps.filter){
+      let nbTalents = 0
+      const filter = nextProps.filter
+      for (let i = 0; i < this.state.talents.length; i++) {
+        const talent = this.state.talents[i]
+        if(filter.includes("pinned") && talent.pin == false){
+          nbTalents++
+        }else if(filter.includes("pinned") && talent.pin != false){
+          if(filter.length === 1 || filter.includes(talent.job.toLowerCase())){
+            nbTalents++
+          }
+        }else if(filter.length === 0 || filter.includes(talent.job.toLowerCase())){
+          nbTalents++
+        }
+      }
+      this.props.updateTalents(nbTalents)
     }
   }
 
@@ -55,6 +81,7 @@ class TalentRepertoire extends Component {
         return null
       }else if(filter.includes("pinned") && talent.pin != false){
         if(filter.length === 1 || filter.includes(talent.job.toLowerCase())){
+          this.setState( nbTalents => { nbTalents: nbTalents + 1})
           return <TalentCard talent={talent} index={index} key={index} />
         }
       }else if(filter.length === 0 || filter.includes(talent.job.toLowerCase())){
@@ -84,11 +111,12 @@ function mapStateToProps(state) {
   return {
     talents: state.talents,
     filter: state.filter,
+    nbTalents: state.nbTalents,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, updateTalents }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TalentRepertoire);

@@ -1,7 +1,7 @@
 class Api::V1::BaseController < ActionController::API
   include Pundit
+  # before_action :current_user
 
-  before_action :current_user
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 
@@ -36,8 +36,12 @@ class Api::V1::BaseController < ActionController::API
     if Rails.env.development?
       response = { type: exception.class.to_s, message: exception.message, backtrace: exception.backtrace }
     else
-      response = { error: "Internal Server Error" }
+      response = { type: exception.class.to_s, message: exception.message, backtrace: exception.backtrace  }
+      # response = { error: "Internal Server Error" }
     end
     render json: response, status: :internal_server_error
   end
+
+
+
 end

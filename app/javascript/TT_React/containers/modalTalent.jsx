@@ -201,7 +201,7 @@ class ModalTalent extends Component {
               <p className="card-job margin-right-30" style={color}>{talent.job}</p>
               <div className="flex-grow-1">
                 <p className="card-position">{talent.position}</p>
-                <p className="card-formation">{talent.city}</p>
+                <p className="card-formation" style={{height: "unset"}}>{talent.city}</p>
               </div>
               <FontAwesomeIcon className="card-bookmark margin-right-5" icon={this.state.icon} onClick={toggleIcon} />
               <p className="margin-right-30 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>
@@ -244,11 +244,11 @@ class ModalTalent extends Component {
                 <div>{renderExperiences()}</div>
               </div>
               <div className="col-md-5">
-                <p className="title-modal" style={{color: color.color}}>Ce que ce talent recherche</p>
+                <p className="title-modal" style={{color: color.color}}>{talent.next_aventure.looking_for != false ? "Ce que ce talent recherche" : ""}</p>
                 <p>{talent.next_aventure.looking_for}</p>
-                <p className="title-modal" style={{color: color.color}}>Comment je vois mon métier</p>
-                <p>{talent.next_aventure.good_manager}</p>
-                <p className="title-modal" style={{color: color.color}}>Un bon manager selon ce talent</p>
+                <p className="title-modal" style={{color: color.color}}>{talent.next_aventure.see_my_job != false ? "Comment je vois mon métier" : ""}</p>
+                <p>{talent.next_aventure.see_my_job}</p>
+                <p className="title-modal" style={{color: color.color}}>{talent.next_aventure.good_manager != false ? "Un bon manager selon ce talent" : ""}</p>
                 <p>{talent.next_aventure.good_manager}</p>
               </div>
               <div className="col-md-4 light-gray-background padding-30">

@@ -1,312 +1,715 @@
-.premiere-ligne{
-  height: 60px;
-  border-bottom: 1px solid $gray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  h4{
-    margin: 0;
-    font-size: 20px
-  }
-}
-.strong-color {
-  p {
-    color: red;
-  }
-}
-.index-talents{
-  padding: 20px;
-  height: calc(100vh - 130px);
-  overflow: auto;
-  a{
-    text-decoration: none;
-  }
-  h3{
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #5ED1AD;
-  }
-  .conversation-card{
-    // display: flex;
-    // align-items: center;
-    padding: 10px;
-    border-radius: 5px;
-    p{
-      margin: 0;
-    }
-  }
-  .conversation-card:hover{
-    background-color: rgba(3,13,89,0.1);
-  }
-  .photo-profil{
-    // transform: scale(0.3, 0.3);
-    // margin: -67px -47px -67px -57px;
-    // min-width: 192px;
-    width: 50px;
-    float: left;
-    height: 50px;
-    margin-right: 15px;
-    .initiale{
-      font-size: 18px;
-      color: white
-    }
-    .statut{
-      height: 20px;
-      width: 20px;
-      border: 1px;
-    }
-  }
-  .prenom-contact{
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: capitalize;
-  }
-  .apercu-message{
-    overflow: hidden;
-    height: 25px;
-  }
+.messagerie-title{
+  color: #000748;
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 30px;
 }
 
-.nom-discussion{
-  h2{
-    font-size: 20px;
+.border-lines-2{
+  margin-top: 25px;
+  border: 1px solid $lines-2;
+  padding: 30px 20px;
+}
+
+.tous-mes-messages {
+  color: $dark-blue;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  cursor: pointer;
+  span > svg{
+    font-size: 12px;
   }
+}
+.dropdown-tsmesmsg{
+  top: 23px;
+  left: 130px;
+  background-color: white;
+  border: 1px solid $lines-2;
+  padding: 15px;
+  border-radius: 2px;
   p{
-    color: $gray;
-    font-weight: 100;
-    font-style: oblique;
-  }
-}
-
-.link-profil{
-  a{
-    display: flex;
-    justify-content: space-between;
-    background-color: lightgray;
-    padding: 20px;
-    p{
-      margin: 0;
-      color: darkgray;
-    }
-    p:last-child{
-      color: $green;
-      font-weight: 600;
-    }
-  }
-  a:hover{
-    text-decoration: none;
-    background-color: $green;
-    transition: background-color ease-in-out 0.15s;
-    p:last-child{
-      color: $red;
-      transition: color ease-in-out 0.15s;
-    }
-  }
-}
-@media screen and (max-width: 770px) {
-  .link-profil a{
-    padding: 0 20px;
-    justify-content: flex-end;
-  }
-}
-
-#conversation{
-  padding: 10px 50px 0;
-  position: relative;
-  overflow: auto;
-
-
-
-  .message{
-    .avatar{
-      height: 35px;
-      width: 35px;
-      background-color: lightgray;
-      border-radius: 20px;
-      position: relative;
-      p{
-        font-size: 14px;
-        color: white;
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-      i{
-        font-size: 14px;
-        color: white;
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-      img{
-        height: 35px;
-      }
-    }
-    .x-commented{
-      font-size: 12px;
-      color: $gray;
-      margin: 0;
-      display: inline-block
-    }
-    .the-message{
-      max-width: 75%;
-      padding: 10px;
-      background-color: $green;
-      white-space: pre-line;
-      border-radius: 8px;
-      a:hover{
-        color: white;
-      }
-    }
-  }
-  .left {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    .avatar{
-      display: inline-block;
-      margin-left: -40px;
-      margin-bottom: -20px;
-    }
-    .x-commented{
-      margin-left: 6px;
-    }
-    .the-message{
-      background-color: #EEEEEE;
-      a:hover{
-        color: $green;
-      }
-    }
-  }
-  .right{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    .avatar{
-      margin-right: -40px;
-      margin-bottom: -30px;
-    }
-    .x-commented{
-      margin-right: 6px;
-    }
-  }
-}
-
-.conversation-card {
-  .avatar-conversation {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    color: $dark-blue;
+    margin-bottom: 3px;
+    padding: 5px;
+    border-radius: 2px;
     cursor: pointer;
+    transition: .5s;
   }
+  p:hover, p.active{
+    background-color: $lines-2
+  }
+}
+.dropdown-tsmesmsg :before {
+  content: ' ';
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  left: 11px;
+  top: -6px;
+  background-color: white;
+  transform: rotate(45deg);
+  border-left: 1px solid $lines-2;
+  border-top: 1px solid $lines-2;
+}
+.dropdown-tsmesmsg.position-more{
+  top: 36px;
+  left: 11px;
+}
+
+.message-box{
+  background-color: white;
+  border: 1px solid white;
+  width: 100%;
+  display: flex;
+  padding: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+.message-box:hover{
+  border: 1px solid #BFC6D4;
+  background-color: transparent;
+}
+.message-box.active{
+  border: 1px solid #BFC6D4;
+  background-color: transparent;
+}
+.message-box:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+.messagebox-title{
+  font-size: 14px;
+  font-weight: 900;
+  color: $dark-blue;
+  text-decoration: underline;
+}
+.messageriebox-subtitle{
+  color: $subtitle;
+  font-size: 13px;
+  font-style: oblique;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.photo-conv{
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  margin-right: 15px;
+  color: white;
+  background-color: $gray;
+  text-align: center;
+  font-size: 2em;
+}
+.photo-conv-small{
+  min-width: 20px;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+}
+.photo-conv-lg{
+  min-width: 80px;
+  width: 80px;
+  height: 80px;
+  font-size: 4em;
+}
+
+.profil-url{
+  display: block;
+  background-color: $violet;
+  border: 1px solid $violet;
+  border-radius: 2px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-weight: 800;
+  transition: .5s
+}
+.profil-url:hover{
+  background-color: transparent;
+  border: 1px solid $violet;
+  color: $violet;
+}
+
+.messagerie-active-mobile{
+  position: fixed;
+  top: 70px;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background-color: $bground;
+  padding: 20px 20px 0;
+  transition: .5s;
+}
+.messagerie-active-mobile.hidden-messagerie{
+  left: -100vw;
+}
+
+#messages-box{
+  // max-height: calc(100vh - 350px);
+  overflow-y: scroll;
+  padding: 30px 0;
+  transition: .5s;
+}
+
+.message-left-position {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.message-left {
+  background-color: $lines-2;
+  padding: 15px;
+  border-radius: 5px 5px 5px 0;
+  p{
+    color: $dark-gray;
+  }
+}
+
+.message-right-position {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  .message-date{
+    margin-right: 15px;
+    text-align: end;
+  }
+}
+.message-right {
+  background-color: $violet;
+  padding: 15px;
+  border-radius: 5px 5px 0;
+  margin-right: 15px;
+  p{
+    color: white;
+  }
+}
+
+.message-date{
+  color: $subtitle;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  margin-bottom: 0;
+}
+
+.doc-sending{
+  overflow-y: hidden;
+  padding: 10px;
+  border-radius: 2px;
+  background-color: #2C3167;
+  animation: apparition .5s ease-out;
+  p{
+    flex-grow: 1;
+    margin: 0;
+    color: white;
+    z-index: 1;
+  }
+  svg{
+    color: white;
+    z-index: 1;
+  }
+}
+@keyframes apparition {
+  0% {max-height: 0}
+  100% {max-height: 100px}
+}
+.background-doc-sending{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  background-color: $violet;
+  border-radius: 2px;
+  animation: fill 2s ease-out;
+}
+@keyframes fill {
+  0% {width: 0}
+  100% {width: 100%}
+}
+
+#message, #message_refus{
+  color: black;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  resize: none;
+}
+#message:disabled{
+  cursor: not-allowed;
+}
+#message:focus, #message_refus:focus {
+  box-shadow: none !important;
+}
+
+.send-message-btn {
+  height: 35px;
+  min-width: 35px;
+  margin: 15px;
+  border-radius: 100px;
+  background-color: $violet;
+  padding: unset;
+  border: 0;
+  svg{
+    color: white;
+  }
+}
+.send-message-btn:disabled{
+  background-color: $lines-2;
+  cursor: not-allowed;
+  svg{
+    color: $subtitle;
+  }
+}
+.send-doc-btn {
+  height: 2em;
+  min-width: 1em;
+  margin-top: 13px;
+  color: $subtitle !important;
+  cursor: pointer;
+}
+.send-doc-btn:disabled{
+  cursor: not-allowed;
+}
+.participant-fullname{
+  color: $dark-blue;
+  font-size: 16px;
+  font-weight: 900;
+  // line-height: 22px;
+  text-align: center;
+}
+.participant-job{
+  color: $dark-blue;
+  font-size: 14px;
+  font-weight: 500;
+  // line-height: 19px;
+  text-align: center;
+}
+.participant-place {
+  color: $subtitle;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 24px;
+  svg{
+    color: $subtitle;
+    margin-right: 5px;
+  }
+}
+
+.criteres {
+  color: #525A6D;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+.criteres-reponses {
+  color: $label;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 20px;
+}
+
+.sidebar-title{
+  color: $label;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 22px;
 }
 
 textarea{
   color: black;
 }
 
-.boite-envoi{
-  // height: calc(30% - 90px);
-  position: relative;
-  textarea {
-    // height: 90px;
-    color: black;
-    width: 100%;
-    border-top: 4px solid $violet;
-    border-right: 0px;
-    border-bottom: 1px solid $gray;
-    border-left: 0px;
-    padding: 10px;
-  }
-  #send-bar{
-    display: flex;
-    justify-content: space-between;
-    .label-file-mailboxer{
-      padding: 0 20px;
-      i{
-        color: black;
-        font-size: 24px;
-      }
-    }
-    .label-file-mailboxer:hover{
-      cursor: pointer;
-      i{
-        color: $green;
-        transition: 0.15s;
-      }
-    }
-    #uploadFile{
-      border: none;
-      flex-grow: 1;
-    }
-  }
-  .gray-button {
-    background-color: $gray;
-    cursor: default !important;
-    box-shadow: 1px 3px 8px rgba(0,0,0,0.17) !important;
-  }
-  .accept-relation{
-    position: absolute;
-    top: 7px;
-    left: 3px;
-    bottom: -22px;
-    right: 3px;
-    z-index: 1;
-    background-color: rgba(216, 216, 216, 0.87);
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    input{
-      position: unset;
-      margin: 20px;
-    }
-    input:last-child{
-      background-color: $red;
-    }
-  }
-  .center-text {
+.white-box{
+  border-radius: 15px 0 0 15px;
+  background-color: white;
+  box-shadow: -6px 0 16px 0 rgba(39,50,67,0.05);
+  padding: 40px;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+}
+.white-box-mobile{
+  position: fixed;
+  z-index: 21;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background-color: white;
+  padding: 30px 20px 0;
+  transition: .5s;
+}
+.white-box-mobile.hidden-wbm{
+  left: 100vw;
+}
+
+.more-messagerie{
+  top: 5px;
+  left: 20px;
+  font-size: 20px;
+  color: $dark-blue;
+  cursor: pointer;
+}
+
+.close-sidebar{
+  top: 20px;
+  right: 20px;
+  font-size: 20px !important;
+  color: $dark-blue !important;
+  cursor: pointer;
+}
+
+.text-pf{
+  padding: 0 45px;
+  p{
+    color: $label;
+    font-size: 14px;
+    font-weight: 500;
     text-align: center;
   }
-  #mailboxer_message_attachment{
-    // height: 24px;
-    // width: 24px;
-    left: 20px;
-    // opacity: 0;
-  }
-  // #mailboxer_message_attachment:hover{
-  //   cursor: pointer;
-  //   .fa-paperclip{
-  //     color: $green;
-  //     transition: 0.15s;
-  //   }
-  // }
-}
-
-.doc-echanges{
-  padding: 20px;
-  i{
-    display: inline-block;
-    color: $green;
-  }
-  p{
-    display: inline-block;
+  .text-pf-1{
+    font-weight: 900;
   }
 }
-
-
-
-
-@media screen and (max-width: 767px) {
-  .col-centre{
-    width: 100%;
-  }
+.text-pf-btn{
+  margin: 0 30px;
+  border-radius: 50px;
+  border: 1px solid $green;
+  color: $green;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: .5s;
 }
+.text-pf-btn-refuser{
+  border-color: $red;
+  color: $red;
+}
+.text-pf-btn:hover{
+  background-color: $green;
+  color: white
+}
+.text-pf-btn-refuser:hover{
+  background-color: $red;
+  color: white
+}
+
+//OLD VERSION
+// .premiere-ligne{
+//   height: 60px;
+//   border-bottom: 1px solid $gray;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   h4{
+//     margin: 0;
+//     font-size: 20px
+//   }
+// }
+// .strong-color {
+//   p {
+//     color: red;
+//   }
+// }
+// .index-talents{
+//   padding: 20px;
+//   height: calc(100vh - 130px);
+//   overflow: auto;
+//   a{
+//     text-decoration: none;
+//   }
+//   h3{
+//     font-size: 16px;
+//     font-weight: 600;
+//     text-transform: uppercase;
+//     color: #5ED1AD;
+//   }
+//   .conversation-card{
+//     // display: flex;
+//     // align-items: center;
+//     padding: 10px;
+//     border-radius: 5px;
+//     p{
+//       margin: 0;
+//     }
+//   }
+//   .conversation-card:hover{
+//     background-color: rgba(3,13,89,0.1);
+//   }
+//   .photo-profil{
+//     // transform: scale(0.3, 0.3);
+//     // margin: -67px -47px -67px -57px;
+//     // min-width: 192px;
+//     width: 50px;
+//     float: left;
+//     height: 50px;
+//     margin-right: 15px;
+//     .initiale{
+//       font-size: 18px;
+//       color: white
+//     }
+//     .statut{
+//       height: 20px;
+//       width: 20px;
+//       border: 1px;
+//     }
+//   }
+//   .prenom-contact{
+//     font-size: 16px;
+//     font-weight: 600;
+//     text-transform: capitalize;
+//   }
+//   .apercu-message{
+//     overflow: hidden;
+//     height: 25px;
+//   }
+// }
+
+// .nom-discussion{
+//   h2{
+//     font-size: 20px;
+//   }
+//   p{
+//     color: $gray;
+//     font-weight: 100;
+//     font-style: oblique;
+//   }
+// }
+
+// .link-profil{
+//   a{
+//     display: flex;
+//     justify-content: space-between;
+//     background-color: lightgray;
+//     padding: 20px;
+//     p{
+//       margin: 0;
+//       color: darkgray;
+//     }
+//     p:last-child{
+//       color: $green;
+//       font-weight: 600;
+//     }
+//   }
+//   a:hover{
+//     text-decoration: none;
+//     background-color: $green;
+//     transition: background-color ease-in-out 0.15s;
+//     p:last-child{
+//       color: $red;
+//       transition: color ease-in-out 0.15s;
+//     }
+//   }
+// }
+// @media screen and (max-width: 770px) {
+//   .link-profil a{
+//     padding: 0 20px;
+//     justify-content: flex-end;
+//   }
+// }
+
+// #conversation{
+//   padding: 10px 50px 0;
+//   position: relative;
+//   overflow: auto;
+
+
+
+//   .message{
+//     .avatar{
+//       height: 35px;
+//       width: 35px;
+//       background-color: lightgray;
+//       border-radius: 20px;
+//       position: relative;
+//       p{
+//         font-size: 14px;
+//         color: white;
+//         margin: 0;
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
+//       }
+//       i{
+//         font-size: 14px;
+//         color: white;
+//         margin: 0;
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
+//       }
+//       img{
+//         height: 35px;
+//       }
+//     }
+//     .x-commented{
+//       font-size: 12px;
+//       color: $gray;
+//       margin: 0;
+//       display: inline-block
+//     }
+//     .the-message{
+//       max-width: 75%;
+//       padding: 10px;
+//       background-color: $green;
+//       white-space: pre-line;
+//       border-radius: 8px;
+//       a:hover{
+//         color: white;
+//       }
+//     }
+//   }
+//   .left {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+//     .avatar{
+//       display: inline-block;
+//       margin-left: -40px;
+//       margin-bottom: -20px;
+//     }
+//     .x-commented{
+//       margin-left: 6px;
+//     }
+//     .the-message{
+//       background-color: #EEEEEE;
+//       a:hover{
+//         color: $green;
+//       }
+//     }
+//   }
+//   .right{
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-end;
+//     .avatar{
+//       margin-right: -40px;
+//       margin-bottom: -30px;
+//     }
+//     .x-commented{
+//       margin-right: 6px;
+//     }
+//   }
+// }
+
+// .conversation-card {
+//   .avatar-conversation {
+//     width: 50px;
+//     height: 50px;
+//     border-radius: 50%;
+//     cursor: pointer;
+//   }
+// }
+
+
+// .boite-envoi{
+//   // height: calc(30% - 90px);
+//   position: relative;
+//   textarea {
+//     // height: 90px;
+//     color: black;
+//     width: 100%;
+//     border-top: 4px solid $violet;
+//     border-right: 0px;
+//     border-bottom: 1px solid $gray;
+//     border-left: 0px;
+//     padding: 10px;
+//   }
+//   #send-bar{
+//     display: flex;
+//     justify-content: space-between;
+//     .label-file-mailboxer{
+//       padding: 0 20px;
+//       i{
+//         color: black;
+//         font-size: 24px;
+//       }
+//     }
+//     .label-file-mailboxer:hover{
+//       cursor: pointer;
+//       i{
+//         color: $green;
+//         transition: 0.15s;
+//       }
+//     }
+//     #uploadFile{
+//       border: none;
+//       flex-grow: 1;
+//     }
+//   }
+//   .gray-button {
+//     background-color: $gray;
+//     cursor: default !important;
+//     box-shadow: 1px 3px 8px rgba(0,0,0,0.17) !important;
+//   }
+//   .accept-relation{
+//     position: absolute;
+//     top: 7px;
+//     left: 3px;
+//     bottom: -22px;
+//     right: 3px;
+//     z-index: 1;
+//     background-color: rgba(216, 216, 216, 0.87);
+//     border-radius: 5px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     input{
+//       position: unset;
+//       margin: 20px;
+//     }
+//     input:last-child{
+//       background-color: $red;
+//     }
+//   }
+//   .center-text {
+//     text-align: center;
+//   }
+//   #mailboxer_message_attachment{
+//     // height: 24px;
+//     // width: 24px;
+//     left: 20px;
+//     // opacity: 0;
+//   }
+//   // #mailboxer_message_attachment:hover{
+//   //   cursor: pointer;
+//   //   .fa-paperclip{
+//   //     color: $green;
+//   //     transition: 0.15s;
+//   //   }
+//   // }
+// }
+
+// .doc-echanges{
+//   padding: 20px;
+//   i{
+//     display: inline-block;
+//     color: $green;
+//   }
+//   p{
+//     display: inline-block;
+//   }
+// }
+
+
+
+
+// @media screen and (max-width: 767px) {
+//   .col-centre{
+//     width: 100%;
+//   }
+// }
 
 
 

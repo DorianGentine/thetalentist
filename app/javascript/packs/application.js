@@ -37,6 +37,10 @@ import '../components/filterMetier';
 
 import '../TT_React/index.jsx';
 
+import '../components/renderDate';
+
+import '../components/customScrollBar';
+
 import { revealModal } from "../components/modal";
 revealModal();
 
@@ -67,10 +71,6 @@ verifDateWithMonthAndYear();
 import { initSelect2, initSelectize } from '../components/select2';
 initSelect2()
 initSelectize()
-
-import { fetchNotifications } from "../components/notification";
-fetchNotifications();
-
 
 import { initAutocomplete } from '../components/init_autocomplete';
 initAutocomplete();

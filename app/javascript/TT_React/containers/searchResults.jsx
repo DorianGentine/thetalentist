@@ -5,28 +5,34 @@ import { connect } from 'react-redux';
 // import { fetchGET, actionTest } from '../actions';
 
 class SearchResults extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      nbTalents: 0,
-    };
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     nbTalents: 0,
+  //   };
+  // }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if(this.props.filter != nextProps.filter){
-      setTimeout(() => {
-        const nbCards = document.getElementsByClassName('card').length
-        this.setState({ nbTalents: nbCards})
-      }, 100);
-    }
+  // componentDidMount(){
+  //   if(this.props.talents != null){
+  //     this.setState({ nbTalents: this.props.talents.talents.length})
+  //   }
+  // }
 
-    if(this.props.talents != nextProps.talents){
-      this.setState({ nbTalents: nextProps.talents.talents.length})
-    }
-  }
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   if(this.props.filter != nextProps.filter){
+  //     setTimeout(() => {
+  //       const nbCards = document.getElementsByClassName('card').length
+  //       this.setState({ nbTalents: nbCards})
+  //     }, 100);
+  //   }
+
+  //   if(this.props.talents != nextProps.talents){
+  //     this.setState({ nbTalents: nextProps.talents.talents.length})
+  //   }
+  // }
 
   render () {
-    let nbTalents = this.state.nbTalents
+    let nbTalents = this.props.nbTalents
     let text
 
     if(nbTalents > 1){
@@ -49,6 +55,7 @@ function mapStateToProps(state) {
   return {
     talents: state.talents,
     filter: state.filter,
+    nbTalents: state.nbTalents,
   };
 }
 

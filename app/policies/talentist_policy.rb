@@ -22,9 +22,15 @@ class TalentistPolicy < ApplicationPolicy
   def show?
     user == record
   end
-
+  def left?
+    true
+  end
   def repertoire?
     user == record
+  end
+
+  def navbar?
+    true
   end
 
   def analytics?

@@ -1,6 +1,8 @@
 class Headhunter < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  acts_as_token_authenticatable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -45,6 +47,22 @@ class Headhunter < ApplicationRecord
     Relationship.where("headhunter_id = ? AND talent_id = ?", self.id, talent.id).size > 0
   end
 
+  def witch_status?(talent)
+    re = Relationship.where(headhunter_id: self.id, talent_id: talent.id)
+    return talent.is_a?(Talent) ? re[0].status : "Accepter"
+  end
+
+  def his_profession
+    return "#{self.job} de #{self.startup.name}"
+  end
+  def avatar
+    self.photo
+  end
+
+  def profil_url
+    return "/headhunters/#{self.id}"
+  end
+
   def capitalize_name_firstname
     self.last_name = self.last_name.capitalize if self.last_name && !self.last_name.blank?
     self.firstname = self.firstname.capitalize if self.firstname && !self.firstname.blank?
@@ -56,7 +74,7 @@ class Headhunter < ApplicationRecord
     "#{self.firstname.split(//).first.upcase if !self.firstname.blank? }#{self.last_name.split(//).first.upcase if !self.last_name.blank? }"
   end
 
-  def completed_totaly
+  def completing
     CompletedHeadhunter.new(self).completed_totaly
   end
 

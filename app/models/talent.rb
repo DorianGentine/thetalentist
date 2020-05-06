@@ -1,6 +1,7 @@
 class Talent < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  acts_as_token_authenticatable
 
   devise  :database_authenticatable,
           :registerable,
@@ -129,8 +130,32 @@ class Talent < ApplicationRecord
   end
 
   def witch_status?(headhunter)
-    re = Relationship.where(headhunter_id: headhunter.id, talent_id: self.id)
-    return re[0].status
+    if headhunter.is_a?(Headhunter)
+      re = Relationship.where(headhunter_id: headhunter.id, talent_id: self.id)
+      return re[0].status
+    else
+      return "Accepter"
+    end
+  end
+
+  def his_profession
+    if self.experiences.count > 0 && !self.experiences.last.position.nil?
+      self.experiences.last.position
+    else
+      "NaN"
+    end
+  end
+
+  def avatar
+    if self.linkedin_picture_url.present? && self.display_linkedin_picture
+      return self.linkedin_picture_url
+    else
+      return self.photo
+    end
+  end
+
+  def profil_url
+    return "/talents/#{self.id}"
   end
 
   def is_a_model
@@ -263,6 +288,9 @@ class Talent < ApplicationRecord
       talentist.reply_to_conversation(conversations.first, "Ravi de te revoir sur notre plateforme #{self.firstname} ! N'hésite pas si tu as des questions", nil, true, true, nil)
     else
       talentist.send_message(self, "Bonjour #{self.firstname}, bienvenue sur notre plateforme!", "#{self.id}")
+      conversation = Mailboxer::Conversation.between(talentist, self).first
+      ConfigConversation.create(conversation_id: conversation.id, user_id: talentist.id, user_email: talentist.email)
+      ConfigConversation.create(conversation_id: conversation.id, user_id: self.id, user_email: self.email)
       self.send_accepted
     end
   end
@@ -317,6 +345,7 @@ class Talent < ApplicationRecord
       end
     end
   end
+
 
   def alerte_headhunters
     jobs = self.jobs

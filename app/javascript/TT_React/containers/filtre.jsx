@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { fetchGET, updateFilter } from '../actions';
+import { fetchGET, updateFilter, updateTalents } from '../actions';
 
 import FiltreItem from './filtreItem'
 import ModalGuide from './modalGuide'
@@ -16,7 +16,9 @@ class Filtre extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchGET('/api/v1/jobs', "FETCH_JOBS")
+    if (this.props.jobs === null) {
+      this.props.fetchGET('/api/v1/jobs', "FETCH_JOBS")
+    }
   }
 
   render () {
@@ -30,6 +32,7 @@ class Filtre extends Component {
 
     const handleChange = (checked) => {
       this.setState({ checked: event.target.checked })
+      this.props.updateTalents(-1)
       this.props.updateFilter("pinned")
     }
 
@@ -67,7 +70,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, updateFilter }, dispatch);
+  return bindActionCreators({ fetchGET, updateFilter, updateTalents }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filtre);

@@ -33,7 +33,7 @@
                 <%= render "shared/notif_message" %>
               <% end %>
             <% end %>
-            <div class="fixed guide-su" id="guide-su-5">
+            <!-- <div class="fixed guide-su" id="guide-su-5">
               <div class="guide-point"></div>
               <div class="guide-text">
                 <div class="flex space-between">
@@ -47,18 +47,18 @@
                   <%= link_to "Suivant", headhunter_path(current_headhunter, query: "new_member6"), class:"white flex-grow-1 padding-vertical-5 text-center" %>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         <% end %>
 
         <div class="lien-messagerie relative">
           <%= link_to headhunter_path(current_headhunter), class:"navbar-wagon-item navbar-wagon-link" do %>
             <i class="fa fa-user"></i> PROFIL
-            <% if current_headhunter.completed_totaly < 95 %>
+            <% if current_headhunter.completing < 95 %>
               <%= render "shared/notif_point" %>
             <% end %>
           <% end %>
-          <div class="fixed guide-su" id="guide-su-6">
+          <!-- <div class="fixed guide-su" id="guide-su-6">
             <div class="guide-point"></div>
             <div class="guide-text">
               <div class="flex space-between">
@@ -72,7 +72,7 @@
                 <a class="white flex-grow-1 padding-vertical-5 text-center close_guide_6">Fermer</a>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
 
 
@@ -212,93 +212,92 @@
 
 
     <!-- Menu appearing at page bottom -->
-    <% if current_user && !current_talentist %>
-      <% if current_user.validated  %>
+<!--     <%# if current_user && !current_talentist %>
+      <%# if current_user.validated  %>
 
 
         <div class="bottom-menu">
-          <% if headhunter_signed_in? %>
+          <%# if headhunter_signed_in? %>
 
-            <!-- Links when logged in -->
             <div class="bottom-menu-item">
-              <%= link_to "RÉPERTOIRE", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
+              <%#= link_to "RÉPERTOIRE", repertoire_path, class: "navbar-wagon-item navbar-wagon-link" %>
             </div>
-            <% if current_headhunter.mailbox.conversations.count > 0 %>
+            <%# if current_headhunter.mailbox.conversations.count > 0 %>
               <div class="bottom-menu-item lien-messagerie">
-                <%= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link lien-messagerie" %>
-                <% if current_user.count_unread_message > 0 %>
-                  <%= render "shared/notif_message" %>
-                <% end %>
+                <%#= link_to "MESSAGERIE", conversation_path(current_headhunter.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link lien-messagerie" %>
+                <%# if current_user.count_unread_message > 0 %>
+                  <%#= render "shared/notif_message" %>
+                <%# end %>
               </div>
-            <% else %>
+            <%# else %>
               <div class="bottom-menu-item">
                 <p>Aucun message</p>
               </div>
-            <% end %>
+            <%# end %>
             <div class="bottom-menu-item">
               <div class="navbar-wagon-item">
                 <div class="dropup">
                   <i class="fa fa-bars dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown"></i>
                   <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
                     <li class="lien-messagerie">
-                      <%= link_to headhunter_path(current_headhunter) do %>
-                        <i class="fa fa-user"></i> <%= t(".profil", default: "Profil") %>
-                        <% if current_headhunter.completed_totaly < 95 %>
-                          <%= render "shared/notif_point" %>
-                        <% end %>
-                      <% end %>
+                      <%#= link_to headhunter_path(current_headhunter) do %>
+                        <i class="fa fa-user"></i> <%#= t(".profil", default: "Profil") %>
+                        <%# if current_headhunter.completing < 95 %>
+                          <%#= render "shared/notif_point" %>
+                        <%# end %>
+                      <%# end %>
                     </li>
                     <li>
-                      <%= link_to destroy_headhunter_session_path, method: :delete do %>
-                        <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-                      <% end %>
+                      <%#= link_to destroy_headhunter_session_path, method: :delete do %>
+                        <i class="fa fa-sign-out"></i>  <%#= t(".sign_out", default: "Log out") %>
+                      <%# end %>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
 
-          <% elsif talent_signed_in?%>
+          <%# elsif talent_signed_in?%>
 
             <div class="bottom-menu-item">
-              <%= link_to "START-UP", repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" %>
+              <%#= link_to "START-UP", repertoire_startup_path, class: "navbar-wagon-item navbar-wagon-link" %>
             </div>
-            <% if current_talent.mailbox.conversations.count > 0 %>
+            <%# if current_talent.mailbox.conversations.count > 0 %>
               <div class="bottom-menu-item lien-messagerie">
-                <%= link_to conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
+                <%#= link_to conversation_path(current_talent.mailbox.conversations.last), class: "navbar-wagon-item navbar-wagon-link" do %>
                   MESSAGERIE
-                  <%= render "shared/notif_message" %>
-                <% end %>
+                  <%#= render "shared/notif_message" %>
+                <%# end %>
               </div>
-            <% else %>
+            <%# else %>
               <div class="bottom-menu-item">
                 <p class="navbar-wagon-item navbar-wagon-link gray no-margin">MESSAGERIE</p>
               </div>
-            <% end %>
+            <%# end %>
             <div class="bottom-menu-item">
               <div class="navbar-wagon-item">
                 <div class="dropup">
                   <i class="fa fa-bars dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown"></i>
                   <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
                     <li>
-                      <%= link_to talent_path(current_talent) do %>
-                        <i class="fa fa-user"></i> <%= t(".profil", default: "Profil") %>
-                      <% end %>
+                      <%#= link_to talent_path(current_talent) do %>
+                        <i class="fa fa-user"></i> <%#= t(".profil", default: "Profil") %>
+                      <%# end %>
                     </li>
                     <li>
-                      <%= link_to destroy_talent_session_path, method: :delete do %>
-                        <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-                      <% end %>
+                      <%#= link_to destroy_talent_session_path, method: :delete do %>
+                        <i class="fa fa-sign-out"></i>  <%#= t(".sign_out", default: "Log out") %>
+                      <%# end %>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
 
-          <% end %>
+          <%# end %>
         </div>
-      <% end %>
-    <% end %>
+      <%# end %>
+    <%# end %> -->
   </div>
 
   <div class="navbar-wagon-margin" style="margin-top: 70px"></div>
