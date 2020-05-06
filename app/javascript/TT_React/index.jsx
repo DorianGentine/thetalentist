@@ -68,7 +68,7 @@ if(app){
     nbTalents: 0,
     notifications: [],
     sidebarActiveMobile: false,
-    stepForm: 11,
+    stepForm: 1,
     talents: null,
     user: null,
   };
@@ -152,6 +152,7 @@ if(app){
           <Route path="/conversations/:id" component={conversation} />
           <Route path="/headhunters/:id" component={profilRecruteur} />
           <Route path="/talents/sign_up" component={inscriptionTalent} />
+          <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/talents/:id" component={profilTalent} />
           <Route path="/messagerie" component={conversation} />
           <Route path="/repertoire" component={repertory} />

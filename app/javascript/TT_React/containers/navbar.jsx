@@ -107,7 +107,6 @@ class Navbar extends Component {
     }
     if(this.props.notifications.length != 0){
       notifications = this.props.notifications
-      console.log(notifications)
     }
     if(path == "dashboardHeadhunter" || path == "dashboardTalent" || path == "profil"){
       pageReact = false

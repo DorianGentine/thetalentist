@@ -51,10 +51,10 @@ class Relationship < ApplicationRecord
     end
 
     def accepeted_a_notofication
-      Notification.create(title: "#{self.talent.full_name} à accepté de rentrer en contact avec #{self.headhunter.full_name} de #{self.headhunter.startup.name} ")
+      Notification.create(title: "#{self.talent.full_name} a accepté de rentrer en contact avec #{self.headhunter.full_name} de #{self.headhunter.startup.name} ")
     end
 
     def refused_a_notofication
-      Notification.create(title: "#{self.talent.full_name} à refuser de rentrer en contact avec #{self.headhunter.full_name} de #{self.headhunter.startup.name} ")
+      Notification.create(title: "#{self.talent.full_name} a refusé de rentrer en contact avec #{self.headhunter.full_name} de #{self.headhunter.startup.name} ")
     end
 end

@@ -27,6 +27,20 @@
     color: $violet;
   }
 
+// btn-white-border
+  .btn-white-border{
+    padding: 5px 10px;
+    border: 1px solid white;
+    border-radius: 2px;
+    background-color: transparent;
+    color: white;
+    transition: .5s
+  }
+  .btn-white-border:hover{
+    background-color: white;
+    color: $red;
+  }
+
 // btn-edition
   .btn-edition-container{
     position: absolute;
