@@ -274,6 +274,7 @@ class Talent < ApplicationRecord
 
   def visible_action(action)
     self.visible = action
+    self.position = 0
     self.save
   end
 
