@@ -29,7 +29,6 @@ class Conversation extends Component {
         width: "100%"
       }
     }
-    console.log(talent_id)
 
     // S'affiche quand Talentist est sur conversation d'un autre
     const renderAlert = () => {
