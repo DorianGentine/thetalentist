@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // import { fetchGET } from '../actions';
 
@@ -13,6 +14,11 @@ class Conversation extends Component {
 
   render () {
     const isMobile = this.props.isMobile
+    const talent_id = this.props.match.params.talent_id || false
+    let convUrl = "/conv"
+    if(this.props.user){
+      convUrl = this.props.user.url.conv
+    }
     let styleContainer = {
       padding: "40px 20px 0 85px",
       width: "100%"
@@ -23,10 +29,23 @@ class Conversation extends Component {
         width: "100%"
       }
     }
+    console.log(talent_id)
+
+    // S'affiche quand Talentist est sur conversation d'un autre
+    const renderAlert = () => {
+      return(
+        <div className="flex w-100 red-background padding-10 justify-center align-items-center">
+          <p className="no-margin margin-right-30">Tu es connecté à la messagerie d'un talent, tu ne peux pas écrire de messages</p>
+          <Link className="btn-white-border" to={convUrl} disabled={convUrl == "/conv"}>Revenir à ma messagerie</Link>
+        </div>
+      )
+    }
+    // END
 
     return(
       <div>
-        <Navbar path="conv" />
+        <Navbar path={talent_id ? "spy_conv" : "conv"} />
+        {talent_id ? renderAlert() : null}
         <div className={isMobile ? "overflow-x-hidden" : "flex"} style={styleContainer}>
           <ListMessagerie params={this.props.match.params} />
           <MessagerieActive params={this.props.match.params} />
@@ -40,6 +59,7 @@ class Conversation extends Component {
 function mapStateToProps(state) {
   return {
     isMobile: state.isMobile,
+    user: state.user,
   };
 }
 

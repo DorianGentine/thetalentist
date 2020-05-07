@@ -17,6 +17,11 @@ class Mailboxer::ConversationPolicy < ApplicationPolicy
 
 
   def show?
-    record.participants.include?(user)
+    p "policy user is a: #{user}"
+    if user.is_a?(Talentist)
+      scope.all
+    else
+      record.participants.include?(user)
+    end
   end
 end

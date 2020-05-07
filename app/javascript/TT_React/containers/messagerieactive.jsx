@@ -19,7 +19,11 @@ class Conversation extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+    if(this.props.params.talent_id){
+      this.props.fetchGET(`/api/v1/talents/${this.props.params.talent_id}/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+    }else{
+      this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+    }
 
     const objDiv = document.getElementById("messages-box");
     let i = 0
@@ -40,7 +44,11 @@ class Conversation extends Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if(nextProps.params.id != this.props.params.id){
-      this.props.fetchGET(`/api/v1/conversations/${nextProps.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+      if(this.props.params.talent_id){
+        this.props.fetchGET(`/api/v1/talents/${this.props.params.talent_id}/conversations/${nextProps.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+      }else{
+        this.props.fetchGET(`/api/v1/conversations/${nextProps.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+      }
       const objDiv = document.getElementById("messages-box");
       let i = 0
       let intervalBottom = setInterval(() => {

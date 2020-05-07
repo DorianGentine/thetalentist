@@ -20,7 +20,15 @@ class Api::V1::ConversationsController < Api::V1::BaseController
 
   def show
     @conv =  Mailboxer::Conversation.find(params[:id])
-    @conversation = InboxFormat.new.discussion(current_user, @conv)
+    user = current_user
+    if current_user.is_a?(Talentist)
+      if params[:talent_id].present?
+        user = Talent.find(params[:talent_id])
+      elsif params[:headhunter_id].present?
+        user = Headhunter.find(params[:headhunter_id])
+      end
+    end
+    @conversation = InboxFormat.new.discussion(user, @conv)
     authorize @conv
   end
 
