@@ -79,6 +79,7 @@ class Conversation extends Component {
     const isMobile = this.props.isMobile
     const messagerieActiveMobile = this.props.messagerieActiveMobile
     const sidebarActiveMobile = this.props.sidebarActiveMobile
+    const talent_id = this.props.params.talent_id || false
     let conversationActive, participant, relationship, email
     let info = {
       image: null,
@@ -123,24 +124,28 @@ class Conversation extends Component {
     }
 
     const acceptRelation = () => {
-      this.setState({in_relation: "Accepter"})
-      const newMessage = {
-        conversation_id: this.props.params.id,
-        sender_id: this.props.user.id,
-        email: email,
-        body: "",
-        in_relation: "Accepter",
+      if(!talent_id){
+        this.setState({in_relation: "Accepter"})
+        const newMessage = {
+          conversation_id: this.props.params.id,
+          sender_id: this.props.user.id,
+          email: email,
+          body: "",
+          in_relation: "Accepter",
+        }
+        console.log(newMessage)
+        this.props.fetchPost(
+          `/api/v1/conversations/${this.props.params.id}/messages`,
+          newMessage,
+          "POST"
+        )
       }
-      console.log(newMessage)
-      this.props.fetchPost(
-        `/api/v1/conversations/${this.props.params.id}/messages`,
-        newMessage,
-        "POST"
-      )
     }
 
     const refuseBox = () => {
-      this.setState({in_relation: "Refuser"})
+      if(!talent_id){
+        this.setState({in_relation: "Refuser"})
+      }
     }
 
     const sendMessage = (event, onoff) => {
