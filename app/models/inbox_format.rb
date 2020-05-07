@@ -113,6 +113,7 @@ class InboxFormat
     end
   end
   def files(config_conv)
+    p "config_conv: #{config_conv}"
     config_conv.files.map do |file|
       {name: file.filename,
       url: "https://res.cloudinary.com/da4nnrzbu/image/upload/#{file.key}"

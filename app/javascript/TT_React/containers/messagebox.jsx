@@ -10,6 +10,7 @@ import { diffTime } from '../../components/renderDate';
 class messagebox extends Component {
   render () {
     const isMobile = this.props.isMobile
+    const talentId = this.props.talentId
     const conversation = this.props.conversation
     const participant = conversation.participant
     const avatar = participant.avatar
@@ -17,6 +18,22 @@ class messagebox extends Component {
     let infos = {
       full_name: "Talent",
       image: null,
+    }
+
+    let linkUrl = "/conv"
+    if(isMobile){
+      if(talentId){
+       linkUrl = `/talents/${talentId}/conversations/${conversation.conversation_id}?messagerie=active`
+      }else{
+       linkUrl = `/conversations/${conversation.conversation_id}?messagerie=active`
+      }
+    }else{
+      if(talentId){
+        linkUrl = `/talents/${talentId}/conversations/${conversation.conversation_id}`
+      }else{
+        console.log(talentId)
+        linkUrl = `/conversations/${conversation.conversation_id}`
+      }
     }
 
     if(conversation.in_relation == "Accepter" || participant.user_model == "Headhunter"){
@@ -28,7 +45,8 @@ class messagebox extends Component {
 
     return(
       <Link
-        to={isMobile ? `/conversations/${conversation.conversation_id}?messagerie=active` : `/conversations/${conversation.conversation_id}`}
+        to={linkUrl}
+        disabled={linkUrl == "/conv"}
         className={`message-box${conversation.conversation_id == idActive && !isMobile ? " active" : ""}`}>
         {infos.image != null ? <img className="photo-conv" src={infos.image} alt="avatar"></img> : <div className="photo-conv">{infos.full_name.slice(0, 1)}</div>}
         <div className="flex-grow-1">
