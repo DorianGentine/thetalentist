@@ -15,7 +15,6 @@ class FiltreItem extends Component {
   componentDidMount(){
     const url = new URL(window.location.href);
     const metierActif = url.searchParams.get("metier");
-    console.log(metierActif)
     if(metierActif){
       let i = 0
       let intervalFilter = setInterval(() => {
