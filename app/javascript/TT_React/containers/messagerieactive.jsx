@@ -21,6 +21,8 @@ class Conversation extends Component {
   componentDidMount(){
     if(this.props.params.talent_id){
       this.props.fetchGET(`/api/v1/talents/${this.props.params.talent_id}/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+    }else if(this.props.params.headhunter_id){
+      this.props.fetchGET(`/api/v1/headhunters/${this.props.params.headhunter_id}/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
     }else{
       this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
     }
@@ -46,6 +48,8 @@ class Conversation extends Component {
     if(nextProps.params.id != this.props.params.id){
       if(this.props.params.talent_id){
         this.props.fetchGET(`/api/v1/talents/${this.props.params.talent_id}/conversations/${nextProps.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+      }else if(this.props.params.headhunter_id){
+        this.props.fetchGET(`/api/v1/headhunters/${this.props.params.headhunter_id}/conversations/${nextProps.params.id}`, "FETCH_CONVERSATION_ACTIVE")
       }else{
         this.props.fetchGET(`/api/v1/conversations/${nextProps.params.id}`, "FETCH_CONVERSATION_ACTIVE")
       }
@@ -124,7 +128,7 @@ class Conversation extends Component {
     }
 
     const acceptRelation = () => {
-      if(!talent_id){
+      if(!talent_id || !headhunter_id){
         this.setState({in_relation: "Accepter"})
         const newMessage = {
           conversation_id: this.props.params.id,
@@ -143,7 +147,7 @@ class Conversation extends Component {
     }
 
     const refuseBox = () => {
-      if(!talent_id){
+      if(!talent_id || !headhunter_id){
         this.setState({in_relation: "Refuser"})
       }
     }
