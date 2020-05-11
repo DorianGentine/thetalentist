@@ -21,17 +21,21 @@ class listmessagerie extends Component {
   componentDidMount(){
     if(this.props.params.talent_id){
       this.props.fetchGET(`/api/v1/talents/${this.props.params.talent_id}/conversations`, "FETCH_CONVERSATIONS")
+    }else if(this.props.params.headhunter_id){
+      this.props.fetchGET(`/api/v1/headhunters/${this.props.params.headhunter_id}/conversations`, "FETCH_CONVERSATIONS")
     }else{
       this.props.fetchGET('/api/v1/conversations', "FETCH_CONVERSATIONS")
     }
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if(nextProps.params.talent_id != this.props.params.talent_id){
+    if(nextProps.params.talent_id != this.props.params.talent_id ||
+      nextProps.params.headhunter_id != this.props.params.headhunter_id){
       if(nextProps.params.talent_id){
         this.props.fetchGET(`/api/v1/talents/${nextProps.params.talent_id}/conversations`, "FETCH_CONVERSATIONS")
+      }else if(nextProps.params.headhunter_id){
+        this.props.fetchGET(`/api/v1/headhunters/${nextProps.params.headhunter_id}/conversations`, "FETCH_CONVERSATIONS")
       }else{
-        console.log('nextparams:', nextProps.params)
         this.props.fetchGET('/api/v1/conversations', "FETCH_CONVERSATIONS")
       }
     }
@@ -41,6 +45,7 @@ class listmessagerie extends Component {
   render () {
     const isMobile = this.props.isMobile
     const talentId = this.props.params.talent_id || false
+    const headhunterId = this.props.params.headhunter_id || false
     const conversations = this.props.conversations
     const filterActive = this.state.filterActive
 
@@ -50,7 +55,7 @@ class listmessagerie extends Component {
         filterActive == "Messages archivés" && conversation.archived == true){
         if(this.state.value == "" ||
           conversation.participant.full_name.toLowerCase().includes(this.state.value.toLowerCase()) && conversation.in_relation == "Accepter"){
-          return <MessageBox conversation={conversation} idActive={this.props.params.id} talentId={talentId} key={index} />
+          return <MessageBox conversation={conversation} idActive={this.props.params.id} talentId={talentId} headhunterId={headhunterId} key={index} />
         }
       }
     })
