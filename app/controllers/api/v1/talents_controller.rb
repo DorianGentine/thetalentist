@@ -28,6 +28,9 @@ class Api::V1::TalentsController < Api::V1::BaseController
     head :ok
   end
 
+  def update
+  end
+
   private
 
     def autorize_call
