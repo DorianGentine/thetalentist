@@ -86,7 +86,8 @@
               <div class="margin-top-30">
                 <div class="form-actions no-margin" id="regrister-talent-btn">
                   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-                    <%= link_to "S'inscrire", new_talent_registration_path, :class => "form-btn form-btn-precedent"  %>
+                    <div id="app" class="no-background"></div>
+                    <%#= link_to "S'inscrire", new_talent_registration_path, :class => "form-btn form-btn-precedent" %>
                   <% end %>
                 </div>
               </div>

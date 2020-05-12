@@ -26,6 +26,7 @@ import conversation from './components/conversation';
 import dashboardHeadhunter from './components/dashboardHeadhunter';
 import dashboardTalent from './components/dashboardTalent';
 import inscriptionTalent from './components/inscriptionTalent';
+import modalInscription from './components/modalInscription';
 import profilRecruteur from './components/profilRecruteur';
 import profilTalent from './components/profilTalent';
 // import '../assets/stylesheets/messagerie.scss';
@@ -151,6 +152,7 @@ if(app){
           <Route path="/messagerie/:id" component={conversation} />
           <Route path="/conversations/:id" component={conversation} />
           <Route path="/headhunters/:id" component={profilRecruteur} />
+          <Route path="/talents/sign_in" component={modalInscription} />
           <Route path="/talents/sign_up" component={inscriptionTalent} />
           <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/talents/:id" component={profilTalent} />

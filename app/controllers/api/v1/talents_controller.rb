@@ -29,6 +29,13 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
 
   def update
+    @talent = Talent.find(params[:id])
+    if @talent.update(talent_params)
+      render :show
+    else
+      # rediriger message erreur
+    end
+    authorize talent
   end
 
   private
@@ -38,5 +45,9 @@ class Api::V1::TalentsController < Api::V1::BaseController
       user = current_talent if current_talent
       user = current_user if current_headhunter
       authorize user
+    end
+
+    def talent_params
+      params.require(:talent).permit(:city)
     end
 end

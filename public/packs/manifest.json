@@ -1,26 +1,26 @@
 {
-  "application.js": "/packs/js/application-66edad5cdcabb4c8a514.js",
-  "application.js.map": "/packs/js/application-66edad5cdcabb4c8a514.js.map",
+  "application.js": "/packs/js/application-61873e32fe8508231040.js",
+  "application.js.map": "/packs/js/application-61873e32fe8508231040.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-66edad5cdcabb4c8a514.js"
+        "/packs/js/application-61873e32fe8508231040.js"
       ],
       "js.map": [
-        "/packs/js/application-66edad5cdcabb4c8a514.js.map"
+        "/packs/js/application-61873e32fe8508231040.js.map"
       ]
     },
     "map": {
       "js": [
-        "/packs/js/map-0a18af546f3fe7b4f23a.js"
+        "/packs/js/map-a1fcec787ee52963b85f.js"
       ],
       "js.map": [
-        "/packs/js/map-0a18af546f3fe7b4f23a.js.map"
+        "/packs/js/map-a1fcec787ee52963b85f.js.map"
       ]
     }
   },
-  "map.js": "/packs/js/map-0a18af546f3fe7b4f23a.js",
-  "map.js.map": "/packs/js/map-0a18af546f3fe7b4f23a.js.map",
+  "map.js": "/packs/js/map-a1fcec787ee52963b85f.js",
+  "map.js.map": "/packs/js/map-a1fcec787ee52963b85f.js.map",
   "media/images/Logo The talentist-01.png": "/packs/media/images/Logo%20The%20talentist-01-55d7c915.png",
   "media/images/Logo The talentist-02.png": "/packs/media/images/Logo%20The%20talentist-02-49afec06.png"
 }

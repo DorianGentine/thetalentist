@@ -12,7 +12,6 @@
 }
 
 .input-form{
-  width: calc(100% - 55px);
   label{
     font-weight: 600;
     font-size: 14px;
@@ -31,6 +30,9 @@
 .requis:after{
   content: "*";
   color: $red;
+}
+.w-input-form{
+  width: calc(100% - 55px);
 }
 
 // OLD VERSION
