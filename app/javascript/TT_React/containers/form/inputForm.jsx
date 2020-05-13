@@ -12,14 +12,15 @@ class InputForm extends Component {
     }
 
     return(
-      <div className={classList}>
-        <label className="requis" htmlFor={this.props.name}>{this.props.title}</label>
-        <Field
-          component="input"
-          name={this.props.name}
-          placeholder={this.props.placeholder}
-        />
-      </div>
+      <Field name={this.props.name}>
+        {({ input, meta }) => (
+          <div className={classList}>
+            <label className="requis">{this.props.title}</label>
+            <input {...input} type={this.props.type || "text"} placeholder={this.props.placeholder} />
+            {(meta.error || meta.submitError) && meta.touched && <p className="span-erreur">{(meta.error || meta.submitError)}</p>}
+          </div>
+        )}
+      </Field>
     );
   }
 };

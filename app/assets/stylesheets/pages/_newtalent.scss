@@ -27,6 +27,10 @@
     border-color: $violet;
   }
 }
+.span-erreur{
+  color: $red;
+  margin-bottom: 0;
+}
 .requis:after{
   content: "*";
   color: $red;

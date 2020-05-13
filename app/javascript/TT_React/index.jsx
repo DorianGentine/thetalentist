@@ -160,7 +160,7 @@ if(app){
           <Route path="/repertoire" component={repertory} />
           <Route path="/talents" component={dashboardTalent} />
           <Route path="/headhunters" component={dashboardHeadhunter} />
-          <Redirect from="/" to="/" />
+          <Redirect from="/" to="/talents/sign_in" />
         </Switch>
       </Router>
     </Provider>,

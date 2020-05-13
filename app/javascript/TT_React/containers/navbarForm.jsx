@@ -19,7 +19,7 @@ class NavbarForm extends Component {
     return(
       <div style={{height: "70px"}}>
         <div className="navbar-wagon light-gray-background">
-          <a className="navbar-wagon-item navbar-wagon-link" onClick={handleClick} href={step == 0 ? "/" : null}>&#8617; Retour</a>
+          <a className="navbar-wagon-item navbar-wagon-link" onClick={handleClick} href={step == 0 ? "/talents/sign_in" : null}>&#8617; Retour</a>
           <a href="/" className="navbar-talentist-logo">
             <img src={mainLogo} style={{height: "50px"}} alt="Logo talentist"/>
           </a>
