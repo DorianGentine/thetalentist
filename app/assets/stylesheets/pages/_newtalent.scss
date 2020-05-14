@@ -39,6 +39,11 @@
   width: calc(100% - 55px);
 }
 
+// hide algolia publicity
+.ap-footer{
+  display: none !important;
+}
+
 // OLD VERSION
 
 .form-line{
