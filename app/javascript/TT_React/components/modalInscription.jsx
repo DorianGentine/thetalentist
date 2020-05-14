@@ -12,9 +12,17 @@ class modalInscription extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      opened: true
+      opened: false
     }
   }
+
+  componentDidMount() {
+    const modal = new URL(window.location.href).searchParams.get("modal");
+    if(modal){
+      this.setState({opened: true})
+    }
+  }
+  
   
 
   render() {
@@ -48,12 +56,13 @@ class modalInscription extends Component {
       if(!/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/.test(value.phone)){
         errors.phone = "Le téléphone ne semble pas correct"
       }
-      for (let i = 0; i < inputNames.length; i++) {
-        const inputName = inputNames[i];
+      // for (let i = 0; i < inputNames.length; i++) {
+      //   const inputName = inputNames[i];
+      inputNames.forEach(inputName => {
         if (!value[inputName]) {
           errors[inputName] = 'Requis'
         }
-      } 
+      })
       if(!value.terms_of_condition){
         errors.terms_of_condition = "Vous devez accepter les CGU pour continuer"
       }

@@ -1206,6 +1206,14 @@ ajv@^6.1.0, ajv@^6.10.2, ajv@^6.5.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+algolia-places-react@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/algolia-places-react/-/algolia-places-react-1.5.1.tgz#29745a5f30c295d5364066df610da01406efc99a"
+  integrity sha512-x2pECaDI8F6tbCJvN3Ad6pOgtE8eUrB/sPXbnI0aXLKtBqjctFhhSv4kgAIn16QDr4wW7AQz9OZadLtTBGUYig==
+  dependencies:
+    places.js "1.17.1"
+    prop-types "^15.6.0"
+
 algoliasearch@^3.35.1:
   version "3.35.1"
   resolved "https://registry.yarnpkg.com/algoliasearch/-/algoliasearch-3.35.1.tgz#297d15f534a3507cab2f5dfb996019cac7568f0c"
@@ -6036,7 +6044,7 @@ pkg-dir@^4.1.0:
   dependencies:
     find-up "^4.0.0"
 
-places.js@^1.16.6:
+places.js@1.17.1, places.js@^1.16.6:
   version "1.17.1"
   resolved "https://registry.yarnpkg.com/places.js/-/places.js-1.17.1.tgz#fc6ef07f5ee87ec332820d7d03ac4c894a8ff764"
   integrity sha512-TzDw893Uo3121vmEg0oV5L0HVbxcHUyanaSmnwcMs0Zll1F83/06lNJRcMiiuwNQWIik6xY3BeDDZzpaMaOILA==
@@ -7034,7 +7042,7 @@ promise-inflight@^1.0.1:
   resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
   integrity sha1-mEcocL8igTL8vdhoEputEsPAKeM=
 
-prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==

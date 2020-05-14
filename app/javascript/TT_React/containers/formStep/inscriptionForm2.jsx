@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { switchStepFrom } from '../../actions';
+// import { switchStepFrom } from '../../actions';
 import { setFormContainerClass } from '../../../components/formContainerClass';
 
 import RadioForm from '../form/radioForm'
@@ -21,15 +21,16 @@ class InscriptionForm2 extends Component {
       "Internationale"
     ]
 
-    const handleClick = () => {
-      this.props.switchStepFrom(actualStep)
-    }
-
     return(
       <div className={setFormContainerClass(actualStep, formStep)}>
         <MessageMagda text1={`Ok c'est noté ! En habitant sur ${this.props.formValue.city || "Paris"} tu restes ouvert à la mobilité ?`}/>
         <RadioForm name="mobilities" choices={choices}/>
-        <button className="btn-violet-square margin-left-55" onClick={handleClick}>Étape suivante</button>
+        <button
+          className="btn-violet-square margin-left-55"
+          type="submit"
+          disabled={this.props.submitting}>
+          Étape suivante
+        </button>
       </div>
     );
   }
@@ -41,8 +42,8 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ switchStepFrom }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ switchStepFrom }, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InscriptionForm2);
+export default connect(mapStateToProps, null)(InscriptionForm2);

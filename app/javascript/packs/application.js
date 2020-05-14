@@ -43,6 +43,8 @@ import '../components/customScrollBar';
 
 import '../components/formContainerClass';
 
+import '../components/validationInscriptionTalent';
+
 import { revealModal } from "../components/modal";
 revealModal();
 
