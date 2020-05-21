@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { switchStepFrom } from '../../actions';
+// import { switchStepFrom } from '../../actions';
 import { setFormContainerClass } from '../../../components/formContainerClass';
 
 import RadioForm from '../form/radioForm'
@@ -18,10 +18,6 @@ class InscriptionForm8 extends Component {
       "+3 mois"
     ]
 
-    const handleClick = () => {
-      this.props.switchStepFrom(actualStep)
-    }
-
     return(
       <div className={setFormContainerClass(actualStep, 8)}>
         <MessageMagda
@@ -31,7 +27,12 @@ class InscriptionForm8 extends Component {
         <MessageMagda
           text1={`Si tu es encore en poste, tu peux répondre +3 mois`}
         />
-        <button className="btn-violet-square margin-left-55" onClick={handleClick}>Étape suivante</button>
+        <button
+          className="btn-violet-square margin-left-55"
+          type="submit"
+          disabled={this.props.submitting}>
+          Étape suivante
+        </button>
       </div>
     );
   }
@@ -43,8 +44,8 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ switchStepFrom }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ switchStepFrom }, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InscriptionForm8);
+export default connect(mapStateToProps, null)(InscriptionForm8);

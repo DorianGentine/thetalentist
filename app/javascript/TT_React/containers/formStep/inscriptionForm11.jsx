@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { switchStepFrom } from '../../actions';
+// import { switchStepFrom } from '../../actions';
 import { setFormContainerClass } from '../../../components/formContainerClass';
 
 import TextAreaForm from '../form/textAreaForm'
@@ -12,10 +12,6 @@ import MessageMagda from './messageMagda'
 class InscriptionForm11 extends Component {
   render () {
     const actualStep = this.props.stepForm
-
-    const handleClick = () => {
-      this.props.switchStepFrom(actualStep)
-    }
 
     return(
       <div className={setFormContainerClass(actualStep, 11)}>
@@ -61,8 +57,8 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ switchStepFrom }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ switchStepFrom }, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InscriptionForm11);
+export default connect(mapStateToProps, null)(InscriptionForm11);

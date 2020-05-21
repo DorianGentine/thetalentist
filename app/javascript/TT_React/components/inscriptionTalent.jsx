@@ -42,6 +42,7 @@ class InscriptionTalent extends Component {
     }
     
     const validate = values => {
+      console.log('values', values)
       const errors = validationForm(values, step)
       if(Object.keys(errors).length < Object.keys(this.state.errors).length){
         this.setState({errors: errors})
@@ -51,6 +52,7 @@ class InscriptionTalent extends Component {
 
     const onSubmit = values => {
       const errors = validationForm(values, step)
+      console.log('errors', errors)
       if(Object.keys(errors).length > 0){
         this.setState({errors: errors})
         return errors
