@@ -3,11 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // import { switchStepFrom } from '../actions';
+import photoMagda from "../../../../assets/images/photo-magda.jpg"
+
 
 class MessageMagda extends Component {
 
   render () {
-    const image = "http:\/\/res.cloudinary.com/da4nnrzbu/image/upload/v1583140180/ff0cntbasziwmlmmfuet.jpg"
+    const image = photoMagda
     const text1 = this.props.text1
     const text2 = this.props.text2 || false
 

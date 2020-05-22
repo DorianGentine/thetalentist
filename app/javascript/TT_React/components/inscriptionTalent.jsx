@@ -34,6 +34,7 @@ class InscriptionTalent extends Component {
     const valuesFilter = values => {
       const valuesToSend = {}
       Object.keys(values).forEach(value => {
+        // if(values[value].length > 0 && values[value] !== this.state.initialValues[value]){
         if(values[value] !== this.state.initialValues[value]){
           valuesToSend[value] = values[value]
         }
@@ -59,13 +60,15 @@ class InscriptionTalent extends Component {
       }else{
         const valuesToSend = valuesFilter(values)
         Object.keys(valuesToSend).forEach(value => {
-          this.setState(initialValues => {initialValues[value] = valuesToSend[values]})
+          this.setState(prevState => {
+            prevState.initialValues[value] = valuesToSend[value]
+          })
         })
-        console.log('initialValues', this.state.initialValues)
+        console.log('valuesToSend', valuesToSend)
+        if(Object.keys(valuesToSend).length > 0){
+          this.props.fetchPost(`/api/v1/talents/${17}`, valuesToSend, "PATCH")
+        }
         this.props.switchStepFrom(step)
-        // this.props.fetchPost(`/api/v1/talents/${"id"}`, valuesToSend, "PATCH", () => {
-        //   this.props.switchStepFrom(step)
-        // })
       }
     }
 
