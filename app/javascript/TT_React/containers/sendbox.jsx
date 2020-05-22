@@ -26,20 +26,20 @@ class SendBox extends Component {
 
   render () {
     const isMobile = this.props.isMobile
+    const talent_id = this.props.params.talent_id || false
     let conversationActive, inRelation = false, config_conv_id, sender_id
     if(this.props.conversationActive != undefined){
       conversationActive = this.props.conversationActive.conversation
       if(conversationActive != undefined){
         config_conv_id = conversationActive.config_conv_id
       }
-      if(conversationActive != undefined && conversationActive.in_relation == "Accepter"){
+      if(conversationActive != undefined && conversationActive.in_relation == "Accepter" && !talent_id){
         inRelation = true
       }
     }
     if(this.props.user != null){
       sender_id = this.props.user.id
     }
-    console.log(sender_id)
 
 
     const handleOnChange = value => {

@@ -1,35 +1,35 @@
-// Slide-container
-  .slidecontainer {
-    // width: 100%; /* Width of the outside container */
-  }
+// // Slide-container
+//   .slidecontainer {
+//     // width: 100%; /* Width of the outside container */
+//   }
 
-  /* The slider itself */
-  .slider {
-      appearance: none;
-      height: 18px; /* Specified height */
-      background: $gray; /* Grey background */
-      outline: none; /* Remove outline */
-      opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-      transition: opacity .2s;
-  }
+//   /* The slider itself */
+//   .slider {
+//       appearance: none;
+//       height: 18px; /* Specified height */
+//       background: $gray; /* Grey background */
+//       outline: none; /* Remove outline */
+//       opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+//       transition: opacity .2s;
+//   }
 
-  /* Mouse-over effects */
-  .slider:hover {
-      opacity: 1; /* Fully shown on mouse-over */
-  }
+//   /* Mouse-over effects */
+//   .slider:hover {
+//       opacity: 1; /* Fully shown on mouse-over */
+//   }
 
-  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-  .slider::-webkit-slider-thumb {
-      appearance: none;
-      width: 18px; /* Set a specific slider handle width */
-      height: 18px; /* Slider handle height */
-      background: $green; /* Green background */
-      cursor: pointer; /* Cursor on hover */
-  }
+//   /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+//   .slider::-webkit-slider-thumb {
+//       appearance: none;
+//       width: 18px; /* Set a specific slider handle width */
+//       height: 18px; /* Slider handle height */
+//       background: $green; /* Green background */
+//       cursor: pointer; /* Cursor on hover */
+//   }
 
-  .slider::-moz-range-thumb {
-      width: 25px; /* Set a specific slider handle width */
-      height: 25px; /* Slider handle height */
-      background: $green; /* Green background */
-      cursor: pointer; /* Cursor on hover */
-  }
+//   .slider::-moz-range-thumb {
+//       width: 25px; /* Set a specific slider handle width */
+//       height: 25px; /* Slider handle height */
+//       background: $green; /* Green background */
+//       cursor: pointer; /* Cursor on hover */
+//   }

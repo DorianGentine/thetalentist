@@ -105,17 +105,19 @@ Rails.application.routes.draw do
       end
       resources :notifications, only: [ :index ]
       resources :headhunters, only: [ :index, :show] do
-        member do
-          get :conversations
-          patch :set_conversation
-        end
+        resources :conversations, only: [:index, :show]
+        # member do
+        #   get :conversations
+        #   patch :set_conversation
+        # end
       end
-      resources :talents, only: [ :index, :show ] do
+      resources :talents, only: [ :index, :show, :update ] do
         collection do
           get :repertoire
           get :analytics
           patch :sort
         end
+        resources :conversations, only: [:index, :show]
       end
     end
   end

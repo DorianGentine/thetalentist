@@ -14,7 +14,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import { createBrowserHistory as history } from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, faChevronLeft, faInfoCircle, faArrowsAlt } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, faChevronLeft, faInfoCircle, faArrowsAlt, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 // import { reducer as formReducer } from 'redux-form';
 
@@ -25,6 +25,8 @@ import repertory from './components/repertory';
 import conversation from './components/conversation';
 import dashboardHeadhunter from './components/dashboardHeadhunter';
 import dashboardTalent from './components/dashboardTalent';
+import inscriptionTalent from './components/inscriptionTalent';
+import modalInscription from './components/modalInscription';
 import profilRecruteur from './components/profilRecruteur';
 import profilTalent from './components/profilTalent';
 // import '../assets/stylesheets/messagerie.scss';
@@ -38,9 +40,11 @@ import guideSuReducer from './reducers/guide_su_reducer';
 import messagerieActiveMobileReducer from './reducers/messagerie_active_mobile_reducer';
 import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
+import nbTalentsReducer from './reducers/nb_talents_reducer';
 import notificationsReducer from './reducers/notifications_reducer';
 import talentsReducer from './reducers/talents_reducer';
 import sidebarActiveMobileReducer from './reducers/sidebar_active_mobile_reducer';
+import stepFormReducer from './reducers/step_form_reducer';
 import userReducer from './reducers/user_reducer';
 
 const app = document.getElementById('app')
@@ -62,8 +66,10 @@ if(app){
     messagerieActiveMobile: false,
     modalSelected: null,
     modalOpened: false,
+    nbTalents: 0,
     notifications: [],
     sidebarActiveMobile: false,
+    stepForm: 1,
     talents: null,
     user: null,
   };
@@ -78,9 +84,11 @@ if(app){
     messagerieActiveMobile: messagerieActiveMobileReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,
+    nbTalents: nbTalentsReducer,
     notifications: notificationsReducer,
     talents: talentsReducer,
     sidebarActiveMobile: sidebarActiveMobileReducer,
+    stepForm: stepFormReducer,
     user: userReducer,
   });
 
@@ -109,6 +117,7 @@ if(app){
     farBookmark,
     fasBookmark,
     faChartLine,
+    faCheck,
     faChevronDown,
     faChevronLeft,
     faChevronUp,
@@ -143,12 +152,15 @@ if(app){
           <Route path="/messagerie/:id" component={conversation} />
           <Route path="/conversations/:id" component={conversation} />
           <Route path="/headhunters/:id" component={profilRecruteur} />
+          <Route path="/talents/sign_in" component={modalInscription} />
+          <Route path="/talents/sign_up" component={inscriptionTalent} />
+          <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/talents/:id" component={profilTalent} />
           <Route path="/messagerie" component={conversation} />
           <Route path="/repertoire" component={repertory} />
           <Route path="/talents" component={dashboardTalent} />
           <Route path="/headhunters" component={dashboardHeadhunter} />
-          <Redirect from="/" to="/" />
+          <Redirect from="/" to="/talents/sign_in" />
         </Switch>
       </Router>
     </Provider>,

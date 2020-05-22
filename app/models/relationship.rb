@@ -5,8 +5,8 @@ class Relationship < ApplicationRecord
 
   before_destroy :destroy_conversation
 
-  after_create :create_a_notofication, :create_config_conversations
-  # after_create :create_a_notofication, :send_message
+  after_create :create_a_notification, :create_config_conversations
+  # after_create :create_a_notification, :send_message
   after_save :modification_status_notification
 
   validates_uniqueness_of :talent_id, scope: :headhunter_id,  :message => "Cette relation existe déjà"
@@ -26,9 +26,9 @@ class Relationship < ApplicationRecord
 
     def modification_status_notification
       if self.status == "Accepter"
-        accepeted_a_notofication
+        accepeted_a_notification
       elsif self.status == "Refuser"
-        refused_a_notofication
+        refused_a_notification
       end
     end
 
@@ -46,15 +46,17 @@ class Relationship < ApplicationRecord
       talent.send_invitation(headhunter)
     end
 
-    def create_a_notofication
+    def create_a_notification
       Notification.create(title: "#{self.headhunter.full_name} de #{self.headhunter.startup.name} est rentré en contact avec #{self.talent.full_name}")
     end
 
-    def accepeted_a_notofication
-      Notification.create(title: "#{self.talent.full_name} à accepté de rentrer en contact avec #{self.headhunter.full_name} de #{self.headhunter.startup.name} ")
+    def accepeted_a_notification
+      p "je suis dans la méthode et le statut est accepté"
+      Notification.create(title: "#{self.talent.full_name} a accepté de rentrer en contact avec #{self.headhunter.full_name} de #{self.headhunter.startup.name} ")
     end
 
-    def refused_a_notofication
-      Notification.create(title: "#{self.talent.full_name} à refuser de rentrer en contact avec #{self.headhunter.full_name} de #{self.headhunter.startup.name} ")
+    def refused_a_notification
+      p "je suis dans la méthode et le statut est refusé"
+      Notification.create(title: "#{self.talent.full_name} a refusé de rentrer en contact avec #{self.headhunter.full_name} de #{self.headhunter.startup.name} ")
     end
 end

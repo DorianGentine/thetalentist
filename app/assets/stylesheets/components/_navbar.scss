@@ -11,6 +11,19 @@
   z-index: 20;
   top: 0;
 }
+.navbar-wagon.light-gray-background{
+  border-bottom: 1px solid $lines-2;
+}
+.progression-bar{
+  border: none;
+  background-color: $violet;
+  height: 2px;
+  margin: unset;
+  z-index: 21;
+  position: fixed;
+  top: 69px;
+  transition: 1s;
+}
 
 /* User Avatar */
   .avatar {

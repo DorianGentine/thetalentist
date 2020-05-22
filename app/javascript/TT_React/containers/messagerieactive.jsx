@@ -118,9 +118,10 @@ class Conversation extends Component {
       this.setState({in_relation: "Accepter"})
       const newMessage = {
         conversation_id: this.props.params.id,
+        sender_id: this.props.user.id,
         email: email,
         body: "",
-        in_relation: this.state.in_relation,
+        in_relation: "Accepter",
       }
       console.log(newMessage)
       this.props.fetchPost(
@@ -218,6 +219,7 @@ class Conversation extends Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.user,
     conversationActive: state.conversationActive,
     isMobile: state.isMobile,
     messagerieActiveMobile: state.messagerieActiveMobile,

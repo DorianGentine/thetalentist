@@ -107,7 +107,6 @@ class Navbar extends Component {
     }
     if(this.props.notifications.length != 0){
       notifications = this.props.notifications
-      console.log(notifications)
     }
     if(path == "dashboardHeadhunter" || path == "dashboardTalent" || path == "profil"){
       pageReact = false
@@ -130,7 +129,6 @@ class Navbar extends Component {
     const openMenu = () => {
       this.setState(prevState => ({menuMobile: !prevState.menuMobile}))
     }
-
 
     return(
       <div className="navbar-wagon">
@@ -274,7 +272,7 @@ class Navbar extends Component {
                   </li>
                   : null }
                   <li>
-                    <a rel="nofollow" data-method="delete" href={userType == "Recruteur" ? "/headhunters/sign_out" : userType == "Talent" ? "/talents/sign_out" : "talentists/sign_out"}>
+                    <a rel="nofollow" data-method="delete" href={userType == "Recruteur" ? "/headhunters/sign_out" : userType == "Talent" ? "/talents/sign_out" : "/talentists/sign_out"}>
                       Déconnexion
                     </a>
                   </li>

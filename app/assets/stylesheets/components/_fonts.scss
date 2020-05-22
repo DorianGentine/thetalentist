@@ -23,7 +23,8 @@
     line-height: 1.1;
   }
   p {
-    color: $black
+    color: $black;
+    white-space: pre-line;
   }
   a {
     color: $black;

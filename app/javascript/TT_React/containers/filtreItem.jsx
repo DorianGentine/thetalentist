@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { updateFilter } from '../actions';
+import { updateFilter, updateTalents } from '../actions';
 
 class FiltreItem extends Component {
   constructor(props) {
@@ -12,10 +12,30 @@ class FiltreItem extends Component {
     };
   }
 
+  componentDidMount(){
+    const url = new URL(window.location.href);
+    const metierActif = url.searchParams.get("metier");
+    if(metierActif){
+      let i = 0
+      let intervalFilter = setInterval(() => {
+        i++
+        if(metierActif.toLowerCase() == this.props.job.title.toLowerCase() && this.props.talents != null){
+          this.setState({ checked: true })
+          this.props.updateFilter(this.props.job.title.toLowerCase())
+          clearInterval(intervalFilter)
+        }else if(this.props.talents != null || i > 10){
+          clearInterval(intervalFilter)
+        }
+      }, 1000)
+    }
+  }
+
+
   render () {
     const job = this.props.job
     const handleChange = (checked) => {
       this.setState({ checked: event.target.checked })
+      this.props.updateTalents(-1)
       this.props.updateFilter(this.props.job.title.toLowerCase())
     }
 
@@ -36,14 +56,14 @@ class FiltreItem extends Component {
   }
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     filter: state.filter,
-//   };
-// }
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateFilter }, dispatch);
+function mapStateToProps(state) {
+  return {
+    talents: state.talents,
+  };
 }
 
-export default connect(null, mapDispatchToProps)(FiltreItem);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ updateFilter, updateTalents }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FiltreItem);
