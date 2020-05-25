@@ -50,7 +50,7 @@ class InscriptionTalent extends Component {
       }
       return errors
     }
-
+    
     const onSubmit = values => {
       const errors = validationForm(values, step)
       console.log('errors', errors)
@@ -59,6 +59,20 @@ class InscriptionTalent extends Component {
         return errors
       }else{
         const valuesToSend = valuesFilter(values)
+        
+        // Met en page les jobs
+        if(valuesToSend.talent_job_attributes.job_id){
+          const jobs = valuesToSend.talent_job_attributes.job_id
+          const jobsLength = valuesToSend.talent_job_attributes.job_id.length
+          if(jobsLength == 2){
+            valuesToSend.talent_second_job_attributes.job_id = jobs[1]
+            valuesToSend.talent_job_attributes.job_id = jobs[0]
+          }else if(jobsLength == 1){
+            valuesToSend.talent_job_attributes.job_id = jobs[0]
+          }
+        }
+        // FIN
+
         Object.keys(valuesToSend).forEach(value => {
           this.setState(prevState => {
             prevState.initialValues[value] = valuesToSend[value]
@@ -72,13 +86,32 @@ class InscriptionTalent extends Component {
       }
     }
 
+    const next_aventure_id = 12
+    const mobilities_id = 20
+    const talent_job_id = 10
+    const talent_second_job_id = 10
+
     return(
       <div>
         <NavbarForm />
         <Form
           onSubmit={onSubmit}
           validate={validate}
-          initialValues={{ years: "0" }}
+          initialValues={{ 
+            years: "0",
+            next_aventure_attributes: {
+              id: next_aventure_id,
+              mobilities_attributes: [{
+                id: mobilities_id,
+              }]
+            },
+            talent_job_attributes: {
+              id: talent_job_id,
+            },
+            talent_second_job_attributes: {
+              id: talent_second_job_id,
+            }
+          }}
           render={({ handleSubmit, values, submitting }) => (
             <form onSubmit={handleSubmit} className="flex">
               {step == 1 || step == 2 ? <InscriptionForm1 submitting={submitting} errors={this.state.errors} /> : null }

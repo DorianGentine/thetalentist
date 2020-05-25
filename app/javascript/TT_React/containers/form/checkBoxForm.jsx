@@ -11,10 +11,19 @@ class RadioForm extends Component {
       if(choice != undefined){
         const value = choice.id || choice
         const title = choice.title || choice
+        let name = this.props.name
+        if(name == "talent_job_attributes"){
+          name = "talent_job_attributes[job_id]"
+        }
+
         const limit = this.props.limit
-        const formName = this.props.formValue[this.props.name]
+        let formName = this.props.formValue[this.props.name]
         let choiceCount, disabled = false
         if(formName != undefined){
+          // Condition pour talent_job
+          if(name == "talent_job_attributes[job_id]" && formName.job_id != undefined){
+            formName = formName.job_id
+          }
           //défini l'ordre dans lequel btns ont été appuyé
           for (let i = 0; i < formName.length; i++) {
             if(formName[i] == value){
@@ -24,13 +33,15 @@ class RadioForm extends Component {
           // Désactive au-delà de la limite
           if(limit != undefined && formName.length == limit && !formName.includes(value)){
             disabled = true
-          }
+          } 
         }
+
+
         return(
           <label className="checkbox-form" key={index}>
             <Field
               component="input"
-              name={this.props.name}
+              name={name}
               type="checkbox"
               value={value}
               disabled={disabled}

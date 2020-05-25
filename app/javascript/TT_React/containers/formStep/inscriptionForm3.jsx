@@ -29,7 +29,7 @@ class InscriptionForm3 extends Component {
     return(
       <div className={setFormContainerClass(actualStep, formStep)}>
         <MessageMagda text1={`Parfait ! Quels types de métiers t'intéressent ? (2 choix possibles)`}/>
-        <CheckBoxForm name="jobs" limit={2} choices={jobs} formValue={this.props.formValue}/>
+        <CheckBoxForm name="talent_job_attributes" limit={2} choices={jobs} formValue={this.props.formValue}/>
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
