@@ -98,7 +98,6 @@ class InscriptionTalent extends Component {
           onSubmit={onSubmit}
           validate={validate}
           initialValues={{ 
-            years: "0",
             next_aventure_attributes: {
               id: next_aventure_id,
               mobilities_attributes: [{
@@ -107,6 +106,7 @@ class InscriptionTalent extends Component {
             },
             talent_job_attributes: {
               id: talent_job_id,
+              years: "0"
             },
             talent_second_job_attributes: {
               id: talent_second_job_id,

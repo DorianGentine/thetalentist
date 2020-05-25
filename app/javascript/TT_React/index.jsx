@@ -69,7 +69,7 @@ if(app){
     nbTalents: 0,
     notifications: [],
     sidebarActiveMobile: false,
-    stepForm: 3,
+    stepForm: 5,
     talents: null,
     user: null,
   };

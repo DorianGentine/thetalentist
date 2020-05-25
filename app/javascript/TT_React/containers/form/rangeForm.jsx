@@ -5,7 +5,10 @@ import { Field } from 'react-final-form';
 
 class RadioForm extends Component {
   render () {
-    const rangeValue = this.props.formValue[this.props.name]
+    let rangeValue = this.props.formValue[this.props.name]
+    if(this.props.name == "talent_job_attributes[years]"){
+      rangeValue = this.props.formValue.talent_job_attributes.years
+    }
     return(
       <div className="flex align-items-center margin-left-55 margin-bottom-30" style={{minHeight: "25px"}}>
         <div className="slider-container relative margin-right-30">

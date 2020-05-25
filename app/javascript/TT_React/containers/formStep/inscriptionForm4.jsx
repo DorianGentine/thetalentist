@@ -17,7 +17,7 @@ class InscriptionForm4 extends Component {
     return(
       <div className={setFormContainerClass(actualStep, formStep)}>
         <MessageMagda text1={`Très bien ! Combien d'années d'expérience as-tu dans ce corps de métier ? (hors stage)`}/>
-        <RangeForm name="years" max={30} formValue={this.props.formValue} />
+        <RangeForm name="talent_job_attributes[years]" max={30} formValue={this.props.formValue} />
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
