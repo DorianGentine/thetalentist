@@ -24,7 +24,7 @@ class InscriptionForm2 extends Component {
     return(
       <div className={setFormContainerClass(actualStep, formStep)}>
         <MessageMagda text1={`Ok c'est noté ! En habitant sur ${this.props.formValue.city || "Paris"} tu restes ouvert à la mobilité ?`}/>
-        <RadioForm name="next_aventure_attributes[mobilities_attributes][title]" choices={choices}/>
+        <RadioForm name="next_aventure_attributes[mobilities_attributes][0][title]" choices={choices}/>
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
