@@ -12,18 +12,18 @@ class RadioForm extends Component {
         const value = choice.id || choice
         const title = choice.title || choice
         let name = this.props.name
-        if(name == "talent_job_attributes"){
-          name = "talent_job_attributes[job_id]"
+        let formName = this.props.formValue[this.props.name]
+        if(name == "talent_job_attributes[job_id]"){
+          formName = this.props.formValue.talent_job_attributes.job_id
+        }else if(name == "next_aventure_attributes[sector_ids]"){
+          formName = this.props.formValue.next_aventure_attributes.sector_ids
+        }else if(name == "next_aventure_attributes[waiting_for_one]"){
+          formName = this.props.formValue.next_aventure_attributes.waiting_for_one
         }
 
         const limit = this.props.limit
-        let formName = this.props.formValue[this.props.name]
         let choiceCount, disabled = false
         if(formName != undefined){
-          // Condition pour talent_job
-          if(name == "talent_job_attributes[job_id]" && formName.job_id != undefined){
-            formName = formName.job_id
-          }
           //défini l'ordre dans lequel btns ont été appuyé
           for (let i = 0; i < formName.length; i++) {
             if(formName[i] == value){

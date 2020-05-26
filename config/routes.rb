@@ -91,6 +91,7 @@ Rails.application.routes.draw do
       get :current_user, to: "pages#navbar"
 
       resources :jobs, only: [ :index ]
+      resources :sectors, only: [ :index ]
       resources :relationships, only: [ :create ]
       resources :config_conversations, only: [ :update ]
       resources :pins, only: [ :create, :destroy ]

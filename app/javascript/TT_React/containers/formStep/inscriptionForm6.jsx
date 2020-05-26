@@ -32,7 +32,7 @@ class InscriptionForm6 extends Component {
           text1={`Parfait !`}
           text2={`À présent, je t'invite à nous donner les 3 enjeux les plus impotants pour ton prochain environnement de travail:`}
         />
-        <CheckBoxForm name="waiting_for" limit={3} choices={choices} formValue={this.props.formValue}/>
+        <CheckBoxForm name="next_aventure_attributes[waiting_for_one]" limit={3} choices={choices} formValue={this.props.formValue}/>
         <button
           className="btn-violet-square margin-left-55"
           type="submit"

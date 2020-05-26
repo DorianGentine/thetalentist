@@ -6,8 +6,8 @@ import { Field } from 'react-final-form';
 class RadioForm extends Component {
   render () {
     let rangeValue = this.props.formValue[this.props.name]
-    if(this.props.name == "talent_job_attributes[years]"){
-      rangeValue = this.props.formValue.talent_job_attributes.years
+    if(this.props.name == "talent_job_attributes[year]"){
+      rangeValue = this.props.formValue.talent_job_attributes.year
     }
     return(
       <div className="flex align-items-center margin-left-55 margin-bottom-30" style={{minHeight: "25px"}}>

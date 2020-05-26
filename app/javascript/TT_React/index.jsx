@@ -43,6 +43,7 @@ import modalOpenedReducer from './reducers/modal_opened_reducer';
 import nbTalentsReducer from './reducers/nb_talents_reducer';
 import notificationsReducer from './reducers/notifications_reducer';
 import talentsReducer from './reducers/talents_reducer';
+import sectorsReducer from './reducers/sectors_reducer';
 import sidebarActiveMobileReducer from './reducers/sidebar_active_mobile_reducer';
 import stepFormReducer from './reducers/step_form_reducer';
 import userReducer from './reducers/user_reducer';
@@ -68,8 +69,9 @@ if(app){
     modalOpened: false,
     nbTalents: 0,
     notifications: [],
+    sectors: null,
     sidebarActiveMobile: false,
-    stepForm: 5,
+    stepForm: 7,
     talents: null,
     user: null,
   };
@@ -86,6 +88,7 @@ if(app){
     modalOpened: modalOpenedReducer,
     nbTalents: nbTalentsReducer,
     notifications: notificationsReducer,
+    sectors: sectorsReducer,
     talents: talentsReducer,
     sidebarActiveMobile: sidebarActiveMobileReducer,
     stepForm: stepFormReducer,

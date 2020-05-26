@@ -30,8 +30,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def update
     @talent = Talent.find(params[:id])
-    p "mes talent params : #{talent_params}"
-    if @talent.update_attributes(talent_params)
+    if @talent.update(talent_params)
       render :show
     else
       # rediriger message erreur

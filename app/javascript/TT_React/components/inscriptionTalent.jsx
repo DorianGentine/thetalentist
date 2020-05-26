@@ -63,13 +63,16 @@ class InscriptionTalent extends Component {
         // Met en page les jobs
         if(valuesToSend.talent_job_attributes.job_id){
           const jobs = valuesToSend.talent_job_attributes.job_id
-          const jobsLength = valuesToSend.talent_job_attributes.job_id.length
-          if(jobsLength == 2){
-            valuesToSend.talent_second_job_attributes.job_id = jobs[1]
-            valuesToSend.talent_job_attributes.job_id = jobs[0]
-          }else if(jobsLength == 1){
-            valuesToSend.talent_job_attributes.job_id = jobs[0]
-          }
+          valuesToSend.talent_second_job_attributes.job_id = jobs[1]
+          valuesToSend.talent_job_attributes.job_id = jobs[0]
+        }
+        // Met en page les waiting_for
+        if(valuesToSend.next_aventure_attributes.waiting_for_one){
+          const nAA = valuesToSend.next_aventure_attributes
+          const waitingFor = valuesToSend.next_aventure_attributes.waiting_for_one
+          nAA.waiting_for_three = waitingFor[2]
+          nAA.waiting_for_two = waitingFor[1]
+          nAA.waiting_for_one = waitingFor[0]
         }
         // FIN
 
@@ -106,7 +109,7 @@ class InscriptionTalent extends Component {
             },
             talent_job_attributes: {
               id: talent_job_id,
-              years: "0"
+              year: "0"
             },
             talent_second_job_attributes: {
               id: talent_second_job_id,
