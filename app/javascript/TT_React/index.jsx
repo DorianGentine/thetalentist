@@ -71,7 +71,7 @@ if(app){
     notifications: [],
     sectors: null,
     sidebarActiveMobile: false,
-    stepForm: 7,
+    stepForm: 8,
     talents: null,
     user: null,
   };

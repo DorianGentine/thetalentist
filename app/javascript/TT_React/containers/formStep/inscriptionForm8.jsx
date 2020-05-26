@@ -23,7 +23,7 @@ class InscriptionForm8 extends Component {
         <MessageMagda
           text1={`Parfait ! Quelles sont tes disponibilités ?`}
         />
-        <RadioForm name="availability" choices={choices} />
+        <RadioForm name="next_aventure_attributes[availability]" choices={choices} />
         <MessageMagda
           text1={`Si tu es encore en poste, tu peux répondre +3 mois`}
         />
