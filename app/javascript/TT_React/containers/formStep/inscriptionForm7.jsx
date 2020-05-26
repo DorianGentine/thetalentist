@@ -26,7 +26,7 @@ class InscriptionForm7 extends Component {
         <MessageMagda
           text1={`Quels sont tes prétentions salariales ? (en k€ annuelle brut) `}
         />
-        <RadioForm name="remuneration" choices={choices} />
+        <RadioForm name="next_aventure_attributes[remuneration]" choices={choices} />
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
