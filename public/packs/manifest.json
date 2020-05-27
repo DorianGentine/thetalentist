@@ -12,14 +12,16 @@
     },
     "map": {
       "js": [
-        "/packs/js/map-0a18af546f3fe7b4f23a.js"
+        "/packs/js/map-a1fcec787ee52963b85f.js"
       ],
       "js.map": [
-        "/packs/js/map-0a18af546f3fe7b4f23a.js.map"
+        "/packs/js/map-a1fcec787ee52963b85f.js.map"
       ]
     }
   },
-  "map.js": "/packs/js/map-0a18af546f3fe7b4f23a.js",
-  "map.js.map": "/packs/js/map-0a18af546f3fe7b4f23a.js.map",
-  "media/images/Logo The talentist-02.png": "/packs/media/images/Logo%20The%20talentist-02-49afec06.png"
+  "map.js": "/packs/js/map-a1fcec787ee52963b85f.js",
+  "map.js.map": "/packs/js/map-a1fcec787ee52963b85f.js.map",
+  "media/images/Logo The talentist-01.png": "/packs/media/images/Logo%20The%20talentist-01-55d7c915.png",
+  "media/images/Logo The talentist-02.png": "/packs/media/images/Logo%20The%20talentist-02-49afec06.png",
+  "media/images/photo-magda.jpg": "/packs/media/images/photo-magda-13f55ecf.jpg"
 }

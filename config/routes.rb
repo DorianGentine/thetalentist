@@ -55,14 +55,18 @@ Rails.application.routes.draw do
   resources :relationships, only: [ :create ]
 
   resources :talents, only: [:show, :update, :index, :edit] do
-    get 'info_pdf', on: :member
-    patch 'update_profile', :on => :member
-    patch 'update_formation_and_skill', :on => :member
-    patch 'update_experience', :on => :member
-    patch 'update_next_aventure', :on => :member
-    patch 'validation', :on => :member
-    patch 'refused', :on => :member
-    patch 'visible', :on => :member
+    member do
+      get 'info_pdf'
+      get 'welcome', to: "pages#welcome_talent"
+      get 'welcome/:step', to: "pages#welcome_talent"
+      patch 'update_profile'
+      patch 'update_formation_and_skill'
+      patch 'update_experience'
+      patch 'update_next_aventure'
+      patch 'validation'
+      patch 'refused'
+      patch 'visible'
+    end
     resources :conversations, only: [ :show ]
   end
 
@@ -91,16 +95,18 @@ Rails.application.routes.draw do
       get :current_user, to: "pages#navbar"
 
       resources :jobs, only: [ :index ]
+      resources :sectors, only: [ :index ]
+      resources :skills, only: [ :index ]
       resources :relationships, only: [ :create ]
       resources :config_conversations, only: [ :update ]
       resources :pins, only: [ :create, :destroy ]
       resources :conversations, only: [ :show, :index ] do
-        collection do
-          get :all
-        end
-        member do
-          get :left
-        end
+        # collection do
+        #   get :all
+        # end
+        # member do
+        #   get :left
+        # end
         resources :messages, only: [ :create ]
       end
       resources :notifications, only: [ :index ]
@@ -111,7 +117,7 @@ Rails.application.routes.draw do
         #   patch :set_conversation
         # end
       end
-      resources :talents, only: [ :index, :show ] do
+      resources :talents, only: [ :index, :show, :update ] do
         collection do
           get :repertoire
           get :analytics

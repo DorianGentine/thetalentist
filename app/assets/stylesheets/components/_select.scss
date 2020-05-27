@@ -1,3 +1,50 @@
+// Version React
+.form-multi-select{
+  .select-form__control{
+    height: 100px;
+    border-radius: 2px;
+    border: 1px solid $input;
+    align-items: start;
+    background-color: transparent;
+    padding: 10px;
+    .select-form__multi-value {
+      background-color: white;
+      color:$dark-blue;
+    }
+    .select-form__indicators {
+      display: none;
+    }
+  }
+  
+  .select-form__max-reached-alert{
+    color: $dark-blue;
+    text-align: center;
+    padding: 10px;
+  }
+  .select-form__menu-list{
+    .select-form__option{
+      color: $dark-blue;
+    }
+  } 
+}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// VERSION HTML
+
 // Equilibre hauteur input text et list
 .select2-container .select2-selection--single{
   height: 35px !important;
@@ -8,9 +55,6 @@
 
 
 #diplome-form{
-  .select span {
-    // width: 100% !important;
-  }
   .select2-container--default .select2-selection--single .select2-selection__arrow {
     width: 25px !important;
   }

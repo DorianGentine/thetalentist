@@ -19,7 +19,6 @@ class FiltreItem extends Component {
       let i = 0
       let intervalFilter = setInterval(() => {
         i++
-        console.log(i)
         if(metierActif.toLowerCase() == this.props.job.title.toLowerCase() && this.props.talents != null){
           this.setState({ checked: true })
           this.props.updateFilter(this.props.job.title.toLowerCase())

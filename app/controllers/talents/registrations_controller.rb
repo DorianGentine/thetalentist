@@ -4,15 +4,8 @@ class Talents::RegistrationsController < Devise::RegistrationsController
 
   def new
     @talent = Talent.new
-
-    # if @talent.talent_jobs.count == 0
-    #   2.times { @talent.talent_jobs.build }
-    # elsif @talent.talent_jobs.count == 1
-      @talent.build_talent_job if @talent.jobs.count == 0
-      @talent.build_talent_second_job if @talent.jobs.count < 2
-    # else
-    #   0.times { @talent.talent_jobs }
-    # end
+    # @talent.build_talent_job if @talent.jobs.count == 0
+    # @talent.build_talent_second_job if @talent.jobs.count < 2
     authorize @talent
   end
 
@@ -25,7 +18,8 @@ class Talents::RegistrationsController < Devise::RegistrationsController
     # @talent.skip_phone_validation = true
     if @talent.save
       session[:talent_id] = @talent.id
-      redirect_to steps_talent_info_path(:formations)
+      # redirect_to steps_talent_info_path(:formations)
+      redirect_to welcome_talent_path(@talent)
     else
       render :new
     end
@@ -45,14 +39,12 @@ class Talents::RegistrationsController < Devise::RegistrationsController
     params.require(:talent).permit(
       :firstname,
       :last_name,
-      :city,
       :phone,
       :email,
       :password,
       :password_confirmation,
-      :linkedin,
-      talent_job_attributes: [ :id, :job_id, :year ],
-      talent_second_job_attributes: [ :id, :job_id ]
+      :terms_of_condition,
+      :linkedin
       )
   end
 end

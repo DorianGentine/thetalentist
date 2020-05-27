@@ -1,12 +1,6 @@
 class NextAventure < ApplicationRecord
   belongs_to :talent
 
-
-  validates_presence_of :mobilities, message: "Information obligatoire"
-  validates_presence_of :contrat, message: "Ajoute ton type de contrat"
-  validates_presence_of :sector_ids, message: "Ajoute un secteur"
-
-
   has_many :next_aventure_sectors, dependent: :destroy
   has_many :sectors, through: :next_aventure_sectors
 
