@@ -31,7 +31,7 @@
           hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
           wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
           label: "Mot de passe", 
-          error: f.object.errors.messages[:password][1] 
+          error: f.object.errors.messages[:password] 
         %>
 
         <%= f.input :password_confirmation, 

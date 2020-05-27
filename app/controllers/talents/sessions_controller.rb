@@ -11,7 +11,7 @@ class Talents::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super
-    talent_path(resource)
+    welcome_talent_path(resource)
   end
 
   # DELETE /resource/sign_out
