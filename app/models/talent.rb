@@ -17,6 +17,7 @@ class Talent < ApplicationRecord
   validates_presence_of :email, :message => "Ton email doit être rempli"
   validates_presence_of :firstname, :message => "Ton prénom doit être rempli"
   validates_presence_of :last_name, :message => "Ton nom doit être rempli"
+  # validates_presence_of :password, :message => "Ton mot de passe doit être rempli"
 
   attr_accessor :skip_city_validation, :skip_phone_validation, :skip_linkedin_validation
 
