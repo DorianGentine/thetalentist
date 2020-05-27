@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
           sign_in(resource)
           talent_path(resource)
         else
-          waiting_for_validation_path
+          welcome_talent_path(resource)
         end
       else
         session[:talent_id] = resource.id
