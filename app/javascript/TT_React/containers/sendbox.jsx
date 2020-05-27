@@ -18,22 +18,27 @@ class SendBox extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if(this.props.conversationActive.conversation != undefined && this.props.conversationActive.conversation.messages.length != nextProps.conversationActive.conversation.messages.length){
-      clearInterval(this.state.intervalMessages)
-      this.setState({ intervalMessages: null })
+    if(this.props.conversationActive.conversation != undefined &&
+      this.props.conversationActive.conversation.messages.length != nextProps.conversationActive.conversation.messages.length){
+        clearInterval(this.state.intervalMessages)
+        this.setState({ intervalMessages: null })
     }
   }
 
   render () {
     const isMobile = this.props.isMobile
     const talent_id = this.props.params.talent_id || false
+    const headhunter_id = this.props.params.headhunter_id || false
     let conversationActive, inRelation = false, config_conv_id, sender_id
     if(this.props.conversationActive != undefined){
       conversationActive = this.props.conversationActive.conversation
       if(conversationActive != undefined){
         config_conv_id = conversationActive.config_conv_id
       }
-      if(conversationActive != undefined && conversationActive.in_relation == "Accepter" && !talent_id){
+      if(conversationActive != undefined && 
+        conversationActive.in_relation == "Accepter" && 
+        !talent_id && 
+        !headhunter_id){
         inRelation = true
       }
     }
