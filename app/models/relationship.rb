@@ -33,6 +33,7 @@ class Relationship < ApplicationRecord
     end
 
     def create_config_conversations
+      p "LE SELF EST : #{self} /// #{self.id}"
       conversation = Mailboxer::Conversation.find(self.conversation_id)
       ConfigConversation.create(conversation_id: conversation.id, user_id: conversation.participants.first.id, user_email: conversation.participants.first.email)
       ConfigConversation.create(conversation_id: conversation.id, user_id: conversation.participants.second.id, user_email: conversation.participants.second.email)
@@ -51,12 +52,10 @@ class Relationship < ApplicationRecord
     end
 
     def accepeted_a_notification
-      p "je suis dans la méthode et le statut est accepté"
       Notification.create(title: "#{self.talent.full_name} a accepté de rentrer en contact avec #{self.headhunter.full_name} de #{self.headhunter.startup.name} ")
     end
 
     def refused_a_notification
-      p "je suis dans la méthode et le statut est refusé"
       Notification.create(title: "#{self.talent.full_name} a refusé de rentrer en contact avec #{self.headhunter.full_name} de #{self.headhunter.startup.name} ")
     end
 end
