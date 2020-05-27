@@ -1,5 +1,54 @@
 .form-container{
-  padding: 60px 190px 0;
+  padding: 40px 300px;
+  min-width: 100%;
+  transition: 1s;
+}
+.form-container.form-hidden{
+  opacity: 0;
+  margin-left: -100%
+}
+.form-container.form-appearance{
+ opacity: 0;
+}
+
+.input-form{
+  label{
+    font-weight: 600;
+    font-size: 14px;
+  }
+  input{
+    padding: 15px;
+    width: 100%;
+    border-radius: 2px;
+    border: 1px solid $input;
+  }
+  input::focus{
+    box-shadow: none;
+    border-color: $violet;
+  }
+}
+.span-erreur{
+  color: $red;
+  margin-bottom: 0;
+}
+.requis:after{
+  content: "*";
+  color: $red;
+}
+.w-input-form{
+  width: calc(100% - 55px);
+}
+
+// hide algolia publicity
+.ap-footer{
+  display: none !important;
+}
+
+// OLD VERSION
+.margin-auto-new-talent {
+  min-height: calc(100vh - 190px);
+  width: 50%;
+  margin-left: 50px;
 }
 
 .form-line{
@@ -9,10 +58,6 @@
 
 .form-label {
   width: 10%;
-}
-.requis:after{
-  content: "*";
-  color: $red;
 }
 
 @media screen and (max-width: 770px) {
@@ -36,10 +81,6 @@
   }
 }
 
-.margin-auto-new-talent {
-  width: 85%;
-  margin: auto;
-}
 
 
 .invalid-feedback {

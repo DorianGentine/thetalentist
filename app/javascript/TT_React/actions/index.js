@@ -2,10 +2,12 @@ import "@babel/polyfill";
 
 export const FETCH_CONVERSATION_ACTIVE = 'FETCH_CONVERSATION_ACTIVE';
 export const FETCH_CONVERSATIONS = 'FETCH_CONVERSATIONS';
+export const FETCH_JOBS = 'FETCH_JOBS';
 export const FETCH_NOTIFICATIONS = 'FETCH_NOTIFICATIONS';
+export const FETCH_SECTORS = 'FETCH_SECTORS';
+export const FETCH_SKILLS = 'FETCH_SKILLS';
 export const FETCH_TALENTS = 'FETCH_TALENTS';
 export const FETCH_USER = 'FETCH_USER';
-export const FETCH_JOBS = 'FETCH_JOBS';
 export const GUIDE_SU = 'GUIDE_SU';
 export const MESSAGERIE_ACTIVE_MOBILE = 'MESSAGERIE_ACTIVE_MOBILE';
 export const MODAL_CLOSED = 'MODAL_CLOSED';
@@ -39,7 +41,10 @@ export function fetchPost(url, body, method, callback) {
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(body)
     })
-    .then(response => response.json())
+    .then(response => {
+      response.json()
+      console.log('response', response)
+    })
     .then(callback)
   }else if(body === null){
     request = fetch(url,

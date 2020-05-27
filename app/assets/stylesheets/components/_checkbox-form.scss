@@ -1,0 +1,65 @@
+/* Customize the label (the container) */
+.checkbox-form {
+  // display: block;
+  // position: relative;
+  min-width: 25%;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-form input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  margin: unset;
+}
+
+/* Create a custom checkbox */
+.check-form {
+  position: relative;
+  border-radius: 2px;
+  border: 1px solid $input;
+  padding: 10px;
+  margin: 0 10px 10px 0;
+  font-size: 14px;
+  text-align: center;
+  transition: .5s;
+}
+
+/* On mouse-over, add a grey background color */
+.check-form:hover{
+  border-color: $violet;
+}
+
+/* Checkbox is checked */
+.checkbox-form input:checked ~ .check-form {
+  outline: 4px solid rgba(0,7,72,0.29);
+}
+
+/* Create the check-form/indicator (hidden when not checked) */
+.check-form > svg,
+.check-form > .choice-count {
+  position: absolute;
+  display: none;
+}
+
+/* Show the check-form when checked */
+.checkbox-form input:checked ~ .check-form > svg,
+.checkbox-form input:checked ~ .check-form > .choice-count {
+  display: block;
+}
+
+/* Style the check-form/indicator */
+.checkbox-form .check-form > svg,
+.checkbox-form .check-form > .choice-count {
+  top: 2px;
+  right: 2px;
+  color: $violet;
+  font-size: 10px;
+}

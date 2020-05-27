@@ -25,6 +25,8 @@ import repertory from './components/repertory';
 import conversation from './components/conversation';
 import dashboardHeadhunter from './components/dashboardHeadhunter';
 import dashboardTalent from './components/dashboardTalent';
+import inscriptionTalent from './components/inscriptionTalent';
+import modalInscription from './components/modalInscription';
 import profilRecruteur from './components/profilRecruteur';
 import profilTalent from './components/profilTalent';
 
@@ -40,7 +42,9 @@ import modalOpenedReducer from './reducers/modal_opened_reducer';
 import nbTalentsReducer from './reducers/nb_talents_reducer';
 import notificationsReducer from './reducers/notifications_reducer';
 import talentsReducer from './reducers/talents_reducer';
+import sectorsReducer from './reducers/sectors_reducer';
 import sidebarActiveMobileReducer from './reducers/sidebar_active_mobile_reducer';
+import skillsReducer from './reducers/skills_reducer';
 import userReducer from './reducers/user_reducer';
 
 const app = document.getElementById('app')
@@ -64,7 +68,9 @@ if(app){
     modalOpened: false,
     nbTalents: 0,
     notifications: [],
+    sectors: null,
     sidebarActiveMobile: false,
+    skills: null,
     talents: null,
     user: null,
   };
@@ -81,8 +87,10 @@ if(app){
     modalOpened: modalOpenedReducer,
     nbTalents: nbTalentsReducer,
     notifications: notificationsReducer,
-    talents: talentsReducer,
+    sectors: sectorsReducer,
     sidebarActiveMobile: sidebarActiveMobileReducer,
+    skills: skillsReducer,
+    talents: talentsReducer,
     user: userReducer,
   });
 
@@ -143,6 +151,10 @@ if(app){
     <Provider store={store}>
       <Router history={history}>
         <Switch>
+          <Route path="/talents/sign_in" component={modalInscription} />
+          <Route path="/talents/:talent_id/welcome/:step" component={inscriptionTalent} />
+          <Redirect from="/talents/:id/welcome" to="/talents/:id/welcome/1" />
+          <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/messagerie/:id" component={conversation} />
           <Route path="/conversations/:id" component={conversation} />
           <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
@@ -153,7 +165,7 @@ if(app){
           <Route path="/repertoire" component={repertory} />
           <Route path="/talents" component={dashboardTalent} />
           <Route path="/headhunters" component={dashboardHeadhunter} />
-          <Redirect from="/" to="/" />
+          <Redirect from="/" to="/talents/sign_in" />
         </Switch>
       </Router>
     </Provider>,
