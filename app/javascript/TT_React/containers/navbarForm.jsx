@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { switchStepFrom } from '../actions';
+// import { switchStepFrom } from '../actions';
 import mainLogo from'../../../assets/images/Logo The talentist-01.png';
 
 class NavbarForm extends Component {
@@ -19,7 +18,11 @@ class NavbarForm extends Component {
     return(
       <div style={{height: "70px"}}>
         <div className="navbar-wagon light-gray-background">
-          <a className="navbar-wagon-item navbar-wagon-link" onClick={handleClick} href={step == 0 ? "/talents/sign_in" : null}>&#8617; Retour</a>
+          {step == 1 ?
+            <a className="navbar-wagon-item navbar-wagon-link" href="/talents/sign_in">&#8617; Retour</a>
+          :
+            <Link className="navbar-wagon-item navbar-wagon-link" to={`/talents/${this.props.talent_id}/welcome/${step - 1}`}>&#8617; Retour</Link>
+          }
           <a href="/" className="navbar-talentist-logo">
             <img src={mainLogo} style={{height: "50px"}} alt="Logo talentist"/>
           </a>
@@ -36,12 +39,11 @@ class NavbarForm extends Component {
 function mapStateToProps(state) {
   return {
     isMobile: state.isMobile,
-    stepForm: state.stepForm,
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ switchStepFrom }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ switchStepFrom }, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavbarForm);
+export default connect(mapStateToProps, null)(NavbarForm);

@@ -51,14 +51,14 @@ class InscriptionForm11 extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    stepForm: state.stepForm,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     stepForm: state.stepForm,
+//   };
+// }
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(mapStateToProps, null)(InscriptionForm11);
+export default connect(null, null)(InscriptionForm11);

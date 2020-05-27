@@ -45,7 +45,7 @@ import notificationsReducer from './reducers/notifications_reducer';
 import talentsReducer from './reducers/talents_reducer';
 import sectorsReducer from './reducers/sectors_reducer';
 import sidebarActiveMobileReducer from './reducers/sidebar_active_mobile_reducer';
-import stepFormReducer from './reducers/step_form_reducer';
+import skillsReducer from './reducers/skills_reducer';
 import userReducer from './reducers/user_reducer';
 
 const app = document.getElementById('app')
@@ -71,7 +71,7 @@ if(app){
     notifications: [],
     sectors: null,
     sidebarActiveMobile: false,
-    stepForm: 8,
+    skills: null,
     talents: null,
     user: null,
   };
@@ -89,9 +89,9 @@ if(app){
     nbTalents: nbTalentsReducer,
     notifications: notificationsReducer,
     sectors: sectorsReducer,
-    talents: talentsReducer,
     sidebarActiveMobile: sidebarActiveMobileReducer,
-    stepForm: stepFormReducer,
+    skills: skillsReducer,
+    talents: talentsReducer,
     user: userReducer,
   });
 
@@ -152,12 +152,13 @@ if(app){
     <Provider store={store}>
       <Router history={history}>
         <Switch>
+          <Route path="/talents/sign_in" component={modalInscription} />
+          <Route path="/talents/:talent_id/welcome/:step" component={inscriptionTalent} />
+          <Redirect from="/talents/:id/welcome" to="/talents/:id/welcome/1" />
+          <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/messagerie/:id" component={conversation} />
           <Route path="/conversations/:id" component={conversation} />
           <Route path="/headhunters/:id" component={profilRecruteur} />
-          <Route path="/talents/sign_in" component={modalInscription} />
-          <Route path="/talents/sign_up" component={inscriptionTalent} />
-          <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/talents/:id" component={profilTalent} />
           <Route path="/messagerie" component={conversation} />
           <Route path="/repertoire" component={repertory} />

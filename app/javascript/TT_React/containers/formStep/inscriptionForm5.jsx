@@ -19,14 +19,13 @@ class InscriptionForm5 extends Component {
 
   render () {
     const actualStep = this.props.stepForm
-    const formStep = 5
     let sectors = this.props.sectors
     if(sectors != null){
       sectors = sectors.sectors
     }
 
     return(
-      <div className={setFormContainerClass(actualStep, formStep)}>
+      <div className={setFormContainerClass(actualStep, 5)}>
         <MessageMagda
           text1={`Nickel ! Tu peux maintenant ajouter jusqu'à 3 secteurs d'activité, et ainsi davantage cibler ta recherche.`}
           text2={`Quels sont les secteurs que tu privilégies ?`}
@@ -45,7 +44,6 @@ class InscriptionForm5 extends Component {
 
 function mapStateToProps(state) {
   return {
-    stepForm: state.stepForm,
     sectors: state.sectors,
   };
 }

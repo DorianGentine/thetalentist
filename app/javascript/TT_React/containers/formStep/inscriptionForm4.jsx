@@ -12,10 +12,9 @@ import MessageMagda from './messageMagda'
 class InscriptionForm4 extends Component {
   render () {
     const actualStep = this.props.stepForm
-    const formStep = 4
 
     return(
-      <div className={setFormContainerClass(actualStep, formStep)}>
+      <div className={setFormContainerClass(actualStep, 4)}>
         <MessageMagda text1={`Très bien ! Combien d'années d'expérience as-tu dans ce corps de métier ? (hors stage)`}/>
         <RangeForm name="talent_job_attributes[year]" max={30} formValue={this.props.formValue} />
         <button
@@ -29,15 +28,14 @@ class InscriptionForm4 extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    stepForm: state.stepForm,
-    jobs: state.jobs,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     jobs: state.jobs,
+//   };
+// }
 
 // function mapDispatchToProps(dispatch) {
 //   // return bindActionCreators({ fetchGET }, dispatch);
 // }
 
-export default connect(mapStateToProps, null)(InscriptionForm4);
+export default connect(null, null)(InscriptionForm4);

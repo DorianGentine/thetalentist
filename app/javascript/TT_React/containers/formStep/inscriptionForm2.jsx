@@ -13,7 +13,6 @@ class InscriptionForm2 extends Component {
 
   render () {
     const actualStep = this.props.stepForm
-    const formStep = 2
     const choices = [
       this.props.formValue.city != undefined && this.props.formValue.city.toLowerCase() == "paris" ? undefined : this.props.formValue.city,
       "Paris",
@@ -22,7 +21,7 @@ class InscriptionForm2 extends Component {
     ]
     // next_aventure_attributes[mobilities_attributes]: {id: xx, title: "xx"}
     return(
-      <div className={setFormContainerClass(actualStep, formStep)}>
+      <div className={setFormContainerClass(actualStep, 2)}>
         <MessageMagda text1={`Ok c'est noté ! En habitant sur ${this.props.formValue.city || "Paris"} tu restes ouvert à la mobilité ?`}/>
         <RadioForm name="next_aventure_attributes[mobilities_attributes][0][title]" choices={choices}/>
         <button
@@ -36,14 +35,14 @@ class InscriptionForm2 extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    stepForm: state.stepForm,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     stepForm: state.stepForm,
+//   };
+// }
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(mapStateToProps, null)(InscriptionForm2);
+export default connect(null, null)(InscriptionForm2);

@@ -13,9 +13,7 @@ class Talent < ApplicationRecord
 
   validates_confirmation_of :password, message: "Vos mots de passe ne concordent pas"
 
-  validates_presence_of :city, :message => "Le lieu doit être rempli", unless: :skip_city_validation
   validates_presence_of :phone, :message => "Ton téléphone doit être rempli", unless: :skip_phone_validation
-  validates_presence_of :linkedin, :message => "Ton linkedin doit être rempli", unless: :skip_linkedin_validation
   validates_presence_of :email, :message => "Ton email doit être rempli"
   validates_presence_of :firstname, :message => "Ton prénom doit être rempli"
   validates_presence_of :last_name, :message => "Ton nom doit être rempli"
@@ -211,7 +209,7 @@ class Talent < ApplicationRecord
 
   def create_next_aventure
     @next_aventure = NextAventure.create(talent: self)
-    Mobility.create(next_avanture: @next_avanture)
+    Mobility.create(next_aventure: @next_avanture)
   end
 
   def capitalize_name_firstname

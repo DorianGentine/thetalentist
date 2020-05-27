@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Form } from 'react-final-form';
 
-import { fetchPost, switchStepFrom } from '../actions';
+import { fetchPost } from '../actions';
 import validationForm from '../../components/validationInscriptionTalent';
 
 import NavbarForm from '../containers/navbarForm'
@@ -29,7 +29,8 @@ class InscriptionTalent extends Component {
   }
 
   render () {
-    const step = this.props.stepForm
+    const step = Number(this.props.match.params.step)
+    const showClg = false
 
     const valuesFilter = values => {
       const valuesToSend = {}
@@ -43,7 +44,7 @@ class InscriptionTalent extends Component {
     }
     
     const validate = values => {
-      console.log('values', values)
+      {showClg ? console.log('values', values) : null}
       const errors = validationForm(values, step)
       if(Object.keys(errors).length < Object.keys(this.state.errors).length){
         this.setState({errors: errors})
@@ -53,7 +54,7 @@ class InscriptionTalent extends Component {
     
     const onSubmit = values => {
       const errors = validationForm(values, step)
-      console.log('errors', errors)
+      {showClg ? console.log('errors', errors) : null}
       if(Object.keys(errors).length > 0){
         this.setState({errors: errors})
         return errors
@@ -81,11 +82,11 @@ class InscriptionTalent extends Component {
             prevState.initialValues[value] = valuesToSend[value]
           })
         })
-        console.log('valuesToSend', valuesToSend)
+        {showClg ? console.log('valuesToSend', valuesToSend) : null}
         if(Object.keys(valuesToSend).length > 0){
-          this.props.fetchPost(`/api/v1/talents/${17}`, valuesToSend, "PATCH")
+          // this.props.fetchPost(`/api/v1/talents/${this.props.match.params.talent_id}`, valuesToSend, "PATCH")
         }
-        this.props.switchStepFrom(step)
+        this.props.history.push(`/talents/${this.props.match.params.talent_id}/welcome/${step + 1}`)
       }
     }
 
@@ -96,7 +97,7 @@ class InscriptionTalent extends Component {
 
     return(
       <div>
-        <NavbarForm />
+        <NavbarForm stepForm={step} talent_id={this.props.match.params.talent_id} />
         <Form
           onSubmit={onSubmit}
           validate={validate}
@@ -117,17 +118,17 @@ class InscriptionTalent extends Component {
           }}
           render={({ handleSubmit, values, submitting }) => (
             <form onSubmit={handleSubmit} className="flex">
-              {step == 1 || step == 2 ? <InscriptionForm1 submitting={submitting} errors={this.state.errors} /> : null }
-              {step >= 1 && step <= 3 ? <InscriptionForm2 formValue={values} submitting={submitting} /> : null }
-              {step >= 2 && step <= 4 ? <InscriptionForm3 formValue={values} submitting={submitting} /> : null }
-              {step >= 3 && step <= 5 ? <InscriptionForm4 formValue={values} submitting={submitting} /> : null }
-              {step >= 4 && step <= 6 ? <InscriptionForm5 formValue={values} submitting={submitting} /> : null }
-              {step >= 5 && step <= 7 ? <InscriptionForm6 formValue={values} submitting={submitting} /> : null }
-              {step >= 6 && step <= 8 ? <InscriptionForm7 formValue={values} submitting={submitting} /> : null }
-              {step >= 7 && step <= 9 ? <InscriptionForm8 formValue={values} submitting={submitting} /> : null }
-              {step >= 8 && step <= 10 ? <InscriptionForm9 formValue={values} submitting={submitting} /> : null }
-              {step >= 9 && step <= 11 ? <InscriptionForm10 formValue={values} submitting={submitting} /> : null }
-              {step >= 10 && step <= 12 ? <InscriptionForm11 formValue={values} submitting={submitting} /> : null }
+              {step == 1 || step == 2 ? <InscriptionForm1 submitting={submitting} stepForm={step} errors={this.state.errors} /> : null }
+              {step >= 1 && step <= 3 ? <InscriptionForm2 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {step >= 2 && step <= 4 ? <InscriptionForm3 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {step >= 3 && step <= 5 ? <InscriptionForm4 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {step >= 4 && step <= 6 ? <InscriptionForm5 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {step >= 5 && step <= 7 ? <InscriptionForm6 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {step >= 6 && step <= 8 ? <InscriptionForm7 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {step >= 7 && step <= 9 ? <InscriptionForm8 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {step >= 8 && step <= 10 ? <InscriptionForm9 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {step >= 9 && step <= 11 ? <InscriptionForm10 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {step >= 10 && step <= 12 ? <InscriptionForm11 formValue={values} submitting={submitting} stepForm={step} /> : null }
             </form>
           )}
         />
@@ -143,7 +144,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPost, switchStepFrom }, dispatch);
+  return bindActionCreators({ fetchPost }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(InscriptionTalent);

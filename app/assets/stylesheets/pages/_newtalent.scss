@@ -45,6 +45,11 @@
 }
 
 // OLD VERSION
+.margin-auto-new-talent {
+  min-height: calc(100vh - 190px);
+  width: 50%;
+  margin-left: 50px;
+}
 
 .form-line{
   display: flex;
@@ -76,10 +81,6 @@
   }
 }
 
-.margin-auto-new-talent {
-  width: 85%;
-  margin: auto;
-}
 
 
 .invalid-feedback {
