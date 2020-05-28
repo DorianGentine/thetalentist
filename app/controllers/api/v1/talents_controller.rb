@@ -17,8 +17,11 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
 
   def show
-    talent = Talent.find(params[:id])
-    @talent = TalentFormat.new.talent(talent)
+    @talent = Talent.find(params[:id])
+    @next_aventure = @talent.next_aventure
+    @mobilities = @next_aventure.mobilities
+    @job = @talent.talent_job
+    @second_job = @talent.talent_second_job
   end
 
   def sort
