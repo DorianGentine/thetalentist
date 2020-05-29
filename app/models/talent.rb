@@ -210,7 +210,8 @@ class Talent < ApplicationRecord
 
   def create_next_aventure
     @next_aventure = NextAventure.create(talent: self)
-    Mobility.create(next_aventure: @next_avanture)
+    @talent_job = TalentJob.create(talent: self, year: 0)
+    @talent_second_job = TalentSecondJob.create(talent: self)
   end
 
   def capitalize_name_firstname

@@ -17,8 +17,13 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
 
   def show
-    talent = Talent.find(params[:id])
-    @talent = TalentFormat.new.talent(talent)
+    @talent = Talent.find(params[:id])
+    @next_aventure = @talent.next_aventure
+    @mobilities = @next_aventure.mobilities
+    @sector_ids = @next_aventure.sector_ids
+    @job = @talent.talent_job
+    @second_job = @talent.talent_second_job
+    authorize @talent
   end
 
   def sort
@@ -41,9 +46,14 @@ class Api::V1::TalentsController < Api::V1::BaseController
   private
   
   def autorize_call
+    p "TOUTES LES INFOS :"
+    p "current_talentist: #{current_talentist}"
+    p "current_talent: #{current_talent}"
+    p "current_headhunter: #{current_headhunter}"
     user = current_talentist if current_talentist
     user = current_talent if current_talent
-    user = current_user if current_headhunter
+    user = current_headhunter if current_headhunter
+    p "user: #{user}"
       authorize user
     end
     

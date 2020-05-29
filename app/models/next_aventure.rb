@@ -1,6 +1,8 @@
 class NextAventure < ApplicationRecord
   belongs_to :talent
 
+  after_create :create_mobility
+
   has_many :next_aventure_sectors, dependent: :destroy
   has_many :sectors, through: :next_aventure_sectors
 
@@ -9,6 +11,10 @@ class NextAventure < ApplicationRecord
 
 
   private
+
+  def create_mobility
+    Mobility.create(next_aventure: self)
+  end
 
   # def compile_cities_of_next_aventure
   #   return self.city.join(', ')
