@@ -44,7 +44,6 @@ export function fetchPost(url, body, method, callback) {
     })
     .then(response => {
       response.json()
-      console.log('response', response)
     })
     .then(callback)
   }else if(body === null){

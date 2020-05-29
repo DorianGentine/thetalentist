@@ -18,6 +18,7 @@ import InscriptionForm8 from '../containers/formStep/inscriptionForm8'
 import InscriptionForm9 from '../containers/formStep/inscriptionForm9'
 import InscriptionForm10 from '../containers/formStep/inscriptionForm10'
 import InscriptionForm11 from '../containers/formStep/inscriptionForm11'
+import InscriptionForm12 from '../containers/formStep/inscriptionForm12'
 
 class InscriptionTalent extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class InscriptionTalent extends Component {
   render () {
     const step = Number(this.props.match.params.step)
     const showClg = true
-    const talent = this.props.talent || null
+    let talent = this.props.talent || null
     console.log('talent', talent)
 
     const valuesFilter = values => {
@@ -89,30 +90,58 @@ class InscriptionTalent extends Component {
           })
         })
         {showClg ? console.log('valuesToSend', valuesToSend) : null}
+        const vTSLength = Object.keys(valuesToSend).length
         if(Object.keys(valuesToSend).length > 0){
-          // this.props.fetchPost(`/api/v1/talents/${this.props.match.params.talent_id}`, valuesToSend, "PATCH")
+          this.props.fetchPost(`/api/v1/talents/${this.props.match.params.talent_id}`, valuesToSend, "PATCH", 
+            this.props.fetchGET(`/api/v1/talents/${this.props.match.params.talent_id}`, "FETCH_TALENT")
+          )
         }
-        this.props.history.push(`/talents/${this.props.match.params.talent_id}/welcome/${step + 1}`)
+        if(step < 12){
+          this.props.history.push(`/talents/${this.props.match.params.talent_id}/welcome/${step + 1}`)
+        }else{
+          window.location = `/talents/${this.props.match.params.talent_id}`
+        }
       }
     }
 
-    let initialValues, next_aventure, mobility, job, second_job
+    let next_aventure, mobility, job, second_job
+    let initialValues = { 
+      next_aventure_attributes: {
+        id: 0,
+        mobilities_attributes: [{
+          id: 0
+        }]
+      },
+      talent_job_attributes: {
+        id: 0,
+        year: "0"
+      },
+      talent_second_job_attributes: {
+        id: 0,
+      }
+    }
     if(talent){
       next_aventure = talent.next_aventure
       mobility = talent.mobilities[0]
       job = talent.job
       second_job = talent.second_job
-      initialValues = { 
+      
+      initialValues = {
+        city: talent.talent.city,
         next_aventure_attributes: {
           id: next_aventure.id || 0,
-
           mobilities_attributes: [{
             id: mobility.id || 0
-          }]
+          }],
+          availability: next_aventure.availability,
+          remuneration: next_aventure.remuneration,
+          waiting_for_one: next_aventure.waiting_for_one,
+          waiting_for_two: next_aventure.waiting_for_two,
+          waiting_for_three: next_aventure.waiting_for_three
         },
         talent_job_attributes: {
           id: job.id,
-          year: "0"
+          year: job.year
         },
         talent_second_job_attributes: {
           id: second_job.id,
@@ -140,6 +169,7 @@ class InscriptionTalent extends Component {
               {step >= 8 && step <= 10 ? <InscriptionForm9 formValue={values} submitting={submitting} stepForm={step} /> : null }
               {step >= 9 && step <= 11 ? <InscriptionForm10 formValue={values} submitting={submitting} stepForm={step} /> : null }
               {step >= 10 && step <= 12 ? <InscriptionForm11 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {step >= 11 && step <= 13 ? <InscriptionForm12 formValue={values} submitting={submitting} stepForm={step} /> : null }
             </form>
           )}
         />
