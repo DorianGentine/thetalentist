@@ -41,10 +41,11 @@ import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
 import nbTalentsReducer from './reducers/nb_talents_reducer';
 import notificationsReducer from './reducers/notifications_reducer';
-import talentsReducer from './reducers/talents_reducer';
 import sectorsReducer from './reducers/sectors_reducer';
 import sidebarActiveMobileReducer from './reducers/sidebar_active_mobile_reducer';
 import skillsReducer from './reducers/skills_reducer';
+import talentReducer from './reducers/talent_reducer';
+import talentsReducer from './reducers/talents_reducer';
 import userReducer from './reducers/user_reducer';
 
 const app = document.getElementById('app')
@@ -71,6 +72,7 @@ if(app){
     sectors: null,
     sidebarActiveMobile: false,
     skills: null,
+    talent: null,
     talents: null,
     user: null,
   };
@@ -90,6 +92,7 @@ if(app){
     sectors: sectorsReducer,
     sidebarActiveMobile: sidebarActiveMobileReducer,
     skills: skillsReducer,
+    talent: talentReducer,
     talents: talentsReducer,
     user: userReducer,
   });

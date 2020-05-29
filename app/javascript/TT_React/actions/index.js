@@ -6,6 +6,7 @@ export const FETCH_JOBS = 'FETCH_JOBS';
 export const FETCH_NOTIFICATIONS = 'FETCH_NOTIFICATIONS';
 export const FETCH_SECTORS = 'FETCH_SECTORS';
 export const FETCH_SKILLS = 'FETCH_SKILLS';
+export const FETCH_TALENT = 'FETCH_TALENT';
 export const FETCH_TALENTS = 'FETCH_TALENTS';
 export const FETCH_USER = 'FETCH_USER';
 export const GUIDE_SU = 'GUIDE_SU';
@@ -43,7 +44,6 @@ export function fetchPost(url, body, method, callback) {
     })
     .then(response => {
       response.json()
-      console.log('response', response)
     })
     .then(callback)
   }else if(body === null){

@@ -7,7 +7,7 @@ class TalentJob < ApplicationRecord
   # before_save :set_position
 
   validates_presence_of :year, message: "L'année doit être remplie"
-  validates_presence_of :job_id, message: "Le métier doit être rempli"
+  # validates_presence_of :job_id, message: "Le métier doit être rempli"
 
   # attr_accessor :skip_year_validation
 

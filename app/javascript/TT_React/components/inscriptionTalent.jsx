@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Form } from 'react-final-form';
 
-import { fetchPost } from '../actions';
+import { fetchPost, fetchGET } from '../actions';
 import validationForm from '../../components/validationInscriptionTalent';
 
 import NavbarForm from '../containers/navbarForm'
@@ -18,6 +18,7 @@ import InscriptionForm8 from '../containers/formStep/inscriptionForm8'
 import InscriptionForm9 from '../containers/formStep/inscriptionForm9'
 import InscriptionForm10 from '../containers/formStep/inscriptionForm10'
 import InscriptionForm11 from '../containers/formStep/inscriptionForm11'
+import InscriptionForm12 from '../containers/formStep/inscriptionForm12'
 
 class InscriptionTalent extends Component {
   constructor(props) {
@@ -28,9 +29,15 @@ class InscriptionTalent extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.fetchGET(`/api/v1/talents/${this.props.match.params.talent_id}`, "FETCH_TALENT")
+  }
+
   render () {
     const step = Number(this.props.match.params.step)
-    const showClg = false
+    const showClg = true
+    let talent = this.props.talent || null
+    console.log('talent', talent)
 
     const valuesFilter = values => {
       const valuesToSend = {}
@@ -83,17 +90,64 @@ class InscriptionTalent extends Component {
           })
         })
         {showClg ? console.log('valuesToSend', valuesToSend) : null}
+        const vTSLength = Object.keys(valuesToSend).length
         if(Object.keys(valuesToSend).length > 0){
-          // this.props.fetchPost(`/api/v1/talents/${this.props.match.params.talent_id}`, valuesToSend, "PATCH")
+          this.props.fetchPost(`/api/v1/talents/${this.props.match.params.talent_id}`, valuesToSend, "PATCH", 
+            this.props.fetchGET(`/api/v1/talents/${this.props.match.params.talent_id}`, "FETCH_TALENT")
+          )
         }
-        this.props.history.push(`/talents/${this.props.match.params.talent_id}/welcome/${step + 1}`)
+        if(step < 12){
+          this.props.history.push(`/talents/${this.props.match.params.talent_id}/welcome/${step + 1}`)
+        }else{
+          window.location = `/talents/${this.props.match.params.talent_id}`
+        }
       }
     }
 
-    const next_aventure_id = 12
-    const mobilities_id = 20
-    const talent_job_id = 10
-    const talent_second_job_id = 10
+    let next_aventure, mobility, job, second_job
+    let initialValues = { 
+      next_aventure_attributes: {
+        id: 0,
+        mobilities_attributes: [{
+          id: 0
+        }]
+      },
+      talent_job_attributes: {
+        id: 0,
+        year: "0"
+      },
+      talent_second_job_attributes: {
+        id: 0,
+      }
+    }
+    if(talent){
+      next_aventure = talent.next_aventure
+      mobility = talent.mobilities[0]
+      job = talent.job
+      second_job = talent.second_job
+      
+      initialValues = {
+        city: talent.talent.city,
+        next_aventure_attributes: {
+          id: next_aventure.id || 0,
+          mobilities_attributes: [{
+            id: mobility.id || 0
+          }],
+          availability: next_aventure.availability,
+          remuneration: next_aventure.remuneration,
+          waiting_for_one: next_aventure.waiting_for_one,
+          waiting_for_two: next_aventure.waiting_for_two,
+          waiting_for_three: next_aventure.waiting_for_three
+        },
+        talent_job_attributes: {
+          id: job.id,
+          year: job.year
+        },
+        talent_second_job_attributes: {
+          id: second_job.id,
+        }
+      }
+    }
 
     return(
       <div>
@@ -101,21 +155,7 @@ class InscriptionTalent extends Component {
         <Form
           onSubmit={onSubmit}
           validate={validate}
-          initialValues={{ 
-            next_aventure_attributes: {
-              id: next_aventure_id,
-              mobilities_attributes: [{
-                id: mobilities_id,
-              }]
-            },
-            talent_job_attributes: {
-              id: talent_job_id,
-              year: "0"
-            },
-            talent_second_job_attributes: {
-              id: talent_second_job_id,
-            }
-          }}
+          initialValues={initialValues}
           render={({ handleSubmit, values, submitting }) => (
             <form onSubmit={handleSubmit} className="flex">
               {step == 1 || step == 2 ? <InscriptionForm1 submitting={submitting} stepForm={step} errors={this.state.errors} /> : null }
@@ -129,6 +169,7 @@ class InscriptionTalent extends Component {
               {step >= 8 && step <= 10 ? <InscriptionForm9 formValue={values} submitting={submitting} stepForm={step} /> : null }
               {step >= 9 && step <= 11 ? <InscriptionForm10 formValue={values} submitting={submitting} stepForm={step} /> : null }
               {step >= 10 && step <= 12 ? <InscriptionForm11 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {step >= 11 && step <= 13 ? <InscriptionForm12 formValue={values} submitting={submitting} stepForm={step} /> : null }
             </form>
           )}
         />
@@ -140,11 +181,12 @@ class InscriptionTalent extends Component {
 function mapStateToProps(state) {
   return {
     stepForm: state.stepForm,
+    talent: state.talent,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPost }, dispatch);
+  return bindActionCreators({ fetchPost, fetchGET }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(InscriptionTalent);
