@@ -9,17 +9,25 @@ import { setFormContainerClass } from '../../../components/formContainerClass';
 import InputForm from '../form/inputForm'
 
 class InscriptionForm12 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: null
+    }
+  }
+  
   render () {
     const actualStep = this.props.stepForm
     const values = this.props.formValue
-    let image = null
+    let image = this.state.image
+    const that = this
     if(values.avatar){
       let input = document.getElementById("avatar");
       let fReader = new FileReader();
       fReader.readAsDataURL(input.files[0]);
       fReader.onloadend = function(event){
         // let img = document.getElementById("yourImgTag");
-        image = event.target.result;
+        that.setState({ image : event.target.result })
         console.log('image', image)
       }
     }
@@ -33,14 +41,14 @@ class InscriptionForm12 extends Component {
           En attendant, tu peux compléter c'est quelques infos manquantes avant d'accéder à ton profil !
         </p>
         <label className="margin-left-55 margin-bottom-30" htmlFor="avatar" >
-          <span className="font-14 bold margin-bottom-15">Avatar</span>
-          <div className="flex align-items-center">  
+          <span className="font-14 bold">Avatar</span>
+          <div className="flex align-items-center margin-top-15">  
             {image != null ? 
               <img className="photo-conv photo-conv-lg" src={image} alt={`yo`}></img> 
               : 
               <div className="photo-conv photo-conv-lg">{"Erwan".slice(0, 1)}</div>
             }
-            <p className="no-margin margin-left-15 add-picture">{values.avatar ? values.avatar : "+ Ajouter une photo"}</p>
+            <p className="no-margin margin-left-15 add-picture">{values.avatar ? values.avatar.slice(12) : "+ Ajouter une photo" }</p>
           </div>
           <Field className="hidden" name="avatar" id="avatar" component="input" type="file" />
         </label>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-// import { switchStepFrom } from '../../actions';
+import { fetchGET } from '../../actions';
 import { setFormContainerClass } from '../../../components/formContainerClass';
 
 import SelectForm from '../form/selectForm'
@@ -10,19 +10,23 @@ import MessageMagda from './messageMagda'
 
 
 class InscriptionForm10 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-      ]
-    }  
+  componentDidMount(){
+    if (this.props.knowns === null) {
+      this.props.fetchGET('/api/v1/knowns', "FETCH_KNOWNS")
+    }
   }
+
 
   render () {
     const actualStep = this.props.stepForm
+    let knowns = this.props.knowns
+    if(knowns != null){
+      knowns = knowns.knowns
+      knowns.map((known) => {
+        known.label = known.title
+        known.value = known.id
+      })
+    }
 
     return(
       <div className={setFormContainerClass(actualStep, 10)}>
@@ -31,7 +35,7 @@ class InscriptionForm10 extends Component {
         />
         <SelectForm 
           name="known_ids" 
-          options={this.state.options} 
+          options={knowns} 
           placeholder="Rentre tes savoir-être..." 
           limit={10}
           formValue={this.props.formValue}
@@ -50,14 +54,14 @@ class InscriptionForm10 extends Component {
   }
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     stepForm: state.stepForm,
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    knowns: state.knowns,
+  };
+}
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ switchStepFrom }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchGET }, dispatch);
+}
 
-export default connect(null, null)(InscriptionForm10);
+export default connect(mapStateToProps, mapDispatchToProps)(InscriptionForm10);

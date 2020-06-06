@@ -19,7 +19,7 @@ class MessageMagda extends Component {
           <img className="photo-conv" src={image} alt="avatar"></img>
           <div className="flex-grow-1">
             <p className="bold no-margin">Magdalena Mleczek</p>
-            <p className="no-margin italic subtitle">Chouchouteuse de talents @thetalentist</p>
+            {/* <p className="no-margin italic subtitle">Chouchouteuse de talents @thetalentist</p> */}
           </div>
         </div>
         <p className="margin-left-55">{text1}</p>

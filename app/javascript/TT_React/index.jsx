@@ -36,6 +36,7 @@ import conversationsReducer from './reducers/conversations_reducer';
 import filterReducer from './reducers/filter_reducer';
 import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
+import knownsReducer from './reducers/knowns_reducer';
 import messagerieActiveMobileReducer from './reducers/messagerie_active_mobile_reducer';
 import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
@@ -64,6 +65,7 @@ if(app){
     guideSu: 0,
     isMobile: isMobileState,
     jobs: null,
+    knowns: null,
     messagerieActiveMobile: false,
     modalSelected: null,
     modalOpened: false,
@@ -84,6 +86,7 @@ if(app){
     guideSu: guideSuReducer,
     isMobile: identityReducer,
     jobs: jobsReducer,
+    knowns: knownsReducer,
     messagerieActiveMobile: messagerieActiveMobileReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,

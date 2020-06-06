@@ -41,6 +41,30 @@ class InscriptionTalent extends Component {
 
     const valuesFilter = values => {
       const valuesToSend = {}
+      // Met en page les skill_ids
+      if(values.skill_ids && values.skill_ids.length > 0){
+        values.skill_ids.map((skill, index) => {
+          if(skill.id){
+            values.skill_ids[index] = skill.id
+          }else{
+            values.skill_ids[index] = skill.value
+          }
+          console.log('skill', skill)
+        })
+        console.log('values.skill_ids', values.skill_ids)
+      }
+      // Met en page les known_ids
+      if(values.known_ids && values.known_ids.length > 0){
+          values.known_ids.map((known, index) => {
+          if(known.id){
+            values.known_ids[index] = known.id
+          }else{
+            values.known_ids[index] = known.value
+          }
+          console.log('known', known)
+        })
+        console.log('values.known_ids', values.known_ids)
+      }
       Object.keys(values).forEach(value => {
         // if(values[value].length > 0 && values[value] !== this.state.initialValues[value]){
         if(values[value] !== this.state.initialValues[value]){
@@ -52,6 +76,9 @@ class InscriptionTalent extends Component {
     
     const validate = values => {
       {showClg ? console.log('values', values) : null}
+      if(values.skill_ids){
+        console.log(values.skill_ids.length)
+      }
       const errors = validationForm(values, step)
       if(Object.keys(errors).length < Object.keys(this.state.errors).length){
         this.setState({errors: errors})
@@ -75,7 +102,7 @@ class InscriptionTalent extends Component {
           valuesToSend.talent_job_attributes.job_id = jobs[0]
         }
         // Met en page les waiting_for
-        if(valuesToSend.next_aventure_attributes.waiting_for_one){
+        if(typeof valuesToSend.next_aventure_attributes.waiting_for_one == "object"){
           const nAA = valuesToSend.next_aventure_attributes
           const waitingFor = valuesToSend.next_aventure_attributes.waiting_for_one
           nAA.waiting_for_three = waitingFor[2]
@@ -89,11 +116,10 @@ class InscriptionTalent extends Component {
             prevState.initialValues[value] = valuesToSend[value]
           })
         })
-        {showClg ? console.log('valuesToSend', valuesToSend) : null}
-        const vTSLength = Object.keys(valuesToSend).length
+        // {showClg ? console.log('valuesToSend', valuesToSend) : null}
         if(Object.keys(valuesToSend).length > 0){
           this.props.fetchPost(`/api/v1/talents/${this.props.match.params.talent_id}`, valuesToSend, "PATCH", 
-            this.props.fetchGET(`/api/v1/talents/${this.props.match.params.talent_id}`, "FETCH_TALENT")
+            // this.props.fetchGET(`/api/v1/talents/${this.props.match.params.talent_id}`, "FETCH_TALENT")
           )
         }
         if(step < 12){
