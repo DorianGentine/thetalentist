@@ -19,20 +19,20 @@ class InscriptionForm11 extends Component {
           text1={`Allez ! Voici les 3 dernières questions qui permettentde te différencier, ce sont elles que les Start-ups voient en premier sur ton profil, alors mets le paquet !`}
         />
         <TextAreaForm
-          name="see_my_job"
+          name="next_aventure_attributes[see_my_job]"
           title="Comment je vois mon métier ?"
           placeholder="J'ai monté ma boite avec 2 associés..."
           maxlength="300"
           formValue={this.props.formValue}
         />
         <TextAreaForm
-          name="good_manager"
+          name="next_aventure_attributes[good_manager]"
           title="Un bon manager c'est ?"
           maxlength="300"
           formValue={this.props.formValue}
         />
         <TextAreaForm
-          name="looking_for"
+          name="next_aventure_attributes[looking_for]"
           title="Ce que je recherche ?"
           maxlength="300"
           formValue={this.props.formValue}
