@@ -19,9 +19,9 @@ class RadioForm extends Component {
             max={this.props.max}
             name={this.props.name}
           />
-          <div className="left-slider" style={{width: `${rangeValue / 30 * 100}%`}}></div>
+          <div className="left-slider" style={{width: `${rangeValue / this.props.max * 100}%`}}></div>
         </div>
-        {rangeValue != undefined && rangeValue != 0 ? <p className="no-margin">{`${rangeValue} ${rangeValue == 1 ? "an" : "ans"}`}</p> : null }
+        {rangeValue != undefined && rangeValue != 0 ? <p className="no-margin">{`${rangeValue == 20 ? `${rangeValue}+` : rangeValue} ${rangeValue == 1 ? "an" : "ans"}`}</p> : null }
       </div>
     );
   }

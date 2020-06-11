@@ -19,7 +19,6 @@ class InscriptionForm2 extends Component {
       "Nationale",
       "Internationale"
     ]
-    // next_aventure_attributes[mobilities_attributes]: {id: xx, title: "xx"}
     return(
       <div className={setFormContainerClass(actualStep, 2)}>
         <MessageMagda text1={`Ok c'est noté ! En habitant sur ${this.props.formValue.city || "Paris"} tu restes ouvert à la mobilité ?`}/>
@@ -27,7 +26,7 @@ class InscriptionForm2 extends Component {
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || this.props.formValue.next_aventure_attributes.mobilities_attributes[0].title == undefined}>
           Étape suivante
         </button>
       </div>

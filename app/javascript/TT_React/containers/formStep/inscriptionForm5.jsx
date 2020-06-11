@@ -34,7 +34,7 @@ class InscriptionForm5 extends Component {
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || this.props.formValue.next_aventure_attributes.sector_ids.length == 0}>
           Étape suivante
         </button>
       </div>

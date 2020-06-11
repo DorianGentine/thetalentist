@@ -20,20 +20,20 @@ class InscriptionForm11 extends Component {
         />
         <TextAreaForm
           name="next_aventure_attributes[see_my_job]"
-          title="Comment je vois mon métier ?"
+          title="Comment je vois mon métier"
           placeholder="J'ai monté ma boite avec 2 associés..."
           maxlength="300"
           formValue={this.props.formValue}
         />
         <TextAreaForm
           name="next_aventure_attributes[good_manager]"
-          title="Un bon manager c'est ?"
+          title="Un bon manager c'est"
           maxlength="300"
           formValue={this.props.formValue}
         />
         <TextAreaForm
           name="next_aventure_attributes[looking_for]"
-          title="Ce que je recherche ?"
+          title="Ce que je recherche"
           maxlength="300"
           formValue={this.props.formValue}
         />
@@ -43,7 +43,11 @@ class InscriptionForm11 extends Component {
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || 
+            this.props.formValue.next_aventure_attributes.see_my_job == undefined ||
+            this.props.formValue.next_aventure_attributes.good_manager == undefined ||
+            this.props.formValue.next_aventure_attributes.looking_for == undefined
+          }>
           Soumettre mon profil
         </button>
       </div>

@@ -12,6 +12,7 @@ class MessageMagda extends Component {
     const image = photoMagda
     const text1 = this.props.text1
     const text2 = this.props.text2 || false
+    const text3 = this.props.text3 || false
 
     return(
       <div className="margin-bottom-30">
@@ -24,6 +25,7 @@ class MessageMagda extends Component {
         </div>
         <p className="margin-left-55">{text1}</p>
         {text2 ? <p className="margin-left-55">{text2}</p> : null }
+        {text3 ? <p className="margin-left-55 italic">{text3}</p> : null }
       </div>
     );
   }

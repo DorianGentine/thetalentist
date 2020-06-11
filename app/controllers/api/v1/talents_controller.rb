@@ -18,8 +18,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def show
     @talent = Talent.find(params[:id])
-    @knowns = @talent.known_ids
-    @skills = @talent.skill_ids
+    @knowns = @talent.knowns
+    @skills = @talent.skills
     @next_aventure = @talent.next_aventure
     @mobilities = @next_aventure.mobilities
     @sector_ids = @next_aventure.sector_ids
@@ -37,14 +37,14 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def update
     @talent = Talent.find(params[:id])
-    if need_to_create_data?
-      if params[:skill_ids].present?
-        set_new_skills(@talent)
-      end
-      if params[:known_ids].present?
-        set_new_knowns(@talent)
-      end
-    end
+    # if need_to_create_data?
+    #   if params[:skill_ids].present?
+    #     set_new_skills(@talent)
+    #   end
+    #   if params[:known_ids].present?
+    #     set_new_knowns(@talent)
+    #   end
+    # end
     if @talent.update(talent_params)
       render :show
     else
@@ -119,6 +119,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
       :terms_of_condition,
       :no_more,
       :sector_ids,
+      :photo,
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
       next_aventure_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
