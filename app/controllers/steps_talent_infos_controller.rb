@@ -177,14 +177,15 @@ class StepsTalentInfosController < ApplicationController
       :terms_of_condition,
       :no_more,
       :sector_ids,
-      hobby_ids: [],
+      :skill_ids,
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
       next_aventure_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[:id, :title, :_destroy]],
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :_destroy],
       talent_languages_attributes: [ :id, :level, :language_id, :_destroy],
       your_small_plus_attributes: [:id, :description, :_destroy],
       talent_job_attributes: [:id, :job_id, :year, :position, :_destroy],
-      talent_second_job_attributes: [ :id, :job_id ]
+      talent_second_job_attributes: [ :id, :job_id ],
+      hobby_ids: []
     )
   end
 end

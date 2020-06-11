@@ -49,9 +49,10 @@
         %>
 
         <%= f.input :terms_of_condition,
-          wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
-          label: "En vous inscrivant vous acceptez les Conditions d'utilisations et la Politique de confidentialité de The Talentist."
+          wrapper_html: { class: "col-md-1 margin-bottom-20" },
+          label: false
         %>
+        <p class="col-md-11 margin-bottom-30">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank" %> et la <%= link_to "Politique de confidentialité", mentions_legales_path, target: "_blank" %> de The Talentist.</p>
 
         <div class="col-md-12 flex">
           <%= f.button :submit, 

@@ -5,14 +5,21 @@ import { Field } from 'react-final-form';
 
 class InputForm extends Component {
   render () {
-    let valueLength = 0
-    if(this.props.formValue[this.props.name] != undefined){
-      valueLength = this.props.formValue[this.props.name].length
+    let valueLength = 0, value
+    if(this.props.name == "next_aventure_attributes[see_my_job]"){
+      value = this.props.formValue.next_aventure_attributes.see_my_job
+    }else if(this.props.name == "next_aventure_attributes[good_manager]"){
+      value = this.props.formValue.next_aventure_attributes.good_manager
+    }else if(this.props.name == "next_aventure_attributes[looking_for]"){
+      value = this.props.formValue.next_aventure_attributes.looking_for
+    }
+    if(value != undefined){
+      valueLength = value.length
     }
 
     return(
       <div className="input-form margin-left-55 margin-bottom-30">
-        <label className="requis" htmlFor={this.props.name}>{this.props.title}</label>
+        <label htmlFor={this.props.name}>{this.props.title}</label>
         <Field
           component="textarea"
           className="textarea-form"

@@ -97,6 +97,7 @@ Rails.application.routes.draw do
       resources :jobs, only: [ :index ]
       resources :sectors, only: [ :index ]
       resources :skills, only: [ :index ]
+      resources :knowns, only: [ :index ]
       resources :relationships, only: [ :create ]
       resources :config_conversations, only: [ :update ]
       resources :pins, only: [ :create, :destroy ]

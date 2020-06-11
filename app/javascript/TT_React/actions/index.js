@@ -3,6 +3,7 @@ import "@babel/polyfill";
 export const FETCH_CONVERSATION_ACTIVE = 'FETCH_CONVERSATION_ACTIVE';
 export const FETCH_CONVERSATIONS = 'FETCH_CONVERSATIONS';
 export const FETCH_JOBS = 'FETCH_JOBS';
+export const FETCH_KNOWNS = 'FETCH_KNOWNS';
 export const FETCH_NOTIFICATIONS = 'FETCH_NOTIFICATIONS';
 export const FETCH_SECTORS = 'FETCH_SECTORS';
 export const FETCH_SKILLS = 'FETCH_SKILLS';
@@ -22,7 +23,7 @@ export async function fetchGET(url, type) {
   let response = await fetch(url)
   let promise
   if(response.ok){
-    promise = await response.json();
+    promise = await response.json()
   } else {
     console.error(`${type} ne passe pas : `, response)
     promise = null

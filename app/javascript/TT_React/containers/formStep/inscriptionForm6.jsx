@@ -35,7 +35,7 @@ class InscriptionForm6 extends Component {
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || this.props.formValue.next_aventure_attributes.waiting_for_one.length == 0}>
           Étape suivante
         </button>
       </div>

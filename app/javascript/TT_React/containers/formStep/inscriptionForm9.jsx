@@ -32,6 +32,7 @@ class InscriptionForm9 extends Component {
         <MessageMagda
           text1={`Merci ! On va bientôt pouvoir examiner ton profil !`}
           text2={`Peux tu nous lister quelques-unes de tes compétences clés, qui font de toi un vrai pro dans ton métier ?`}
+          text3={"Astuce: tu peux rajouter librement ce qui te passe par la tête en l'écrivant directement"}
         />
         <SelectForm 
           name="skill_ids" 
@@ -43,7 +44,7 @@ class InscriptionForm9 extends Component {
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || this.props.formValue.skill_ids.length == 0}>
           Étape suivante
         </button>
       </div>
