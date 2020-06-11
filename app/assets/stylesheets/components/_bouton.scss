@@ -26,6 +26,12 @@
     background-color: white;
     color: $violet;
   }
+  .btn-violet-square[disabled] {
+    color: $subtitle;
+    background-color: $lines-2;
+    border-color: $lines-2;
+    cursor: not-allowed;
+  }
 
 // btn-white-border
   .btn-white-border{

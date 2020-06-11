@@ -29,7 +29,7 @@ class InscriptionForm7 extends Component {
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || this.props.formValue.next_aventure_attributes.remuneration == undefined}>
           Étape suivante
         </button>
       </div>
