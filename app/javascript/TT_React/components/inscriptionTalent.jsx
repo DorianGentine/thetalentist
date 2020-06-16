@@ -24,7 +24,6 @@ class InscriptionTalent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errors: {},
       initialValues: { 
         next_aventure_attributes: {
           id: 0,
@@ -47,82 +46,115 @@ class InscriptionTalent extends Component {
       },
     }
   }
-
-  componentDidMount() {
-    const setInitialvalues = () => {
-      const talent = this.props.talent
-      const next_aventure = talent.next_aventure
-      const mobility = talent.mobilities[0]
-      const job = talent.job
-      const second_job = talent.second_job
-      const skills = talent.skills
-      skills.map((skill, index) => {
-        skill.label = skill.title
-        skill.value = skill.id
-      })
-      const knowns = talent.knowns
-      knowns.map((known) => {
-        known.label = known.title
-        known.value = known.id
-      })
-      const initialValues = {
-        city: talent.talent.city,
-        linkedin: talent.talent.linkedin,
-        // photo: talent.talent.photo.url,
-        skill_ids: skills,
-        known_ids: knowns,
-        next_aventure_attributes: {
-          id: next_aventure.id || 0,
-          mobilities_attributes: [{
-            id: mobility.id || 0,
-            title: mobility.title
-          }],
-          availability: next_aventure.availability,
-          good_manager: next_aventure.good_manager,
-          looking_for: next_aventure.looking_for,
-          remuneration: next_aventure.remuneration,
-          sector_ids: talent.sector_ids,
-          see_my_job: next_aventure.see_my_job,
-          waiting_for_one: [
-            next_aventure.waiting_for_one, 
-            next_aventure.waiting_for_two, 
-            next_aventure.waiting_for_three
-          ]
-        },
-        talent_job_attributes: {
-          id: job.id,
-          job_id: [job.job_id, second_job.job_id] || null,
-          year: job.year
-        },
-        talent_second_job_attributes: {
-          id: second_job.id,
-        }
-      }
-      console.log('initialValues', initialValues)
-      this.setState({ initialValues: initialValues })
+  
+  setInitialvalues = values => {
+    console.log(values)
+    let talent, city, linkedin, next_aventure, mobility, job, second_job, skills, knowns
+    if (values.payload) {
+      talent = values.payload
+      city = talent.talent.city
+      linkedin = talent.talent.linkedin
+      next_aventure = talent.next_aventure
+      mobility = talent.mobilities[0]
+      job = talent.job
+      second_job = talent.second_job
+      skills = talent.skills
+      knowns = talent.knowns
+    }else{
+      talent = values
+      city = talent.city
+      linkedin = talent.linkedin
+      next_aventure = talent.next_aventure_attributes
+      mobility = next_aventure.mobilities_attributes
+      job = talent.talent_job_attributes
+      second_job = talent.talent_second_job_attributes
+      skills = talent.skill_ids
+      knowns = talent.known_ids
     }
+    
+    console.log('talent', talent)
+    const jobsId = []
 
+    if(job.job_id){
+      jobsId[0] = job.job_id
+    }
+    if(second_job.job_id){
+      jobsId[1] = second_job.job_id
+    }
+    const waitingForOnes = []
+    if(next_aventure.waiting_for_one){
+      waitingForOnes[0] = next_aventure.waiting_for_one
+    }
+    if(next_aventure.waiting_for_two){
+      waitingForOnes[1] = next_aventure.waiting_for_two
+    }
+    if(next_aventure.waiting_for_three){
+      waitingForOnes[2] = next_aventure.waiting_for_three
+    }
+    skills.map((skill, index) => {
+      skill.label = skill.title
+      skill.value = skill.id
+    })
+    knowns.map((known) => {
+      known.label = known.title
+      known.value = known.id
+    })
+    const initialValues = {
+      city: city,
+      linkedin: linkedin,
+      // photo: talent.talent.photo.url,
+      skill_ids: skills,
+      known_ids: knowns,
+      next_aventure_attributes: {
+        id: next_aventure.id || 0,
+        mobilities_attributes: [{
+          id: mobility.id || 0,
+          title: mobility.title
+        }],
+        availability: next_aventure.availability,
+        good_manager: next_aventure.good_manager,
+        looking_for: next_aventure.looking_for,
+        remuneration: next_aventure.remuneration,
+        sector_ids: talent.sector_ids,
+        see_my_job: next_aventure.see_my_job,
+        waiting_for_one: waitingForOnes
+      },
+      talent_job_attributes: {
+        id: job.id,
+        job_id: jobsId,
+        year: job.year
+      },
+      talent_second_job_attributes: {
+        id: second_job.id,
+      }
+    }
+    console.log('initialValues', initialValues)
+    this.setState({ initialValues: initialValues })
+  }
+  
+  componentDidMount() {
     this.props.fetchGET(`/api/v1/talents/${this.props.match.params.talent_id}`, "FETCH_TALENT")
-      .then(setInitialvalues)
+    .then(this.setInitialvalues)
   }
 
   render () {
     const step = Number(this.props.match.params.step)
     const showClg = true
     let talent = this.props.talent || null
-
+    
     const valuesFilter = values => {
       const valuesToSend = {}
       const initialValues = this.state.initialValues
       Object.keys(values).forEach(value => {
         if(initialValues[value] !== values[value]){
-          valuesToSend[value] = values[value]
+          valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
           if(value == "talent_job_attributes"){
-            valuesToSend["talent_second_job_attributes"] = values.talent_second_job_attributes
+            valuesToSend["talent_second_job_attributes"] = JSON.parse(JSON.stringify(values.talent_second_job_attributes))
           }
+        }else if(value == "photo"){
+          valuesToSend[value] = values[value]
         }
       })
-      console.log('valuesToSend', valuesToSend)
       // Met en page les jobs
       if(valuesToSend.talent_job_attributes && valuesToSend.talent_job_attributes.job_id){
         const jobs = valuesToSend.talent_job_attributes.job_id
@@ -131,7 +163,7 @@ class InscriptionTalent extends Component {
       }
       // Met en page les waiting_for
       if(valuesToSend.next_aventure_attributes && 
-        typeof valuesToSend.next_aventure_attributes.waiting_for_one == "object"){
+        typeof valuesToSend.next_aventure_attributes.waiting_for_one.length > 0){
         const nAA = valuesToSend.next_aventure_attributes
         const waitingFor = valuesToSend.next_aventure_attributes.waiting_for_one
         nAA.waiting_for_three = waitingFor[2] || null
@@ -140,47 +172,43 @@ class InscriptionTalent extends Component {
       }
       // Met en page les skill_ids
       if(valuesToSend.skill_ids && valuesToSend.skill_ids.length > 0){
-        valuesToSend.skill_ids.map((skill, index) => {
-          if(skill.id){
-            valuesToSend.skill_ids[index] = skill.id
-          }else{
-            valuesToSend.skill_ids[index] = skill.value
-          }
-        })
+        for (let i = 0; i < valuesToSend.skill_ids.length; i++) {
+          const element = valuesToSend.skill_ids[i];
+          const infoToSend = element.id || element.value
+          valuesToSend.skill_ids[i] = infoToSend
+        }
       }
       // Met en page les known_ids
       if(valuesToSend.known_ids && valuesToSend.known_ids.length > 0){
-        valuesToSend.known_ids.map((known, index) => {
-          if(known.id){
-            valuesToSend.known_ids[index] = known.id
-          }else{
-            valuesToSend.known_ids[index] = known.value
-          }
-        })
+        for (let i = 0; i < valuesToSend.known_ids.length; i++) {
+          const element = valuesToSend.known_ids[i];
+          const infoToSend = element.id || element.value
+          valuesToSend.known_ids[i] = infoToSend
+        }
       }
       // FIN
+      this.setInitialvalues(values)
       
       return valuesToSend
     }
     
     const validate = values => {
-      {showClg ? console.log('values', values) : null}
+      // {showClg ? console.log('values', values) : null}
       const errors = validationForm(values, step)
-      if(Object.keys(errors).length < Object.keys(this.state.errors).length){
-        this.setState({errors: errors})
-      }
+      // if(Object.keys(errors).length < Object.keys(this.state.errors).length){
+      //   this.setState({errors: errors})
+      // }
       return errors
     }
     
     const onSubmit = values => {
       const errors = validationForm(values, step)
-      {showClg ? console.log('errors', errors) : null}
       if(Object.keys(errors).length > 0){
         this.setState({errors: errors})
         return errors
       }else{
         const valuesToSend = valuesFilter(values)
-        {showClg ? console.log('valuesToSend', valuesToSend) : null}
+        console.log('valuesToSend', valuesToSend)
         if(Object.keys(valuesToSend).length > 0){
           this.props.fetchPost(`/api/v1/talents/${this.props.match.params.talent_id}`, valuesToSend, "PATCH",
             this.props.fetchGET(`/api/v1/talents/${this.props.match.params.talent_id}`, "FETCH_TALENT")
@@ -198,12 +226,13 @@ class InscriptionTalent extends Component {
       <div>
         <NavbarForm stepForm={step} talent_id={this.props.match.params.talent_id} />
         <Form
+          style={{marginTop: "70px"}}
           onSubmit={onSubmit}
           validate={validate}
           initialValues={this.state.initialValues}
           render={({ handleSubmit, values, submitting }) => (
             <form onSubmit={handleSubmit} className="flex">
-              {step == 1 || step == 2 ? <InscriptionForm1 formValue={values} submitting={submitting} stepForm={step} errors={this.state.errors} /> : null }
+              {step == 1 || step == 2 ? <InscriptionForm1 formValue={values} submitting={submitting} stepForm={step} /> : null }
               {step >= 1 && step <= 3 ? <InscriptionForm2 formValue={values} submitting={submitting} stepForm={step} /> : null }
               {step >= 2 && step <= 4 ? <InscriptionForm3 formValue={values} submitting={submitting} stepForm={step} /> : null }
               {step >= 3 && step <= 5 ? <InscriptionForm4 formValue={values} submitting={submitting} stepForm={step} /> : null }

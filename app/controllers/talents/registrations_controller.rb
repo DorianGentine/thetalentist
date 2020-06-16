@@ -4,8 +4,6 @@ class Talents::RegistrationsController < Devise::RegistrationsController
 
   def new
     @talent = Talent.new
-    # @talent.build_talent_job if @talent.jobs.count == 0
-    # @talent.build_talent_second_job if @talent.jobs.count < 2
     authorize @talent
   end
 
@@ -18,7 +16,7 @@ class Talents::RegistrationsController < Devise::RegistrationsController
     # @talent.skip_phone_validation = true
     if @talent.save
       session[:talent_id] = @talent.id
-      # redirect_to steps_talent_info_path(:formations)
+      sign_in(@talent)
       redirect_to welcome_talent_path(@talent)
     else
       render :new
