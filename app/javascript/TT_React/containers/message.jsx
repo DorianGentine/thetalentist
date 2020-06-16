@@ -12,6 +12,12 @@ class Message extends Component {
     const message = this.props.message
     const avatar = message.avatar
     const image = typeof avatar == "string" ? null : avatar.small_bright_face.url
+    // const urlify = text => {
+    //   let urlRegex = /(https?:\/\/[^\s]+)/g;
+    //   return text.replace(urlRegex, function(url) {
+    //     return '<a href="' + url + '">' + url + '</a>';
+    //   })
+    // }
 
     if(message.sender === "Vous"){
       return(

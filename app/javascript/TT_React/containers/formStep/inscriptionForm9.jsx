@@ -21,7 +21,7 @@ class InscriptionForm9 extends Component {
     let skills = this.props.skills
     if(skills != null){
       skills = skills.skills
-      skills.map((skill, index) => {
+      skills.map((skill) => {
         skill.label = skill.title
         skill.value = skill.id
       })

@@ -34,7 +34,6 @@ class InscriptionForm1 extends Component {
 
   render () {
     const step = this.props.stepForm
-    const errors = this.props.errors
 
     const handleChange = (input) => {
       if(!this.state.updated){
@@ -71,13 +70,8 @@ class InscriptionForm1 extends Component {
             }}
           />
           <Field name="city" >
-            {props => <input
-              name={props.input.name}
-              type="hidden"
-              onChange={handleChange(props.input)}
-            />}    
+            {props => <input name={props.input.name} type="hidden" onChange={handleChange(props.input)} />}    
           </Field>
-          {errors.city ? <p className="span-erreur">{errors.city}</p> : null}
         </div>
         <MessageMagda text1="La majorité de nos opportunités se trouvent à Paris. Mais nous recevons aussi des offres de la France entière."/>
         <button
