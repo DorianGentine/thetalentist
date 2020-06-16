@@ -128,16 +128,17 @@ class InboxFormat
     elsif user.is_a?(Headhunter)
       return "Nombre d'employés :"
     else
-      return "Talentist"
+      return "Téléphone :"
     end
   end
+
   def question_2(user)
     if user.is_a?(Talent)
       return "Attentes salariales :"
     elsif user.is_a?(Headhunter)
       return "Domaines d'activités :"
     else
-      return "Talentist"
+      return "E-mail :"
     end
   end
 
@@ -147,19 +148,19 @@ class InboxFormat
     elsif user.is_a?(Headhunter)
       return "Année de création :"
     else
-      return "Talentist"
+      return "Adresse :"
     end
   end
 
-  def question_2(user)
-    if user.is_a?(Talent)
-      return "Attentes salariales :"
-    elsif user.is_a?(Headhunter)
-      return "Domaines d'activités :"
-    else
-      return "Talentist"
-    end
-  end
+  # def question_2(user)
+  #   if user.is_a?(Talent)
+  #     return "Attentes salariales :"
+  #   elsif user.is_a?(Headhunter)
+  #     return "Domaines d'activités :"
+  #   else
+  #     return "Talentist"
+  #   end
+  # end
 
   def answer_1(user)
     if user.is_a?(Talent)
@@ -167,7 +168,7 @@ class InboxFormat
     elsif user.is_a?(Headhunter)
       return user.startup.collaborators
     else
-      return "Talentist"
+      return user.phone
     end
   end
 
@@ -177,7 +178,7 @@ class InboxFormat
     elsif user.is_a?(Headhunter)
       return user.startup.sectors.last.present? ? user.startup.sectors.last.title : nil
     else
-      return "Talentist"
+      return user.email
     end
   end
 
@@ -187,7 +188,7 @@ class InboxFormat
     elsif user.is_a?(Headhunter)
       return user.startup.year_of_creation
     else
-      return "Talentist"
+      return "9 Rue Saint-Fiacre, 75002 Paris"
     end
   end
 

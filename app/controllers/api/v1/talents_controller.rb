@@ -37,14 +37,14 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def update
     @talent = Talent.find(params[:id])
-    # if need_to_create_data?
-    #   if params[:skill_ids].present?
-    #     set_new_skills(@talent)
-    #   end
-    #   if params[:known_ids].present?
-    #     set_new_knowns(@talent)
-    #   end
-    # end
+    if need_to_create_data?
+      if params[:skill_ids].present?
+        set_new_skills(@talent)
+      end
+      if params[:known_ids].present?
+        set_new_knowns(@talent)
+      end
+    end
     if @talent.update(talent_params)
       render :show
     else
@@ -59,7 +59,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
     user = current_talentist if current_talentist
     user = current_talent if current_talent
     user = current_headhunter if current_headhunter
-    p "USER: #{user}"
+    p "USER: #{current_user}"
     authorize user
   end
 

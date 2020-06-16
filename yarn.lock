@@ -1343,6 +1343,11 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
+anchorme@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/anchorme/-/anchorme-2.1.2.tgz#4abc7e128a8a42d0036a61ebb9b18bbc032fa52a"
+  integrity sha512-2iPY3kxDDZvtRzauqKDb4v7a5sTF4GZ+esQTY8nGYvmhAtGTeFPMn4cRnvyWS1qmtPTP0Mv8hyLOp9l3ZzWMKg==
+
 ansi-colors@^3.0.0:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-3.2.4.tgz#e3a3da4bfbae6c86a9c285625de124a234026fbf"
@@ -7354,6 +7359,13 @@ raw-body@2.4.0:
     http-errors "1.7.2"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
+
+react-anchorme@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-anchorme/-/react-anchorme-1.1.0.tgz#05c8b01e75187ae5b34d7eb1b7ffe7386cd5d3f0"
+  integrity sha512-U8k/QEp/yK3S/7muYJFBlYKss9cFCvMQTOqs8mho304wDCY7g9wBwFz78nOfWj+TUI9O6+3bCyvrejZeuW5Q+w==
+  dependencies:
+    anchorme "^2.1.2"
 
 react-dom@^16.12.0:
   version "16.12.0"
