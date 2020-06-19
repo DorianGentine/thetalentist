@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { openModalTalent, fetchPost, fetchGET } from '../actions';
+import setJobColor from '../../components/setJobColor';
 
 import ModalGuide from './modalGuide'
 
@@ -36,48 +37,11 @@ class TalentCard extends PureComponent {
       talent_id: talent.id,
       headhunter_id: user.id,
     }
-    let jobs = this.props.jobs
-    let color = {
-      backgroundColor: "lightgray",
-      color: "gray",
-    }
+    
+    let color = setJobColor(talent.job, this.props.jobs)
+
     if(talent.position !== null && talent.position.length >= 30){
       $('[data-toggle="tooltip"]').tooltip()
-    }
-
-    if(jobs != null){
-      jobs = this.props.jobs.jobs
-      if(talent.job.toLowerCase() === jobs[0].title.toLowerCase()){
-        color = {
-          backgroundColor: "#FCEBEB",
-          color: "#FE7373",
-        }
-      }else if(talent.job.toLowerCase() === jobs[1].title.toLowerCase()){
-        color = {
-          backgroundColor: "#DFDEFE",
-          color: "#5F5DDA",
-        }
-      }else if(talent.job.toLowerCase() === jobs[2].title.toLowerCase()){
-        color = {
-          backgroundColor: "#FFF7E2",
-          color: "#FFAC4B",
-        }
-      }else if(talent.job.toLowerCase() === jobs[3].title.toLowerCase()){
-        color = {
-          backgroundColor: "#EDF4FE",
-          color: "#6A9FE2",
-        }
-      }else if(talent.job.toLowerCase() === jobs[4].title.toLowerCase()){
-        color = {
-          backgroundColor: "#FCEBEB",
-          color: "#FE7373",
-        }
-      }else if(talent.job.toLowerCase() === jobs[5].title.toLowerCase()){
-        color = {
-          backgroundColor: "#DFDEFE",
-          color: "#5F5DDA",
-        }
-      }
     }
 
     let border = {

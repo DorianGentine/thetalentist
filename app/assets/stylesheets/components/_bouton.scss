@@ -33,6 +33,21 @@
     cursor: not-allowed;
   }
 
+// btn-gray-violet
+  .btn-gray-violet{
+    border: 1px solid #e5e6ec;
+    border-radius: 2px;
+    color: $violet;
+    padding: 10px;
+    width: 100%;
+    background-color: #e5e6ec;
+    transition: .5s;
+  }
+  .btn-gray-violet:hover{
+    color: #e5e6ec;
+    background-color: $violet;
+  }
+
 // btn-white-border
   .btn-white-border{
     padding: 5px 10px;

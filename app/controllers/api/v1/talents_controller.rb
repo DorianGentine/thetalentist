@@ -25,6 +25,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
     @sector_ids = @next_aventure.sector_ids
     @job = @talent.talent_job
     @second_job = @talent.talent_second_job
+    @jobs = @talent.jobs
     authorize @talent
   end
 

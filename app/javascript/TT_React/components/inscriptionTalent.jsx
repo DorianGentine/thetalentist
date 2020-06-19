@@ -162,8 +162,7 @@ class InscriptionTalent extends Component {
         valuesToSend.talent_job_attributes.job_id = jobs[0]
       }
       // Met en page les waiting_for
-      if(valuesToSend.next_aventure_attributes && 
-        typeof valuesToSend.next_aventure_attributes.waiting_for_one.length > 0){
+      if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.waiting_for_one.length > 0){
         const nAA = valuesToSend.next_aventure_attributes
         const waitingFor = valuesToSend.next_aventure_attributes.waiting_for_one
         nAA.waiting_for_three = waitingFor[2] || null
@@ -211,7 +210,7 @@ class InscriptionTalent extends Component {
         console.log('valuesToSend', valuesToSend)
         if(Object.keys(valuesToSend).length > 0){
           this.props.fetchPost(`/api/v1/talents/${this.props.match.params.talent_id}`, valuesToSend, "PATCH",
-            this.props.fetchGET(`/api/v1/talents/${this.props.match.params.talent_id}`, "FETCH_TALENT")
+            // this.props.fetchGET(`/api/v1/talents/${this.props.match.params.talent_id}`, "FETCH_TALENT")
           )
         }
         if(step < 12){
