@@ -1,6 +1,6 @@
-<div id="app" class="no-background"></div>
+<div id="app"></div>
 
-<% if current_user.is_a?(Talent) %>
+<!-- <% if current_user.is_a?(Talent) %>
   <%= link_to edit_talent_path(@talent) do %>
     <div class="btn-edition-container">
       <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="fas <%= @talent.completing > 85 ? "fa-thumbs-up green" : "fa-exclamation-triangle red"  %> margin-right-15"></i>profil complété à <strong class="<%= @talent.completing > 85 ? "green" : "red"  %>"><%= @talent.completing %>%</strong></p>
@@ -15,7 +15,7 @@
       <p class="no-margin label-edit align-center green"><i class="fas fa-angle-left"></i> Retour</p>
     </div>
   <% end %>
-<% end %>
+<% end %> -->
 
 
 <div class="container-show grid-show">
