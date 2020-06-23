@@ -25,10 +25,16 @@ class ProfilTalent extends Component {
 
   render () {
     const title = this.state.title
+    const talent = this.props.talent
+    let experiencesLength = 0, formationsLength = 0
+    if(talent){
+      experiencesLength = talent.experiences.length
+      formationsLength = talent.formations.length
+    }
     const titles = [
       "Prochaine aventure",
-      "Expériences professionnelles",
-      "Formations"
+      `Expériences professionnelles (${experiencesLength})`,
+      `Formations (${formationsLength})`
     ]
 
     const handleTitle = title => {
@@ -38,7 +44,7 @@ class ProfilTalent extends Component {
     const renderTitles = titles => titles.map((titre, index) => 
       <p 
         key={index} 
-        className={`section-title${title == titre ? " active" : ""}`} 
+        className={`section-title${titre.includes(title) ? " active" : ""}`} 
         onClick={()=>{handleTitle(titre)}}>
         {titre}
       </p>)
@@ -55,8 +61,8 @@ class ProfilTalent extends Component {
             <hr className="ligne-horizontal no-margin margin-bottom-60"/>
 
             {title == titles[0] ? <ProchaineAventure/> : null }
-            {title == titles[1] ? <ExperiencesProfessionnelles/> : null }
-            {title == titles[2] ? <Formations/> : null }
+            {titles[1].includes(title) ? <ExperiencesProfessionnelles/> : null }
+            {titles[2].includes(title) ? <Formations/> : null }
           </div>
         </div>
       </div>
@@ -64,14 +70,14 @@ class ProfilTalent extends Component {
   }
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     conversations: state.conversations,
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    talent: state.talent,
+  };
+}
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchGET }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(ProfilTalent);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilTalent);

@@ -14,18 +14,18 @@ class InscriptionForm8 extends Component {
     const actualStep = this.props.stepForm
     let choices = [
       "Immédiate",
-      "-3 mois",
-      "+3 mois"
+      "- de 3 mois",
+      "+ de 3 mois"
     ]
 
     return(
       <div className={setFormContainerClass(actualStep, 8)}>
         <MessageMagda
-          text1={`Parfait ! Quelles sont tes disponibilités ?`}
+          text1={`Parfait : Quelles sont tes disponibilités ?`}
         />
         <RadioForm name="next_aventure_attributes[availability]" choices={choices} />
         <MessageMagda
-          text1={`Si tu es encore en poste, tu peux répondre +3 mois`}
+          text1={`Si tu es encore en poste, tu peux répondre + de 3 mois`}
         />
         <button
           className="btn-violet-square margin-left-55"

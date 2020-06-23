@@ -29,7 +29,7 @@ class InscriptionForm6 extends Component {
       <div className={setFormContainerClass(actualStep, 6)}>
         <MessageMagda
           text1={`Parfait !`}
-          text2={`À présent, je t'invite à nous donner les 3 enjeux les plus impotants pour ton prochain environnement de travail:`}
+          text2={`À présent, je t’invite à nous donner les 3 enjeux les plus importants pour ton prochain environnement de travail :`}
         />
         <CheckBoxForm name="next_aventure_attributes[waiting_for_one]" limit={3} choices={choices} formValue={this.props.formValue}/>
         <button
