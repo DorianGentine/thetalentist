@@ -10,16 +10,11 @@ class NavbarForm extends Component {
   render () {
     const step = this.props.stepForm
 
-    const handleClick = () => {
-      if(step > 0 ){
-        this.props.switchStepFrom(step, "sub")
-      }
-    }
     return(
-      <div style={{height: "70px"}}>
+      <div>
         <div className="navbar-wagon light-gray-background">
           {step == 1 ?
-            <a className="navbar-wagon-item navbar-wagon-link" href="/talents/sign_in">&#8617; Retour</a>
+            <a className="navbar-wagon-item navbar-wagon-link" href="/">&#8617; Retour</a>
           :
             <Link className="navbar-wagon-item navbar-wagon-link" to={`/talents/${this.props.talent_id}/welcome/${step - 1}`}>&#8617; Retour</Link>
           }

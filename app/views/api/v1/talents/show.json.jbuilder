@@ -7,6 +7,8 @@ json.sector_ids @sector_ids
 json.job @job
 json.second_job @second_job
 json.jobs @jobs
+json.experiences @experiences
+json.formations @formations
 
 # json.next_aventure do
 #   json.id @next_aventure.id

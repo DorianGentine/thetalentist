@@ -26,6 +26,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
     @job = @talent.talent_job
     @second_job = @talent.talent_second_job
     @jobs = @talent.jobs
+    @experiences = @talent.experiences
+    @formations = @talent.formations
     authorize @talent
   end
 
