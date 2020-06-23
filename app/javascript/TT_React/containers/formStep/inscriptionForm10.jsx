@@ -32,7 +32,7 @@ class InscriptionForm10 extends Component {
       <div className={setFormContainerClass(actualStep, 10)}>
         <MessageMagda
           text1={`Très bien ! Maintenant, peux-tu nous lister certains de tes savoir-être ? (Exemple: Curieux...)`}
-          text3={"Astuce: tu peux rajouter librement ce qui te passe par la tête en l'écrivant directement"}
+          text3={"Tu peux en ajouter un en l’écrivant directement !"}
         />
         <SelectForm 
           name="known_ids" 
@@ -42,7 +42,7 @@ class InscriptionForm10 extends Component {
           formValue={this.props.formValue}
         />
         <MessageMagda
-          text1={`N'hésites pas à mettre des éléments unique de ta personnalité, de ton caractère. Ils permettent de savoir comment tu peux evoluer au sein d'une équipe et d'une structure.`}
+          text1={`N'hésite pas à mettre des éléments unique de ta personnalité, de ton caractère. Ils permettent de savoir comment tu peux evoluer au sein d'une équipe et d'une structure.`}
         />
         <button
           className="btn-violet-square margin-left-55"

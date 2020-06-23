@@ -23,7 +23,7 @@ class InscriptionForm7 extends Component {
     return(
       <div className={setFormContainerClass(actualStep, 7)}>
         <MessageMagda
-          text1={`Quels sont tes prétentions salariales ? (en k€ annuelle brut) `}
+          text1={`Quelles sont tes prétentions salariales ? (package en K€ annuel brut)`}
         />
         <RadioForm name="next_aventure_attributes[remuneration]" choices={choices} />
         <button

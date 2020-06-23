@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { fetchGET } from '../../actions';
 import setJobColor from '../../../components/setJobColor';
@@ -18,11 +19,11 @@ class ProfilTalent extends Component {
 
   render () {
     let talent = this.props.talent
-    let fullName = "Chargement...", image = null, firstname = " ", overview, city, experience, remuneration, availability, mobility, job, color, secteur
+    let fullName = "Chargement...", image = null, firstname = " ", overview, city, experience, remuneration, availability, mobility, job, color = [], secteur
     if(talent){
       job = talent.jobs[0].title
       color = setJobColor(job, this.props.jobs)
-      color.marginRight = "-20px"
+      // color.marginRight = "-20px"
       firstname = talent.talent.firstname
       fullName = `${firstname} ${talent.talent.last_name}`
       city = talent.talent.city
@@ -35,7 +36,7 @@ class ProfilTalent extends Component {
 
     return(
       <div className="profil-white-box col-md-3">
-        <p className="card-job margin-left-auto" style={color}>{job}</p>
+        <p className="card-job margin-left-auto margin-right-minus-20" style={color}>{job}</p>
         {image != null ? 
           <img className="photo-conv photo-conv-lg" src={image} alt={values.photo.slice(12)}></img> 
           : 
@@ -43,7 +44,10 @@ class ProfilTalent extends Component {
         }
         <h3>{fullName}</h3>
         <p>{overview ? overview : "❌ À renseigner ❌"}</p>
-        <p className="margin-bottom-45 gray">{city}</p>
+        <div className="flex">
+          <FontAwesomeIcon icon={["fas", "map-marker-alt"]} className="gray margin-right-5" />
+          <p className="margin-bottom-45 gray">{city}</p>
+        </div>
 
         <p className="criteres">Expérience</p>
         <p className="criteres-reponses">{`${experience} ${experience == 1 ? "an" : "ans"}`}</p>

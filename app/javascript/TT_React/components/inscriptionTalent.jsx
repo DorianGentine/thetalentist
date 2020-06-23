@@ -49,7 +49,7 @@ class InscriptionTalent extends Component {
   
   setInitialvalues = values => {
     console.log(values)
-    let talent, city, linkedin, next_aventure, mobility, job, second_job, skills, knowns
+    let talent, city, linkedin, next_aventure, mobility, job, second_job, skills, knowns, sectorIds, jobsId = [], waitingForOnes = []
     if (values.payload) {
       talent = values.payload
       city = talent.talent.city
@@ -60,37 +60,38 @@ class InscriptionTalent extends Component {
       second_job = talent.second_job
       skills = talent.skills
       knowns = talent.knowns
+      sectorIds = talent.sector_ids
+      if(job.job_id){
+        jobsId[0] = job.job_id
+      }
+      if(second_job.job_id){
+        jobsId[1] = second_job.job_id
+      }
+      if(next_aventure.waiting_for_one){
+        waitingForOnes[0] = next_aventure.waiting_for_one
+      }
+      if(next_aventure.waiting_for_two){
+        waitingForOnes[1] = next_aventure.waiting_for_two
+      }
+      if(next_aventure.waiting_for_three){
+        waitingForOnes[2] = next_aventure.waiting_for_three
+      }
     }else{
       talent = values
       city = talent.city
       linkedin = talent.linkedin
       next_aventure = talent.next_aventure_attributes
       mobility = next_aventure.mobilities_attributes
+      sectorIds = next_aventure.sector_ids
+      waitingForOnes = next_aventure.waiting_for_one
       job = talent.talent_job_attributes
       second_job = talent.talent_second_job_attributes
       skills = talent.skill_ids
       knowns = talent.known_ids
+      jobsId = job.job_id
     }
     
     console.log('talent', talent)
-    const jobsId = []
-
-    if(job.job_id){
-      jobsId[0] = job.job_id
-    }
-    if(second_job.job_id){
-      jobsId[1] = second_job.job_id
-    }
-    const waitingForOnes = []
-    if(next_aventure.waiting_for_one){
-      waitingForOnes[0] = next_aventure.waiting_for_one
-    }
-    if(next_aventure.waiting_for_two){
-      waitingForOnes[1] = next_aventure.waiting_for_two
-    }
-    if(next_aventure.waiting_for_three){
-      waitingForOnes[2] = next_aventure.waiting_for_three
-    }
     skills.map((skill, index) => {
       skill.label = skill.title
       skill.value = skill.id
@@ -102,20 +103,19 @@ class InscriptionTalent extends Component {
     const initialValues = {
       city: city,
       linkedin: linkedin,
-      // photo: talent.talent.photo.url,
       skill_ids: skills,
       known_ids: knowns,
       next_aventure_attributes: {
-        id: next_aventure.id || 0,
+        id: next_aventure.id,
         mobilities_attributes: [{
-          id: mobility.id || 0,
+          id: mobility.id,
           title: mobility.title
         }],
         availability: next_aventure.availability,
         good_manager: next_aventure.good_manager,
         looking_for: next_aventure.looking_for,
         remuneration: next_aventure.remuneration,
-        sector_ids: talent.sector_ids,
+        sector_ids: sectorIds,
         see_my_job: next_aventure.see_my_job,
         waiting_for_one: waitingForOnes
       },
@@ -192,7 +192,7 @@ class InscriptionTalent extends Component {
     }
     
     const validate = values => {
-      // {showClg ? console.log('values', values) : null}
+      {showClg ? console.log('values', values) : null}
       const errors = validationForm(values, step)
       // if(Object.keys(errors).length < Object.keys(this.state.errors).length){
       //   this.setState({errors: errors})
