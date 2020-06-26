@@ -27,6 +27,36 @@
     }
   } 
 }
+
+// Version profil
+.profil-multi-select{
+  .select-form__control{
+    // height: 100px;
+    border-radius: 2px;
+    border: 1px solid $input;
+    align-items: start;
+    background-color: transparent;
+    padding: 3px;
+    .select-form__multi-value {
+      background-color: white;
+      color:$dark-blue;
+    }
+    .select-form__indicators {
+      display: none;
+    }
+  }
+  
+  .select-form__max-reached-alert{
+    color: $dark-blue;
+    text-align: center;
+    padding: 10px;
+  }
+  .select-form__menu-list{
+    .select-form__option{
+      color: $dark-blue;
+    }
+  } 
+}
     
 
 

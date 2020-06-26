@@ -23,6 +23,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
     @next_aventure = @talent.next_aventure
     @mobilities = @next_aventure.mobilities
     @sector_ids = @next_aventure.sector_ids
+    @sectors = @next_aventure.sectors
     @job = @talent.talent_job
     @second_job = @talent.talent_second_job
     @jobs = @talent.jobs
@@ -98,6 +99,17 @@ class Api::V1::TalentsController < Api::V1::BaseController
     known_params = params.permit(known_ids: [])[:known_ids]
     known_ids = create_new_data_with_only_title(known_params, "known")
     talent.known_ids = known_ids
+  end   
+
+  def set_new_experience(talent)
+    experience_params = params.permit(experience: [])[:experience]
+    talent_experiences = talent.experiences
+    if talent_experiences.count == 0
+      p "TALENT.EXPERIENCES: #{experience_params}"
+      talent.experiences = experience_params
+    else
+      talent.experiences.first = experience_params
+    end
   end   
   
   def need_to_create_data?
