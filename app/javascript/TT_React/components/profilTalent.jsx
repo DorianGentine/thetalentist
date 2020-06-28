@@ -14,7 +14,7 @@ class ProfilTalent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: "Prochaine aventure"
+      title: "Expériences professionnelles"
     };
   }
 
@@ -60,7 +60,7 @@ class ProfilTalent extends Component {
             </div>
             <hr className="ligne-horizontal no-margin margin-bottom-60"/>
 
-            {title == titles[0] ? <ProchaineAventure/> : null }
+            {titles[0].includes(title) ? <ProchaineAventure/> : null }
             {titles[1].includes(title) ? <ExperiencesProfessionnelles/> : null }
             {titles[2].includes(title) ? <Formations/> : null }
           </div>

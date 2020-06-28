@@ -74,6 +74,19 @@
   color: $dark-blue;
   margin-bottom: 10px;
 }
+.edit-gray-box-question{
+  background-color: #E5E6ED;
+  border-radius: 2px;
+  padding: 20px;
+  margin: 0 0 10px;
+}
+.edit-gray-box-input{
+  width: 100%;
+  border-radius: 2px;
+  border: 1px solid $input;
+  background-color: white;
+  padding: 10px
+}
 .competence{
   padding: 4px 7px;
   margin: 0 10px 10px 0;
@@ -102,4 +115,11 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 22px;
+}
+.react-date-picker-style{
+  width: 100%;
+  border-radius: 2px;
+  border: 1px solid $input;
+  background-color: white;
+  padding: 10px
 }

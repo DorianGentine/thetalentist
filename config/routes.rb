@@ -94,13 +94,17 @@ Rails.application.routes.draw do
     namespace :v1 do
       get :current_user, to: "pages#navbar"
 
+      resources :company_types, only: [ :index ]
+      resources :config_conversations, only: [ :update ]
+      resources :formations, only: [ :index ]
       resources :jobs, only: [ :index ]
+      resources :knowns, only: [ :index ]
+      resources :pins, only: [ :create, :destroy ]
+      resources :relationships, only: [ :create ]
+      resources :startups, only: [ :index ]
       resources :sectors, only: [ :index ]
       resources :skills, only: [ :index ]
-      resources :knowns, only: [ :index ]
-      resources :relationships, only: [ :create ]
-      resources :config_conversations, only: [ :update ]
-      resources :pins, only: [ :create, :destroy ]
+      
       resources :conversations, only: [ :show, :index ] do
         # collection do
         #   get :all

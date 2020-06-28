@@ -29,6 +29,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-anchorme": "^1.1.0",
+    "react-datepicker": "^3.0.0",
     "react-dom": "^16.12.0",
     "react-dropzone": "^10.2.1",
     "react-final-form": "^6.4.0",

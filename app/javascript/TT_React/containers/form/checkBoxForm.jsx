@@ -57,7 +57,7 @@ class RadioForm extends Component {
 
 
     return(
-      <div className="flex flex-wrap margin-left-55 margin-bottom-30">
+      <div className={`flex flex-wrap margin-bottom-30${this.props.noMargin55 ? "" : " margin-left-55"}`}>
         {choices != null ? renderFields() : "chargement..."}
       </div>
     );
