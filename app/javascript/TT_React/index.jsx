@@ -14,8 +14,8 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import { createBrowserHistory as history } from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, faChevronLeft, faInfoCircle, faArrowsAlt, faCheck } from '@fortawesome/free-solid-svg-icons'
-import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, faChevronLeft, faInfoCircle, faArrowsAlt, faCheck, faSuitcase, faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle, faEdit } from '@fortawesome/free-regular-svg-icons'
 // import { reducer as formReducer } from 'redux-form';
 
 // import { fetchAPI } from './actions';
@@ -31,9 +31,11 @@ import profilRecruteur from './components/profilRecruteur';
 import profilTalent from './components/profilTalent';
 
 // State and reducers
+import companyTypesReducer from './reducers/company_types_reducer';
 import conversationActiveReducer from './reducers/conversation_active_reducer';
 import conversationsReducer from './reducers/conversations_reducer';
 import filterReducer from './reducers/filter_reducer';
+import formationsReducer from './reducers/formations_reducer';
 import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
 import knownsReducer from './reducers/knowns_reducer';
@@ -45,6 +47,7 @@ import notificationsReducer from './reducers/notifications_reducer';
 import sectorsReducer from './reducers/sectors_reducer';
 import sidebarActiveMobileReducer from './reducers/sidebar_active_mobile_reducer';
 import skillsReducer from './reducers/skills_reducer';
+import startupsReducer from './reducers/startups_reducer';
 import talentReducer from './reducers/talent_reducer';
 import talentsReducer from './reducers/talents_reducer';
 import userReducer from './reducers/user_reducer';
@@ -59,9 +62,11 @@ if(app){
   }
 
   const initialState = {
+    companyTypes: null,
     conversationActive: [],
     conversations: [],
     filter: [],
+    formations: null,
     guideSu: 0,
     isMobile: isMobileState,
     jobs: null,
@@ -74,15 +79,18 @@ if(app){
     sectors: null,
     sidebarActiveMobile: false,
     skills: null,
+    startups: null,
     talent: null,
     talents: null,
     user: null,
   };
 
   const reducers = combineReducers({
+    companyTypes: companyTypesReducer,
     conversationActive: conversationActiveReducer,
     conversations: conversationsReducer,
     filter: filterReducer,
+    formations: formationsReducer,
     guideSu: guideSuReducer,
     isMobile: identityReducer,
     jobs: jobsReducer,
@@ -95,6 +103,7 @@ if(app){
     sectors: sectorsReducer,
     sidebarActiveMobile: sidebarActiveMobileReducer,
     skills: skillsReducer,
+    startups: startupsReducer,
     talent: talentReducer,
     talents: talentsReducer,
     user: userReducer,
@@ -124,12 +133,14 @@ if(app){
     faBars,
     farBookmark,
     fasBookmark,
+    faCalendar,
     faChartLine,
     faCheck,
     faChevronDown,
     faChevronLeft,
     faChevronUp,
     faCogs,
+    faEdit,
     faEnvelope,
     faEnvelopeOpen,
     faFile,
@@ -144,6 +155,7 @@ if(app){
     faShareAlt,
     faSignOutAlt,
     faSlidersH,
+    faSuitcase,
     faTimesCircle,
     faUser,
     fasUser,

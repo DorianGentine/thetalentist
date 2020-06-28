@@ -14,7 +14,7 @@ class ProfilTalent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: "Prochaine aventure"
+      title: "Expériences professionnelles"
     };
   }
 

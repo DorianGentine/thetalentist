@@ -5,20 +5,11 @@ import { connect } from 'react-redux';
 // import { fetchGET } from '../../actions';
 // import setJobColor from '../../../components/setJobColor';
 
-// import Navbar from '../containers/navbar'
+import RenderFormations from './renderFormations'
 
 class Formations extends Component {
 
   render () {
-    let talent = this.props.talent
-    let formations = []
-    if(talent){
-      formations = talent.formations
-    }
-
-    const renderFormations = () => {
-      return <p>SALUT</p>
-    }
 
     return(
       <div>
@@ -27,26 +18,20 @@ class Formations extends Component {
           <span className="after"></span>
         </div>
 
-        <div className="gray-border-box">
-          <h4 className="box-title">Mes formations antérieures</h4>
-          <h5 className="box-subtitle">{`${formations.length} formations`}</h5>
-          <div>
-            {formations.length > 0 ? renderFormations() : null}
-          </div>
-        </div>
+        <RenderFormations />
       </div>
     );
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    talent: state.talent,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     talent: state.talent,
+//   };
+// }
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ fetchGET }, dispatch);
 // }
 
-export default connect(mapStateToProps, null)(Formations);
+export default connect(null, null)(Formations);

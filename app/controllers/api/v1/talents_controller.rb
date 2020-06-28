@@ -28,7 +28,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
     @second_job = @talent.talent_second_job
     @jobs = @talent.jobs
     @experiences = @talent.experiences
-    @formations = @talent.formations
+    @formations = @talent.talent_formations
     authorize @talent
   end
 
@@ -137,6 +137,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
       :photo,
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
+      talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
       next_aventure_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
       talent_job_attributes: [:id, :job_id, :year, :position, :_destroy],
       talent_second_job_attributes: [ :id, :job_id ]
