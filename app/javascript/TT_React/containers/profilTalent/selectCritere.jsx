@@ -14,19 +14,20 @@ class InputForm extends Component {
   }
 
   componentDidMount() {
-    if(this.props.formValue[this.props.name] != undefined){
-      this.setState({valueLength: this.props.formValue[this.props.name].length})
+    if(this.props.critere.name == "next_aventure_attributes[sectors]"){
+      this.setState({valueLength: this.props.formValue.next_aventure_attributes.sectors.length})
     }
   }
   
 
   render () {
+    const critere = this.props.critere
 
     const Menu = props => {
       const optionSelectedLength = props.getValue().length || 0;
       return (
         <components.Menu {...props}>
-          {optionSelectedLength < this.props.limit ? (
+          {critere.limit == 1 || optionSelectedLength < critere.limit ? (
             props.children
           ) : (
             <div className="select-form__max-reached-alert">😫 Vous avez atteint le maximum de choix 😫</div>
@@ -40,21 +41,26 @@ class InputForm extends Component {
     };
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
-      const isValidNewOption = (inputValue, selectValue) =>
-        inputValue.length > 0 && selectValue.length < this.props.limit;
+      const isValidNewOption = (inputValue, selectValue) => 
+        inputValue.length > 0 && selectValue.length < critere.limit;
       return (
         <Creatable 
           {...input} 
           {...rest}
           closeMenuOnSelect={false}
           components={{ Menu }}
-          isMulti
-          placeholder={this.props.placeholder}
+          isMulti={critere.limit != 1}
           onChange={(value) => {
-            input.onChange(value)
+            let newValue = value
+            if(critere.limit == 1){
+              newValue = [value]
+            }
+            input.onChange(newValue)
             handleChange(value)
           }}
-          className="form-multi-select"
+          getOptionLabel={option => option.title || option} 
+          getOptionValue={option => option.id || option}
+          className="profil-multi-select"
           classNamePrefix="select-form"
           isValidNewOption={isValidNewOption}
           // defaultMenuIsOpen={true}
@@ -63,13 +69,14 @@ class InputForm extends Component {
     }
           
     return(
-      <div className="margin-left-55 margin-bottom-30">
+      <div>
+        <p className="criteres">{critere.title}</p>
         <Field
-          name={this.props.name}
+          name={critere.name}
           component={ReactSelectAdapter}
-          options={this.props.options}
+          options={critere.options}
         />
-        <p className="subtitle italic float-right">{`${this.props.limit - this.state.valueLength} compétences restantes`}</p>
+        {critere.limit != 1 ? <p className="subtitle italic float-right">{`${critere.limit - this.state.valueLength} compétences restantes`}</p> : null }
       </div>
     );
   }

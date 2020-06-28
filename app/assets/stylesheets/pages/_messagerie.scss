@@ -319,6 +319,13 @@
   font-weight: 900;
   line-height: 20px;
 }
+.criteres-input{
+  width: 100%;
+  border-radius: 2px;
+  border: 1px solid $input;
+  background-color: transparent;
+  padding: 9px
+}
 
 .sidebar-title{
   color: $label;

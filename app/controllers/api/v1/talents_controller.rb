@@ -23,11 +23,12 @@ class Api::V1::TalentsController < Api::V1::BaseController
     @next_aventure = @talent.next_aventure
     @mobilities = @next_aventure.mobilities
     @sector_ids = @next_aventure.sector_ids
+    @sectors = @next_aventure.sectors
     @job = @talent.talent_job
     @second_job = @talent.talent_second_job
     @jobs = @talent.jobs
     @experiences = @talent.experiences
-    @formations = @talent.formations
+    @formations = @talent.talent_formations
     authorize @talent
   end
 
@@ -99,6 +100,17 @@ class Api::V1::TalentsController < Api::V1::BaseController
     known_ids = create_new_data_with_only_title(known_params, "known")
     talent.known_ids = known_ids
   end   
+
+  def set_new_experience(talent)
+    experience_params = params.permit(experience: [])[:experience]
+    talent_experiences = talent.experiences
+    if talent_experiences.count == 0
+      p "TALENT.EXPERIENCES: #{experience_params}"
+      talent.experiences = experience_params
+    else
+      talent.experiences.first = experience_params
+    end
+  end   
   
   def need_to_create_data?
     skill_params = params.permit(skill_ids: [])[:skill_ids]
@@ -125,6 +137,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
       :photo,
       hobby_ids: [],
       experiences_attributes: [ :id, :company_name, :position, :currently, :years, :starting, :overview, :company_type_id, :_destroy],
+      talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
       next_aventure_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
       talent_job_attributes: [:id, :job_id, :year, :position, :_destroy],
       talent_second_job_attributes: [ :id, :job_id ]
