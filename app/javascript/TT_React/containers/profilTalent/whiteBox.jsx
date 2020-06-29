@@ -44,7 +44,7 @@ class WhiteBox extends Component {
       fullName = `${firstname} ${talent.talent.last_name}`
       city = talent.talent.city
       year = talent.job.year
-      secteurNames = `${talent.sectors[0].title}${talent.sectors[1].title ? `, ${talent.sectors[1].title}` : ""}${talent.sectors[2].title ? `, ${talent.sectors[2].title}` : ""}`
+      secteurNames = `${talent.sectors[0] ? talent.secors[0].title : ""}${talent.sectors[1] ? `, ${talent.sectors[1].title}` : ""}${talent.sectors[2] ? `, ${talent.sectors[2].title}` : ""}`
       talent_sectors = talent.sectors
       remuneration = talent.next_aventure.remuneration
       availability = talent.next_aventure.availability
