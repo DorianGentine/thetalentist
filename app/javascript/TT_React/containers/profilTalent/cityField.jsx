@@ -18,6 +18,18 @@ class CityField extends Component {
     }
   }
   
+  componentDidMount() {
+    const AlgoliaPlaces = document.getElementById('algolia-places')
+    if(this.props.formValue.city !== undefined && this.state.updated){
+      AlgoliaPlaces.value = this.props.formValue.city
+      this.setState({
+        ville: this.props.formValue.city,
+        updated: false
+      })
+    }
+  }
+  
+
   shouldComponentUpdate(nextProps, nextState) {
     const AlgoliaPlaces = document.getElementById('algolia-places')
     if(nextProps.formValue.city !== undefined && this.state.updated){
