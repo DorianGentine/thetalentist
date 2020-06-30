@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Form, Field } from 'react-final-form';
 
-import { fetchGET, fetchPost } from '../../actions';
+import { fetchGET, fetchPost, updateTalent } from '../../actions';
 import setJobColor from '../../../components/setJobColor';
 
 import EditCritere from './editCritere'
@@ -179,14 +179,16 @@ class WhiteBox extends Component {
       }
       // MEP sector_ids
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.sectors){
-        valuesToSend.next_aventure_attributes.sector_ids = [
-          valuesToSend.next_aventure_attributes.sectors[0].id,
-          valuesToSend.next_aventure_attributes.sectors[1].id,
-          valuesToSend.next_aventure_attributes.sectors[2].id
-        ]
+        const sectors = valuesToSend.next_aventure_attributes.sectors
+        valuesToSend.next_aventure_attributes.sector_ids = []
+        for (let i = 0; i < sectors.length; i++) {
+          const sector = sectors[i];
+          valuesToSend.next_aventure_attributes.sector_ids[i] = sector.id
+        }
         delete valuesToSend.next_aventure_attributes['sectors']
       }
 
+      this.props.updateTalent(this.props.talent, valuesToSend, values)
       initialCriteres = values
       return valuesToSend
     }
@@ -292,7 +294,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, updateTalent }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WhiteBox);

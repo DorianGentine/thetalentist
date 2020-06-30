@@ -7,7 +7,7 @@ import Creatable from 'react-select/creatable';
  
 import "react-datepicker/dist/react-datepicker.css";
 
-import { fetchGET, fetchPost } from '../../actions';
+import { fetchGET, fetchPost, updateTalent } from '../../actions';
 // import setJobColor from '../../../components/setJobColor';
 
 import RenderDatePicker from './renderDatePicker'
@@ -19,7 +19,20 @@ class RenderFormations extends Component {
     this.state = {
       edit: false,
       add: false,
+      deleted: false,
+      deletedFormationsIds: []
     };
+  }
+
+  saveDeletedFormationId = (formation) => {
+    let deletedFormationId = formation.id
+    const othersIds = this.state.deletedFormationsIds
+    othersIds.push(deletedFormationId)
+    console.log('othersIds', othersIds)
+    this.setState({
+      FormationsIds: othersIds,
+      deleted: true,
+    })
   }
 
   componentDidMount() {
@@ -69,6 +82,7 @@ class RenderFormations extends Component {
       this.setState({add: !this.state.add})
     }
     const deleteFormation = index => {
+      this.saveDeletedFormationId(formations[index])
       formations.splice(index, 1)
       initialValues = {
         talent_formations_attributes: formations
@@ -86,11 +100,23 @@ class RenderFormations extends Component {
     const valuesFilter = values => {
       const valuesToSend = {}
       const preValues = initialValues 
-      Object.keys(values).forEach(value => {
-        if(preValues[value] !== values[value]){
-          valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
+      if(this.state.deleted){
+        valuesToSend.talent_formations_attributes = JSON.parse(JSON.stringify(values.talent_formations_attributes))
+        for (let i = 0; i < this.state.deletedFormationsIds.length; i++) {
+          const formationId = this.state.deletedFormationsIds[i];
+          const deletedFormation = {
+            id: formationId,
+            _destroy: true
+          }
+          valuesToSend.talent_formations_attributes.push(deletedFormation)
         }
-      })
+      }else{
+        Object.keys(values).forEach(value => {
+          if(preValues[value] !== values[value]){
+            valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
+          }
+        })
+      }
 
       if(valuesToSend.talent_formations_attributes){
         for (let i = 0; i < valuesToSend.talent_formations_attributes.length; i++) {
@@ -101,8 +127,11 @@ class RenderFormations extends Component {
           delete formation.created_at
           delete formation.updated_at
           delete formation.ranking
+          delete formation.talent_id
+          delete formation.level
         }
       }
+      this.props.updateTalent(this.props.talent, valuesToSend, values)
       initialValues = values
       return valuesToSend
     }
@@ -117,6 +146,9 @@ class RenderFormations extends Component {
     }
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
+      const isValidNewOption = (inputValue, selectValue, selectOptions) => {
+        return false
+      }
       return (
         <Creatable 
           {...input} 
@@ -125,10 +157,15 @@ class RenderFormations extends Component {
           onChange={(value) => {
             input.onChange(value)
           }}
-          getOptionLabel={option => option.title || option.name || option} 
+          getOptionLabel={option => option.title || option} 
           getOptionValue={option => option.id || option}
+          getNewOptionData={(inputValue, optionLabel) => ({
+            id: null,
+            title: optionLabel,
+          })}
           className="profil-multi-select"
           classNamePrefix="select-form"
+          isValidNewOption={isValidNewOption}
         />
       )
     }
@@ -168,7 +205,7 @@ class RenderFormations extends Component {
           </div>
           <div className="col-md-3">
             <p className="bold no-margin margin-top-15">Année d'obtention</p>
-            <RenderDatePicker name={`talent_formations_attributes[${index}].year`} showYearPicker={true} />
+            <RenderDatePicker name={`talent_formations_attributes[${index}].year`} showYearPicker={true} startDate={formation.year ? new Date(parseInt(formation.year), 0) : null} />
           </div>
           <div className="col-md-3"></div>
           <div 
@@ -202,14 +239,18 @@ class RenderFormations extends Component {
     }
 
     const renderFormations = () => formations.map((formation, index) => {
+      let formatted_date = formation.year
+      if(formatted_date.length > 4){
+        formatted_date = new Date(formatted_date).getFullYear()
+      }
       return(
         <div key={index} className="gray-box-question">
           <p className="bold">{formation.title}</p>
           <div className="flex">
             <FontAwesomeIcon icon={["fas", "suitcase"]} className="gray margin-right-15" />
-            <p className="gray margin-right-30">{formation.formation_id.title || formation.formation_id }</p>
+            <p className="gray margin-right-30">{formation.formation_id.title ? formation.formation_id.title : formation.formation_id }</p>
             <FontAwesomeIcon icon={["fas", "calendar"]} className="gray margin-right-15" />
-            <p className="gray margin-right-30">{formation.year}</p>
+            <p className="gray margin-right-30">{formatted_date}</p>
           </div>
         </div>
       )
@@ -243,7 +284,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, updateTalent }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RenderFormations);

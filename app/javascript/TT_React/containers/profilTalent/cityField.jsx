@@ -10,65 +10,50 @@ import AlgoliaPlaces from 'algolia-places-react';
 
 
 class CityField extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     ville: this.props.formValue.city,
-  //     updated: true
-  //   }
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      ville: this.props.formValue.city,
+      updated: true
+    }
+  }
   
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   const AlgoliaPlaces = document.getElementById('algolia-places')
-  //   if(nextProps.formValue.city !== undefined && this.state.updated){
-  //     AlgoliaPlaces.value = this.props.formValue.city
-  //     this.setState({
-  //       ville: nextProps.formValue.city,
-  //       updated: false
-  //     })
-  //   }
-  //   return true
-  // }
+  componentDidMount() {
+    const AlgoliaPlaces = document.getElementById('algolia-places')
+    if(this.props.formValue.city !== undefined && this.state.updated){
+      AlgoliaPlaces.value = this.props.formValue.city
+      this.setState({
+        ville: this.props.formValue.city,
+        updated: false
+      })
+    }
+  }
+  
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const AlgoliaPlaces = document.getElementById('algolia-places')
+    if(nextProps.formValue.city !== undefined && this.state.updated){
+      AlgoliaPlaces.value = this.props.formValue.city
+      this.setState({
+        ville: nextProps.formValue.city,
+        updated: false
+      })
+    }
+    return true
+  }
   
 
   render () {
-    // const handleChange = (input) => {
-    //   if(!this.state.updated){
-    //     input.onChange(this.state.ville)
-    //   }
-    // }
-
-    const algoliaPlacesAdapter = ({input}) => {
-      return (
-        <AlgoliaPlaces
-          {...input}
-          placeholder= 'Paris, 15e arrondissement'
-          id="algolia-places"
-          options={{
-            language: 'fr',
-            type: 'city',
-          }}
-          onChange={({suggestion}) => {
-            const ville = `${suggestion.name}, ${suggestion.country}`
-            input.onChange(ville)
-            // this.setState({ville: ville})
-          }}
-          onSuggestions={({query}) => {
-            input.onChange(query)
-            // this.setState({ville: query})
-          }}
-          onClear={() => {
-            input.onChange("")
-            // this.setState({ville: ""})
-          }}
-        />
-      )
+    const handleChange = (input) => {
+      if(!this.state.updated){
+        input.onChange(this.state.ville)
+      }
     }
 
     return(
       <div>
         <p className="criteres">Ville</p>
-        {/* <AlgoliaPlaces
+        <AlgoliaPlaces
           placeholder= 'Paris, 15e arrondissement'
           id="algolia-places"
           options={{
@@ -85,12 +70,10 @@ class CityField extends Component {
           onClear={() => {
             this.setState({ville: ""})
           }}
-        /> */}
-        <Field name="city" 
-          component={algoliaPlacesAdapter}
         />
-          {/* {props => <input name={props.input.name} type="hidden" onChange={handleChange(props.input)} />}    
-        </Field> */}
+        <Field name="city" >
+          {props => <input name={props.input.name} type="hidden" onChange={handleChange(props.input)} />}    
+        </Field>
       </div>
     );
   }

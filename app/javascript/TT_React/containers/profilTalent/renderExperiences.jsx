@@ -7,7 +7,7 @@ import Creatable from 'react-select/creatable';
  
 import "react-datepicker/dist/react-datepicker.css";
 
-import { fetchGET, fetchPost } from '../../actions';
+import { fetchGET, fetchPost, updateTalent } from '../../actions';
 // import setJobColor from '../../../components/setJobColor';
 
 import RenderDatePicker from './renderDatePicker'
@@ -19,7 +19,20 @@ class ExperiencesProfessionnelles extends Component {
     this.state = {
       edit: false,
       add: false,
+      deleted: false,
+      deletedExperiencesIds: []
     };
+  }
+
+  saveDeletedExperienceId = (experience) => {
+    let deletedExperienceId = experience.id
+    const othersIds = this.state.deletedExperiencesIds
+    othersIds.push(deletedExperienceId)
+    console.log('othersIds', othersIds)
+    this.setState({
+      experiencesIds: othersIds,
+      deleted: true,
+    })
   }
 
   componentDidMount() {
@@ -72,10 +85,11 @@ class ExperiencesProfessionnelles extends Component {
         overview: null,
         position: "",
         talent_id: talent.talent.id,
-        years: null
+        years: null,
+        starting: null
       }
     }
-
+    
     const addExperience = () => {
       experiences.push(experience)
       initialValues = {
@@ -84,8 +98,7 @@ class ExperiencesProfessionnelles extends Component {
       this.setState({add: !this.state.add})
     }
     const deleteExperience = index => {
-      console.log('index', index)
-      console.log('experiences', typeof experiences)
+      this.saveDeletedExperienceId(experiences[index])
       experiences.splice(index, 1)
       initialValues = {
         experiences_attributes: experiences
@@ -102,25 +115,43 @@ class ExperiencesProfessionnelles extends Component {
 
     const valuesFilter = values => {
       const valuesToSend = {}
-      const preValues = initialValues 
-      Object.keys(values).forEach(value => {
-        if(preValues[value] !== values[value]){
-          valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
+      const preValues = initialValues
+      if(this.state.deleted){
+        console.log("CA MARCHE")
+        valuesToSend.experiences_attributes = JSON.parse(JSON.stringify(values.experiences_attributes))
+        for (let i = 0; i < this.state.deletedExperiencesIds.length; i++) {
+          const experienceId = this.state.deletedExperiencesIds[i];
+          const deletedExperience = {
+            id: experienceId,
+            _destroy: true
+          }
+          valuesToSend.experiences_attributes.push(deletedExperience)
         }
-      })
+      }else{
+        Object.keys(values).forEach(value => {
+          if(preValues[value] !== values[value]){
+            valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
+          }
+        })
+      }
 
       if(valuesToSend.experiences_attributes){
         for (let i = 0; i < valuesToSend.experiences_attributes.length; i++) {
           const experiences_attributes = valuesToSend.experiences_attributes[i];
-          if (experiences_attributes.company_type_id) {
+          if (typeof experiences_attributes.company_type_id == "object") {
             experiences_attributes.company_type_id = experiences_attributes.company_type_id.id
           }
-          if (!experiences_attributes.years) {
-            experiences_attributes.currently = true
-          }else{
-            experiences_attributes.currently = false
+          if(!experiences_attributes.destroy){
+            if(experiences_attributes.years.getFullYear() == 1970){
+              experiences_attributes.years = null
+            }
+            if (!experiences_attributes.years) {
+              experiences_attributes.currently = true
+            }else{
+              experiences_attributes.currently = false
+            }
           }
-          if (experiences_attributes.company_name){
+          if(typeof experiences_attributes.company_name == "object"){
             experiences_attributes.company_name = experiences_attributes.company_name.name
           }
           delete experiences_attributes.created_at
@@ -129,6 +160,7 @@ class ExperiencesProfessionnelles extends Component {
           delete experiences_attributes.talent_id
         }
       }
+      this.props.updateTalent(this.props.talent, valuesToSend, values)
       initialValues = values
       return valuesToSend
     }
@@ -143,6 +175,16 @@ class ExperiencesProfessionnelles extends Component {
     }
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
+      const isValidNewOption = (inputValue, selectValue, selectOptions) => {
+        if (
+          input.name.includes('company_type_id') ||
+          inputValue.trim().length === 0 ||
+          selectOptions.find(option => option.name === inputValue)
+        ){
+          return false;
+        }
+        return true;
+      }
       return (
         <Creatable 
           {...input} 
@@ -153,8 +195,13 @@ class ExperiencesProfessionnelles extends Component {
           }}
           getOptionLabel={option => option.title || option.name || option} 
           getOptionValue={option => option.id || option}
+          getNewOptionData={(inputValue, optionLabel) => ({
+            id: null,
+            name: optionLabel,
+          })}
           className="profil-multi-select"
           classNamePrefix="select-form"
+          isValidNewOption={isValidNewOption}
         />
       )
     }
@@ -183,11 +230,11 @@ class ExperiencesProfessionnelles extends Component {
           </div>
           <div className="col-md-3">
             <p className="bold no-margin margin-top-15">Début d'activité</p>
-            <RenderDatePicker name={`experiences_attributes[${index}].starting`} showMonthYearPicker={true} />
+            <RenderDatePicker name={`experiences_attributes[${index}].starting`} showMonthYearPicker={true} startDate={experience.starting} />
           </div>
           <div className="col-md-3">
             <p className="bold no-margin margin-top-15">Date de fin</p>
-            <RenderDatePicker name={`experiences_attributes[${index}].years`} showMonthYearPicker={true} />
+            <RenderDatePicker name={`experiences_attributes[${index}].years`} showMonthYearPicker={true} startDate={experience.years} minDate={experience.starting} />
             <p className="subtitle italic no-margin">Vide si toujours en poste</p>
           </div>
           <div className="col-md-6">
@@ -239,16 +286,17 @@ class ExperiencesProfessionnelles extends Component {
     
     
     const renderExperiences = () => experiences.map((experience, index) => {
-      const formatted_starting = `${("0" + (experience.starting.getMonth() + 1)).slice(-2)}/${experience.starting.getFullYear()}`
-      const formatted_years = experience.years ? `${("0" + (experience.years.getMonth() + 1)).slice(-2)}/${experience.years.getFullYear()}` : null
+      let formatted_starting = new Date(experience.starting)
+      formatted_starting = `${("0" + (formatted_starting.getMonth() + 1)).slice(-2)}/${formatted_starting.getFullYear()}`
+      let formatted_years = experience.years ? new Date(experience.years) : null
+      formatted_years = formatted_years ? `${("0" + (formatted_years.getMonth() + 1)).slice(-2)}/${formatted_years.getFullYear()}` : null
       const formatted_date = formatted_years ? `${formatted_starting} - ${formatted_years}` : `${formatted_starting} - Maintenant`
-      console.log(formatted_date)
       return(
         <div key={index} className="gray-box-question">
           <p className="bold">{experience.position}</p>
           <div className="flex">
             <FontAwesomeIcon icon={["fas", "suitcase"]} className="gray margin-right-15" />
-            <p className="gray margin-right-30">{typeof experience.company_name === "string" ? experience.company_name : experience.company_name.name }</p>
+            <p className="gray margin-right-30">{experience.company_name ? typeof experience.company_name === "string" ? experience.company_name : experience.company_name.name : "" }</p>
             <FontAwesomeIcon icon={["fas", "calendar"]} className="gray margin-right-15" />
             <p className="gray margin-right-30">{formatted_date}</p>
           </div>
@@ -286,7 +334,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, updateTalent }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExperiencesProfessionnelles);

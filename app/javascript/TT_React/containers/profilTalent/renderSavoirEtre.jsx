@@ -6,7 +6,7 @@ import Creatable from 'react-select/creatable';
 import { components } from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchGET, fetchPost } from '../../actions';
+import { fetchGET, fetchPost, updateTalent } from '../../actions';
 
 class RenderKnowns extends Component {
   constructor(props) {
@@ -62,6 +62,7 @@ class RenderKnowns extends Component {
         delete valuesToSend['knowns']
       }
 
+      this.props.updateTalent(this.props.talent, valuesToSend, values)
       initialValues = values
       return valuesToSend
     }
@@ -93,8 +94,17 @@ class RenderKnowns extends Component {
     };
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
-      const isValidNewOption = (inputValue, selectValue) => 
-        inputValue.length > 0 && selectValue.length < limit;
+      const isValidNewOption = (inputValue, selectValue, selectOptions) => {
+        if (
+          selectValue.length < limit && 
+          inputValue.trim().length === 0 ||
+          selectOptions.find(option => option.name === inputValue
+          )
+        ){
+          return false;
+        }
+        return true;
+      }
       return (
         <Creatable 
           {...input} 
@@ -102,15 +112,27 @@ class RenderKnowns extends Component {
           closeMenuOnSelect={false}
           components={{ Menu }}
           isMulti={limit != 1}
-          onChange={(value) => {
-            let newValue = value
-            if(limit == 1){
-              newValue = [value]
+          onChange={(value, {action}) => {
+            switch(action) {
+              case 'select-option':
+                input.onChange(value)
+                break;
+              case 'create-option':
+                input.onChange(value)
+                const options = this.props.knowns.knowns;
+                options.push(value[(value.length - 1)]);
+                break;
+              case 'remove-value':
+                input.onChange(value)
+                break;
             }
-            input.onChange(newValue)
           }}
           getOptionLabel={option => option.title || option} 
           getOptionValue={option => option.id || option}
+          getNewOptionData={(inputValue, optionLabel) => ({
+            id: inputValue,
+            title: optionLabel,
+          })}
           className="form-multi-select"
           classNamePrefix="select-form"
           isValidNewOption={isValidNewOption}
@@ -132,7 +154,7 @@ class RenderKnowns extends Component {
                 component={ReactSelectAdapter}
                 options={this.props.knowns.knowns}
               />
-              <p className="subtitle italic float-right">{`${limit - values.knowns.length} savoir-être restants`}</p>
+              <p className="subtitle italic float-right">{`${limit - (values.knowns ? values.knowns.length : 0)} savoir-être restants`}</p>
               <button 
                 className="btn-gray-violet"
                 >Enregistrer
@@ -150,7 +172,7 @@ class RenderKnowns extends Component {
     return(
       <div className="gray-border-box">
         <div className="flex space-between">
-          <h4 className="box-title">Mes svoir-êtres</h4>
+          <h4 className="box-title">Mes savoir-êtres</h4>
           {userModel == "Talent" ? <p className="pointer" onClick={() => handleClick("questions")}>Éditer</p> : null }
         </div>
         <h5 className="box-subtitle">{`${knowns.length} savoir-êtres listés`}</h5>
@@ -175,7 +197,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, updateTalent }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RenderKnowns);

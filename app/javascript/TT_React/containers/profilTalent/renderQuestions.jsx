@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchPost } from '../../actions';
+import { fetchPost, updateTalent } from '../../actions';
 
 class ProchaineAventure extends Component {
   constructor(props) {
@@ -65,6 +65,7 @@ class ProchaineAventure extends Component {
         }
       })
 
+      this.props.updateTalent(this.props.talent, valuesToSend, values)
       initialValues = values
       return valuesToSend
     }
@@ -144,7 +145,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPost }, dispatch);
+  return bindActionCreators({ fetchPost, updateTalent }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProchaineAventure);

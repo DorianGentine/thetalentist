@@ -76,7 +76,7 @@ class InputForm extends Component {
           component={ReactSelectAdapter}
           options={critere.options}
         />
-        {critere.limit != 1 ? <p className="subtitle italic float-right">{`${critere.limit - this.state.valueLength} compétences restantes`}</p> : null }
+        {critere.limit != 1 ? <p className="subtitle italic float-right">{`${critere.limit - this.state.valueLength} secteurs restants`}</p> : null }
       </div>
     );
   }

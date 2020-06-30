@@ -50,6 +50,10 @@ class Api::V1::TalentsController < Api::V1::BaseController
       end
     end
     if @talent.update(talent_params)
+      @talent.experiences.each do |experience|
+        p "SALUT, ON COMMENCE :"
+        set_new_startups(experience.company_name) if startup_is_available?(experience.company_name)
+      end
       render :show
     else
       # rediriger message erreur
@@ -99,18 +103,25 @@ class Api::V1::TalentsController < Api::V1::BaseController
     known_params = params.permit(known_ids: [])[:known_ids]
     known_ids = create_new_data_with_only_title(known_params, "known")
     talent.known_ids = known_ids
-  end   
-
-  def set_new_experience(talent)
-    experience_params = params.permit(experience: [])[:experience]
-    talent_experiences = talent.experiences
-    if talent_experiences.count == 0
-      p "TALENT.EXPERIENCES: #{experience_params}"
-      talent.experiences = experience_params
+  end
+  
+  def startup_is_available?(param)
+    p "EXPERIENCE.COMPANY_NAME: #{param}"
+    if Startup.where(name: param).count > 0 || Startup.where(name: param.upcase).count > 0
+      return false
     else
-      talent.experiences.first = experience_params
+      return true
     end
-  end   
+  end
+
+  def set_new_startups(param)
+    p "ON CREE LA SU"
+    if param.present?
+      startup = Startup.create(name: param)
+      p "STARTUP: #{startup}"
+      return startup.id
+    end
+  end 
   
   def need_to_create_data?
     skill_params = params.permit(skill_ids: [])[:skill_ids]
