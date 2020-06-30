@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchGET, fetchPost } from '../../actions';
+import { fetchGET, fetchPost, updateTalent } from '../../actions';
 
 import CheckBoxForm from '../form/checkBoxForm'
 
@@ -78,6 +78,7 @@ class RenderWaitingFors extends Component {
         nAA.waiting_for_one = waitingFor[0]
       }
 
+      this.props.updateTalent(this.props.talent, valuesToSend, values)
       initialValues = values
       return valuesToSend
     }
@@ -155,7 +156,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, updateTalent }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RenderWaitingFors);

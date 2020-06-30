@@ -218,24 +218,26 @@ class Navbar extends Component {
                 </ul>
               </div>
             : null}
-            <div className="lien-messagerie relative">
-              {pageReact ?
-                <Link className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} to={convUrl} disabled={convUrl == "/conv"}>
-                  <FontAwesomeIcon icon={this.state.envelope}/>
-                  {unreadMessages != 0 ?
-                    <div className="notif" title={`${unreadMessages} non lus`}></div>
-                  : null}
-                </Link>
-              :
-                <a className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} href={convUrl} disabled={convUrl == "/conv"}>
-                  <FontAwesomeIcon icon={this.state.envelope}/>
-                  {unreadMessages != 0 ?
-                    <div className="notif" title={`${unreadMessages} non lus`}></div>
-                  : null}
-                </a>
-              }
-              {this.props.guideSu == 5 ? <ModalGuide /> : null}
-            </div>
+            {convUrl != "/conv" ?
+              <div className="lien-messagerie relative">
+                {pageReact ?
+                  <Link className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} to={convUrl}>
+                    <FontAwesomeIcon icon={this.state.envelope}/>
+                    {unreadMessages != 0 ?
+                      <div className="notif" title={`${unreadMessages} non lus`}></div>
+                    : null}
+                  </Link>
+                :
+                  <a className={`navbar-wagon-item navbar-wagon-link${path == "conv" ? " active" : ""}`} href={convUrl}>
+                    <FontAwesomeIcon icon={this.state.envelope}/>
+                    {unreadMessages != 0 ?
+                      <div className="notif" title={`${unreadMessages} non lus`}></div>
+                    : null}
+                  </a>
+                }
+                {this.props.guideSu == 5 ? <ModalGuide /> : null}
+              </div>
+            : null }
 
             <div className="navbar-wagon-item" >
               <div className={`dropdown${this.props.guideSu == 6 ? " open" : ""}`} onClick={toggleChevron}>
@@ -257,16 +259,16 @@ class Navbar extends Component {
                       {this.props.guideSu == 6 ? <ModalGuide /> : null}
                     </li>
                   : null }
-                  {userType != "Talentist" ?
+                  {/* {userType != "Talentist" ?
                   <li>
                     <a href={`${profilUrl}/edit`}>
                       Editer mon compte
                     </a>
                   </li>
-                  : null }
+                  : null } */}
                   {userType != "Talentist" ?
                   <li>
-                    <a href={userType == "Recruteur" ? "/headhunters/edit" : userType == "Talent" ? "/talents/edit" : "talentists/edit"}>
+                    <a href={userType == "Recruteur" ? "/headhunters/edit" : "/talents/edit"}>
                       Configuration
                     </a>
                   </li>

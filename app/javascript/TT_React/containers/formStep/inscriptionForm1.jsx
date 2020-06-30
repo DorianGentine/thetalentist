@@ -47,7 +47,7 @@ class InscriptionForm1 extends Component {
           text1={`Bonjour ! Je suis Magdalena.
             5 minutes seront nécessaires pour remplir ce formulaire.
             L'objectif : permettre à notre équipe de mieux te connaître et de t'accompagner pour ta prochaine aventure.
-            N'oublie pas ! Certaines de tes réponses seront masquées pour la start-up afin de garder ton anonymat.`}
+            N'oublie pas : certaines de tes réponses seront masquées pour la start-up afin de garder ton anonymat.`}
           text2="On commence ? Dans quelle ville recherches-tu ?" />
         <div className="input-form w-input-form margin-left-55 margin-bottom-30">
           <label>Ville</label>
@@ -73,7 +73,7 @@ class InscriptionForm1 extends Component {
             {props => <input name={props.input.name} type="hidden" onChange={handleChange(props.input)} />}    
           </Field>
         </div>
-        <MessageMagda text1="La majorité de nos opportunités se trouvent à Paris. Mais nous recevons aussi des offres de la France entière."/>
+        <MessageMagda text1="La majorité de nos opportunités se trouvent à Paris."/>
         <button
           className="btn-violet-square margin-left-55"
           type="submit"

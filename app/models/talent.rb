@@ -306,6 +306,7 @@ class Talent < ApplicationRecord
     company_name = self.experiences.first.company_name
     startup = Startup.where(name: company_name).first
     startup_id = startup.present? ? startup.id : nil
+    p "STARTUP_ID: #{startup_id}"
     return startup_id
   end
 
