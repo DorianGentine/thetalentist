@@ -27,6 +27,10 @@ class InscriptionForm10 extends Component {
         known.value = known.id
       })
     }
+    let disabled = true
+    if(this.props.formValue.known_ids && this.props.formValue.known_ids.length != 0){
+      disabled = false
+    }
 
     return(
       <div className={setFormContainerClass(actualStep, 10)}>
@@ -47,7 +51,7 @@ class InscriptionForm10 extends Component {
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting || this.props.formValue.known_ids.length == 0}>
+          disabled={this.props.submitting || disabled}>
           Étape suivante
         </button>
       </div>
