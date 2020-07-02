@@ -58,17 +58,19 @@ class TalentRepertoire extends Component {
   render () {
     const filter = this.props.filter
 
+    const handleEnd = () => {
+      let newOrder = []
+      for (var i = 0; i < this.state.talents.length; i++) {
+        newOrder.push(this.state.talents[i].id)
+      }
+      this.props.fetchPost("/api/v1/talents/sort", newOrder, "PATCH")
+    }
+
     const renderSortable = () => {
       return <ReactSortable
             list={this.state.talents}
-            setList={newState => {
-              let newOrder = []
-              for (var i = 0; i < newState.length; i++) {
-                newOrder.push(newState[i].id)
-              }
-              this.props.fetchPost("/api/v1/talents/sort", newOrder, "PATCH")
-              this.setState({ talents: newState })}
-            }
+            onEnd={handleEnd}
+            setList={newState => this.setState({ talents: newState })}
           >
             {this.state.talents.map((talent, index) => (
               <TalentCard talent={talent} index={index} key={index} />

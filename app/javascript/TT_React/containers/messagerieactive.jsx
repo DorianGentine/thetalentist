@@ -21,6 +21,8 @@ class Conversation extends Component {
   componentDidMount(){
     if(this.props.params.talent_id){
       this.props.fetchGET(`/api/v1/talents/${this.props.params.talent_id}/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+    }else if(this.props.params.headhunter_id){
+      this.props.fetchGET(`/api/v1/headhunters/${this.props.params.headhunter_id}/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
     }else{
       this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
     }
@@ -46,6 +48,8 @@ class Conversation extends Component {
     if(nextProps.params.id != this.props.params.id){
       if(this.props.params.talent_id){
         this.props.fetchGET(`/api/v1/talents/${this.props.params.talent_id}/conversations/${nextProps.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+      }else if(this.props.params.headhunter_id){
+        this.props.fetchGET(`/api/v1/headhunters/${this.props.params.headhunter_id}/conversations/${nextProps.params.id}`, "FETCH_CONVERSATION_ACTIVE")
       }else{
         this.props.fetchGET(`/api/v1/conversations/${nextProps.params.id}`, "FETCH_CONVERSATION_ACTIVE")
       }
@@ -79,6 +83,7 @@ class Conversation extends Component {
     const isMobile = this.props.isMobile
     const messagerieActiveMobile = this.props.messagerieActiveMobile
     const sidebarActiveMobile = this.props.sidebarActiveMobile
+    const talent_id = this.props.params.talent_id || false
     let conversationActive, participant, relationship, email
     let info = {
       image: null,
@@ -123,24 +128,28 @@ class Conversation extends Component {
     }
 
     const acceptRelation = () => {
-      this.setState({in_relation: "Accepter"})
-      const newMessage = {
-        conversation_id: this.props.params.id,
-        sender_id: this.props.user.id,
-        email: email,
-        body: "",
-        in_relation: "Accepter",
+      if(!talent_id || !headhunter_id){
+        this.setState({in_relation: "Accepter"})
+        const newMessage = {
+          conversation_id: this.props.params.id,
+          sender_id: this.props.user.id,
+          email: email,
+          body: "",
+          in_relation: "Accepter",
+        }
+        console.log(newMessage)
+        this.props.fetchPost(
+          `/api/v1/conversations/${this.props.params.id}/messages`,
+          newMessage,
+          "POST"
+        )
       }
-      console.log(newMessage)
-      this.props.fetchPost(
-        `/api/v1/conversations/${this.props.params.id}/messages`,
-        newMessage,
-        "POST"
-      )
     }
 
     const refuseBox = () => {
-      this.setState({in_relation: "Refuser"})
+      if(!talent_id || !headhunter_id){
+        this.setState({in_relation: "Refuser"})
+      }
     }
 
     const sendMessage = (event, onoff) => {
