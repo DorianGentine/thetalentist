@@ -106,7 +106,25 @@ class Navbar extends Component {
       completing = user.completing
     }
     if(this.props.notifications.length != 0){
-      notifications = this.props.notifications
+      const filterNotifications = notifications => {
+        const filtered = []
+        for (let i = 0; i < notifications.length; i++) {
+          const notification = notifications[i];
+          let add = true
+          for (let j = 0; j < filtered.length; j++) {
+            const item = filtered[j];
+            if(notification.title === item.title){
+              add = false
+            }
+          }
+          if(add){
+            filtered.push(notification)
+          }
+        }
+        return filtered
+      }
+      
+      notifications = filterNotifications(this.props.notifications)
     }
     if(path == "dashboardHeadhunter" || path == "dashboardTalent" || path == "profil"){
       pageReact = false

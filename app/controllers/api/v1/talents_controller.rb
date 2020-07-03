@@ -4,7 +4,10 @@ class Api::V1::TalentsController < Api::V1::BaseController
   def repertoire
     talents = Talent.where(:visible => true).reorder(position: :asc, completing: :desc, last_sign_in_at: :desc)
     @talents = TalentFormat.new.for_api_repository(talents, current_headhunter)
-    @conversation_id = current_user.mailbox.conversations.first.id
+    @conversation_id = current_user.mailbox.conversations.first
+    if current_user.mailbox.conversations.first
+      @conversation_id = @conversation_id.id
+    end
     @user = current_user
     p "TEST => #{current_headhunter}"
   end
