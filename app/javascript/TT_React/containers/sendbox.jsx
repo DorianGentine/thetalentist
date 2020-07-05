@@ -35,9 +35,9 @@ class SendBox extends Component {
       if(conversationActive != undefined){
         config_conv_id = conversationActive.config_conv_id
       }
-      if(conversationActive != undefined && 
-        conversationActive.in_relation == "Accepter" && 
-        !talent_id && 
+      if(conversationActive != undefined &&
+        conversationActive.in_relation == "Accepter" &&
+        !talent_id &&
         !headhunter_id){
         inRelation = true
       }

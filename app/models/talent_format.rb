@@ -83,6 +83,7 @@ class TalentFormat
 
       talent_injected = {
         id: talent.id,
+        order: talent.position,
         first_name: talent.firstname,
         last_name: talent.last_name,
         completing: talent.completing,

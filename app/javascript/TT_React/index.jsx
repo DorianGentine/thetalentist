@@ -25,6 +25,8 @@ import repertory from './components/repertory';
 import conversation from './components/conversation';
 import dashboardHeadhunter from './components/dashboardHeadhunter';
 import dashboardTalent from './components/dashboardTalent';
+import inscriptionTalent from './components/inscriptionTalent';
+import modalInscription from './components/modalInscription';
 import profilRecruteur from './components/profilRecruteur';
 import profilTalent from './components/profilTalent';
 
@@ -41,6 +43,7 @@ import nbTalentsReducer from './reducers/nb_talents_reducer';
 import notificationsReducer from './reducers/notifications_reducer';
 import talentsReducer from './reducers/talents_reducer';
 import sidebarActiveMobileReducer from './reducers/sidebar_active_mobile_reducer';
+import stepFormReducer from './reducers/step_form_reducer';
 import userReducer from './reducers/user_reducer';
 
 const app = document.getElementById('app')
@@ -65,6 +68,7 @@ if(app){
     nbTalents: 0,
     notifications: [],
     sidebarActiveMobile: false,
+    stepForm: 1,
     talents: null,
     user: null,
   };
@@ -83,6 +87,7 @@ if(app){
     notifications: notificationsReducer,
     talents: talentsReducer,
     sidebarActiveMobile: sidebarActiveMobileReducer,
+    stepForm: stepFormReducer,
     user: userReducer,
   });
 
@@ -148,12 +153,15 @@ if(app){
           <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/headhunters/:headhunter_id/conversations/:id" component={conversation} />
           <Route path="/headhunters/:id" component={profilRecruteur} />
+          <Route path="/talents/sign_in" component={modalInscription} />
+          <Route path="/talents/sign_up" component={inscriptionTalent} />
+          <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/talents/:id" component={profilTalent} />
           <Route path="/messagerie" component={conversation} />
           <Route path="/repertoire" component={repertory} />
           <Route path="/talents" component={dashboardTalent} />
           <Route path="/headhunters" component={dashboardHeadhunter} />
-          <Redirect from="/" to="/" />
+          <Redirect from="/" to="/talents/sign_in" />
         </Switch>
       </Router>
     </Provider>,

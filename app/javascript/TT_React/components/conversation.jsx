@@ -35,6 +35,7 @@ class Conversation extends Component {
     const renderAlert = () => {
       return(
         <div className="flex w-100 red-background padding-10 justify-center align-items-center">
+          <p className="no-margin margin-right-30">Tu es connecté à la messagerie d'un talent, tu ne peux pas écrire de messages</p>
           <p className="no-margin margin-right-30">{`Tu es connecté à la messagerie d'un ${talent_id ? "talent" : "recruteur"}, tu ne peux pas écrire de messages`}</p>
           <Link className="btn-white-border" to={convUrl} disabled={convUrl == "/conv"}>Revenir à ma messagerie</Link>
         </div>

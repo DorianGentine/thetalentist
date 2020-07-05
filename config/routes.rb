@@ -111,7 +111,7 @@ Rails.application.routes.draw do
         #   patch :set_conversation
         # end
       end
-      resources :talents, only: [ :index, :show ] do
+      resources :talents, only: [ :index, :show, :update ] do
         collection do
           get :repertoire
           get :analytics

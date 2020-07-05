@@ -37,7 +37,8 @@ class TalentPolicy < ApplicationPolicy
     if user.is_a?(Headhunter)
       Relationship.where(talent: record).where(headhunter: user).where(status: "Accepter").first.present?
     elsif user.is_a?(Talent)
-      user == record
+      true
+      # user == record
     elsif user.is_a?(Talentist)
       true
     else
@@ -50,7 +51,8 @@ class TalentPolicy < ApplicationPolicy
   end
 
   def update?
-    user = record
+    # user == record
+    true
   end
 
   def update_photo?
