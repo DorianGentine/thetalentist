@@ -11,8 +11,17 @@ class RadioForm extends Component {
       if(choice != undefined){
         const value = choice.id || choice
         const title = choice.title || choice
+        let name = this.props.name
+        let formName = this.props.formValue[this.props.name]
+        if(name == "talent_job_attributes[job_id]"){
+          formName = this.props.formValue.talent_job_attributes.job_id
+        }else if(name == "next_aventure_attributes[sector_ids]"){
+          formName = this.props.formValue.next_aventure_attributes.sector_ids
+        }else if(name == "next_aventure_attributes[waiting_for_one]"){
+          formName = this.props.formValue.next_aventure_attributes.waiting_for_one
+        }
+
         const limit = this.props.limit
-        const formName = this.props.formValue[this.props.name]
         let choiceCount, disabled = false
         if(formName != undefined){
           //défini l'ordre dans lequel btns ont été appuyé
@@ -24,13 +33,15 @@ class RadioForm extends Component {
           // Désactive au-delà de la limite
           if(limit != undefined && formName.length == limit && !formName.includes(value)){
             disabled = true
-          }
+          } 
         }
+
+
         return(
           <label className="checkbox-form" key={index}>
             <Field
               component="input"
-              name={this.props.name}
+              name={name}
               type="checkbox"
               value={value}
               disabled={disabled}
@@ -46,7 +57,7 @@ class RadioForm extends Component {
 
 
     return(
-      <div className="flex flex-wrap margin-left-55 margin-bottom-30">
+      <div className={`flex flex-wrap margin-bottom-30${this.props.noMargin55 ? "" : " margin-left-55"}`}>
         {choices != null ? renderFields() : "chargement..."}
       </div>
     );

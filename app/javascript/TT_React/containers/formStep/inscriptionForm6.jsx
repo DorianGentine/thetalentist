@@ -12,7 +12,6 @@ import MessageMagda from './messageMagda'
 class InscriptionForm6 extends Component {
   render () {
     const actualStep = this.props.stepForm
-    const formStep = 6
     let choices = [
       "Ambiance",
       "International",
@@ -27,16 +26,16 @@ class InscriptionForm6 extends Component {
     ]
 
     return(
-      <div className={setFormContainerClass(actualStep, formStep)}>
+      <div className={setFormContainerClass(actualStep, 6)}>
         <MessageMagda
           text1={`Parfait !`}
-          text2={`À présent, je t'invite à nous donner les 3 enjeux les plus impotants pour ton prochain environnement de travail:`}
+          text2={`À présent, je t’invite à nous donner les 3 enjeux les plus importants pour ton prochain environnement de travail :`}
         />
-        <CheckBoxForm name="waiting_for" limit={3} choices={choices} formValue={this.props.formValue}/>
+        <CheckBoxForm name="next_aventure_attributes[waiting_for_one]" limit={3} choices={choices} formValue={this.props.formValue}/>
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || this.props.formValue.next_aventure_attributes.waiting_for_one.length == 0}>
           Étape suivante
         </button>
       </div>
@@ -44,14 +43,14 @@ class InscriptionForm6 extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    stepForm: state.stepForm,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     stepForm: state.stepForm,
+//   };
+// }
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(mapStateToProps, null)(InscriptionForm6);
+export default connect(null, null)(InscriptionForm6);

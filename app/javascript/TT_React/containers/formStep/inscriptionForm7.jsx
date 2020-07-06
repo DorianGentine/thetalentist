@@ -12,7 +12,6 @@ import MessageMagda from './messageMagda'
 class InscriptionForm7 extends Component {
   render () {
     const actualStep = this.props.stepForm
-    const formStep = 7
     let choices = [
       "-30k€",
       "30k€ à 40k€",
@@ -22,15 +21,15 @@ class InscriptionForm7 extends Component {
     ]
 
     return(
-      <div className={setFormContainerClass(actualStep, formStep)}>
+      <div className={setFormContainerClass(actualStep, 7)}>
         <MessageMagda
-          text1={`Quels sont tes prétentions salariales ? (en k€ annuelle brut) `}
+          text1={`Quelles sont tes prétentions salariales ? (package en K€ annuel brut)`}
         />
-        <RadioForm name="remuneration" choices={choices} />
+        <RadioForm name="next_aventure_attributes[remuneration]" choices={choices} />
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || this.props.formValue.next_aventure_attributes.remuneration == undefined}>
           Étape suivante
         </button>
       </div>
@@ -38,14 +37,14 @@ class InscriptionForm7 extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    stepForm: state.stepForm,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     stepForm: state.stepForm,
+//   };
+// }
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(mapStateToProps, null)(InscriptionForm7);
+export default connect(null, null)(InscriptionForm7);

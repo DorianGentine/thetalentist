@@ -14,8 +14,8 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import { createBrowserHistory as history } from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, faChevronLeft, faInfoCircle, faArrowsAlt, faCheck } from '@fortawesome/free-solid-svg-icons'
-import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, faChevronLeft, faInfoCircle, faArrowsAlt, faCheck, faSuitcase, faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle, faEdit } from '@fortawesome/free-regular-svg-icons'
 // import { reducer as formReducer } from 'redux-form';
 
 // import { fetchAPI } from './actions';
@@ -31,19 +31,25 @@ import profilRecruteur from './components/profilRecruteur';
 import profilTalent from './components/profilTalent';
 
 // State and reducers
+import companyTypesReducer from './reducers/company_types_reducer';
 import conversationActiveReducer from './reducers/conversation_active_reducer';
 import conversationsReducer from './reducers/conversations_reducer';
 import filterReducer from './reducers/filter_reducer';
+import formationsReducer from './reducers/formations_reducer';
 import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
+import knownsReducer from './reducers/knowns_reducer';
 import messagerieActiveMobileReducer from './reducers/messagerie_active_mobile_reducer';
 import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
 import nbTalentsReducer from './reducers/nb_talents_reducer';
 import notificationsReducer from './reducers/notifications_reducer';
-import talentsReducer from './reducers/talents_reducer';
+import sectorsReducer from './reducers/sectors_reducer';
 import sidebarActiveMobileReducer from './reducers/sidebar_active_mobile_reducer';
-import stepFormReducer from './reducers/step_form_reducer';
+import skillsReducer from './reducers/skills_reducer';
+import startupsReducer from './reducers/startups_reducer';
+import talentReducer from './reducers/talent_reducer';
+import talentsReducer from './reducers/talents_reducer';
 import userReducer from './reducers/user_reducer';
 
 const app = document.getElementById('app')
@@ -56,38 +62,50 @@ if(app){
   }
 
   const initialState = {
+    companyTypes: null,
     conversationActive: [],
     conversations: [],
     filter: [],
+    formations: null,
     guideSu: 0,
     isMobile: isMobileState,
     jobs: null,
+    knowns: null,
     messagerieActiveMobile: false,
     modalSelected: null,
     modalOpened: false,
     nbTalents: 0,
     notifications: [],
+    sectors: null,
     sidebarActiveMobile: false,
-    stepForm: 1,
+    skills: null,
+    startups: null,
+    talent: null,
     talents: null,
     user: null,
   };
 
   const reducers = combineReducers({
+    companyTypes: companyTypesReducer,
     conversationActive: conversationActiveReducer,
     conversations: conversationsReducer,
     filter: filterReducer,
+    formations: formationsReducer,
     guideSu: guideSuReducer,
     isMobile: identityReducer,
     jobs: jobsReducer,
+    knowns: knownsReducer,
     messagerieActiveMobile: messagerieActiveMobileReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,
     nbTalents: nbTalentsReducer,
     notifications: notificationsReducer,
-    talents: talentsReducer,
+    sectors: sectorsReducer,
     sidebarActiveMobile: sidebarActiveMobileReducer,
-    stepForm: stepFormReducer,
+    skills: skillsReducer,
+    startups: startupsReducer,
+    talent: talentReducer,
+    talents: talentsReducer,
     user: userReducer,
   });
 
@@ -115,12 +133,14 @@ if(app){
     faBars,
     farBookmark,
     fasBookmark,
+    faCalendar,
     faChartLine,
     faCheck,
     faChevronDown,
     faChevronLeft,
     faChevronUp,
     faCogs,
+    faEdit,
     faEnvelope,
     faEnvelopeOpen,
     faFile,
@@ -135,6 +155,7 @@ if(app){
     faShareAlt,
     faSignOutAlt,
     faSlidersH,
+    faSuitcase,
     faTimesCircle,
     faUser,
     fasUser,
@@ -148,14 +169,15 @@ if(app){
     <Provider store={store}>
       <Router history={history}>
         <Switch>
+          <Route path="/talents/sign_in" component={modalInscription} />
+          <Route path="/talents/:talent_id/welcome/:step" component={inscriptionTalent} />
+          <Redirect from="/talents/:id/welcome" to="/talents/:id/welcome/1" />
+          <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/messagerie/:id" component={conversation} />
           <Route path="/conversations/:id" component={conversation} />
           <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/headhunters/:headhunter_id/conversations/:id" component={conversation} />
           <Route path="/headhunters/:id" component={profilRecruteur} />
-          <Route path="/talents/sign_in" component={modalInscription} />
-          <Route path="/talents/sign_up" component={inscriptionTalent} />
-          <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/talents/:id" component={profilTalent} />
           <Route path="/messagerie" component={conversation} />
           <Route path="/repertoire" component={repertory} />

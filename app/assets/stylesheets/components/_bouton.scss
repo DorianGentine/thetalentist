@@ -9,7 +9,7 @@
   }
   button:hover{
     color: white;
-    background: $green;
+    // background: $green;
   }
 
 // btn-violet-square
@@ -25,6 +25,49 @@
   .btn-violet-square:hover{
     background-color: white;
     color: $violet;
+  }
+  .btn-violet-square[disabled] {
+    color: $subtitle;
+    background-color: $lines-2;
+    border-color: $lines-2;
+    cursor: not-allowed;
+  }
+
+// btn-red-square
+  .btn-red-square{
+    background-color: $red;
+    border-radius: 2px;
+    color: white;
+    border: 1px solid $red;
+    padding: 10px 20px;
+    box-shadow: 0 4px 14px 0 rgba(0,7,72,0.2);
+    transition: .5s;
+    cursor: pointer;
+  }
+  .btn-red-square:hover{
+    background-color: white;
+    color: $red;
+  }
+  .btn-red-square[disabled] {
+    color: $subtitle;
+    background-color: $lines-2;
+    border-color: $lines-2;
+    cursor: not-allowed;
+  }
+
+// btn-gray-violet
+  .btn-gray-violet{
+    border: 1px solid #e5e6ec;
+    border-radius: 2px;
+    color: $violet;
+    padding: 10px;
+    width: 100%;
+    background-color: #e5e6ec;
+    transition: .5s;
+  }
+  .btn-gray-violet:hover{
+    color: #e5e6ec;
+    background-color: $violet;
   }
 
 // btn-white-border

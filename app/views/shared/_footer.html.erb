@@ -1,5 +1,6 @@
-<% if params[:action] != "home" %>
-<%# if params[:action] != "home" && params[:controller] != "conversations" %>
+<% if params[:action] != "home" && 
+  params[:action] != "welcome_talent" %>
+
   <div class="footer">
 
     <%= render 'shared/modal_contact' %>

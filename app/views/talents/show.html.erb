@@ -1,6 +1,6 @@
-<div id="app" class="no-background"></div>
+<div id="app"></div>
 
-<% if current_user.is_a?(Talent) %>
+<!-- <% if current_user.is_a?(Talent) %>
   <%= link_to edit_talent_path(@talent) do %>
     <div class="btn-edition-container">
       <p class="no-margin margin-right-15 label-edit align-center hidden-xs"><i class="fas <%= @talent.completing > 85 ? "fa-thumbs-up green" : "fa-exclamation-triangle red"  %> margin-right-15"></i>profil complété à <strong class="<%= @talent.completing > 85 ? "green" : "red"  %>"><%= @talent.completing %>%</strong></p>
@@ -15,16 +15,14 @@
       <p class="no-margin label-edit align-center green"><i class="fas fa-angle-left"></i> Retour</p>
     </div>
   <% end %>
-<% end %>
+<% end %> -->
 
 
-<div class="container-show grid-show">
+<!--<div class="container-show grid-show">
 
   <div class="first-column">
-    <!-- Présentation profil -->
       <div class="blue-background">
 
-        <!-- Photo de profil -->
           <% if @talent.photo? %>
             <div class="photo-profil margin-auto" style="background-image: url('<%= cl_image_path @talent.photo.url(:big_bright_face), :transformation=>[ :gravity=>"face"] %>');">
               <div class="statut tooltip <%= @talent.visible ? 'green-background' : 'red-background' %>">
@@ -49,10 +47,8 @@
             </div>
           <% end %>
 
-        <!-- Nom talent -->
           <h1 class="titre-profil"><%= @talent.firstname %> <%= @talent.last_name %></h1>
 
-        <!-- Poste -->
             <% if @experiences.count > 0 && @experiences.first.position.present? %>
               <h2 class="sous-titre-profil"><%= @experiences.first.position %></h2>
               <% else %>
@@ -61,7 +57,6 @@
 
         <hr class="ligne-horizontal">
 
-        <!-- Secteur d'activité -->
           <div class="row margin-bottom-15">
             <p class="titre-rubrique-1 col-xs-12">Domaine d'activité</p>
             <i class="far fa-compass green titre-rubrique-3 col-xs-2"></i>
@@ -79,7 +74,6 @@
             </p>
           </div>
 
-        <!-- Téléphone -->
           <% if !current_user.is_a?(Headhunter) %>
             <div class="row margin-bottom-15">
               <p class="titre-rubrique-1 col-xs-12">Téléphone</p>
@@ -94,7 +88,6 @@
             </div>
           <% end %>
 
-        <!-- Ville -->
           <div class="row margin-bottom-15">
             <p class="titre-rubrique-1 col-xs-12">Ville</p>
             <i class="fas fa-map-marker-alt green titre-rubrique-3 col-xs-2" style="font-weight: 900"></i>
@@ -103,12 +96,10 @@
             </p>
           </div>
           <% if @talent.city.present? %>
-            <!-- <div id="map" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY']%>"></div> -->
             <div id="map" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="pk.eyJ1IjoidGFsZW50aXN0IiwiYSI6ImNrMjNkZHc5eTB6N2ozbG55MDJ6Nnlqd2cifQ.-gN3Zvab3Yxqr7xfxktk7w"></div>
           <% end %>
       </div>
 
-    <!-- Mes compétences linguistiques -->
       <% if @talent.talent_languages.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
         <div class="blue-background margin-top-60">
@@ -134,7 +125,6 @@
         </div>
       <% end %>
 
-    <!-- Mes compétences clés -->
       <% if @talent.technos.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
         <div class="blue-background margin-top-60">
@@ -151,7 +141,6 @@
         </div>
       <% end %>
 
-    <!-- Me suivre sur -->
       <% if @talent.linkedin.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
         <div class="blue-background margin-top-60">
@@ -170,14 +159,11 @@
 
     <div class="blue-background margin-top-30-xs">
 
-      <!-- Titre section -->
         <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
         <h2 class="titre-section">Ma prochaine <strong>aventure</strong></h2>
 
 
-      <!-- Ligne souhaits -->
         <div class="row margin-top-30">
-          <!-- Mobilité -->
             <div class="info-grid-1 col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Mobilité</p>
               <% if @next_aventure.present? %>
@@ -198,7 +184,6 @@
               <% end %>
             </div>
 
-          <!-- Type de contrat -->
             <div class="info-grid-1 col-lg-2 col-xs-6">
               <p class="titre-rubrique-1 grid-col-span-2">Type de contrat</p>
               <% if @next_aventure.present? %>
@@ -214,7 +199,6 @@
               <% end %>
             </div>
 
-          <!-- Attentes salariales -->
             <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Attentes salariales</p>
               <% if @next_aventure.present? %>
@@ -230,7 +214,6 @@
               <% end %>
             </div>
 
-          <!-- Secteur -->
             <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Secteur</p>
               <% if @sectors.present? %>
@@ -244,7 +227,6 @@
               <% end %>
             </div>
 
-          <!-- Disponibilité -->
             <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2">Disponibilité</p>
               <% if @next_aventure.present? %>
@@ -260,7 +242,6 @@
               <% end %>
             </div>
 
-          <!-- Branche -->
             <div class="info-grid-1 col-lg-2 col-xs-6 margin-top-15-xs">
               <p class="titre-rubrique-1 grid-col-span-2" style="opacity:0">Branche</p>
               <% if @next_aventure.present? %>
@@ -285,11 +266,9 @@
 
       <hr class="ligne-horizontal">
 
-      <!-- Ligne texte -->
 
         <div class="row">
 
-          <!-- Rêve remis à demain -->
             <div class="col-lg-4 col-xs-12">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">
                 <% if @next_aventure.present? %>
@@ -323,7 +302,6 @@
               </p>
             </div>
 
-          <!-- Ma plus grande fierté -->
             <div class="col-lg-4 col-xs-12 margin-top-30-xs">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >Ma plus grande fierté</h4>
 
@@ -340,7 +318,6 @@
               <% end %>
             </div>
 
-          <!-- Comment je vois mon métier -->
             <div class="col-lg-4 col-xs-12 margin-top-30-xs">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >Comment je vois mon métier</h4>
 
@@ -363,7 +340,6 @@
 
         <div class="row">
 
-          <!-- La personnalité qui m'inspire -->
             <div class="col-lg-4 col-xs-12 margin-top-30-xs">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >La personnalité qui m'inspire</h4>
 
@@ -381,7 +357,6 @@
               <% end %>
             </div>
 
-          <!-- Un bon manager, c'est -->
             <div class="col-lg-4 col-xs-12 margin-top-30-xs">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3">Un bon manager, c'est</h4>
               <% if @next_aventure.present? %>
@@ -397,7 +372,6 @@
               <% end %>
             </div>
 
-          <!-- Le travail effectué gratuitement serait -->
             <div class="col-lg-4 col-xs-12 margin-top-30-xs">
               <h4 class="margin-right-15 no-margin-xs titre-rubrique-3" >Le travail effectué gratuitement serait</h4>
               <% if @next_aventure.present? %>
@@ -414,7 +388,6 @@
             </div>
         </div>
 
-        <!-- L'entreprise de mes rêves -->
         <% if !current_user.is_a?(Headhunter) %>
           <hr class="ligne-horizontal">
 
@@ -438,7 +411,6 @@
         <% end %>
 
 
-      <!-- Mes petits plus -->
         <% if !@talent.your_small_plus.present? && current_user.is_a?(Headhunter) %>
         <% else %>
           <hr class="ligne-horizontal">
@@ -468,11 +440,9 @@
       <hr class="ligne-horizontal">
 
       <div class="row">
-        <!-- Je suis plutôt -->
           <div class="col-lg-8 col-xs-12">
             <h3 class="titre-rubrique-2">Je suis plutôt:</h3>
 
-            <!-- Chasseur / Eleveur -->
               <div class="row margin-top-15-xs margin-right-15 no-margin-xs">
                 <p class="texte-rubrique-2b no-margin col-lg-2 col-xs-6">Chasseur</p>
                 <p class="visible-xs texte-rubrique-2b no-margin col-xs-6" style="text-align: right;">Éleveur</p>
@@ -490,7 +460,6 @@
                 <p class="hidden-xs texte-rubrique-2b no-margin col-lg-2">Éleveur</p>
               </div>
 
-            <!-- Créatif / pragmatique -->
               <div class="row margin-top-15 margin-top-15-xs margin-right-15 no-margin-xs">
                 <p class="texte-rubrique-2b no-margin col-lg-2 col-xs-6">Créatif</p>
                 <p class="visible-xs texte-rubrique-2b no-margin col-xs-6" style="text-align: right;">Pragmatique</p>
@@ -509,7 +478,6 @@
               </div>
           </div>
 
-        <!-- Je priorise -->
           <div class="col-lg-4 col-xs-12 margin-top-30-xs">
             <h3 class="titre-rubrique-2">Je priorise:</h3>
 
@@ -528,16 +496,13 @@
       </div>
     </div>
 
-    <!-- SECTION Formations -->
       <% if @talent_formations.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
         <div class="blue-background margin-top-60">
 
-          <!-- Titre section -->
             <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-graduation-cap"></i></div>
             <h2 class="titre-section">Formations <strong>scolaires</strong></h2>
 
-          <!-- Liste avec ligne verte -->
             <% if @talent_formations.nil? %>
               <p><i class="red fas fa-exclamation-triangle"></i> Ajoutez vos formations <i class="red fas fa-exclamation-triangle"></i></p>
             <% else %>
@@ -558,16 +523,13 @@
 
 
 
-    <!-- SECTION Expériences -->
       <% if @experiences.nil? && current_user.is_a?(Headhunter) %>
       <% else %>
         <div class="blue-background margin-top-60">
 
-          <!-- Titre section -->
             <div class="titre-section-icon"><i class="titre-section-icon-illu far fa-file-alt"></i></div>
             <h2 class="titre-section">Expériences <strong>professionnelles</strong></h2>
 
-          <!-- Liste avec ligne verte -->
             <% if @experiences.nil? %>
               <p><i class="red fas fa-exclamation-triangle"></i> Ajoutez vos expériences professionnelles <i class="red fas fa-exclamation-triangle"></i></p>
             <% else %>
@@ -587,7 +549,7 @@
       <% end %>
 
   </div>
-</div>
+</div> -->
 
 
 <!-- <script>

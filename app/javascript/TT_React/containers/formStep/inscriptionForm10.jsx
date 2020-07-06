@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-// import { switchStepFrom } from '../../actions';
+import { fetchGET } from '../../actions';
 import { setFormContainerClass } from '../../../components/formContainerClass';
 
 import SelectForm from '../form/selectForm'
@@ -10,39 +10,48 @@ import MessageMagda from './messageMagda'
 
 
 class InscriptionForm10 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-      ]
-    }  
+  componentDidMount(){
+    if (this.props.knowns === null) {
+      this.props.fetchGET('/api/v1/knowns', "FETCH_KNOWNS")
+    }
   }
+
 
   render () {
     const actualStep = this.props.stepForm
+    let knowns = this.props.knowns
+    if(knowns != null){
+      knowns = knowns.knowns
+      knowns.map((known) => {
+        known.label = known.title
+        known.value = known.id
+      })
+    }
+    let disabled = true
+    if(this.props.formValue.known_ids && this.props.formValue.known_ids.length != 0){
+      disabled = false
+    }
 
     return(
       <div className={setFormContainerClass(actualStep, 10)}>
         <MessageMagda
           text1={`Très bien ! Maintenant, peux-tu nous lister certains de tes savoir-être ? (Exemple: Curieux...)`}
+          text3={"Tu peux en ajouter un en l’écrivant directement !"}
         />
         <SelectForm 
           name="known_ids" 
-          options={this.state.options} 
+          options={knowns} 
           placeholder="Rentre tes savoir-être..." 
           limit={10}
           formValue={this.props.formValue}
         />
         <MessageMagda
-          text1={`N'hésites pas à mettre des éléments unique de ta personnalité, de ton caractère. Ils permettent de savoir comment tu peux evoluer au sein d'une équipe et d'une structure.`}
+          text1={`N'hésite pas à mettre des éléments unique de ta personnalité, de ton caractère. Ils permettent de savoir comment tu peux evoluer au sein d'une équipe et d'une structure.`}
         />
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || disabled}>
           Étape suivante
         </button>
       </div>
@@ -52,12 +61,12 @@ class InscriptionForm10 extends Component {
 
 function mapStateToProps(state) {
   return {
-    stepForm: state.stepForm,
+    knowns: state.knowns,
   };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ switchStepFrom }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchGET }, dispatch);
+}
 
-export default connect(mapStateToProps, null)(InscriptionForm10);
+export default connect(mapStateToProps, mapDispatchToProps)(InscriptionForm10);
