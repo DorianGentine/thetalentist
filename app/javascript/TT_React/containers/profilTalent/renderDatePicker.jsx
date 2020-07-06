@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 import DatePicker from "react-datepicker";
-import { registerLocale } from  "react-datepicker";
-import fr from 'date-fns/locale/fr';
-registerLocale('fr', fr)
  
 import "react-datepicker/dist/react-datepicker.css";
 
