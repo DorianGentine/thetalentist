@@ -92,7 +92,7 @@ class Navbar extends Component {
 
   render () {
     const path = this.props.path
-    let user, userType, userId, convUrl = "/conv", profilUrl = "/profil", firstName, fullName = "Test", image = null, unreadMessages, completing, notifications, pageReact = true
+    let user, userType, userId, convUrl = "/conv", profilUrl = "/profil", firstName, fullName = " ", image = null, unreadMessages, completing, notifications, pageReact = true
     if(this.props.user != null){
       user = this.props.user
       userType = user.is_a_model
@@ -108,7 +108,7 @@ class Navbar extends Component {
     if(this.props.notifications.length != 0){
       notifications = this.props.notifications
     }
-    if(path == "dashboardHeadhunter" || path == "dashboardTalent" || path == "profil"){
+    if(path == "dashboardHeadhunter" || path == "dashboardTalent"){
       pageReact = false
     }
 

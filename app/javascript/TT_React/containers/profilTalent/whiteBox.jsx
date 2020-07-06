@@ -153,6 +153,7 @@ class WhiteBox extends Component {
 
     const validate = values => {
       console.log('values', values)
+      criteres[4].options[0] = values.city
       const errors = {}
       return errors
     }

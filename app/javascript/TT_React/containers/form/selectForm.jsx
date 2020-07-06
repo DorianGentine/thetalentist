@@ -36,7 +36,11 @@ class InputForm extends Component {
     };
 
     const handleChange = (newValue) => {
-      this.setState({valueLength: newValue.length})
+      let length = 0
+      if(newValue){
+        length = newValue.length
+      }
+      this.setState({valueLength: length})
     };
 
     const ReactSelectAdapter = ({ input, ...rest }) => {

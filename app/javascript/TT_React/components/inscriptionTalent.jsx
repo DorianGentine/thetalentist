@@ -81,7 +81,7 @@ class InscriptionTalent extends Component {
       city = talent.city
       linkedin = talent.linkedin
       next_aventure = talent.next_aventure_attributes
-      mobility = next_aventure.mobilities_attributes
+      mobility = next_aventure.mobilities_attributes[0]
       sectorIds = next_aventure.sector_ids
       waitingForOnes = next_aventure.waiting_for_one
       job = talent.talent_job_attributes

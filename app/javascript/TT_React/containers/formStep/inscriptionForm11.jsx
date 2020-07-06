@@ -16,7 +16,7 @@ class InscriptionForm11 extends Component {
     return(
       <div className={setFormContainerClass(actualStep, 11)}>
         <MessageMagda
-          text1={`Allez ! Voici les 3 dernières questions qui permettentde te différencier, ce sont elles que les Start-ups voient en premier sur ton profil, alors mets le paquet !`}
+          text1={`Allez ! Voici les 3 dernières questions qui permettent de te différencier, ce sont celles que les Start-ups voient en premier sur ton profil, alors mets le paquet !`}
         />
         {actualStep == 11 ? 
           <TextAreaForm

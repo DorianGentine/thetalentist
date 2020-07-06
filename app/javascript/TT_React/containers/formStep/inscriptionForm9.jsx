@@ -26,6 +26,10 @@ class InscriptionForm9 extends Component {
         skill.value = skill.id
       })
     }
+    let disabled = true
+    if(this.props.formValue.skill_ids && this.props.formValue.skill_ids.length != 0){
+      disabled = false
+    }
 
     return(
       <div className={setFormContainerClass(actualStep, 9)}>
@@ -44,7 +48,7 @@ class InscriptionForm9 extends Component {
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting || this.props.formValue.skill_ids.length == 0}>
+          disabled={this.props.submitting || disabled}>
           Étape suivante
         </button>
       </div>

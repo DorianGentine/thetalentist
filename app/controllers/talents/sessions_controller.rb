@@ -10,7 +10,7 @@ class Talents::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    p "JE ME CONNECTE: #{ressource}"
+    p "JE ME CONNECTE: #{resource}"
     super
     welcome_talent_path(resource)
   end
