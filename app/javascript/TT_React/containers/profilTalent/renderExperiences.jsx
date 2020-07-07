@@ -121,7 +121,6 @@ class ExperiencesProfessionnelles extends Component {
       const valuesToSend = {}
       const preValues = initialValues
       if(this.state.deleted){
-        console.log("CA MARCHE")
         valuesToSend.experiences_attributes = JSON.parse(JSON.stringify(values.experiences_attributes))
         for (let i = 0; i < this.state.deletedExperiencesIds.length; i++) {
           const experienceId = this.state.deletedExperiencesIds[i];
@@ -146,6 +145,7 @@ class ExperiencesProfessionnelles extends Component {
             experiences_attributes.company_type_id = experiences_attributes.company_type_id.id
           }
           if(!experiences_attributes.destroy){
+            experiences_attributes.years = new Date(experiences_attributes.years)
             if(experiences_attributes.years.getFullYear() == 1970){
               experiences_attributes.years = null
             }

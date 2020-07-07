@@ -13,11 +13,15 @@ class RenderDatePicker extends Component {
     super(props)
     this.state = {
       startDate: this.props.startDate,
+      edited: false,
     };
   }
 
   handleChange = (date) => {
-    this.setState({startDate: date})
+    this.setState({
+      startDate: date,
+      edited: true,
+    })
   }
 
   render () {
@@ -29,7 +33,7 @@ class RenderDatePicker extends Component {
       return(
           <DatePicker
           {...input}
-          selected={this.props.startDate.getFullYear() == 1970 ? null : this.state.startDate}
+          selected={this.props.startDate.getFullYear() == 1970 && !this.state.edited ? null : this.state.startDate}
           className="edit-gray-box-input"
           dateFormat={this.props.showYearPicker ? "yyyy" : "MM/yyyy" }
           isClearable={input.name.includes('years')}
