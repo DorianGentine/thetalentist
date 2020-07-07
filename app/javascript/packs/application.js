@@ -41,6 +41,12 @@ import '../components/renderDate';
 
 import '../components/customScrollBar';
 
+import '../components/formContainerClass';
+
+import '../components/validationInscriptionTalent';
+
+import '../components/setJobColor';
+
 import { revealModal } from "../components/modal";
 revealModal();
 

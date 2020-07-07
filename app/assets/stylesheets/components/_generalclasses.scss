@@ -1,5 +1,5 @@
 #app{
-  min-height: calc(100vh - 190px);
+  min-height: calc(100vh - 70px);
   background-color: $bground;
 }
 #app.no-background{
@@ -62,6 +62,9 @@
   .green-background{
     background-color: $green !important;
   }
+  .label-color{
+    color: $label !important;
+  }
   .light-gray{
     color: $light-gray !important;
   }
@@ -77,6 +80,9 @@
   .red-border{
     border-color: $red !important;
   }
+  .subtitle{
+    color: $subtitle !important;
+  }
   .violet{
     color: $violet !important;
   }
@@ -91,6 +97,9 @@
   }
   .white-background{
     background-color: white !important;
+  }
+  .white-border{
+    border-color: white !important;
   }
 
 // Cursor
@@ -150,7 +159,7 @@
   input:focus, button:focus, select:focus, textarea:focus {
     border-color: $blue !important;
     outline: 0 !important;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $blue !important;
+    // box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $blue;
   }
 
   input, button, select, textarea {
@@ -212,6 +221,9 @@
   .margin-bottom-60{
     margin-bottom: 60px !important
   }
+  .margin-left-55{
+    margin-left: 55px !important
+  }
   .margin-bottom-45{
     margin-bottom: 45px !important
   }
@@ -226,6 +238,9 @@
   }
   .margin-right-30{
     margin-right: 30px !important
+  }
+  .margin-bottom-20{
+    margin-bottom: 20px !important
   }
   .margin-bottom-15{
     margin-bottom: 15px !important
@@ -247,6 +262,9 @@
   }
   .margin-right-5{
     margin-right: 5px !important
+  }
+  .margin-right-minus-20{
+    margin-right: -20px !important
   }
 
   @media screen and (max-width: 770px){
@@ -361,9 +379,9 @@
   .on-scrollbar::-webkit-scrollbar {
     width: 5px;
   }
-  .scroll{
-    scrollbar-gutter: always;
-  }
+  // .scroll{
+  //   scrollbar-gutter: always;
+  // }
 
 // Text
   .capitalize{
@@ -446,6 +464,9 @@
   }
   .w-33{
     width: 33.3333%;
+  }
+  .w-50{
+    width: 50%;
   }
   .w-100{
     width: 100%;

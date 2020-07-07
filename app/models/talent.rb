@@ -13,12 +13,11 @@ class Talent < ApplicationRecord
 
   validates_confirmation_of :password, message: "Vos mots de passe ne concordent pas"
 
-  validates_presence_of :city, :message => "Le lieu doit être rempli", unless: :skip_city_validation
   validates_presence_of :phone, :message => "Ton téléphone doit être rempli", unless: :skip_phone_validation
-  validates_presence_of :linkedin, :message => "Ton linkedin doit être rempli", unless: :skip_linkedin_validation
   validates_presence_of :email, :message => "Ton email doit être rempli"
   validates_presence_of :firstname, :message => "Ton prénom doit être rempli"
   validates_presence_of :last_name, :message => "Ton nom doit être rempli"
+  # validates_presence_of :password, :message => "Ton mot de passe doit être rempli"
 
   attr_accessor :skip_city_validation, :skip_phone_validation, :skip_linkedin_validation
 
@@ -27,7 +26,7 @@ class Talent < ApplicationRecord
   after_validation :geocode, if: ->(obj){ obj.city.present? and obj.city_changed? }
 
 
-  after_create :send_welcome_email, :send_new_user_to_talentist, :fill_last_sign_at
+  after_create :send_welcome_email, :send_new_user_to_talentist, :fill_last_sign_at, :create_next_aventure
   before_save :capitalize_name_firstname, :save_completed_profil
 
   has_many :talent_sectors, dependent: :destroy
@@ -209,6 +208,12 @@ class Talent < ApplicationRecord
     self.save
   end
 
+  def create_next_aventure
+    @next_aventure = NextAventure.create(talent: self)
+    @talent_job = TalentJob.create(talent: self, year: 0)
+    @talent_second_job = TalentSecondJob.create(talent: self)
+  end
+
   def capitalize_name_firstname
     self.last_name = self.last_name.capitalize if self.last_name && !self.last_name.blank?
     self.firstname = self.firstname.capitalize if self.firstname && !self.firstname.blank?
@@ -227,10 +232,10 @@ class Talent < ApplicationRecord
     talent = Talent.find_by(provider: auth.provider, uid: auth.uid)
     talent ||= Talent.find_by(email: auth.info.email) # talent did a regular sign up in the past.
     if talent
-      p "alrealdy exciste"
+      p "alrealdy exists"
       talent.update(talent_params)
     else
-      p "not exciste"
+      p "not created yet"
       talent_params[:city] =  "Paris"
       talent_params[:linkedin] =  "NA"
       talent = Talent.new(talent_params)
@@ -301,26 +306,16 @@ class Talent < ApplicationRecord
     company_name = self.experiences.first.company_name
     startup = Startup.where(name: company_name).first
     startup_id = startup.present? ? startup.id : nil
+    p "STARTUP_ID: #{startup_id}"
     return startup_id
   end
 
 
   def set_build_belong_tables
-    # if self.talent_formations.count == 0
-    #   5.times { self.talent_formations.build }
-    # else
-    #   0.times { self.talent_formations.build }
-    # end
     self.talent_formations.build if self.talent_formations.count == 0
     self.build_talent_job if self.jobs.count == 0
     self.build_talent_second_job if self.jobs.count < 2
-    # if self.talent_jobs.count == 0
-    #   2.times { self.talent_jobs.build }
-    # elsif self.talent_jobs.count == 1
-    #   1.times { self.talent_jobs.build }
-    # else
-    #   0.times { self.talent_jobs }
-    # end
+
     if self.talent_languages.count == 0
       1.times { self.talent_languages.build }
     else

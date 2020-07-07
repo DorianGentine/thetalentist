@@ -4,22 +4,23 @@ class Api::V1::RelationshipsController < Api::V1::BaseController
 
  def create
     p "You are in create Relationship function"
-    p "@relationship: #{relationship_params}"
-    @relationship = Relationship.create(relationship_params)
+    @relationship = Relationship.new(relationship_params)
     @relationship.status = "pending"
     p "Relationship is created"
     headhunter = @relationship.headhunter
     talent = @relationship.talent
     headhunter.send_message(talent, params[:message], "#{headhunter.firstname}")
+    p "C'EST COOL LÀ"
+    p "conversation est : #{Mailboxer::Conversation.between(talent, headhunter).last}"
     conversation = Mailboxer::Conversation.between(talent, headhunter).last
     @relationship.conversation_id = conversation.id
-    talent.send_invitation(headhunter)
     p "=> Message as been created and send"
     if @relationship.save
+      talent.send_invitation(headhunter)
       p "relationship created"
       render :show, status: :created
     else
-      p "relationship erroZr"
+      p "relationship error"
       render_error
     end
     authorize @relationship

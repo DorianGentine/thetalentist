@@ -4,9 +4,6 @@
 
 <section class="container" style="min-height: calc( 100vh - 241px);">
 
-  <!-- Division pour résultats de recherche -->
-  <!-- <button type="button" id="save_talents" class="btn btn-primary">Charger les données Talent</button> -->
-
   <p id="search-results">
     <strong><%= pluralize(@talents.count, 'Profil')%></strong> correspondent à votre recherche '<em><%= params[:tag] || 'Tous' %></em>'
   </p>
@@ -34,10 +31,6 @@
 
   </div>
 
-  <!-- Choix des pages -->
- <!--  <div class="page-choice">
-    <p>Préc. <strong>1</strong> 2 3 Suiv.</p>
-  </div> -->
 </section>
 
 <% if @formations.count > 0 %>

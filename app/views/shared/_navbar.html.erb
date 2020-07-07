@@ -1,5 +1,10 @@
 <noscript style="width: 100vw; top: 70px; left: 0; z-index: 19; padding: 20px;" class=" fixed text-align-center white-background"><h3 class="red">The talentist fonctionne mieux avec javascript, activez-le &#128519;</h3></noscript>
-<% if params[:action] != "home" && params[:action] != "talent_home" && params[:action] != "headhunter_home" && params[:controller] != "headhunters/sessions" && params[:controller] != "talents/sessions" %>
+<% if params[:action] != "home" &&
+ params[:action] != "talent_home" &&
+ params[:action] != "headhunter_home" &&
+ params[:controller] != "headhunters/sessions" && 
+ params[:controller] != "talents/sessions" &&
+ params[:action] != "welcome_talent" %>
 
   <div class="navbar-wagon">
     <!-- Logo -->

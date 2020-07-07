@@ -1,332 +1,388 @@
 .form-container{
-  padding: 60px 190px 0;
+  padding: 40px 300px;
+  min-width: 100%;
+  transition: 1s;
+}
+.form-container.form-hidden{
+  opacity: 0;
+  margin-left: -100%
+}
+.form-container.form-appearance{
+  opacity: 0;
 }
 
-.form-line{
-  display: flex;
-  align-items: center;
+.input-form{
+  label{
+    font-weight: 600;
+    font-size: 14px;
+  }
+  input{
+    padding: 15px;
+    width: 100%;
+    border-radius: 2px;
+    border: 1px solid $input;
+  }
+  input::focus{
+    box-shadow: none;
+    border-color: $violet;
+  }
 }
-
-.form-label {
-  width: 10%;
+.span-erreur{
+  color: $red;
+  margin-bottom: 0;
 }
 .requis:after{
   content: "*";
   color: $red;
 }
-
-@media screen and (max-width: 770px) {
-  #linkedin-size .form-group {
-    width: 100%;
-  }
+.w-input-form{
+  width: calc(100% - 55px);
 }
 
-#metier-size .form-group {
-  width: 130px;
+// hide algolia publicity
+.ap-footer{
+  display: none !important;
 }
 
-.form-group {
-  margin: unset;
+
+.add-picture{
+  border-radius: 2px;
+  border: 1px solid #CCCEDA;
+  padding: 10px 20px;
+  color: $violet;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: .5s;
 }
-#display-btn{
-  .form-check {
-    display: flex;
-    align-items: center;
-    height: 100%
-  }
+.add-picture:hover{
+  border-color: $violet;
 }
 
 .margin-auto-new-talent {
-  width: 85%;
-  margin: auto;
+  min-height: calc(100vh - 190px);
+  width: 50%;
+  margin-left: 50px;
 }
 
+// OLD VERSION
+// .form-line{
+//   display: flex;
+//   align-items: center;
+// }
 
-.invalid-feedback {
-  color: $red;
-  font-size: 14px;
-}
+// .form-label {
+//   width: 10%;
+// }
 
-
-.alert{
-  background-color: $red;
-}
-
-.form-compte{
-  align-items: flex-start;
-  margin-bottom: -20px;
-  .form-label{
-    margin-top: 25px;
-  }
-  .alert{
-    display: none;
-  }
-}
-.form-label em{
-  font-style: normal;
-  color: $red;
-}
-.talent_password small {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-#new-talent {
-  .display-flex {
-    display: flex;
-    justify-content: space-around;
-  }
-}
-.p-relative{
-  position: relative;
-}
-
-
-
-
-@media screen and (min-width: 771px) {
-  .padding-center {
-    padding-left: 39%
-  }
-}
-
-
-.nested-fields a{
-  padding: 0 10px;
-  color: $red;
-  // line-height: 35px;
-}
-
-.form-label-semi-line{
-  width: unset;
-  text-align: left;
-}
-
-#text_area-experience {
-  textarea {
-    width: 100%;
-    height: 100%;
-  }
-}
-.checked_boxe {
-  background-color: $gray !important;
-  opacity: 0.5 !important;
-  cursor: none !important;
-}
-/* CSS checkboxes */
-input[type="radio"], input[type="checkbox"] {
-  margin: 4px 15px;
-}
-
-/* CSS next_aventure - A REVOIR */
-.label-next_aventure{
-  width: 26%;
-}
-.label-next_aventure-lg{
-  width: 100%;
-  text-align: left;
-}
-
-
-
-@media screen and (max-width: 770px) {
-  .form-container{
-    padding: 0 40px;
-  }
-  .form-line{
-    align-items: flex-start;
-    flex-direction: column;
-    margin: 0 0 20px;
-  }
-  .form-label{
-    width: unset;
-  }
-
-  #form-p2-comp{
-    .form-semi-line{
-      display: block;
-      .form-group{
-        width: 100%;
-        margin-bottom: 15px;
-      }
-    }
-    .form-semi-line:first-child {
-      position: unset;
-      margin-bottom: 40px
-    }
-    .form-semi-line:last-child{
-      margin-left: 0;
-    }
-  }
-  .nested-fields a{
-    margin: 0;
-  }
-}
-#font-input-currently label {
-  font-size: 12px;
-}
-
-#registration-headhunter {
-  width: 70%;
-  margin: auto;
-  .form-label {
-    width: 10% !important;
-  }
-  .form-line {
-    justify-content: space-between;
-  }
-  #email-registration {
-    justify-content: flex-start;
-    .form-label {
-      width: 17% !important;
-    }
-  }
-}
-
-.form-grid{
-  display: grid;
-  grid: auto / 17% 33% 17% 33%;
-  align-items: center;
-  .form-label{
-    width: unset;
-    min-width: 153px;
-    margin: 0;
-  }
-}
-@media screen and (max-width: 1140px) {
-  .form-grid{
-    grid: auto / auto;
-  }
-}
-@media screen and (min-width: 1141px) {
-  .form-grid .form-label-right-grid {
-    min-width: unset;
-    margin: 0 0 0 25px;
-  }
-}
-
-
-@media screen and (min-width: 771px) {
-  .width-rang {
-    width: 80%;
-    margin: auto;
-    margin-top: 10px;
-    p {
-      margin-right: 20px;
-    }
-    input {
-      width: 90%;
-    }
-  }
-  #add-margin-left {
-    margin-left: 15px;
-  }
-}
-.align-items-form {
-  display: flex;
-  align-items: center;
-}
-
-
-// grid pour experience
-#experience-grid {
-  display: grid;
-  grid: auto / calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px);
-  justify-content: space-between;
-  grid-row-gap: 15px;
-}
-
-// .experience-title-grid {
-//   grid-row: 1 / span 3;
-//   grid-column: 1 / span 1;
-//   margin: auto;
-//   .form-label-font-size {
-//     text-align: center !important;
+// @media screen and (max-width: 770px) {
+//   #linkedin-size .form-group {
+//     width: 100%;
 //   }
 // }
 
-.company-name-grid {
-  grid-column: 1 / span 2;
-}
+// #metier-size .form-group {
+//   width: 130px;
+// }
 
-.position-grid {
-  grid-column: 3 / span 2;
-}
-.starting-grid {
-  grid-column: 5 / span 1;
-}
-.ending-grid {
-  grid-column: 6 / span 1;
-}
-.currently-grid {
-  text-align: center;
-  grid-column: 7 / span 1;
-}
+// .form-group {
+//   margin: unset;
+// }
+// #display-btn{
+//   .form-check {
+//     display: flex;
+//     align-items: center;
+//     height: 100%
+//   }
+// }
 
 
-#text_area-experience {
-  grid-row: 2 / span 2;
-  grid-column: 1 / span 5;
-}
 
-.company-type-grid {
-  grid-row: 2 / span 1;
-  grid-column: 6 / span 2;
-}
-.supp-grid-experience {
-  grid-row: 1 / span 3;
-  grid-column: 8 / span 1;
-}
-@media screen and (max-width: 770px) {
-  #experience-grid {
-    margin-bottom: 20px;
-    grid: auto / auto;
-    justify-content: unset;
-    > div{
-      width: 100%;
-    }
-  }
-  .company-name-grid {
-    grid-column: 1 / span 1;
-    grid-row: 1;
-  }
-  .position-grid {
-    grid-column: 1 / span 1;
-    grid-row: 2;
-  }
-  .starting-grid {
-    grid-column: 1 / span 1;
-    grid-row: 3;
-    .form-control{
-      width: 100%;
-    }
-  }
-  .ending-grid {
-    grid-column: 1 / span 1;
-    grid-row: 4;
-    .form-control{
-      width: 100%;
-    }
-  }
-  .currently-grid {
-    text-align: center;
-    grid-column: 1 / span 1;
-    grid-row: 5;
-  }
-  #text_area-experience {
-    grid-row: 2 / span 2;
-    grid-column: 1 / span 1;
-    grid-row: 6;
-  }
+// .invalid-feedback {
+//   color: $red;
+//   font-size: 14px;
+// }
 
-  .company-type-grid {
-    grid-row: 2 / span 1;
-    grid-column: 1 / span 1;
-    grid-row: 7;
-  }
-  .supp-grid-experience {
-    grid-row: 1 / span 3;
-    grid-column: 1 / span 1;
-    grid-row: 8;
-  }
-}
+
+// .alert{
+//   background-color: $red;
+// }
+
+// .form-compte{
+//   align-items: flex-start;
+//   margin-bottom: -20px;
+//   .form-label{
+//     margin-top: 25px;
+//   }
+//   .alert{
+//     display: none;
+//   }
+// }
+// .form-label em{
+//   font-style: normal;
+//   color: $red;
+// }
+// .talent_password small {
+//     display: flex;
+//     justify-content: flex-end;
+//   }
+
+// #new-talent {
+//   .display-flex {
+//     display: flex;
+//     justify-content: space-around;
+//   }
+// }
+// .p-relative{
+//   position: relative;
+// }
+
+
+
+
+// @media screen and (min-width: 771px) {
+//   .padding-center {
+//     padding-left: 39%
+//   }
+// }
+
+
+// .nested-fields a{
+//   padding: 0 10px;
+//   color: $red;
+//   // line-height: 35px;
+// }
+
+// .form-label-semi-line{
+//   width: unset;
+//   text-align: left;
+// }
+
+// #text_area-experience {
+//   textarea {
+//     width: 100%;
+//     height: 100%;
+//   }
+// }
+// .checked_boxe {
+//   background-color: $gray !important;
+//   opacity: 0.5 !important;
+//   cursor: none !important;
+// }
+// /* CSS checkboxes */
+// input[type="radio"], input[type="checkbox"] {
+//   margin: 4px 15px;
+// }
+
+// /* CSS next_aventure - A REVOIR */
+// .label-next_aventure{
+//   width: 26%;
+// }
+// .label-next_aventure-lg{
+//   width: 100%;
+//   text-align: left;
+// }
+
+
+
+// @media screen and (max-width: 770px) {
+//   .form-container{
+//     padding: 0 40px;
+//   }
+//   .form-line{
+//     align-items: flex-start;
+//     flex-direction: column;
+//     margin: 0 0 20px;
+//   }
+//   .form-label{
+//     width: unset;
+//   }
+
+//   #form-p2-comp{
+//     .form-semi-line{
+//       display: block;
+//       .form-group{
+//         width: 100%;
+//         margin-bottom: 15px;
+//       }
+//     }
+//     .form-semi-line:first-child {
+//       position: unset;
+//       margin-bottom: 40px
+//     }
+//     .form-semi-line:last-child{
+//       margin-left: 0;
+//     }
+//   }
+//   .nested-fields a{
+//     margin: 0;
+//   }
+// }
+// #font-input-currently label {
+//   font-size: 12px;
+// }
+
+// #registration-headhunter {
+//   width: 70%;
+//   margin: auto;
+//   .form-label {
+//     width: 10% !important;
+//   }
+//   .form-line {
+//     justify-content: space-between;
+//   }
+//   #email-registration {
+//     justify-content: flex-start;
+//     .form-label {
+//       width: 17% !important;
+//     }
+//   }
+// }
+
+// .form-grid{
+//   display: grid;
+//   grid: auto / 17% 33% 17% 33%;
+//   align-items: center;
+//   .form-label{
+//     width: unset;
+//     min-width: 153px;
+//     margin: 0;
+//   }
+// }
+// @media screen and (max-width: 1140px) {
+//   .form-grid{
+//     grid: auto / auto;
+//   }
+// }
+// @media screen and (min-width: 1141px) {
+//   .form-grid .form-label-right-grid {
+//     min-width: unset;
+//     margin: 0 0 0 25px;
+//   }
+// }
+
+
+// @media screen and (min-width: 771px) {
+//   .width-rang {
+//     width: 80%;
+//     margin: auto;
+//     margin-top: 10px;
+//     p {
+//       margin-right: 20px;
+//     }
+//     input {
+//       width: 90%;
+//     }
+//   }
+//   #add-margin-left {
+//     margin-left: 15px;
+//   }
+// }
+// .align-items-form {
+//   display: flex;
+//   align-items: center;
+// }
+
+
+// // grid pour experience
+// #experience-grid {
+//   display: grid;
+//   grid: auto / calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px) calc(12.5% - 7.5px);
+//   justify-content: space-between;
+//   grid-row-gap: 15px;
+// }
+
+// // .experience-title-grid {
+// //   grid-row: 1 / span 3;
+// //   grid-column: 1 / span 1;
+// //   margin: auto;
+// //   .form-label-font-size {
+// //     text-align: center !important;
+// //   }
+// // }
+
+// .company-name-grid {
+//   grid-column: 1 / span 2;
+// }
+
+// .position-grid {
+//   grid-column: 3 / span 2;
+// }
+// .starting-grid {
+//   grid-column: 5 / span 1;
+// }
+// .ending-grid {
+//   grid-column: 6 / span 1;
+// }
+// .currently-grid {
+//   text-align: center;
+//   grid-column: 7 / span 1;
+// }
+
+
+// #text_area-experience {
+//   grid-row: 2 / span 2;
+//   grid-column: 1 / span 5;
+// }
+
+// .company-type-grid {
+//   grid-row: 2 / span 1;
+//   grid-column: 6 / span 2;
+// }
+// .supp-grid-experience {
+//   grid-row: 1 / span 3;
+//   grid-column: 8 / span 1;
+// }
+// @media screen and (max-width: 770px) {
+//   #experience-grid {
+//     margin-bottom: 20px;
+//     grid: auto / auto;
+//     justify-content: unset;
+//     > div{
+//       width: 100%;
+//     }
+//   }
+//   .company-name-grid {
+//     grid-column: 1 / span 1;
+//     grid-row: 1;
+//   }
+//   .position-grid {
+//     grid-column: 1 / span 1;
+//     grid-row: 2;
+//   }
+//   .starting-grid {
+//     grid-column: 1 / span 1;
+//     grid-row: 3;
+//     .form-control{
+//       width: 100%;
+//     }
+//   }
+//   .ending-grid {
+//     grid-column: 1 / span 1;
+//     grid-row: 4;
+//     .form-control{
+//       width: 100%;
+//     }
+//   }
+//   .currently-grid {
+//     text-align: center;
+//     grid-column: 1 / span 1;
+//     grid-row: 5;
+//   }
+//   #text_area-experience {
+//     grid-row: 2 / span 2;
+//     grid-column: 1 / span 1;
+//     grid-row: 6;
+//   }
+
+//   .company-type-grid {
+//     grid-row: 2 / span 1;
+//     grid-column: 1 / span 1;
+//     grid-row: 7;
+//   }
+//   .supp-grid-experience {
+//     grid-row: 1 / span 3;
+//     grid-column: 1 / span 1;
+//     grid-row: 8;
+//   }
+// }

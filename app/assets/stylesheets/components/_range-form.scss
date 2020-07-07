@@ -1,0 +1,44 @@
+.slider-container{
+  width: 50%;
+}
+
+.slider-container > .slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 4px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+}
+
+.slider:focus {
+  border: none;
+  box-shadow: none !important;
+}
+
+.left-slider{
+  position: absolute;
+  top: 0;
+  height: 4px;
+  background-color: $violet;
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 4px;
+  background: $violet; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 4px;
+  background: $violet; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
