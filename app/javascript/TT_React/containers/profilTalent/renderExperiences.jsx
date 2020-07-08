@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Form, Field } from 'react-final-form';
 import Creatable from 'react-select/creatable';
- 
-import "react-datepicker/dist/react-datepicker.css";
 
 import { fetchGET, fetchPost, updateTalent } from '../../actions';
 // import setJobColor from '../../../components/setJobColor';
