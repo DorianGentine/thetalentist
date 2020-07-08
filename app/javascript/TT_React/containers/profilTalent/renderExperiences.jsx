@@ -27,7 +27,6 @@ class ExperiencesProfessionnelles extends Component {
     let deletedExperienceId = experience.id
     const othersIds = this.state.deletedExperiencesIds
     othersIds.push(deletedExperienceId)
-    console.log('othersIds', othersIds)
     this.setState({
       experiencesIds: othersIds,
       deleted: true,
@@ -72,7 +71,11 @@ class ExperiencesProfessionnelles extends Component {
           experience.company_type_id = companyTypes.find(companyType => companyType.id === experience.company_type_id)
         }
         experience.starting = new Date(experience.starting)
-        experience.years = new Date(experience.years)
+        if(experience.years != ""){
+          experience.years = new Date(experience.years)
+        }else{
+          experience.years = null
+        }
       }
       initialValues = {
         experiences_attributes: experiences
@@ -290,7 +293,7 @@ class ExperiencesProfessionnelles extends Component {
     const renderExperiences = () => experiences.map((experience, index) => {
       let formatted_starting = new Date(experience.starting)
       formatted_starting = `${("0" + (formatted_starting.getMonth() + 1)).slice(-2)}/${formatted_starting.getFullYear()}`
-      let formatted_years = experience.years ? new Date(experience.years) : null
+      let formatted_years = experience.years && experience.years != "" ? new Date(experience.years) : null
       formatted_years = formatted_years ? `${("0" + (formatted_years.getMonth() + 1)).slice(-2)}/${formatted_years.getFullYear()}` : null
       const formatted_date = formatted_years ? `${formatted_starting} - ${formatted_years}` : `${formatted_starting} - Maintenant`
       return(

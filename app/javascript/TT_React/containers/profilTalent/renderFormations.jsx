@@ -60,8 +60,9 @@ class RenderFormations extends Component {
         if(typeof formation.formation_id === "number"){
           formation.formation_id = ecoles.find(ecole => ecole.id === formation.formation_id)
         }
-        // formation.year = new Date(formation.year)
-        formation.year = new Date(parseInt(formation.year), 0)
+        if(typeof formation.year == "number"){
+          formation.year = new Date(parseInt(formation.year), 0)
+        }
       }
       initialValues = {
         talent_formations_attributes: formations

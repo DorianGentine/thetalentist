@@ -155,9 +155,10 @@ class RenderKnowns extends Component {
                 options={this.props.knowns.knowns}
               />
               <p className="subtitle italic float-right">{`${limit - (values.knowns ? values.knowns.length : 0)} savoir-être restants`}</p>
-              <button 
-                className="btn-gray-violet"
-                >Enregistrer
+              <button
+                disabled={!values.knowns || values.knowns.length == 0} 
+                className={`btn-gray-violet${values.knowns && values.knowns.length > 0 ? "" : " red-background white not-allowed"}`}
+                >{values.knowns && values.knowns.length > 0 ? "Enregistrer" : "Renseigne au moins une compétence"}
               </button>
             </form>
           )}
