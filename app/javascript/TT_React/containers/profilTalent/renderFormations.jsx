@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Form, Field } from 'react-final-form';
 import Creatable from 'react-select/creatable';
- 
-import "react-datepicker/dist/react-datepicker.css";
 
 import { fetchGET, fetchPost, updateTalent } from '../../actions';
 // import setJobColor from '../../../components/setJobColor';
@@ -62,6 +60,8 @@ class RenderFormations extends Component {
         if(typeof formation.formation_id === "number"){
           formation.formation_id = ecoles.find(ecole => ecole.id === formation.formation_id)
         }
+        // formation.year = new Date(formation.year)
+        formation.year = new Date(parseInt(formation.year), 0)
       }
       initialValues = {
         talent_formations_attributes: formations
@@ -205,7 +205,7 @@ class RenderFormations extends Component {
           </div>
           <div className="col-md-3">
             <p className="bold no-margin margin-top-15">Année d'obtention</p>
-            <RenderDatePicker name={`talent_formations_attributes[${index}].year`} showYearPicker={true} startDate={formation.year ? new Date(parseInt(formation.year), 0) : null} />
+            <RenderDatePicker name={`talent_formations_attributes[${index}].year`} showYearPicker={true} startDate={formation.year} />
           </div>
           <div className="col-md-3"></div>
           <div 
@@ -239,10 +239,10 @@ class RenderFormations extends Component {
     }
 
     const renderFormations = () => formations.map((formation, index) => {
-      let formatted_date = formation.year
-      if(formatted_date.length > 4){
-        formatted_date = new Date(formatted_date).getFullYear()
-      }
+      let formatted_date = formation.year.getFullYear()
+      // if(formatted_date.length > 4){
+      //   formatted_date = new Date(formatted_date).getFullYear()
+      // }
       return(
         <div key={index} className="gray-box-question">
           <p className="bold">{formation.title}</p>
