@@ -176,7 +176,10 @@ class ExperiencesProfessionnelles extends Component {
       if(Object.keys(valuesToSend).length > 0){
         this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
       }
-      this.setState({edit: false})
+      this.setState({
+        edit: false,
+        added: false
+      })
     }
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
@@ -294,7 +297,7 @@ class ExperiencesProfessionnelles extends Component {
       let formatted_starting = new Date(experience.starting)
       formatted_starting = `${("0" + (formatted_starting.getMonth() + 1)).slice(-2)}/${formatted_starting.getFullYear()}`
       let formatted_years = experience.years && experience.years != "" ? new Date(experience.years) : null
-      formatted_years = formatted_years ? `${("0" + (formatted_years.getMonth() + 1)).slice(-2)}/${formatted_years.getFullYear()}` : null
+      formatted_years = formatted_years && formatted_years.getFullYear() != 1970 ? `${("0" + (formatted_years.getMonth() + 1)).slice(-2)}/${formatted_years.getFullYear()}` : null
       const formatted_date = formatted_years ? `${formatted_starting} - ${formatted_years}` : `${formatted_starting} - Maintenant`
       return(
         <div key={index} className="gray-box-question">
