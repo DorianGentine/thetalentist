@@ -68,9 +68,9 @@ class RenderFormations extends Component {
         talent_formations_attributes: formations
       }
       formation = {
-        year: null,
+        year: new Date(),
         formation_id: null,
-        title: null,
+        title: "",
         type_of_formation: null
       }
     }
@@ -249,7 +249,7 @@ class RenderFormations extends Component {
           <p className="bold">{formation.title}</p>
           <div className="flex">
             <FontAwesomeIcon icon={["fas", "suitcase"]} className="gray margin-right-15" />
-            <p className="gray margin-right-30">{formation.formation_id.title ? formation.formation_id.title : formation.formation_id }</p>
+            <p className="gray margin-right-30">{formation.formation_id && formation.formation_id.title ? formation.formation_id.title : formation.formation_id }</p>
             <FontAwesomeIcon icon={["fas", "calendar"]} className="gray margin-right-15" />
             <p className="gray margin-right-30">{formatted_date}</p>
           </div>
