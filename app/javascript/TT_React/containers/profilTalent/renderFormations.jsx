@@ -70,7 +70,7 @@ class RenderFormations extends Component {
       formation = {
         year: new Date(),
         formation_id: null,
-        title: "",
+        title: undefined,
         type_of_formation: null
       }
     }
@@ -92,9 +92,28 @@ class RenderFormations extends Component {
     }
 
 
+    let disabled = {
+      state: false,
+      className: "btn-gray-violet margin-top-60",
+      message: "Enregistrer"
+    }
     const validate = values => {
       console.log('values', values)
       const errors = {}
+      for (let i = 0; i < values.talent_formations_attributes.length; i++) {
+        const formation = values.talent_formations_attributes[i];
+        if (formation.formation_id != null && formation.title != undefined) {
+          disabled.state = false
+          disabled.className = "btn-gray-violet margin-top-60"
+          disabled.message = "Enregistrer"
+        }else if(formation.title == undefined ||
+          formation.formation_id == null) {
+            disabled.state = true
+            disabled.className = "btn-gray-violet margin-top-60 red-background white not-allowed"
+            disabled.message = `Tous les intitulés, noms d'établissements et années d'obtention doivent être remplis`
+        }
+      }
+
       return errors
     }
 
@@ -230,8 +249,9 @@ class RenderFormations extends Component {
               {this.state.add ? renderEditFormations() : renderEditFormations() }
               <p className="violet pointer" onClick={addFormation}>+ Ajouter une formation</p>
               <button 
-                className="btn-gray-violet margin-top-60"
-                >Enregistrer
+                disabled={disabled.state}
+                className={disabled.className}
+                >{disabled.message}
               </button>
             </form>
           )}
@@ -240,10 +260,12 @@ class RenderFormations extends Component {
     }
 
     const renderFormations = () => formations.map((formation, index) => {
-      let formatted_date = formation.year.getFullYear()
-      // if(formatted_date.length > 4){
-      //   formatted_date = new Date(formatted_date).getFullYear()
-      // }
+      let formatted_date = formation.year
+      if(typeof formatted_date == "Object"){
+        formatted_date = formatted_date.getFullYear()
+      }else{
+        formatted_date = new Date(formatted_date).getFullYear()
+      }
       return(
         <div key={index} className="gray-box-question">
           <p className="bold">{formation.title}</p>
