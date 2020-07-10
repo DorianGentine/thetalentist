@@ -28,10 +28,18 @@ class RenderDatePicker extends Component {
 
     const ReactDatePickerAdapter = ({input}) => {
       let minDate = false
+      let selected = this.state.startDate
+      if(typeof this.props.startDate != "Object"){
+        this.props.startDate = new Date(this.props.startDate)
+      }
+      if(this.props.startDate.getFullYear() == 1970 && !this.state.edited){
+        selected = null
+      }
+      console.log('this.props.startDate', this.props.startDate)
       return(
           <DatePicker
           {...input}
-          selected={this.props.startDate.getFullYear() == 1970 && !this.state.edited ? null : this.state.startDate}
+          selected={selected}
           className="edit-gray-box-input"
           dateFormat={this.props.showYearPicker ? "yyyy" : "MM/yyyy" }
           isClearable={input.name.includes('years')}
