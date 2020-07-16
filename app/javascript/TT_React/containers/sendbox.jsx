@@ -37,11 +37,7 @@ class SendBox extends Component {
       }
       if(conversationActive != undefined && 
         conversationActive.in_relation == "Accepter" && 
-<<<<<<< HEAD
         !talent_id && 
-=======
-        !talent_id &&
->>>>>>> 3137318e86d9a48a7add0f6ca97381ade56d28b0
         !headhunter_id){
         inRelation = true
       }
