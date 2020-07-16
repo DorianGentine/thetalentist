@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Form, Field } from 'react-final-form';
 import Creatable from 'react-select/creatable';
- 
-import "react-datepicker/dist/react-datepicker.css";
 
 import { fetchGET, fetchPost, updateTalent } from '../../actions';
 // import setJobColor from '../../../components/setJobColor';
@@ -29,7 +27,6 @@ class ExperiencesProfessionnelles extends Component {
     let deletedExperienceId = experience.id
     const othersIds = this.state.deletedExperiencesIds
     othersIds.push(deletedExperienceId)
-    console.log('othersIds', othersIds)
     this.setState({
       experiencesIds: othersIds,
       deleted: true,
@@ -74,7 +71,11 @@ class ExperiencesProfessionnelles extends Component {
           experience.company_type_id = companyTypes.find(companyType => companyType.id === experience.company_type_id)
         }
         experience.starting = new Date(experience.starting)
-        experience.years = new Date(experience.years)
+        if(experience.years != ""){
+          experience.years = new Date(experience.years)
+        }else{
+          experience.years = null
+        }
       }
       initialValues = {
         experiences_attributes: experiences
@@ -121,7 +122,6 @@ class ExperiencesProfessionnelles extends Component {
       const valuesToSend = {}
       const preValues = initialValues
       if(this.state.deleted){
-        console.log("CA MARCHE")
         valuesToSend.experiences_attributes = JSON.parse(JSON.stringify(values.experiences_attributes))
         for (let i = 0; i < this.state.deletedExperiencesIds.length; i++) {
           const experienceId = this.state.deletedExperiencesIds[i];
@@ -146,6 +146,7 @@ class ExperiencesProfessionnelles extends Component {
             experiences_attributes.company_type_id = experiences_attributes.company_type_id.id
           }
           if(!experiences_attributes.destroy){
+            experiences_attributes.years = new Date(experiences_attributes.years)
             if(experiences_attributes.years.getFullYear() == 1970){
               experiences_attributes.years = null
             }
@@ -175,7 +176,10 @@ class ExperiencesProfessionnelles extends Component {
       if(Object.keys(valuesToSend).length > 0){
         this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
       }
-      this.setState({edit: false})
+      this.setState({
+        edit: false,
+        added: false
+      })
     }
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
@@ -292,8 +296,8 @@ class ExperiencesProfessionnelles extends Component {
     const renderExperiences = () => experiences.map((experience, index) => {
       let formatted_starting = new Date(experience.starting)
       formatted_starting = `${("0" + (formatted_starting.getMonth() + 1)).slice(-2)}/${formatted_starting.getFullYear()}`
-      let formatted_years = experience.years ? new Date(experience.years) : null
-      formatted_years = formatted_years ? `${("0" + (formatted_years.getMonth() + 1)).slice(-2)}/${formatted_years.getFullYear()}` : null
+      let formatted_years = experience.years && experience.years != "" ? new Date(experience.years) : null
+      formatted_years = formatted_years && formatted_years.getFullYear() != 1970 ? `${("0" + (formatted_years.getMonth() + 1)).slice(-2)}/${formatted_years.getFullYear()}` : null
       const formatted_date = formatted_years ? `${formatted_starting} - ${formatted_years}` : `${formatted_starting} - Maintenant`
       return(
         <div key={index} className="gray-box-question">

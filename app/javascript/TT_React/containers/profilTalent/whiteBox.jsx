@@ -44,6 +44,7 @@ class WhiteBox extends Component {
       fullName = `${firstname} ${talent.talent.last_name}`
       city = talent.talent.city
       year = talent.job.year
+      image = talent.talent.photo.url
       secteurNames = `${talent.sectors[0] ? talent.sectors[0].title : ""}${talent.sectors[1] ? `, ${talent.sectors[1].title}` : ""}${talent.sectors[2] ? `, ${talent.sectors[2].title}` : ""}`
       talent_sectors = talent.sectors
       remuneration = talent.next_aventure.remuneration
@@ -256,7 +257,7 @@ class WhiteBox extends Component {
         :
           <div>
             {image != null ? 
-              <img className="photo-conv photo-conv-lg" src={image} alt={values.photo.slice(12)}></img> 
+              <img className="photo-conv photo-conv-lg" src={image} alt="avatar"></img> 
               : 
               <div className="photo-conv photo-conv-lg">{firstname.slice(0, 1)}</div>
             }

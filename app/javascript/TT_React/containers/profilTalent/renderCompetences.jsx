@@ -156,8 +156,9 @@ class RenderSkills extends Component {
               />
               <p className="subtitle italic float-right">{`${limit - (values.skills ? values.skills.length : 0)} compétences restantes`}</p>
               <button 
-                className="btn-gray-violet "
-                >Enregistrer
+                disabled={!values.skills || values.skills.length == 0}
+                className={`btn-gray-violet${values.skills && values.skills.length > 0 ? "" : " red-background white not-allowed"}`}
+                >{values.skills && values.skills.length > 0 ? "Enregistrer" : "Renseigne au moins une compétence"}
               </button>
             </form>
           )}
