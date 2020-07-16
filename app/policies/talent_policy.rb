@@ -1,7 +1,6 @@
 class TalentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-
       if user.is_a?(Talentist) || user.is_a?(Headhunter)
         scope.all.order('created_at DESC')
       else
@@ -34,11 +33,11 @@ class TalentPolicy < ApplicationPolicy
   end
 
   def show?
+    p ">>>>>>>>>>  JE SUIS UN #{user}"
     if user.is_a?(Headhunter)
       Relationship.where(talent: record).where(headhunter: user).where(status: "Accepter").first.present?
     elsif user.is_a?(Talent)
-      true
-      # user == record
+      user == record
     elsif user.is_a?(Talentist)
       true
     else

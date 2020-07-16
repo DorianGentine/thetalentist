@@ -32,6 +32,9 @@ $(function() {
         // idPrevAvatar.parentNode.insertAdjacentHTML("beforeend",text)
         alert("Votre photo est trop large : 10MB maximum. Nous vous invitons à en charger une moins grosse 🙂" )
       } else {
+        console.log("J'ai envoyé photo")
+        console.log('this', this)
+        console.log('targetAvatar', targetAvatar)
         readURL(this, targetAvatar);
         if (idAvatarRemove && idAvatarRemove.checked) {
           idAvatarRemove.checked = false;
@@ -54,6 +57,7 @@ $(function() {
 
 
 function readURL(input, target) {
+  console.log(input.files[0])
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     let idImg = document.getElementById("img_prev" + target)

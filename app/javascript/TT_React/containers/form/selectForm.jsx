@@ -16,16 +16,11 @@ class InputForm extends Component {
   componentDidMount() {
     if(this.props.formValue[this.props.name] != undefined){
       this.setState({valueLength: this.props.formValue[this.props.name].length})
-      // valueLength = this.props.formValue[this.props.name].length
     }
   }
   
 
   render () {
-    // let valueLength = 0
-    // if(this.props.formValue[this.props.name] != undefined){
-    //   valueLength = this.props.formValue[this.props.name].length
-    // }
 
     const Menu = props => {
       const optionSelectedLength = props.getValue().length || 0;
@@ -41,7 +36,11 @@ class InputForm extends Component {
     };
 
     const handleChange = (newValue) => {
-      this.setState({valueLength: newValue.length})
+      let length = 0
+      if(newValue){
+        length = newValue.length
+      }
+      this.setState({valueLength: length})
     };
 
     const ReactSelectAdapter = ({ input, ...rest }) => {

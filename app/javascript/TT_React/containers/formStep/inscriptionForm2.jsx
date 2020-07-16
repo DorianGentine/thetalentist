@@ -13,22 +13,20 @@ class InscriptionForm2 extends Component {
 
   render () {
     const actualStep = this.props.stepForm
-    const formStep = 2
     const choices = [
       this.props.formValue.city != undefined && this.props.formValue.city.toLowerCase() == "paris" ? undefined : this.props.formValue.city,
       "Paris",
       "Nationale",
       "Internationale"
     ]
-    // next_aventure_attributes[mobilities_attributes]: {id: xx, title: "xx"}
     return(
-      <div className={setFormContainerClass(actualStep, formStep)}>
-        <MessageMagda text1={`Ok c'est noté ! En habitant sur ${this.props.formValue.city || "Paris"} tu restes ouvert à la mobilité ?`}/>
-        <RadioForm name="next_aventure_attributes[mobilities_attributes][title]" choices={choices}/>
+      <div className={setFormContainerClass(actualStep, 2)}>
+        <MessageMagda text1={`C'est noté ! En habitant à ${this.props.formValue.city || "Paris"}, es-tu ouvert à la mobilité ?`}/>
+        <RadioForm name="next_aventure_attributes[mobilities_attributes][0][title]" choices={choices}/>
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || this.props.formValue.next_aventure_attributes.mobilities_attributes[0].title == undefined}>
           Étape suivante
         </button>
       </div>
@@ -36,14 +34,14 @@ class InscriptionForm2 extends Component {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    stepForm: state.stepForm,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     stepForm: state.stepForm,
+//   };
+// }
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(mapStateToProps, null)(InscriptionForm2);
+export default connect(null, null)(InscriptionForm2);

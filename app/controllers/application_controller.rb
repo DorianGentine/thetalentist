@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
           sign_in(resource)
           talent_path(resource)
         else
-          waiting_for_validation_path
+          welcome_talent_path(resource)
         end
       else
         session[:talent_id] = resource.id
@@ -106,7 +106,9 @@ class ApplicationController < ActionController::Base
   end
 
   def create_new_data_with_only_title(params, table_name)
+    p "JE SUIS LA"
     class_name = table_name.classify.constantize
+    p "le class_name: #{class_name}"
     words = []
     params.each do |param|
       if param == ""

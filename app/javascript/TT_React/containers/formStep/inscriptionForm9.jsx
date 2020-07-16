@@ -10,42 +10,37 @@ import MessageMagda from './messageMagda'
 
 
 class InscriptionForm9 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'Mangue', label: 'Mangue' },
-        { value: 'Citron', label: 'Citron' },
-        { value: 'Orange', label: 'Orange' },
-        { value: 'Tomate', label: 'Tomate' },
-        { value: 'Chou', label: 'Chou' },
-        { value: 'Salade', label: 'Salade' },
-        { value: 'Thé', label: 'Thé' },
-        { value: 'Matcha', label: 'Matcha' },
-        { value: 'Soja', label: 'Soja' },
-        { value: 'Piment', label: 'Piment' },
-        { value: 'Banane', label: 'Banane' },
-        { value: 'Ail', label: 'Ail' },
-        { value: 'vanilla', label: 'Vanilla' }
-      ]
-    }  
+  componentDidMount(){
+    if (this.props.skills === null) {
+      this.props.fetchGET('/api/v1/skills', "FETCH_SKILLS")
+    }
   }
-
 
   render () {
     const actualStep = this.props.stepForm
+    let skills = this.props.skills
+    if(skills != null){
+      skills = skills.skills
+      skills.map((skill) => {
+        skill.label = skill.title
+        skill.value = skill.id
+      })
+    }
+    let disabled = true
+    if(this.props.formValue.skill_ids && this.props.formValue.skill_ids.length != 0){
+      disabled = false
+    }
 
     return(
       <div className={setFormContainerClass(actualStep, 9)}>
         <MessageMagda
           text1={`Merci ! On va bientôt pouvoir examiner ton profil !`}
-          text2={`Peux tu nous lister quelques-unes de tes compétences clés, qui font de toi un vrai pro dans ton métier ?`}
+          text2={`Peux-tu nous lister quelques-unes de tes compétences clés, qui font de toi un vrai pro dans ton métier ?`}
+          text3={"Tu peux en ajouter une en l’écrivant directement !"}
         />
         <SelectForm 
           name="skill_ids" 
-          options={this.state.options} 
+          options={skills} 
           placeholder="Rentre tes compétences clés..." 
           limit={10}
           formValue={this.props.formValue}
@@ -53,7 +48,7 @@ class InscriptionForm9 extends Component {
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || disabled}>
           Étape suivante
         </button>
       </div>
@@ -63,7 +58,7 @@ class InscriptionForm9 extends Component {
 
 function mapStateToProps(state) {
   return {
-    stepForm: state.stepForm,
+    skills: state.skills,
   };
 }
 

@@ -1,9 +1,9 @@
-import { STEP_FORM } from '../actions/index';
+import { FETCH_TALENT } from '../actions/index';
 
 
 export default function(state = null, action) {
   switch (action.type) {
-    case STEP_FORM: {
+    case FETCH_TALENT: {
       return action.payload;
     }
     default: {

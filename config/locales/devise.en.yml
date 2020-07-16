@@ -3,6 +3,12 @@
 en:
   fr:
   errors:
+    models:
+      talent:
+        attributes:
+          password:
+            exist: "Ton mot de passe doit être rempli"
+
     messages:
       not_found: "n'a pas été trouvé(e)"
       already_confirmed: "a déjà été confirmé(e)"

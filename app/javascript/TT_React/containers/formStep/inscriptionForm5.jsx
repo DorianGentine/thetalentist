@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-// import { switchStepFrom } from '../../actions';
+import { fetchGET } from '../../actions';
 import { setFormContainerClass } from '../../../components/formContainerClass';
 
 import CheckBoxForm from '../form/checkBoxForm'
@@ -10,33 +10,31 @@ import MessageMagda from './messageMagda'
 
 
 class InscriptionForm5 extends Component {
+
+  componentDidMount(){
+    if (this.props.sectors === null) {
+      this.props.fetchGET('/api/v1/sectors', "FETCH_SECTORS")
+    }
+  }
+
   render () {
     const actualStep = this.props.stepForm
-    const formStep = 5
-    let choices = [
-      "Saas",
-      "Marketplace",
-      "IOT",
-      "Finance",
-      "Conseil",
-      "Big data",
-      "Innovation",
-      "E-commerce",
-      "Com/pub",
-      "Mobile"
-    ]
+    let sectors = this.props.sectors
+    if(sectors != null){
+      sectors = sectors.sectors
+    }
 
     return(
-      <div className={setFormContainerClass(actualStep, formStep)}>
+      <div className={setFormContainerClass(actualStep, 5)}>
         <MessageMagda
           text1={`Nickel ! Tu peux maintenant ajouter jusqu'à 3 secteurs d'activité, et ainsi davantage cibler ta recherche.`}
           text2={`Quels sont les secteurs que tu privilégies ?`}
         />
-        <CheckBoxForm name="sectors" limit={3} choices={choices} formValue={this.props.formValue}/>
+        <CheckBoxForm name="next_aventure_attributes[sector_ids]" limit={3} choices={sectors} formValue={this.props.formValue}/>
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || this.props.formValue.next_aventure_attributes.sector_ids.length == 0}>
           Étape suivante
         </button>
       </div>
@@ -46,12 +44,12 @@ class InscriptionForm5 extends Component {
 
 function mapStateToProps(state) {
   return {
-    stepForm: state.stepForm,
+    sectors: state.sectors,
   };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ switchStepFrom }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchGET }, dispatch);
+}
 
-export default connect(mapStateToProps, null)(InscriptionForm5);
+export default connect(mapStateToProps, mapDispatchToProps)(InscriptionForm5);

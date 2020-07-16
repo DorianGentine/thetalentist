@@ -19,7 +19,7 @@ class Experience < ApplicationRecord
   :skip_starting_validation,
   :skip_currently_validation
 
-  after_validation :date_save_format
+  # after_validation :date_save_format
   before_save :upcase_company_name
 
   def nothing_to_save
@@ -50,14 +50,14 @@ class Experience < ApplicationRecord
     change_date_format(self.years)
   end
 
-  def date_save_format
-    if self.years.present?
-      years = self.years.insert(0, "01-")
-      self.years = DateTime.parse(years).to_date.to_s if self.years.present?
-    end
-    starting = self.starting.insert(0, "01-")
-    self.starting = DateTime.parse(starting).to_date.to_s
-  end
+  # def date_save_format
+  #   if self.years.present?
+  #     years = self.years.insert(0, "01-")
+  #     self.years = DateTime.parse(years).to_date.to_s if self.years.present?
+  #   end
+  #   starting = self.starting.insert(0, "01-")
+  #   self.starting = DateTime.parse(starting).to_date.to_s
+  # end
 
   def input_date_format(date)
     if date.split("-").count > 2

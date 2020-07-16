@@ -20,20 +20,19 @@ class InscriptionForm3 extends Component {
 
   render () {
     const actualStep = this.props.stepForm
-    const formStep = 3
     let jobs = this.props.jobs
     if(jobs != null){
       jobs = jobs.jobs
     }
 
     return(
-      <div className={setFormContainerClass(actualStep, formStep)}>
-        <MessageMagda text1={`Parfait ! Quels types de métiers t'intéressent ? (2 choix possibles)`}/>
-        <CheckBoxForm name="jobs" limit={2} choices={jobs} formValue={this.props.formValue}/>
+      <div className={setFormContainerClass(actualStep, 3)}>
+        <MessageMagda text1={`Parfait ! Quels types de métiers t'intéressent ? (Métier principal / métier secondaire)`}/>
+        <CheckBoxForm name="talent_job_attributes[job_id]" limit={2} choices={jobs} formValue={this.props.formValue}/>
         <button
           className="btn-violet-square margin-left-55"
           type="submit"
-          disabled={this.props.submitting}>
+          disabled={this.props.submitting || this.props.formValue.talent_job_attributes.job_id.length == 0}>
           Étape suivante
         </button>
       </div>
@@ -43,7 +42,6 @@ class InscriptionForm3 extends Component {
 
 function mapStateToProps(state) {
   return {
-    stepForm: state.stepForm,
     jobs: state.jobs,
   };
 }
