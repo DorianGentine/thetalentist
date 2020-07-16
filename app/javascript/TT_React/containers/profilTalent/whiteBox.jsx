@@ -269,6 +269,18 @@ class WhiteBox extends Component {
             </div>
 
             {criteres.length > 0 ? renderClassicCriteres() : null}
+            {userModel == "Talentist" && talent ? 
+              <div>
+                <p className="criteres">Téléphone</p>
+                <p className="criteres-reponses">{talent.talent.phone}</p>
+              </div> 
+            : null }
+            {userModel == "Talentist" && talent ? 
+              <div>
+                <p className="criteres">Linkedin</p>
+                <a href={talent.talent.linkedin} target="_blank" className="criteres-reponses">Visiter lien</a>
+              </div> 
+            : null }
 
             {userModel == "Talent" ?
               <button 
