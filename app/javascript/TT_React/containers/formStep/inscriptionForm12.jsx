@@ -63,7 +63,7 @@ class InscriptionForm12 extends Component {
         <h3 className="margin-left-55 violet">Le formulaire est terminé !</h3>
         <p className="margin-left-55 margin-bottom-30 label-color">Merci d'avoir pris ces quelques minutes ! Ton profil a été envoyé à notre équipe, 
           qui te recontactera dans les 2 prochains jours, afin de t'accompagner dans ta prochaine aventure !
-          En attendant, tu peux compléter c'est quelques infos manquantes avant d'accéder à ton profil !
+          Avant d’accéder à ton profil, je te laisse nous communiquer le lien de ton profil Linkedin :
         </p>
         {/* <label className="margin-left-55 margin-bottom-30" htmlFor="avatar" >
           <span className="font-14 bold">Avatar</span>
