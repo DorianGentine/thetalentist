@@ -6,7 +6,6 @@ class Api::V1::PagesController < Api::V1::BaseController
     @photo = @user.photo.small_bright_face.url
     @urls =  {
       conv: @user.mailbox.conversations.count > 0 ? conversation_path(@user.mailbox.conversations.last) : "/conv",
-      # conv: conversation_path(@user.mailbox.conversations.last),
       profil: @user.profil_url,
       admin: admin_root_path,
       talents: talents_path,

@@ -178,6 +178,11 @@ if(app){
           <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/headhunters/:headhunter_id/conversations/:id" component={conversation} />
           <Route path="/headhunters/:id" component={profilRecruteur} />
+          <Route path="/talents/sign_in" component={modalInscription} />
+          <Route path="/talents/sign_up" component={inscriptionTalent} />
+          <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
+          <Route path="/headhunters/:headhunter_id/conversations/:id" component={conversation} />
+          <Route path="/headhunters/:id" component={profilRecruteur} />
           <Route path="/talents/:id" component={profilTalent} />
           <Route path="/messagerie" component={conversation} />
           <Route path="/repertoire" component={repertory} />

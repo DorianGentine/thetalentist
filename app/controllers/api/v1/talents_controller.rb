@@ -4,7 +4,10 @@ class Api::V1::TalentsController < Api::V1::BaseController
   def repertoire
     talents = Talent.where(:visible => true).reorder(position: :asc, completing: :desc, last_sign_in_at: :desc)
     @talents = TalentFormat.new.for_api_repository(talents, current_headhunter)
-    @conversation_id = current_user.mailbox.conversations.first.id
+    @conversation_id = current_user.mailbox.conversations.first
+    if current_user.mailbox.conversations.first
+      @conversation_id = @conversation_id.id
+    end
     @user = current_user
     p "TEST => #{current_headhunter}"
   end
@@ -18,12 +21,22 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def show
     @talent = Talent.find(params[:id])
-    @knowns = @talent.knowns
-    @skills = @talent.skills
+    @knowns = @talent.knowns || nil
+    @skills = @talent.skills || nil
     @next_aventure = @talent.next_aventure
-    @mobilities = @next_aventure.mobilities
-    @sector_ids = @next_aventure.sector_ids
-    @sectors = @next_aventure.sectors
+    @mobilities = nil
+    @sector_ids = nil
+    @sectors = nil
+    if @next_aventure
+      @mobilities = @next_aventure.mobilities
+      @sector_ids = @next_aventure.sector_ids
+      @sectors = @next_aventure.sectors
+    else
+      @next_aventure = NextAventure.create(talent: @talent)
+      @mobilities = @next_aventure.mobilities
+      @sector_ids = @next_aventure.sector_ids
+      @sectors = @next_aventure.sectors
+    end
     @job = @talent.talent_job
     @second_job = @talent.talent_second_job
     @jobs = @talent.jobs
@@ -60,9 +73,9 @@ class Api::V1::TalentsController < Api::V1::BaseController
     end
     authorize @talent
   end
-  
+
   private
-  
+
   def autorize_call
     user = current_talentist if current_talentist
     user = current_talent if current_talent
