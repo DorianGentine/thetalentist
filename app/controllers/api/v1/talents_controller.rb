@@ -21,12 +21,22 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def show
     @talent = Talent.find(params[:id])
-    @knowns = @talent.knowns
-    @skills = @talent.skills
+    @knowns = @talent.knowns || nil
+    @skills = @talent.skills || nil
     @next_aventure = @talent.next_aventure
-    @mobilities = @next_aventure.mobilities
-    @sector_ids = @next_aventure.sector_ids
-    @sectors = @next_aventure.sectors
+    @mobilities = nil
+    @sector_ids = nil
+    @sectors = nil
+    if @next_aventure
+      @mobilities = @next_aventure.mobilities
+      @sector_ids = @next_aventure.sector_ids
+      @sectors = @next_aventure.sectors
+    else
+      @next_aventure = NextAventure.create(talent: @talent)
+      @mobilities = @next_aventure.mobilities
+      @sector_ids = @next_aventure.sector_ids
+      @sectors = @next_aventure.sectors
+    end
     @job = @talent.talent_job
     @second_job = @talent.talent_second_job
     @jobs = @talent.jobs
