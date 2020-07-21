@@ -27,7 +27,7 @@ class InscriptionForm5 extends Component {
     return(
       <div className={setFormContainerClass(actualStep, 5)}>
         <MessageMagda
-          text1={`Nickel ! Tu peux maintenant ajouter jusqu'à 3 secteurs d'activité, et ainsi davantage cibler ta recherche.`}
+          text1={`Tu peux maintenant ajouter jusqu'à 3 secteurs d'activité, et ainsi davantage cibler ta recherche.`}
           text2={`Quels sont les secteurs que tu privilégies ?`}
         />
         <CheckBoxForm name="next_aventure_attributes[sector_ids]" limit={3} choices={sectors} formValue={this.props.formValue}/>
