@@ -142,7 +142,11 @@ class RenderFormations extends Component {
         for (let i = 0; i < valuesToSend.talent_formations_attributes.length; i++) {
           const formation = valuesToSend.talent_formations_attributes[i];
           if (typeof formation.formation_id == "object") {
-            formation.formation_id = formation.formation_id.id
+            if(formation.formation_id.id){
+              formation.formation_id = formation.formation_id.id
+            }else{
+              formation.formation_id = formation.formation_id.title
+            }
           }
           delete formation.created_at
           delete formation.updated_at
@@ -167,7 +171,13 @@ class RenderFormations extends Component {
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
       const isValidNewOption = (inputValue, selectValue, selectOptions) => {
-        return false
+        if (
+          inputValue.trim().length === 0 ||
+          selectOptions.find(option => option.title === inputValue)
+        ){
+          return false;
+        }
+        return true;
       }
       return (
         <Creatable 

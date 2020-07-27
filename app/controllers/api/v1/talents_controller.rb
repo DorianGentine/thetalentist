@@ -62,6 +62,13 @@ class Api::V1::TalentsController < Api::V1::BaseController
         set_new_knowns(@talent)
       end
     end
+    if params[:talent_formations_attributes].present?
+      params[:talent_formations_attributes].each do |formation|
+        if formation_is_available?(formation[:formation_id])
+          formation[:formation_id] = set_new_formations(formation[:formation_id]) 
+        end
+      end
+    end
     if @talent.update(talent_params)
       @talent.experiences.each do |experience|
         p "SALUT, ON COMMENCE :"
@@ -119,8 +126,16 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
   
   def startup_is_available?(param)
-    p "EXPERIENCE.COMPANY_NAME: #{param}"
     if Startup.where(name: param).count > 0 || Startup.where(name: param.upcase).count > 0
+      return false
+    else
+      return true
+    end
+  end
+  
+  def formation_is_available?(param)
+    p "FORMATION: #{param}"
+    if Formation.where(title: param).count > 0 || Formation.where(title: param.upcase).count > 0
       return false
     else
       return true
@@ -133,6 +148,15 @@ class Api::V1::TalentsController < Api::V1::BaseController
       startup = Startup.create(name: param)
       p "STARTUP: #{startup}"
       return startup.id
+    end
+  end 
+  
+  def set_new_formations(param)
+    p "ON CREE LA Formation"
+    if param.present?
+      formation = Formation.create(title: param)
+      p "FORMATION: #{formation.id}"
+      return formation.id
     end
   end 
   

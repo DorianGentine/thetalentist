@@ -29,14 +29,9 @@ class RenderDatePicker extends Component {
     const ReactDatePickerAdapter = ({input}) => {
       let minDate = false
       let selected = this.state.startDate
-      // if(typeof this.props.startDate != "Object"){
-      //   console.log('this.props.startDate', this.props.startDate)
-      //   this.props.startDate = new Date(this.props.startDate)
-      // }
       if(this.props.startDate.getFullYear() == 1970 && !this.state.edited){
         selected = null
       }
-      console.log('this.props.startDate', this.props.startDate)
       return(
           <DatePicker
           {...input}
