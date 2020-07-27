@@ -103,7 +103,7 @@ class modalInscription extends Component {
                     {({ input, meta }) => (
                       <label className="col-md-12 margin-bottom-30">
                           <input {...input} />
-                          En vous inscrivant vous acceptez les Conditions d'utilisations et la Politique de confidentialité de The Talentist.
+                          En vous inscrivant, vous acceptez les Conditions d'utilisations et la Politique de confidentialité de The Talentist.
                           {(meta.error || meta.submitError) && meta.touched && <p className="span-erreur">{(meta.error || meta.submitError)}</p>}
                       </label>
                     )}
