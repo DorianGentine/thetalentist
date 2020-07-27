@@ -70,7 +70,13 @@ class ExperiencesProfessionnelles extends Component {
         if(typeof experience.company_type_id === "number"){
           experience.company_type_id = companyTypes.find(companyType => companyType.id === experience.company_type_id)
         }
-        experience.starting = new Date(experience.starting)
+        if(experience.starting.length < 8){
+          console.log('experience.starting', experience.starting)
+          const startingParts = experience.starting.split("-")
+          experience.starting = new Date(startingParts[1], startingParts[0] - 1)
+        }else{
+          experience.starting = new Date(experience.starting)
+        }
         if(experience.years != ""){
           experience.years = new Date(experience.years)
         }else{
@@ -295,6 +301,7 @@ class ExperiencesProfessionnelles extends Component {
     
     const renderExperiences = () => experiences.map((experience, index) => {
       let formatted_starting = new Date(experience.starting)
+      console.log('formatted_starting', formatted_starting)
       formatted_starting = `${("0" + (formatted_starting.getMonth() + 1)).slice(-2)}/${formatted_starting.getFullYear()}`
       let formatted_years = experience.years && experience.years != "" ? new Date(experience.years) : null
       formatted_years = formatted_years && formatted_years.getFullYear() != 1970 ? `${("0" + (formatted_years.getMonth() + 1)).slice(-2)}/${formatted_years.getFullYear()}` : null
