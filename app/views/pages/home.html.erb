@@ -1,66 +1,90 @@
-<div class="new_landing container-fluid">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 px-0 d-none d-sm-block no-padding">
+      <%= image_tag "Illustrations_site-31.png", class: "login-img" %>
+      <%# <img src="assets/images/login.jpg" alt="login image" class="login-img"> %>
+    </div>
+    <div class="col-sm-6 login-section-wrapper">
+      <div class="brand-wrapper flex space-between">
+        <%= link_to root_path, class: "navbar-talentist-logo" do %>
+          <%= image_tag "Logo The talentist-01.png", class: "logo" %>
+        <% end %>
+        <%= render "shared/top_menu" %>
+      </div>
+      <div class="login-wrapper my-auto">
+        <h1 class="login-title">Bienvenue sur The Talentist</h1>
+        <h4>Quel est ton profil ?</h4>
+        <%= link_to new_talent_session_path do %>
+          <div class="btn btn-inscription">
+            <p><i class="fas fa-user"></i></p>
+            <p>Un talent</p>
+          </div>
+        <% end %>
+        <%= link_to new_headhunter_session_path do %>
+          <div class="btn btn-inscription">
+            <p><i class="fas fa-briefcase"></i></p>
+            <p>Une start-up</p>
+          </div>
+        <% end %>
+        <%= link_to "Admin", new_talentist_session_path, style: "position: absolute; bottom: 68px; right: 100px; color: #d4e1f4" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div class="new_landing container-fluid"> -->
 
 
   <!-- navbar -->
-    <div class="row margin-top-30 margin-bottom-30">
+  <!--  <div class="row margin-top-30 margin-bottom-30">
       <div class="col-xs-2 text-align-center">
-        <%= render "shared/top_menu" %>
       </div>
       <div class="col-xs-4 col-xs-offset-2 text-align-center">
         <%= image_tag "Logo The talentist-01.png", class: "new-landing-logo-talentist" %>
       </div>
-    </div>
+    </div> -->
 
   <!-- box grise -->
-    <div class="absolute hidden-xs hidden-sm" style="top: 0; right: 0; left: 0; z-index: -1;">
+  <!--  <div class="absolute hidden-xs hidden-sm" style="top: 0; right: 0; left: 0; z-index: -1;">
       <div class="col-xs-offset-2 col-xs-10 landing-top"></div>
-    </div>
+    </div> -->
 
   <!-- intérieur box -->
-    <div class="row">
+  <!--  <div class="row">
       <div class="col-xs-offset-2 col-xs-10 image-habillage">
-        <div class="row">
+        <div class="row"> -->
           <!-- image de fond -->
-            <div class="col-lg-offset-4 col-lg-8 col-xs-12 compartiment-image relative" style="background-image: url('<%= image_path "home_bg.jpg" %>');">
+            <!-- <div class="col-lg-offset-4 col-lg-8 col-xs-12 compartiment-image relative" style="background-image: url('<%= image_path "home_bg.jpg" %>');">
               <div class="quatre-metiers hidden-xs hidden-sm hidden-md">
                 <h3>Plateforme de mise en relation entre talents du digital et startups, spécialisée dans les métiers du Marketing, Produit, Sales, Opérations, RH et Finance !</h3>
               </div>
-            </div>
+            </div> -->
 
           <!-- texte principal -->
-            <div class="col-lg-11 col-xs-12 margin-top-60 position-top texte-principal">
+            <!-- <div class="col-lg-11 col-xs-12 margin-top-60 position-top texte-principal">
               <div class="texte-principal-gauche">
                 <h1>When the most talented candidates meet promising start-ups.</h1>
               </div>
               <div class="texte-principal-droit">
                 <h1 class="green">When the most talented candidates meet promising start-ups.</h1>
               </div>
-            </div>
+            </div> -->
 
           <!-- btns inscription -->
-            <div class="col-lg-4 margin-top-30">
-              <div class="col-xs-5 btn btn-inscription">
-                <%= link_to new_talent_session_path do  %>
-                  <p><i class="fas fa-user"></i></p>
-                  <p>Je suis un<br>talent</p>
-                <% end %>
-              </div>
-              <div class="col-xs-5 col-xs-offset-2 btn btn-inscription">
-                <%= link_to new_headhunter_session_path do %>
-                  <p><i class="fas fa-rocket"></i></p>
-                  <p>Je suis une<br>start-up</p>
-                <% end %>
-              </div>
-            </div>
-        </div>
+
+        <!-- </div>
       </div>
     </div>
 
 
-</div>
+</div> -->
 
-
-<%= link_to new_talentist_session_path do %>
-  <i class="fas fa-user hidden-xs" style="color: white; position: fixed; bottom: 0;"></i>
-<% end %>
+<%# <div class="col-lg-4 margin-top-30">
+  <div class="col-xs-5 btn btn-inscription">
+  </div>
+  <div class="col-xs-5 col-xs-offset-2 btn btn-inscription">
+  </div>
+</div> %>
 

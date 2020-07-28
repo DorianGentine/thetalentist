@@ -27,7 +27,7 @@
   }
 
   &-wrapper {
-      width: 300px;
+    //   width: 300px;
       max-width: 100%;
       padding-top: 24px;
       padding-bottom: 24px;
@@ -102,7 +102,6 @@
       width: 100%;
       height: 100vh;
       object-fit: contain;
-      object-position: left;
-      background-color: $violet;
+      background-color: #f5f7fc;
   }
 }
