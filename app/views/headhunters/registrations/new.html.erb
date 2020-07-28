@@ -1,4 +1,4 @@
-<div class="form-container">
+<div class="container-fluid">
 
   <div id="modal_modalites_fin" class="modal">
 
@@ -25,82 +25,118 @@
     </div>
   </div>
 
-  <h2 class="form-titre-page"><i class="far fa-id-badge"></i> Dites-nous qui <strong>vous êtes</strong> ?</h2>
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= f.error_notification %>
-
-
-  <div class="blue-background">
-    <!-- Line 1 -->
-      <div class="row align-items-baseline">
-        <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis">Prénom</label>
-        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-          <%= f.input :firstname, required: true, autofocus: true, label: false, input_html: { style: "width: 100%" }, placeholder: "Prénom" %>
-        </div>
-        <label class="col-lg-3 col-xs-12 label-edit text-align-right text-align-left-xs requis">Votre entreprise</label>
-        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-          <%= f.input :startup, collection: Startup.all, input_html: { style: "width: 100%", class:"selectAndCreate" }, label:false, placeholder: "Entreprise" %>
-        </div>
-
+  <div class="row">
+    <div class="col-sm-6 px-0 d-none d-sm-block no-padding">
+      <%= image_tag "Illustrations_site-31.png", class: "login-img" %>
+      <%# <img src="assets/images/login.jpg" alt="login image" class="login-img"> %>
+    </div>
+    <div class="col-sm-6 login-section-wrapper">
+      <div class="brand-wrapper">
+        <%= link_to root_path, class: "navbar-talentist-logo" do %>
+          <%= image_tag "Logo The talentist-01.png", class: "logo" %>
+        <% end %>
       </div>
+      <div class="login-wrapper my-auto">
+        <h1 class="login-title">Je crée mon compte startup</h1>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+            <%= f.input :firstname, 
+              required: true, 
+              autofocus: true, 
+              label: "Prénom", 
+              wrapper_html: { class: "col-md-6 margin-bottom-20" }
+            %>
+              <%# <label class="form-control-label string required">Entreprise</label> %>
+            <%= f.input :startup, 
+              collection: Startup.all, 
+              input_html: { class: "selectAndCreate" },
+              wrapper_html: { class: "col-md-6 margin-bottom-20" }
+            %>
+            <%= f.input :email, 
+              required: true, 
+              autofocus: true, 
+              label: "Email", 
+              wrapper_html: { class: "col-md-12 margin-bottom-20" }
+            %>
+            <%= f.input :password, 
+              required: true, 
+              hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), 
+              label: "Mot de passe", 
+              wrapper_html: { class: "col-md-6 margin-bottom-20" } 
+            %>
+            <%= f.input :password_confirmation, 
+              required: true, 
+              label: "Confirmation du mot de passe",  
+              wrapper_html: { class: "col-md-6 margin-bottom-20" }
+            %>
+            <%= f.input :phone, 
+              required: true, 
+              autofocus: false, 
+              label: false, 
+              wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
+              error: f.object.errors.messages[:phone][0] 
+            %>
 
-    <!-- Line 2 -->
-      <div class="row align-items-baseline margin-top-15">
-        <p class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis">Identifiants</p>
-        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-          <%= f.input :email, required: true, autofocus: true, label: false, input_html: { style: "width: 100%" }, placeholder: "Email" %>
-        </div>
-        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), label: false, input_html: { style: "width: 100%" }, placeholder: "Mot de passe" %>
-        </div>
-        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-          <%= f.input :password_confirmation, required: true, placeholder: "Confirmation du mot de passe", label: false, input_html: { style: "width: 100%" } %>
-        </div>
-      </div>
+            <div class="col-md-12 flex">
+              <%= f.button :submit, 
+                "S'enregistrer", 
+                class: "btn-violet-square"
+              %>
+              <%= link_to 'Précédent', 
+                new_session_path(resource_name), 
+                class: "form-btn form-btn-precedent" 
+              %>
+            </div>
 
-      <div class="row align-items-center margin-top-15">
-        <label class="col-lg-2 col-xs-12 label-edit text-align-right text-align-left-xs requis" for="talent_phone">Tel.</label>
-
-        <div class="col-lg-3 col-xs-12 margin-bottom-15-xs">
-          <%= f.input :phone, required: true, autofocus: false, placeholder: "06 01 02 03 05", label: false, :input_html => { style: "width: 100%" }, error: f.object.errors.messages[:phone][0] %>
-        </div>
+        <% end %>
       </div>
     </div>
-
-  <!-- Line 5 -->
-    <div class="blue-background margin-top-30">
-      <%= f.simple_fields_for :headhunter_email do |u| %>
-        <div class="row margin-bottom-15">
-          <div class="col-xs-2 col-lg-offset-3 col-lg-1 no-padding">
-            <%= u.input :newletter, as: :boolean, label: false, name:"allow_newsletter", input_html: {id:"allow_newsletter"}%>
-          </div>
-          <div class="col-xs-10 col-lg-6 no-padding">
-            <label for="allow_newsletter" style="font-weight: unset;">3 nouveaux profils chaque semaine dans votre boîte mail, ça vous dit ?</label>
-          </div>
-        </div>
-      <% end %>
-      <div class="row margin-bottom-15">
-        <div class="col-xs-2 col-lg-offset-3 col-lg-1 no-padding">
-          <%= f.input :terms_of_condition, as: :boolean, label: false, required: true %>
-        </div>
-        <div class="col-xs-10 col-lg-6 no-padding">
-          <label for="headhunter_terms_of_condition" style="font-weight: unset;">J'accepte les conditions générales, </label>
-          <span><%= link_to 'lire ici', cgu_employeurs_path, target: "_blank", class: "green" %></span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-2 col-lg-offset-3 col-lg-1 no-padding">
-          <input type="checkbox" id="modalite_fin">
-        </div>
-        <div class="col-xs-10 col-lg-6 no-padding">
-          <label for="modalite_fin" style="font-weight: unset;">J'accepte </label><span id="modalites_fin_link" class="modal-button green" data-target="modal_modalites_fin"> les modalités financières</span>
-        </div>
-      </div>
-    </div>
-
-  <!-- Boutons -->
-    <div class="form-actions">
-      <%= f.button :submit, "S'enregistrer", :class => 'btn-connexion' %>
-    </div>
-  <% end %>
+  </div>
 </div>
+
+<%#= f.input :firstname, 
+  required: true, 
+  autofocus: false,
+  label: "Prénom", 
+  wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+  error: f.object.errors.messages[:firstname][0] 
+%>
+<%#= f.input :last_name, 
+  required: true, 
+  autofocus: false,
+  label: "Nom", 
+  wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+  error: f.object.errors.messages[:last_name][0] 
+%>
+<%#= f.input :email, 
+  required: true, 
+  autofocus: false,
+  label: "Email", 
+  wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
+  error: f.object.errors.messages[:email][1] 
+%>
+<%#= f.input :password, 
+  required: true, 
+  hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
+  wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+  label: "Mot de passe", 
+  error: f.object.errors.messages[:password] 
+%>
+<%#= f.input :password_confirmation, 
+  required: true,
+  label: "Confirmer le mot de passe", 
+  wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+  error: f.object.errors.messages[:password_confirmation][1] 
+%>
+<%#= f.input :phone, 
+  required: true,
+  label: "Numéro de téléphone", 
+  wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
+  error: f.object.errors.messages[:phone][0] 
+%>
+<%#= f.input :terms_of_condition,
+  wrapper_html: { class: "col-md-1 margin-bottom-20" },
+  label: false
+%>
+<!--<p class="col-md-11 margin-bottom-30">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %>  de The Talentist.</p> -->
+<%# et la <%= link_to "Politique de confidentialité", mentions_legales_path, target: "_blank", style: "text-decoration:underline" %>

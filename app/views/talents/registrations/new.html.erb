@@ -1,74 +1,87 @@
-<div class="flex">
-  <div class="row margin-auto-new-talent">
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= f.error_notification %>
-        <%= f.input :firstname, 
-          required: true, 
-          autofocus: false,
-          label: "Prénom", 
-          wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
-          error: f.object.errors.messages[:firstname][0] 
-        %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 px-0 d-none d-sm-block no-padding">
+      <%= image_tag "Illustrations_site-31.png", class: "login-img" %>
+      <%# <img src="assets/images/login.jpg" alt="login image" class="login-img"> %>
+    </div>
+    <div class="col-sm-6 login-section-wrapper">
+      <div class="brand-wrapper">
+        <%= link_to root_path, class: "navbar-talentist-logo" do %>
+          <%= image_tag "Logo The talentist-01.png", class: "logo" %>
+        <% end %>
+      </div>
+      <div class="login-wrapper my-auto">
+        <h1 class="login-title">Je crée mon compte talent</h1>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+            <%= f.input :firstname, 
+              required: true, 
+              autofocus: false,
+              label: "Prénom", 
+              wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+              error: f.object.errors.messages[:firstname][0] 
+            %>
 
-        <%= f.input :last_name, 
-          required: true, 
-          autofocus: false,
-          label: "Nom", 
-          wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
-          error: f.object.errors.messages[:last_name][0] 
-        %>
+            <%= f.input :last_name, 
+              required: true, 
+              autofocus: false,
+              label: "Nom", 
+              wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+              error: f.object.errors.messages[:last_name][0] 
+            %>
 
-        <%= f.input :email, 
-          required: true, 
-          autofocus: false,
-          label: "Email", 
-          wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
-          error: f.object.errors.messages[:email][1] 
-        %>
+            <%= f.input :email, 
+              required: true, 
+              autofocus: false,
+              label: "Email", 
+              wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
+              error: f.object.errors.messages[:email][1] 
+            %>
 
-        <%= f.input :password, 
-          required: true, 
-          hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
-          wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
-          label: "Mot de passe", 
-          error: f.object.errors.messages[:password] 
-        %>
+            <%= f.input :password, 
+              required: true, 
+              hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
+              wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+              label: "Mot de passe", 
+              error: f.object.errors.messages[:password] 
+            %>
 
-        <%= f.input :password_confirmation, 
-          required: true,
-          label: "Confirmer le mot de passe", 
-          wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
-          error: f.object.errors.messages[:password_confirmation][1] 
-        %>
+            <%= f.input :password_confirmation, 
+              required: true,
+              label: "Confirmer le mot de passe", 
+              wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+              error: f.object.errors.messages[:password_confirmation][1] 
+            %>
 
-        <%= f.input :phone, 
-          required: true,
-          label: "Numéro de téléphone", 
-          wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
-          error: f.object.errors.messages[:phone][0] 
-        %>
+            <%= f.input :phone, 
+              required: true,
+              label: "Numéro de téléphone", 
+              wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
+              error: f.object.errors.messages[:phone][0] 
+            %>
 
-        <%= f.input :terms_of_condition,
-          wrapper_html: { class: "col-md-1 margin-bottom-20" },
-          label: false
-        %>
-        <p class="col-md-11 margin-bottom-30">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %>  de The Talentist.</p>
-        <%# et la <%= link_to "Politique de confidentialité", mentions_legales_path, target: "_blank", style: "text-decoration:underline" %> %>
+            <%= f.input :terms_of_condition,
+              wrapper_html: { class: "col-md-1 margin-bottom-20" },
+              label: false
+            %>
+            <p class="col-md-11 margin-bottom-30">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %>  de The Talentist.</p>
+            <%# et la <%= link_to "Politique de confidentialité", mentions_legales_path, target: "_blank", style: "text-decoration:underline" %>
 
-        <div class="col-md-12 flex">
-          <%= f.button :submit, 
-            "Commencer à compléter mon profil", 
-            class: "btn-violet-square"
-          %>
-          <%= link_to 'Précédent', 
-            new_session_path(resource_name), 
-            class: "form-btn form-btn-precedent" 
-          %>
-        </div>
+            <div class="col-md-12 flex">
+              <%= f.button :submit, 
+                "Commencer à compléter mon profil", 
+                class: "btn-violet-square"
+              %>
+              <%= link_to 'Précédent', 
+                new_session_path(resource_name), 
+                class: "form-btn form-btn-precedent" 
+              %>
+            </div>
 
-    <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <%#= image_tag "home_bg.jpg", height: "10%" %>
 </div>
 
 

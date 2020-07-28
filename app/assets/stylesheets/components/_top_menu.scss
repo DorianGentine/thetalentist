@@ -37,7 +37,7 @@
     color: $violet;
     font-size: 16px;
     font-weight: 600;
-    margin: 0 20px;
+    margin: 0;
     transition: 0.5s;
   }
 }
@@ -58,7 +58,8 @@
 
 .dropdown-top-menu{
   top: 35px;
-  left: 10px;
+  left: unset;
+  right: 0;
   bottom: unset;
   margin-top: 15px;
   box-shadow: 1px 1px 4px #C9C9C9;
@@ -68,13 +69,13 @@
     height: 10px;
     width: 10px;
     position: absolute;
-    left: 11px;
+    right: 20px;
     top: -6px;
     background-color: white;
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
-    border-left: 1px solid #E6E6E6;
-    border-top: 1px solid #E6E6E6;
+    border-left: 2px solid #E6E6E6;
+    border-top: 2px solid #E6E6E6;
   }
   li{
     padding: 5px 10px;
