@@ -136,11 +136,15 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
   
   def formation_is_available?(param)
-    p "FORMATION: #{param}"
-    if Formation.where(title: param).count > 0 || Formation.where(title: param.upcase).count > 0
-      return false
+    p "FORMATION: #{param.to_i == 0}"
+    if param.to_i == 0
+      if Formation.where(title: param).count > 0 || Formation.where(title: param.upcase).count > 0
+        return false
+      else
+        return true
+      end
     else
-      return true
+      return false
     end
   end
 
