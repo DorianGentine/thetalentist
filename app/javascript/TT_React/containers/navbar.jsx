@@ -290,7 +290,13 @@ class Navbar extends Component {
                       Configuration
                     </a>
                   </li>
-                  : null }
+                  : 
+                  <li>
+                    <a href="/talentists/edit">
+                      Configuration
+                    </a>
+                  </li> 
+                  }
                   <li>
                     <a rel="nofollow" data-method="delete" href={userType == "Recruteur" ? "/headhunters/sign_out" : userType == "Talent" ? "/talents/sign_out" : "/talentists/sign_out"}>
                       Déconnexion
