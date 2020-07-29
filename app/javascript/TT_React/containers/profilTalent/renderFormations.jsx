@@ -43,11 +43,36 @@ class RenderFormations extends Component {
   render () {
     let talent = this.props.talent
     let user = this.props.user
-    let ecoles = this.props.formations
+    // let ecoles = this.props.formations
+    let ecoles = {
+      formations: [
+      {
+      id: 3082,
+      title: " Université Nancy 2",
+      created_at: "2018-10-18T07:10:41.421Z",
+      updated_at: "2018-10-18T07:10:41.421Z",
+      type_of_formation: null,
+      ranking: null
+      },
+      {
+      id: 3084,
+      title: " Pierre and Marie Curie University",
+      created_at: "2018-10-18T07:10:41.432Z",
+      updated_at: "2018-10-18T07:10:41.432Z",
+      type_of_formation: null,
+      ranking: null
+      },
+      {
+      id: 3207,
+      title: " Université Sorbonne Nouvelle - Paris 3",
+      created_at: "2018-10-18T07:10:42.244Z",
+      updated_at: "2019-10-17T09:11:46.053Z",
+      type_of_formation: "Formation en economie ",
+      ranking: ""
+      }]}
     if(ecoles){
       ecoles = ecoles.formations
     }
-    console.log('ecoles', ecoles)
     let userModel, initialValues = {}
     if(user){
       userModel = user.is_a_model
@@ -171,6 +196,7 @@ class RenderFormations extends Component {
     }
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
+      console.log('input', input.options)
       const isValidNewOption = (inputValue, selectValue, selectOptions) => {
         if (
           inputValue.trim().length === 0 ||
@@ -217,6 +243,7 @@ class RenderFormations extends Component {
           </div>
           <div className="col-md-6">
             <p className="bold no-margin margin-top-15">Nom de l'établissement</p>
+            {console.log('ecoles', ecoles)}
             <Field
               name={`talent_formations_attributes[${index}].formation_id`}
               component={ReactSelectAdapter}
