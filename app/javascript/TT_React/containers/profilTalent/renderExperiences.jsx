@@ -70,8 +70,8 @@ class ExperiencesProfessionnelles extends Component {
         if(typeof experience.company_type_id === "number"){
           experience.company_type_id = companyTypes.find(companyType => companyType.id === experience.company_type_id)
         }
-        if(experience.starting.length < 8){
-          console.log('experience.starting', experience.starting)
+        console.log('experience.starting', experience.starting)
+        if(experience.starting && experience.starting.length < 8){
           const startingParts = experience.starting.split("-")
           experience.starting = new Date(startingParts[1], startingParts[0] - 1)
         }else{

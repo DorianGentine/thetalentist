@@ -69,6 +69,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
         end
       end
     end
+    p "Talent formations #{@talent.formations}"
+    p "Talent TalentFormations #{@talent.talent_formations}"
     if @talent.update(talent_params)
       @talent.experiences.each do |experience|
         p "SALUT, ON COMMENCE :"
