@@ -45,9 +45,9 @@ class RenderFormations extends Component {
     let user = this.props.user
     let ecoles = this.props.formations
     if(ecoles){
-      ecoles = ecoles.formations
+      ecoles = JSON.parse(JSON.stringify(ecoles.formations))
     }
-    console.log('ecoles', ecoles)
+    console.log('ecoles', typeof ecoles)
     let userModel, initialValues = {}
     if(user){
       userModel = user.is_a_model
