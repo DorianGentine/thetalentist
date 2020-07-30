@@ -171,7 +171,6 @@ class RenderFormations extends Component {
     }
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
-      console.log('input', input.options)
       const isValidNewOption = (inputValue, selectValue, selectOptions) => {
         if (
           inputValue.trim().length === 0 ||
@@ -202,6 +201,11 @@ class RenderFormations extends Component {
       )
     }
 
+    const returnOptions = () => {
+      console.log('ecoles', ecoles)
+      return ecoles
+    }
+
     const renderEditFormations = () => formations.map((formation, index) => {
       return(
         <div className="edit-gray-box-question row" key={index}>
@@ -221,7 +225,7 @@ class RenderFormations extends Component {
             <Field
               name={`talent_formations_attributes[${index}].formation_id`}
               component={ReactSelectAdapter}
-              options={ecoles}
+              options={returnOptions()}
             />
           </div>
           <div className="col-md-6">
