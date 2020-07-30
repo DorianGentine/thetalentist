@@ -47,7 +47,7 @@ class ProfilTalent extends Component {
     const renderTitles = titles => titles.map((titre, index) => 
       <p 
         key={index} 
-        className={`section-title${titre.includes(title) ? " active" : ""}`} 
+        className={`srendertion-title${titre.includes(title) ? " active" : ""}`} 
         onClick={()=>{handleTitle(titre)}}>
         {titre}
       </p>)
