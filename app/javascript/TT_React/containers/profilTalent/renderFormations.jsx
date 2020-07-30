@@ -44,10 +44,10 @@ class RenderFormations extends Component {
     let talent = this.props.talent
     let user = this.props.user
     let ecoles = this.props.formations
+
     if(ecoles){
-      ecoles = JSON.parse(JSON.stringify(ecoles.formations))
+      ecoles = ecoles.formations
     }
-    console.log('ecoles', typeof ecoles)
     let userModel, initialValues = {}
     if(user){
       userModel = user.is_a_model
@@ -171,6 +171,7 @@ class RenderFormations extends Component {
     }
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
+      console.log('input', input.options)
       const isValidNewOption = (inputValue, selectValue, selectOptions) => {
         if (
           inputValue.trim().length === 0 ||
