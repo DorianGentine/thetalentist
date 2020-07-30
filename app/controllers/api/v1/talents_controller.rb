@@ -62,18 +62,16 @@ class Api::V1::TalentsController < Api::V1::BaseController
         set_new_knowns(@talent)
       end
     end
-    if params[:talent_formations_attributes].present?
-      params[:talent_formations_attributes].each do |formation|
+    if params.require(:talent)[:talent_formations_attributes].present?
+      params.require(:talent)[:talent_formations_attributes].each do |formation|
         if formation_is_available?(formation[:formation_id])
           formation[:formation_id] = set_new_formations(formation[:formation_id]) 
+          p "formation[:formation_id] #{formation[:formation_id]}"
         end
       end
     end
-    p "Talent formations #{@talent.formations}"
-    p "Talent TalentFormations #{@talent.talent_formations}"
     if @talent.update(talent_params)
       @talent.experiences.each do |experience|
-        p "SALUT, ON COMMENCE :"
         set_new_startups(experience.company_name) if startup_is_available?(experience.company_name)
       end
       render :show
@@ -89,7 +87,6 @@ class Api::V1::TalentsController < Api::V1::BaseController
     user = current_talentist if current_talentist
     user = current_talent if current_talent
     user = current_headhunter if current_headhunter
-    p "USER: #{current_user}"
     authorize user
   end
 
@@ -136,7 +133,6 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
   
   def formation_is_available?(param)
-    p "FORMATION: #{param.to_i == 0}"
     if param.to_i == 0
       if Formation.where(title: param).count > 0 || Formation.where(title: param.upcase).count > 0
         return false
