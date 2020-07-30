@@ -135,6 +135,7 @@ class RenderFormations extends Component {
     ]}
 
     if(ecoles){
+      console.log('ecoles', ecoles)
       ecoles = ecoles.formations
     }
     let userModel, initialValues = {}
