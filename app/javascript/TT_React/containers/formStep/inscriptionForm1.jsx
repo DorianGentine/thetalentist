@@ -52,7 +52,7 @@ class InscriptionForm1 extends Component {
         <div className="input-form w-input-form margin-left-55 margin-bottom-30">
           <label>Ville</label>
           <AlgoliaPlaces
-            placeholder= 'Paris, 15e arrondissement'
+            placeholder= 'Indique ta ville ici...'
             id="algolia-places"
             options={{
               language: 'fr',
