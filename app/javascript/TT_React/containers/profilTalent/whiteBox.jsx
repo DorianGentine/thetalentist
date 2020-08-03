@@ -38,7 +38,7 @@ class WhiteBox extends Component {
       sectors = sectors.sectors
     }
     if(talent){
-      job = talent.jobs[0].title
+      job = talent.jobs[0] ? talent.jobs[0].title : "Non Défini"
       color = setJobColor(job, this.props.jobs)
       firstname = talent.talent.firstname
       fullName = `${firstname} ${talent.talent.last_name}`
