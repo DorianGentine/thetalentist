@@ -277,13 +277,13 @@ class Navbar extends Component {
                       {this.props.guideSu == 6 ? <ModalGuide /> : null}
                     </li>
                   : null }
-                  {/* {userType != "Talentist" ?
+                  {userType == "Recruteur" ?
                   <li>
                     <a href={`${profilUrl}/edit`}>
                       Editer mon compte
                     </a>
                   </li>
-                  : null } */}
+                  : null }
                   {userType != "Talentist" ?
                   <li>
                     <a href={userType == "Recruteur" ? "/headhunters/edit" : "/talents/edit"}>
