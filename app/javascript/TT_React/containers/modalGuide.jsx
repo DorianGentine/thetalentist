@@ -9,6 +9,15 @@ class ModalGuide extends Component {
   render () {
     const step = this.props.guideSu
     let titre, text, position, guideTextStyle, guidePointStyle
+    let user = {
+      url: {
+        conv: "/conv",
+        profil: "/profil"
+      }
+    }
+    if(this.props.user){
+      user = this.props.user
+    }
 
     if(step == 1) {
       titre = "Etape 1 : Répertoire"
@@ -113,13 +122,13 @@ class ModalGuide extends Component {
               className="white flex-grow-1 padding-vertical-5 text-center bordure-droite-white"
               disabled={step == 1}
               onClick={step < 5 ? prevStep : () => {}}
-              href={step == 5 ? `/repertoire?query=new_member4` : step == 6 ? `${this.props.user.url.conv}?query=new_member` : undefined}>
+              href={step == 5 ? `/repertoire?query=new_member4` : step == 6 ? `${user.url.conv}?query=new_member` : undefined}>
               Précédent
             </a>
             <a
               className="white flex-grow-1 padding-vertical-5 text-center"
               onClick={step < 4 ? nextStep : step == 6 ? this.props.closeGuideSu : ()=>{}}
-              href={step == 4 ? `${this.props.user.url.conv}?query=new_member` : step == 5 ? `${this.props.user.url.profil}?query=new_member` : undefined}>
+              href={step == 4 ? `${user.url.conv}?query=new_member` : step == 5 ? `${user.url.profil}?query=new_member` : undefined}>
               {step == 6 ? "Fermer" : "Suivant"}
             </a>
           </div>

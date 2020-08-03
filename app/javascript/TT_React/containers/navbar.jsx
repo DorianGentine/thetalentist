@@ -192,15 +192,15 @@ class Navbar extends Component {
           <div className="navbar-talentist-right">
             {userType == "Recruteur" ?
               <div className="flex align-items-center">
-                {pageReact ?
+                {/* {pageReact ?
                   <Link to="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
                     <FontAwesomeIcon icon={["far", "question-circle"]}/>
                   </Link>
-                :
+                : */}
                   <a href="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
                     <FontAwesomeIcon icon={["far", "question-circle"]}/>
                   </a>
-                }
+                {/* } */}
                 <div className="relative">
                   {pageReact ?
                     <Link className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} to="/repertoire">RÉPERTOIRE</Link>
