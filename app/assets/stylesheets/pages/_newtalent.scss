@@ -10,6 +10,11 @@
 .form-container.form-appearance{
   opacity: 0;
 }
+@media screen and (max-width: 900px){
+  .form-container{
+    padding: 40px
+  }
+}
 
 .input-form{
   label{

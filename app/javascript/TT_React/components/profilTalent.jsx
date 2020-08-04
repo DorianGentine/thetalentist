@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { fetchGET } from '../actions';
 
@@ -14,7 +15,7 @@ class ProfilTalent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: "Prochaine aventure"
+      title: 0
     };
   }
 
@@ -27,6 +28,7 @@ class ProfilTalent extends Component {
   
 
   render () {
+    const isMobile = this.props.isMobile
     const title = this.state.title
     const talent = this.props.talent
     let experiencesLength = 0, formationsLength = 0
@@ -34,21 +36,29 @@ class ProfilTalent extends Component {
       experiencesLength = talent.experiences.length
       formationsLength = talent.formations.length
     }
-    const titles = [
+    let titles = [
       "Prochaine aventure",
       `Expériences professionnelles (${experiencesLength})`,
       `Formations (${formationsLength})`
     ]
+    if(isMobile){
+      titles = [
+        <FontAwesomeIcon className="violet" icon={["fas", "plane"]}/>,
+        <FontAwesomeIcon className="violet" icon={["fas", "briefcase"]}/>,
+        <FontAwesomeIcon className="violet" icon={["fas", "graduation-cap"]}/>
+      ]
+    }
 
-    const handleTitle = title => {
-      this.setState({title: title})
+    const handleTitle = index => {
+      console.log('index', index)
+      this.setState({title: index})
     }
 
     const renderTitles = titles => titles.map((titre, index) => 
       <p 
         key={index} 
-        className={`section-title${titre.includes(title) ? " active" : ""}`} 
-        onClick={()=>{handleTitle(titre)}}>
+        className={`section-title${index == title ? " active" : ""}`} 
+        onClick={()=>{handleTitle(index)}}>
         {titre}
       </p>)
 
@@ -57,15 +67,15 @@ class ProfilTalent extends Component {
         <Navbar path="profil" />
         <div className="container-fluid" style={{padding: "20px"}}>
           <WhiteBox />
-          <div className="col-md-9" style={{padding: "40px 80px 0 60px"}}>
+          <div className="col-md-9" style={isMobile ? {paddingTop: "20px"} : {padding: "40px 80px 0 60px"}}>
             <div className="flex">
               {renderTitles(titles)}
             </div>
             <hr className="ligne-horizontal no-margin margin-bottom-60"/>
 
-            {titles[0].includes(title) ? <ProchaineAventure/> : null }
-            {titles[1].includes(title) ? <ExperiencesProfessionnelles/> : null }
-            {titles[2].includes(title) ? <Formations/> : null }
+            {title == 0 ? <ProchaineAventure/> : null }
+            {title == 1 ? <ExperiencesProfessionnelles/> : null }
+            {title == 2 ? <Formations/> : null }
           </div>
         </div>
       </div>
@@ -76,6 +86,7 @@ class ProfilTalent extends Component {
 function mapStateToProps(state) {
   return {
     talent: state.talent,
+    isMobile: state.isMobile,
   };
 }
 

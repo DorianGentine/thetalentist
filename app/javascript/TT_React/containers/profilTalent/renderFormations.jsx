@@ -279,11 +279,15 @@ class RenderFormations extends Component {
       return(
         <div key={index} className="gray-box-question">
           <p className="bold">{formation.title}</p>
-          <div className="flex">
-            <FontAwesomeIcon icon={["fas", "suitcase"]} className="gray margin-right-15" />
-            <p className="gray margin-right-30">{formation.formation_id && formation.formation_id.title ? formation.formation_id.title : formation.formation_id }</p>
-            <FontAwesomeIcon icon={["fas", "calendar"]} className="gray margin-right-15" />
-            <p className="gray margin-right-30">{formatted_date}</p>
+          <div className="flex flex-wrap">
+            <div className="flex">
+              <FontAwesomeIcon icon={["fas", "suitcase"]} className="gray margin-right-15" />
+              <p className="gray margin-right-30">{formation.formation_id && formation.formation_id.title ? formation.formation_id.title : formation.formation_id }</p>
+            </div>
+            <div className="flex">
+              <FontAwesomeIcon icon={["fas", "calendar"]} className="gray margin-right-15" />
+              <p className="gray margin-right-30">{formatted_date}</p>
+            </div>
           </div>
         </div>
       )

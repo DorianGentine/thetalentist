@@ -21,6 +21,7 @@ class InputForm extends Component {
   
 
   render () {
+    const isMobile = this.props.isMobile
 
     const Menu = props => {
       const optionSelectedLength = props.getValue().length || 0;
@@ -67,7 +68,7 @@ class InputForm extends Component {
     }
           
     return(
-      <div className="margin-left-55 margin-bottom-30">
+      <div className={`margin-bottom-30${isMobile ? "" : " margin-left-55"}`}>
         <Field
           name={this.props.name}
           component={ReactSelectAdapter}
@@ -79,14 +80,14 @@ class InputForm extends Component {
   }
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     stepForm: state.stepForm,
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    isMobile: state.isMobile,
+  };
+}
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(null, null)(InputForm);
+export default connect(mapStateToProps, null)(InputForm);

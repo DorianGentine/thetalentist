@@ -34,6 +34,7 @@ class InscriptionForm1 extends Component {
 
   render () {
     const step = this.props.stepForm
+    const isMobile = this.props.isMobile
 
     const handleChange = (input) => {
       if(!this.state.updated){
@@ -49,7 +50,7 @@ class InscriptionForm1 extends Component {
             L'objectif : permettre à notre équipe de mieux te connaître et de t'accompagner pour ta prochaine aventure.
             N'oublie pas : certaines de tes réponses seront masquées pour la start-up afin de garder ton anonymat.`}
           text2="On commence ? Dans quelle ville recherches-tu ?" />
-        <div className="input-form w-input-form margin-left-55 margin-bottom-30">
+        <div className={`input-form margin-bottom-30${isMobile ? "" : " w-input-form margin-left-55"}`}>
           <label>Ville</label>
           <AlgoliaPlaces
             placeholder= 'Indique ta ville ici...'
@@ -85,14 +86,14 @@ class InscriptionForm1 extends Component {
   }
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     stepForm: state.stepForm,
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    isMobile: state.isMobile,
+  };
+}
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(null, null)(InscriptionForm1);
+export default connect(mapStateToProps, null)(InscriptionForm1);
