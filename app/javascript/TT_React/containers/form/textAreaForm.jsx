@@ -3,8 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Field } from 'react-final-form';
 
-class InputForm extends Component {
+class TextAreaForm extends Component {
   render () {
+    const isMobile = this.props.isMobile
     let valueLength = 0, value
     if(this.props.name == "next_aventure_attributes[see_my_job]"){
       value = this.props.formValue.next_aventure_attributes.see_my_job
@@ -18,7 +19,7 @@ class InputForm extends Component {
     }
 
     return(
-      <div className="input-form margin-left-55 margin-bottom-30">
+      <div className={`input-form margin-bottom-30${isMobile ? "" : " margin-left-55"}`}>
         <label htmlFor={this.props.name}>{this.props.title}</label>
         <Field
           component="textarea"
@@ -34,14 +35,14 @@ class InputForm extends Component {
   }
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     stepForm: state.stepForm,
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    isMobile: state.isMobile,
+  };
+}
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(null, null)(InputForm);
+export default connect(mapStateToProps, null)(TextAreaForm);

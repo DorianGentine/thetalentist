@@ -28,21 +28,21 @@ class RadioForm extends Component {
 
 
     return(
-      <div className="flex flex-wrap margin-left-55 margin-bottom-30">
+      <div className={`flex flex-wrap margin-bottom-30${this.props.isMobile ? "" : " margin-left-55"}`}>
         {renderFields()}
       </div>
     );
   }
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     stepForm: state.stepForm,
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    isMobile: state.isMobile,
+  };
+}
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(null, null)(RadioForm);
+export default connect(mapStateToProps, null)(RadioForm);

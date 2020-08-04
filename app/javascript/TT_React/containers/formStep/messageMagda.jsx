@@ -13,6 +13,7 @@ class MessageMagda extends Component {
     const text1 = this.props.text1
     const text2 = this.props.text2 || false
     const text3 = this.props.text3 || false
+    const isMobile = this.props.isMobile
 
     return(
       <div className="margin-bottom-30">
@@ -23,22 +24,22 @@ class MessageMagda extends Component {
             {/* <p className="no-margin italic subtitle">Chouchouteuse de talents @thetalentist</p> */}
           </div>
         </div>
-        <p className="margin-left-55">{text1}</p>
-        {text2 ? <p className="margin-left-55">{text2}</p> : null }
-        {text3 ? <p className="margin-left-55 italic">{text3}</p> : null }
+        <p className={isMobile ? "" : "margin-left-55"}>{text1}</p>
+        {text2 ? <p className={isMobile ? "" : "margin-left-55"}>{text2}</p> : null }
+        {text3 ? <p className={isMobile ? "italic" : "italic margin-left-55"}>{text3}</p> : null }
       </div>
     );
   }
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     stepForm: state.stepForm,
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    isMobile: state.isMobile,
+  };
+}
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(null, null)(MessageMagda);
+export default connect(mapStateToProps, null)(MessageMagda);

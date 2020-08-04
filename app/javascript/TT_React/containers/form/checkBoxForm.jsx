@@ -6,6 +6,7 @@ import { Field } from 'react-final-form';
 class RadioForm extends Component {
   render () {
     const choices = this.props.choices
+    const isMobile = this.props.isMobile
 
     const renderFields = () => choices.map((choice, index) => {
       if(choice != undefined){
@@ -57,21 +58,21 @@ class RadioForm extends Component {
 
 
     return(
-      <div className={`flex flex-wrap margin-bottom-30${this.props.noMargin55 ? "" : " margin-left-55"}`}>
+      <div className={`flex flex-wrap margin-bottom-30${this.props.noMargin55 || isMobile ? "" : " margin-left-55"}`}>
         {choices != null ? renderFields() : "chargement..."}
       </div>
     );
   }
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     stepForm: state.stepForm,
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    isMobile: state.isMobile,
+  };
+}
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(null, null)(RadioForm);
+export default connect(mapStateToProps, null)(RadioForm);
