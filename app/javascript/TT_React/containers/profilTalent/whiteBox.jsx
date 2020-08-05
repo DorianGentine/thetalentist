@@ -32,7 +32,7 @@ class WhiteBox extends Component {
     let talent = this.props.talent
     let user = this.props.user
     let sectors = this.props.sectors
-    let fullName = "Chargement...", image = null, firstname = " ", city, experience = {}, remuneration, availability, mobility, job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year
+    let fullName = "Chargement...", image = null, firstname = " ", city, experience = {}, remuneration, availability, mobility, job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year, jobId
     let userModel
     if(sectors){
       sectors = sectors.sectors
@@ -44,6 +44,10 @@ class WhiteBox extends Component {
       fullName = `${firstname} ${talent.talent.last_name}`
       city = talent.talent.city
       year = talent.job.year
+      jobId = talent.job.job_id
+      if(this.props.jobs){
+        jobId = this.props.jobs.jobs.find(job => job.id === jobId)
+      }
       image = talent.talent.photo.url
       secteurNames = `${talent.sectors[0] ? talent.sectors[0].title : ""}${talent.sectors[1] ? `, ${talent.sectors[1].title}` : ""}${talent.sectors[2] ? `, ${talent.sectors[2].title}` : ""}`
       talent_sectors = talent.sectors
@@ -83,7 +87,12 @@ class WhiteBox extends Component {
             "30k€ à 40k€",
             "40k€ à 50k€",
             "50k€ à 60k€",
-            "+60k€"
+            "60 à 70k€",
+            "70 à 80k€",
+            "80 à 90k€",
+            "90 à 100k€",
+            "100 à 150k€",
+            "+150k€"
           ],
           limit: 1,
           name: "next_aventure_attributes[remuneration]"
@@ -119,6 +128,7 @@ class WhiteBox extends Component {
         experiences_attributes: experience,
         talent_job_attributes: {
           id: talent.job.id,
+          job_id: jobId,
           year: talent.job.year
         },
         next_aventure_attributes: {
@@ -167,6 +177,10 @@ class WhiteBox extends Component {
           valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
         }
       })
+      // MEP job_id
+      if(valuesToSend.talent_job_attributes && valuesToSend.talent_job_attributes.job_id){
+        valuesToSend.talent_job_attributes.job_id = valuesToSend.talent_job_attributes.job_id[0].id
+      }
       // MEP availability
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.availability){
         valuesToSend.next_aventure_attributes.availability = valuesToSend.next_aventure_attributes.availability[0]
@@ -245,6 +259,7 @@ class WhiteBox extends Component {
                     </div>
                   )}
                 </Field>
+                <EditCritere critere={{title: "Métier", name: "talent_job_attributes.job_id", options: this.props.jobs.jobs, limit: 1}} formValue={values} />
                 <CityField formValue={values} />
                 {criteres.length > 0 ? renderEditCriteres(values) : null}
                 <button 

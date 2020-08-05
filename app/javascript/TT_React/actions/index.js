@@ -198,9 +198,6 @@ export function updateTalent(talentValues, values, rawValues){
     talentValues.knowns = rawValues.knowns
   }
 
-  // if(talent.firstname != v.firstname){
-  //   talent.firstname = v.firstname
-  // }
   return {
     type: FETCH_TALENT,
     payload: talentValues
