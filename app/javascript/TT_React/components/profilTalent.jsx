@@ -31,10 +31,12 @@ class ProfilTalent extends Component {
     const isMobile = this.props.isMobile
     const title = this.state.title
     const talent = this.props.talent
-    let experiencesLength = 0, formationsLength = 0
+    let experiencesLength = 0, formationsLength = 0, validated, visible
     if(talent){
       experiencesLength = talent.experiences.length
       formationsLength = talent.formations.length
+      validated = talent.talent.validated
+      visible = talent.talent.visible
     }
     let titles = [
       "Prochaine aventure",
@@ -65,6 +67,18 @@ class ProfilTalent extends Component {
     return(
       <div>
         <Navbar path="profil" />
+        {validated ? 
+          visible ? 
+            null 
+          : 
+            <div className="flex w-100 green-background white padding-10 justify-center align-items-center">
+              Ton profil n'est pas visible par les Startups, profites-en pour l'étoffer 😉
+            </div> 
+        :
+          <div className="flex w-100 green-background white padding-10 justify-center align-items-center">
+            Ton profil n'a pas encore été validé par nos équipes, nous revenons vers toi dès que possible !
+          </div> 
+        }
         <div className="container-fluid" style={{padding: "20px"}}>
           <WhiteBox />
           <div className="col-md-9" style={isMobile ? {paddingTop: "20px"} : {padding: "40px 80px 0 60px"}}>
