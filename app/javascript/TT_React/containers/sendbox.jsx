@@ -18,7 +18,7 @@ class SendBox extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if(this.props.conversationActive.conversation != undefined &&
+    if(this.props.conversationActive && this.props.conversationActive.conversation != undefined &&
       this.props.conversationActive.conversation.messages.length != nextProps.conversationActive.conversation.messages.length){
         clearInterval(this.state.intervalMessages)
         this.setState({ intervalMessages: null })
