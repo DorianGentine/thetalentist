@@ -72,10 +72,16 @@
             <%= f.input :phone, 
               required: true, 
               autofocus: false, 
-              label: false, 
+              label: "Téléphone", 
               wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
               error: f.object.errors.messages[:phone][0] 
             %>
+
+            <%= f.input :terms_of_condition,
+              wrapper_html: { class: "col-md-1 margin-bottom-20" },
+              label: false
+            %>
+            <p class="col-md-11 margin-bottom-30">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %> de The Talentist.</p>
 
             <div class="col-md-12 flex">
               <%= f.button :submit, 

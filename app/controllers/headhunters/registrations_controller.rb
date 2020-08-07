@@ -24,6 +24,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
        return render :new
       end
     end
+    p "HEADHUNTER: #{@headhunter}"
     if @headhunter.save
       message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme !"
       @talentist = Talentist.last
@@ -95,8 +96,16 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
     end
 
     def headhunter_params
-      params.require(:headhunter).permit(:firstname, :last_name,
-        :job, :email, :password, :phone, :password_confirmation, :terms_of_condition, headhunter_email_attributes: [:newletter]
+      params.require(:headhunter).permit(
+        :firstname, 
+        :last_name,
+        :job, 
+        :email, 
+        :password, 
+        :phone, 
+        :password_confirmation, 
+        :terms_of_condition, 
+        headhunter_email_attributes: [:newletter]
       )
     end
 

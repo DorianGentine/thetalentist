@@ -15,6 +15,7 @@ class Conversation extends Component {
       value: "",
       intervalMessages: null,
       in_relation: null,
+      disappear: false,
     };
   }
 
@@ -73,7 +74,7 @@ class Conversation extends Component {
       }
     }
 
-    if(this.props.conversationActive.in_relation != undefined && this.props.conversationActive.in_relation != nextProps.conversationActive.in_relation){
+    if(this.props.conversationActive && this.props.conversationActive.in_relation != undefined && this.props.conversationActive.in_relation != nextProps.conversationActive.in_relation){
       clearInterval(this.state.intervalMessages)
       this.setState({ intervalMessages: null })
     }
@@ -129,7 +130,10 @@ class Conversation extends Component {
 
     const acceptRelation = () => {
       if(!talent_id || !headhunter_id){
-        this.setState({in_relation: "Accepter"})
+        this.setState({
+          in_relation: "Accepter",
+          disappear: true
+        })
         const newMessage = {
           conversation_id: this.props.params.id,
           sender_id: this.props.user.id,
@@ -137,7 +141,6 @@ class Conversation extends Component {
           body: "",
           in_relation: "Accepter",
         }
-        console.log(newMessage)
         this.props.fetchPost(
           `/api/v1/conversations/${this.props.params.id}/messages`,
           newMessage,
@@ -195,7 +198,7 @@ class Conversation extends Component {
             <p className="margin-bottom-45">Centralisez tous vos échanges et documents. Vous conservez ainsi en un seul endroit l’historique de votre relation.</p>
           </div>
           {conversationActive != undefined ? renderMessages() : <p>Chargement...</p>}
-          {conversationActive != undefined && relationship == "pending" ?
+          {conversationActive != undefined && relationship == "pending" && !this.state.disappear ?
             participant.user_model == "Headhunter" ?
               <div className="col-md-12 text-pf">
                 <p className="text-pf-1">Ce recruteur ne voit pas vos informations.</p>
