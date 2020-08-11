@@ -14,7 +14,9 @@ class WhiteBox extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      edit: false
+      edit: true,
+      image: null,
+      newPhoto: null
     };
   }
 
@@ -26,7 +28,12 @@ class WhiteBox extends Component {
       this.props.fetchGET('/api/v1/sectors', "FETCH_SECTORS")
     }
   }
-  
+
+  handleImageChange = e => {
+    if (e.target.files[0]) {
+      this.setState({ newPhoto: e.target.files[0] });
+    }
+  };
 
   render () {
     let talent = this.props.talent
@@ -48,7 +55,7 @@ class WhiteBox extends Component {
       if(this.props.jobs){
         jobId = this.props.jobs.jobs.find(job => job.id === jobId)
       }
-      image = talent.talent.photo.url
+      image = this.state.image || talent.talent.photo.url
       secteurNames = `${talent.sectors[0] ? talent.sectors[0].title : ""}${talent.sectors[1] ? `, ${talent.sectors[1].title}` : ""}${talent.sectors[2] ? `, ${talent.sectors[2].title}` : ""}`
       talent_sectors = talent.sectors
       remuneration = talent.next_aventure.remuneration
@@ -122,6 +129,7 @@ class WhiteBox extends Component {
         }
       ]
       initialCriteres = {
+        // photo: image,
         firstname: talent.talent.firstname,
         last_name: talent.talent.last_name,
         city: talent.talent.city,
@@ -177,9 +185,24 @@ class WhiteBox extends Component {
           valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
         }
       })
+
+      // MEP photo
+      if(this.state.newPhoto){
+      // if(valuesToSend.photo){
+        const formData = new FormData();
+        console.log('this.state.newPhoto', this.state.newPhoto)
+        formData.append("file", this.state.newPhoto);
+        const formDataValue = formData.get('file')
+        console.log('formData', formDataValue)
+        valuesToSend.photo = formDataValue
+      }
       // MEP job_id
       if(valuesToSend.talent_job_attributes && valuesToSend.talent_job_attributes.job_id){
-        valuesToSend.talent_job_attributes.job_id = valuesToSend.talent_job_attributes.job_id[0].id
+        if(valuesToSend.talent_job_attributes.job_id[0]){
+          valuesToSend.talent_job_attributes.job_id = valuesToSend.talent_job_attributes.job_id[0].id
+        }else{
+          valuesToSend.talent_job_attributes.job_id = valuesToSend.talent_job_attributes.job_id.id
+        }
       }
       // MEP availability
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.availability){
@@ -210,6 +233,7 @@ class WhiteBox extends Component {
     }
 
     const onSubmit = values => {
+      this.uploadPhoto
       const valuesToSend = valuesFilter(values)
       console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
@@ -232,6 +256,18 @@ class WhiteBox extends Component {
             initialValues={initialCriteres}
             render={({ handleSubmit, values, submitting }) => (
               <form onSubmit={handleSubmit}>
+                <label className="margin-bottom-30" htmlFor="avatar" >
+                  <p className="criteres">Avatar</p>
+                  <div className="flex align-items-center margin-top-15">  
+                    {image != null ? 
+                      <img className="photo-conv photo-conv-lg" src={this.state.image ? this.state.image : image} alt={image ? image : values.photo.slice(12)}></img> 
+                      : 
+                      <div className="photo-conv photo-conv-lg">{firstname.slice(0, 1)}</div>
+                    }
+                    <p className="no-margin margin-left-15 add-picture">{values.photo ? values.photo.slice(12) : "Changer photo" }</p>
+                  </div>
+                  <Field className="hidden" name="photo" id="avatar" component="input" type="file" onChange={this.handleImageChange} />
+                </label>
                 <Field name="firstname">
                   {({ input, meta }) => (
                     <div>

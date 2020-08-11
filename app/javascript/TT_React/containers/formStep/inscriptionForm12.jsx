@@ -50,12 +50,12 @@ class InscriptionForm12 extends Component {
     const that = this
     if(values.photo){
       // console.log(!typeof values.photo == "string")
-        let input = document.getElementById("avatar");
-        let fReader = new FileReader();
-        fReader.onload = function(event){
-          that.setState({ image : event.target.result })
-        }
-        fReader.readAsDataURL(input.files[0]);
+      let input = document.getElementById("avatar");
+      let fReader = new FileReader();
+      fReader.onload = function(event){
+        that.setState({ image : event.target.result })
+      }
+      fReader.readAsDataURL(input.files[0]);
     }
 
     return(
