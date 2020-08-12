@@ -54,6 +54,10 @@ class TalentPolicy < ApplicationPolicy
     true
   end
 
+  def update_avatar?
+    update?
+  end
+  
   def update_photo?
     update?
   end

@@ -128,6 +128,9 @@ Rails.application.routes.draw do
           get :analytics
           patch :sort
         end
+        member do
+          patch 'update_avatar'
+        end
         resources :conversations, only: [:index, :show]
       end
     end
