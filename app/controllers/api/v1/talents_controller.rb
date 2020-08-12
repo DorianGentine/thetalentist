@@ -80,6 +80,17 @@ class Api::V1::TalentsController < Api::V1::BaseController
     end
     authorize @talent
   end
+  
+  def update_avatar
+    @talent = Talent.find(params[:id])
+    p "TENTE LE SAVE"
+    if @talent.update(talent_photo_params)
+      render :show
+    else
+      p "Le problème est #{@talent.errors}"
+    end
+    authorize @talent
+  end
 
   private
 
@@ -172,6 +183,12 @@ class Api::V1::TalentsController < Api::V1::BaseController
     end
   end
 
+  def talent_photo_params
+    params.permit(
+      :photo
+    )
+  end
+  
   def talent_params
     params.require(:talent).permit(
       :firstname,

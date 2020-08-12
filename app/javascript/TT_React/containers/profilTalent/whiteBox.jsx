@@ -14,7 +14,7 @@ class WhiteBox extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      edit: true,
+      edit: false,
       image: null,
       newPhoto: null
     };
@@ -29,8 +29,9 @@ class WhiteBox extends Component {
     }
   }
 
-  handleImageChange = e => {
+  handleImageChange = (e, input) => {
     if (e.target.files[0]) {
+      console.log('e.target.files[0]', e.target.files[0])
       this.setState({ newPhoto: e.target.files[0] });
     }
   };
@@ -191,10 +192,11 @@ class WhiteBox extends Component {
       // if(valuesToSend.photo){
         const formData = new FormData();
         console.log('this.state.newPhoto', this.state.newPhoto)
-        formData.append("file", this.state.newPhoto);
-        const formDataValue = formData.get('file')
-        console.log('formData', formDataValue)
-        valuesToSend.photo = formDataValue
+        formData.append("photo", this.state.newPhoto);
+        fetch(`/api/v1/talents/${talent.talent.id}/update_avatar`, {method: "PATCH", body: formData})
+          .then(r => {
+            console.log('result', r)
+          })
       }
       // MEP job_id
       if(valuesToSend.talent_job_attributes && valuesToSend.talent_job_attributes.job_id){
@@ -233,10 +235,10 @@ class WhiteBox extends Component {
     }
 
     const onSubmit = values => {
-      this.uploadPhoto
       const valuesToSend = valuesFilter(values)
       console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
+        console.log("J'ai envoyé, SORRY !!")
         this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
       }
       this.setState({edit: !this.state.edit})
@@ -266,7 +268,19 @@ class WhiteBox extends Component {
                     }
                     <p className="no-margin margin-left-15 add-picture">{values.photo ? values.photo.slice(12) : "Changer photo" }</p>
                   </div>
-                  <Field className="hidden" name="photo" id="avatar" component="input" type="file" onChange={this.handleImageChange} />
+                  <Field name="photo">
+                    {({ input, meta }) => (
+                      <input {...input} 
+                        className="hidden" 
+                        id="avatar" 
+                        component="input" 
+                        type="file" 
+                        onChange={() => {
+                          this.handleImageChange(event)
+                          // input.onChange(event.target.files[0].name)
+                        }} />
+                    )}
+                  </Field>
                 </label>
                 <Field name="firstname">
                   {({ input, meta }) => (
