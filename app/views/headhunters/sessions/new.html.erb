@@ -5,14 +5,15 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-6 px-0 d-none d-sm-block no-padding">
-      <%= image_tag "Illustrations_site-31.png", class: "login-img" %>
-      <%# <img src="assets/images/login.jpg" alt="login image" class="login-img"> %>
+      <%= link_to root_path, class: "navbar-talentist-logo" do %>
+        <%= image_tag "Illustrations_site-31.png", class: "login-img" %>
+      <% end %>
     </div>
     <div class="col-sm-6 login-section-wrapper">
       <div class="brand-wrapper">
-        <%= link_to root_path, class: "navbar-talentist-logo" do %>
+        <a href="https://thetalentist.com/" target="_blank" class="navbar-talentist-logo">
           <%= image_tag "Logo The talentist-01.png", class: "logo" %>
-        <% end %>
+        </a>
       </div>
       <div class="login-wrapper my-auto">
         <h1 class="login-title">Je suis une start-up</h1>
