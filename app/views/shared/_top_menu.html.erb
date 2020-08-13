@@ -10,9 +10,10 @@
     </div>
     <ul class="dropdown-menu dropdown-top-menu">
       <div class="title-menu-link">
-        <li><%= link_to root_path do  %>
-              <p>Accueil</p>
-            <% end %>
+        <li>
+          <a href="https://thetalentist.com/" target="_blank">
+            <p>Accueil</p>
+          </a>
         </li>
         <hr class="top-menu-separation">
 
@@ -41,7 +42,6 @@
             <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
         </li>
-        <hr class="top-menu-separation">
 
       <% elsif talent_signed_in? && current_talent %>
         <li>
@@ -49,12 +49,12 @@
             <p><%= current_talent.firstname.capitalize %> <%= current_talent.last_name.capitalize %> :</p>
           <% end %>
         </li>
-        <% if current_talent.validated %>
           <li>
             <%= link_to talent_path(current_talent) do %>
               <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
             <% end %>
           </li>
+        <% if current_talent.validated %>
           <li>
             <%= link_to "Start-up", repertoire_startup_path %>
           </li>
@@ -63,22 +63,12 @@
               <%= link_to "Messagerie", conversation_path(current_talent.mailbox.conversations.last) %>
             </li>
           <% end %>
-        <% else %>
-          <li>
-            <%= link_to "Mon formulaire", welcome_talent_path(current_talent) %>
-          </li>
         <% end %>
-        <!-- <li>
-          <#%= link_to "#" do %>
-            <i class="fa fa-cog"></i>  <#%= t(".settings", default: "Settings") %>
-          <#% end %>
-        </li> -->
         <li>
           <%= link_to destroy_talent_session_path, method: :delete do %>
             <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
         </li>
-        <hr class="top-menu-separation">
 
       <% elsif talentist_signed_in? && current_talentist %>
         <li>
@@ -102,66 +92,57 @@
             <%= link_to "Messagerie", conversation_path(current_talentist.mailbox.conversations.last) %>
           </li>
         <% end %>
-        <!-- <li>
-          <#%= link_to talent_path(current_talent) do %>
-            <i class="fa fa-user"></i> <#%= t(".profile", default: "Profile") %>
-          <#% end %>
-        </li> -->
-        <!-- <li>
-          <#%= link_to "#" do %>
-            <i class="fa fa-cog"></i>  <#%= t(".settings", default: "Settings") %>
-          <#% end %>
-        </li> -->
         <li>
           <%= link_to destroy_talentist_session_path, method: :delete do %>
             <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
         </li>
-        <hr class="top-menu-separation">
 
       <% else %>
         <div class="title-menu-link">
           <li>
-            <%= link_to new_headhunter_session_path do  %>
-              <p>Start-up</p>
-            <% end %>
+            <a href="https://thetalentist.com/je-suis-une-startup/" target="_blank">
+              <p>Je suis une start-up</p>
+            </a>
           </li>
         </div>
-        <li>
-          <%= link_to new_headhunter_registration_path do  %>
-            <p>S'inscrire</p>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to new_headhunter_session_path do  %>
-            <p>Se connecter</p>
-          <% end %>
-        </li>
+        <div class="title-menu-link">
+          <li>
+            <a href="https://thetalentist.com/" target="_blank">
+              <p>Je suis un talent</p>
+            </a>
+          </li>
+        </div>
         <hr class="top-menu-separation">
         <div class="title-menu-link">
           <li>
-            <%= link_to new_talent_session_path do  %>
-              <p>Talent</p>
-            <% end %>
+            <p>FAQ</p>
           </li>
         </div>
         <li>
-          <%= link_to new_talent_registration_path do  %>
-            <p>S'inscrire</p>
-          <% end %>
+          <a href="https://thetalentist.com/faq-startups/" target="_blank">
+            <p>Startup</p>
+          </a>
         </li>
         <li>
-          <%= link_to new_talent_session_path do  %>
-            <p>Se connecter</p>
-          <% end %>
+          <a href="https://thetalentist.com/faq-talents/" target="_blank">
+            <p>Talent</p>
+          </a>
         </li>
-        <hr class="top-menu-separation">
+        <div class="title-menu-link">
+          <li>
+            <a href="https://thetalentist.com/actus/" target="_blank">
+              <p>Actus</p>
+            </a>
+          </li>
+        </div>
       <% end %>
+      <hr class="top-menu-separation">
       <div class="title-menu-link">
         <li>
-          <%= link_to mentions_legales_path do  %>
+          <a href="https://thetalentist.com/mentions-legales/" target="_blank">
             <p>Mentions légales</p>
-          <% end %>
+          </a>
         </li>
       </div>
     </ul>
