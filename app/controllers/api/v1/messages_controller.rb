@@ -15,17 +15,14 @@ class Api::V1::MessagesController < ApplicationController
       rela.save
     end
     if params[:body].present? || @user.present?
-    p "Attachment is #{params[:attachment]}"
+      p "Attachment is #{params[:attachment]}"
       @receipt = @user.reply_to_conversation(
         @conversation,
         params[:body],
         params[:attachment]
         )
-      p "MESSAGE IS #{@receipt.message.attachment}"
+      p "MESSAGE IS #{@receipt}"
 
-      # document.file = params["attachment"]
-      # pour récupérer le fichier attaché :
-      # receipt.message.attachment.url --> "http://res.cloudinary.com/da4nnrzbu/image/upload/v1528733299/jhwimkdrds6gs4pxhvyw.jpg"
       participant = @conversation.participants - [@user]
       @participant = participant[0]
 

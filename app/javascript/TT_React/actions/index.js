@@ -138,6 +138,18 @@ export function closeModalTalent(talent){
   }
 }
 
+export function updateConversation(conversationActive, message, status){
+  const newConv = JSON.parse(JSON.stringify(conversationActive))
+  newConv.conversation.messages.push(message)
+  if(status){
+    newConv.conversation.in_relation = status
+  }
+  return {
+    type: FETCH_CONVERSATION_ACTIVE,
+    payload: newConv
+  }
+}
+
 export function updateTalent(talentValues, values, rawValues){
   console.log('talent', talentValues)
   console.log('values', values)

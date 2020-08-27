@@ -62,7 +62,7 @@ class Conversation extends Component {
       }
     }
 
-    const renderDocs = () => attachments.map((attachment, index) => <p key={index}><FontAwesomeIcon icon={["far", "file"]}/></p>)
+  const renderDocs = () => attachments.map((attachment, index) => <a key={index} className="margin-bottom-15" href={attachment.url} target="_blank"><FontAwesomeIcon icon={["far", "file"]}/> {attachment.name}</a>)
 
     const openDropdown = () => {
       if(this.state.opened){
@@ -160,8 +160,10 @@ class Conversation extends Component {
             : null }
           </div>
         : null }
-        <p className="sidebar-title margin-top-30">Documents échangés</p>
-        <div>{attachments.length > 0 ? renderDocs() : null}</div>
+        {attachments.length > 0 ?
+          <p className="sidebar-title margin-top-30">Documents échangés</p>
+        : null}
+        <div className="flex flex-column">{attachments.length > 0 ? renderDocs() : null}</div>
         <p className="sidebar-title margin-top-30">Note personnelle</p>
       </div>
     );

@@ -1,22 +1,29 @@
-
-
-<div class="forgot_password">
-
-  <h2>Vous souhaitez <strong>réinitialiser</strong> votre mot de passe ?</h2>
-
-  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-    <div class="forgot_password_grid blue-background">
-      <%= f.error_notification %>
-
-      <p class="form-label-font-size requis">Email</p>
-      <%= f.input :email, required: true, autofocus: true, label: false %>
-
-      <%= f.button :submit, "Envoyer", :class => "submit_forgot_password" %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 px-0 d-none d-sm-block no-padding">
+      <%= link_to root_path, class: "navbar-talentist-logo" do %>
+        <%= image_tag "Illustrations_site-31.png", class: "login-img" %>
+      <% end %>
     </div>
-
-  <% end %>
-
-  <!-- <#%= render "headhunters/shared/links" %> -->
-
+    <div class="col-sm-6 login-section-wrapper">
+      <div class="brand-wrapper">
+        <a href="https://thetalentist.com/" target="_blank" class="navbar-talentist-logo">
+          <%= image_tag "Logo The talentist-01.png", class: "logo" %>
+        </a>
+      </div>
+      <div class="login-wrapper my-auto">
+        <h1 class="login-title">Vous souhaitez <strong>réinitialiser</strong> votre mot de passe ?</h1>
+        <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "margin-bottom-45" }) do |f| %>
+          <%= f.error_notification %>
+          <%= f.input :email, required: true, autofocus: true, label: "Email" %>
+          <%= f.button :submit, "Envoyer", :class => "btn btn-block login-btn" %>
+        <% end %>
+        <%= link_to 'Précédent', 
+          new_session_path(resource_name), 
+          class: "btn-violet-square-border" 
+        %>
+      </div>
+    </div>
+  </div>
 </div>
 

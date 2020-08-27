@@ -12,6 +12,7 @@ class Message extends Component {
     const message = this.props.message
     const avatar = message.avatar
     const image = typeof avatar == "string" ? null : avatar.small_bright_face.url
+    const attachment = this.props.attachment
     // const urlify = text => {
     //   let urlRegex = /(https?:\/\/[^\s]+)/g;
     //   return text.replace(urlRegex, function(url) {
@@ -25,7 +26,11 @@ class Message extends Component {
           <div>
             <div className="message-right">
               <p>{message.sender_name}</p>
-              <p className="no-margin">{message.body}</p>
+              {attachment ? 
+                <a className="no-margin" href={attachment.url} target="-blank">{attachment.name}</a>
+              : 
+                <p className="no-margin">{message.body}</p>
+              }
             </div>
             <p className="message-date">{renderDate(message.update_at, "ddd_mmm_hhhh")}</p>
           </div>
@@ -39,7 +44,11 @@ class Message extends Component {
           <div>
             <div className="message-left">
               <p className="black">{message.sender_name}</p>
-              <p className="no-margin">{message.body}</p>
+              {attachment ? 
+                <a className="no-margin" href={attachment.url} target="-blank">{attachment.name}</a>
+              : 
+                <p className="no-margin">{message.body}</p>
+              }
             </div>
             <p className="message-date">{renderDate(message.update_at, "ddd_mmm_hhhh")}</p>
           </div>

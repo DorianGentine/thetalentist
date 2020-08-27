@@ -29,9 +29,15 @@ class WhiteBox extends Component {
     }
   }
 
-  handleImageChange = (e, input) => {
+  handleImageChange = (e, image) => {
     if (e.target.files[0]) {
       console.log('e.target.files[0]', e.target.files[0])
+      let fReader = new FileReader();
+      const that = this
+      fReader.onload = function(event){
+        that.setState({ image: event.target.result })
+      }
+      fReader.readAsDataURL(e.target.files[0]);
       this.setState({ newPhoto: e.target.files[0] });
     }
   };
@@ -56,7 +62,7 @@ class WhiteBox extends Component {
       if(this.props.jobs){
         jobId = this.props.jobs.jobs.find(job => job.id === jobId)
       }
-      image = this.state.image || talent.talent.photo.url
+      image = talent.talent.photo.url
       secteurNames = `${talent.sectors[0] ? talent.sectors[0].title : ""}${talent.sectors[1] ? `, ${talent.sectors[1].title}` : ""}${talent.sectors[2] ? `, ${talent.sectors[2].title}` : ""}`
       talent_sectors = talent.sectors
       remuneration = talent.next_aventure.remuneration
@@ -189,7 +195,6 @@ class WhiteBox extends Component {
 
       // MEP photo
       if(this.state.newPhoto){
-      // if(valuesToSend.photo){
         const formData = new FormData();
         console.log('this.state.newPhoto', this.state.newPhoto)
         formData.append("photo", this.state.newPhoto);
@@ -276,7 +281,7 @@ class WhiteBox extends Component {
                         component="input" 
                         type="file" 
                         onChange={() => {
-                          this.handleImageChange(event)
+                          this.handleImageChange(event, image)
                           // input.onChange(event.target.files[0].name)
                         }} />
                     )}
@@ -309,7 +314,7 @@ class WhiteBox extends Component {
                     </div>
                   )}
                 </Field>
-                <EditCritere critere={{title: "Métier", name: "talent_job_attributes.job_id", options: this.props.jobs.jobs, limit: 1}} formValue={values} />
+                <EditCritere critere={{title: "Métier", name: "talent_job_attributes.job_id", options: this.props.jobs.jobs || [], limit: 1}} formValue={values} />
                 <CityField formValue={values} />
                 {criteres.length > 0 ? renderEditCriteres(values) : null}
                 <button 
@@ -322,7 +327,7 @@ class WhiteBox extends Component {
         :
           <div>
             {image != null ? 
-              <img className="photo-conv photo-conv-lg" src={image} alt="avatar"></img> 
+              <img className="photo-conv photo-conv-lg" src={this.state.image ? this.state.image : image} alt="avatar"></img> 
               : 
               <div className="photo-conv photo-conv-lg">{firstname.slice(0, 1)}</div>
             }
