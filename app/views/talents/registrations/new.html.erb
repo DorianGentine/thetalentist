@@ -12,7 +12,7 @@
         </a>
       </div>
       <div class="login-wrapper my-auto">
-        <h1 class="login-title">Je crée mon compte talent</h1>
+        <h1 class="login-title">Je crée mon compte <strong>talent</strong></h1>
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= f.error_notification %>
             <%= f.input :firstname, 
@@ -71,11 +71,11 @@
             <div class="col-md-12 flex">
               <%= f.button :submit, 
                 "Commencer à compléter mon profil", 
-                class: "btn-violet-square"
+                class: "btn-violet-square margin-right-30"
               %>
               <%= link_to 'Précédent', 
                 new_session_path(resource_name), 
-                class: "form-btn form-btn-precedent" 
+                class: "btn-violet-square-border" 
               %>
             </div>
 

@@ -83,7 +83,7 @@ class InboxFormat
           email: user.email,
           in_relation: user.witch_status?(participant),
           count: @conversation.messages.count,
-          messages: messages(user, @conversation).reverse()
+          messages: messages(user, @conversation)
         }
   end
 
@@ -117,7 +117,8 @@ class InboxFormat
     if config_conv.present?
       config_conv.files.map do |file|
         {name: file.filename,
-        url: "https://res.cloudinary.com/da4nnrzbu/image/upload/#{file.key}"
+        url: "https://res.cloudinary.com/da4nnrzbu/image/upload/#{file.key}",
+        key: file.key
         }
       end
     end

@@ -3,9 +3,17 @@ class Api::V1::ConfigConversationsController < Api::V1::BaseController
   # before_action :require_authentication! # eventually scoped to only: :restricted_action
 
   def update
-    @config_conversations = ConfigConversation.find(params[:id])
-    # authorize @config_conversations
-     if @config_conversations.update(config_conversation_params)
+    @config_conversation = ConfigConversation.find(params[:id])
+    # authorize @config_conversation
+     if @config_conversation.update(config_conversation_params)
+      p "TEST: #{params[:files].present?}"
+      if params[:files].present?
+        @conversation = Mailboxer::Conversation.find(@config_conversation.conversation_id)
+        @receipt = current_user.reply_to_conversation(
+          @conversation,
+          @config_conversation.files.last.key
+        )
+      end
       render :update
     else
       render_error
@@ -21,9 +29,14 @@ class Api::V1::ConfigConversationsController < Api::V1::BaseController
 
 
   def config_conversation_params
-    p "////////////// #{params[:config_conversation]}"
+    p "////////////// #{params[:id]}"
 
-    params.permit(:pin, :archived, {files: []}, :note)
+    params.permit(
+      :pin, 
+      :archived, 
+      :files, 
+      :note
+    )
     # params.require(:config_conversation).permit(:pin, :archived, {files: []})
   end
 
