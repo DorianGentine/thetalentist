@@ -37,9 +37,6 @@
             <%= link_to "Mot de passe oublié ?", new_password_path(resource_name), { class: "forgot-password-link" } %>
             <%# <a href="#!" class="forgot-password-link">Forgot password?</a> %>
           <% end -%>
-          <%#= link_to omniauth_authorize_path(:talent, :linkedin), :class => "button-linkedin" do %>
-            <%# <p class="text-align-center"><i class="fab fa-linkedin"></i> Se connecter avec Linkedin</p> %>
-          <%# end %>
 
           <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
             <p class="login-wrapper-footer-text">Pas encore de compte ? <%= link_to "Inscris-toi", new_talent_registration_path, :class => "text-reset" %></p>

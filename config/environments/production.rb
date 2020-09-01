@@ -12,7 +12,7 @@ Rails.application.configure do
   # TODO when we have a hosting
   # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.action_mailer.default_url_options = { host: "www.thetalentist.com" }
+  config.action_mailer.default_url_options = { host: "www.app.thetalentist.com" }
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
