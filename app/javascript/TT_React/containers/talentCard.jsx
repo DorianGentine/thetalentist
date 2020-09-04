@@ -31,7 +31,7 @@ class TalentCard extends PureComponent {
 
   render () {
     const talent = this.props.talent
-    const user = this.props.talents.user
+    const user = this.props.user
     const relation = talent.relationship
     const pin = {
       talent_id: talent.id,
@@ -39,6 +39,10 @@ class TalentCard extends PureComponent {
     }
     
     let color = setJobColor(talent.job, this.props.jobs)
+    let userModel
+    if(user){
+      userModel = user.is_a_model
+    }
 
     if(talent.position !== null && talent.position.length >= 30){
       $('[data-toggle="tooltip"]').tooltip()
@@ -105,14 +109,14 @@ class TalentCard extends PureComponent {
     return(
       <div className="col-xs-12 col-md-4 card-width">
         <div className="relative card" style={border}>
-          {relation !== false && relation !== null || user.admin ?
+          {relation !== false && relation !== null || userModel == "Talentist" ?
             <p className={`text-test absolute ${relation === "pending" ? "gray-background" : "violet-background"}`}>{
               relation === "pending" ? "EN ATTENTE" : `${talent.first_name.toUpperCase()} ${talent.last_name.toUpperCase()}`
             }</p>
           : null }
           <div className="flex space-between">
             <p className="card-job" style={color}>{talent.job}</p>
-            { user.admin ?
+            { userModel == "Talentist" ?
               <FontAwesomeIcon icon={["fas", "arrows-alt"]} style={{cursor: "all-scroll"}} />
             :
               <FontAwesomeIcon className="card-bookmark" icon={this.state.icon} onClick={toggleIcon} />
@@ -131,7 +135,7 @@ class TalentCard extends PureComponent {
             <p className="grid-info">{talent.next_aventure.remuneration}</p>
           </div>
           <div className="margin-top-15 flex flex-wrap card-small-plus">{talent.skills.length != 0 ? renderSkills() : renderSmallPlus()}</div>
-          <div className="flex flex-end relative margin-top-15">
+          <div className="flex relative margin-top-15 flex-end">
             <p className="no-margin card-cta" onClick={() => this.props.openModalTalent(talent)}>Afficher davantage</p>
             {this.props.guideSu == 3 && this.props.index == 0 ? <ModalGuide /> : null}
           </div>

@@ -18,7 +18,7 @@ class Formations extends Component {
           <span className="after"></span>
         </div>
 
-        <RenderFormations />
+        <RenderFormations color={this.props.color} />
       </div>
     );
   }

@@ -130,10 +130,14 @@ class RenderWaitingFors extends Component {
     }
 
     return(
-      <div className="gray-border-box">
+      <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
         <div className="flex space-between">
           <h4 className="box-title margin-bottom-30">3 enjeux de mon environnement de travail</h4>
-          {userModel == "Talent" ? <p className="pointer" onClick={() => handleClick("questions")}>Éditer</p> : null }
+          {userModel == "Talent" ? 
+            <div className="btn-expand-green" onClick={() => handleClick("questions")}>
+              <span><FontAwesomeIcon className="white" icon={["fas", "pen"]}/></span>
+            </div>
+          : null }
         </div>
         {this.state.edit ? 
           renderFormWaitingFors()

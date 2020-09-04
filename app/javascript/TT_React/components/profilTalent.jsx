@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { fetchGET } from '../actions';
+import setJobColor from '../../components/setJobColor';
 
 import Navbar from '../containers/navbar'
 import WhiteBox from '../containers/profilTalent/whiteBox'
@@ -24,6 +25,9 @@ class ProfilTalent extends Component {
     if(!this.props.formations){
       this.props.fetchGET('/api/v1/formations', "FETCH_FORMATIONS")
     }
+    if(!this.props.jobs){
+      this.props.fetchGET('/api/v1/jobs', "FETCH_JOBS")
+    }
   }
   
 
@@ -31,12 +35,14 @@ class ProfilTalent extends Component {
     const isMobile = this.props.isMobile
     const title = this.state.title
     const talent = this.props.talent
-    let experiencesLength = 0, formationsLength = 0, validated, visible
+    let experiencesLength = 0, formationsLength = 0, validated, visible, color = {backgroundColor: "#E5E6ED", color: "##273243"}, job
     if(talent){
       experiencesLength = talent.experiences.length
       formationsLength = talent.formations.length
       validated = talent.talent.validated
       visible = talent.talent.visible
+      job = talent.jobs[0] ? talent.jobs[0].title : "Non Défini"
+      color = setJobColor(job, this.props.jobs)
     }
     let titles = [
       "Prochaine aventure",
@@ -80,16 +86,16 @@ class ProfilTalent extends Component {
           </div> 
         }
         <div className="container-fluid" style={{padding: "20px"}}>
-          <WhiteBox />
+          <WhiteBox color={color} />
           <div className="col-md-9" style={isMobile ? {paddingTop: "20px"} : {padding: "40px 80px 0 60px"}}>
             <div className="flex">
               {renderTitles(titles)}
             </div>
             <hr className="ligne-horizontal no-margin margin-bottom-60"/>
 
-            {title == 0 ? <ProchaineAventure/> : null }
-            {title == 1 ? <ExperiencesProfessionnelles/> : null }
-            {title == 2 ? <Formations/> : null }
+            {title == 0 ? <ProchaineAventure color={color} /> : null }
+            {title == 1 ? <ExperiencesProfessionnelles color={color} /> : null }
+            {title == 2 ? <Formations color={color} /> : null }
           </div>
         </div>
       </div>
@@ -101,6 +107,7 @@ function mapStateToProps(state) {
   return {
     talent: state.talent,
     isMobile: state.isMobile,
+    jobs: state.jobs,
   };
 }
 
