@@ -125,11 +125,16 @@ class ProchaineAventure extends Component {
       this.setState({edit: !this.state.edit})
     }
 
+    // <p className="pointer" onClick={() => handleClick("questions")}>Éditer</p> 
     return(
-      <div className="gray-border-box">
+      <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
         <div className="flex space-between">
           <h4 className="box-title margin-bottom-30">{`${questions.length} questions qui me décrivent`}</h4>
-          {userModel == "Talent" ? <p className="pointer" onClick={() => handleClick("questions")}>Éditer</p> : null }
+          {userModel == "Talent" ? 
+            <div className="btn-expand-green" onClick={() => handleClick("questions")}>
+              <span><FontAwesomeIcon className="white" icon={["fas", "pen"]}/></span>
+            </div>
+          : null }
         </div>
         {questions.length > 0 ? this.state.edit ? renderFormQuestions() : renderQuestions() : null}
       </div>

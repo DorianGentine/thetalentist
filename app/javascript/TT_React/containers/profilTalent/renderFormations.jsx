@@ -298,10 +298,14 @@ class RenderFormations extends Component {
     }
 
     return(
-      <div className="gray-border-box">
+      <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
         <div className="flex space-between">
           <h4 className="box-title">Mes formations antérieures</h4>
-          {userModel == "Talent" ? <p className="pointer" onClick={handleClick}>Éditer</p> : null }
+          {userModel == "Talent" ? 
+            <div className="btn-expand-green" onClick={handleClick}>
+              <span><FontAwesomeIcon className="white" icon={["fas", "pen"]}/></span>
+            </div>
+          : null }
         </div>
         <h5 className="box-subtitle">{`${formations.length} formations`}</h5>
         <div>

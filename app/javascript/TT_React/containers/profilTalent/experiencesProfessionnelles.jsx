@@ -18,7 +18,7 @@ class ExperiencesProfessionnelles extends Component {
           <span className="after"></span>
         </div>
 
-        <RenderExperiences />
+        <RenderExperiences color={this.props.color} />
       </div>
     );
   }

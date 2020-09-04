@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Form, Field } from 'react-final-form';
 
 import { fetchGET, fetchPost, updateTalent } from '../../actions';
-import setJobColor from '../../../components/setJobColor';
 
 import EditCritere from './editCritere'
 import CityField from './cityField'
@@ -21,9 +20,6 @@ class WhiteBox extends Component {
   }
 
   componentDidMount() {
-    if(!this.props.jobs){
-      this.props.fetchGET('/api/v1/jobs', "FETCH_JOBS")
-    }
     if (!this.props.sectors) {
       this.props.fetchGET('/api/v1/sectors', "FETCH_SECTORS")
     }
@@ -53,12 +49,12 @@ class WhiteBox extends Component {
     }
     if(talent){
       job = talent.jobs[0] ? talent.jobs[0].title : "Non Défini"
-      color = setJobColor(job, this.props.jobs)
+      color = this.props.color
       firstname = talent.talent.firstname
       fullName = `${firstname} ${talent.talent.last_name}`
       city = talent.talent.city
-      year = talent.job.year
-      jobId = talent.job.job_id
+      year = talent.job ? talent.job.year : 0
+      jobId = talent.job ? talent.job.job_id : null
       if(this.props.jobs){
         jobId = this.props.jobs.jobs.find(job => job.id === jobId)
       }
@@ -142,9 +138,9 @@ class WhiteBox extends Component {
         city: talent.talent.city,
         experiences_attributes: experience,
         talent_job_attributes: {
-          id: talent.job.id,
+          id: talent.job ? talent.job.id : null,
           job_id: jobId,
-          year: talent.job.year
+          year: talent.job ? talent.job.year : 0
         },
         next_aventure_attributes: {
           id: talent.next_aventure.id,

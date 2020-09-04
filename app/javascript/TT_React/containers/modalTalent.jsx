@@ -33,8 +33,14 @@ class ModalTalent extends Component {
   }
 
   render () {
+    const user = this.props.user
+    let userModel
+    if(user){
+      userModel = user.is_a_model
+    }
     if(this.props.modalOpened){
       const talent = this.props.modalSelected
+      console.log('talent', talent)
       let color = {
         backgroundColor: "lightgray",
         color: "gray",
@@ -199,10 +205,13 @@ class ModalTalent extends Component {
           <div className="modal-content-react">
             <div className={`flex align-items-center${this.props.guideSu == 4 ? " relative" : ""}`}>
               <p className="card-job margin-right-30" style={color}>{talent.job}</p>
-              <div className="flex-grow-1">
+              <div className={userModel != "Talentist" ? "flex-grow-1" : ""}>
                 <p className="card-position">{talent.position}</p>
                 <p className="card-formation" style={{height: "unset"}}>{talent.city}</p>
               </div>
+              {userModel == "Talentist" ? 
+                <p className="flex-grow-1 margin-left-15">{`https://app.thetalentist.com/repertoire?talent=${talent.id}`}</p> 
+              : null}
               <FontAwesomeIcon className="card-bookmark margin-right-5" icon={this.state.icon} onClick={toggleIcon} />
               <p className="margin-right-30 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>
               {this.props.guideSu == 4 ? <ModalGuide /> : null}
@@ -279,6 +288,7 @@ function mapStateToProps(state) {
     talents: state.talents,
     jobs: state.jobs,
     guideSu: state.guideSu,
+    user: state.user,
   };
 }
 

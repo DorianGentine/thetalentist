@@ -56,12 +56,15 @@
 
             <%= f.input :phone, 
               required: true,
+              as: :tel,
+              :pattern => "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$",
               label: "Numéro de téléphone", 
               wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
-              error: f.object.errors.messages[:phone][0] 
+              error: f.object.errors.messages[:phone][0] || "Le numéro de téléphone n'est pas correct"
             %>
 
             <%= f.input :terms_of_condition,
+              required: true,
               wrapper_html: { class: "col-md-1 margin-bottom-20" },
               label: false
             %>
