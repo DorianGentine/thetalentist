@@ -38,6 +38,7 @@ import formationsReducer from './reducers/formations_reducer';
 import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
 import knownsReducer from './reducers/knowns_reducer';
+import languagesReducer from './reducers/languages_reducer';
 import messagerieActiveMobileReducer from './reducers/messagerie_active_mobile_reducer';
 import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
@@ -70,6 +71,7 @@ if(app){
     isMobile: isMobileState,
     jobs: null,
     knowns: null,
+    languages: null,
     messagerieActiveMobile: false,
     modalSelected: null,
     modalOpened: false,
@@ -94,6 +96,7 @@ if(app){
     isMobile: identityReducer,
     jobs: jobsReducer,
     knowns: knownsReducer,
+    languages: languagesReducer,
     messagerieActiveMobile: messagerieActiveMobileReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,

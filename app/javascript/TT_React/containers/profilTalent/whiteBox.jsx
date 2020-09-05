@@ -23,6 +23,9 @@ class WhiteBox extends Component {
     if (!this.props.sectors) {
       this.props.fetchGET('/api/v1/sectors', "FETCH_SECTORS")
     }
+    if (!this.props.languages) {
+      this.props.fetchGET('/api/v1/languages', "FETCH_LANGUAGES")
+    }
   }
 
   handleImageChange = (e, image) => {
@@ -42,10 +45,14 @@ class WhiteBox extends Component {
     let talent = this.props.talent
     let user = this.props.user
     let sectors = this.props.sectors
-    let fullName = "Chargement...", image = null, firstname = " ", city, experience = {}, remuneration, availability, mobility, job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year, jobId
+    let languages = this.props.languages
+    let fullName = "Chargement...", image = null, firstname = " ", city, experience = {}, remuneration, availability, mobility, job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year, jobId, contrat, languesNames, talent_languages
     let userModel
     if(sectors){
       sectors = sectors.sectors
+    }
+    if(languages){
+      languages = languages.languages
     }
     if(talent){
       job = talent.jobs[0] ? talent.jobs[0].title : "Non Défini"
@@ -61,9 +68,12 @@ class WhiteBox extends Component {
       image = talent.talent.photo.url
       secteurNames = `${talent.sectors[0] ? talent.sectors[0].title : ""}${talent.sectors[1] ? `, ${talent.sectors[1].title}` : ""}${talent.sectors[2] ? `, ${talent.sectors[2].title}` : ""}`
       talent_sectors = talent.sectors
+      languesNames = `${talent.languages[0] ? talent.languages[0].title : ""}${talent.languages[1] ? `, ${talent.languages[1].title}` : ""}${talent.languages[2] ? `, ${talent.languages[2].title}` : ""}`
+      talent_languages = talent.languages
       remuneration = talent.next_aventure.remuneration
       availability = talent.next_aventure.availability
       mobility = talent.mobilities[0]
+      contrat = talent.next_aventure.contrat
       if(talent.experiences.length != 0){
         experience = talent.experiences
       }else{
@@ -129,6 +139,24 @@ class WhiteBox extends Component {
           ],
           limit: 1,
           name: "next_aventure_attributes[mobilities_attributes][0][title]"
+        },{
+          title: "Contrat",
+          answer: contrat,
+          value: contrat,
+          options: [
+            "CDI",
+            "CDD",
+            "Freelance"
+          ],
+          limit: 1,
+          name: "next_aventure_attributes[contrat]"
+        },{
+          title: "Langues",
+          answer: languesNames,
+          value: talent_languages,
+          name: "talent_languages_attributes",
+          options: languages,
+          limit: 3
         }
       ]
       initialCriteres = {
@@ -147,11 +175,13 @@ class WhiteBox extends Component {
           remuneration: [talent.next_aventure.remuneration],
           availability: [talent.next_aventure.availability],
           sectors: talent_sectors,
+          contrat: [talent.next_aventure.contrat],
           mobilities_attributes: [{
             id: mobility.id,
             title: [mobility.title]
           }],
         },
+        talent_languages_attributes: talent_languages
       }
     }
     if(user){
@@ -214,6 +244,10 @@ class WhiteBox extends Component {
       // MEP remuneration
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.remuneration){
         valuesToSend.next_aventure_attributes.remuneration = valuesToSend.next_aventure_attributes.remuneration[0]
+      }
+      // MEP contrat
+      if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.contrat){
+        valuesToSend.next_aventure_attributes.contrat = valuesToSend.next_aventure_attributes.contrat[0]
       }
       // MEP mobilities_attributes[0].title
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.mobilities_attributes[0].title){
@@ -369,7 +403,8 @@ function mapStateToProps(state) {
     talent: state.talent,
     jobs: state.jobs,
     user: state.user,
-    sectors: state.sectors
+    sectors: state.sectors,
+    languages: state.languages,
   };
 }
 

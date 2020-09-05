@@ -23,6 +23,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
     @talent = Talent.find(params[:id])
     @knowns = @talent.knowns || nil
     @skills = @talent.skills || nil
+    @languages = @talent.languages || nil
     @next_aventure = @talent.next_aventure
     @mobilities = nil
     @sector_ids = nil
@@ -207,7 +208,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
       next_aventure_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
       talent_job_attributes: [:id, :job_id, :year, :position, :_destroy],
-      talent_second_job_attributes: [ :id, :job_id ]
+      talent_second_job_attributes: [ :id, :job_id ],
+      talent_languages_attributes: [:id, :language_id]
     )
   end
 end

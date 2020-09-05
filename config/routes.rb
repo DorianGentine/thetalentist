@@ -99,6 +99,7 @@ Rails.application.routes.draw do
       resources :formations, only: [ :index ]
       resources :jobs, only: [ :index ]
       resources :knowns, only: [ :index ]
+      resources :languages, only: [ :index ]
       resources :pins, only: [ :create, :destroy ]
       resources :relationships, only: [ :create ]
       resources :startups, only: [ :index ]
