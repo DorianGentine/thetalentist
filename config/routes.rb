@@ -99,11 +99,13 @@ Rails.application.routes.draw do
       resources :formations, only: [ :index ]
       resources :jobs, only: [ :index ]
       resources :knowns, only: [ :index ]
+      resources :languages, only: [ :index ]
       resources :pins, only: [ :create, :destroy ]
       resources :relationships, only: [ :create ]
       resources :startups, only: [ :index ]
       resources :sectors, only: [ :index ]
       resources :skills, only: [ :index ]
+      resources :technos, only: [ :index ]
       
       resources :conversations, only: [ :show, :index ] do
         # collection do
@@ -127,6 +129,9 @@ Rails.application.routes.draw do
           get :repertoire
           get :analytics
           patch :sort
+        end
+        member do
+          patch 'update_avatar'
         end
         resources :conversations, only: [:index, :show]
       end

@@ -39,13 +39,19 @@ class ProchaineAventure extends Component {
           value: talent.next_aventure.looking_for,
           name: "next_aventure_attributes[looking_for]"
         },
+        {
+          title: "Ma plus grande fierté",
+          value: talent.next_aventure.proud,
+          name: "next_aventure_attributes[proud]"
+        }
       ]
       initialValues = {
         next_aventure_attributes: {
           id: talent.next_aventure.id,
           see_my_job: talent.next_aventure.see_my_job,
           good_manager: talent.next_aventure.good_manager,
-          looking_for: talent.next_aventure.looking_for
+          looking_for: talent.next_aventure.looking_for,
+          proud: talent.next_aventure.proud
         }
       }
     }
@@ -124,12 +130,16 @@ class ProchaineAventure extends Component {
     const handleClick = edit => {
       this.setState({edit: !this.state.edit})
     }
-
+    
     return(
-      <div className="gray-border-box">
+      <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
         <div className="flex space-between">
           <h4 className="box-title margin-bottom-30">{`${questions.length} questions qui me décrivent`}</h4>
-          {userModel == "Talent" ? <p className="pointer" onClick={() => handleClick("questions")}>Éditer</p> : null }
+          {userModel == "Talent" ? 
+            <div className="btn-expand-green" onClick={() => handleClick("questions")}>
+              <span><FontAwesomeIcon className="white" icon={["fas", "pen"]}/></span>
+            </div>
+          : null }
         </div>
         {questions.length > 0 ? this.state.edit ? renderFormQuestions() : renderQuestions() : null}
       </div>

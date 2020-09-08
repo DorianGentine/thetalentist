@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Dropzone from 'react-dropzone'
 
-import { fetchGET, fetchPost } from '../actions';
+import { fetchGET, fetchPost, updateConversation } from '../actions';
 
 
 class SendBox extends Component {
@@ -12,28 +12,20 @@ class SendBox extends Component {
     super(props)
     this.state = {
       value: "",
-      intervalMessages: null,
       docs: [],
     };
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if(this.props.conversationActive.conversation != undefined &&
-      this.props.conversationActive.conversation.messages.length != nextProps.conversationActive.conversation.messages.length){
-        clearInterval(this.state.intervalMessages)
-        this.setState({ intervalMessages: null })
-    }
   }
 
   render () {
     const isMobile = this.props.isMobile
     const talent_id = this.props.params.talent_id || false
     const headhunter_id = this.props.params.headhunter_id || false
-    let conversationActive, inRelation = false, config_conv_id, sender_id
+    let conversationActive, inRelation = this.props.in_relation, config_conv_id, sender_id, user_model
     if(this.props.conversationActive != undefined){
       conversationActive = this.props.conversationActive.conversation
       if(conversationActive != undefined){
         config_conv_id = conversationActive.config_conv_id
+        user_model = conversationActive.participant.user_model
       }
       if(conversationActive != undefined && 
         conversationActive.in_relation == "Accepter" && 
@@ -51,51 +43,54 @@ class SendBox extends Component {
       this.setState({ value: value })
     }
 
-    const setIntervalMessages = () => {
-      let i = 0
-      let intervalMessages = setInterval(() => {
-        i++
-        this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
-        this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
-        console.log(i)
-        if(i > 4){
-          clearInterval(this.state.intervalMessages)
-          this.setState({ intervalMessages: null })
-        }
-      }, 1000)
-      this.setState({ intervalMessages: intervalMessages })
-    }
-
     const sendMessage = (event) => {
       event.preventDefault()
       if(this.state.docs.length != 0){
-        const newConfig = {
-          email: this.props.email,
-          user_model: user_model,
-          config_conversation: this.state.docsPath,
+        const formData = new FormData();
+        let body
+        for (let i = 0; i < this.state.docs.length; i++) {
+          const doc = this.state.docs[i];
+          body = doc.name
+          formData.append("files", doc);
         }
-        console.log(newConfig)
-        this.props.fetchPost(
-          `/api/v1/config_conversations/${config_conv_id}`,
-          newConfig,
-          "PATCH",
-          setIntervalMessages()
-        )
+        fetch(`/api/v1/config_conversations/${config_conv_id}`, {method: "PATCH", body: formData})
+          .then(r => {
+            console.log('result', r)
+            const message = {
+              sender_name: this.props.user.full_name,
+              sender: "Vous",
+              avatar: {
+                small_bright_face: {
+                  url: this.props.user.photo
+                }
+              },
+              body: body,
+              update_at: new Date()
+            }
+            this.props.updateConversation(this.props.conversationActive, message)
+          })
       }
       if(this.state.value != ""){
-        const newMessage = {
-          conversation_id: this.props.params.id,
-          email: this.props.email,
-          sender_id: sender_id,
-          body: this.state.value,
-        }
-        console.log(newMessage)
-        this.props.fetchPost(
-          `/api/v1/conversations/${this.props.params.id}/messages`,
-          newMessage,
-          "POST",
-          setIntervalMessages()
-        )
+        const body = this.state.value
+        const formData = new FormData();
+        formData.append("email", this.props.email);
+        formData.append("sender_id", sender_id);
+        formData.append("body", body);
+        fetch(`/api/v1/conversations/${this.props.params.id}/messages`, {method: "POST", body: formData})
+          .then(r => {
+            const message = {
+              sender_name: this.props.user.full_name,
+              sender: "Vous",
+              avatar: {
+                small_bright_face: {
+                  url: this.props.user.photo
+                }
+              },
+              body: body,
+              update_at: new Date()
+            }
+            this.props.updateConversation(this.props.conversationActive, message)
+          })
       }
       this.setState({
         value: "",
@@ -213,7 +208,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, updateConversation }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SendBox);

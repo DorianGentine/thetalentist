@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Form, Field } from 'react-final-form';
 
 import { fetchGET, fetchPost, updateTalent } from '../../actions';
-import setJobColor from '../../../components/setJobColor';
 
 import EditCritere from './editCritere'
 import CityField from './cityField'
@@ -14,42 +13,67 @@ class WhiteBox extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      edit: false
+      edit: false,
+      image: null,
+      newPhoto: null
     };
   }
 
   componentDidMount() {
-    if(!this.props.jobs){
-      this.props.fetchGET('/api/v1/jobs', "FETCH_JOBS")
-    }
     if (!this.props.sectors) {
       this.props.fetchGET('/api/v1/sectors', "FETCH_SECTORS")
     }
+    if (!this.props.languages) {
+      this.props.fetchGET('/api/v1/languages', "FETCH_LANGUAGES")
+    }
   }
-  
+
+  handleImageChange = (e, image) => {
+    if (e.target.files[0]) {
+      console.log('e.target.files[0]', e.target.files[0])
+      let fReader = new FileReader();
+      const that = this
+      fReader.onload = function(event){
+        that.setState({ image: event.target.result })
+      }
+      fReader.readAsDataURL(e.target.files[0]);
+      this.setState({ newPhoto: e.target.files[0] });
+    }
+  };
 
   render () {
     let talent = this.props.talent
     let user = this.props.user
     let sectors = this.props.sectors
-    let fullName = "Chargement...", image = null, firstname = " ", city, experience = {}, remuneration, availability, mobility, job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year
+    let languages = this.props.languages
+    let fullName = "Chargement...", image = null, firstname = " ", city, experience = {}, remuneration, availability, mobility, job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year, jobId, contrat, languesNames, talent_languages
     let userModel
     if(sectors){
       sectors = sectors.sectors
     }
+    if(languages){
+      languages = languages.languages
+    }
     if(talent){
-      job = talent.jobs[0].title
-      color = setJobColor(job, this.props.jobs)
+      job = talent.jobs[0] ? talent.jobs[0].title : "Non Défini"
+      color = this.props.color
       firstname = talent.talent.firstname
       fullName = `${firstname} ${talent.talent.last_name}`
       city = talent.talent.city
-      year = talent.job.year
+      year = talent.job ? talent.job.year : 0
+      jobId = talent.job ? talent.job.job_id : null
+      if(this.props.jobs){
+        jobId = this.props.jobs.jobs.find(job => job.id === jobId)
+      }
       image = talent.talent.photo.url
       secteurNames = `${talent.sectors[0] ? talent.sectors[0].title : ""}${talent.sectors[1] ? `, ${talent.sectors[1].title}` : ""}${talent.sectors[2] ? `, ${talent.sectors[2].title}` : ""}`
       talent_sectors = talent.sectors
+      languesNames = `${talent.languages[0] ? talent.languages[0].title : ""}${talent.languages[1] ? `, ${talent.languages[1].title}` : ""}${talent.languages[2] ? `, ${talent.languages[2].title}` : ""}`
+      talent_languages = talent.languages
       remuneration = talent.next_aventure.remuneration
       availability = talent.next_aventure.availability
       mobility = talent.mobilities[0]
+      contrat = talent.next_aventure.contrat
       if(talent.experiences.length != 0){
         experience = talent.experiences
       }else{
@@ -83,7 +107,12 @@ class WhiteBox extends Component {
             "30k€ à 40k€",
             "40k€ à 50k€",
             "50k€ à 60k€",
-            "+60k€"
+            "60 à 70k€",
+            "70 à 80k€",
+            "80 à 90k€",
+            "90 à 100k€",
+            "100 à 150k€",
+            "+150k€"
           ],
           limit: 1,
           name: "next_aventure_attributes[remuneration]"
@@ -110,27 +139,49 @@ class WhiteBox extends Component {
           ],
           limit: 1,
           name: "next_aventure_attributes[mobilities_attributes][0][title]"
+        },{
+          title: "Contrat",
+          answer: contrat,
+          value: contrat,
+          options: [
+            "CDI",
+            "CDD",
+            "Freelance"
+          ],
+          limit: 1,
+          name: "next_aventure_attributes[contrat]"
+        },{
+          title: "Langues",
+          answer: languesNames,
+          value: talent_languages,
+          name: "talent_languages",
+          options: languages,
+          limit: 3
         }
       ]
       initialCriteres = {
+        // photo: image,
         firstname: talent.talent.firstname,
         last_name: talent.talent.last_name,
         city: talent.talent.city,
         experiences_attributes: experience,
         talent_job_attributes: {
-          id: talent.job.id,
-          year: talent.job.year
+          id: talent.job ? talent.job.id : null,
+          job_id: jobId,
+          year: talent.job ? talent.job.year : 0
         },
         next_aventure_attributes: {
           id: talent.next_aventure.id,
           remuneration: [talent.next_aventure.remuneration],
           availability: [talent.next_aventure.availability],
           sectors: talent_sectors,
+          contrat: [talent.next_aventure.contrat],
           mobilities_attributes: [{
             id: mobility.id,
             title: [mobility.title]
           }],
         },
+        talent_languages: talent_languages
       }
     }
     if(user){
@@ -167,6 +218,25 @@ class WhiteBox extends Component {
           valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
         }
       })
+
+      // MEP photo
+      if(this.state.newPhoto){
+        const formData = new FormData();
+        console.log('this.state.newPhoto', this.state.newPhoto)
+        formData.append("photo", this.state.newPhoto);
+        fetch(`/api/v1/talents/${talent.talent.id}/update_avatar`, {method: "PATCH", body: formData})
+          .then(r => {
+            console.log('result', r)
+          })
+      }
+      // MEP job_id
+      if(valuesToSend.talent_job_attributes && valuesToSend.talent_job_attributes.job_id){
+        if(valuesToSend.talent_job_attributes.job_id[0]){
+          valuesToSend.talent_job_attributes.job_id = valuesToSend.talent_job_attributes.job_id[0].id
+        }else{
+          valuesToSend.talent_job_attributes.job_id = valuesToSend.talent_job_attributes.job_id.id
+        }
+      }
       // MEP availability
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.availability){
         valuesToSend.next_aventure_attributes.availability = valuesToSend.next_aventure_attributes.availability[0]
@@ -188,6 +258,21 @@ class WhiteBox extends Component {
           valuesToSend.next_aventure_attributes.sector_ids[i] = sector.id
         }
         delete valuesToSend.next_aventure_attributes['sectors']
+      }
+      // MEP contrat
+      if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.contrat){
+        valuesToSend.next_aventure_attributes.contrat = valuesToSend.next_aventure_attributes.contrat[0]
+      }
+      // MEP languages
+      if(valuesToSend.talent_languages){
+        const languages = valuesToSend.talent_languages
+        valuesToSend.talent_languages_attributes = []
+        console.log('languages.length', languages.length)
+        for (let i = 0; i < languages.length; i++) {
+          const language = languages[i];
+          valuesToSend.talent_languages_attributes[i] = {language_id: language.id}
+        }
+        delete valuesToSend['talent_languages']
       }
 
       this.props.updateTalent(this.props.talent, valuesToSend, values)
@@ -218,6 +303,30 @@ class WhiteBox extends Component {
             initialValues={initialCriteres}
             render={({ handleSubmit, values, submitting }) => (
               <form onSubmit={handleSubmit}>
+                <label className="margin-bottom-30" htmlFor="avatar" >
+                  <p className="criteres">Avatar</p>
+                  <div className="flex align-items-center margin-top-15">  
+                    {image != null ? 
+                      <img className="photo-conv photo-conv-lg" src={this.state.image ? this.state.image : image} alt={image ? image : values.photo.slice(12)}></img> 
+                      : 
+                      <div className="photo-conv photo-conv-lg">{firstname.slice(0, 1)}</div>
+                    }
+                    <p className="no-margin margin-left-15 add-picture">{values.photo ? values.photo.slice(12) : "Changer photo" }</p>
+                  </div>
+                  <Field name="photo">
+                    {({ input, meta }) => (
+                      <input {...input} 
+                        className="hidden" 
+                        id="avatar" 
+                        component="input" 
+                        type="file" 
+                        onChange={() => {
+                          this.handleImageChange(event, image)
+                          // input.onChange(event.target.files[0].name)
+                        }} />
+                    )}
+                  </Field>
+                </label>
                 <Field name="firstname">
                   {({ input, meta }) => (
                     <div>
@@ -245,6 +354,7 @@ class WhiteBox extends Component {
                     </div>
                   )}
                 </Field>
+                <EditCritere critere={{title: "Métier", name: "talent_job_attributes.job_id", options: this.props.jobs.jobs || [], limit: 1}} formValue={values} />
                 <CityField formValue={values} />
                 {criteres.length > 0 ? renderEditCriteres(values) : null}
                 <button 
@@ -257,7 +367,7 @@ class WhiteBox extends Component {
         :
           <div>
             {image != null ? 
-              <img className="photo-conv photo-conv-lg" src={image} alt="avatar"></img> 
+              <img className="photo-conv photo-conv-lg" src={this.state.image ? this.state.image : image} alt="avatar"></img> 
               : 
               <div className="photo-conv photo-conv-lg">{firstname.slice(0, 1)}</div>
             }
@@ -303,7 +413,8 @@ function mapStateToProps(state) {
     talent: state.talent,
     jobs: state.jobs,
     user: state.user,
-    sectors: state.sectors
+    sectors: state.sectors,
+    languages: state.languages,
   };
 }
 

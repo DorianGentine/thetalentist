@@ -167,7 +167,7 @@
   background-color: $lines-2;
   padding: 15px;
   border-radius: 5px 5px 5px 0;
-  p{
+  p, a{
     color: $dark-gray;
   }
 }
@@ -186,7 +186,7 @@
   padding: 15px;
   border-radius: 5px 5px 0;
   margin-right: 15px;
-  p{
+  p, a{
     color: white;
   }
 }

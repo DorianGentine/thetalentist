@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { fetchGET, fetchPost, updateTalent } from '../../actions';
 
-class RenderKnowns extends Component {
+class RenderTechnos extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -17,8 +17,8 @@ class RenderKnowns extends Component {
   }
 
   componentDidMount(){
-    if (this.props.knowns === null) {
-      this.props.fetchGET('/api/v1/knowns', "FETCH_KNOWNS")
+    if (this.props.technos === null) {
+      this.props.fetchGET('/api/v1/technos', "FETCH_TECHNOS")
     }
   }
 
@@ -29,12 +29,12 @@ class RenderKnowns extends Component {
     if(user){
       userModel = user.is_a_model
     }
-    let knowns = [], initialValues = {}
+    let technos = [], initialValues = {}
     const limit = 10
     if(talent){
-      knowns = talent.knowns
+      technos = talent.technos
       initialValues = {
-        knowns: knowns
+        technos: technos
       }
     }
 
@@ -52,14 +52,14 @@ class RenderKnowns extends Component {
           valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
         }
       })
-      // MEP known_ids
-      if(valuesToSend.knowns){
-        valuesToSend.known_ids = []
-        for (let i = 0; i < valuesToSend.knowns.length; i++) {
-          const element = valuesToSend.knowns[i];
-          valuesToSend.known_ids[i] = element.id
+      // MEP techno_ids
+      if(valuesToSend.technos){
+        valuesToSend.techno_ids = []
+        for (let i = 0; i < valuesToSend.technos.length; i++) {
+          const element = valuesToSend.technos[i];
+          valuesToSend.techno_ids[i] = element.id
         }
-        delete valuesToSend['knowns']
+        delete valuesToSend['technos']
       }
 
       this.props.updateTalent(this.props.talent, valuesToSend, values)
@@ -76,8 +76,8 @@ class RenderKnowns extends Component {
       this.setState({edit: false})
     }
 
-    const renderKnowns = () => knowns.map((known, index) => {
-      return <p key={index} className="competence">{known.title}</p>
+    const renderTechnos = () => technos.map((techno, index) => {
+      return <p key={index} className="competence">{techno.title}</p>
     })
 
     const Menu = props => {
@@ -119,7 +119,7 @@ class RenderKnowns extends Component {
                 break;
               case 'create-option':
                 input.onChange(value)
-                const options = this.props.knowns.knowns;
+                const options = this.props.technos.technos;
                 options.push(value[(value.length - 1)]);
                 break;
               case 'remove-value':
@@ -141,7 +141,7 @@ class RenderKnowns extends Component {
       )
     }
 
-    const renderFormKnowns = () => {
+    const renderFormTechnos = () => {
       return(
         <Form
           onSubmit={onSubmit}
@@ -150,15 +150,15 @@ class RenderKnowns extends Component {
           render={({ handleSubmit, values, submitting }) => (
             <form onSubmit={handleSubmit}>
               <Field
-                name="knowns"
+                name="technos"
                 component={ReactSelectAdapter}
-                options={this.props.knowns.knowns}
+                options={this.props.technos.technos}
               />
-              <p className="subtitle italic float-right">{`${limit - (values.knowns ? values.knowns.length : 0)} savoir-être restants`}</p>
+              <p className="subtitle italic float-right">{`${limit - (values.technos ? values.technos.length : 0)} outils restants`}</p>
               <button
-                disabled={!values.knowns || values.knowns.length == 0} 
-                className={`btn-gray-violet${values.knowns && values.knowns.length > 0 ? "" : " red-background white not-allowed"}`}
-                >{values.knowns && values.knowns.length > 0 ? "Enregistrer" : "Renseigne au moins une compétence"}
+                disabled={!values.technos || values.technos.length == 0} 
+                className={`btn-gray-violet${values.technos && values.technos.length > 0 ? "" : " red-background white not-allowed"}`}
+                >{values.technos && values.technos.length > 0 ? "Enregistrer" : "Renseigne au moins une compétence"}
               </button>
             </form>
           )}
@@ -173,19 +173,19 @@ class RenderKnowns extends Component {
     return(
       <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
         <div className="flex space-between">
-          <h4 className="box-title">Mes savoir-êtres</h4>
+          <h4 className="box-title">Mes outils</h4>
           {userModel == "Talent" ? 
             <div className="btn-expand-green" onClick={() => handleClick("questions")}>
               <span><FontAwesomeIcon className="white" icon={["fas", "pen"]}/></span>
             </div>
           : null }
         </div>
-        <h5 className="box-subtitle">{`${knowns.length} savoir-êtres listés`}</h5>
+        <h5 className="box-subtitle">{`${technos.length} outils listés`}</h5>
         {this.state.edit ? 
-          renderFormKnowns()
+          renderFormTechnos()
         :
           <div className="flex flex-wrap">
-            {knowns.length > 0 ? renderKnowns() : null}
+            {technos.length > 0 ? renderTechnos() : null}
           </div>
         }
       </div>
@@ -196,7 +196,7 @@ class RenderKnowns extends Component {
 function mapStateToProps(state) {
   return {
     talent: state.talent,
-    knowns: state.knowns,
+    technos: state.technos,
     user: state.user
   };
 }
@@ -205,4 +205,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchGET, fetchPost, updateTalent }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RenderKnowns);
+export default connect(mapStateToProps, mapDispatchToProps)(RenderTechnos);

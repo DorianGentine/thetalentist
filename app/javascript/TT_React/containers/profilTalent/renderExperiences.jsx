@@ -309,11 +309,15 @@ class ExperiencesProfessionnelles extends Component {
       return(
         <div key={index} className="gray-box-question">
           <p className="bold">{experience.position}</p>
-          <div className="flex">
-            <FontAwesomeIcon icon={["fas", "suitcase"]} className="gray margin-right-15" />
-            <p className="gray margin-right-30">{experience.company_name ? typeof experience.company_name === "string" ? experience.company_name : experience.company_name.name : "" }</p>
-            <FontAwesomeIcon icon={["fas", "calendar"]} className="gray margin-right-15" />
-            <p className="gray margin-right-30">{formatted_date}</p>
+          <div className="flex flex-wrap">
+            <div className="flex">
+              <FontAwesomeIcon icon={["fas", "suitcase"]} className="gray margin-right-15" />
+              <p className="gray margin-right-30">{experience.company_name ? typeof experience.company_name === "string" ? experience.company_name : experience.company_name.name : "" }</p>
+            </div>
+            <div className="flex">
+              <FontAwesomeIcon icon={["fas", "calendar"]} className="gray margin-right-15" />
+              <p className="gray margin-right-30">{formatted_date}</p>
+            </div>
           </div>
           <p className="no-margin">{experience.overview}</p>
         </div>
@@ -325,10 +329,14 @@ class ExperiencesProfessionnelles extends Component {
     }
 
     return(
-      <div className="gray-border-box">
+      <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
         <div className="flex space-between">
           <h4 className="box-title">Mes expériences antérieures</h4>
-          {userModel == "Talent" ? <p className="pointer" onClick={handleClick}>Éditer</p> : null }
+          {userModel == "Talent" ? 
+            <div className="btn-expand-green" onClick={handleClick}>
+              <span><FontAwesomeIcon className="white" icon={["fas", "pen"]}/></span>
+            </div>
+          : null }
         </div>
         <h5 className="box-subtitle">{`${experiences.length} entreprises`}</h5>
         <div>

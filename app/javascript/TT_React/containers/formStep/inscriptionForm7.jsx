@@ -17,7 +17,12 @@ class InscriptionForm7 extends Component {
       "30k€ à 40k€",
       "40k€ à 50k€",
       "50k€ à 60k€",
-      "+60k€"
+      "60 à 70k€",
+      "70 à 80k€",
+      "80 à 90k€",
+      "90 à 100k€",
+      "100 à 150k€",
+      "+150k€"
     ]
 
     return(

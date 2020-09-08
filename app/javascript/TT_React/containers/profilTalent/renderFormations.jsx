@@ -26,7 +26,6 @@ class RenderFormations extends Component {
     let deletedFormationId = formation.id
     const othersIds = this.state.deletedFormationsIds
     othersIds.push(deletedFormationId)
-    console.log('othersIds', othersIds)
     this.setState({
       FormationsIds: othersIds,
       deleted: true,
@@ -143,7 +142,7 @@ class RenderFormations extends Component {
         for (let i = 0; i < valuesToSend.talent_formations_attributes.length; i++) {
           const formation = valuesToSend.talent_formations_attributes[i];
           if (typeof formation.formation_id == "object") {
-            if(formation.formation_id.id){
+            if(formation.formation_id.id != ""){
               formation.formation_id = formation.formation_id.id
             }else{
               formation.formation_id = formation.formation_id.title
@@ -188,10 +187,10 @@ class RenderFormations extends Component {
           onChange={(value) => {
             input.onChange(value)
           }}
-          getOptionLabel={option => option.title || option} 
-          getOptionValue={option => option.id || option}
+          getOptionLabel={option => option.title} 
+          getOptionValue={option => option.id}
           getNewOptionData={(inputValue, optionLabel) => ({
-            id: null,
+            id: "",
             title: optionLabel,
           })}
           className="profil-multi-select"
@@ -199,11 +198,6 @@ class RenderFormations extends Component {
           isValidNewOption={isValidNewOption}
         />
       )
-    }
-
-    const returnOptions = () => {
-      console.log('ecoles', ecoles)
-      return ecoles
     }
 
     const renderEditFormations = () => formations.map((formation, index) => {
@@ -225,7 +219,7 @@ class RenderFormations extends Component {
             <Field
               name={`talent_formations_attributes[${index}].formation_id`}
               component={ReactSelectAdapter}
-              options={returnOptions()}
+              options={ecoles}
             />
           </div>
           <div className="col-md-6">
@@ -285,11 +279,15 @@ class RenderFormations extends Component {
       return(
         <div key={index} className="gray-box-question">
           <p className="bold">{formation.title}</p>
-          <div className="flex">
-            <FontAwesomeIcon icon={["fas", "suitcase"]} className="gray margin-right-15" />
-            <p className="gray margin-right-30">{formation.formation_id && formation.formation_id.title ? formation.formation_id.title : formation.formation_id }</p>
-            <FontAwesomeIcon icon={["fas", "calendar"]} className="gray margin-right-15" />
-            <p className="gray margin-right-30">{formatted_date}</p>
+          <div className="flex flex-wrap">
+            <div className="flex">
+              <FontAwesomeIcon icon={["fas", "suitcase"]} className="gray margin-right-15" />
+              <p className="gray margin-right-30">{formation.formation_id && formation.formation_id.title ? formation.formation_id.title : formation.formation_id }</p>
+            </div>
+            <div className="flex">
+              <FontAwesomeIcon icon={["fas", "calendar"]} className="gray margin-right-15" />
+              <p className="gray margin-right-30">{formatted_date}</p>
+            </div>
           </div>
         </div>
       )
@@ -300,10 +298,14 @@ class RenderFormations extends Component {
     }
 
     return(
-      <div className="gray-border-box">
+      <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
         <div className="flex space-between">
           <h4 className="box-title">Mes formations antérieures</h4>
-          {userModel == "Talent" ? <p className="pointer" onClick={handleClick}>Éditer</p> : null }
+          {userModel == "Talent" ? 
+            <div className="btn-expand-green" onClick={handleClick}>
+              <span><FontAwesomeIcon className="white" icon={["fas", "pen"]}/></span>
+            </div>
+          : null }
         </div>
         <h5 className="box-subtitle">{`${formations.length} formations`}</h5>
         <div>

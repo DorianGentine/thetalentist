@@ -14,9 +14,8 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import { createBrowserHistory as history } from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, faChevronLeft, faInfoCircle, faArrowsAlt, faCheck, faSuitcase, faCalendar } from '@fortawesome/free-solid-svg-icons'
-import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle, faEdit } from '@fortawesome/free-regular-svg-icons'
-// import { reducer as formReducer } from 'redux-form';
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, faChevronLeft, faInfoCircle, faArrowsAlt, faCheck, faSuitcase, faCalendar, faArrowLeft, faPlane, faBriefcase, faGraduationCap, faPen } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle, faEdit, faSave } from '@fortawesome/free-regular-svg-icons'
 
 // import { fetchAPI } from './actions';
 
@@ -39,6 +38,7 @@ import formationsReducer from './reducers/formations_reducer';
 import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
 import knownsReducer from './reducers/knowns_reducer';
+import languagesReducer from './reducers/languages_reducer';
 import messagerieActiveMobileReducer from './reducers/messagerie_active_mobile_reducer';
 import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
@@ -50,6 +50,7 @@ import skillsReducer from './reducers/skills_reducer';
 import startupsReducer from './reducers/startups_reducer';
 import talentReducer from './reducers/talent_reducer';
 import talentsReducer from './reducers/talents_reducer';
+import technosReducer from './reducers/technos_reducer';
 import userReducer from './reducers/user_reducer';
 
 const app = document.getElementById('app')
@@ -71,6 +72,7 @@ if(app){
     isMobile: isMobileState,
     jobs: null,
     knowns: null,
+    languages: null,
     messagerieActiveMobile: false,
     modalSelected: null,
     modalOpened: false,
@@ -82,6 +84,7 @@ if(app){
     startups: null,
     talent: null,
     talents: null,
+    technos: null,
     user: null,
   };
 
@@ -95,6 +98,7 @@ if(app){
     isMobile: identityReducer,
     jobs: jobsReducer,
     knowns: knownsReducer,
+    languages: languagesReducer,
     messagerieActiveMobile: messagerieActiveMobileReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,
@@ -106,6 +110,7 @@ if(app){
     startups: startupsReducer,
     talent: talentReducer,
     talents: talentsReducer,
+    technos: technosReducer,
     user: userReducer,
   });
 
@@ -130,9 +135,11 @@ if(app){
   library.add(
     fab,
     faArrowsAlt,
+    faArrowLeft,
     faBars,
     farBookmark,
     fasBookmark,
+    faBriefcase,
     faCalendar,
     faChartLine,
     faCheck,
@@ -145,12 +152,16 @@ if(app){
     faEnvelopeOpen,
     faFile,
     fasFile,
+    faGraduationCap,
     faInfoCircle,
     faMapMarkerAlt,
     faPaperclip,
     faPaperPlane,
+    faPen,
+    faPlane,
     faPhone,
     faQuestionCircle,
+    faSave,
     faSearch,
     faShareAlt,
     faSignOutAlt,

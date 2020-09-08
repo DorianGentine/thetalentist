@@ -83,7 +83,7 @@ class InboxFormat
           email: user.email,
           in_relation: user.witch_status?(participant),
           count: @conversation.messages.count,
-          messages: messages(user, @conversation).reverse()
+          messages: messages(user, @conversation)
         }
   end
 
@@ -114,10 +114,13 @@ class InboxFormat
   end
   def files(config_conv)
     p "config_conv: #{config_conv}"
-    config_conv.files.map do |file|
-      {name: file.filename,
-      url: "https://res.cloudinary.com/da4nnrzbu/image/upload/#{file.key}"
-      }
+    if config_conv.present?
+      config_conv.files.map do |file|
+        {name: file.filename,
+        url: "https://res.cloudinary.com/da4nnrzbu/image/upload/#{file.key}",
+        key: file.key
+        }
+      end
     end
   end
 
@@ -184,7 +187,11 @@ class InboxFormat
 
   def answer_3(user)
     if user.is_a?(Talent)
-      return user.talent_job.year
+      if user.talent_job
+        return user.talent_job.year
+      else
+        return 0
+      end
     elsif user.is_a?(Headhunter)
       return user.startup.year_of_creation
     else

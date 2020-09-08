@@ -23,6 +23,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
     @talent = Talent.find(params[:id])
     @knowns = @talent.knowns || nil
     @skills = @talent.skills || nil
+    @technos = @talent.technos || nil
+    @languages = @talent.languages || nil
     @next_aventure = @talent.next_aventure
     @mobilities = nil
     @sector_ids = nil
@@ -55,30 +57,46 @@ class Api::V1::TalentsController < Api::V1::BaseController
   def update
     @talent = Talent.find(params[:id])
     if need_to_create_data?
+      p "params SKILLS"
       if params[:skill_ids].present?
         set_new_skills(@talent)
       end
+      p "params KNOWNS"
       if params[:known_ids].present?
         set_new_knowns(@talent)
       end
+      p "params TECHNOS"
+      if params[:techno_ids].present?
+        set_new_technos(@talent)
+      end
     end
-    if params[:talent_formations_attributes].present?
-      params[:talent_formations_attributes].each do |formation|
+    if params.require(:talent)[:talent_formations_attributes].present?
+      params.require(:talent)[:talent_formations_attributes].each do |formation|
         if formation_is_available?(formation[:formation_id])
           formation[:formation_id] = set_new_formations(formation[:formation_id]) 
+          p "formation[:formation_id] #{formation[:formation_id]}"
         end
       end
     end
-    p "Talent formations #{@talent.formations}"
-    p "Talent TalentFormations #{@talent.talent_formations}"
+    p "params TALENT"
     if @talent.update(talent_params)
       @talent.experiences.each do |experience|
-        p "SALUT, ON COMMENCE :"
         set_new_startups(experience.company_name) if startup_is_available?(experience.company_name)
       end
       render :show
     else
       # rediriger message erreur
+    end
+    authorize @talent
+  end
+  
+  def update_avatar
+    @talent = Talent.find(params[:id])
+    p "TENTE LE SAVE"
+    if @talent.update(talent_photo_params)
+      render :show
+    else
+      p "Le problème est #{@talent.errors}"
     end
     authorize @talent
   end
@@ -89,7 +107,6 @@ class Api::V1::TalentsController < Api::V1::BaseController
     user = current_talentist if current_talentist
     user = current_talent if current_talent
     user = current_headhunter if current_headhunter
-    p "USER: #{current_user}"
     authorize user
   end
 
@@ -120,11 +137,17 @@ class Api::V1::TalentsController < Api::V1::BaseController
     skill_ids = create_new_data_with_only_title(skill_params, "skill")
     talent.skill_ids = skill_ids
   end   
-
+  
   def set_new_knowns(talent)
     known_params = params.permit(known_ids: [])[:known_ids]
     known_ids = create_new_data_with_only_title(known_params, "known")
     talent.known_ids = known_ids
+  end
+  
+  def set_new_technos(talent)
+    techno_params = params.permit(techno_ids: [])[:techno_ids]
+    techno_ids = create_new_data_with_only_title(techno_params, "techno")
+    talent.techno_ids = techno_ids
   end
   
   def startup_is_available?(param)
@@ -136,7 +159,6 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
   
   def formation_is_available?(param)
-    p "FORMATION: #{param.to_i == 0}"
     if param.to_i == 0
       if Formation.where(title: param).count > 0 || Formation.where(title: param.upcase).count > 0
         return false
@@ -169,13 +191,20 @@ class Api::V1::TalentsController < Api::V1::BaseController
   def need_to_create_data?
     skill_params = params.permit(skill_ids: [])[:skill_ids]
     known_params = params.permit(known_ids: [])[:known_ids]
-    if skill_params.nil? && known_params.nil?
+    techno_params = params.permit(techno_ids: [])[:techno_ids]
+    if skill_params.nil? && known_params.nil? && techno_params.nil?
       return false
     else
       return true
     end
   end
 
+  def talent_photo_params
+    params.permit(
+      :photo
+    )
+  end
+  
   def talent_params
     params.require(:talent).permit(
       :firstname,
@@ -194,7 +223,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
       next_aventure_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
       talent_job_attributes: [:id, :job_id, :year, :position, :_destroy],
-      talent_second_job_attributes: [ :id, :job_id ]
+      talent_second_job_attributes: [ :id, :job_id ],
+      talent_languages_attributes: [:id, :language_id]
     )
   end
 end

@@ -14,9 +14,12 @@ class Headhunters::SessionsController < Devise::SessionsController
   # end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    # super
+    signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
+    redirect_to "https://thetalentist.com/"
+    return
+  end
 
   # protected
 

@@ -28,6 +28,7 @@ class Talent < ApplicationRecord
 
   after_create :send_welcome_email, :send_new_user_to_talentist, :fill_last_sign_at, :create_next_aventure
   before_save :capitalize_name_firstname, :save_completed_profil
+  # , :check_phone
 
   has_many :talent_sectors, dependent: :destroy
   has_many :sectors, through: :talent_sectors
@@ -139,7 +140,7 @@ class Talent < ApplicationRecord
 
   def his_profession
     if self.experiences.count > 0 && !self.experiences.last.position.nil?
-      self.experiences.last.position
+      self.experiences.first.position
     else
       "NaN"
     end
@@ -368,6 +369,14 @@ class Talent < ApplicationRecord
   def save_completed_profil
     self.completing = CompletedTalent.new(self).completed_totaly
   end
+
+  # def check_phone
+  #   if self.phone == /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/
+  #     return true
+  #   else
+  #     return false
+  #   end
+  # end
 
   # def set_new_city
   #   if self.latitude_changed?

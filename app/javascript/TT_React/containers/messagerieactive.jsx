@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchGET, fetchPost, openMessagerie, openSidebar } from '../actions';
+import { fetchGET, fetchPost, openMessagerie, openSidebar, updateConversation } from '../actions';
 
 import Message from './message'
 import SendBox from './sendbox'
@@ -15,6 +15,7 @@ class Conversation extends Component {
       value: "",
       intervalMessages: null,
       in_relation: null,
+      disappear: false,
     };
   }
 
@@ -73,7 +74,7 @@ class Conversation extends Component {
       }
     }
 
-    if(this.props.conversationActive.in_relation != undefined && this.props.conversationActive.in_relation != nextProps.conversationActive.in_relation){
+    if(this.props.conversationActive && this.props.conversationActive.in_relation != undefined && this.props.conversationActive.in_relation != nextProps.conversationActive.in_relation){
       clearInterval(this.state.intervalMessages)
       this.setState({ intervalMessages: null })
     }
@@ -106,30 +107,44 @@ class Conversation extends Component {
       }
     }
 
-    const renderMessages = () => conversationActive.messages.map((message, index) => <Message key={index} message={message} />)
+    const renderMessages = () => conversationActive.messages.map((message, index) => {
+      const checkAttachment = attachment => {
+        return attachment.key == message.body
+      }
+
+      const attachment = conversationActive.attachments.find(checkAttachment)
+      if(attachment){
+        return <Message key={index} message={message} attachment={attachment} />
+      }else{
+        return <Message key={index} message={message} />
+      }
+    })
 
     const handleOnChange = value => {
       this.setState({ value: value })
     }
 
-    const setIntervalMessages = () => {
-      let i = 0
-      let intervalMessages = setInterval(() => {
-        i++
-        this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
-        this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
-        console.log(i)
-        if(i > 4){
-          clearInterval(this.state.intervalMessages)
-          this.setState({ intervalMessages: null })
-        }
-      }, 1000)
-      this.setState({ intervalMessages: intervalMessages })
-    }
+    // const setIntervalMessages = () => {
+    //   let i = 0
+    //   let intervalMessages = setInterval(() => {
+    //     i++
+    //     this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
+    //     this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
+    //     console.log(i)
+    //     if(i > 4){
+    //       clearInterval(this.state.intervalMessages)
+    //       this.setState({ intervalMessages: null })
+    //     }
+    //   }, 1000)
+    //   this.setState({ intervalMessages: intervalMessages })
+    // }
 
     const acceptRelation = () => {
       if(!talent_id || !headhunter_id){
-        this.setState({in_relation: "Accepter"})
+        this.setState({
+          in_relation: "Accepter",
+          disappear: true
+        })
         const newMessage = {
           conversation_id: this.props.params.id,
           sender_id: this.props.user.id,
@@ -137,7 +152,6 @@ class Conversation extends Component {
           body: "",
           in_relation: "Accepter",
         }
-        console.log(newMessage)
         this.props.fetchPost(
           `/api/v1/conversations/${this.props.params.id}/messages`,
           newMessage,
@@ -157,9 +171,12 @@ class Conversation extends Component {
       if(onoff === "close"){
         this.setState({in_relation: null})
       }else if(onoff === "send"){
+        const body = document.getElementById('message_refus').value
+        console.log('body', body)
         const newMessage = {
           conversation_id: this.props.params.id,
           email: email,
+          sender_id: this.props.user.id,
           body: document.getElementById('message_refus').value,
           in_relation: this.state.in_relation,
         }
@@ -168,9 +185,23 @@ class Conversation extends Component {
           `/api/v1/conversations/${this.props.params.id}/messages`,
           newMessage,
           "POST",
-          setIntervalMessages()
+          ()=>{
+            const message = {
+              sender_name: this.props.user.full_name,
+              sender: "Vous",
+              avatar: {
+                small_bright_face: {
+                  url: this.props.user.photo
+                }
+              },
+              body: body,
+              update_at: new Date()
+            }
+            this.props.updateConversation(this.props.conversationActive, message, "Refuser")
+          }
         )
       }
+        // setIntervalMessages()
       this.setState({
         value: "",
       })
@@ -195,7 +226,7 @@ class Conversation extends Component {
             <p className="margin-bottom-45">Centralisez tous vos échanges et documents. Vous conservez ainsi en un seul endroit l’historique de votre relation.</p>
           </div>
           {conversationActive != undefined ? renderMessages() : <p>Chargement...</p>}
-          {conversationActive != undefined && relationship == "pending" ?
+          {conversationActive != undefined && relationship == "pending" && !this.state.disappear ?
             participant.user_model == "Headhunter" ?
               <div className="col-md-12 text-pf">
                 <p className="text-pf-1">Ce recruteur ne voit pas vos informations.</p>
@@ -227,7 +258,7 @@ class Conversation extends Component {
               </div>
           : null}
         </div>
-        <SendBox params={this.props.params} email={email} />
+        <SendBox params={this.props.params} in_relation={this.state.in_relation} email={email} />
 
       </div>
     );
@@ -245,7 +276,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost, openMessagerie, openSidebar }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, openMessagerie, openSidebar, updateConversation }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Conversation);
