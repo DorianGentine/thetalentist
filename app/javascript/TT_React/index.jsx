@@ -50,6 +50,7 @@ import skillsReducer from './reducers/skills_reducer';
 import startupsReducer from './reducers/startups_reducer';
 import talentReducer from './reducers/talent_reducer';
 import talentsReducer from './reducers/talents_reducer';
+import technosReducer from './reducers/technos_reducer';
 import userReducer from './reducers/user_reducer';
 
 const app = document.getElementById('app')
@@ -83,6 +84,7 @@ if(app){
     startups: null,
     talent: null,
     talents: null,
+    technos: null,
     user: null,
   };
 
@@ -108,6 +110,7 @@ if(app){
     startups: startupsReducer,
     talent: talentReducer,
     talents: talentsReducer,
+    technos: technosReducer,
     user: userReducer,
   });
 

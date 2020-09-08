@@ -13,6 +13,7 @@ export const FETCH_SKILLS = 'FETCH_SKILLS';
 export const FETCH_STARTUPS = 'FETCH_STARTUPS';
 export const FETCH_TALENT = 'FETCH_TALENT';
 export const FETCH_TALENTS = 'FETCH_TALENTS';
+export const FETCH_TECHNOS = 'FETCH_TECHNOS';
 export const FETCH_USER = 'FETCH_USER';
 export const GUIDE_SU = 'GUIDE_SU';
 export const MESSAGERIE_ACTIVE_MOBILE = 'MESSAGERIE_ACTIVE_MOBILE';
@@ -152,8 +153,6 @@ export function updateConversation(conversationActive, message, status){
 }
 
 export function updateTalent(talentValues, values, rawValues){
-  console.log('talent', talentValues)
-  console.log('values', values)
   const talent = talentValues.talent
   Object.keys(values).forEach(value => {
     if(talent[value] && talent[value] !== values[value]){

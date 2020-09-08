@@ -23,6 +23,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
     @talent = Talent.find(params[:id])
     @knowns = @talent.knowns || nil
     @skills = @talent.skills || nil
+    @technos = @talent.technos || nil
     @languages = @talent.languages || nil
     @next_aventure = @talent.next_aventure
     @mobilities = nil
@@ -56,11 +57,17 @@ class Api::V1::TalentsController < Api::V1::BaseController
   def update
     @talent = Talent.find(params[:id])
     if need_to_create_data?
+      p "params SKILLS"
       if params[:skill_ids].present?
         set_new_skills(@talent)
       end
+      p "params KNOWNS"
       if params[:known_ids].present?
         set_new_knowns(@talent)
+      end
+      p "params TECHNOS"
+      if params[:techno_ids].present?
+        set_new_technos(@talent)
       end
     end
     if params.require(:talent)[:talent_formations_attributes].present?
@@ -71,6 +78,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
         end
       end
     end
+    p "params TALENT"
     if @talent.update(talent_params)
       @talent.experiences.each do |experience|
         set_new_startups(experience.company_name) if startup_is_available?(experience.company_name)
@@ -129,11 +137,17 @@ class Api::V1::TalentsController < Api::V1::BaseController
     skill_ids = create_new_data_with_only_title(skill_params, "skill")
     talent.skill_ids = skill_ids
   end   
-
+  
   def set_new_knowns(talent)
     known_params = params.permit(known_ids: [])[:known_ids]
     known_ids = create_new_data_with_only_title(known_params, "known")
     talent.known_ids = known_ids
+  end
+  
+  def set_new_technos(talent)
+    techno_params = params.permit(techno_ids: [])[:techno_ids]
+    techno_ids = create_new_data_with_only_title(techno_params, "techno")
+    talent.techno_ids = techno_ids
   end
   
   def startup_is_available?(param)
@@ -177,7 +191,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
   def need_to_create_data?
     skill_params = params.permit(skill_ids: [])[:skill_ids]
     known_params = params.permit(known_ids: [])[:known_ids]
-    if skill_params.nil? && known_params.nil?
+    techno_params = params.permit(techno_ids: [])[:techno_ids]
+    if skill_params.nil? && known_params.nil? && techno_params.nil?
       return false
     else
       return true

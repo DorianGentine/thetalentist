@@ -130,7 +130,7 @@ class ProchaineAventure extends Component {
     const handleClick = edit => {
       this.setState({edit: !this.state.edit})
     }
-
+    
     return(
       <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
         <div className="flex space-between">

@@ -154,7 +154,7 @@ class WhiteBox extends Component {
           title: "Langues",
           answer: languesNames,
           value: talent_languages,
-          name: "talent_languages_attributes",
+          name: "talent_languages",
           options: languages,
           limit: 3
         }
@@ -181,7 +181,7 @@ class WhiteBox extends Component {
             title: [mobility.title]
           }],
         },
-        talent_languages_attributes: talent_languages
+        talent_languages: talent_languages
       }
     }
     if(user){
@@ -245,10 +245,6 @@ class WhiteBox extends Component {
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.remuneration){
         valuesToSend.next_aventure_attributes.remuneration = valuesToSend.next_aventure_attributes.remuneration[0]
       }
-      // MEP contrat
-      if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.contrat){
-        valuesToSend.next_aventure_attributes.contrat = valuesToSend.next_aventure_attributes.contrat[0]
-      }
       // MEP mobilities_attributes[0].title
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.mobilities_attributes[0].title){
         valuesToSend.next_aventure_attributes.mobilities_attributes[0].title = valuesToSend.next_aventure_attributes.mobilities_attributes[0].title[0]
@@ -263,6 +259,21 @@ class WhiteBox extends Component {
         }
         delete valuesToSend.next_aventure_attributes['sectors']
       }
+      // MEP contrat
+      if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.contrat){
+        valuesToSend.next_aventure_attributes.contrat = valuesToSend.next_aventure_attributes.contrat[0]
+      }
+      // MEP languages
+      if(valuesToSend.talent_languages){
+        const languages = valuesToSend.talent_languages
+        valuesToSend.talent_languages_attributes = []
+        console.log('languages.length', languages.length)
+        for (let i = 0; i < languages.length; i++) {
+          const language = languages[i];
+          valuesToSend.talent_languages_attributes[i] = {language_id: language.id}
+        }
+        delete valuesToSend['talent_languages']
+      }
 
       this.props.updateTalent(this.props.talent, valuesToSend, values)
       initialCriteres = values
@@ -273,7 +284,6 @@ class WhiteBox extends Component {
       const valuesToSend = valuesFilter(values)
       console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
-        console.log("J'ai envoyé, SORRY !!")
         this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
       }
       this.setState({edit: !this.state.edit})

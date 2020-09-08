@@ -1,6 +1,7 @@
 json.talent @talent
 json.knowns @knowns
 json.skills @skills
+json.technos @technos
 json.languages @languages
 json.next_aventure @next_aventure
 json.mobilities @mobilities

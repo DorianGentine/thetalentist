@@ -105,6 +105,7 @@ Rails.application.routes.draw do
       resources :startups, only: [ :index ]
       resources :sectors, only: [ :index ]
       resources :skills, only: [ :index ]
+      resources :technos, only: [ :index ]
       
       resources :conversations, only: [ :show, :index ] do
         # collection do
