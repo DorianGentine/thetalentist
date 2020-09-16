@@ -209,6 +209,16 @@ export function updateTalent(talentValues, values, rawValues){
   if(rawValues.knowns){
     talentValues.knowns = rawValues.knowns
   }
+  if(values.talent_languages_attributes){
+    const newLanguages = []
+    for (let i = 0; i < values.talent_languages_attributes.length; i++) {
+      const language = values.talent_languages_attributes[i];
+      if(!language._destroy){
+        newLanguages[i] = language
+      }
+    }
+    talentValues.talent_languages = newLanguages
+  }
 
   return {
     type: FETCH_TALENT,
