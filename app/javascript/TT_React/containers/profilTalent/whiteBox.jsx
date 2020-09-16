@@ -15,7 +15,8 @@ class WhiteBox extends Component {
     this.state = {
       edit: false,
       image: null,
-      newPhoto: null
+      newPhoto: null,
+      savedTLIds: null
     };
   }
 
@@ -41,6 +42,16 @@ class WhiteBox extends Component {
     }
   };
 
+  saveTalentLanguageIds = (talent_languages) => {
+    const savedIds = []
+    for (let i = 0; i < talent_languages.length; i++) {
+      const tl = talent_languages[i];
+      savedIds[i] = tl.id
+    }
+    console.log('savedIds', savedIds)
+    this.setState({ savedTLIds: savedIds})
+  }
+
   render () {
     let talent = this.props.talent
     let user = this.props.user
@@ -55,6 +66,15 @@ class WhiteBox extends Component {
       languages = languages.languages
     }
     if(talent){
+      if(talent.talent_languages && languages){
+        for (let i = 0; i < talent.talent_languages.length; i++) {
+          const language = talent.talent_languages[i];
+          const langue = languages.find(l => language.language_id === l.id)
+          language.title = langue.title
+          languesNames = `${talent.talent_languages[0] ? talent.talent_languages[0].title : ""}${talent.talent_languages[1] ? `, ${talent.talent_languages[1].title}` : ""}${talent.talent_languages[2] ? `, ${talent.talent_languages[2].title}` : ""}`
+          talent_languages = talent.talent_languages
+        }
+      }
       job = talent.jobs[0] ? talent.jobs[0].title : "Non Défini"
       color = this.props.color
       firstname = talent.talent.firstname
@@ -68,8 +88,6 @@ class WhiteBox extends Component {
       image = talent.talent.photo.url
       secteurNames = `${talent.sectors[0] ? talent.sectors[0].title : ""}${talent.sectors[1] ? `, ${talent.sectors[1].title}` : ""}${talent.sectors[2] ? `, ${talent.sectors[2].title}` : ""}`
       talent_sectors = talent.sectors
-      languesNames = `${talent.languages[0] ? talent.languages[0].title : ""}${talent.languages[1] ? `, ${talent.languages[1].title}` : ""}${talent.languages[2] ? `, ${talent.languages[2].title}` : ""}`
-      talent_languages = talent.languages
       remuneration = talent.next_aventure.remuneration
       availability = talent.next_aventure.availability
       mobility = talent.mobilities[0]
@@ -267,10 +285,47 @@ class WhiteBox extends Component {
       if(valuesToSend.talent_languages){
         const languages = valuesToSend.talent_languages
         valuesToSend.talent_languages_attributes = []
-        console.log('languages.length', languages.length)
-        for (let i = 0; i < languages.length; i++) {
-          const language = languages[i];
-          valuesToSend.talent_languages_attributes[i] = {language_id: language.id}
+        if (languages.length == this.state.savedTLIds.length) {
+          for (let i = 0; i < languages.length; i++) {
+            const language = languages[i];
+            if(language.language_id){
+              valuesToSend.talent_languages_attributes[i] = {id: this.state.savedTLIds[i], language_id: language.language_id}
+            }else{
+              valuesToSend.talent_languages_attributes[i] = {id: this.state.savedTLIds[i], language_id: language.id}
+            }
+          }
+        }else if(languages.length < this.state.savedTLIds.length){
+          for (let i = 0; i < this.state.savedTLIds.length; i++) {
+            const savedTLid = this.state.savedTLIds[i];
+            const language = languages[i];
+            if(language){
+              if(language.language_id){
+                valuesToSend.talent_languages_attributes[i] = {id: savedTLid, language_id: language.language_id}
+              }else{
+                valuesToSend.talent_languages_attributes[i] = {id: savedTLid, language_id: language.id}
+              }
+            }else{
+              valuesToSend.talent_languages_attributes[i] = {id: savedTLid, _destroy: true}
+            }
+          }
+        }else{
+          for (let i = 0; i < languages.length; i++) {
+            const language = languages[i];
+            const savedTLid = this.state.savedTLIds[i];
+            if(savedTLid){
+              if(language.language_id){
+                valuesToSend.talent_languages_attributes[i] = {id: savedTLid, language_id: language.language_id}
+              }else{
+                valuesToSend.talent_languages_attributes[i] = {id: savedTLid, language_id: language.id}
+              }
+            }else{
+              if(language.language_id){
+                valuesToSend.talent_languages_attributes[i] = {id: language.id, language_id: language.language_id}
+              }else{
+                valuesToSend.talent_languages_attributes[i] = {language_id: language.id}
+              }
+            }
+          }
         }
         delete valuesToSend['talent_languages']
       }
@@ -395,7 +450,10 @@ class WhiteBox extends Component {
             {userModel == "Talent" ?
               <button 
                 className="btn-gray-violet margin-top-60"
-                onClick={handleClick}
+                onClick={() => {
+                  handleClick()
+                  this.saveTalentLanguageIds(talent_languages)
+                }}
                 >Modifier
               </button>
             :
