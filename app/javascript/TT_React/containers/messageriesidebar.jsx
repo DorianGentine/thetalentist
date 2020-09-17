@@ -15,10 +15,12 @@ class Conversation extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if(this.props.conversationActive.conversation != undefined && this.props.conversationActive.conversation.pin != nextProps.conversationActive.conversation.pin ||
-      this.props.conversationActive.conversation != undefined && this.props.conversationActive.conversation.archived != nextProps.conversationActive.conversation.archived){
-      clearInterval(this.state.intervalMessages)
-      this.setState({ intervalMessages: null })
+    if(this.props.conversationActive.conversation != undefined){
+      if(this.props.conversationActive.conversation.pin != nextProps.conversationActive.conversation.pin ||
+          this.props.conversationActive.conversation.archived != nextProps.conversationActive.conversation.archived){
+          clearInterval(this.state.intervalMessages)
+          this.setState({ intervalMessages: null })
+      }
     }
   }
 
