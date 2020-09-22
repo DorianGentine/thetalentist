@@ -75,11 +75,14 @@
               class="g-recaptcha col-md-12 margin-bottom-30" 
               data-sitekey="6LezKs8ZAAAAAD0Xw8MY6XG3FGHkQ2OGrT921WN0"
               hl="fr"
+              data-callback="validate_captcha"
             ></div>
 
             <div class="col-md-12 flex">
               <%= f.button :submit, 
-                "Commencer à compléter mon profil", 
+                "Commencer à compléter mon profil",
+                id: "submit-btn",
+                disabled: true,
                 class: "btn-violet-square margin-right-30"
               %>
               <%= link_to 'Précédent', 
@@ -95,8 +98,14 @@
 </div>
 
  <script>
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();
+   function validate_captcha(token) {
+     const submitBtn = document.getElementById('submit-btn')
+     if(token){
+      submitBtn.disabled = false
+      setTimeout(function(){ 
+        submitBtn.disabled = true; 
+      }, 60000);
+     }
    }
  </script>
 
