@@ -39,13 +39,19 @@ class ProchaineAventure extends Component {
           value: talent.next_aventure.looking_for,
           name: "next_aventure_attributes[looking_for]"
         },
+        {
+          title: "Ma plus grande fierté",
+          value: talent.next_aventure.proud,
+          name: "next_aventure_attributes[proud]"
+        }
       ]
       initialValues = {
         next_aventure_attributes: {
           id: talent.next_aventure.id,
           see_my_job: talent.next_aventure.see_my_job,
           good_manager: talent.next_aventure.good_manager,
-          looking_for: talent.next_aventure.looking_for
+          looking_for: talent.next_aventure.looking_for,
+          proud: talent.next_aventure.proud
         }
       }
     }
@@ -124,8 +130,7 @@ class ProchaineAventure extends Component {
     const handleClick = edit => {
       this.setState({edit: !this.state.edit})
     }
-
-    // <p className="pointer" onClick={() => handleClick("questions")}>Éditer</p> 
+    
     return(
       <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
         <div className="flex space-between">
