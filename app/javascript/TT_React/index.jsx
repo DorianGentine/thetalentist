@@ -38,6 +38,7 @@ import formationsReducer from './reducers/formations_reducer';
 import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
 import knownsReducer from './reducers/knowns_reducer';
+import languagesReducer from './reducers/languages_reducer';
 import messagerieActiveMobileReducer from './reducers/messagerie_active_mobile_reducer';
 import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
@@ -49,6 +50,7 @@ import skillsReducer from './reducers/skills_reducer';
 import startupsReducer from './reducers/startups_reducer';
 import talentReducer from './reducers/talent_reducer';
 import talentsReducer from './reducers/talents_reducer';
+import technosReducer from './reducers/technos_reducer';
 import userReducer from './reducers/user_reducer';
 
 const app = document.getElementById('app')
@@ -70,6 +72,7 @@ if(app){
     isMobile: isMobileState,
     jobs: null,
     knowns: null,
+    languages: null,
     messagerieActiveMobile: false,
     modalSelected: null,
     modalOpened: false,
@@ -81,6 +84,7 @@ if(app){
     startups: null,
     talent: null,
     talents: null,
+    technos: null,
     user: null,
   };
 
@@ -94,6 +98,7 @@ if(app){
     isMobile: identityReducer,
     jobs: jobsReducer,
     knowns: knownsReducer,
+    languages: languagesReducer,
     messagerieActiveMobile: messagerieActiveMobileReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,
@@ -105,6 +110,7 @@ if(app){
     startups: startupsReducer,
     talent: talentReducer,
     talents: talentsReducer,
+    technos: technosReducer,
     user: userReducer,
   });
 
