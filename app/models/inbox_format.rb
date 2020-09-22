@@ -83,7 +83,7 @@ class InboxFormat
           email: user.email,
           in_relation: user.witch_status?(participant),
           count: @conversation.messages.count,
-          messages: messages(user, @conversation)
+          messages: messages(user, @conversation).sort_by { |a| a[:update_at] }
         }
   end
 
