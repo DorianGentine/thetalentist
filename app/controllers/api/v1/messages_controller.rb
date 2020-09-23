@@ -64,8 +64,6 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   def message_notification(sender, participant)
-    p "SENDER IS: #{sender.full_name}"
-    p "PARTICIPANT IS: #{participant.full_name}"
     Notification.create(title: "#{sender.full_name} a envoyé un message à #{participant.full_name}")
   end
 
