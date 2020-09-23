@@ -29,6 +29,7 @@ class Api::V1::MessagesController < ApplicationController
       # send email only for new messages but not for the first one beacause it will be welcome_in_our_plateforme
       if Mailboxer::Conversation.participant(@participant).count > 0
         @user.new_message(@receipt, @participant)
+        message_notification(@user, @participant)
       end
       head :no_content
     else
@@ -60,6 +61,12 @@ class Api::V1::MessagesController < ApplicationController
   def render_error
     render json: { errors: @conversation.errors.full_messages },
       status: :unprocessable_entity
+  end
+
+  def message_notification(sender, participant)
+    p "SENDER IS: #{sender.full_name}"
+    p "PARTICIPANT IS: #{participant.full_name}"
+    Notification.create(title: "#{sender.full_name} a envoyé un message à #{participant.full_name}")
   end
 
 end
