@@ -209,6 +209,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
     params.require(:talent).permit(
       :firstname,
       :last_name,
+      :overview,
       :phone,
       :linkedin,
       :city,
