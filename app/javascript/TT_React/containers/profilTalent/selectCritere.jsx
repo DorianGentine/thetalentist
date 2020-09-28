@@ -37,7 +37,11 @@ class InputForm extends Component {
     };
 
     const handleChange = (newValue) => {
-      this.setState({valueLength: newValue.length})
+      if(newValue){
+        this.setState({valueLength: newValue.length})
+      }else{
+        this.setState({valueLength: 0})
+      }
     };
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
@@ -59,7 +63,7 @@ class InputForm extends Component {
             handleChange(value)
           }}
           getOptionLabel={option => option.title || option} 
-          getOptionValue={option => option.id || option}
+          getOptionValue={option => option.language_id || option.id || option}
           className="profil-multi-select"
           classNamePrefix="select-form"
           isValidNewOption={isValidNewOption}

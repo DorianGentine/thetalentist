@@ -8,6 +8,7 @@ import RenderQuestions from './renderQuestions'
 import RenderCompetences from './renderCompetences'
 import RenderWaitingFors from './renderWaitingFors'
 import RenderSavoirEtre from './renderSavoirEtre'
+import RenderTechnos from './renderTechnos'
 
 class ProchaineAventure extends Component {
   render () {
@@ -21,6 +22,7 @@ class ProchaineAventure extends Component {
         <RenderCompetences color={this.props.color} />
         <RenderWaitingFors color={this.props.color} />
         <RenderSavoirEtre color={this.props.color} />
+        <RenderTechnos color={this.props.color} />
       </div>
     );
   }

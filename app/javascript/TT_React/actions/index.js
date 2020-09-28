@@ -6,12 +6,14 @@ export const FETCH_CONVERSATIONS = 'FETCH_CONVERSATIONS';
 export const FETCH_FORMATIONS = 'FETCH_FORMATIONS';
 export const FETCH_JOBS = 'FETCH_JOBS';
 export const FETCH_KNOWNS = 'FETCH_KNOWNS';
+export const FETCH_LANGUAGES = 'FETCH_LANGUAGES';
 export const FETCH_NOTIFICATIONS = 'FETCH_NOTIFICATIONS';
 export const FETCH_SECTORS = 'FETCH_SECTORS';
 export const FETCH_SKILLS = 'FETCH_SKILLS';
 export const FETCH_STARTUPS = 'FETCH_STARTUPS';
 export const FETCH_TALENT = 'FETCH_TALENT';
 export const FETCH_TALENTS = 'FETCH_TALENTS';
+export const FETCH_TECHNOS = 'FETCH_TECHNOS';
 export const FETCH_USER = 'FETCH_USER';
 export const GUIDE_SU = 'GUIDE_SU';
 export const MESSAGERIE_ACTIVE_MOBILE = 'MESSAGERIE_ACTIVE_MOBILE';
@@ -151,8 +153,6 @@ export function updateConversation(conversationActive, message, status){
 }
 
 export function updateTalent(talentValues, values, rawValues){
-  console.log('talent', talentValues)
-  console.log('values', values)
   const talent = talentValues.talent
   Object.keys(values).forEach(value => {
     if(talent[value] && talent[value] !== values[value]){
@@ -208,6 +208,16 @@ export function updateTalent(talentValues, values, rawValues){
   }
   if(rawValues.knowns){
     talentValues.knowns = rawValues.knowns
+  }
+  if(values.talent_languages_attributes){
+    const newLanguages = []
+    for (let i = 0; i < values.talent_languages_attributes.length; i++) {
+      const language = values.talent_languages_attributes[i];
+      if(!language._destroy){
+        newLanguages[i] = language
+      }
+    }
+    talentValues.talent_languages = newLanguages
   }
 
   return {
