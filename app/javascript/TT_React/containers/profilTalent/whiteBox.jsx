@@ -42,7 +42,7 @@ class WhiteBox extends Component {
     let talent = this.props.talent
     let user = this.props.user
     let sectors = this.props.sectors
-    let fullName = "Chargement...", image = null, firstname = " ", city, experience = {}, remuneration, availability, mobility, job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year, jobId
+    let fullName = "Chargement...", image = null, firstname = " ", overview, city, experience = {}, remuneration, availability, mobility, job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year, jobId
     let userModel
     if(sectors){
       sectors = sectors.sectors
@@ -52,6 +52,10 @@ class WhiteBox extends Component {
       color = this.props.color
       firstname = talent.talent.firstname
       fullName = `${firstname} ${talent.talent.last_name}`
+      overview = talent.talent.overview
+      if(!overview && talent.experiences.length != 0){
+        overview = talent.experiences[0].position
+      }
       city = talent.talent.city
       year = talent.job ? talent.job.year : 0
       jobId = talent.job ? talent.job.job_id : null
@@ -64,16 +68,6 @@ class WhiteBox extends Component {
       remuneration = talent.next_aventure.remuneration
       availability = talent.next_aventure.availability
       mobility = talent.mobilities[0]
-      if(talent.experiences.length != 0){
-        experience = talent.experiences
-      }else{
-        experience = [{
-          company_name: "À renseigner",
-          position: null,
-          starting: new Date(),
-          currently: true
-        }]
-      }
       criteres = [
         {
           title: "Expérience",
@@ -132,11 +126,10 @@ class WhiteBox extends Component {
         }
       ]
       initialCriteres = {
-        // photo: image,
         firstname: talent.talent.firstname,
         last_name: talent.talent.last_name,
+        overview: overview,
         city: talent.talent.city,
-        experiences_attributes: experience,
         talent_job_attributes: {
           id: talent.job ? talent.job.id : null,
           job_id: jobId,
@@ -301,7 +294,7 @@ class WhiteBox extends Component {
                     </div>
                   )}
                 </Field> 
-                <Field name="experiences_attributes[0][position]">
+                <Field name="overview">
                   {({ input, meta }) => (
                     <div>
                       <p className="criteres">Poste</p>
@@ -328,7 +321,7 @@ class WhiteBox extends Component {
               <div className="photo-conv photo-conv-lg">{firstname.slice(0, 1)}</div>
             }
             <h3>{fullName}</h3>
-            <p>{experience[0] && experience[0].position ? experience[0].position : "❌ À renseigner ❌"}</p>
+            <p>{overview ? overview : "❌ À renseigner ❌"}</p>
             <div className="flex">
               <FontAwesomeIcon icon={["fas", "map-marker-alt"]} className="gray margin-right-5" />
               <p className="margin-bottom-45 gray">{city}</p>
