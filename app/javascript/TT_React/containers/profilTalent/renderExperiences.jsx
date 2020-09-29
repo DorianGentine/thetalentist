@@ -49,6 +49,11 @@ class ExperiencesProfessionnelles extends Component {
     let companyTypes = this.props.companyTypes
     let startups = this.props.startups
     let userModel, initialValues = {}
+    let color = {backgroundColor: "#E5E6ED", color: "#273243"}
+    
+    if (this.props.color) {
+      color = this.props.color
+    }
     if(companyTypes){
       companyTypes = companyTypes.company_types
     }
@@ -329,7 +334,7 @@ class ExperiencesProfessionnelles extends Component {
     }
 
     return(
-      <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
+      <div className="gray-border-box" style={{borderColor: color.backgroundColor}}>
         <div className="flex space-between">
           <h4 className="box-title">Mes expériences antérieures</h4>
           {userModel == "Talent" ? 

@@ -43,7 +43,11 @@ class RenderFormations extends Component {
     let talent = this.props.talent
     let user = this.props.user
     let ecoles = this.props.formations
-
+    let color = {backgroundColor: "#E5E6ED", color: "#273243"}
+    
+    if (this.props.color) {
+      color = this.props.color
+    }
     if(ecoles){
       ecoles = ecoles.formations
     }
@@ -298,7 +302,7 @@ class RenderFormations extends Component {
     }
 
     return(
-      <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
+      <div className="gray-border-box" style={{borderColor: color.backgroundColor}}>
         <div className="flex space-between">
           <h4 className="box-title">Mes formations antérieures</h4>
           {userModel == "Talent" ? 

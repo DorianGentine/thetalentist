@@ -22,6 +22,10 @@ class ProchaineAventure extends Component {
       userModel = user.is_a_model
     }
     let questions = [], initialValues = {}
+    let color = {backgroundColor: "#E5E6ED", color: "#273243"}
+    if (this.props.color) {
+      color = this.props.color
+    }
     if(talent){
       questions = [
         {
@@ -132,7 +136,7 @@ class ProchaineAventure extends Component {
     }
     
     return(
-      <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
+      <div className="gray-border-box" style={{borderColor: color.backgroundColor}}>
         <div className="flex space-between">
           <h4 className="box-title margin-bottom-30">{`${questions.length} questions qui me décrivent`}</h4>
           {userModel == "Talent" ? 
