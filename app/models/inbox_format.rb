@@ -187,7 +187,11 @@ class InboxFormat
 
   def answer_3(user)
     if user.is_a?(Talent)
-      return user.talent_job.year
+      if user.talent_job
+        return user.talent_job.year
+      else
+        return 0
+      end
     elsif user.is_a?(Headhunter)
       return user.startup.year_of_creation
     else

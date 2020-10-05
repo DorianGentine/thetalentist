@@ -35,7 +35,7 @@ class ProfilTalent extends Component {
     const isMobile = this.props.isMobile
     const title = this.state.title
     const talent = this.props.talent
-    let experiencesLength = 0, formationsLength = 0, validated, visible, color = {backgroundColor: "#E5E6ED", color: "##273243"}, job
+    let experiencesLength = 0, formationsLength = 0, validated, visible, color = {backgroundColor: "#E5E6ED", color: "#273243"}, job
     if(talent){
       experiencesLength = talent.experiences.length
       formationsLength = talent.formations.length

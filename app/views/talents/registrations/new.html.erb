@@ -5,7 +5,7 @@
         <%= image_tag "Illustrations_site-31.png", class: "login-img" %>
       <% end %>
     </div>
-    <div class="col-sm-6 login-section-wrapper">
+    <div class="col-sm-6 login-section-wrapper scroll" style="height: 100vh">
       <div class="brand-wrapper">
         <a href="https://thetalentist.com/" target="_blank" class="navbar-talentist-logo">
           <%= image_tag "Logo The talentist-01.png", class: "logo" %>
@@ -71,9 +71,18 @@
             <p class="col-md-11 margin-bottom-30">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %>  de The Talentist.</p>
             <%# et la <%= link_to "Politique de confidentialité", mentions_legales_path, target: "_blank", style: "text-decoration:underline" %>
 
+            <div 
+              class="g-recaptcha col-md-12 margin-bottom-30" 
+              data-sitekey="6LezKs8ZAAAAAD0Xw8MY6XG3FGHkQ2OGrT921WN0"
+              hl="fr"
+              data-callback="validate_captcha"
+            ></div>
+
             <div class="col-md-12 flex">
               <%= f.button :submit, 
-                "Commencer à compléter mon profil", 
+                "Commencer à compléter mon profil",
+                id: "submit-btn",
+                disabled: true,
                 class: "btn-violet-square margin-right-30"
               %>
               <%= link_to 'Précédent', 
@@ -87,5 +96,17 @@
     </div>
   </div>
 </div>
+
+ <script>
+   function validate_captcha(token) {
+     const submitBtn = document.getElementById('submit-btn')
+     if(token){
+      submitBtn.disabled = false
+      setTimeout(function(){ 
+        submitBtn.disabled = true; 
+      }, 60000);
+     }
+   }
+ </script>
 
 

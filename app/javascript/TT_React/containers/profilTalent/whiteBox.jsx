@@ -15,13 +15,17 @@ class WhiteBox extends Component {
     this.state = {
       edit: false,
       image: null,
-      newPhoto: null
+      newPhoto: null,
+      savedTLIds: null
     };
   }
 
   componentDidMount() {
     if (!this.props.sectors) {
       this.props.fetchGET('/api/v1/sectors', "FETCH_SECTORS")
+    }
+    if (!this.props.languages) {
+      this.props.fetchGET('/api/v1/languages', "FETCH_LANGUAGES")
     }
   }
 
@@ -38,20 +42,47 @@ class WhiteBox extends Component {
     }
   };
 
+  saveTalentLanguageIds = (talent_languages) => {
+    const savedIds = []
+    for (let i = 0; i < talent_languages.length; i++) {
+      const tl = talent_languages[i];
+      savedIds[i] = tl.id
+    }
+    console.log('savedIds', savedIds)
+    this.setState({ savedTLIds: savedIds})
+  }
+
   render () {
     let talent = this.props.talent
     let user = this.props.user
     let sectors = this.props.sectors
-    let fullName = "Chargement...", image = null, firstname = " ", city, experience = {}, remuneration, availability, mobility, job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year, jobId
+    let languages = this.props.languages
+    let fullName = "Chargement...", image = null, firstname = " ", overview, city, remuneration, availability, mobility, job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year, jobId, contrat, languesNames, talent_languages
     let userModel
     if(sectors){
       sectors = sectors.sectors
     }
+    if(languages){
+      languages = languages.languages
+    }
     if(talent){
+      if(talent.talent_languages && languages){
+        for (let i = 0; i < talent.talent_languages.length; i++) {
+          const language = talent.talent_languages[i];
+          const langue = languages.find(l => language.language_id === l.id)
+          language.title = langue.title
+          languesNames = `${talent.talent_languages[0] ? talent.talent_languages[0].title : ""}${talent.talent_languages[1] ? `, ${talent.talent_languages[1].title}` : ""}${talent.talent_languages[2] ? `, ${talent.talent_languages[2].title}` : ""}`
+          talent_languages = talent.talent_languages
+        }
+      }
       job = talent.jobs[0] ? talent.jobs[0].title : "Non Défini"
       color = this.props.color
       firstname = talent.talent.firstname
       fullName = `${firstname} ${talent.talent.last_name}`
+      overview = talent.talent.overview
+      if(!overview && talent.experiences.length != 0){
+        overview = talent.experiences[0].position
+      }
       city = talent.talent.city
       year = talent.job ? talent.job.year : 0
       jobId = talent.job ? talent.job.job_id : null
@@ -64,16 +95,7 @@ class WhiteBox extends Component {
       remuneration = talent.next_aventure.remuneration
       availability = talent.next_aventure.availability
       mobility = talent.mobilities[0]
-      if(talent.experiences.length != 0){
-        experience = talent.experiences
-      }else{
-        experience = [{
-          company_name: "À renseigner",
-          position: null,
-          starting: new Date(),
-          currently: true
-        }]
-      }
+      contrat = talent.next_aventure.contrat
       criteres = [
         {
           title: "Expérience",
@@ -129,14 +151,31 @@ class WhiteBox extends Component {
           ],
           limit: 1,
           name: "next_aventure_attributes[mobilities_attributes][0][title]"
+        },{
+          title: "Contrat",
+          answer: contrat,
+          value: contrat,
+          options: [
+            "CDI",
+            "CDD",
+            "Freelance"
+          ],
+          limit: 1,
+          name: "next_aventure_attributes[contrat]"
+        },{
+          title: "Langues",
+          answer: languesNames,
+          value: talent_languages,
+          name: "talent_languages",
+          options: languages,
+          limit: 3
         }
       ]
       initialCriteres = {
-        // photo: image,
         firstname: talent.talent.firstname,
         last_name: talent.talent.last_name,
+        overview: overview,
         city: talent.talent.city,
-        experiences_attributes: experience,
         talent_job_attributes: {
           id: talent.job ? talent.job.id : null,
           job_id: jobId,
@@ -147,11 +186,13 @@ class WhiteBox extends Component {
           remuneration: [talent.next_aventure.remuneration],
           availability: [talent.next_aventure.availability],
           sectors: talent_sectors,
+          contrat: [talent.next_aventure.contrat],
           mobilities_attributes: [{
             id: mobility.id,
             title: [mobility.title]
           }],
         },
+        talent_languages: talent_languages
       }
     }
     if(user){
@@ -229,6 +270,58 @@ class WhiteBox extends Component {
         }
         delete valuesToSend.next_aventure_attributes['sectors']
       }
+      // MEP contrat
+      if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.contrat){
+        valuesToSend.next_aventure_attributes.contrat = valuesToSend.next_aventure_attributes.contrat[0]
+      }
+      // MEP languages
+      if(valuesToSend.talent_languages){
+        const languages = valuesToSend.talent_languages
+        valuesToSend.talent_languages_attributes = []
+        if (languages.length == this.state.savedTLIds.length) {
+          for (let i = 0; i < languages.length; i++) {
+            const language = languages[i];
+            if(language.language_id){
+              valuesToSend.talent_languages_attributes[i] = {id: this.state.savedTLIds[i], language_id: language.language_id}
+            }else{
+              valuesToSend.talent_languages_attributes[i] = {id: this.state.savedTLIds[i], language_id: language.id}
+            }
+          }
+        }else if(languages.length < this.state.savedTLIds.length){
+          for (let i = 0; i < this.state.savedTLIds.length; i++) {
+            const savedTLid = this.state.savedTLIds[i];
+            const language = languages[i];
+            if(language){
+              if(language.language_id){
+                valuesToSend.talent_languages_attributes[i] = {id: savedTLid, language_id: language.language_id}
+              }else{
+                valuesToSend.talent_languages_attributes[i] = {id: savedTLid, language_id: language.id}
+              }
+            }else{
+              valuesToSend.talent_languages_attributes[i] = {id: savedTLid, _destroy: true}
+            }
+          }
+        }else{
+          for (let i = 0; i < languages.length; i++) {
+            const language = languages[i];
+            const savedTLid = this.state.savedTLIds[i];
+            if(savedTLid){
+              if(language.language_id){
+                valuesToSend.talent_languages_attributes[i] = {id: savedTLid, language_id: language.language_id}
+              }else{
+                valuesToSend.talent_languages_attributes[i] = {id: savedTLid, language_id: language.id}
+              }
+            }else{
+              if(language.language_id){
+                valuesToSend.talent_languages_attributes[i] = {id: language.id, language_id: language.language_id}
+              }else{
+                valuesToSend.talent_languages_attributes[i] = {language_id: language.id}
+              }
+            }
+          }
+        }
+        delete valuesToSend['talent_languages']
+      }
 
       this.props.updateTalent(this.props.talent, valuesToSend, values)
       initialCriteres = values
@@ -239,7 +332,6 @@ class WhiteBox extends Component {
       const valuesToSend = valuesFilter(values)
       console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
-        console.log("J'ai envoyé, SORRY !!")
         this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
       }
       this.setState({edit: !this.state.edit})
@@ -301,7 +393,7 @@ class WhiteBox extends Component {
                     </div>
                   )}
                 </Field> 
-                <Field name="experiences_attributes[0][position]">
+                <Field name="overview">
                   {({ input, meta }) => (
                     <div>
                       <p className="criteres">Poste</p>
@@ -328,7 +420,7 @@ class WhiteBox extends Component {
               <div className="photo-conv photo-conv-lg">{firstname.slice(0, 1)}</div>
             }
             <h3>{fullName}</h3>
-            <p>{experience[0] && experience[0].position ? experience[0].position : "❌ À renseigner ❌"}</p>
+            <p>{overview ? overview : "❌ À renseigner ❌"}</p>
             <div className="flex">
               <FontAwesomeIcon icon={["fas", "map-marker-alt"]} className="gray margin-right-5" />
               <p className="margin-bottom-45 gray">{city}</p>
@@ -351,7 +443,10 @@ class WhiteBox extends Component {
             {userModel == "Talent" ?
               <button 
                 className="btn-gray-violet margin-top-60"
-                onClick={handleClick}
+                onClick={() => {
+                  handleClick()
+                  this.saveTalentLanguageIds(talent_languages)
+                }}
                 >Modifier
               </button>
             :
@@ -369,7 +464,8 @@ function mapStateToProps(state) {
     talent: state.talent,
     jobs: state.jobs,
     user: state.user,
-    sectors: state.sectors
+    sectors: state.sectors,
+    languages: state.languages,
   };
 }
 
