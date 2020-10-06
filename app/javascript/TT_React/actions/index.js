@@ -209,6 +209,9 @@ export function updateTalent(talentValues, values, rawValues){
   if(rawValues.knowns){
     talentValues.knowns = rawValues.knowns
   }
+  if(rawValues.technos){
+    talentValues.technos = rawValues.technos
+  }
   if(values.talent_languages_attributes){
     const newLanguages = []
     for (let i = 0; i < values.talent_languages_attributes.length; i++) {

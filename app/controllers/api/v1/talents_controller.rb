@@ -57,15 +57,12 @@ class Api::V1::TalentsController < Api::V1::BaseController
   def update
     @talent = Talent.find(params[:id])
     if need_to_create_data?
-      p "params SKILLS"
       if params[:skill_ids].present?
         set_new_skills(@talent)
       end
-      p "params KNOWNS"
       if params[:known_ids].present?
         set_new_knowns(@talent)
       end
-      p "params TECHNOS"
       if params[:techno_ids].present?
         set_new_technos(@talent)
       end
@@ -78,7 +75,6 @@ class Api::V1::TalentsController < Api::V1::BaseController
         end
       end
     end
-    p "params TALENT"
     if @talent.update(talent_params)
       @talent.experiences.each do |experience|
         set_new_startups(experience.company_name) if startup_is_available?(experience.company_name)
