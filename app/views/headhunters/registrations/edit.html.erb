@@ -41,10 +41,10 @@
         <div class="margin-top-30">
           <div class="titre-section-icon"><i class="titre-section-icon-illu fas fa-angle-double-right"></i></div>
           <h2 class="titre-section">Supprimer <strong>mon compte</strong></h2>
-          <div style="display: flex; justify-content: center;">
-            <p>Voulez-vous supprimer votre compte?</p>
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <p class="no-margin margin-right-30">Voulez-vous supprimer votre compte?</p>
             <%= link_to registration_path(resource_name), data: { confirm: "Attention, toutes les informations et conversations seront définivement supprimées, Voulez-vous continuer ?" }, method: :delete do %>
-              <p style="margin-left: 10px">OUI</p>
+              <div class="btn-red-square">SUPPRIMER</div>
             <% end %>
           </div>
         </div>
