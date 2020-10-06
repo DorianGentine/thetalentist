@@ -11,7 +11,7 @@ class ProfilRecruteur extends Component {
   render () {
     return(
       <div>
-        <Navbar path="profil" />
+        <Navbar path="profilRecruteur" />
       </div>
     );
   }

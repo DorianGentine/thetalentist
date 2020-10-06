@@ -69,7 +69,6 @@
               label: false
             %>
             <p class="col-md-11 margin-bottom-30">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %>  de The Talentist.</p>
-            <%# et la <%= link_to "Politique de confidentialité", mentions_legales_path, target: "_blank", style: "text-decoration:underline" %>
 
             <div 
               class="g-recaptcha col-md-12 margin-bottom-30" 
@@ -97,16 +96,16 @@
   </div>
 </div>
 
- <script>
-   function validate_captcha(token) {
-     const submitBtn = document.getElementById('submit-btn')
-     if(token){
-      submitBtn.disabled = false
-      setTimeout(function(){ 
-        submitBtn.disabled = true; 
-      }, 60000);
-     }
-   }
- </script>
+<script>
+  function validate_captcha(token) {
+    const submitBtn = document.getElementById('submit-btn')
+    if(token){
+    submitBtn.disabled = false
+    setTimeout(function(){ 
+      submitBtn.disabled = true; 
+    }, 60000);
+    }
+  }
+</script>
 
 
