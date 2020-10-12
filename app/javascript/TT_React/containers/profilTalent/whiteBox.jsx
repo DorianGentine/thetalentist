@@ -57,7 +57,7 @@ class WhiteBox extends Component {
     let user = this.props.user
     let sectors = this.props.sectors
     let languages = this.props.languages
-    let fullName = "Chargement...", image = null, firstname = " ", overview, city, remuneration, availability, mobility, job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year, jobId, contrat, languesNames, talent_languages
+    let fullName = "Chargement...", image = null, firstname = " ", overview, city, remuneration, availability, mobilities, mobilitiesAnswerTitles, mobilitiesTitles = [], job, color = [], secteurNames, talent_sectors, criteres = [], initialCriteres = {}, year, jobId, contrat, languesNames, talent_languages
     let userModel
     if(sectors){
       sectors = sectors.sectors
@@ -94,7 +94,11 @@ class WhiteBox extends Component {
       talent_sectors = talent.sectors
       remuneration = talent.next_aventure.remuneration
       availability = talent.next_aventure.availability
-      mobility = talent.mobilities[0]
+      mobilities = talent.mobilities
+      mobilities.map((mobility, index) => {
+        mobilitiesTitles[index] = mobility.title
+      })
+      mobilitiesAnswerTitles = `${mobilities[0] ? mobilities[0].title : ""}${mobilities[1] ? `, ${mobilities[1].title}` : ""}${mobilities[2] ? `, ${mobilities[2].title}` : ""}`
       contrat = talent.next_aventure.contrat
       criteres = [
         {
@@ -141,16 +145,18 @@ class WhiteBox extends Component {
           name: "next_aventure_attributes[availability]"
         },{
           title: "Mobilité",
-          answer: mobility.title,
-          value: mobility.title,
+          answer: mobilitiesAnswerTitles,
+          value: mobilitiesTitles,
           options: [
             talent.talent.city,
             "Paris",
+            "Bordeaux",
             "Nationale",
-            "Internationale"
+            "Internationale",
+            "Remote"
           ],
-          limit: 1,
-          name: "next_aventure_attributes[mobilities_attributes][0][title]"
+          limit: 3,
+          name: "next_aventure_attributes[mobilities_attributes]"
         },{
           title: "Contrat",
           answer: contrat,
@@ -187,10 +193,7 @@ class WhiteBox extends Component {
           availability: [talent.next_aventure.availability],
           sectors: talent_sectors,
           contrat: [talent.next_aventure.contrat],
-          mobilities_attributes: [{
-            id: mobility.id,
-            title: [mobility.title]
-          }],
+          mobilities_attributes: mobilitiesTitles,
         },
         talent_languages: talent_languages
       }
@@ -252,13 +255,35 @@ class WhiteBox extends Component {
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.availability){
         valuesToSend.next_aventure_attributes.availability = valuesToSend.next_aventure_attributes.availability[0]
       }
+      // MEP mobilities
+      if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.mobilities_attributes){
+        for (let i = 0; i < valuesToSend.next_aventure_attributes.mobilities_attributes.length; i++) {
+          const mobility = valuesToSend.next_aventure_attributes.mobilities_attributes[i];
+          console.log('mobility', mobility)
+          let mobility_id
+          if(this.props.talent.mobilities[i]){
+            mobility_id = this.props.talent.mobilities[i].id
+          }
+          valuesToSend.next_aventure_attributes.mobilities_attributes[i] = {
+            id: mobility_id,
+            title: mobility,
+            next_aventure_id: this.props.talent.next_aventure.id,
+          }
+        }
+        for (let i = 0; i < this.props.talent.mobilities.length; i++) {
+          const initialMobility = this.props.talent.mobilities[i];
+          const mobility = valuesToSend.next_aventure_attributes.mobilities_attributes[i];
+          if(!mobility){
+            valuesToSend.next_aventure_attributes.mobilities_attributes[i] = {
+              id: initialMobility.id,
+              _destroy: true
+            }
+          }
+        }
+      }
       // MEP remuneration
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.remuneration){
         valuesToSend.next_aventure_attributes.remuneration = valuesToSend.next_aventure_attributes.remuneration[0]
-      }
-      // MEP mobilities_attributes[0].title
-      if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.mobilities_attributes[0].title){
-        valuesToSend.next_aventure_attributes.mobilities_attributes[0].title = valuesToSend.next_aventure_attributes.mobilities_attributes[0].title[0]
       }
       // MEP sector_ids
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.sectors){

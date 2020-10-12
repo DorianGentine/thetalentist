@@ -78,7 +78,6 @@ class InscriptionTalent extends Component {
       })
     }else{
       talent = values
-      console.log("ici", talent.next_aventure_attributes)
       city = talent.city
       linkedin = talent.linkedin
       next_aventure = talent.next_aventure_attributes
@@ -162,7 +161,7 @@ class InscriptionTalent extends Component {
           valuesToSend.next_aventure_attributes.mobilities_attributes[i] = {
             id: mobility_id,
             title: mobility,
-            next_aventure_id: 28,
+            next_aventure_id: this.props.talent.next_aventure.id,
           }
         }
         for (let i = 0; i < this.props.talent.mobilities.length; i++) {
