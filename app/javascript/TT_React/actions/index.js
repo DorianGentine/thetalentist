@@ -222,6 +222,7 @@ export function updateTalent(talentValues, values, rawValues){
     }
     talentValues.talent_languages = newLanguages
   }
+  console.log('talentValues', talentValues)
 
   return {
     type: FETCH_TALENT,

@@ -56,25 +56,25 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def update
     @talent = Talent.find(params[:id])
-    if need_to_create_data?
-      if params[:skill_ids].present?
-        set_new_skills(@talent)
-      end
-      if params[:known_ids].present?
-        set_new_knowns(@talent)
-      end
-      if params[:techno_ids].present?
-        set_new_technos(@talent)
-      end
-    end
-    if params.require(:talent)[:talent_formations_attributes].present?
-      params.require(:talent)[:talent_formations_attributes].each do |formation|
-        if formation_is_available?(formation[:formation_id])
-          formation[:formation_id] = set_new_formations(formation[:formation_id]) 
-          p "formation[:formation_id] #{formation[:formation_id]}"
-        end
-      end
-    end
+    # if need_to_create_data?
+    #   if params[:skill_ids].present?
+    #     set_new_skills(@talent)
+    #   end
+    #   if params[:known_ids].present?
+    #     set_new_knowns(@talent)
+    #   end
+    #   if params[:techno_ids].present?
+    #     set_new_technos(@talent)
+    #   end
+    # end
+    # if params.require(:talent)[:talent_formations_attributes].present?
+    #   params.require(:talent)[:talent_formations_attributes].each do |formation|
+    #     if formation_is_available?(formation[:formation_id])
+    #       formation[:formation_id] = set_new_formations(formation[:formation_id]) 
+    #       p "formation[:formation_id] #{formation[:formation_id]}"
+    #     end
+    #   end
+    # end
     if @talent.update(talent_params)
       @talent.experiences.each do |experience|
         set_new_startups(experience.company_name) if startup_is_available?(experience.company_name)
