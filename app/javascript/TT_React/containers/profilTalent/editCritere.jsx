@@ -40,7 +40,7 @@ class EditCritere extends Component {
     critere.name == "talent_job_attributes.job_id" ||
     critere.name == "next_aventure_attributes[contrat]" ||
     critere.name == "talent_languages" ||
-    critere.name == "next_aventure_attributes[mobilities_attributes][0][title]"){
+    critere.name == "next_aventure_attributes[mobilities_attributes]"){
       return <SelectCritere critere={critere} formValue={this.props.formValue} />
     }else{
       return(
