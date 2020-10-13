@@ -111,6 +111,7 @@ class TalentFormat
           proud: talent.next_aventure.present? && talent.next_aventure.proud.present? ? talent.next_aventure.proud : false,
           btob: talent.next_aventure.present? && talent.next_aventure.btob.present? ? true : false,
           btoc: talent.next_aventure.present? && talent.next_aventure.btoc.present? ? true : false,
+          mobilities: talent.mobilities.first.present? ? talent.mobilities : nil,
         },
         sectors: talent_sectors,
         formations: talent_formations,

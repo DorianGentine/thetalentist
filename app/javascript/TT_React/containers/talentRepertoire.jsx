@@ -36,23 +36,23 @@ class TalentRepertoire extends Component {
       })
       this.props.updateTalents(nextProps.talents.talents.length)
     }
-    if(this.props.filter != nextProps.filter){
-      let nbTalents = 0
-      const filter = nextProps.filter
-      for (let i = 0; i < this.state.talents.length; i++) {
-        const talent = this.state.talents[i]
-        if(filter.includes("pinned") && talent.pin == false){
-          nbTalents++
-        }else if(filter.includes("pinned") && talent.pin != false){
-          if(filter.length === 1 || filter.includes(talent.job.toLowerCase())){
-            nbTalents++
-          }
-        }else if(filter.length === 0 || filter.includes(talent.job.toLowerCase())){
-          nbTalents++
-        }
-      }
-      this.props.updateTalents(nbTalents)
-    }
+    // if(this.props.filter != nextProps.filter){
+    //   let nbTalents = 0
+    //   const filter = nextProps.filter
+    //   for (let i = 0; i < this.state.talents.length; i++) {
+    //     const talent = this.state.talents[i]
+    //     if(filter.includes("pinned") && talent.pin == false){
+    //       nbTalents++
+    //     }else if(filter.includes("pinned") && talent.pin != false){
+    //       if(filter.length === 1 || filter.includes(talent.job.toLowerCase())){
+    //         nbTalents++
+    //       }
+    //     }else if(filter.length === 0 || filter.includes(talent.job.toLowerCase())){
+    //       nbTalents++
+    //     }
+    //   }
+    //   this.props.updateTalents(nbTalents)
+    // }
   }
 
   render () {
@@ -79,14 +79,61 @@ class TalentRepertoire extends Component {
     }
 
     const renderTalents = () => this.state.talents.map((talent, index) => {
-      if(filter.includes("pinned") && talent.pin == false){
-        return null
-      }else if(filter.includes("pinned") && talent.pin != false){
-        if(filter.length === 1 || filter.includes(talent.job.toLowerCase())){
-          this.setState( nbTalents => { nbTalents: nbTalents + 1})
-          return <TalentCard talent={talent} index={index} key={index} />
+      const displayRem = () => {
+        const remTalent = Math.abs(parseInt(talent.next_aventure.remuneration, 10))/10
+        const remFilter = parseInt(filter.remFilter, 10)
+        if(filter.remFilter == 0){
+          return true
         }
-      }else if(filter.length === 0 || filter.includes(talent.job.toLowerCase())){
+        // Affiche rem de 30 si remFilter en dessous de 30
+        if(remFilter <= 3 && remTalent <= 3){
+          return true
+        }
+        // N'affiche pas les rem de -150 si remFilter à 150
+        if(remFilter == 15 && remTalent < 15){
+          return false
+        }
+        // Affiche rem de 100-150 quand remFilter dépasse 100
+        if(remFilter >= 10 && remTalent >= 10){
+          return true
+        }
+        // Affiche rem compris dans la vingtaine de remFilter
+        if(remTalent < remFilter + 1 && remTalent >= remFilter - 1){
+          return true
+        }
+      }
+      const displayMobility = () => {
+        if(filter.mobilityFilter.length == 0){
+          return true
+        }else{
+          let toD = false
+          for (let i = 0; i < talent.next_aventure.mobilities.length; i++) {
+            const title = talent.next_aventure.mobilities[i].title;
+            if(filter.mobilityFilter.includes(title.toLowerCase())){
+              toD = true
+            }
+          }
+          return toD
+        }
+      }
+
+      const toDisplay = () => {
+        if(filter.pinFilter && talent.pin == false){
+          return false
+        }
+        if(filter.jobFilter.length != 0 && !filter.jobFilter.includes(talent.job.toLowerCase())){
+          return false
+        }
+        if(!displayRem()){
+          return false
+        }
+        if(!displayMobility()){
+          return false
+        }
+        return true
+      }
+
+      if(toDisplay()){
         return <TalentCard talent={talent} index={index} key={index} />
       }
     })
@@ -112,7 +159,7 @@ class TalentRepertoire extends Component {
 function mapStateToProps(state) {
   return {
     talents: state.talents,
-    filter: state.filter,
+    // filter: state.filter,
     nbTalents: state.nbTalents,
   };
 }
