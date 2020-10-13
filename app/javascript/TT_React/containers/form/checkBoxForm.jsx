@@ -34,7 +34,7 @@ class RadioForm extends Component {
             }
           }
           // Désactive au-delà de la limite
-          if(limit != undefined && formName.length == limit && !formName.includes(value)){
+          if(limit != undefined && formName.length >= limit && !formName.includes(value)){
             disabled = true
           } 
         }

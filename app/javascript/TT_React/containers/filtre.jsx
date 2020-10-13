@@ -28,7 +28,7 @@ class Filtre extends Component {
       "Paris",
       "Bordeaux",
       "Nationale",
-      "Remote"
+      "Télétravail"
     ]
     // const remunerations = [
     //   "-30k€",
