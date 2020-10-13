@@ -155,7 +155,7 @@ export function updateConversation(conversationActive, message, status){
 export function updateTalent(talentValues, values, rawValues){
   const talent = talentValues.talent
   Object.keys(values).forEach(value => {
-    if(talent[value] && talent[value] !== values[value]){
+    if(talent[value] !== values[value]){
       talent[value] = values[value]
     }
   })

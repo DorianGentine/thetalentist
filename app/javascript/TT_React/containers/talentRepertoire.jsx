@@ -36,23 +36,6 @@ class TalentRepertoire extends Component {
       })
       this.props.updateTalents(nextProps.talents.talents.length)
     }
-    // if(this.props.filter != nextProps.filter){
-    //   let nbTalents = 0
-    //   const filter = nextProps.filter
-    //   for (let i = 0; i < this.state.talents.length; i++) {
-    //     const talent = this.state.talents[i]
-    //     if(filter.includes("pinned") && talent.pin == false){
-    //       nbTalents++
-    //     }else if(filter.includes("pinned") && talent.pin != false){
-    //       if(filter.length === 1 || filter.includes(talent.job.toLowerCase())){
-    //         nbTalents++
-    //       }
-    //     }else if(filter.length === 0 || filter.includes(talent.job.toLowerCase())){
-    //       nbTalents++
-    //     }
-    //   }
-    //   this.props.updateTalents(nbTalents)
-    // }
   }
 
   render () {
@@ -118,6 +101,20 @@ class TalentRepertoire extends Component {
       }
 
       const toDisplay = () => {
+        // FILTRE METIER A SUPPRIMER
+          const talentJob = talent.job.toLowerCase()
+          const jobsToDelete = [
+            "opérations",
+            "rh",
+            "finance",
+            "finances",
+            "digital",
+            "developper"
+          ]
+          if(jobsToDelete.includes(talentJob)){
+            return false
+          }
+        // END
         if(filter.pinFilter && talent.pin == false){
           return false
         }

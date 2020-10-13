@@ -151,7 +151,7 @@ class InscriptionTalent extends Component {
         }
       })
       // Met en page les mobilities
-      if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.mobilities_attributes){
+      if(step == 2 && valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.mobilities_attributes){
         for (let i = 0; i < valuesToSend.next_aventure_attributes.mobilities_attributes.length; i++) {
           const mobility = valuesToSend.next_aventure_attributes.mobilities_attributes[i];
           let mobility_id

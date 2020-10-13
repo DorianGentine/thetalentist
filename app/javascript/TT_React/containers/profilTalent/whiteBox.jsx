@@ -44,11 +44,13 @@ class WhiteBox extends Component {
 
   saveTalentLanguageIds = (talent_languages) => {
     const savedIds = []
-    for (let i = 0; i < talent_languages.length; i++) {
-      const tl = talent_languages[i];
-      savedIds[i] = tl.id
+    if(talent_languages){
+      for (let i = 0; i < talent_languages.length; i++) {
+        const tl = talent_languages[i];
+        savedIds[i] = tl.id
+      }
+      console.log('savedIds', savedIds)
     }
-    console.log('savedIds', savedIds)
     this.setState({ savedTLIds: savedIds})
   }
 
@@ -148,11 +150,11 @@ class WhiteBox extends Component {
           answer: mobilitiesAnswerTitles,
           value: mobilitiesTitles,
           options: [
-            talent.talent.city,
+            undefined,
             "Paris",
             "Bordeaux",
             "Nationale",
-            "Remote"
+            "Télétravail"
           ],
           limit: 3,
           name: "next_aventure_attributes[mobilities_attributes]"
@@ -218,7 +220,12 @@ class WhiteBox extends Component {
 
     const validate = values => {
       console.log('values', values)
-      criteres[4].options[0] = values.city
+      let firstChoice = values.city
+      if(values.city.toLowerCase().includes("paris") || 
+        values.city.toLowerCase().includes("bordeaux")){
+        firstChoice = undefined
+      }
+      criteres[4].options[0] = firstChoice
       const errors = {}
       return errors
     }

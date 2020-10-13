@@ -14,12 +14,19 @@ class InscriptionForm2 extends Component {
 
   render () {
     const actualStep = this.props.stepForm
+    let firstChoice = this.props.formValue.city
+    if(this.props.formValue.city != undefined){
+      if(this.props.formValue.city.toLowerCase().includes("paris") || 
+        this.props.formValue.city.toLowerCase().includes("bordeaux")){
+        firstChoice = undefined
+      } 
+    }
     const choices = [
-      this.props.formValue.city != undefined && this.props.formValue.city.toLowerCase() == "paris" ? undefined : this.props.formValue.city,
+      firstChoice,
       "Paris",
       "Bordeaux",
       "Nationale",
-      "Remote"
+      "Télétravail"
     ]
     return(
       <div className={setFormContainerClass(actualStep, 2)}>
