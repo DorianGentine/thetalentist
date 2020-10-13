@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Field } from 'react-final-form';
 
-class RadioForm extends Component {
+class RangeForm extends Component {
   render () {
     const isMobile = this.props.isMobile
     let rangeValue = this.props.formValue[this.props.name]
@@ -38,4 +38,4 @@ function mapStateToProps(state) {
 //   return bindActionCreators({ switchStepFrom }, dispatch);
 // }
 
-export default connect(mapStateToProps, null)(RadioForm);
+export default connect(mapStateToProps, null)(RangeForm);
