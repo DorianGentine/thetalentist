@@ -1,6 +1,12 @@
 .slider-container{
   width: 50%;
 }
+.slider-container-repertoire{
+  width: 80%;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
 
 .slider-container > .slider {
   -webkit-appearance: none;  /* Override default CSS styles */

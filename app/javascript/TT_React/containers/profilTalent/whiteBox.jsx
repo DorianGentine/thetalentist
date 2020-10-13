@@ -152,7 +152,6 @@ class WhiteBox extends Component {
             "Paris",
             "Bordeaux",
             "Nationale",
-            "Internationale",
             "Remote"
           ],
           limit: 3,
