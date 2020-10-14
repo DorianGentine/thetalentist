@@ -19,38 +19,42 @@ class CompletedTalent
     if @talent.talent_job.present?
       @talent.talent_job.year.present? ? count += value_input : count
     end
-    p "COMP PROFIL: #{count}"
     return count.round(0)
   end
 
-  def completed_formation_skill_language
+  def completed_formation_language
     count = 0
     formation_count = @talent.talent_formations.size > 0 ? @talent.talent_formations.size * 3 : 3
-    language_count = @talent.talent_languages.size > 0 ? @talent.talent_languages.size * 1 : 1
-    technos_count = @talent.techno_ids.size > 0 ? @talent.techno_ids.size * 1 : 1
-    value_input = stat(formation_count + language_count + technos_count)
+    language_count = 1
+    value_input = stat(formation_count + language_count)
     if @talent.talent_formations.count > 0
       @talent.talent_formations.each do |talent_formation|
         talent_formation.formation_id.present? ? count += value_input : count
         talent_formation.year.present? ? count += value_input : count
         talent_formation.title.present? ? count += value_input : count
-        # talent_formation.level.present? ? count += value_input : count
-        # talent_formation.type_of_formation.present? ? count += value_input : count
       end
     end
     if @talent.talent_languages.count > 0
-      @talent.talent_languages.each do |talent_language|
-        talent_language.language_id.present? ? count += value_input : count
-        # talent_language.level.present? ? count += value_input : count
-      end
+      @talent.talent_languages.first.language_id.present? ? count += value_input : count
+    end
+    return count.round(0)
+  end
+
+  def completed_known_skill_technos
+    count = 0
+    knowns_count = 1
+    skills_count = 1
+    technos_count = 1
+    value_input = stat(knowns_count + skills_count + technos_count)
+    if @talent.known_ids.count > 0
+      @talent.known_ids.first.present? ? count += value_input : count
+    end
+    if @talent.skill_ids.count > 0
+      @talent.skill_ids.first.present? ? count += value_input : count
     end
     if @talent.techno_ids.count > 0
-      @talent.techno_ids.each do |techno_id|
-        techno_id.present? ? count += value_input : count
-        # talent_skill.level.present? ? count += value_input : count
-      end
+      @talent.techno_ids.first.present? ? count += value_input : count
     end
-    p "COMP FORMATION_SKILL: #{count}"
     return count.round(0)
   end
 
@@ -66,7 +70,6 @@ class CompletedTalent
       experience.company_name.present? ? count += value_input : count
       experience.company_type_id.present? ? count += value_input : count
     end
-    p "COMP EXPERIENCE: #{count}"
     return count.round(0)
   end
 
@@ -82,28 +85,18 @@ class CompletedTalent
       next_aventure.sector_ids.count > 0 ? count += value_input : count
       next_aventure.availability.present? ? count += value_input : count
       next_aventure.waiting_for_one.present? ? count += value_input : count
-      # next_aventure.waiting_for_two.present? ? count += value_input : count
-      # next_aventure.waiting_for_three.present? ? count += value_input : count
       next_aventure.looking_for.present? ? count += value_input : count
       next_aventure.good_manager.present? ? count += value_input : count
       next_aventure.proud.present? ? count += value_input : count
       next_aventure.see_my_job.present? ? count += value_input : count
-      # next_aventure.btob || next_aventure.btoc ? count += value_input : count
-      # next_aventure.hunter_or_breeder.present? ? count += value_input : count
-      # next_aventure.creative_or_pragmatic.present? ? count += value_input : count
     end
-    p "COMP NEXT_AVENTURE: #{count}"
     return count.round(0)
   end
 
   def completed_totaly
-    if completed_profil != nil && completed_formation_skill_language != nil && completed_experience != nil && completed_next_aventure != nil
-      all_parts = completed_profil + completed_formation_skill_language + completed_next_aventure + completed_experience
-      result = all_parts / 4.0
-      return result.round(1)
-    else
-      return 0
-    end
+    all_parts = completed_profil + completed_formation_language + completed_known_skill_technos + completed_experience + completed_next_aventure
+    result = all_parts / 5.0
+    return result.round(1)
   end
 
   private
