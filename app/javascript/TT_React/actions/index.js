@@ -19,10 +19,8 @@ export const GUIDE_SU = 'GUIDE_SU';
 export const MESSAGERIE_ACTIVE_MOBILE = 'MESSAGERIE_ACTIVE_MOBILE';
 export const MODAL_CLOSED = 'MODAL_CLOSED';
 export const MODAL_OPENED = 'MODAL_OPENED';
-export const NB_TALENTS = 'NB_TALENTS';
 export const POST_COMPTE = 'POST_COMPTE';
 export const SIDEBAR_ACTIVE_MOBILE = 'SIDEBAR_ACTIVE_MOBILE';
-export const UPDATE_FILTER = 'UPDATE_FILTER';
 export const UPDATE_TALENT = 'UPDATE_TALENT';
 
 export async function fetchGET(url, type) {
@@ -89,26 +87,6 @@ export function prevGuideSu(step){
   return {
     type: GUIDE_SU,
     payload: prevStep
-  }
-}
-
-export function updateFilter(job){
-  return {
-    type: UPDATE_FILTER,
-    payload: job
-  }
-}
-
-export function updateTalents(nbTalents){
-  if(nbTalents == -1){
-    nbTalents = 0
-  }else{
-    nbTalents
-  }
-
-  return {
-    type: NB_TALENTS,
-    payload: nbTalents
   }
 }
 

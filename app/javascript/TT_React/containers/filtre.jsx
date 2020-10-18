@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { fetchGET, updateTalents } from '../actions';
+import { fetchGET } from '../actions';
 
 import FiltreItem from './filtreItem'
 import ModalGuide from './modalGuide'
@@ -30,18 +30,6 @@ class Filtre extends Component {
       "Nationale",
       "Télétravail"
     ]
-    // const remunerations = [
-    //   "-30k€",
-    //   "30k€ à 40k€",
-    //   "40k€ à 50k€",
-    //   "50k€ à 60k€",
-    //   "60 à 70k€",
-    //   "70 à 80k€",
-    //   "80 à 90k€",
-    //   "90 à 100k€",
-    //   "100 à 150k€",
-    //   "+150k€"
-    // ]
 
     const renderJobs = () => this.props.jobs.jobs.map((job, index) => {
       return(
@@ -50,14 +38,6 @@ class Filtre extends Component {
         </div>
       )
     })
-    
-    // const renderRemunerations = () => remunerations.map((remuneration, index) => {
-    //   return(
-    //     <div className="flex flex-column" key={index}>
-    //       <FiltreItem remuneration={remuneration} updateFilter={this.props.updateFilter} filter={filter} />
-    //     </div>
-    //   )
-    // })
 
     const renderRemunerations = () => {
       let rangeValue = 0
@@ -139,7 +119,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, updateTalents }, dispatch);
+  return bindActionCreators({ fetchGET }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filtre);

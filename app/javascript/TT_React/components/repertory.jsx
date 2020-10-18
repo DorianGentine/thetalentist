@@ -19,15 +19,25 @@ class Repertory extends Component {
         jobFilter: [],
         remFilter: 0,
         mobilityFilter: []
-      }
+      },
+      nbTalents: 0
     };
   }
 
   render () {
     const updateFilter = (filter) => {
-      console.log('filter', filter)
       this.setState({
         filter: JSON.parse(JSON.stringify(filter))
+      })
+    }
+    const updateNbTalents = (newNbTalents) => {
+      if(newNbTalents == -1){
+        newNbTalents = 0
+      }else{
+        newNbTalents
+      }
+      this.setState({
+        nbTalents: newNbTalents
       })
     }
 
@@ -38,8 +48,8 @@ class Repertory extends Component {
           <ModalTalent />
           <Filtre updateFilter={updateFilter} filter={this.state.filter} />
           <div className="col-md-10 col-xs-12" style={{padding: "0 50px 0 60px"}}>
-            <SearchResults />
-            <TalentRepertoire filter={this.state.filter} />
+            <SearchResults nbTalents={this.state.nbTalents} />
+            <TalentRepertoire filter={this.state.filter} updateNbTalents={updateNbTalents} />
           </div>
         </div>
       </div>
