@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { updateTalents } from '../actions';
+// import { updateTalents } from '../actions';
 
 class FiltreItem extends Component {
   constructor(props) {
@@ -91,8 +91,8 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateTalents }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ updateTalents }, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FiltreItem);
+export default connect(mapStateToProps, null)(FiltreItem);

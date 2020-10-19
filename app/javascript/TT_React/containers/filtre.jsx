@@ -72,7 +72,6 @@ class Filtre extends Component {
 
     const handleChange = (checked) => {
       this.setState({ checked: event.target.checked })
-      this.props.updateTalents(-1)
       filter.pinFilter = event.target.checked
       this.props.updateFilter(filter)
     }

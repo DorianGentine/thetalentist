@@ -58,7 +58,6 @@ class ProfilTalent extends Component {
     }
 
     const handleTitle = index => {
-      console.log('index', index)
       this.setState({title: index})
     }
 

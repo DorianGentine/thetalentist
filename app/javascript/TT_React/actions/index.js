@@ -144,7 +144,7 @@ export function updateTalent(talentValues, values, rawValues){
       if(valueExperience._destroy){
         delete talentValues.experiences[i]
       }else{
-        talentValues.experiences[i] = valueExperience
+        talentValues.experiences[i] = rawValues.experiences_attributes[i]
       }
     }
   }
@@ -162,7 +162,7 @@ export function updateTalent(talentValues, values, rawValues){
   if(values.next_aventure_attributes){
     const valuesNA = values.next_aventure_attributes
     Object.keys(valuesNA).forEach(value => {
-      if(talentValues.next_aventure[value] && talentValues.next_aventure[value] !== valuesNA[value]){
+      if(talentValues.next_aventure[value] !== valuesNA[value]){
         talentValues.next_aventure[value] = valuesNA[value]
       }
     })
@@ -173,7 +173,7 @@ export function updateTalent(talentValues, values, rawValues){
   if(values.talent_job_attributes){
     const valuesTJ = values.talent_job_attributes
     Object.keys(valuesTJ).forEach(value => {
-      if(talentValues.job[value] && talentValues.job[value] !== valuesTJ[value]){
+      if(talentValues.job[value] !== valuesTJ[value]){
         talentValues.job[value] = valuesTJ[value]
       }
     })
