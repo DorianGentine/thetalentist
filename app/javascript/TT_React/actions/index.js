@@ -138,14 +138,15 @@ export function updateTalent(talentValues, values, rawValues){
     }
   })
   if (values.experiences_attributes) {
-    const experiences_attributes = values.experiences_attributes
+    const experiences_attributes = rawValues.experiences_attributes
     for (let i = 0; i < experiences_attributes.length; i++) {
-      const valueExperience = experiences_attributes[i];
-      if(valueExperience._destroy){
-        delete talentValues.experiences[i]
-      }else{
-        talentValues.experiences[i] = rawValues.experiences_attributes[i]
-      }
+      talentValues.experiences[i] = rawValues.experiences_attributes[i]
+      talentValues.experiences[i].status = "created"
+      // const valueExperience = experiences_attributes[i];
+      // if(valueExperience._destroy){
+      //   delete talentValues.experiences[i]
+      // }else{
+      // }
     }
   }
   if (values.talent_formations_attributes) {
