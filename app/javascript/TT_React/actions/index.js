@@ -23,11 +23,14 @@ export const POST_COMPTE = 'POST_COMPTE';
 export const SIDEBAR_ACTIVE_MOBILE = 'SIDEBAR_ACTIVE_MOBILE';
 export const UPDATE_TALENT = 'UPDATE_TALENT';
 
-export async function fetchGET(url, type) {
+export async function fetchGET(url, type, callback) {
   let response = await fetch(url)
   let promise
   if(response.ok){
     promise = await response.json()
+    if(callback){
+      await callback
+    }
   } else {
     console.error(`${type} ne passe pas : `, response)
     promise = null
