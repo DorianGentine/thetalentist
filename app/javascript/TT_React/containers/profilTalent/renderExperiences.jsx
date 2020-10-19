@@ -140,8 +140,10 @@ class ExperiencesProfessionnelles extends Component {
     const valuesFilter = values => {
       const valuesToSend = {}
       const preValues = initialValues
-      if(this.state.deleted){
+      if(this.state.deleted || preValues.experiences_attributes != values.experiences_attributes){
         valuesToSend.experiences_attributes = JSON.parse(JSON.stringify(values.experiences_attributes))
+      }
+      if(this.state.deleted){
         for (let i = 0; i < this.state.deletedExperiencesIds.length; i++) {
           const experienceId = this.state.deletedExperiencesIds[i];
           const deletedExperience = {
@@ -150,21 +152,17 @@ class ExperiencesProfessionnelles extends Component {
           }
           valuesToSend.experiences_attributes.push(deletedExperience)
         }
-      }else{
-        Object.keys(values).forEach(value => {
-          if(preValues[value] !== values[value]){
-            valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
-          }
-        })
       }
 
       if(valuesToSend.experiences_attributes){
+        valuesToSend.experiences_attributes = valuesToSend.experiences_attributes.filter( el => el.status != "created" || el._destroy)
+        console.log('valuesToSend.experiences_attributes', valuesToSend.experiences_attributes)
         for (let i = 0; i < valuesToSend.experiences_attributes.length; i++) {
           const experiences_attributes = valuesToSend.experiences_attributes[i];
           if (typeof experiences_attributes.company_type_id == "object") {
             experiences_attributes.company_type_id = experiences_attributes.company_type_id.id
           }
-          if(!experiences_attributes.destroy){
+          if(!experiences_attributes._destroy){
             experiences_attributes.years = new Date(experiences_attributes.years)
             if(experiences_attributes.years.getFullYear() == 1970){
               experiences_attributes.years = null
@@ -174,10 +172,8 @@ class ExperiencesProfessionnelles extends Component {
             }else{
               experiences_attributes.currently = false
             }
-          }
-          // if(typeof experiences_attributes.company_name == "object"){
             experiences_attributes.company_name = experiences_attributes.company_name.name
-          // }
+          }
           delete experiences_attributes.created_at
           delete experiences_attributes.updated_at
           delete experiences_attributes.link
@@ -185,16 +181,31 @@ class ExperiencesProfessionnelles extends Component {
         }
       }
       console.log('valuesToSend', valuesToSend)
-      this.props.updateTalent(this.props.talent, valuesToSend, values)
-      // initialValues = values
+      // this.props.updateTalent(this.props.talent, valuesToSend, values)
       return valuesToSend
     }
 
     const onSubmit = values => {
       const valuesToSend = valuesFilter(values)
-      console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
-        this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
+        // this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
+        // this.props.fetchGET(`/api/v1/talents/${this.props.talent.talent.id}`, "FETCH_TALENT"))
+        fetch(`/api/v1/talents/${talent.talent.id}`, {method: "PATCH", body: JSON.stringify(valuesToSend), headers: { 'Content-Type': 'application/json'}})
+          .then(r => {
+            if(r.ok){
+              this.props.fetchGET(`/api/v1/talents/${talent.talent.id}`, "FETCH_TALENT")
+              for (let i = 0; i < values.experiences_attributes.length; i++) {
+                const experience = values.experiences_attributes[i];
+                if(!experience.company_name.id){
+                  fetch('/api/v1/startups')
+                    .then(r => {
+                      console.log('result.json', r.json())
+                      this.props.fetchGET(`/api/v1/talents/${talent.talent.id}`, "FETCH_TALENT")
+                    })
+                }
+              }
+            }
+          })
       }
       this.setState({
         edit: false,
