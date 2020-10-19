@@ -1,3 +1,14 @@
+
+
+
+
+// EVITER DOUBLON QUAND ON CREE PLUSIEURS EP SANS REFRESH
+// ATTRIBUT "ALREEADY-EXIST"?
+
+
+
+
+
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -6,10 +17,8 @@ import { Form, Field } from 'react-final-form';
 import Creatable from 'react-select/creatable';
 
 import { fetchGET, fetchPost, updateTalent } from '../../actions';
-// import setJobColor from '../../../components/setJobColor';
 
 import RenderDatePicker from './renderDatePicker'
-import SelectCritere from './selectCritere'
 
 class ExperiencesProfessionnelles extends Component {
   constructor(props) {
@@ -75,7 +84,6 @@ class ExperiencesProfessionnelles extends Component {
         if(typeof experience.company_type_id === "number"){
           experience.company_type_id = companyTypes.find(companyType => companyType.id === experience.company_type_id)
         }
-        console.log('experience.starting', experience.starting)
         if(experience.starting && experience.starting.length < 8){
           const startingParts = experience.starting.split("-")
           experience.starting = new Date(startingParts[1], startingParts[0] - 1)
@@ -167,17 +175,18 @@ class ExperiencesProfessionnelles extends Component {
               experiences_attributes.currently = false
             }
           }
-          if(typeof experiences_attributes.company_name == "object"){
+          // if(typeof experiences_attributes.company_name == "object"){
             experiences_attributes.company_name = experiences_attributes.company_name.name
-          }
+          // }
           delete experiences_attributes.created_at
           delete experiences_attributes.updated_at
           delete experiences_attributes.link
           delete experiences_attributes.talent_id
         }
       }
+      console.log('valuesToSend', valuesToSend)
       this.props.updateTalent(this.props.talent, valuesToSend, values)
-      initialValues = values
+      // initialValues = values
       return valuesToSend
     }
 
@@ -306,7 +315,6 @@ class ExperiencesProfessionnelles extends Component {
     
     const renderExperiences = () => experiences.map((experience, index) => {
       let formatted_starting = new Date(experience.starting)
-      console.log('formatted_starting', formatted_starting)
       formatted_starting = `${("0" + (formatted_starting.getMonth() + 1)).slice(-2)}/${formatted_starting.getFullYear()}`
       let formatted_years = experience.years && experience.years != "" ? new Date(experience.years) : null
       formatted_years = formatted_years && formatted_years.getFullYear() != 1970 ? `${("0" + (formatted_years.getMonth() + 1)).slice(-2)}/${formatted_years.getFullYear()}` : null
@@ -317,7 +325,7 @@ class ExperiencesProfessionnelles extends Component {
           <div className="flex flex-wrap">
             <div className="flex">
               <FontAwesomeIcon icon={["fas", "suitcase"]} className="gray margin-right-15" />
-              <p className="gray margin-right-30">{experience.company_name ? typeof experience.company_name === "string" ? experience.company_name : experience.company_name.name : "" }</p>
+              <p className="gray margin-right-30">{experience.company_name ? typeof experience.company_name === "string" ? experience.company_name.toUpperCase() : experience.company_name.name.toUpperCase() : "" }</p>
             </div>
             <div className="flex">
               <FontAwesomeIcon icon={["fas", "calendar"]} className="gray margin-right-15" />

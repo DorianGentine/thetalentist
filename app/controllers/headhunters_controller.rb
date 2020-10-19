@@ -22,12 +22,13 @@ class HeadhuntersController < ApplicationController
     end
 
     talents_scope = Talent.where(:visible => true).order('created_at DESC')
+    # talents_scope = Talent.where(:jobs => jobs.first.title.include?("Prod")).order('created_at DESC')
 
     @relationship = Relationship.new
     @job_alert = JobAlerte.new
 
     @jobs = Job.all.order(:id)
-
+      
     talents_visible = talents_scope.reorder(last_sign_in_at: :desc, completing: :desc)
     # talents_visible = talents_scope.reorder(completing: :desc, last_sign_in_at: :desc)
 
