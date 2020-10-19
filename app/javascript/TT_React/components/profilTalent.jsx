@@ -21,7 +21,9 @@ class ProfilTalent extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchGET(`/api/v1/talents/${this.props.match.params.id}`, "FETCH_TALENT")
+    if(!this.props.talent){
+      this.props.fetchGET(`/api/v1/talents/${this.props.match.params.id}`, "FETCH_TALENT")
+    }
     if(!this.props.formations){
       this.props.fetchGET('/api/v1/formations', "FETCH_FORMATIONS")
     }
@@ -58,7 +60,6 @@ class ProfilTalent extends Component {
     }
 
     const handleTitle = index => {
-      console.log('index', index)
       this.setState({title: index})
     }
 

@@ -33,7 +33,6 @@ import profilTalent from './components/profilTalent';
 import companyTypesReducer from './reducers/company_types_reducer';
 import conversationActiveReducer from './reducers/conversation_active_reducer';
 import conversationsReducer from './reducers/conversations_reducer';
-import filterReducer from './reducers/filter_reducer';
 import formationsReducer from './reducers/formations_reducer';
 import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
@@ -42,7 +41,6 @@ import languagesReducer from './reducers/languages_reducer';
 import messagerieActiveMobileReducer from './reducers/messagerie_active_mobile_reducer';
 import modalSelectedReducer from './reducers/modal_selected_reducer';
 import modalOpenedReducer from './reducers/modal_opened_reducer';
-import nbTalentsReducer from './reducers/nb_talents_reducer';
 import notificationsReducer from './reducers/notifications_reducer';
 import sectorsReducer from './reducers/sectors_reducer';
 import sidebarActiveMobileReducer from './reducers/sidebar_active_mobile_reducer';
@@ -66,7 +64,6 @@ if(app){
     companyTypes: null,
     conversationActive: [],
     conversations: [],
-    filter: [],
     formations: null,
     guideSu: 0,
     isMobile: isMobileState,
@@ -76,7 +73,6 @@ if(app){
     messagerieActiveMobile: false,
     modalSelected: null,
     modalOpened: false,
-    nbTalents: 0,
     notifications: [],
     sectors: null,
     sidebarActiveMobile: false,
@@ -92,7 +88,6 @@ if(app){
     companyTypes: companyTypesReducer,
     conversationActive: conversationActiveReducer,
     conversations: conversationsReducer,
-    filter: filterReducer,
     formations: formationsReducer,
     guideSu: guideSuReducer,
     isMobile: identityReducer,
@@ -102,7 +97,6 @@ if(app){
     messagerieActiveMobile: messagerieActiveMobileReducer,
     modalSelected: modalSelectedReducer,
     modalOpened: modalOpenedReducer,
-    nbTalents: nbTalentsReducer,
     notifications: notificationsReducer,
     sectors: sectorsReducer,
     sidebarActiveMobile: sidebarActiveMobileReducer,

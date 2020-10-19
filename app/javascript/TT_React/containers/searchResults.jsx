@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // import { fetchGET, actionTest } from '../actions';
@@ -18,20 +18,18 @@ class SearchResults extends Component {
     }
 
     return(
-      <div className="">
+      <div>
         <p>{`Résultats: ${text}`}</p>
       </div>
     );
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    talents: state.talents,
-    filter: state.filter,
-    nbTalents: state.nbTalents,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     nbTalents: state.nbTalents,
+//   };
+// }
 
 // function mapDispatchToProps(dispatch) {
 //   return bindActionCreators({
@@ -39,4 +37,4 @@ function mapStateToProps(state) {
 //   }, dispatch);
 // }
 
-export default connect(mapStateToProps, null)(SearchResults);
+export default connect(null, null)(SearchResults);

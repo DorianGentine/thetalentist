@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { updateFilter, updateTalents } from '../actions';
+// import { updateTalents } from '../actions';
 
 class FiltreItem extends Component {
   constructor(props) {
@@ -33,20 +33,49 @@ class FiltreItem extends Component {
 
   render () {
     const job = this.props.job
+    const remuneration = this.props.remuneration
+    const mobility = this.props.mobility
+    const filter = this.props.filter
+    
+    let title, selectedFilter
+    if(job){
+      title = job.title
+      selectedFilter = filter.jobFilter
+    }else if(remuneration){
+      title = remuneration
+      selectedFilter = filter.remFilter
+    }else if(mobility){
+      title = mobility
+      selectedFilter = filter.mobilityFilter
+    }
+
     const handleChange = (checked) => {
       this.setState({ checked: event.target.checked })
       this.props.updateTalents(-1)
-      this.props.updateFilter(this.props.job.title.toLowerCase())
+      let selectedFilterUpdated
+      if(selectedFilter.includes(title.toLowerCase())){
+        selectedFilterUpdated = selectedFilter.filter(index => index !== title.toLowerCase())
+      }else{
+        selectedFilterUpdated = selectedFilter.concat(title.toLowerCase())
+      }
+      if(job){
+        filter.jobFilter = selectedFilterUpdated
+      }else if(remuneration){
+        filter.remFilter = selectedFilterUpdated
+      }else if(mobility){
+        filter.mobilityFilter = selectedFilterUpdated
+      }
+      this.props.updateFilter(filter)
     }
 
     return (
       <div>
-        <label className="checkbox-react">{job.title}
+        <label className="checkbox-react">{title}
           <input
               type="checkbox"
               className="no-margin margin-right-15"
               checked={this.state.checked}
-              id={job.title}
+              id={title}
               onChange={() => {handleChange(this.state.checked)}}
             />
           <span className="checkmark"></span>
@@ -62,8 +91,8 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateFilter, updateTalents }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ updateTalents }, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FiltreItem);
+export default connect(mapStateToProps, null)(FiltreItem);

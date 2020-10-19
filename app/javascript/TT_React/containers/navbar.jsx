@@ -126,7 +126,7 @@ class Navbar extends Component {
       
       notifications = filterNotifications(this.props.notifications)
     }
-    if(path == "dashboardHeadhunter" || path == "dashboardTalent"){
+    if(path == "dashboardHeadhunter" || path == "dashboardTalent" || path == "profilRecruteur"){
       pageReact = false
     }
 
@@ -192,15 +192,9 @@ class Navbar extends Component {
           <div className="navbar-talentist-right">
             {userType == "Recruteur" ?
               <div className="flex align-items-center">
-                {/* {pageReact ?
-                  <Link to="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
-                    <FontAwesomeIcon icon={["far", "question-circle"]}/>
-                  </Link>
-                : */}
-                  <a href="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
-                    <FontAwesomeIcon icon={["far", "question-circle"]}/>
-                  </a>
-                {/* } */}
+                <a href="/repertoire?query=new_member" className="navbar-wagon-item navbar-wagon-link">
+                  <FontAwesomeIcon icon={["far", "question-circle"]}/>
+                </a>
                 <div className="relative">
                   {pageReact ?
                     <Link className={`navbar-wagon-item navbar-wagon-link${path == "repertoire" ? " active" : ""}`} to="/repertoire">RÉPERTOIRE</Link>
@@ -277,13 +271,13 @@ class Navbar extends Component {
                       {this.props.guideSu == 6 ? <ModalGuide /> : null}
                     </li>
                   : null }
-                  {userType == "Recruteur" ?
+                  {/* {userType == "Recruteur" ?
                   <li>
                     <a href={`${profilUrl}/edit`}>
                       Editer mon compte
                     </a>
                   </li>
-                  : null }
+                  : null } */}
                   {userType != "Talentist" ?
                   <li>
                     <a href={userType == "Recruteur" ? "/headhunters/edit" : "/talents/edit"}>

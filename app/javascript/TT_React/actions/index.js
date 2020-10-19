@@ -19,10 +19,8 @@ export const GUIDE_SU = 'GUIDE_SU';
 export const MESSAGERIE_ACTIVE_MOBILE = 'MESSAGERIE_ACTIVE_MOBILE';
 export const MODAL_CLOSED = 'MODAL_CLOSED';
 export const MODAL_OPENED = 'MODAL_OPENED';
-export const NB_TALENTS = 'NB_TALENTS';
 export const POST_COMPTE = 'POST_COMPTE';
 export const SIDEBAR_ACTIVE_MOBILE = 'SIDEBAR_ACTIVE_MOBILE';
-export const UPDATE_FILTER = 'UPDATE_FILTER';
 export const UPDATE_TALENT = 'UPDATE_TALENT';
 
 export async function fetchGET(url, type) {
@@ -92,26 +90,6 @@ export function prevGuideSu(step){
   }
 }
 
-export function updateFilter(job){
-  return {
-    type: UPDATE_FILTER,
-    payload: job
-  }
-}
-
-export function updateTalents(nbTalents){
-  if(nbTalents == -1){
-    nbTalents = 0
-  }else{
-    nbTalents
-  }
-
-  return {
-    type: NB_TALENTS,
-    payload: nbTalents
-  }
-}
-
 export function openMessagerie(opened){
   return {
     type: MESSAGERIE_ACTIVE_MOBILE,
@@ -155,19 +133,20 @@ export function updateConversation(conversationActive, message, status){
 export function updateTalent(talentValues, values, rawValues){
   const talent = talentValues.talent
   Object.keys(values).forEach(value => {
-    if(talent[value] && talent[value] !== values[value]){
+    if(talent[value] !== values[value]){
       talent[value] = values[value]
     }
   })
   if (values.experiences_attributes) {
-    const experiences_attributes = values.experiences_attributes
+    const experiences_attributes = rawValues.experiences_attributes
     for (let i = 0; i < experiences_attributes.length; i++) {
-      const valueExperience = experiences_attributes[i];
-      if(valueExperience._destroy){
-        delete talentValues.experiences[i]
-      }else{
-        talentValues.experiences[i] = valueExperience
-      }
+      talentValues.experiences[i] = rawValues.experiences_attributes[i]
+      talentValues.experiences[i].status = "created"
+      // const valueExperience = experiences_attributes[i];
+      // if(valueExperience._destroy){
+      //   delete talentValues.experiences[i]
+      // }else{
+      // }
     }
   }
   if (values.talent_formations_attributes) {
@@ -184,7 +163,7 @@ export function updateTalent(talentValues, values, rawValues){
   if(values.next_aventure_attributes){
     const valuesNA = values.next_aventure_attributes
     Object.keys(valuesNA).forEach(value => {
-      if(talentValues.next_aventure[value] && talentValues.next_aventure[value] !== valuesNA[value]){
+      if(talentValues.next_aventure[value] !== valuesNA[value]){
         talentValues.next_aventure[value] = valuesNA[value]
       }
     })
@@ -195,7 +174,7 @@ export function updateTalent(talentValues, values, rawValues){
   if(values.talent_job_attributes){
     const valuesTJ = values.talent_job_attributes
     Object.keys(valuesTJ).forEach(value => {
-      if(talentValues.job[value] && talentValues.job[value] !== valuesTJ[value]){
+      if(talentValues.job[value] !== valuesTJ[value]){
         talentValues.job[value] = valuesTJ[value]
       }
     })
@@ -209,6 +188,9 @@ export function updateTalent(talentValues, values, rawValues){
   if(rawValues.knowns){
     talentValues.knowns = rawValues.knowns
   }
+  if(rawValues.technos){
+    talentValues.technos = rawValues.technos
+  }
   if(values.talent_languages_attributes){
     const newLanguages = []
     for (let i = 0; i < values.talent_languages_attributes.length; i++) {
@@ -219,6 +201,7 @@ export function updateTalent(talentValues, values, rawValues){
     }
     talentValues.talent_languages = newLanguages
   }
+  console.log('talentValues', talentValues)
 
   return {
     type: FETCH_TALENT,

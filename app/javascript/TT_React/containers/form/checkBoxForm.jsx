@@ -20,6 +20,8 @@ class RadioForm extends Component {
           formName = this.props.formValue.next_aventure_attributes.sector_ids
         }else if(name == "next_aventure_attributes[waiting_for_one]"){
           formName = this.props.formValue.next_aventure_attributes.waiting_for_one
+        }else if(name == "next_aventure_attributes[mobilities_attributes]"){
+          formName = this.props.formValue.next_aventure_attributes.mobilities_attributes
         }
 
         const limit = this.props.limit
@@ -32,7 +34,7 @@ class RadioForm extends Component {
             }
           }
           // Désactive au-delà de la limite
-          if(limit != undefined && formName.length == limit && !formName.includes(value)){
+          if(limit != undefined && formName.length >= limit && !formName.includes(value)){
             disabled = true
           } 
         }

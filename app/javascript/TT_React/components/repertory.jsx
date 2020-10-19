@@ -8,21 +8,48 @@ import Navbar from '../containers/navbar'
 import Filtre from '../containers/filtre'
 import TalentRepertoire from '../containers/talentRepertoire'
 import SearchResults from '../containers/searchResults'
-import ModalGuide from '../containers/modalGuide'
 import ModalTalent from '../containers/modalTalent'
 
 class Repertory extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      filter: {
+        pinFilter: false,
+        jobFilter: [],
+        remFilter: 0,
+        mobilityFilter: []
+      },
+      nbTalents: 0
+    };
+  }
 
   render () {
+    const updateFilter = (filter) => {
+      this.setState({
+        filter: JSON.parse(JSON.stringify(filter))
+      })
+    }
+    const updateNbTalents = (newNbTalents) => {
+      if(newNbTalents == -1){
+        newNbTalents = 0
+      }else{
+        newNbTalents
+      }
+      this.setState({
+        nbTalents: newNbTalents
+      })
+    }
+
     return(
       <div>
         <Navbar path="repertoire" />
         <div id="all-talents" className="row no-margin" style={{padding: "40px 0"}}>
           <ModalTalent />
-          <Filtre />
+          <Filtre updateFilter={updateFilter} filter={this.state.filter} />
           <div className="col-md-10 col-xs-12" style={{padding: "0 50px 0 60px"}}>
-            <SearchResults />
-            <TalentRepertoire />
+            <SearchResults nbTalents={this.state.nbTalents} />
+            <TalentRepertoire filter={this.state.filter} updateNbTalents={updateNbTalents} />
           </div>
         </div>
       </div>

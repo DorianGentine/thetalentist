@@ -43,23 +43,34 @@ class TalentCard extends PureComponent {
     if(user){
       userModel = user.is_a_model
     }
-
-    if(talent.position !== null && talent.position.length >= 30){
-      $('[data-toggle="tooltip"]').tooltip()
-    }
-
+    let talentMobilities = ""
     let border = {
       border: `1px solid ${color.color}`,
     }
-    if(relation === "pending"){
-      border = {
-        border: `1px solid ${color.color}`,
-        borderTop: "1px solid lightgray"
+    if(talent){
+      if(relation === "pending"){
+        border = {
+          border: `1px solid ${color.color}`,
+          borderTop: "1px solid lightgray"
+        }
+      }else if(relation === "Accepter"){
+        border = {
+          border: `1px solid ${color.color}`,
+          borderTop: "1px solid #000748"
+        }
       }
-    }else if(relation === "Accepter"){
-      border = {
-        border: `1px solid ${color.color}`,
-        borderTop: "1px solid #000748"
+      if(talent.next_aventure.mobilities != undefined && talent.next_aventure.mobilities.length != 0){
+        for (let i = 0; i < talent.next_aventure.mobilities.length; i++) {
+          const mobility = talent.next_aventure.mobilities[i];
+          let separation = ", "
+          if(i == 0){
+            separation = ""
+          }
+          talentMobilities = talentMobilities + separation + mobility.title
+        }
+      }
+      if(talent.position !== null && talent.position.length >= 30){
+        $('[data-toggle="tooltip"]').tooltip()
       }
     }
 
@@ -133,6 +144,8 @@ class TalentCard extends PureComponent {
             <p className="grid-info">{talent.year_experience_job} {talent.year_experience_job === 1 ? "an" : "ans"}</p>
             <p className="grid-title">Rémunération:</p>
             <p className="grid-info">{talent.next_aventure.remuneration}</p>
+            <p className="grid-title">Mobilités:</p>
+            <p className="grid-info" style={{minHeight: "40px"}}>{talentMobilities}</p>
           </div>
           <div className="margin-top-15 flex flex-wrap card-small-plus">{talent.skills.length != 0 ? renderSkills() : renderSmallPlus()}</div>
           <div className="flex relative margin-top-15 flex-end">

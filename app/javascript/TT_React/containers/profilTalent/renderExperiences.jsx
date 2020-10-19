@@ -1,3 +1,14 @@
+
+
+
+
+// EVITER DOUBLON QUAND ON CREE PLUSIEURS EP SANS REFRESH
+// ATTRIBUT "ALREEADY-EXIST"?
+
+
+
+
+
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -6,10 +17,8 @@ import { Form, Field } from 'react-final-form';
 import Creatable from 'react-select/creatable';
 
 import { fetchGET, fetchPost, updateTalent } from '../../actions';
-// import setJobColor from '../../../components/setJobColor';
 
 import RenderDatePicker from './renderDatePicker'
-import SelectCritere from './selectCritere'
 
 class ExperiencesProfessionnelles extends Component {
   constructor(props) {
@@ -49,6 +58,11 @@ class ExperiencesProfessionnelles extends Component {
     let companyTypes = this.props.companyTypes
     let startups = this.props.startups
     let userModel, initialValues = {}
+    let color = {backgroundColor: "#E5E6ED", color: "#273243"}
+    
+    if (this.props.color) {
+      color = this.props.color
+    }
     if(companyTypes){
       companyTypes = companyTypes.company_types
     }
@@ -70,7 +84,6 @@ class ExperiencesProfessionnelles extends Component {
         if(typeof experience.company_type_id === "number"){
           experience.company_type_id = companyTypes.find(companyType => companyType.id === experience.company_type_id)
         }
-        console.log('experience.starting', experience.starting)
         if(experience.starting && experience.starting.length < 8){
           const startingParts = experience.starting.split("-")
           experience.starting = new Date(startingParts[1], startingParts[0] - 1)
@@ -127,8 +140,10 @@ class ExperiencesProfessionnelles extends Component {
     const valuesFilter = values => {
       const valuesToSend = {}
       const preValues = initialValues
-      if(this.state.deleted){
+      if(this.state.deleted || preValues.experiences_attributes != values.experiences_attributes){
         valuesToSend.experiences_attributes = JSON.parse(JSON.stringify(values.experiences_attributes))
+      }
+      if(this.state.deleted){
         for (let i = 0; i < this.state.deletedExperiencesIds.length; i++) {
           const experienceId = this.state.deletedExperiencesIds[i];
           const deletedExperience = {
@@ -137,21 +152,17 @@ class ExperiencesProfessionnelles extends Component {
           }
           valuesToSend.experiences_attributes.push(deletedExperience)
         }
-      }else{
-        Object.keys(values).forEach(value => {
-          if(preValues[value] !== values[value]){
-            valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
-          }
-        })
       }
 
       if(valuesToSend.experiences_attributes){
+        valuesToSend.experiences_attributes = valuesToSend.experiences_attributes.filter( el => el.status != "created" || el._destroy)
+        console.log('valuesToSend.experiences_attributes', valuesToSend.experiences_attributes)
         for (let i = 0; i < valuesToSend.experiences_attributes.length; i++) {
           const experiences_attributes = valuesToSend.experiences_attributes[i];
           if (typeof experiences_attributes.company_type_id == "object") {
             experiences_attributes.company_type_id = experiences_attributes.company_type_id.id
           }
-          if(!experiences_attributes.destroy){
+          if(!experiences_attributes._destroy){
             experiences_attributes.years = new Date(experiences_attributes.years)
             if(experiences_attributes.years.getFullYear() == 1970){
               experiences_attributes.years = null
@@ -161,8 +172,6 @@ class ExperiencesProfessionnelles extends Component {
             }else{
               experiences_attributes.currently = false
             }
-          }
-          if(typeof experiences_attributes.company_name == "object"){
             experiences_attributes.company_name = experiences_attributes.company_name.name
           }
           delete experiences_attributes.created_at
@@ -171,16 +180,32 @@ class ExperiencesProfessionnelles extends Component {
           delete experiences_attributes.talent_id
         }
       }
-      this.props.updateTalent(this.props.talent, valuesToSend, values)
-      initialValues = values
+      console.log('valuesToSend', valuesToSend)
+      // this.props.updateTalent(this.props.talent, valuesToSend, values)
       return valuesToSend
     }
 
     const onSubmit = values => {
       const valuesToSend = valuesFilter(values)
-      console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
-        this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
+        // this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
+        // this.props.fetchGET(`/api/v1/talents/${this.props.talent.talent.id}`, "FETCH_TALENT"))
+        fetch(`/api/v1/talents/${talent.talent.id}`, {method: "PATCH", body: JSON.stringify(valuesToSend), headers: { 'Content-Type': 'application/json'}})
+          .then(r => {
+            if(r.ok){
+              this.props.fetchGET(`/api/v1/talents/${talent.talent.id}`, "FETCH_TALENT")
+              for (let i = 0; i < values.experiences_attributes.length; i++) {
+                const experience = values.experiences_attributes[i];
+                if(!experience.company_name.id){
+                  fetch('/api/v1/startups')
+                    .then(r => {
+                      console.log('result.json', r.json())
+                      this.props.fetchGET(`/api/v1/talents/${talent.talent.id}`, "FETCH_TALENT")
+                    })
+                }
+              }
+            }
+          })
       }
       this.setState({
         edit: false,
@@ -301,7 +326,6 @@ class ExperiencesProfessionnelles extends Component {
     
     const renderExperiences = () => experiences.map((experience, index) => {
       let formatted_starting = new Date(experience.starting)
-      console.log('formatted_starting', formatted_starting)
       formatted_starting = `${("0" + (formatted_starting.getMonth() + 1)).slice(-2)}/${formatted_starting.getFullYear()}`
       let formatted_years = experience.years && experience.years != "" ? new Date(experience.years) : null
       formatted_years = formatted_years && formatted_years.getFullYear() != 1970 ? `${("0" + (formatted_years.getMonth() + 1)).slice(-2)}/${formatted_years.getFullYear()}` : null
@@ -312,7 +336,7 @@ class ExperiencesProfessionnelles extends Component {
           <div className="flex flex-wrap">
             <div className="flex">
               <FontAwesomeIcon icon={["fas", "suitcase"]} className="gray margin-right-15" />
-              <p className="gray margin-right-30">{experience.company_name ? typeof experience.company_name === "string" ? experience.company_name : experience.company_name.name : "" }</p>
+              <p className="gray margin-right-30">{experience.company_name ? typeof experience.company_name === "string" ? experience.company_name.toUpperCase() : experience.company_name.name.toUpperCase() : "" }</p>
             </div>
             <div className="flex">
               <FontAwesomeIcon icon={["fas", "calendar"]} className="gray margin-right-15" />
@@ -329,7 +353,7 @@ class ExperiencesProfessionnelles extends Component {
     }
 
     return(
-      <div className="gray-border-box" style={{borderColor: this.props.color.backgroundColor}}>
+      <div className="gray-border-box" style={{borderColor: color.backgroundColor}}>
         <div className="flex space-between">
           <h4 className="box-title">Mes expériences antérieures</h4>
           {userModel == "Talent" ? 

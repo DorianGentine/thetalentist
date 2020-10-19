@@ -16,6 +16,8 @@ class InputForm extends Component {
   componentDidMount() {
     if(this.props.critere.name == "next_aventure_attributes[sectors]"){
       this.setState({valueLength: this.props.formValue.next_aventure_attributes.sectors.length})
+    }else if(this.props.critere.name == "next_aventure_attributes[mobilities_attributes]"){
+      this.setState({valueLength: this.props.formValue.next_aventure_attributes.mobilities_attributes.length})
     }
   }
   
@@ -80,7 +82,7 @@ class InputForm extends Component {
           component={ReactSelectAdapter}
           options={critere.options}
         />
-        {critere.limit != 1 ? <p className="subtitle italic float-right">{`${critere.limit - this.state.valueLength} secteurs restants`}</p> : null }
+        {critere.limit != 1 ? <p className="subtitle italic float-right">{`${critere.limit - this.state.valueLength} ${critere.title} restants`}</p> : null }
       </div>
     );
   }

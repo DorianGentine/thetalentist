@@ -45,6 +45,17 @@ class ModalTalent extends Component {
         backgroundColor: "lightgray",
         color: "gray",
       }
+      let talentMobilities = ""
+      if(talent.next_aventure.mobilities != undefined && talent.next_aventure.mobilities.length != 0){
+        for (let i = 0; i < talent.next_aventure.mobilities.length; i++) {
+          const mobility = talent.next_aventure.mobilities[i];
+          let separation = ", "
+          if(i == 0){
+            separation = ""
+          }
+          talentMobilities = talentMobilities + separation + mobility.title
+        }
+      }
       let jobs = this.props.jobs
 
       if(jobs != null){
@@ -240,6 +251,7 @@ class ModalTalent extends Component {
               <p className="no-margin">Expérience : <strong>{talent.year_experience_job} {talent.year_experience_job === 1 ? "an" : "ans"}</strong></p>
               <p className="no-margin">Secteur : <strong>{renderSectors()}</strong></p>
               <p className="no-margin">Rémunération : <strong>{talent.next_aventure.remuneration}k/an</strong></p>
+              <p className="no-margin">Mobilités : <strong>{talentMobilities}</strong></p>
               <p className="no-margin">Disponibilité : <strong>{talent.next_aventure.availability}</strong></p>
             </div>
 
