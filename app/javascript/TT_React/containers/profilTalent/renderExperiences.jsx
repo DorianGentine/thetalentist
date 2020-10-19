@@ -156,7 +156,6 @@ class ExperiencesProfessionnelles extends Component {
 
       if(valuesToSend.experiences_attributes){
         valuesToSend.experiences_attributes = valuesToSend.experiences_attributes.filter( el => el.status != "created" || el._destroy)
-        console.log('valuesToSend.experiences_attributes', valuesToSend.experiences_attributes)
         for (let i = 0; i < valuesToSend.experiences_attributes.length; i++) {
           const experiences_attributes = valuesToSend.experiences_attributes[i];
           if (typeof experiences_attributes.company_type_id == "object") {
@@ -194,14 +193,16 @@ class ExperiencesProfessionnelles extends Component {
           .then(r => {
             if(r.ok){
               this.props.fetchGET(`/api/v1/talents/${talent.talent.id}`, "FETCH_TALENT")
+              this.setState({
+                deleted: false,
+                deletedExperiencesIds: []
+              })
               for (let i = 0; i < values.experiences_attributes.length; i++) {
                 const experience = values.experiences_attributes[i];
                 if(!experience.company_name.id){
-                  fetch('/api/v1/startups')
-                    .then(r => {
-                      console.log('result.json', r.json())
-                      this.props.fetchGET(`/api/v1/talents/${talent.talent.id}`, "FETCH_TALENT")
-                    })
+                  this.props.fetchGET('/api/v1/startups', "FETCH_STARTUPS",
+                    () => { this.props.fetchGET(`/api/v1/talents/${talent.talent.id}`, "FETCH_TALENT")}
+                  )
                 }
               }
             }
