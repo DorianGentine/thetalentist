@@ -184,7 +184,7 @@ class RenderTechnos extends Component {
             </div>
           : null }
         </div>
-        <h5 className="box-subtitle">{`${technos.length} outils listés`}</h5>
+        {/* <h5 className="box-subtitle">{`${technos.length} outils listés`}</h5> */}
         {this.state.edit ? 
           renderFormTechnos()
         :

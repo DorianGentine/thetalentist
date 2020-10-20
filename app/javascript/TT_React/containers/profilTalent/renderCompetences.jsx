@@ -184,7 +184,7 @@ class RenderSkills extends Component {
             </div>
           : null }
         </div>
-        <h5 className="box-subtitle">{`${competences.length} compétences listées`}</h5>
+        {/* <h5 className="box-subtitle">{`${competences.length} compétences listées`}</h5> */}
         {this.state.edit ? 
           renderFormCompetences()
         :
