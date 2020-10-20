@@ -27,7 +27,7 @@ class Conversation extends Component {
   render () {
     const isMobile = this.props.isMobile
     const sidebarActiveMobile = this.props.sidebarActiveMobile
-    let conversationActive, participant, relationship, email, city, user_model, config_conv_id, pin, archived
+    let conversationActive, participant, relationship, email, city, participant_model, user_model, config_conv_id, pin, archived
     let attachments = []
     let info = {
       image: null,
@@ -42,17 +42,20 @@ class Conversation extends Component {
       conversationActive = this.props.conversationActive.conversation
     }
 
+    if(this.props.user){
+      user_model = this.props.user.is_a_model
+    }
     if(conversationActive != undefined){
       participant = conversationActive.participant
       relationship = conversationActive.in_relation
       email = conversationActive.email
       city = participant.city
       attachments = conversationActive.attachments
-      user_model = participant.user_model
+      participant_model = participant.user_model
       config_conv_id = conversationActive.config_conv_id
       pin = conversationActive.pin
       archived = conversationActive.archived
-      if(relationship == "Accepter" || user_model === "Headhunter"){
+      if(relationship == "Accepter" || user_model != "Headhunter" ){
         info = {
           image: typeof participant.avatar == "string" ? null : participant.avatar.small_bright_face.url,
           full_name: participant.full_name,
@@ -137,10 +140,10 @@ class Conversation extends Component {
         {city != null ?
           <p className="participant-place"><FontAwesomeIcon icon={["fas", "map-marker-alt"]}/>{city}</p>
         : null }
-        {user_model != "Talentist" && relationship == "Accepter" || user_model === "Headhunter" ?
+        {participant_model != "Talentist" && (relationship == "Accepter" || user_model == "Talentist") ?
           <a className="profil-url" href={info.profil_url}>Voir le profil</a>
         : ""}
-        {relationship == "Accepter" || user_model === "Headhunter" ?
+        {relationship == "Accepter" || user_model != "Headhunter" ?
           <div className="margin-top-30">
             {info.answer_1 != null ?
               <div>
@@ -177,6 +180,7 @@ function mapStateToProps(state) {
     conversationActive: state.conversationActive,
     isMobile: state.isMobile,
     sidebarActiveMobile: state.sidebarActiveMobile,
+    user: state.user,
   };
 }
 

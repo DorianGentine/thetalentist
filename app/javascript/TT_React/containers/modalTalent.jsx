@@ -273,7 +273,7 @@ class ModalTalent extends Component {
                 <p>{talent.next_aventure.good_manager}</p>
               </div>
               <div className="col-md-4 light-gray-background padding-30">
-                <p className="title-modal">{talent.skills.length != 0 ? "Compétences clefs" : ""}</p>
+                <p className="title-modal">{talent.skills.length != 0 ? "Compétences clés" : ""}</p>
                 <div className="flex flex-wrap">{renderSkills()}</div>
                 <p className="title-modal">{talent.technos.length != 0 ? "Outils" : ""}</p>
                 <div className="flex flex-wrap">{renderTools()}</div>
