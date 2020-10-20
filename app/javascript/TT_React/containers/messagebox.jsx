@@ -46,6 +46,12 @@ class messagebox extends Component {
         image: typeof avatar == "string" ? null : avatar.small_bright_face.url,
       }
     }
+    if(conversation.in_relation != "Accepter" && this.props.user.is_a_model == "Talentist"){
+      infos = {
+        image: typeof avatar == "string" ? null : avatar.small_bright_face.url,
+        full_name: `Talent - (${participant.full_name})`,
+      }
+    }
 
     return(
       <Link
@@ -73,6 +79,7 @@ function mapStateToProps(state) {
   return {
     isMobile: state.isMobile,
     messagerieActiveMobile: state.messagerieActiveMobile,
+    user: state.user,
   };
 }
 
