@@ -29,8 +29,11 @@ class WhiteBox extends Component {
     }
   }
 
-  handleImageChange = (e, image) => {
+  handleImageChange = (values) => {
+    const e = event
     if (e.target.files[0]) {
+      console.log('values', values)
+      this.setState({newInitialCriteres: values})
       console.log('e.target.files[0]', e.target.files[0])
       let fReader = new FileReader();
       const that = this
@@ -150,7 +153,6 @@ class WhiteBox extends Component {
           answer: mobilitiesAnswerTitles,
           value: mobilitiesTitles,
           options: [
-            undefined,
             "Paris",
             "Bordeaux",
             "Nationale",
@@ -202,6 +204,8 @@ class WhiteBox extends Component {
     if(user){
       userModel = user.is_a_model
     }
+    console.log('newInitialCriteres', this.state.newInitialCriteres)
+    console.log('InitialCriteres', initialCriteres)
     
     const renderClassicCriteres = () => criteres.map((critere, index) => {
       return(
@@ -219,13 +223,19 @@ class WhiteBox extends Component {
     })
 
     const validate = values => {
-      console.log('values', values)
-      let firstChoice = values.city
-      if(values.city.toLowerCase().includes("paris") || 
-        values.city.toLowerCase().includes("bordeaux")){
-        firstChoice = undefined
+      if(values.city && 
+        !values.city.toLowerCase().includes("paris") && 
+        !values.city.toLowerCase().includes("bordeaux")){
+        if(criteres[4].options.length > 4){
+          criteres[4].options[0] = values.city
+        }else{
+          criteres[4].options.splice(0, 0, values.city)
+        }
+      }else{
+        if(criteres[4].options.length > 4){
+          criteres[4].options.splice(0, 1)
+        }
       }
-      criteres[4].options[0] = firstChoice
       const errors = {}
       return errors
     }
@@ -355,7 +365,6 @@ class WhiteBox extends Component {
       }
 
       this.props.updateTalent(this.props.talent, valuesToSend, values)
-      initialCriteres = values
       return valuesToSend
     }
 
@@ -379,7 +388,7 @@ class WhiteBox extends Component {
           <Form
             onSubmit={onSubmit}
             validate={validate}
-            initialValues={initialCriteres}
+            initialValues={this.state.newInitialCriteres ? this.state.newInitialCriteres : initialCriteres}
             render={({ handleSubmit, values, submitting }) => (
               <form onSubmit={handleSubmit}>
                 <label className="margin-bottom-30" htmlFor="avatar" >
@@ -390,21 +399,15 @@ class WhiteBox extends Component {
                       : 
                       <div className="photo-conv photo-conv-lg">{firstname.slice(0, 1)}</div>
                     }
-                    <p className="no-margin margin-left-15 add-picture">{values.photo ? values.photo.slice(12) : "Changer photo" }</p>
+                    <p className="no-margin margin-left-15 add-picture">Changer photo</p>
                   </div>
-                  <Field name="photo">
-                    {({ input, meta }) => (
-                      <input {...input} 
-                        className="hidden" 
-                        id="avatar" 
-                        component="input" 
-                        type="file" 
-                        onChange={() => {
-                          this.handleImageChange(event, image)
-                          // input.onChange(event.target.files[0].name)
-                        }} />
-                    )}
-                  </Field>
+                  <input 
+                    type="file"
+                    className="hidden" 
+                    name="photo" 
+                    id="avatar"
+                    onChange={() => {this.handleImageChange(values)}}
+                  />
                 </label>
                 <Field name="firstname">
                   {({ input, meta }) => (
