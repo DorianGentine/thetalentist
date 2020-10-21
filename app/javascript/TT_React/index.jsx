@@ -14,7 +14,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import { createBrowserHistory as history } from 'history';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, faChevronLeft, faInfoCircle, faArrowsAlt, faCheck, faSuitcase, faCalendar, faArrowLeft, faPlane, faBriefcase, faGraduationCap, faPen } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark as fasBookmark, faShareAlt, faUserPlus, faUserCheck, faPhone, faSearch, faChevronDown, faChevronUp, faMapMarkerAlt, faPaperclip, faFile as fasFile, faUserFriends, faEnvelope, faEnvelopeOpen, faUser as fasUser, faSlidersH, faCogs, faSignOutAlt, faChartLine, faBars, faChevronLeft, faInfoCircle, faArrowsAlt, faCheck, faSuitcase, faCalendar, faArrowLeft, faPlane, faBriefcase, faGraduationCap, faPen, faUserCircle, faCommentAlt } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark as farBookmark, faPaperPlane, faUser, faFile, faTimesCircle, faQuestionCircle, faEdit, faSave } from '@fortawesome/free-regular-svg-icons'
 
 // import { fetchAPI } from './actions';
@@ -141,6 +141,7 @@ if(app){
     faChevronLeft,
     faChevronUp,
     faCogs,
+    faCommentAlt,
     faEdit,
     faEnvelope,
     faEnvelopeOpen,
@@ -163,6 +164,7 @@ if(app){
     faSuitcase,
     faTimesCircle,
     faUser,
+    faUserCircle,
     fasUser,
     faUserFriends,
     faUserCheck,

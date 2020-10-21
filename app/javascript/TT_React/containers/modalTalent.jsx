@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { closeModalTalent, fetchPost, fetchGET } from '../actions';
+import setJobColor from '../../components/setJobColor';
 
 import ModalGuide from './modalGuide'
 
@@ -21,13 +23,18 @@ class ModalTalent extends Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if(this.props.modalOpened != nextProps.modalOpened && nextProps.modalOpened){
+      console.log('nextProps.modalSelected.pin', nextProps.modalSelected.pin)
       this.setState({
         checked: nextProps.modalSelected.pin != false,
         relationship: nextProps.modalSelected.relationship,
         value: `${this.props.talents.user.firstname} souhaite rentrer en contact avec toi`,
       })
       if(nextProps.modalSelected.pin != false){
+        console.log("je change l'icon")
         this.setState({ icon: ["fas", "bookmark"] })
+      }else{
+        console.log("je remet l'icon")
+        this.setState({ icon: ["far", "bookmark"] })
       }
     }
   }
@@ -45,6 +52,10 @@ class ModalTalent extends Component {
         backgroundColor: "lightgray",
         color: "gray",
       }
+
+      if(this.props.jobs != null){
+        color = setJobColor(talent.job, this.props.jobs)
+      }
       let talentMobilities = ""
       if(talent.next_aventure.mobilities != undefined && talent.next_aventure.mobilities.length != 0){
         for (let i = 0; i < talent.next_aventure.mobilities.length; i++) {
@@ -54,42 +65,6 @@ class ModalTalent extends Component {
             separation = ""
           }
           talentMobilities = talentMobilities + separation + mobility.title
-        }
-      }
-      let jobs = this.props.jobs
-
-      if(jobs != null){
-        jobs = this.props.jobs.jobs
-        if(talent.job.toLowerCase() === jobs[0].title.toLowerCase()){
-          color = {
-            backgroundColor: "#FCEBEB",
-            color: "#FE7373",
-          }
-        }else if(talent.job.toLowerCase() === jobs[1].title.toLowerCase()){
-          color = {
-            backgroundColor: "#DFDEFE",
-            color: "#5F5DDA",
-          }
-        }else if(talent.job.toLowerCase() === jobs[2].title.toLowerCase()){
-          color = {
-            backgroundColor: "#FFF7E2",
-            color: "#FFAC4B",
-          }
-        }else if(talent.job.toLowerCase() === jobs[3].title.toLowerCase()){
-          color = {
-            backgroundColor: "#EDF4FE",
-            color: "#6A9FE2",
-          }
-        }else if(talent.job.toLowerCase() === jobs[4].title.toLowerCase()){
-          color = {
-            backgroundColor: "#FCEBEB",
-            color: "#FE7373",
-          }
-        }else if(talent.job.toLowerCase() === jobs[5].title.toLowerCase()){
-          color = {
-            backgroundColor: "#DFDEFE",
-            color: "#5F5DDA",
-          }
         }
       }
 
@@ -227,9 +202,15 @@ class ModalTalent extends Component {
               <p className="margin-right-30 no-margin pointer" onClick={toggleIcon}>Épingler ce talent</p>
               {this.props.guideSu == 4 ? <ModalGuide /> : null}
               <div className="add-user" style={!this.state.relationship ? {backgroundColor: "#000748"} : this.state.relationship === "pending" ? {backgroundColor: "#C9C9C9"} : {backgroundColor: "#4ECCA3"}} onClick={addRelation}>
-                <FontAwesomeIcon className="add-user-icon margin-right-5" icon={!this.state.relationship ? ["fas", "user-plus"] : ["fas", "user-check"]}/>
-                <p className="white no-margin">{!this.state.relationship ? "Contacter" : this.state.relationship === "pending" ? "En attente" : "Contacté"}</p>
+                <FontAwesomeIcon className="add-user-icon margin-right-5" icon={!this.state.relationship ? ["fas", "user-plus"] : ["fas", "comment-alt"]}/>
+                <p className="white no-margin">{!this.state.relationship ? "Contacter" : this.state.relationship === "pending" ? "En attente" : "Accéder à la messagerie"}</p>
               </div>
+              {this.state.relationship === "Accepter" || userModel === "Talentist" ? 
+                <Link to={`/talents/${talent.id}`} className="add-user margin-left-15">
+                  <FontAwesomeIcon className="add-user-icon margin-right-5" icon={["fas", "user-circle"]}/>
+                  <p className="white no-margin">Voir le profil</p>
+                </Link>
+              : null }
             </div>
 
             <form action="">
