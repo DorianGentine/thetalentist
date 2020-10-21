@@ -471,7 +471,7 @@ class WhiteBox extends Component {
               </div> 
             : null }
 
-            {userModel == "Talent" ?
+            {userModel == "Talent" || userModel == "Talentist" ?
               <button 
                 className="btn-gray-violet margin-top-60"
                 onClick={() => {
