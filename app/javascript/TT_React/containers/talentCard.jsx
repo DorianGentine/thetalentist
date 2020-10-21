@@ -39,7 +39,6 @@ class TalentCard extends PureComponent {
     }
     
     let color = setJobColor(talent.job, this.props.jobs)
-    // let color = {backgroundColor: "#E5E6ED", color: "#273243"}
     let userModel
     if(user){
       userModel = user.is_a_model
