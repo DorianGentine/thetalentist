@@ -86,18 +86,15 @@
             %>
             <p class="col-md-11 margin-bottom-30">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %> de The Talentist.</p>
 
-            <div 
-              class="g-recaptcha col-md-12 margin-bottom-30" 
-              data-sitekey="6LezKs8ZAAAAAD0Xw8MY6XG3FGHkQ2OGrT921WN0"
-              hl="fr"
-              data-callback="validate_captcha"
-            ></div>
+            <% if @show_checkbox_recaptcha %>
+              <%= recaptcha_tags class: "col-md-12 margin-bottom-30" %>
+            <% else %>
+              <%= recaptcha_v3(action: 'registration', site_key: ENV['RECAPTCHA_SITE_KEY_V3']) %>
+            <% end %>
 
             <div class="col-md-12 flex">
               <%= f.button :submit, 
-                "S'enregistrer",
-                id: "submit-btn",
-                disabled: true, 
+                "S'enregistrer", 
                 class: "btn-violet-square margin-right-30"
               %>
               <%= link_to 'Précédent', 
@@ -111,15 +108,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  function validate_captcha(token) {
-    const submitBtn = document.getElementById('submit-btn')
-    if(token){
-    submitBtn.disabled = false
-    setTimeout(function(){ 
-      submitBtn.disabled = true; 
-    }, 60000);
-    }
-  }
-</script>
