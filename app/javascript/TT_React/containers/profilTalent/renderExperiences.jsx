@@ -1,14 +1,3 @@
-
-
-
-
-// EVITER DOUBLON QUAND ON CREE PLUSIEURS EP SANS REFRESH
-// ATTRIBUT "ALREEADY-EXIST"?
-
-
-
-
-
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -179,23 +168,22 @@ class ExperiencesProfessionnelles extends Component {
           delete experiences_attributes.talent_id
         }
       }
-      console.log('valuesToSend', valuesToSend)
-      // this.props.updateTalent(this.props.talent, valuesToSend, values)
       return valuesToSend
     }
-
+    
     const onSubmit = values => {
       const valuesToSend = valuesFilter(values)
+      console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
-        // this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
-        // this.props.fetchGET(`/api/v1/talents/${this.props.talent.talent.id}`, "FETCH_TALENT"))
         fetch(`/api/v1/talents/${talent.talent.id}`, {method: "PATCH", body: JSON.stringify(valuesToSend), headers: { 'Content-Type': 'application/json'}})
           .then(r => {
             if(r.ok){
               this.props.fetchGET(`/api/v1/talents/${talent.talent.id}`, "FETCH_TALENT")
               this.setState({
                 deleted: false,
-                deletedExperiencesIds: []
+                deletedExperiencesIds: [],
+                edit: false,
+                added: false
               })
               for (let i = 0; i < values.experiences_attributes.length; i++) {
                 const experience = values.experiences_attributes[i];
@@ -208,10 +196,6 @@ class ExperiencesProfessionnelles extends Component {
             }
           })
       }
-      this.setState({
-        edit: false,
-        added: false
-      })
     }
 
     const ReactSelectAdapter = ({ input, ...rest }) => {

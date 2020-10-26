@@ -123,9 +123,11 @@ class RenderFormations extends Component {
 
     const valuesFilter = values => {
       const valuesToSend = {}
-      const preValues = initialValues 
-      if(this.state.deleted){
+      const preValues = initialValues
+      if(this.state.deleted || preValues.talent_formations_attributes != values.talent_formations_attributes){
         valuesToSend.talent_formations_attributes = JSON.parse(JSON.stringify(values.talent_formations_attributes))
+      } 
+      if(this.state.deleted){
         for (let i = 0; i < this.state.deletedFormationsIds.length; i++) {
           const formationId = this.state.deletedFormationsIds[i];
           const deletedFormation = {
@@ -134,12 +136,6 @@ class RenderFormations extends Component {
           }
           valuesToSend.talent_formations_attributes.push(deletedFormation)
         }
-      }else{
-        Object.keys(values).forEach(value => {
-          if(preValues[value] !== values[value]){
-            valuesToSend[value] = JSON.parse(JSON.stringify(values[value]))
-          }
-        })
       }
 
       if(valuesToSend.talent_formations_attributes){
@@ -159,8 +155,6 @@ class RenderFormations extends Component {
           delete formation.level
         }
       }
-      this.props.updateTalent(this.props.talent, valuesToSend, values)
-      initialValues = values
       return valuesToSend
     }
 
@@ -168,9 +162,27 @@ class RenderFormations extends Component {
       const valuesToSend = valuesFilter(values)
       console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
-        this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
+        fetch(`/api/v1/talents/${talent.talent.id}`, {method: "PATCH", body: JSON.stringify(valuesToSend), headers: { 'Content-Type': 'application/json'}})
+          .then(r => {
+            console.log('r', r)
+            if(r.ok){
+              this.props.fetchGET(`/api/v1/talents/${talent.talent.id}`, "FETCH_TALENT")
+              this.setState({
+                deleted: false,
+                deletedExperiencesIds: [],
+                edit: false
+              })
+              for (let i = 0; i < values.talent_formations_attributes.length; i++) {
+                const formation = values.talent_formations_attributes[i];
+                if(!formation.formation_id.id){
+                  this.props.fetchGET('/api/v1/formations', "FETCH_FORMATIONS",
+                    () => {this.props.fetchGET(`/api/v1/talents/${talent.talent.id}`, "FETCH_TALENT")}
+                  )
+                }
+              }
+            }
+          })
       }
-      this.setState({edit: false})
     }
 
     const ReactSelectAdapter = ({ input, ...rest }) => {
