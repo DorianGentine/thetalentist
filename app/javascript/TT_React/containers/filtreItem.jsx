@@ -51,7 +51,6 @@ class FiltreItem extends Component {
 
     const handleChange = (checked) => {
       this.setState({ checked: event.target.checked })
-      this.props.updateTalents(-1)
       let selectedFilterUpdated
       if(selectedFilter.includes(title.toLowerCase())){
         selectedFilterUpdated = selectedFilter.filter(index => index !== title.toLowerCase())
