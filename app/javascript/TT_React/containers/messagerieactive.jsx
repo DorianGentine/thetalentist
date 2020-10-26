@@ -82,6 +82,7 @@ class Conversation extends Component {
 
   render () {
     const isMobile = this.props.isMobile
+    const user = this.props.user
     const messagerieActiveMobile = this.props.messagerieActiveMobile
     const sidebarActiveMobile = this.props.sidebarActiveMobile
     const talent_id = this.props.params.talent_id || false
@@ -105,6 +106,12 @@ class Conversation extends Component {
           full_name: participant.full_name,
         }
       }
+      if(relationship != "Accepter" && user.is_a_model == "Talentist"){
+        info = {
+          image: typeof participant.avatar == "string" ? null : participant.avatar.small_bright_face.url,
+          full_name: `Talent - (${participant.full_name})`,
+        }
+      }
     }
 
     const renderMessages = () => conversationActive.messages.map((message, index) => {
@@ -124,21 +131,6 @@ class Conversation extends Component {
       this.setState({ value: value })
     }
 
-    // const setIntervalMessages = () => {
-    //   let i = 0
-    //   let intervalMessages = setInterval(() => {
-    //     i++
-    //     this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
-    //     this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
-    //     console.log(i)
-    //     if(i > 4){
-    //       clearInterval(this.state.intervalMessages)
-    //       this.setState({ intervalMessages: null })
-    //     }
-    //   }, 1000)
-    //   this.setState({ intervalMessages: intervalMessages })
-    // }
-
     const acceptRelation = () => {
       if(!talent_id || !headhunter_id){
         this.setState({
@@ -147,7 +139,7 @@ class Conversation extends Component {
         })
         const newMessage = {
           conversation_id: this.props.params.id,
-          sender_id: this.props.user.id,
+          sender_id: user.id,
           email: email,
           body: "",
           in_relation: "Accepter",
@@ -176,7 +168,7 @@ class Conversation extends Component {
         const newMessage = {
           conversation_id: this.props.params.id,
           email: email,
-          sender_id: this.props.user.id,
+          sender_id: user.id,
           body: document.getElementById('message_refus').value,
           in_relation: this.state.in_relation,
         }
@@ -187,11 +179,11 @@ class Conversation extends Component {
           "POST",
           ()=>{
             const message = {
-              sender_name: this.props.user.full_name,
+              sender_name: user.full_name,
               sender: "Vous",
               avatar: {
                 small_bright_face: {
-                  url: this.props.user.photo
+                  url: user.photo
                 }
               },
               body: body,
@@ -214,7 +206,7 @@ class Conversation extends Component {
           {info.image != null ? <img className="photo-conv" src={info.image} alt="avatar"></img> : <div className="photo-conv">{info.full_name.slice(0, 1)}</div>}
           <div className="flex-grow-1">
             <p className="bold no-margin">{info.full_name}</p>
-            <p className="no-margin"><span className="green">•</span> En ligne</p>
+            {/* <p className="no-margin"><span className="green">•</span> En ligne</p> */}
           </div>
           {isMobile ? <FontAwesomeIcon className="violet" icon={["fas", "info-circle"]} onClick={() => this.props.openSidebar(sidebarActiveMobile)} /> : null}
         </div>

@@ -184,7 +184,7 @@ class RenderKnowns extends Component {
             </div>
           : null }
         </div>
-        <h5 className="box-subtitle">{`${knowns.length} savoir-êtres listés`}</h5>
+        {/* <h5 className="box-subtitle">{`${knowns.length} savoir-êtres listés`}</h5> */}
         {this.state.edit ? 
           renderFormKnowns()
         :

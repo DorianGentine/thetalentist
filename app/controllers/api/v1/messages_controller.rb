@@ -12,10 +12,14 @@ class Api::V1::MessagesController < ApplicationController
     if params[:in_relation]
       rela = Relationship.where(conversation_id: @conversation.id).first
       rela.status = params[:in_relation]
-      rela.save
+      if rela.save
+        headhunter = Headhunter.find(rela.headhunter_id)
+        @talent = Talent.find(rela.talent_id)
+        @status = rela.status
+        headhunter.send_relation(@talent, @status)
+      end
     end
-    if params[:body].present? || @user.present?
-      p "Attachment is #{params[:attachment]}"
+    if @user.present? && params[:body].present? || params[:attachment].present?
       @receipt = @user.reply_to_conversation(
         @conversation,
         params[:body],
