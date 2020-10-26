@@ -71,10 +71,12 @@ class TalentRepertoire extends Component {
         return true
       }else{
         let toD = false
-        for (let i = 0; i < talent.next_aventure.mobilities.length; i++) {
-          const title = talent.next_aventure.mobilities[i].title;
-          if(filter.mobilityFilter.includes(title.toLowerCase())){
-            toD = true
+        if(talent.next_aventure.mobilities){
+          for (let i = 0; i < talent.next_aventure.mobilities.length; i++) {
+            const title = talent.next_aventure.mobilities[i].title;
+            if(filter.mobilityFilter.includes(title.toLowerCase())){
+              toD = true
+            }
           }
         }
         return toD
