@@ -14,11 +14,11 @@ export default function setJobColor(job, jobs){
       backgroundColor: "#FCEBEB",
       color: "#FE7373",
     },{
-      backgroundColor: "#FCEBEB",
-      color: "#FE7373",
+      backgroundColor: "#E5FED5",
+      color: "#86C05B",
     },{
-      backgroundColor: "#DFDEFE",
-      color: "#5F5DDA",
+      backgroundColor: "#FBEBEA",
+      color: "#FE7371",
     }
   ]
   if(jobs != null){
@@ -27,6 +27,13 @@ export default function setJobColor(job, jobs){
       if(job.toLowerCase() === jobs[i].title.toLowerCase()){
         color = colors[i]
       }
+    }
+    if(job.toLowerCase().includes("market")){
+      color = colors[1]
+    }else if(job.toLowerCase().includes("sales")){
+      color = colors[5]
+    }else if(job.toLowerCase().includes("prod")){
+      color = colors[4]
     }
   }
   return color

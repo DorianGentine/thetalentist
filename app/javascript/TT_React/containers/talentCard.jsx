@@ -48,17 +48,6 @@ class TalentCard extends PureComponent {
       border: `1px solid ${color.color}`,
     }
     if(talent){
-      if(relation === "pending"){
-        border = {
-          border: `1px solid ${color.color}`,
-          borderTop: "1px solid lightgray"
-        }
-      }else if(relation === "Accepter"){
-        border = {
-          border: `1px solid ${color.color}`,
-          borderTop: "1px solid #000748"
-        }
-      }
       if(talent.next_aventure.mobilities != undefined && talent.next_aventure.mobilities.length != 0){
         for (let i = 0; i < talent.next_aventure.mobilities.length; i++) {
           const mobility = talent.next_aventure.mobilities[i];

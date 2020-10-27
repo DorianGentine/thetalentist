@@ -28,6 +28,7 @@ class Filtre extends Component {
       "Paris",
       "Bordeaux",
       "Nationale",
+      "Internationale",
       "Télétravail"
     ]
 

@@ -14,32 +14,43 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
     @headhunter = Headhunter.new(headhunter_params)
     startup_params = params.require(:headhunter).permit(:startup)[:startup]
     authorize @headhunter
-    @headhunter.validated = true
-    if startup_params.to_i != 0
-      @headhunter.startup_id = startup_params.to_i
-    else
-      if startup_is_available?(startup_params)
-        @headhunter.startup_id = set_new_startups(startup_params)
+    success = verify_recaptcha(action: 'registration', minimum_score: 0.8, secret_key: ENV['RECAPTCHA_SECRET_KEY_V3'])
+    p "verify_recaptcha: #{success}"
+    p "score: #{recaptcha_reply['score']}"
+    checkbox_success = verify_recaptcha unless success
+    if success || checkbox_success
+      @headhunter.validated = true
+      if startup_params.to_i != 0
+        @headhunter.startup_id = startup_params.to_i
       else
-       return render :new
+        if startup_is_available?(startup_params)
+          @headhunter.startup_id = set_new_startups(startup_params)
+        else
+        return render :new
+        end
       end
-    end
-    p "HEADHUNTER: #{@headhunter}"
-    if @headhunter.save
-      message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme !"
-      @talentist = Talentist.last
-      @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
+      p "HEADHUNTER: #{@headhunter}"
+      if @headhunter.save
+        message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme !"
+        @talentist = Talentist.last
+        @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
 
-      # if @headhunter.startup.address == "" || @headhunter.startup.address.nil?
-      #   session[:headhunter_id] = @headhunter.id
-      #   redirect_to steps_startup_info_path(:startup)
-      # else
-        @headhunter.send_welcome_and_reminder_email
-        session[:headhunter_id] = @headhunter.id
-        sign_up(resource)
-      # end
+        # if @headhunter.startup.address == "" || @headhunter.startup.address.nil?
+        #   session[:headhunter_id] = @headhunter.id
+        #   redirect_to steps_startup_info_path(:startup)
+        # else
+          @headhunter.send_welcome_and_reminder_email
+          session[:headhunter_id] = @headhunter.id
+          sign_up(resource)
+        # end
+      else
+        return render :new
+      end
     else
-      return render :new
+      if !success
+        @show_checkbox_recaptcha = true
+      end
+      render :new
     end
   end
 

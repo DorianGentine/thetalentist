@@ -259,7 +259,7 @@ class Navbar extends Component {
                   :
                     <div className="photo-conv">{fullName.slice(0, 1)}</div>
                   }
-                  <p className="white align-center no-margin">{`Hi, ${firstName}`}</p>
+                  <p className="white align-center no-margin">{`Bonjour, ${firstName}`}</p>
                   <FontAwesomeIcon className="white align-center font-12 margin-left-5" icon={this.state.chevron}/>
                 </div>
                 <ul className="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">

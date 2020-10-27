@@ -96,6 +96,9 @@ gem 'gibbon'
 #for react
 gem 'nokogiri', '~> 1.10'
 
+# for captcha
+gem "recaptcha"
+
 
 # add token to all user
 gem 'simple_token_authentication'
