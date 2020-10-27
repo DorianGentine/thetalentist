@@ -26,6 +26,7 @@ class InscriptionForm2 extends Component {
       "Paris",
       "Bordeaux",
       "Nationale",
+      "Internationale",
       "Télétravail"
     ]
     return(
