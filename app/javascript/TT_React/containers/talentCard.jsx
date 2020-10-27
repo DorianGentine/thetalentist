@@ -7,6 +7,7 @@ import { openModalTalent, fetchPost, fetchGET } from '../actions';
 import setJobColor from '../../components/setJobColor';
 
 import ModalGuide from './modalGuide'
+import ModalPushTalent from './modalPushTalent'
 
 class TalentCard extends PureComponent {
   constructor(props) {
