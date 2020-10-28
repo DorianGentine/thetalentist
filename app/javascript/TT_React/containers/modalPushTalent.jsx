@@ -19,23 +19,33 @@ class TalentCard extends PureComponent {
   // }
 
   componentDidMount(){
-    if(this.state.checked){
-      this.setState({ icon: ["fas", "bookmark"] })
+    if(!this.props.headhunters && this.props.talent){
+      console.log('this.props.talent', this.props.talent)
+      this.props.fetchGET('/api/v1/headhunters', "FETCH_HEADHUNTERS")
     }
   }
 
   render () {
     const talent = this.props.talent
     const headhunters = this.props.headhunters
-    const pin = {
-      talent_id: talent.id,
-      headhunter_id: user.id,
-    }
 
-    return(
-      <div className="col-xs-12 col-md-4 card-width">
-      </div>
-    );
+    if(talent){
+      console.log('talent', talent)
+      const closeModal = () => {
+        this.props.pushTalent(null)
+      }
+
+      return(
+        <div className='modal active'>
+            <div className="close-modal" onClick={closeModal}></div>
+            <div className="modal-content-react">
+              <p>TEEEST</p>
+            </div>
+        </div>
+      );
+    }else{
+      return null
+    }
   }
 };
 
@@ -46,7 +56,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ openModalTalent, fetchPost, fetchGET }, dispatch);
+  return bindActionCreators({ fetchPost, fetchGET }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TalentCard);

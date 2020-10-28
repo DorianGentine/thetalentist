@@ -107,8 +107,17 @@ class TalentCard extends PureComponent {
       }
     }
 
+    const pushTalent = (talent) => {
+      if(talent){
+        this.setState({pushedTalent: talent})
+      }else{
+        this.setState({pushedTalent: null})
+      }
+    }
+
     return(
       <div className="col-xs-12 col-md-4 card-width">
+        <ModalPushTalent talent={this.state.pushedTalent} pushTalent={pushTalent} />
         <div className="relative card" style={border}>
           {relation !== false && relation !== null || userModel == "Talentist" ?
             <p className={`text-test absolute ${relation === "pending" ? "gray-background" : "violet-background"}`}>{
@@ -138,7 +147,8 @@ class TalentCard extends PureComponent {
             <p className="grid-info" style={{minHeight: "40px"}}>{talentMobilities}</p>
           </div>
           <div className="margin-top-15 flex flex-wrap card-small-plus">{talent.skills.length != 0 ? renderSkills() : renderSmallPlus()}</div>
-          <div className="flex relative margin-top-15 flex-end">
+          <div className={`flex relative margin-top-15 ${userModel == "Talentist" ? "space-between" : "flex-end"}`}>
+            {userModel == "Talentist" ? <p className="p-btn" onClick={() => pushTalent(talent)}>Recommander</p> : null }
             <p className="no-margin card-cta" onClick={() => this.props.openModalTalent(talent)}>Afficher davantage</p>
             {this.props.guideSu == 3 && this.props.index == 0 ? <ModalGuide /> : null}
           </div>

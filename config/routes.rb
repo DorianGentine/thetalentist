@@ -97,6 +97,7 @@ Rails.application.routes.draw do
       resources :company_types, only: [ :index ]
       resources :config_conversations, only: [ :update ]
       resources :formations, only: [ :index ]
+      resources :headhunters, only: [ :index ]
       resources :jobs, only: [ :index ]
       resources :knowns, only: [ :index ]
       resources :languages, only: [ :index ]
@@ -108,21 +109,11 @@ Rails.application.routes.draw do
       resources :technos, only: [ :index ]
       
       resources :conversations, only: [ :show, :index ] do
-        # collection do
-        #   get :all
-        # end
-        # member do
-        #   get :left
-        # end
         resources :messages, only: [ :create ]
       end
       resources :notifications, only: [ :index ]
       resources :headhunters, only: [ :index, :show] do
         resources :conversations, only: [:index, :show]
-        # member do
-        #   get :conversations
-        #   patch :set_conversation
-        # end
       end
       resources :talents, only: [ :index, :show, :update ] do
         collection do
