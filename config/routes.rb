@@ -122,6 +122,7 @@ Rails.application.routes.draw do
           patch :sort
         end
         member do
+          post :recommandation
           patch 'update_avatar'
         end
         resources :conversations, only: [:index, :show]

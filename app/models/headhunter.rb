@@ -123,6 +123,10 @@ class Headhunter < ApplicationRecord
     HeadhunterMailer.in_relation(self.id, talent.id, status).deliver_later
   end
 
+  def send_recommandation(talent)
+    HeadhunterMailer.recommanded(self.id, talent.id).deliver_later
+  end
+
   def send_welcome_and_reminder_email
     HeadhunterMailer.welcome(self.id).deliver_later(wait_until: 2.hours)
     # HeadhunterMailer.reminder(self.id).deliver_later(wait_until: self.created_at.next_week.tomorrow + 9.hours)

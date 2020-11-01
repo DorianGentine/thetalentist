@@ -117,7 +117,7 @@ class TalentCard extends PureComponent {
 
     return(
       <div className="col-xs-12 col-md-4 card-width">
-        <ModalPushTalent talent={this.state.pushedTalent} pushTalent={pushTalent} />
+        <ModalPushTalent talent={this.state.pushedTalent} pushTalent={pushTalent} jobs={this.props.jobs} />
         <div className="relative card" style={border}>
           {relation !== false && relation !== null || userModel == "Talentist" ?
             <p className={`text-test absolute ${relation === "pending" ? "gray-background" : "violet-background"}`}>{
