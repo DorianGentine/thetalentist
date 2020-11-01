@@ -54,6 +54,17 @@ class HeadhunterMailer < ApplicationMailer
       )
   end
 
+  def recommanded(headhunter_id, talent_id)
+    @headhunter = Headhunter.find(headhunter_id)
+    @talent = Talent.find(talent_id)
+
+    mail(
+      to: @headhunter.email,
+      cc: Talentist.all.collect(&:email).join(", "),
+      subject: "#{@headhunter.firstname}, ce talent devrait te plaire"
+    )
+  end
+
 
   def alerte(user_id)
     @user = Headhunter.find(user_id)

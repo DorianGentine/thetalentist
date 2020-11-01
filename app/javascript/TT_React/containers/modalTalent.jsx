@@ -23,17 +23,14 @@ class ModalTalent extends Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if(this.props.modalOpened != nextProps.modalOpened && nextProps.modalOpened){
-      console.log('nextProps.modalSelected.pin', nextProps.modalSelected.pin)
       this.setState({
         checked: nextProps.modalSelected.pin != false,
         relationship: nextProps.modalSelected.relationship,
         value: `${this.props.talents.user.firstname} souhaite rentrer en contact avec toi`,
       })
       if(nextProps.modalSelected.pin != false){
-        console.log("je change l'icon")
         this.setState({ icon: ["fas", "bookmark"] })
       }else{
-        console.log("je remet l'icon")
         this.setState({ icon: ["far", "bookmark"] })
       }
     }
@@ -47,7 +44,6 @@ class ModalTalent extends Component {
     }
     if(this.props.modalOpened){
       const talent = this.props.modalSelected
-      console.log('talent', talent)
       let color = {
         backgroundColor: "lightgray",
         color: "gray",
@@ -176,7 +172,6 @@ class ModalTalent extends Component {
             talent_id: talent.id,
             message: document.getElementById('first_message').value
           }
-          console.log(newRelationship)
           this.props.fetchPost("/api/v1/relationships", newRelationship, "POST", this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS"))
           this.setState({
             relationship: "pending",
@@ -293,7 +288,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(ModalTalent);
 
 // const share = () => {
 //   const shareLink = document.getElementById("share-input");
-//   console.log(shareLink.value)
 //   shareLink.select()
 //   shareLink.setSelectionRange(0, 99999)
 //   document.execCommand("copy");

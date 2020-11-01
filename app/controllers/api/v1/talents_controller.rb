@@ -104,6 +104,17 @@ class Api::V1::TalentsController < Api::V1::BaseController
     end
     authorize @talent
   end
+  
+  def recommandation
+    p "Params: #{params[:id]}"
+    p "Params: #{params[:recruteur_id]}"
+    @talent = Talent.find(params[:id])
+    @headhunter = Headhunter.find(params[:recruteur_id])
+    p "LE TALENT: #{@talent}"
+    p "LE HEADHUNTER: #{@headhunter}"
+    @headhunter.send_recommandation(@talent)
+    authorize @talent
+  end
 
   private
 

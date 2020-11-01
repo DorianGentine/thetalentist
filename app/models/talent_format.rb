@@ -86,6 +86,7 @@ class TalentFormat
         order: talent.position,
         first_name: talent.firstname,
         last_name: talent.last_name,
+        photo: talent.photo,
         completing: talent.completing,
         position: talent.experiences.first.present? ? talent.experiences.first.position : nil,
         company_id: talent.experiences.first.present? ? talent.startup_id : nil,
