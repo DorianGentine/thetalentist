@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ReactSortable } from "react-sortablejs";
 
-import { fetchGET, fetchTALENTS, fetchPost } from '../actions';
+import { fetchGET, fetchPost, updateTalents } from '../actions';
 
 import TalentCard from './talentCard'
 
@@ -16,32 +16,36 @@ class TalentRepertoire extends Component {
     };
   }
 
-  // handlePagy(promise){
-  //   const current_page = promise.pagy.page
-  //   const last_page = promise.pagy.last
-  //   if(current_page < last_page){
-  //     fetch(promise.pagy.next_url, {method: "GET", headers: { 'Content-Type': 'application/json'}})
-  //     .then(r => r.json())
-  //     .then(body => {
-  //       console.log('body', body)
-  //       const talents = this.state.talents
-  //       const totalTalents = talents.concat(body.talents)
-  //       console.log('totalTalents', totalTalents)
-  //       this.setState({
-  //         talents: totalTalents
-  //       })
-  //       this.handlePagy(body)
-  //     })
-  //   }
-  // }
+  handlePagy(promise){
+    const current_page = promise.pagy.page
+    const last_page = promise.pagy.last
+    if(current_page < last_page){
+      fetch(promise.pagy.next_url, {method: "GET", headers: { 'Content-Type': 'application/json'}})
+      .then(r => r.json())
+      .then(body => {
+        const talents = this.state.talents
+        const totalTalents = talents.concat(body.talents)
+        this.setState({
+          talents: totalTalents
+        })
+        this.handlePagy(body)
+      })
+    }else{
+      const result = {
+        pagy: promise.pagy,
+        talents: this.state.talents
+      }
+      console.log('result', result)
+      this.props.updateTalents(result)
+    }
+  }
 
   componentDidMount(){
     const that = this
     if(this.props.talents === null){
-      this.props.fetchTALENTS()
-      // this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS", function(promise){
-      //   that.handlePagy(promise)
-      // })
+      this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS", function(promise){
+        that.handlePagy(promise)
+      })
     }else{
       this.setState({
         admin: this.props.user.is_a_model == "Talentist",
@@ -176,7 +180,7 @@ class TalentRepertoire extends Component {
       }
     })
 
-    if(this.state.talents != null && this.state.admin && filter.length === 0){
+    if(this.state.talents != null && this.state.admin && filter.empty()){
       return(
         <div className="row">
           {renderSortable()}
@@ -203,7 +207,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchTALENTS, fetchPost }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, updateTalents }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TalentRepertoire);
