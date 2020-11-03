@@ -24,13 +24,53 @@ export const POST_COMPTE = 'POST_COMPTE';
 export const SIDEBAR_ACTIVE_MOBILE = 'SIDEBAR_ACTIVE_MOBILE';
 export const UPDATE_TALENT = 'UPDATE_TALENT';
 
+export async function handlePagy(infos){
+  const pagy = infos.pagy
+  const talents = infos.talents
+  const current_page = pagy.page
+  const last_page = pagy.last
+  let promise
+  if(current_page < last_page){
+    let response = await fetch(pagy.next_url)
+    if(response.ok){
+      promise = await response.json()
+      // await talents.concat(promise.talents)
+      console.log('promise', promise)
+      handlePagy(promise)
+    }
+  }
+
+  return {
+    type: FETCH_TALENTS,
+    payload: promise
+  }
+}
+
+export async function fetchTALENTS() {
+  // let response = fetch("/api/v1/talents/repertoire", {method: "GET", headers: { 'Content-Type': 'application/json'}})
+  let response = await fetch("/api/v1/talents/repertoire")
+  let promise
+  if(response.ok){
+    promise = await response.json()
+    await handlePagy(promise)
+  } else {
+    console.error(`fetchTalents ne passe pas : `, response)
+    promise = null
+  }
+  
+  return {
+    type: FETCH_TALENTS,
+    payload: promise
+  }
+}
+
 export async function fetchGET(url, type, callback) {
   let response = await fetch(url)
   let promise
   if(response.ok){
     promise = await response.json()
     if(callback){
-      await callback
+      await callback(promise)
     }
   } else {
     console.error(`${type} ne passe pas : `, response)

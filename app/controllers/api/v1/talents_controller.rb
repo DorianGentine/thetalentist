@@ -1,23 +1,23 @@
+# Lancer fonction pour les talent_second_job alors que talent_job vide ?
+
+
 class Api::V1::TalentsController < Api::V1::BaseController
+  include Pagy::Backend
+
   before_action :autorize_call, only: [:repertoire, :analytics, :show, :sort]
 
   def repertoire
-    talents = Talent.where(:visible => true).reorder(position: :asc, completing: :desc, last_sign_in_at: :desc)
-    # FILTRE LES JOBS
-      talents_filtered = []
-      talents.each do |talent|
-        if talent.jobs.first.title.include?("Prod") || talent.jobs.first.title.include?("Market") || talent.jobs.first.title.include?("Sal")
-          talents_filtered << talent
-        end
-      end
-    # END
-    @talents = TalentFormat.new.for_api_repository(talents_filtered, current_headhunter)
-    @conversation_id = current_user.mailbox.conversations.first
-    if current_user.mailbox.conversations.first
-      @conversation_id = @conversation_id.id
-    end
-    @user = current_user
-    p "TEST => #{current_headhunter}"
+    jobsId = jobs_array()
+    @pagy, @records = pagy(
+      Talent.joins(:talent_job).where(:visible => true, talent_jobs: { job_id: jobsId })
+        .reorder(position: :asc, completing: :desc, last_sign_in_at: :desc), 
+      items: 3, 
+      size: []
+    )
+    @pagy_metadata = pagy_metadata(@pagy)
+    @records = TalentFormat.new.for_api_repository(@records, current_headhunter)
+    p ">>>>>>>>>> #{current_user}"
+    autorize_call
   end
 
   def analytics
@@ -212,6 +212,17 @@ class Api::V1::TalentsController < Api::V1::BaseController
     else
       return true
     end
+  end
+
+  def jobs_array
+    jobs = Job.all
+    jobs_filtered = []
+    jobs.each do |job|
+      if job.title.include?("Prod") || job.title.include?("Market") || job.title.include?("Sal")
+        jobs_filtered << job.id
+      end
+    end
+    return jobs_filtered
   end
 
   def talent_photo_params

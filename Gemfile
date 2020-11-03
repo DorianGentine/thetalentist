@@ -103,4 +103,6 @@ gem "recaptcha"
 # add token to all user
 gem 'simple_token_authentication'
 
+# add pagy
+gem 'pagy', '~> 3.5'
 
