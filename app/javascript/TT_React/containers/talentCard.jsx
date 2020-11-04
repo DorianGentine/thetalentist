@@ -34,15 +34,16 @@ class TalentCard extends PureComponent {
     const talent = this.props.talent
     const user = this.props.user
     const relation = talent.relationship
-    const pin = {
-      talent_id: talent.id,
-      headhunter_id: user.id,
-    }
+    let pin
     
     let color = setJobColor(talent.job, this.props.jobs)
     let userModel
     if(user){
       userModel = user.is_a_model
+      pin = {
+        talent_id: talent.id,
+        headhunter_id: user.id,
+      }
     }
     let talentMobilities = ""
     let border = {
