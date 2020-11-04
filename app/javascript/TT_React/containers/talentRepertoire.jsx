@@ -35,15 +35,14 @@ class TalentRepertoire extends Component {
         pagy: promise.pagy,
         talents: this.state.talents
       }
-      console.log('result', result)
       this.props.updateTalents(result)
     }
   }
 
   componentDidMount(){
-    const that = this
     if(this.props.talents === null){
-      this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS", function(promise){
+      const that = this
+      this.props.fetchGET('/api/v1/talents/repertoire_pagy', "FETCH_TALENTS", function(promise){
         that.handlePagy(promise)
       })
     }else{

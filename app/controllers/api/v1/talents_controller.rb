@@ -8,6 +8,15 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def repertoire
     jobsId = jobs_array()
+    @talents = Talent.joins(:talent_job).where(:visible => true, talent_jobs: { job_id: jobsId })
+        .reorder(position: :asc, completing: :desc, last_sign_in_at: :desc)
+    @talents = TalentFormat.new.for_api_repository(@talents, current_headhunter)
+    @count = { count: @talents.length }
+    autorize_call
+  end
+
+  def repertoire_pagy
+    jobsId = jobs_array()
     @pagy, @records = pagy(
       Talent.joins(:talent_job).where(:visible => true, talent_jobs: { job_id: jobsId })
         .reorder(position: :asc, completing: :desc, last_sign_in_at: :desc), 
@@ -16,7 +25,6 @@ class Api::V1::TalentsController < Api::V1::BaseController
     )
     @pagy_metadata = pagy_metadata(@pagy)
     @records = TalentFormat.new.for_api_repository(@records, current_headhunter)
-    p ">>>>>>>>>> #{current_user}"
     autorize_call
   end
 

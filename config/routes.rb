@@ -118,6 +118,7 @@ Rails.application.routes.draw do
       resources :talents, only: [ :index, :show, :update ] do
         collection do
           get :repertoire
+          get :repertoire_pagy
           get :analytics
           patch :sort
         end

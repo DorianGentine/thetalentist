@@ -1,3 +1,3 @@
-json.pagy @pagy_metadata
-json.talents @records
+json.pagy @count
+json.talents @talents
 
