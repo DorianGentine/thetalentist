@@ -26,7 +26,7 @@ class ModalTalent extends Component {
       this.setState({
         checked: nextProps.modalSelected.pin != false,
         relationship: nextProps.modalSelected.relationship,
-        value: `${this.props.talents.user.firstname} souhaite rentrer en contact avec toi`,
+        value: `${this.props.user.firstname} souhaite rentrer en contact avec toi`,
       })
       if(nextProps.modalSelected.pin != false){
         this.setState({ icon: ["fas", "bookmark"] })
@@ -81,7 +81,7 @@ class ModalTalent extends Component {
         }else{
           const pin = {
             talent_id: talent.id,
-            headhunter_id: this.props.talents.user.id,
+            headhunter_id: this.props.user.id,
           }
           this.props.fetchPost(
             '/api/v1/pins',
@@ -168,7 +168,7 @@ class ModalTalent extends Component {
           this.setState({message: !this.state.message})
         }else if(onoff === "send"){
           const newRelationship = {
-            headhunter_id: parseInt(this.props.talents.user.id, 10),
+            headhunter_id: parseInt(this.props.user.id, 10),
             talent_id: talent.id,
             message: document.getElementById('first_message').value
           }

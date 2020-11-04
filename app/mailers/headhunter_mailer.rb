@@ -70,7 +70,7 @@ class HeadhunterMailer < ApplicationMailer
     @user = Headhunter.find(user_id)
 
     mail( 
-      to: user.email ,
+      to: @user.email ,
       cc: "bienvenue@thetalentist.com", 
       subject: "Un nouveau talent pourrait t'intéresser"
     )

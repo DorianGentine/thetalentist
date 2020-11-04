@@ -23,12 +23,12 @@ class TalentsController < ApplicationController
 
 
     # A supprimer Après MEP
-    Mailboxer::Conversation.all.each do |conv|
-      if conv.participants.count > 1
-        ConfigConversation.find_or_create_by(conversation_id: conv.id, user_id: conv.participants.first.id, user_email:conv.participants.first.email)
-        ConfigConversation.find_or_create_by(conversation_id: conv.id, user_id: conv.participants.second.id, user_email:conv.participants.second.email)
-      end
-    end
+    # Mailboxer::Conversation.all.each do |conv|
+    #   if conv.participants.count > 1
+    #     ConfigConversation.find_or_create_by(conversation_id: conv.id, user_id: conv.participants.first.id, user_email:conv.participants.first.email)
+    #     ConfigConversation.find_or_create_by(conversation_id: conv.id, user_id: conv.participants.second.id, user_email:conv.participants.second.email)
+    #   end
+    # end
 
     @notifications = Notification.all
   end
@@ -181,7 +181,7 @@ private
     talent.techno_ids = techno_ids
   end
 
-  def reminde_new_talents_less_than(created, number)
+  def remind_new_talents_less_than(created, number)
     talents = Talent.where('created_at <= ?', created).completed_less_than(number).have_been_never_reminded
     talents.each do |talent|
       TalentMailer.reminder_completed(talent.id).deliver_later

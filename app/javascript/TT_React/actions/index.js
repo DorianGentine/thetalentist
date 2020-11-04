@@ -30,7 +30,7 @@ export async function fetchGET(url, type, callback) {
   if(response.ok){
     promise = await response.json()
     if(callback){
-      await callback
+      await callback(promise)
     }
   } else {
     console.error(`${type} ne passe pas : `, response)
@@ -148,57 +148,57 @@ export function updateTalent(talentValues, values, rawValues){
       talentValues.experiences[i].status = "created"
       // const valueExperience = experiences_attributes[i];
       // if(valueExperience._destroy){
-      //   delete talentValues.experiences[i]
-      // }else{
-      // }
-    }
-  }
-  if (values.talent_formations_attributes) {
-    const talent_formations_attributes = values.talent_formations_attributes
-    for (let i = 0; i < talent_formations_attributes.length; i++) {
-      const valueFormations = talent_formations_attributes[i];
-      if(valueFormations._destroy){
-        delete talentValues.formations[i]
-      }else{
-        talentValues.formations[i] = valueFormations
+        //   delete talentValues.experiences[i]
+        // }else{
+          // }
+        }
       }
-    }
-  }
-  if(values.next_aventure_attributes){
-    const valuesNA = values.next_aventure_attributes
-    Object.keys(valuesNA).forEach(value => {
-      if(talentValues.next_aventure[value] !== valuesNA[value]){
-        talentValues.next_aventure[value] = valuesNA[value]
+      if (values.talent_formations_attributes) {
+        const talent_formations_attributes = values.talent_formations_attributes
+        for (let i = 0; i < talent_formations_attributes.length; i++) {
+          const valueFormations = talent_formations_attributes[i];
+          if(valueFormations._destroy){
+            delete talentValues.formations[i]
+          }else{
+            talentValues.formations[i] = valueFormations
+          }
+        }
       }
-    })
-    if (values.next_aventure_attributes.mobilities_attributes) {
-      talentValues.mobilities = values.next_aventure_attributes.mobilities_attributes
-    }
-  }
-  if(values.talent_job_attributes){
-    const valuesTJ = values.talent_job_attributes
-    Object.keys(valuesTJ).forEach(value => {
-      if(talentValues.job[value] !== valuesTJ[value]){
-        talentValues.job[value] = valuesTJ[value]
+      if(values.next_aventure_attributes){
+        const valuesNA = values.next_aventure_attributes
+        Object.keys(valuesNA).forEach(value => {
+          if(talentValues.next_aventure[value] !== valuesNA[value]){
+            talentValues.next_aventure[value] = valuesNA[value]
+          }
+        })
+        if (values.next_aventure_attributes.mobilities_attributes) {
+          talentValues.mobilities = values.next_aventure_attributes.mobilities_attributes
+        }
       }
-    })
-  }
-  if(rawValues.next_aventure_attributes && rawValues.next_aventure_attributes.sectors){
-    talentValues.sectors = rawValues.next_aventure_attributes.sectors
-  }
-  if(rawValues.skills){
-    talentValues.skills = rawValues.skills
-  }
-  if(rawValues.knowns){
-    talentValues.knowns = rawValues.knowns
-  }
-  if(rawValues.technos){
-    talentValues.technos = rawValues.technos
-  }
-  if(values.talent_languages_attributes){
-    const newLanguages = []
-    for (let i = 0; i < values.talent_languages_attributes.length; i++) {
-      const language = values.talent_languages_attributes[i];
+      if(values.talent_job_attributes){
+        const valuesTJ = values.talent_job_attributes
+        Object.keys(valuesTJ).forEach(value => {
+          if(talentValues.job[value] !== valuesTJ[value]){
+            talentValues.job[value] = valuesTJ[value]
+          }
+        })
+      }
+      if(rawValues.next_aventure_attributes && rawValues.next_aventure_attributes.sectors){
+        talentValues.sectors = rawValues.next_aventure_attributes.sectors
+      }
+      if(rawValues.skills){
+        talentValues.skills = rawValues.skills
+      }
+      if(rawValues.knowns){
+        talentValues.knowns = rawValues.knowns
+      }
+      if(rawValues.technos){
+        talentValues.technos = rawValues.technos
+      }
+      if(values.talent_languages_attributes){
+        const newLanguages = []
+        for (let i = 0; i < values.talent_languages_attributes.length; i++) {
+          const language = values.talent_languages_attributes[i];
       if(!language._destroy){
         newLanguages[i] = language
       }
@@ -213,3 +213,10 @@ export function updateTalent(talentValues, values, rawValues){
   }
 }
 
+export function updateTalents(talents){
+  
+  return {
+    type: FETCH_TALENTS,
+    payload: talents
+  }
+}
