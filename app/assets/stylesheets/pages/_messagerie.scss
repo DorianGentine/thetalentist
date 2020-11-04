@@ -104,8 +104,14 @@
   margin-right: 15px;
   color: white;
   background-color: $subtitle;
+  background-position: center;
+  background-size: cover;
   text-align: center;
   font-size: 2em;
+  position: relative;
+}
+.photo-conv p{
+  color: white;
 }
 .photo-conv-small{
   min-width: 20px;
@@ -118,6 +124,29 @@
   width: 80px;
   height: 80px;
   font-size: 4em;
+}
+.logo-su-conv{
+  min-width: 20px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 100px;
+  color: white;
+  background-color: $subtitle;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  font-size: 0.5em;
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+}
+.logo-su-conv-lg{
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+  bottom: -10px;
+  right: -10px;
 }
 
 .profil-url{

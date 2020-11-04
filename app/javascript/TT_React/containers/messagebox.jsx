@@ -16,10 +16,12 @@ class messagebox extends Component {
     const participant = conversation.participant
     const avatar = participant.avatar
     const idActive = this.props.idActive
+    const startup = participant.startup
     let infos = {
       full_name: "Talent",
       image: null,
     }
+    
 
     let linkUrl = "/conv"
     if(isMobile){
@@ -53,12 +55,25 @@ class messagebox extends Component {
       }
     }
 
+    const renderAvatar = () => {
+      return (
+        <div className="photo-conv" style={{backgroundImage: `url(${infos.image})`}}>
+          <p>{infos.image ? "" : infos.full_name.slice(0, 1)}</p>
+          {!startup ? null :
+            <div className="logo-su-conv" style={{backgroundImage: `url(${startup.logo.small_bright_face.url})`}}>
+              {startup.logo.url ? "" : startup.name.slice(0,1)}
+            </div>
+          }
+        </div> 
+      )
+    }
+
     return(
       <Link
         to={linkUrl}
         disabled={linkUrl == "/conv"}
         className={`message-box${conversation.conversation_id == idActive && !isMobile ? " active" : ""}`}>
-        {infos.image != null ? <img className="photo-conv" src={infos.image} alt="avatar"></img> : <div className="photo-conv">{infos.full_name.slice(0, 1)}</div>}
+        {renderAvatar()}
         <div className="flex-grow-1">
           <div className="flex space-between">
             <div className="flex flex-grow-1">
