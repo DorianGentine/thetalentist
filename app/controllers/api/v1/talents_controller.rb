@@ -20,7 +20,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
     @pagy, @records = pagy(
       Talent.joins(:talent_job).where(:visible => true, talent_jobs: { job_id: jobsId })
         .reorder(position: :asc, completing: :desc, last_sign_in_at: :desc), 
-      items: 3, 
+      items: 9, 
       size: []
     )
     @pagy_metadata = pagy_metadata(@pagy)
