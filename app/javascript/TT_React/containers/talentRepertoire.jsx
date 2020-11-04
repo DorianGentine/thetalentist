@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ReactSortable } from "react-sortablejs";
 
-import { fetchGET, fetchPost } from '../actions';
+import { fetchGET, fetchPost, updateTalents } from '../actions';
 
 import TalentCard from './talentCard'
 
@@ -16,15 +16,41 @@ class TalentRepertoire extends Component {
     };
   }
 
+  handlePagy(promise){
+    const current_page = promise.pagy.page
+    const last_page = promise.pagy.last
+    if(current_page < last_page){
+      fetch(promise.pagy.next_url, {method: "GET", headers: { 'Content-Type': 'application/json'}})
+      .then(r => r.json())
+      .then(body => {
+        const talents = this.state.talents
+        const totalTalents = talents.concat(body.talents)
+        this.setState({
+          talents: totalTalents
+        })
+        this.handlePagy(body)
+      })
+    }else{
+      const result = {
+        pagy: promise.pagy,
+        talents: this.state.talents
+      }
+      this.props.updateTalents(result)
+    }
+  }
+
   componentDidMount(){
     if(this.props.talents === null){
-      this.props.fetchGET('/api/v1/talents/repertoire', "FETCH_TALENTS")
+      const that = this
+      this.props.fetchGET('/api/v1/talents/repertoire_pagy', "FETCH_TALENTS", function(promise){
+        that.handlePagy(promise)
+      })
     }else{
       this.setState({
-        admin: this.props.talents.user.admin,
+        admin: this.props.user.is_a_model == "Talentist",
         talents: this.props.talents.talents,
       })
-      this.props.updateNbTalents(this.props.talents.talents.length)
+      this.props.updateNbTalents(this.props.talents.pagy.count)
     }
   }
 
@@ -100,10 +126,14 @@ class TalentRepertoire extends Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if(this.props.talents != nextProps.talents && this.props.talents === null){
       this.setState({
-        admin: nextProps.talents.user.admin,
         talents: nextProps.talents.talents,
       })
-      this.props.updateNbTalents(nextProps.talents.talents.length)
+      this.props.updateNbTalents(nextProps.talents.pagy.count)
+    }
+    if(this.props.user != nextProps.user && this.props.user === null){
+      this.setState({
+        admin: nextProps.user.is_a_model == "Talentist",
+      })
     }
     if(this.props.filter != nextProps.filter){
       let nbTalents = 0
@@ -149,7 +179,7 @@ class TalentRepertoire extends Component {
       }
     })
 
-    if(this.state.talents != null && this.state.admin && filter.length === 0){
+    if(this.state.talents != null && this.state.admin && filter.empty()){
       return(
         <div className="row">
           {renderSortable()}
@@ -171,11 +201,12 @@ function mapStateToProps(state) {
   return {
     talents: state.talents,
     nbTalents: state.nbTalents,
+    user: state.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, updateTalents }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TalentRepertoire);
