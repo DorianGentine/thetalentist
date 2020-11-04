@@ -17,7 +17,6 @@ class Api::V1::TalentsController < Api::V1::BaseController
       @conversation_id = @conversation_id.id
     end
     @user = current_user
-    p "TEST => #{current_headhunter}"
   end
 
   def analytics
@@ -77,9 +76,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
     end
     if params.require(:talent)[:talent_formations_attributes].present?
       params.require(:talent)[:talent_formations_attributes].each do |formation|
-        if formation_is_available?(formation[:formation_id])
+        if formation[:formation_id].present? && formation_is_available?(formation[:formation_id])
           formation[:formation_id] = set_new_formations(formation[:formation_id]) 
-          p "formation[:formation_id] #{formation[:formation_id]}"
         end
       end
     end
@@ -96,11 +94,9 @@ class Api::V1::TalentsController < Api::V1::BaseController
   
   def update_avatar
     @talent = Talent.find(params[:id])
-    p "TENTE LE SAVE"
     if @talent.update(talent_photo_params)
       render :show
     else
-      p "Le problème est #{@talent.errors}"
     end
     authorize @talent
   end
@@ -175,19 +171,15 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
 
   def set_new_startups(param)
-    p "ON CREE LA SU"
     if param.present?
       startup = Startup.create(name: param)
-      p "STARTUP: #{startup}"
       return startup.id
     end
   end 
   
   def set_new_formations(param)
-    p "ON CREE LA Formation"
     if param.present?
       formation = Formation.create(title: param)
-      p "FORMATION: #{formation.id}"
       return formation.id
     end
   end 
