@@ -45,7 +45,7 @@ class HeadhunterMailerPreview < ActionMailer::Preview
   def recommanded
     @headhunter = Headhunter.first
     @talent = Talent.first
-    HeadhunterMailer.recommanded(@headhunter.id, @headhunter.id)
+    HeadhunterMailer.recommanded(@headhunter.id, @talent.id)
   end
 
 end
