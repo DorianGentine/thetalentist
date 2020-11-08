@@ -1,20 +1,11 @@
 <div class="tab_gallery-grid">
-  <% count = @startup.pictures.length %>
-
   <% @startup.pictures.first(5).each do |photo| %>
     <% if photo.photo? %>
       <div data-target="modal_image_<%= photo.id %>" class="modal-button" style="background-image: url('<%= cl_image_path photo.photo.url(:big_picture)  %>')"></div>
       <%= render 'component_avem/modal_image_apparition', photo: photo %>
     <% else %>
-      <div class="center-text" style="background-color: gray; padding: 15px;">Ajoutez encore une photo</div>
-    <% end %>
-  <% end %>
-
-  <% if count < 5 && current_user.is_a?(Headhunter) %>
-    <% for i in 1..(5-count) %>
-      <% if current_user.is_a?(Talent) %>
-      <% else %>
-        <div class="center-text" style="background-color: gray; padding: 15px;">Ajoutez encore une photo</div>
+      <% if !current_user.is_a?(Talent) %>
+        <div class="center-text" style="background-color: lightgray; padding: 15px;">Ajoutez encore une photo</div>
       <% end %>
     <% end %>
   <% end %>

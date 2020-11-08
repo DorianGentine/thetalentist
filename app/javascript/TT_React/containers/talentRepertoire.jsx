@@ -19,7 +19,7 @@ class TalentRepertoire extends Component {
   handlePagy(promise){
     const current_page = promise.pagy.page
     const last_page = promise.pagy.last
-    if(current_page < last_page){
+    if(current_page < last_page && last_page != 1){
       fetch(promise.pagy.next_url, {method: "GET", headers: { 'Content-Type': 'application/json'}})
       .then(r => r.json())
       .then(body => {
@@ -30,7 +30,7 @@ class TalentRepertoire extends Component {
         })
         this.handlePagy(body)
       })
-    }else{
+    }else if(last_page != 1){
       const result = {
         pagy: promise.pagy,
         talents: this.state.talents

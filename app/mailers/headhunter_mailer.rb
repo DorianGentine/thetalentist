@@ -57,6 +57,8 @@ class HeadhunterMailer < ApplicationMailer
   def recommanded(headhunter_id, talent_id)
     @headhunter = Headhunter.find(headhunter_id)
     @talent = Talent.find(talent_id)
+    rela = Relationship.where(headhunter_id: headhunter_id, talent_id: talent_id).first
+    @status = rela.status
 
     mail(
       to: @headhunter.email,

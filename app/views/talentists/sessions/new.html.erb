@@ -22,7 +22,7 @@
           <%= f.input :password, 
             required: false 
           %>
-          <%= f.input :remember_me, 
+          <%= f.input :remember_me, label: "Se souvenir de moi", input_html: { class: "margin-right-5"},
             as: :boolean if devise_mapping.rememberable? 
           %>
           <%= render "talentists/shared/links" %>

@@ -43,11 +43,12 @@ class ProfilTalent extends Component {
       visible = talent.talent.visible
       job = talent.jobs[0] ? talent.jobs[0].title : "Non Défini"
       color = setJobColor(job, this.props.jobs)
+
     }
     let titles = [
       "Prochaine aventure",
-      `Expériences professionnelles (${experiencesLength})`,
-      `Formations (${formationsLength})`
+      `${experiencesLength == 1 ? "Expérience professionnelle" : "Expériences professionnelles"} (${experiencesLength})`,
+      `${formationsLength == 1 ? "Formation" : "Formations"} (${formationsLength})`
     ]
     if(isMobile){
       titles = [

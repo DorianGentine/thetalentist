@@ -16,7 +16,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
     authorize @headhunter
     success = verify_recaptcha(action: 'registration', minimum_score: 0.8, secret_key: ENV['RECAPTCHA_SECRET_KEY_V3'])
     p "verify_recaptcha: #{success}"
-    p "score: #{recaptcha_reply['score']}"
+    p "score: #{recaptcha_reply.present? ? recaptcha_reply['score'] : nil}"
     checkbox_success = verify_recaptcha unless success
     if success || checkbox_success
       @headhunter.validated = true
@@ -29,20 +29,13 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
         return render :new
         end
       end
-      p "HEADHUNTER: #{@headhunter}"
       if @headhunter.save
         message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme !"
         @talentist = Talentist.last
         @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
-
-        # if @headhunter.startup.address == "" || @headhunter.startup.address.nil?
-        #   session[:headhunter_id] = @headhunter.id
-        #   redirect_to steps_startup_info_path(:startup)
-        # else
-          @headhunter.send_welcome_and_reminder_email
-          session[:headhunter_id] = @headhunter.id
-          sign_up(resource)
-        # end
+        @headhunter.send_welcome_and_reminder_email
+        session[:headhunter_id] = @headhunter.id
+        sign_up(resource)
       else
         return render :new
       end

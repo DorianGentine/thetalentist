@@ -1,6 +1,3 @@
-# Lancer fonction pour les talent_second_job alors que talent_job vide ?
-
-
 class Api::V1::TalentsController < Api::V1::BaseController
   include Pagy::Backend
 
@@ -85,9 +82,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
     end
     if params.require(:talent)[:talent_formations_attributes].present?
       params.require(:talent)[:talent_formations_attributes].each do |formation|
-        if formation_is_available?(formation[:formation_id])
+        if formation[:formation_id].present? && formation_is_available?(formation[:formation_id])
           formation[:formation_id] = set_new_formations(formation[:formation_id]) 
-          p "formation[:formation_id] #{formation[:formation_id]}"
         end
       end
     end

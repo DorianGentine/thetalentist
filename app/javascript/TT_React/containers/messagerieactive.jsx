@@ -86,7 +86,7 @@ class Conversation extends Component {
     const messagerieActiveMobile = this.props.messagerieActiveMobile
     const sidebarActiveMobile = this.props.sidebarActiveMobile
     const talent_id = this.props.params.talent_id || false
-    let conversationActive, participant, relationship, email
+    let conversationActive, participant, relationship, email, startup
     let info = {
       image: null,
       full_name: "Talent",
@@ -100,6 +100,7 @@ class Conversation extends Component {
       participant = conversationActive.participant
       relationship = conversationActive.in_relation
       email = conversationActive.email
+      startup = participant.startup
       if(relationship == "Accepter" || participant.user_model == "Headhunter"){
         info = {
           image: typeof participant.avatar == "string" ? null : participant.avatar.small_bright_face.url,
@@ -112,6 +113,19 @@ class Conversation extends Component {
           full_name: `Talent - (${participant.full_name})`,
         }
       }
+    }
+
+    const renderAvatar = () => {
+      return (
+        <div className="photo-conv" style={{backgroundImage: `url(${info.image})`}}>
+          <p>{info.image ? "" : info.full_name.slice(0, 1)}</p>
+          {!startup ? null :
+            <div className="logo-su-conv" style={{backgroundImage: `url(${startup.logo.small_bright_face.url})`}}>
+              {startup.logo.url ? "" : startup.name.slice(0,1)}
+            </div>
+          }
+        </div> 
+      )
     }
 
     const renderMessages = () => conversationActive.messages.map((message, index) => {
@@ -203,7 +217,7 @@ class Conversation extends Component {
       <div className={`col-md-5 flex-column${isMobile ? " messagerie-active-mobile" : " flex-grow-1"}${messagerieActiveMobile ? "" : " hidden-messagerie"}`} style={isMobile ? null : {paddingTop: "56px"}}>
         <div className="flex align-items-center">
           {isMobile ? <FontAwesomeIcon className="violet margin-right-15" icon={["fas", "chevron-left"]} onClick={() => this.props.openMessagerie(messagerieActiveMobile)} /> : null}
-          {info.image != null ? <img className="photo-conv" src={info.image} alt="avatar"></img> : <div className="photo-conv">{info.full_name.slice(0, 1)}</div>}
+          {renderAvatar()}
           <div className="flex-grow-1">
             <p className="bold no-margin">{info.full_name}</p>
             {/* <p className="no-margin"><span className="green">•</span> En ligne</p> */}

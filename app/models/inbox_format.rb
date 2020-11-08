@@ -28,6 +28,7 @@ class InboxFormat
                 user_model: participant.class.name,
                 job: participant.his_profession,
                 avatar: avatar,
+                startup: startup(participant,)
               },
               conversation_id: conversation.id,
               archived: config_conv.archived,
@@ -73,6 +74,7 @@ class InboxFormat
             answer_2: answer_2(participant),
             test_3: question_3(participant),
             answer_3: answer_3(participant),
+            startup: startup(participant),
           },
           attachments: files(config_conv),
           conversation_id: @conversation.id,
@@ -155,16 +157,6 @@ class InboxFormat
     end
   end
 
-  # def question_2(user)
-  #   if user.is_a?(Talent)
-  #     return "Attentes salariales :"
-  #   elsif user.is_a?(Headhunter)
-  #     return "Domaines d'activités :"
-  #   else
-  #     return "Talentist"
-  #   end
-  # end
-
   def answer_1(user)
     if user.is_a?(Talent)
       return user.next_aventure.availability
@@ -207,5 +199,16 @@ class InboxFormat
     else
       user.city
     end
+  end
+
+  def startup(participant)
+    startup = nil
+    if participant.is_a?(Headhunter)
+      startup = {
+        name: participant.startup.name,
+        logo: participant.startup.logo,
+      }
+    end
+    return startup
   end
 end

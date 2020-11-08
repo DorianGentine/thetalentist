@@ -27,7 +27,7 @@ class Conversation extends Component {
   render () {
     const isMobile = this.props.isMobile
     const sidebarActiveMobile = this.props.sidebarActiveMobile
-    let conversationActive, participant, relationship, email, city, participant_model, user_model, config_conv_id, pin, archived
+    let conversationActive, participant, relationship, email, city, participant_model, user_model, config_conv_id, pin, archived, startup
     let attachments = []
     let info = {
       image: null,
@@ -52,6 +52,7 @@ class Conversation extends Component {
       city = participant.city
       attachments = conversationActive.attachments
       participant_model = participant.user_model
+      startup = participant.startup
       config_conv_id = conversationActive.config_conv_id
       pin = conversationActive.pin
       archived = conversationActive.archived
@@ -67,7 +68,20 @@ class Conversation extends Component {
       }
     }
 
-  const renderDocs = () => attachments.map((attachment, index) => <a key={index} className="margin-bottom-15" href={attachment.url} target="_blank"><FontAwesomeIcon icon={["far", "file"]}/> {attachment.name}</a>)
+    const renderDocs = () => attachments.map((attachment, index) => <a key={index} className="margin-bottom-15" href={attachment.url} target="_blank"><FontAwesomeIcon icon={["far", "file"]}/> {attachment.name}</a>)
+
+    const renderAvatar = () => {
+      return (
+        <div className="photo-conv photo-conv-lg" style={{backgroundImage: `url(${info.image})`}}>
+          <p>{info.image ? "" : info.full_name.slice(0, 1)}</p>
+          {!startup ? null :
+            <div className="logo-su-conv logo-su-conv-lg" style={{backgroundImage: `url(${startup.logo.small_bright_face.url})`}}>
+              {startup.logo.url ? "" : startup.name.slice(0,1)}
+            </div>
+          }
+        </div> 
+      )
+    }
 
     const openDropdown = () => {
       if(this.state.opened){
@@ -133,7 +147,7 @@ class Conversation extends Component {
         : null}
         {isMobile ? <FontAwesomeIcon className="absolute close-sidebar" onClick={() => this.props.openSidebar(sidebarActiveMobile)} icon={["far", "times-circle"]} /> : null }
         <div className="flex justify-center margin-bottom-30">
-          {info.image != null ? <img className="photo-conv photo-conv-lg" src={info.image} alt="avatar"></img> : <div className="photo-conv photo-conv-lg">{info.full_name.slice(0, 1)}</div>}
+          {renderAvatar()}
         </div>
         <p className="participant-fullname margin-bottom-5">{info.full_name}</p>
         <p className="participant-job margin-bottom-5">{participant != undefined ? participant.job : ""}</p>
