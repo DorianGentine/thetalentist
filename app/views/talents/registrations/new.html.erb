@@ -57,7 +57,8 @@
             <%= f.input :phone, 
               required: true,
               as: :tel,
-              :pattern => "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$",
+              # :pattern => "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$",
+              :pattern => "[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}",
               label: "Numéro de téléphone", 
               wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
               error: f.object.errors.messages[:phone][0] || "Le numéro de téléphone n'est pas correct"
@@ -65,20 +66,25 @@
 
             <%= f.input :terms_of_condition,
               required: true,
-              wrapper_html: { class: "col-md-1 margin-bottom-20" },
-              label: false
+              wrapper_html: { class: "col-md-1" },
+              label: false,
+              error: ""
             %>
-            <p class="col-md-11 margin-bottom-30 requis">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %>  de The Talentist.</p>
+            <p class="col-md-11 requis no-margin">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %>  de The Talentist.</p>
+            <% if f.object.errors.messages[:terms_of_condition] %>
+              <div class="invalid-feedback col-md-12"><%= f.object.errors.messages[:terms_of_condition][0] %></div>
+            <% end %>
 
             <% if @show_checkbox_recaptcha %>
-              <%= recaptcha_tags class: "col-md-12 margin-bottom-30" %>
+              <%= recaptcha_tags class: "col-md-12 margin-top-30" %>
             <% else %>
               <%= recaptcha_v3(action: 'registration', site_key: ENV['RECAPTCHA_SITE_KEY_V3']) %>
             <% end %>
 
-            <div class="col-md-12 flex">
+            <div class="col-md-12 flex margin-top-30">
               <%= f.button :submit, 
                 "Commencer à compléter mon profil",
+                id: "submit-btn",
                 class: "btn-violet-square margin-right-30"
               %>
               <%= link_to 'Précédent', 
@@ -91,5 +97,28 @@
     </div>
   </div>
 </div>
+
+<%# <script>
+  const talentPhone = document.getElementById('talent_phone')
+  let displayed = false
+  talentPhone.addEventListener("blur", function(){
+    const patt = new RegExp("(?:(?:\\+|00)33|0)\\s*[6-7](?:[\\s.-]*\\d{2}){4}$")
+    if(!patt.test(talentPhone.value) && !displayed){
+      displayed = true
+      const alert = document.createElement("div")
+      alert.classList.add("invalid-feedback")
+      alert.id = "phone-alert"
+      alert.innerText = "Le numéro de téléphone n'est pas bon (06 00 00 00 00)"
+      talentPhone.insertAdjacentElement("afterend", alert)
+      document.getElementById("submit-btn").disabled = true
+    }else if(patt.test(talentPhone.value) && displayed){
+      displayed = false
+      const parent = talentPhone.parentNode
+      const phoneAlert = document.getElementById('phone-alert')
+      parent.removeChild(phoneAlert)
+      document.getElementById("submit-btn").disabled = false
+    }
+  })
+</script> %>
 
 

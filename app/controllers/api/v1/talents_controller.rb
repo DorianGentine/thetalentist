@@ -1,6 +1,3 @@
-# Lancer fonction pour les talent_second_job alors que talent_job vide ?
-
-
 class Api::V1::TalentsController < Api::V1::BaseController
   include Pagy::Backend
 

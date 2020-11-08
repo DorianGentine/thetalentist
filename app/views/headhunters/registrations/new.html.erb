@@ -81,18 +81,22 @@
             %>
 
             <%= f.input :terms_of_condition,
-              wrapper_html: { class: "col-md-1 margin-bottom-20" },
-              label: false
+              wrapper_html: { class: "col-md-1" },
+              label: false,
+              error: ""
             %>
-            <p class="col-md-11 margin-bottom-30 requis">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %> de The Talentist.</p>
+            <p class="col-md-11 requis no-margin">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %> de The Talentist.</p>
+            <% if f.object.errors.messages[:terms_of_condition] %>
+              <div class="invalid-feedback col-md-12"><%= f.object.errors.messages[:terms_of_condition][0] %></div>
+            <% end %>
 
             <% if @show_checkbox_recaptcha %>
-              <%= recaptcha_tags class: "col-md-12 margin-bottom-30" %>
+              <%= recaptcha_tags class: "col-md-12 margin-top-30" %>
             <% else %>
               <%= recaptcha_v3(action: 'registration', site_key: ENV['RECAPTCHA_SITE_KEY_V3']) %>
             <% end %>
 
-            <div class="col-md-12 flex">
+            <div class="col-md-12 flex margin-top-30">
               <%= f.button :submit, 
                 "S'enregistrer", 
                 class: "btn-violet-square margin-right-30"

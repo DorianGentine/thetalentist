@@ -8,12 +8,11 @@ class Talents::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    # TODO envoyer un email de bienvenue
     @talent = Talent.new(talent_params)
     authorize @talent
     success = verify_recaptcha(action: 'registration', minimum_score: 0.8, secret_key: ENV['RECAPTCHA_SECRET_KEY_V3'])
     p "verify_recaptcha: #{success}"
-    p "score: #{recaptcha_reply['score']}"
+    p "score: #{recaptcha_reply.present? ? recaptcha_reply['score'] : nil}"
     checkbox_success = verify_recaptcha unless success
     if success || checkbox_success
       if @talent.save
