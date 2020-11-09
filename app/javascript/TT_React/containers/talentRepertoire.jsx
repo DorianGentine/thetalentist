@@ -153,6 +153,14 @@ class TalentRepertoire extends Component {
   render () {
     const filter = this.props.filter
 
+    const empty = (filter) => {
+      if(filter.pinFilter == false && filter.jobFilter.length == 0 && filter.remFilter == 0 && filter.mobilityFilter.length == 0){
+        return true
+      }else{
+        return false
+      }
+    }
+
     const handleEnd = () => {
       let newOrder = []
       for (var i = 0; i < this.state.talents.length; i++) {
@@ -179,7 +187,7 @@ class TalentRepertoire extends Component {
       }
     })
 
-    if(this.state.talents != null && this.state.admin && filter.empty()){
+    if(this.state.talents != null && this.state.admin && empty(filter)){
       return(
         <div className="row">
           {renderSortable()}
