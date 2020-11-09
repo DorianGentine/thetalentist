@@ -28,6 +28,9 @@ class TalentistPolicy < ApplicationPolicy
   def repertoire?
     user == record
   end
+  def repertoire_pagy?
+    repertoire?
+  end
 
   def navbar?
     true
