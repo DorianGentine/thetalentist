@@ -85,14 +85,17 @@ class RenderTechnos extends Component {
     })
 
     const Menu = props => {
+      const inputLength = props.selectProps.inputValue.length
       const optionSelectedLength = props.getValue().length || 0;
+      let text = props.children
+      if(limit != 1 && optionSelectedLength >= limit){
+        text = <div className="select-form__max-reached-alert">😫 Vous avez atteint le maximum de choix 😫</div>
+      }else if(inputLength >= 30){
+        text = <div className="select-form__max-reached-alert">😫 Malheureusement nous n'acceptons pas les entrées de plus de 30 caractères 😫</div>
+      }
       return (
         <components.Menu {...props}>
-          {limit == 1 || optionSelectedLength < limit ? (
-            props.children
-          ) : (
-            <div className="select-form__max-reached-alert">😫 Vous avez atteint le maximum de choix 😫</div>
-          )}
+          {text}
         </components.Menu>
       );
     };
@@ -100,7 +103,8 @@ class RenderTechnos extends Component {
     const ReactSelectAdapter = ({ input, ...rest }) => {
       const isValidNewOption = (inputValue, selectValue, selectOptions) => {
         if (
-          selectValue.length < limit && 
+          selectValue.length < limit &&
+          inputValue.trim().length > 30 || 
           inputValue.trim().length === 0 ||
           selectOptions.find(option => option.name === inputValue
           )
