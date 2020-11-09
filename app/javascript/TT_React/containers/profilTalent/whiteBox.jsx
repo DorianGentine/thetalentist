@@ -32,9 +32,7 @@ class WhiteBox extends Component {
   handleImageChange = (values) => {
     const e = event
     if (e.target.files[0]) {
-      console.log('values', values)
       this.setState({newInitialCriteres: values})
-      console.log('e.target.files[0]', e.target.files[0])
       let fReader = new FileReader();
       const that = this
       fReader.onload = function(event){
@@ -52,7 +50,6 @@ class WhiteBox extends Component {
         const tl = talent_languages[i];
         savedIds[i] = tl.id
       }
-      console.log('savedIds', savedIds)
     }
     this.setState({ savedTLIds: savedIds})
   }
@@ -205,8 +202,6 @@ class WhiteBox extends Component {
     if(user){
       userModel = user.is_a_model
     }
-    console.log('newInitialCriteres', this.state.newInitialCriteres)
-    console.log('InitialCriteres', initialCriteres)
     
     const renderClassicCriteres = () => criteres.map((critere, index) => {
       return(
@@ -253,7 +248,6 @@ class WhiteBox extends Component {
       // MEP photo
       if(this.state.newPhoto){
         const formData = new FormData();
-        console.log('this.state.newPhoto', this.state.newPhoto)
         formData.append("photo", this.state.newPhoto);
         fetch(`/api/v1/talents/${talent.talent.id}/update_avatar`, {method: "PATCH", body: formData})
           .then(r => {
@@ -276,7 +270,6 @@ class WhiteBox extends Component {
       if(valuesToSend.next_aventure_attributes && valuesToSend.next_aventure_attributes.mobilities_attributes){
         for (let i = 0; i < valuesToSend.next_aventure_attributes.mobilities_attributes.length; i++) {
           const mobility = valuesToSend.next_aventure_attributes.mobilities_attributes[i];
-          console.log('mobility', mobility)
           let mobility_id
           if(this.props.talent.mobilities[i]){
             mobility_id = this.props.talent.mobilities[i].id
@@ -371,7 +364,6 @@ class WhiteBox extends Component {
 
     const onSubmit = values => {
       const valuesToSend = valuesFilter(values)
-      console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
         this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
       }
