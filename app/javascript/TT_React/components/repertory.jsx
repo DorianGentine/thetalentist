@@ -19,13 +19,6 @@ class Repertory extends Component {
         jobFilter: [],
         remFilter: 0,
         mobilityFilter: [],
-        empty: function(filter){
-          if(this.pinFilter == false && this.jobFilter.length == 0 && this.remFilter == 0 && this.mobilityFilter.length == 0){
-            return true
-          }else{
-            return false
-          }
-        }
       },
       nbTalents: 0
     };
