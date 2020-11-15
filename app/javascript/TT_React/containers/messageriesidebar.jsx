@@ -3,25 +3,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchPost, fetchGET, openSidebar } from '../actions';
+import { fetchPost, fetchGET, openSidebar, updateConversation, updateConversations } from '../actions';
 
 class Conversation extends Component {
   constructor(props) {
     super(props)
     this.state = {
       opened: false,
-      intervalMessages: null,
     };
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if(this.props.conversationActive.conversation != undefined){
-      if(this.props.conversationActive.conversation.pin != nextProps.conversationActive.conversation.pin ||
-          this.props.conversationActive.conversation.archived != nextProps.conversationActive.conversation.archived){
-          clearInterval(this.state.intervalMessages)
-          this.setState({ intervalMessages: null })
-      }
-    }
   }
 
   render () {
@@ -94,18 +83,15 @@ class Conversation extends Component {
       }
     }
 
-    const setIntervalMessages = () => {
-      let i = 0
-      let intervalMessages = setInterval(() => {
-        i++
-        this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
-        this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
-        if(i > 4){
-          clearInterval(this.state.intervalMessages)
-          this.setState({ intervalMessages: null })
-        }
-      }, 1000)
-      this.setState({ intervalMessages: intervalMessages })
+    const handleUpdate = promise => {
+      const conversation = {
+        conversation: promise.conversation
+      }
+      const conversations = {
+        conversations: promise.conversations
+      }
+      this.props.updateConversation(conversation)
+      this.props.updateConversations(conversations)
     }
 
     const handlePin = () => {
@@ -113,12 +99,11 @@ class Conversation extends Component {
         pin: !pin,
         email: email,
       }
-      console.log(newConfig)
       this.props.fetchPost(
         `/api/v1/config_conversations/${config_conv_id}`,
         newConfig,
         "PATCH",
-        setIntervalMessages()
+        promise => {handleUpdate(promise)}
       )
     }
     const handleArchive = () => {
@@ -126,12 +111,11 @@ class Conversation extends Component {
         archived: !archived,
         email: email,
       }
-      console.log(newConfig)
       this.props.fetchPost(
         `/api/v1/config_conversations/${config_conv_id}`,
         newConfig,
         "PATCH",
-        setIntervalMessages()
+        promise => {handleUpdate(promise)}
       )
     }
 
@@ -183,7 +167,7 @@ class Conversation extends Component {
           <p className="sidebar-title margin-top-30">Documents échangés</p>
         : null}
         <div className="flex flex-column">{attachments.length > 0 ? renderDocs() : null}</div>
-        <p className="sidebar-title margin-top-30">Note personnelle</p>
+        {/* <p className="sidebar-title margin-top-30">Note personnelle</p> */}
       </div>
     );
   }
@@ -199,7 +183,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPost, fetchGET, openSidebar }, dispatch);
+  return bindActionCreators({ fetchPost, fetchGET, openSidebar, updateConversation, updateConversations }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Conversation);

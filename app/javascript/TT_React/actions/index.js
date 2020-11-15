@@ -42,32 +42,58 @@ export async function fetchGET(url, type, callback) {
     payload: promise
   };}
 
-export function fetchPost(url, body, method, callback) {
-  let request
-  if(body != null){
-    request = fetch(url,
-    {
-      method: method,
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(body)
-    })
-    .then(response => {
-      response.json()
-    })
-    .then(callback)
-  }else if(body === null){
-    request = fetch(url,
-    {
-      method: method,
-      headers: { 'Content-Type': 'application/json'},
-    })
-    .then(callback)
+export async function fetchPost(url, body, method, callback) {
+  let promise
+  let response = await fetch(url, {
+    method: method,
+    headers: { 'Content-Type': 'application/json'},
+    body: body ? JSON.stringify(body) : null
+  })
+  if(response.ok){
+    promise = await response.json()
+    if(callback){
+      await callback(promise)
+    }
+  } else {
+    console.error(`POST_COMPTE ne passe pas : `, response)
+    promise = null
   }
 
   return {
     type: POST_COMPTE,
-    payload: body
+    payload: promise
   };}
+
+// export function fetchPost(url, body, method, callback) {
+//   let request
+//   if(body != null){
+//     request = fetch(url,
+//     {
+//       method: method,
+//       headers: { 'Content-Type': 'application/json'},
+//       body: JSON.stringify(body)
+//     })
+//     .then(response => {
+//       response.json()
+//       console.log('response', response)
+//     })
+//     .then((promise) => {
+//       console.log('promise', promise)
+//       callback
+//     })
+//   }else if(body === null){
+//     request = fetch(url,
+//     {
+//       method: method,
+//       headers: { 'Content-Type': 'application/json'},
+//     })
+//     .then(callback)
+//   }
+
+//   return {
+//     type: POST_COMPTE,
+//     payload: body
+//   };}
 
 export function closeGuideSu(){
   const nextStep = 0
@@ -124,7 +150,9 @@ export function closeModalTalent(talent){
 
 export function updateConversation(conversationActive, message, status){
   const newConv = JSON.parse(JSON.stringify(conversationActive))
-  newConv.conversation.messages.push(message)
+  if(message){
+    newConv.conversation.messages.push(message)
+  }
   if(status){
     newConv.conversation.in_relation = status
   }
@@ -134,84 +162,91 @@ export function updateConversation(conversationActive, message, status){
   }
 }
 
-export function updateTalent(talentValues, values, rawValues){
-  const talent = talentValues.talent
-  Object.keys(values).forEach(value => {
-    if(talent[value] !== values[value]){
-      talent[value] = values[value]
-    }
-  })
-  if (values.experiences_attributes) {
-    const experiences_attributes = rawValues.experiences_attributes
-    for (let i = 0; i < experiences_attributes.length; i++) {
-      talentValues.experiences[i] = rawValues.experiences_attributes[i]
-      talentValues.experiences[i].status = "created"
-      // const valueExperience = experiences_attributes[i];
-      // if(valueExperience._destroy){
-        //   delete talentValues.experiences[i]
-        // }else{
-          // }
-        }
-      }
-      if (values.talent_formations_attributes) {
-        const talent_formations_attributes = values.talent_formations_attributes
-        for (let i = 0; i < talent_formations_attributes.length; i++) {
-          const valueFormations = talent_formations_attributes[i];
-          if(valueFormations._destroy){
-            delete talentValues.formations[i]
-          }else{
-            talentValues.formations[i] = valueFormations
-          }
-        }
-      }
-      if(values.next_aventure_attributes){
-        const valuesNA = values.next_aventure_attributes
-        Object.keys(valuesNA).forEach(value => {
-          if(talentValues.next_aventure[value] !== valuesNA[value]){
-            talentValues.next_aventure[value] = valuesNA[value]
-          }
-        })
-        if (values.next_aventure_attributes.mobilities_attributes) {
-          talentValues.mobilities = values.next_aventure_attributes.mobilities_attributes
-        }
-      }
-      if(values.talent_job_attributes){
-        const valuesTJ = values.talent_job_attributes
-        Object.keys(valuesTJ).forEach(value => {
-          if(talentValues.job[value] !== valuesTJ[value]){
-            talentValues.job[value] = valuesTJ[value]
-          }
-        })
-      }
-      if(rawValues.next_aventure_attributes && rawValues.next_aventure_attributes.sectors){
-        talentValues.sectors = rawValues.next_aventure_attributes.sectors
-      }
-      if(rawValues.skills){
-        talentValues.skills = rawValues.skills
-      }
-      if(rawValues.knowns){
-        talentValues.knowns = rawValues.knowns
-      }
-      if(rawValues.technos){
-        talentValues.technos = rawValues.technos
-      }
-      if(values.talent_languages_attributes){
-        const newLanguages = []
-        for (let i = 0; i < values.talent_languages_attributes.length; i++) {
-          const language = values.talent_languages_attributes[i];
-      if(!language._destroy){
-        newLanguages[i] = language
-      }
-    }
-    talentValues.talent_languages = newLanguages
-  }
-  console.log('talentValues', talentValues)
-
+export function updateConversations(conversations){
   return {
-    type: FETCH_TALENT,
-    payload: talentValues
+    type: FETCH_CONVERSATIONS,
+    payload: conversations
   }
 }
+
+export function updateTalent(talent){
+  
+  return {
+    type: FETCH_TALENT,
+    payload: talent
+  }
+}
+// const talent = talentValues.talent
+// Object.keys(values).forEach(value => {
+//   if(talent[value] !== values[value]){
+//     talent[value] = values[value]
+//   }
+// })
+// if (values.experiences_attributes) {
+//   const experiences_attributes = rawValues.experiences_attributes
+//   for (let i = 0; i < experiences_attributes.length; i++) {
+//     talentValues.experiences[i] = rawValues.experiences_attributes[i]
+//     talentValues.experiences[i].status = "created"
+//     // const valueExperience = experiences_attributes[i];
+//     // if(valueExperience._destroy){
+//       //   delete talentValues.experiences[i]
+//       // }else{
+//         // }
+//       }
+//     }
+//     if (values.talent_formations_attributes) {
+//       const talent_formations_attributes = values.talent_formations_attributes
+//       for (let i = 0; i < talent_formations_attributes.length; i++) {
+//         const valueFormations = talent_formations_attributes[i];
+//         if(valueFormations._destroy){
+//           delete talentValues.formations[i]
+//         }else{
+//           talentValues.formations[i] = valueFormations
+//         }
+//       }
+//     }
+//     if(values.next_aventure_attributes){
+//       const valuesNA = values.next_aventure_attributes
+//       Object.keys(valuesNA).forEach(value => {
+//         if(talentValues.next_aventure[value] !== valuesNA[value]){
+//           talentValues.next_aventure[value] = valuesNA[value]
+//         }
+//       })
+//       if (values.next_aventure_attributes.mobilities_attributes) {
+//         talentValues.mobilities = values.next_aventure_attributes.mobilities_attributes
+//       }
+//     }
+//     if(values.talent_job_attributes){
+//       const valuesTJ = values.talent_job_attributes
+//       Object.keys(valuesTJ).forEach(value => {
+//         if(talentValues.job[value] !== valuesTJ[value]){
+//           talentValues.job[value] = valuesTJ[value]
+//         }
+//       })
+//     }
+//     if(rawValues.next_aventure_attributes && rawValues.next_aventure_attributes.sectors){
+//       talentValues.sectors = rawValues.next_aventure_attributes.sectors
+//     }
+//     if(rawValues.skills){
+//       talentValues.skills = rawValues.skills
+//     }
+//     if(rawValues.knowns){
+//       talentValues.knowns = rawValues.knowns
+//     }
+//     if(rawValues.technos){
+//       talentValues.technos = rawValues.technos
+//     }
+//     if(values.talent_languages_attributes){
+//       const newLanguages = []
+//       for (let i = 0; i < values.talent_languages_attributes.length; i++) {
+//         const language = values.talent_languages_attributes[i];
+//     if(!language._destroy){
+//       newLanguages[i] = language
+//     }
+//   }
+//   talentValues.talent_languages = newLanguages
+// }
+// console.log('talentValues', talentValues)
 
 export function updateTalents(talents){
   

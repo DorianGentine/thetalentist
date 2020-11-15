@@ -33,7 +33,6 @@ class TalentPolicy < ApplicationPolicy
   end
 
   def show?
-    p ">>>>>>>>>>  JE SUIS UN #{user}"
     if user.is_a?(Headhunter)
       Relationship.where(talent: record).where(headhunter: user).where(status: "Accepter").first.present?
     elsif user.is_a?(Talent)
@@ -50,8 +49,9 @@ class TalentPolicy < ApplicationPolicy
   end
 
   def update?
-    # user == record
-    true
+    # test = Talent.find(38)
+    # test == record
+    user == record
   end
 
   def update_avatar?
