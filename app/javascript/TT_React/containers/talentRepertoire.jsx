@@ -124,7 +124,8 @@ class TalentRepertoire extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if(this.props.talents != nextProps.talents && this.props.talents === null){
+    console.log("this.props.talents != nextProps.talents", this.props.talents != nextProps.talents)
+    if(this.props.talents != nextProps.talents){
       this.setState({
         talents: nextProps.talents.talents,
       })

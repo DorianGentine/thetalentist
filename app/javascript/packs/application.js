@@ -47,6 +47,8 @@ import '../components/validationInscriptionTalent';
 
 import '../components/setJobColor';
 
+import '../components/valuesToSendFilter';
+
 import { revealModal } from "../components/modal";
 revealModal();
 

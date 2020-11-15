@@ -75,9 +75,6 @@ class modalInscription extends Component {
       if(Object.keys(errors).length > 0){
         return errors
       }else{
-        // this.props.fetchPost('/api/v1/talents/:id', value, "PATCH", () => {
-        //   console.log('Submitted: DO SOMETHING NOW')
-        // })
         relocation()
       }
     }

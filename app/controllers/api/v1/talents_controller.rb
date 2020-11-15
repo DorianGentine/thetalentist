@@ -1,28 +1,27 @@
 class Api::V1::TalentsController < Api::V1::BaseController
   include Pagy::Backend
 
-  before_action :autorize_call, only: [:repertoire, :analytics, :show, :sort]
+  before_action :autorize_call, only: [:repertoire, :repertoire_pagy, :analytics, :show, :sort]
 
   def repertoire
-    jobsId = jobs_array()
-    @talents = Talent.joins(:talent_job).where(:visible => true, talent_jobs: { job_id: jobsId })
-        .reorder(position: :asc, completing: :desc, last_sign_in_at: :desc)
+    @talents = set_talents_repertoire()
     @talents = TalentFormat.new.for_api_repository(@talents, current_headhunter)
     @count = { count: @talents.length }
-    autorize_call
+    repertoire = {
+      count: @count,
+      talents: @talents
+    }
+    return repertoire
   end
 
   def repertoire_pagy
-    jobsId = jobs_array()
     @pagy, @records = pagy(
-      Talent.joins(:talent_job).where(:visible => true, talent_jobs: { job_id: jobsId })
-        .reorder(position: :asc, completing: :desc, last_sign_in_at: :desc), 
+      set_talents_repertoire(), 
       items: 9, 
       size: []
     )
     @pagy_metadata = pagy_metadata(@pagy)
     @records = TalentFormat.new.for_api_repository(@records, current_headhunter)
-    autorize_call
   end
 
   def analytics
@@ -30,6 +29,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def index
     @talents = policy_scope(Talent)
+    # @talents = policy_scope(set_talents_repertoire())
   end
 
   def show
@@ -61,22 +61,33 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
 
   def sort
-    params[:_json].each_with_index do |id, index|
-      Talent.where(id: id).update_all(position: index + 1)
+    if params[:reorder]
+      jobsId = jobs_array()
+      talents = Talent.joins(:talent_job).where(:visible => true, talent_jobs: { job_id: jobsId }).reorder(completing: :desc, last_sign_in_at: :desc)
+      talents.each_with_index do |talent, index|
+        talent.update(position: index + 1)
+      end
+      repertoire = self.repertoire
+      @count = repertoire[:count]
+      @talents = repertoire[:talents]
+    else
+      params[:_json].each_with_index do |id, index|
+        Talent.where(id: id).update_all(position: index + 1)
+      end
     end
-    head :ok
+    render :repertoire
   end
 
   def update
     @talent = Talent.find(params[:id])
     if need_to_create_data?
-      if params[:skill_ids].present?
+      if params.require(:talent)[:skill_ids].present?
         set_new_skills(@talent)
       end
-      if params[:known_ids].present?
+      if params.require(:talent)[:known_ids].present?
         set_new_knowns(@talent)
       end
-      if params[:techno_ids].present?
+      if params.require(:talent)[:techno_ids].present?
         set_new_technos(@talent)
       end
     end
@@ -91,6 +102,19 @@ class Api::V1::TalentsController < Api::V1::BaseController
       @talent.experiences.each do |experience|
         set_new_startups(experience.company_name) if startup_is_available?(experience.company_name)
       end
+      @knowns = @talent.knowns || nil
+      @skills = @talent.skills || nil
+      @technos = @talent.technos || nil
+      @talent_languages = @talent.talent_languages || nil
+      @next_aventure = @talent.next_aventure
+      @mobilities = @next_aventure.mobilities
+      @sector_ids = @next_aventure.sector_ids
+      @sectors = @next_aventure.sectors
+      @job = @talent.talent_job
+      @second_job = @talent.talent_second_job
+      @jobs = @talent.jobs
+      @experiences = @talent.experiences
+      @formations = @talent.talent_formations
       render :show
     else
       # rediriger message erreur
@@ -100,7 +124,6 @@ class Api::V1::TalentsController < Api::V1::BaseController
   
   def update_avatar
     @talent = Talent.find(params[:id])
-    p "TENTE LE SAVE"
     if @talent.update(talent_photo_params)
       render :show
     else
@@ -110,12 +133,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
   
   def recommandation
-    p "Params: #{params[:id]}"
-    p "Params: #{params[:recruteur_id]}"
     @talent = Talent.find(params[:id])
     @headhunter = Headhunter.find(params[:recruteur_id])
-    p "LE TALENT: #{@talent}"
-    p "LE HEADHUNTER: #{@headhunter}"
     @headhunter.send_recommandation(@talent)
     authorize @talent
   end
@@ -152,19 +171,19 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
 
   def set_new_skills(talent)
-    skill_params = params.permit(skill_ids: [])[:skill_ids]
+    skill_params = params.require(:talent).permit(skill_ids: [])[:skill_ids]
     skill_ids = create_new_data_with_only_title(skill_params, "skill")
     talent.skill_ids = skill_ids
   end   
   
   def set_new_knowns(talent)
-    known_params = params.permit(known_ids: [])[:known_ids]
+    known_params = params.require(:talent).permit(known_ids: [])[:known_ids]
     known_ids = create_new_data_with_only_title(known_params, "known")
     talent.known_ids = known_ids
   end
   
   def set_new_technos(talent)
-    techno_params = params.permit(techno_ids: [])[:techno_ids]
+    techno_params = params.require(:talent).permit(techno_ids: [])[:techno_ids]
     techno_ids = create_new_data_with_only_title(techno_params, "techno")
     talent.techno_ids = techno_ids
   end
@@ -208,9 +227,9 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end 
   
   def need_to_create_data?
-    skill_params = params.permit(skill_ids: [])[:skill_ids]
-    known_params = params.permit(known_ids: [])[:known_ids]
-    techno_params = params.permit(techno_ids: [])[:techno_ids]
+    skill_params = params.require(:talent).permit(skill_ids: [])[:skill_ids]
+    known_params = params.require(:talent).permit(known_ids: [])[:known_ids]
+    techno_params = params.require(:talent).permit(techno_ids: [])[:techno_ids]
     if skill_params.nil? && known_params.nil? && techno_params.nil?
       return false
     else
@@ -227,6 +246,13 @@ class Api::V1::TalentsController < Api::V1::BaseController
       end
     end
     return jobs_filtered
+  end
+
+  def set_talents_repertoire
+    jobsId = jobs_array()
+    @talents = Talent.joins(:talent_job).where(:visible => true, talent_jobs: { job_id: jobsId })
+      .reorder(position: :asc, completing: :desc, last_sign_in_at: :desc)
+    return @talents
   end
 
   def talent_photo_params
@@ -254,7 +280,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
       talent_formations_attributes: [ :id, :title, :year, :formation_id, :type_of_formation, :_destroy],
       next_aventure_attributes:[ NextAventure.attribute_names.map(&:to_sym).push(:_destroy), sector_ids: [], mobilities_attributes:[ Mobility.attribute_names.map(&:to_sym).push(:_destroy)]],
       talent_job_attributes: [:id, :job_id, :year, :position, :_destroy],
-      talent_second_job_attributes: [ :id, :job_id ],
+      talent_second_job_attributes: [ :id, :job_id, :_destroy ],
       talent_languages_attributes: [:id, :language_id, :_destroy]
     )
   end
