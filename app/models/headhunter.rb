@@ -30,7 +30,7 @@ class Headhunter < ApplicationRecord
   validates :firstname, :email, :startup, presence: true
   validates_presence_of :terms_of_condition, :message => "Les conditions d'utilisations doivent être acceptées"
   validates_presence_of :phone, :message => "Ton téléphone doit être rempli"
-  validates_format_of :phone, with: /^(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}$/i, multiline: true, message: "Le numéro de téléphone n'est pas bon (06 00 00 00 00)"
+  validates_format_of :phone, with: /^(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}$/i, multiline: true, message: "Le numéro de téléphone n'est pas bon (06 00 00 00 00)", :on => :create
 
   after_create :send_new_user_to_talentist
 
