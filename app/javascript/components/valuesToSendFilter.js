@@ -113,7 +113,7 @@ const photoEdit = (photo, talent) => {
 }
 
 export default function valuesToSendFilter(infos){
-  console.log("j'y suis ;)", infos)
+  // console.log("j'y suis ;)", infos)
   const valuesToSend = {}
   const values = infos.values
   const initialValues = infos.initialValues

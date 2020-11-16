@@ -51,7 +51,6 @@ class ProfilTalent extends Component {
   }
 
   setInitialValues = (talent) => {
-    console.log('talent', talent)
     let overview = "❌ À renseigner ❌"
     if(talent.talent.overview){
       overview = talent.talent.overview
