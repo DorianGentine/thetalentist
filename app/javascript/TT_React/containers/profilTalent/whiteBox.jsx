@@ -161,7 +161,6 @@ class WhiteBox extends Component {
     })
 
     const validate = values => {
-      console.log('values', values)
       if(values.city && 
         !values.city.toLowerCase().includes("paris") && 
         !values.city.toLowerCase().includes("bordeaux")){
@@ -190,7 +189,7 @@ class WhiteBox extends Component {
       // const valuesToSend = valuesFilter(values)
       const valuesToSend = valuesToSendFilter(infos)
       if(Object.keys(valuesToSend).length > 0){
-        this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH", promise => {
+        this.props.fetchPost(`/api/v1/talents/${user.id}`, valuesToSend, "PATCH", promise => {
           this.props.updateTalent(promise)
           this.props.setInitialValues(promise)
           this.props.setInitialJobs(promise, this.props.jobs)
