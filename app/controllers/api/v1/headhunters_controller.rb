@@ -1,5 +1,9 @@
 class Api::V1::HeadhuntersController < Api::V1::BaseController
 
+  def index
+    @headhunters = policy_scope(Headhunter)
+  end
+
   def conversations
     @unread_messages = current_user.mailbox.inbox(unread: true).count
     @conversations = current_user.mailbox.inbox({page: params[:page], per_page: 10})

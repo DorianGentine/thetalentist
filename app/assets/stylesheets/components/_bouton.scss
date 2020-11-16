@@ -184,6 +184,20 @@
     }
   }
 
+//p-btn
+  .p-btn{
+    margin: 0;
+    border-radius: 3px;
+    padding: 2px;
+    cursor: pointer;
+    transition: .5s;
+  }
+  .p-btn:hover{
+    padding: 2px 10px;
+    background-color: $blue-background;
+    color: $violet;
+  }
+
   @media screen and (max-width: 770px) {
     .btn-edition-container{
       right: 50%;

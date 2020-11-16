@@ -14,9 +14,11 @@ class Talent < ApplicationRecord
   validates_confirmation_of :password, message: "Vos mots de passe ne concordent pas"
 
   validates_presence_of :phone, :message => "Ton téléphone doit être rempli", unless: :skip_phone_validation
+  validates_format_of :phone, with: /^(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}$/i, multiline: true, message: "Le numéro de téléphone n'est pas bon (06 00 00 00 00)", :on => :create
   validates_presence_of :email, :message => "Ton email doit être rempli"
   validates_presence_of :firstname, :message => "Ton prénom doit être rempli"
   validates_presence_of :last_name, :message => "Ton nom doit être rempli"
+  validates_presence_of :terms_of_condition, :message => "Les conditions d'utilisations doivent être acceptées"
   # validates_presence_of :password, :message => "Ton mot de passe doit être rempli"
 
   attr_accessor :skip_city_validation, :skip_phone_validation, :skip_linkedin_validation
@@ -233,10 +235,8 @@ class Talent < ApplicationRecord
     talent = Talent.find_by(provider: auth.provider, uid: auth.uid)
     talent ||= Talent.find_by(email: auth.info.email) # talent did a regular sign up in the past.
     if talent
-      p "alrealdy exists"
       talent.update(talent_params)
     else
-      p "not created yet"
       talent_params[:city] =  "Paris"
       talent_params[:linkedin] =  "NA"
       talent = Talent.new(talent_params)
@@ -307,7 +307,6 @@ class Talent < ApplicationRecord
     company_name = self.experiences.first.company_name
     startup = Startup.where(name: company_name).first
     startup_id = startup.present? ? startup.id : nil
-    p "STARTUP_ID: #{startup_id}"
     return startup_id
   end
 

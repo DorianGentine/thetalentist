@@ -36,6 +36,7 @@ import conversationsReducer from './reducers/conversations_reducer';
 import formationsReducer from './reducers/formations_reducer';
 import jobsReducer from './reducers/jobs_reducer';
 import guideSuReducer from './reducers/guide_su_reducer';
+import headhuntersReducer from './reducers/headhunters_reducer';
 import knownsReducer from './reducers/knowns_reducer';
 import languagesReducer from './reducers/languages_reducer';
 import messagerieActiveMobileReducer from './reducers/messagerie_active_mobile_reducer';
@@ -66,6 +67,7 @@ if(app){
     conversations: [],
     formations: null,
     guideSu: 0,
+    headhunters: null,
     isMobile: isMobileState,
     jobs: null,
     knowns: null,
@@ -90,6 +92,7 @@ if(app){
     conversations: conversationsReducer,
     formations: formationsReducer,
     guideSu: guideSuReducer,
+    headhunters: headhuntersReducer,
     isMobile: identityReducer,
     jobs: jobsReducer,
     knowns: knownsReducer,

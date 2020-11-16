@@ -3,31 +3,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchPost, fetchGET, openSidebar } from '../actions';
+import { fetchPost, fetchGET, openSidebar, updateConversation, updateConversations } from '../actions';
 
 class Conversation extends Component {
   constructor(props) {
     super(props)
     this.state = {
       opened: false,
-      intervalMessages: null,
     };
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if(this.props.conversationActive.conversation != undefined){
-      if(this.props.conversationActive.conversation.pin != nextProps.conversationActive.conversation.pin ||
-          this.props.conversationActive.conversation.archived != nextProps.conversationActive.conversation.archived){
-          clearInterval(this.state.intervalMessages)
-          this.setState({ intervalMessages: null })
-      }
-    }
   }
 
   render () {
     const isMobile = this.props.isMobile
     const sidebarActiveMobile = this.props.sidebarActiveMobile
-    let conversationActive, participant, relationship, email, city, participant_model, user_model, config_conv_id, pin, archived
+    let conversationActive, participant, relationship, email, city, participant_model, user_model, config_conv_id, pin, archived, startup
     let attachments = []
     let info = {
       image: null,
@@ -52,6 +41,7 @@ class Conversation extends Component {
       city = participant.city
       attachments = conversationActive.attachments
       participant_model = participant.user_model
+      startup = participant.startup
       config_conv_id = conversationActive.config_conv_id
       pin = conversationActive.pin
       archived = conversationActive.archived
@@ -67,7 +57,20 @@ class Conversation extends Component {
       }
     }
 
-  const renderDocs = () => attachments.map((attachment, index) => <a key={index} className="margin-bottom-15" href={attachment.url} target="_blank"><FontAwesomeIcon icon={["far", "file"]}/> {attachment.name}</a>)
+    const renderDocs = () => attachments.map((attachment, index) => <a key={index} className="margin-bottom-15" href={attachment.url} target="_blank"><FontAwesomeIcon icon={["far", "file"]}/> {attachment.name}</a>)
+
+    const renderAvatar = () => {
+      return (
+        <div className="photo-conv photo-conv-lg" style={{backgroundImage: `url(${info.image})`}}>
+          <p>{info.image ? "" : info.full_name.slice(0, 1)}</p>
+          {!startup ? null :
+            <div className="logo-su-conv logo-su-conv-lg" style={{backgroundImage: `url(${startup.logo.small_bright_face.url})`}}>
+              {startup.logo.url ? "" : startup.name.slice(0,1)}
+            </div>
+          }
+        </div> 
+      )
+    }
 
     const openDropdown = () => {
       if(this.state.opened){
@@ -80,18 +83,15 @@ class Conversation extends Component {
       }
     }
 
-    const setIntervalMessages = () => {
-      let i = 0
-      let intervalMessages = setInterval(() => {
-        i++
-        this.props.fetchGET(`/api/v1/conversations/${this.props.params.id}`, "FETCH_CONVERSATION_ACTIVE")
-        this.props.fetchGET(`/api/v1/conversations`, "FETCH_CONVERSATIONS")
-        if(i > 4){
-          clearInterval(this.state.intervalMessages)
-          this.setState({ intervalMessages: null })
-        }
-      }, 1000)
-      this.setState({ intervalMessages: intervalMessages })
+    const handleUpdate = promise => {
+      const conversation = {
+        conversation: promise.conversation
+      }
+      const conversations = {
+        conversations: promise.conversations
+      }
+      this.props.updateConversation(conversation)
+      this.props.updateConversations(conversations)
     }
 
     const handlePin = () => {
@@ -99,12 +99,11 @@ class Conversation extends Component {
         pin: !pin,
         email: email,
       }
-      console.log(newConfig)
       this.props.fetchPost(
         `/api/v1/config_conversations/${config_conv_id}`,
         newConfig,
         "PATCH",
-        setIntervalMessages()
+        promise => {handleUpdate(promise)}
       )
     }
     const handleArchive = () => {
@@ -112,12 +111,11 @@ class Conversation extends Component {
         archived: !archived,
         email: email,
       }
-      console.log(newConfig)
       this.props.fetchPost(
         `/api/v1/config_conversations/${config_conv_id}`,
         newConfig,
         "PATCH",
-        setIntervalMessages()
+        promise => {handleUpdate(promise)}
       )
     }
 
@@ -133,7 +131,7 @@ class Conversation extends Component {
         : null}
         {isMobile ? <FontAwesomeIcon className="absolute close-sidebar" onClick={() => this.props.openSidebar(sidebarActiveMobile)} icon={["far", "times-circle"]} /> : null }
         <div className="flex justify-center margin-bottom-30">
-          {info.image != null ? <img className="photo-conv photo-conv-lg" src={info.image} alt="avatar"></img> : <div className="photo-conv photo-conv-lg">{info.full_name.slice(0, 1)}</div>}
+          {renderAvatar()}
         </div>
         <p className="participant-fullname margin-bottom-5">{info.full_name}</p>
         <p className="participant-job margin-bottom-5">{participant != undefined ? participant.job : ""}</p>
@@ -169,7 +167,7 @@ class Conversation extends Component {
           <p className="sidebar-title margin-top-30">Documents échangés</p>
         : null}
         <div className="flex flex-column">{attachments.length > 0 ? renderDocs() : null}</div>
-        <p className="sidebar-title margin-top-30">Note personnelle</p>
+        {/* <p className="sidebar-title margin-top-30">Note personnelle</p> */}
       </div>
     );
   }
@@ -185,7 +183,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPost, fetchGET, openSidebar }, dispatch);
+  return bindActionCreators({ fetchPost, fetchGET, openSidebar, updateConversation, updateConversations }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Conversation);

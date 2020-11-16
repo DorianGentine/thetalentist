@@ -1,20 +1,4 @@
-<!-- Répertoire côté start-up -->
-<% if !@headhunter.nil? %>
-  <%= render 'create_alert' %>
-<% end %>
-<% if params[:query] == "new_member" %>
-  <%= render 'modal_welcome' %>
-<% end %>
-
-<%#= render 'filter', conditioning: 'repertoire' %>
-
-<div id="app" data-company_id="<%= @headhunter.startup.id if @headhunter.present? %>"></div>
-<!-- <div id="all-talents" data-company_id="<%#= @headhunter.startup.id if @headhunter.present? %>">
-
-    <%#= render 'section_talents'%>
-
-</div>
- -->
+<div id="app"></div>
 
 
 

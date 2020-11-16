@@ -54,12 +54,25 @@ class HeadhunterMailer < ApplicationMailer
       )
   end
 
+  def recommanded(headhunter_id, talent_id)
+    @headhunter = Headhunter.find(headhunter_id)
+    @talent = Talent.find(talent_id)
+    rela = Relationship.where(headhunter_id: headhunter_id, talent_id: talent_id).first
+    @status = rela.status
+
+    mail(
+      to: @headhunter.email,
+      cc: Talentist.all.collect(&:email).join(", "),
+      subject: "#{@headhunter.firstname}, ce talent devrait te plaire"
+    )
+  end
+
 
   def alerte(user_id)
     @user = Headhunter.find(user_id)
 
     mail( 
-      to: user.email ,
+      to: @user.email ,
       cc: "bienvenue@thetalentist.com", 
       subject: "Un nouveau talent pourrait t'intéresser"
     )

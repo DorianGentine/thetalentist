@@ -18,7 +18,7 @@ class Repertory extends Component {
         pinFilter: false,
         jobFilter: [],
         remFilter: 0,
-        mobilityFilter: []
+        mobilityFilter: [],
       },
       nbTalents: 0
     };

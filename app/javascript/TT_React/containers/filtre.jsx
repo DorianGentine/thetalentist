@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { fetchGET } from '../actions';
+import { fetchGET, fetchPost, updateTalents } from '../actions';
 
 import FiltreItem from './filtreItem'
 import ModalGuide from './modalGuide'
@@ -23,6 +23,12 @@ class Filtre extends Component {
 
   render () {
     const filter = this.props.filter
+    const user = this.props.user
+    let admin = false
+    if(user){
+      admin = user.is_a_model == "Talentist"
+    }
+
 
     const mobilities = [
       "Paris",
@@ -77,23 +83,34 @@ class Filtre extends Component {
       this.props.updateFilter(filter)
     }
 
+    const organizeTalents = () => {
+      const params = {
+        reorder: true
+      }
+      this.props.fetchPost("/api/v1/talents/sort", params, "PATCH", promise => this.props.updateTalents(promise))
+    }
+
     return(
       <div className="col-md-2 col-xs-12 relative" style={{padding: "0 10px 0 30px"}}>
         {this.props.guideSu == 2 ? <ModalGuide /> : null}
         <h4>Filtres Avancés</h4>
-        <div className="flex space-between align-items-center">
-          <h5 htmlFor="pin-filter">Talents épinglés</h5>
-          <label className="switch">
-            <input
-              type="checkbox"
-              className="no-margin margin-right-15"
-              id="pin-filter"
-              checked={this.state.checked}
-              onChange={() => {handleChange(this.state.checked)}}
-            />
-            <span className="slider-small round"></span>
-          </label>
-        </div>
+        {admin ? 
+          <button className="btn-violet-square w-100" onClick={organizeTalents}>Trier talents</button>
+        :
+          <div className="flex space-between align-items-center">
+            <h5 htmlFor="pin-filter">Talents épinglés</h5>
+            <label className="switch">
+              <input
+                type="checkbox"
+                className="no-margin margin-right-15"
+                id="pin-filter"
+                checked={this.state.checked}
+                onChange={() => {handleChange(this.state.checked)}}
+                />
+              <span className="slider-small round"></span>
+            </label>
+          </div>
+        }
         <div>
           <h5>Métiers</h5>
           {this.props.jobs != null ? renderJobs() : <p className="flex-grow-1">Chargement...</p>}
@@ -115,11 +132,12 @@ function mapStateToProps(state) {
   return {
     jobs: state.jobs,
     guideSu: state.guideSu,
+    user: state.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, updateTalents }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filtre);

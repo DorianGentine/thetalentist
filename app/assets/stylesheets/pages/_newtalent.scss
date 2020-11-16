@@ -36,7 +36,7 @@
   color: $red;
   margin-bottom: 0;
 }
-.requis:after{
+.form-control-label.required:after, .requis:after{
   content: "*";
   color: $red;
 }

@@ -12,11 +12,13 @@
   margin: 0 50px 0 0;
   padding-bottom: 8px;
   cursor: pointer;
+  opacity: .5;
 }
 .section-title.active{
   color: $dark-blue;
   font-weight: 700;
   border-bottom: 3px solid $dark-blue;
+  opacity: 1;
 }
 
 .section-h3-wrap{

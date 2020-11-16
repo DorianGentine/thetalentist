@@ -1,18 +1,14 @@
 json.talent @talent
-json.knowns @knowns
-json.skills @skills
-json.technos @technos
-json.talent_languages @talent_languages
 json.next_aventure @next_aventure
+json.experiences @experiences
+json.formations @formations
+json.knowns @knowns
 json.mobilities @mobilities
+json.skills @skills
 json.sector_ids @sector_ids
 json.sectors @sectors
+json.technos @technos
+json.talent_languages @talent_languages
 json.job @job
 json.second_job @second_job
 json.jobs @jobs
-json.experiences @experiences
-json.formations @formations
-
-# json.next_aventure do
-#   json.id @next_aventure.id
-# end
