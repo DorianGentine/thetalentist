@@ -145,7 +145,7 @@ class TalentCard extends PureComponent {
             <p className="grid-title">Rémunération:</p>
             <p className="grid-info">{talent.next_aventure.remuneration}</p>
             <p className="grid-title">Mobilités:</p>
-            <p className="grid-info" style={{minHeight: "40px"}}>{talentMobilities}</p>
+            <p className="grid-info" style={{height: "40px", overflowY: "hidden"}}>{talentMobilities}</p>
           </div>
           <div className="margin-top-15 flex flex-wrap card-small-plus">{talent.skills.length != 0 ? renderSkills() : renderSmallPlus()}</div>
           <div className={`flex relative margin-top-15 ${userModel == "Talentist" ? "space-between" : "flex-end"}`}>
