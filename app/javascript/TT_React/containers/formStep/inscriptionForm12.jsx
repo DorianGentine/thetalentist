@@ -26,9 +26,8 @@ class InscriptionForm12 extends Component {
         <h3 className={`${isMobile ? "" : "margin-left-55 "}violet`}>Le formulaire est terminé !</h3>
         <p className={`${isMobile ? "" : "margin-left-55 "}margin-bottom-30 label-color`}>Merci d'avoir pris ces quelques minutes ! Ton profil a été envoyé à notre équipe, 
           qui te recontactera dans les 2 prochains jours, afin de t'accompagner dans ta prochaine aventure !
-          Avant d’accéder à ton profil, je te laisse nous communiquer le lien de ton profil Linkedin :
         </p>
-        <InputForm name="linkedin" title="Ton Linkedin" placeholder="https://www.linkedin.com/in..." />
+        {/* <InputForm name="linkedin" title="Ton Linkedin" placeholder="https://www.linkedin.com/in..." /> */}
         <button
           className="btn-violet-square margin-left-55"
           type="submit"

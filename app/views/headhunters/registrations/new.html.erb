@@ -40,72 +40,77 @@
       <div class="login-wrapper my-auto">
         <h1 class="login-title">Je crée mon compte <strong>startup</strong></h1>
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= f.error_notification %>
-            <%= f.input :firstname, 
-              required: true, 
-              autofocus: true, 
-              label: "Prénom", 
-              wrapper_html: { class: "col-md-6 margin-bottom-20" }
-            %>
+          <% if f.object.errors.messages[:email][0] == "n'est pas disponible" %>
+            <%= f.error_notification message: 'Cette adresse mail est déjà utilisée 😟' %>
+          <% else %>
+            <%= f.error_notification %>
+          <% end %>
+            
+          <%= f.input :firstname, 
+            required: true, 
+            autofocus: true, 
+            label: "Prénom", 
+            wrapper_html: { class: "col-md-6 margin-bottom-20" }
+          %>
 
-            <%= f.input :startup, 
-              collection: Startup.all, 
-              input_html: { class: "selectAndCreate" },
-              wrapper_html: { class: "col-md-6 margin-bottom-20" }
-            %>
+          <%= f.input :startup, 
+            collection: Startup.all, 
+            input_html: { class: "selectAndCreate" },
+            wrapper_html: { class: "col-md-6 margin-bottom-20" }
+          %>
 
-            <%= f.input :email, 
-              required: true, 
-              autofocus: true, 
-              label: "Email", 
-              wrapper_html: { class: "col-md-12 margin-bottom-20" }
-            %>
+          <%= f.input :email, 
+            required: true, 
+            autofocus: true, 
+            label: "Email", 
+            wrapper_html: { class: "col-md-12 margin-bottom-20" }
+          %>
 
-            <%= f.input :password, 
-              required: true, 
-              hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), 
-              label: "Mot de passe", 
-              wrapper_html: { class: "col-md-6 margin-bottom-20" } 
-            %>
-            <%= f.input :password_confirmation, 
-              required: true, 
-              label: "Confirmation du mot de passe",  
-              wrapper_html: { class: "col-md-6 margin-bottom-20" }
-            %>
-            <%= f.input :phone, 
-              required: true, 
-              autofocus: false, 
-              label: "Téléphone", 
-              wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
-              error: f.object.errors.messages[:phone][0] 
-            %>
+          <%= f.input :password, 
+            required: true, 
+            hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), 
+            label: "Mot de passe", 
+            wrapper_html: { class: "col-md-6 margin-bottom-20" } 
+          %>
+          <%= f.input :password_confirmation, 
+            required: true, 
+            label: "Confirmation du mot de passe",  
+            wrapper_html: { class: "col-md-6 margin-bottom-20" }
+          %>
+          <%= f.input :phone, 
+            required: true, 
+            autofocus: false, 
+            label: "Téléphone", 
+            wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
+            error: f.object.errors.messages[:phone][0] 
+          %>
 
-            <%= f.input :terms_of_condition,
-              wrapper_html: { class: "col-md-1" },
-              label: false,
-              error: ""
+          <%= f.input :terms_of_condition,
+            wrapper_html: { class: "col-md-1" },
+            label: false,
+            error: ""
+          %>
+          <p class="col-md-11 requis no-margin">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %> de The Talentist.</p>
+          <% if f.object.errors.messages[:terms_of_condition] %>
+            <div class="invalid-feedback col-md-12"><%= f.object.errors.messages[:terms_of_condition][0] %></div>
+          <% end %>
+
+          <% if @show_checkbox_recaptcha %>
+            <%= recaptcha_tags class: "col-md-12 margin-top-30" %>
+          <% else %>
+            <%= recaptcha_v3(action: 'registration', site_key: ENV['RECAPTCHA_SITE_KEY_V3']) %>
+          <% end %>
+
+          <div class="col-md-12 flex margin-top-30">
+            <%= f.button :submit, 
+              "S'enregistrer", 
+              class: "btn-violet-square margin-right-30"
             %>
-            <p class="col-md-11 requis no-margin">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %> de The Talentist.</p>
-            <% if f.object.errors.messages[:terms_of_condition] %>
-              <div class="invalid-feedback col-md-12"><%= f.object.errors.messages[:terms_of_condition][0] %></div>
-            <% end %>
-
-            <% if @show_checkbox_recaptcha %>
-              <%= recaptcha_tags class: "col-md-12 margin-top-30" %>
-            <% else %>
-              <%= recaptcha_v3(action: 'registration', site_key: ENV['RECAPTCHA_SITE_KEY_V3']) %>
-            <% end %>
-
-            <div class="col-md-12 flex margin-top-30">
-              <%= f.button :submit, 
-                "S'enregistrer", 
-                class: "btn-violet-square margin-right-30"
-              %>
-              <%= link_to 'Précédent', 
-                new_session_path(resource_name), 
-                class: "btn-violet-square-border" 
-              %>
-            </div>
+            <%= link_to 'Précédent', 
+              new_session_path(resource_name), 
+              class: "btn-violet-square-border" 
+            %>
+          </div>
 
         <% end %>
       </div>
