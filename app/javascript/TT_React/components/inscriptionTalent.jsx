@@ -187,7 +187,7 @@ class InscriptionTalent extends Component {
               {checkStep(step, 9) ? <InscriptionForm9 formValue={values} submitting={submitting} stepForm={step} /> : null }
               {checkStep(step, 10) ? <InscriptionForm10 formValue={values} submitting={submitting} stepForm={step} /> : null }
               {checkStep(step, 11) ? <InscriptionForm11 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {checkStep(step, 12) ? <InscriptionForm12 errors={this.state.errors} formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 12) ? <InscriptionForm12 formValue={values} submitting={submitting} stepForm={step} /> : null }
             </form>
           )}
         />
