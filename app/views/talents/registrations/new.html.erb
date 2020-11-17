@@ -14,84 +14,100 @@
       <div class="login-wrapper my-auto">
         <h1 class="login-title">Je crée mon compte <strong>talent</strong></h1>
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= f.error_notification %>
-            <%= f.input :firstname, 
-              required: true, 
-              autofocus: false,
-              label: "Prénom", 
-              wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
-              error: f.object.errors.messages[:firstname][0] 
+          <% if f.object.errors.messages[:email][0] == "n'est pas disponible" %>
+            <%= f.error_notification message: 'Cette adresse mail est déjà utilisée 😟' %>
+          <% else %>
+            <%= f.error_notification %>
+          <% end %>
+          
+          <%= f.input :firstname, 
+            required: true, 
+            autofocus: false,
+            error: "Ton prénom est requis",
+            label: "Prénom", 
+            wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+            error: f.object.errors.messages[:firstname][0] 
+          %>
+
+          <%= f.input :last_name, 
+            required: true, 
+            autofocus: false,
+            label: "Nom", 
+            wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+            error: f.object.errors.messages[:last_name][0] 
+          %>
+
+          <%= f.input :email, 
+            required: true, 
+            autofocus: false,
+            label: "Email", 
+            wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
+            error: f.object.errors.messages[:email][1] 
+          %>
+
+          <%= f.input :password, 
+            required: true, 
+            hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
+            wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+            label: "Mot de passe", 
+            error: f.object.errors.messages[:password] 
+          %>
+
+          <%= f.input :password_confirmation, 
+            required: true,
+            label: "Confirmer le mot de passe", 
+            wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
+            error: f.object.errors.messages[:password_confirmation][1] 
+          %>
+
+          <%= f.input :linkedin, 
+            required: true,
+            # as: :tel,
+            # :pattern => "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$",
+            # :pattern => "[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}",
+            label: "Linkedin", 
+            wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
+            error: f.object.errors.messages[:linkedin][0] || "Le lien ne semble pas correct"
+          %>
+
+          <%= f.input :phone, 
+            required: true,
+            as: :tel,
+            # :pattern => "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$",
+            :pattern => "[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}",
+            label: "Numéro de téléphone", 
+            wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
+            error: f.object.errors.messages[:phone][0] || "Le numéro de téléphone n'est pas correct"
+          %>
+
+          <%= f.input :terms_of_condition,
+            required: true,
+            wrapper_html: { class: "col-md-1" },
+            label: false,
+            error: ""
+          %>
+          <p class="col-md-11 requis no-margin">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %>  de The Talentist.</p>
+          <% if f.object.errors.messages[:terms_of_condition] %>
+            <div class="invalid-feedback col-md-12"><%= f.object.errors.messages[:terms_of_condition][0] %></div>
+          <% end %>
+
+          <% if @show_checkbox_recaptcha %>
+            <%= recaptcha_tags class: "col-md-12 margin-top-30" %>
+          <% else %>
+            <%= recaptcha_v3(action: 'registration', site_key: ENV['RECAPTCHA_SITE_KEY_V3']) %>
+          <% end %>
+
+          <div class="col-md-12 flex margin-top-30">
+            <%= f.button :submit, 
+              "Commencer à compléter mon profil",
+              id: "submit-btn",
+              class: "btn-violet-square margin-right-30"
             %>
-
-            <%= f.input :last_name, 
-              required: true, 
-              autofocus: false,
-              label: "Nom", 
-              wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
-              error: f.object.errors.messages[:last_name][0] 
+            <%= link_to 'Précédent', 
+              new_session_path(resource_name), 
+              class: "btn-violet-square-border" 
             %>
-
-            <%= f.input :email, 
-              required: true, 
-              autofocus: false,
-              label: "Email", 
-              wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
-              error: f.object.errors.messages[:email][1] 
-            %>
-
-            <%= f.input :password, 
-              required: true, 
-              hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
-              wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
-              label: "Mot de passe", 
-              error: f.object.errors.messages[:password] 
-            %>
-
-            <%= f.input :password_confirmation, 
-              required: true,
-              label: "Confirmer le mot de passe", 
-              wrapper_html: { class: "col-md-6 margin-bottom-20" }, 
-              error: f.object.errors.messages[:password_confirmation][1] 
-            %>
-
-            <%= f.input :phone, 
-              required: true,
-              as: :tel,
-              # :pattern => "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$",
-              :pattern => "[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}",
-              label: "Numéro de téléphone", 
-              wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
-              error: f.object.errors.messages[:phone][0] || "Le numéro de téléphone n'est pas correct"
-            %>
-
-            <%= f.input :terms_of_condition,
-              required: true,
-              wrapper_html: { class: "col-md-1" },
-              label: false,
-              error: ""
-            %>
-            <p class="col-md-11 requis no-margin">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %>  de The Talentist.</p>
-            <% if f.object.errors.messages[:terms_of_condition] %>
-              <div class="invalid-feedback col-md-12"><%= f.object.errors.messages[:terms_of_condition][0] %></div>
-            <% end %>
-
-            <% if @show_checkbox_recaptcha %>
-              <%= recaptcha_tags class: "col-md-12 margin-top-30" %>
-            <% else %>
-              <%= recaptcha_v3(action: 'registration', site_key: ENV['RECAPTCHA_SITE_KEY_V3']) %>
-            <% end %>
-
-            <div class="col-md-12 flex margin-top-30">
-              <%= f.button :submit, 
-                "Commencer à compléter mon profil",
-                id: "submit-btn",
-                class: "btn-violet-square margin-right-30"
-              %>
-              <%= link_to 'Précédent', 
-                new_session_path(resource_name), 
-                class: "btn-violet-square-border" 
-              %>
-            </div>
+          </div>
         <% end %>
       </div>
     </div>
