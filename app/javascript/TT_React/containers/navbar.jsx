@@ -150,7 +150,7 @@ class Navbar extends Component {
 
     return(
       <div className="navbar-wagon">
-        <a href="/" className="navbar-talentist-logo">
+        <a href="https://thetalentist.com/" target="_blank" className="navbar-talentist-logo">
           <img src={mainLogo} style={{height: "50px"}} alt="Logo talentist"/>
         </a>
         {this.props.isMobile ?
