@@ -158,6 +158,14 @@ class InscriptionTalent extends Component {
       }
     }
 
+    const checkStep = (step, formStep) => {
+      if(step > formStep - 2 && step < formStep + 2){
+        return true
+      }else{
+        return false
+      }
+    }
+
     return(
       <div>
         <NavbarForm stepForm={step} talent_id={this.props.match.params.talent_id} />
@@ -168,18 +176,18 @@ class InscriptionTalent extends Component {
           initialValues={this.state.initialValues}
           render={({ handleSubmit, values, submitting }) => (
             <form onSubmit={handleSubmit} className="flex">
-              {step == 1 || step == 2 ? <InscriptionForm1 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {step >= 1 && step <= 3 ? <InscriptionForm2 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {step >= 2 && step <= 4 ? <InscriptionForm3 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {step >= 3 && step <= 5 ? <InscriptionForm4 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {step >= 4 && step <= 6 ? <InscriptionForm5 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {step >= 5 && step <= 7 ? <InscriptionForm6 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {step >= 6 && step <= 8 ? <InscriptionForm7 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {step >= 7 && step <= 9 ? <InscriptionForm8 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {step >= 8 && step <= 10 ? <InscriptionForm9 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {step >= 9 && step <= 11 ? <InscriptionForm10 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {step >= 10 && step <= 12 ? <InscriptionForm11 formValue={values} submitting={submitting} stepForm={step} /> : null }
-              {step >= 11 && step <= 13 ? <InscriptionForm12 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 1) ? <InscriptionForm1 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 2) ? <InscriptionForm2 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 3) ? <InscriptionForm3 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 4) ? <InscriptionForm4 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 5) ? <InscriptionForm5 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 6) ? <InscriptionForm6 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 7) ? <InscriptionForm7 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 8) ? <InscriptionForm8 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 9) ? <InscriptionForm9 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 10) ? <InscriptionForm10 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 11) ? <InscriptionForm11 formValue={values} submitting={submitting} stepForm={step} /> : null }
+              {checkStep(step, 12) ? <InscriptionForm12 formValue={values} submitting={submitting} stepForm={step} /> : null }
             </form>
           )}
         />
