@@ -15,7 +15,6 @@ class ExperiencesProfessionnelles extends Component {
     this.state = {
       edit: false,
       add: false,
-      added: false,
       deleted: false,
       deletedExperiencesIds: []
     };
@@ -107,7 +106,6 @@ class ExperiencesProfessionnelles extends Component {
       }
       this.setState({
         add: !this.state.add,
-        added: true
       })
     }
     const deleteExperience = index => {
@@ -183,7 +181,6 @@ class ExperiencesProfessionnelles extends Component {
                 deleted: false,
                 deletedExperiencesIds: [],
                 edit: false,
-                added: false
               })
               for (let i = 0; i < values.experiences_attributes.length; i++) {
                 const experience = values.experiences_attributes[i];
@@ -297,7 +294,7 @@ class ExperiencesProfessionnelles extends Component {
           render={({ handleSubmit, values, submitting }) => (
             <form onSubmit={handleSubmit}>
               {this.state.add ? renderEditExperiences() : renderEditExperiences() }
-              {!this.state.added ? <p className="violet pointer" onClick={addExperience}>+ Ajouter une experience</p> : null}
+              <p className="violet pointer" onClick={addExperience}>+ Ajouter une experience</p>
               <button 
                 className="btn-gray-violet margin-top-60"
                 >Enregistrer

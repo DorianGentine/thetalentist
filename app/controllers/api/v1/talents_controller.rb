@@ -127,7 +127,6 @@ class Api::V1::TalentsController < Api::V1::BaseController
     if @talent.update(talent_photo_params)
       render :show
     else
-      p "Le problème est #{@talent.errors}"
     end
     authorize @talent
   end
@@ -209,19 +208,15 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
 
   def set_new_startups(param)
-    p "ON CREE LA SU"
     if param.present?
       startup = Startup.create(name: param)
-      p "STARTUP: #{startup}"
       return startup.id
     end
   end 
   
   def set_new_formations(param)
-    p "ON CREE LA Formation"
     if param.present?
       formation = Formation.create(title: param)
-      p "FORMATION: #{formation.id}"
       return formation.id
     end
   end 
