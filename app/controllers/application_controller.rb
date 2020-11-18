@@ -70,8 +70,8 @@ class ApplicationController < ActionController::Base
       end
     elsif resource.is_a?(Talent)
       if resource.next_aventure.present?
-        p "Le Linkedin du talent : #{resource.linkedin.present?}"
-        if resource.validated || resource.linkedin.present?
+        p "Ce que recherche le talent : #{resource.next_aventure.looking_for}"
+        if resource.validated || resource.next_aventure.looking_for.present?
           sign_in(resource)
           talent_path(resource)
         else
