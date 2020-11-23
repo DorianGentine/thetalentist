@@ -62,9 +62,6 @@
 
           <%= f.input :linkedin, 
             required: true,
-            # as: :tel,
-            # :pattern => "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$",
-            # :pattern => "[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}",
             label: "Linkedin", 
             wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
             error: f.object.errors.messages[:linkedin][0] || "Le lien ne semble pas correct"
@@ -73,8 +70,6 @@
           <%= f.input :phone, 
             required: true,
             as: :tel,
-            # :pattern => "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$",
-            :pattern => "[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}",
             label: "Numéro de téléphone", 
             wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
             error: f.object.errors.messages[:phone][0] || "Le numéro de téléphone n'est pas correct"

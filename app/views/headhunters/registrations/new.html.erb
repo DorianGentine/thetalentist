@@ -50,6 +50,22 @@
             required: true, 
             autofocus: true, 
             label: "Prénom", 
+            wrapper_html: { class: "col-md-6 margin-bottom-20" },
+            error: f.object.errors.messages[:firstname][0]
+          %>
+          
+          <%= f.input :last_name, 
+            required: true, 
+            autofocus: false, 
+            label: "Nom", 
+            wrapper_html: { class: "col-md-6 margin-bottom-20" },
+            error: f.object.errors.messages[:last_name][0]
+          %>
+
+          <%= f.input :email, 
+            required: true, 
+            autofocus: true, 
+            label: "Email", 
             wrapper_html: { class: "col-md-6 margin-bottom-20" }
           %>
 
@@ -57,13 +73,6 @@
             collection: Startup.all, 
             input_html: { class: "selectAndCreate" },
             wrapper_html: { class: "col-md-6 margin-bottom-20" }
-          %>
-
-          <%= f.input :email, 
-            required: true, 
-            autofocus: true, 
-            label: "Email", 
-            wrapper_html: { class: "col-md-12 margin-bottom-20" }
           %>
 
           <%= f.input :password, 
@@ -76,6 +85,13 @@
             required: true, 
             label: "Confirmation du mot de passe",  
             wrapper_html: { class: "col-md-6 margin-bottom-20" }
+          %>
+
+          <%= f.input :linkedin, 
+            required: true,
+            label: "Linkedin", 
+            wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
+            error: f.object.errors.messages[:linkedin][0] || "Le lien ne semble pas correct"
           %>
           <%= f.input :phone, 
             required: true, 
