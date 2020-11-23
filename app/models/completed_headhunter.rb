@@ -13,13 +13,14 @@ class CompletedHeadhunter
 
   def completed_profil
     count = 0
-    headhunters_count = @headhunter.startup.headhunters.size * 4
+    headhunters_count = @headhunter.startup.headhunters.size * 5
     value_input = stat(headhunters_count + 6)
     @headhunter.startup.headhunters.each do |headhunter|
       headhunter.firstname.present? ? count += value_input : count
       headhunter.last_name.present? ? count += value_input : count
       headhunter.job.present? ? count += value_input : count
       headhunter.photo? ? count += value_input : count
+      headhunter.linkedin.present? ? count += value_input : count
     end
     @headhunter.startup.name.present? ? count += value_input : count
     @headhunter.startup.logo? ? count += value_input : count
@@ -27,7 +28,6 @@ class CompletedHeadhunter
     @headhunter.startup.address.present? ? count += value_input : count
     @headhunter.startup.short_resume.present? ? count += value_input : count
     @headhunter.startup.linkedin.present? ? count += value_input : count
-    # @headhunter.startup.facebook.present? ? count += value_input : count
     return count.round(0)
   end
 
