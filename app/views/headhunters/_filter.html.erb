@@ -7,16 +7,7 @@
 
     <div class="flex align-items-center filter-item">
 
-      <% if conditioning == 'repertoire' %>
-
-        <%= form_tag repertoire_path, :method => 'get', id:"search-lg", remote: true do %>
-          <% @jobs.each do |job| %>
-            <label class= "category-choice" for="<%= job.title.downcase %>"><i class="<%= job.icon %>"></i> <%= job.title.upcase %></label>
-            <input type="checkbox" name="jobs[]" id="<%= job.title.downcase %>" value="<%= job.title.capitalize %>" class="hidden">
-          <% end %>
-          <input type="submit" class="submit-filtre hidden" name="commit" value="Search" data-disable-with="Search">
-        <% end %>
-      <% elsif conditioning == 'talents' %>
+      <% if conditioning == 'talents' %>
         <%= link_to talents_path(tag: "Tous"), { :class=> "bordure-droite"} do %>
           <i class="fas fa-infinity"></i> Tous
         <% end %>
@@ -64,16 +55,6 @@
       <% end %>
 
     </div>
-
-    <% if headhunter_signed_in? && current_headhunter %>
-      <div class="col-lg-2 alert-creation hidden-xs hidden-sm modal-button" data-target= "create_alert">
-        <% if @headhunter.job_alertes.first.present? %>
-          <p>Mes alertes <i class="fas fa-bell"></i></p>
-        <% else %>
-          <p>Créer une alerte <i class="far fa-bell"></i></p>
-        <% end %>
-      </div>
-    <% end %>
 
 </div>
 

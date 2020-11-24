@@ -106,7 +106,7 @@
             label: false,
             error: ""
           %>
-          <p class="col-md-11 requis no-margin">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %> de The Talentist.</p>
+          <p class="col-md-11 requis no-margin">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_employeurs_path, target: "_blank", style: "text-decoration:underline" %> de The Talentist.</p>
           <% if f.object.errors.messages[:terms_of_condition] %>
             <div class="invalid-feedback col-md-12"><%= f.object.errors.messages[:terms_of_condition][0] %></div>
           <% end %>

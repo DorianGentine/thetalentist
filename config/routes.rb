@@ -59,10 +59,10 @@ Rails.application.routes.draw do
       get 'info_pdf'
       get 'welcome', to: "pages#welcome_talent"
       get 'welcome/:step', to: "pages#welcome_talent"
-      patch 'update_profile'
-      patch 'update_formation_and_skill'
-      patch 'update_experience'
-      patch 'update_next_aventure'
+      # patch 'update_profile'
+      # patch 'update_formation_and_skill'
+      # patch 'update_experience'
+      # patch 'update_next_aventure'
       patch 'validation'
       patch 'refused'
       patch 'visible'
@@ -80,10 +80,8 @@ Rails.application.routes.draw do
     resources :messages, only: [ :create ]
   end
 
-  resources :steps_talent_infos
   resources :steps_startup_infos
 
-  get 'waiting_for_validation', to: "pages#waiting_for_validation"
   get 'legal_informations', to: "pages#legal_informations", as: "mentions_legales"
   get 'cgu_talents', to: "pages#cgu_talents", as: "cgu_talents"
   get 'cgu_employeurs', to: "pages#cgu_headhunters", as: "cgu_employeurs"
