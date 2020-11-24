@@ -15,6 +15,7 @@ class Api::V1::ConversationsController < Api::V1::BaseController
       end
       conversations = user.mailbox.conversations
     end
+    p "LES CONVS SONT: #{conversations}"
     @conversations = InboxFormat.new.discussions(conversations, user)
   end
 

@@ -12,7 +12,9 @@ class InboxFormat
 
   def conversations(conversations, user)
     arra_conversations = []
+    p "________LES CONVS SONT: #{conversations}"
     conversations.each do |conversation|
+      p "Une conv est: #{conversation}"
       if conversation.participants.count > 1
         config_convs = ConfigConversation.where(conversation_id: conversation.id, user_id: user.id, user_email: user.email)
         config_conv = config_convs.nil? || config_convs.first.nil? ?  nil : config_convs.first

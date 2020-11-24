@@ -34,82 +34,11 @@ class TalentsController < ApplicationController
     authorize @talent
   end
 
-  def show
-    @flats = []
-    @flats << @talent
-    @flats << @talent
-    @markers = @flats.map do |flat|
-      { lat: @talent.latitude, lng: @talent.longitude }
-    end
-    @experiences = @talent.experiences
-    @next_aventure = @talent.next_aventure
-    @talent_formations = @talent.talent_formations.order(:year)
-    if @talent.next_aventure.present?
-      @sectors = @talent.next_aventure.next_aventure_sectors
-    end
-    @credentials = @talent.credentials
-  end
-
-  def edit
-    @talent.set_build_belong_tables
-    if @talent.next_aventure.mobilities.count > 0
-      1.times {  @talent.next_aventure.mobilities.build }
-    else
-      0.times {  @talent.next_aventure.mobilities.build }
-    end
-    @choices = ["Ambiance", "International", "Produit", "Rémunération", "Sens", "Valeurs", "Mission", "Management", "Worklife balance", "Impact"]
-  end
-
-
-  def update
-    if @talent.update_attributes(talent_params)
-       redirect_to edit_talent_path(@talent)
-    else
-      render :edit
-    end
-  end
-
-  def update_formation_and_skill
-    set_new_technos(@talent)
-    set_new_skills(@talent)
-    if @talent.update_attributes(formation_and_skill_params)
-      redirect_to edit_talent_path(@talent)
-    else
-      render :edit
-    end
-  end
-
-  def update_experience
-    if @talent.update_attributes(experience_params)
-      @talent.experiences.each do |experience|
-        set_new_startups(experience.company_name) if startup_is_available?(experience.company_name)
-      end
-      redirect_to edit_talent_path(@talent)
-    else
-      render :edit
-    end
-  end
-
-  def update_next_aventure
-    set_new_knowns(@talent)
-    if @talent.update_attributes(next_aventure_params)
-      redirect_to edit_talent_path(@talent)
-    else
-      render :edit
-    end
-  end
-
   def validation
     @talentist = current_talentist
     if params[:commit] == "Accepter" && !@talent.validated
       @talent.validated_action(true)
       @talent.set_conversation_between(@talentist)
-    # elsif params[:commit] == "Refuser"
-    #   if @talent.validated || @talent.validated.nil?
-    #     @talent.update(declined_params)
-    #     @talent.validated_action(false)
-    #     @talent.send_refused
-    #   end
     end
     @talent.visible_action(false)
     redirect_to talents_path
