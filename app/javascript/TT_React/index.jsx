@@ -25,7 +25,6 @@ import conversation from './components/conversation';
 import dashboardHeadhunter from './components/dashboardHeadhunter';
 import dashboardTalent from './components/dashboardTalent';
 import inscriptionTalent from './components/inscriptionTalent';
-import modalInscription from './components/modalInscription';
 import profilRecruteur from './components/profilRecruteur';
 import profilTalent from './components/profilTalent';
 
@@ -179,7 +178,6 @@ if(app){
     <Provider store={store}>
       <Router history={history}>
         <Switch>
-          <Route path="/talents/sign_in" component={modalInscription} />
           <Route path="/talents/:talent_id/welcome/:step" component={inscriptionTalent} />
           <Redirect from="/talents/:id/welcome" to="/talents/:id/welcome/1" />
           <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
@@ -188,7 +186,6 @@ if(app){
           <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/headhunters/:headhunter_id/conversations/:id" component={conversation} />
           <Route path="/headhunters/:id" component={profilRecruteur} />
-          <Route path="/talents/sign_in" component={modalInscription} />
           <Route path="/talents/sign_up" component={inscriptionTalent} />
           <Route path="/talents/:talent_id/conversations/:id" component={conversation} />
           <Route path="/headhunters/:headhunter_id/conversations/:id" component={conversation} />

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { fetchGET } from '../actions';
+import { fetchGET, fetchPost, updateTalent } from '../actions';
 import setJobColor from '../../components/setJobColor';
 
 import Navbar from '../containers/navbar'
@@ -158,15 +158,19 @@ class ProfilTalent extends Component {
     const isMobile = this.props.isMobile
     const title = this.state.title
     const talent = this.props.talent
-    let experiencesLength = 0, formationsLength = 0, validated, visible, color = {backgroundColor: "#E5E6ED", color: "#273243"}, job
+    let experiencesLength = 0, formationsLength = 0, validated, visible, terms_of_condition, color = {backgroundColor: "#E5E6ED", color: "#273243"}, job
+    let userModel = this.props.user
     if(talent){
       experiencesLength = talent.experiences.length
       formationsLength = talent.formations.length
       validated = talent.talent.validated
       visible = talent.talent.visible
+      terms_of_condition = talent.talent.terms_of_condition
       job = talent.jobs[0] ? talent.jobs[0].title : "Non Défini"
       color = setJobColor(job, this.props.jobs)
-
+    }
+    if(userModel){
+      userModel = userModel.is_a_model
     }
     let titles = [
       "Prochaine aventure",
@@ -193,11 +197,21 @@ class ProfilTalent extends Component {
         {titre}
       </p>)
 
+    const acceptTerms = () => {
+      this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, {talent: {terms_of_condition: true}}, "PATCH", promise => {
+        this.props.updateTalent(promise)
+      })
+    }
     return(
       <div>
         <Navbar path="profil" />
-        {validated ? 
-          visible ? 
+        {terms_of_condition != false || userModel === "Recruteur" ? null :
+          <div className="flex w-100 red-background white padding-10 justify-center align-items-center">
+            Tu n'as pas accepté nos <a target="_blank" href="/cgu_talents" className="white margin-left-5">conditions générales d'utilisations</a>, merci de les valider en <span onClick={acceptTerms} className="pointer margin-left-5">cliquant ici</span>
+          </div> 
+        }
+        {validated != false ? 
+          visible != false ? 
             null 
           : 
             <div className="flex w-100 green-background white padding-10 justify-center align-items-center">
@@ -237,11 +251,12 @@ function mapStateToProps(state) {
     talent: state.talent,
     isMobile: state.isMobile,
     jobs: state.jobs,
+    user: state.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost, updateTalent }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilTalent);
