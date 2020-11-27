@@ -15,7 +15,7 @@ class Talent < ApplicationRecord
 
   validates_presence_of :phone, :message => "Ton téléphone doit être rempli", unless: :skip_phone_validation
   validates_format_of :phone, with: /^(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}$/i, multiline: true, message: "Le numéro de téléphone n'est pas bon (06 00 00 00 00)", :on => :create
-  validates_presence_of :linkedin, :message => "Ton linkedin doit être rempli", on: => :create
+  validates_presence_of :linkedin, :message => "Ton linkedin doit être rempli", :on => :create
   validates_format_of :linkedin, with: /^(https?:\/\/)?([a-z]{2,3}\.)?linkedin\.com\/.*$/, multiline: true, message: "Le lien ne semble pas bon", :on => :create
   validates_presence_of :email, :message => "Ton email doit être rempli"
   validates_presence_of :firstname, :message => "Ton prénom doit être rempli"
