@@ -3,9 +3,9 @@ class Mailboxer::ConversationPolicy < ApplicationPolicy
     def resolve
       # scope.all
       if user.is_a?(Talentist)
-        scope.all.reorder(unread: :desc, update_at: :desc)
+        scope.all.reorder(updated_at: :desc)
       else
-        user.mailbox.conversations.reorder(unread: :desc, update_at: :desc)
+        user.mailbox.conversations.reorder(updated_at: :desc)
       end
     end
   end

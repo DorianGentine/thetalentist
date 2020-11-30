@@ -50,6 +50,22 @@
             required: true, 
             autofocus: true, 
             label: "Prénom", 
+            wrapper_html: { class: "col-md-6 margin-bottom-20" },
+            error: f.object.errors.messages[:firstname][0]
+          %>
+          
+          <%= f.input :last_name, 
+            required: true, 
+            autofocus: false, 
+            label: "Nom", 
+            wrapper_html: { class: "col-md-6 margin-bottom-20" },
+            error: f.object.errors.messages[:last_name][0]
+          %>
+
+          <%= f.input :email, 
+            required: true, 
+            autofocus: true, 
+            label: "Email", 
             wrapper_html: { class: "col-md-6 margin-bottom-20" }
           %>
 
@@ -57,13 +73,6 @@
             collection: Startup.all, 
             input_html: { class: "selectAndCreate" },
             wrapper_html: { class: "col-md-6 margin-bottom-20" }
-          %>
-
-          <%= f.input :email, 
-            required: true, 
-            autofocus: true, 
-            label: "Email", 
-            wrapper_html: { class: "col-md-12 margin-bottom-20" }
           %>
 
           <%= f.input :password, 
@@ -76,6 +85,13 @@
             required: true, 
             label: "Confirmation du mot de passe",  
             wrapper_html: { class: "col-md-6 margin-bottom-20" }
+          %>
+
+          <%= f.input :linkedin, 
+            required: true,
+            label: "Linkedin", 
+            wrapper_html: { class: "col-md-12 margin-bottom-20" }, 
+            error: f.object.errors.messages[:linkedin][0] || "Le lien ne semble pas correct"
           %>
           <%= f.input :phone, 
             required: true, 
@@ -90,7 +106,7 @@
             label: false,
             error: ""
           %>
-          <p class="col-md-11 requis no-margin">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_talents_path, target: "_blank", style: "text-decoration:underline" %> de The Talentist.</p>
+          <p class="col-md-11 requis no-margin">En vous inscrivant vous acceptez les <%= link_to "Conditions d'utilisations", cgu_employeurs_path, target: "_blank", style: "text-decoration:underline" %> de The Talentist.</p>
           <% if f.object.errors.messages[:terms_of_condition] %>
             <div class="invalid-feedback col-md-12"><%= f.object.errors.messages[:terms_of_condition][0] %></div>
           <% end %>
