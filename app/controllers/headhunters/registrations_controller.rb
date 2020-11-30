@@ -31,7 +31,7 @@ class Headhunters::RegistrationsController < Devise::RegistrationsController
       end
       if @headhunter.save
         message = "Bonjour #{@headhunter.firstname}, bienvenue sur notre plateforme !"
-        @talentist = Talentist.last
+        @talentist = Talentist.where(email: "magdalena@ineva-partners.com").first
         @talentist.send_message(@headhunter, message, "#{@headhunter.id}")
         @headhunter.send_welcome_and_reminder_email
         session[:headhunter_id] = @headhunter.id
