@@ -1,0 +1,8 @@
+headhunter:
+  email: headhunter@mail.com
+  firstname: Alex
+  job: HR
+  last_name: Rideau
+  validated: true
+  terms_of_condition: true
+  phone: 0677700011

@@ -66,7 +66,21 @@ class TalentsController < ApplicationController
     redirect_to talents_path
   end
 
-private
+  def info_pdf
+    @talent = TalentPresenter.new(@talent)
+    respond_to do |format|
+      format.pdf do
+        render(
+          pdf: "Recommandation de talents",
+          disposition: 'attachment',
+          template: 'talents/pdf_recommendation.html.erb',
+          layout: 'pdf.html.erb'
+        )
+      end
+    end
+  end
+
+  private
 
   def startup_is_available?(param)
     if Startup.where(name: param).count > 0 || Startup.where(name: param.upcase).count > 0

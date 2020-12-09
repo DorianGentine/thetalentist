@@ -1,0 +1,9 @@
+talent_sector_1:
+  talent: talent_with_dependencies
+  sector: saas
+talent_sector_2:
+  talent: talent_with_dependencies
+  sector: marketplace
+talent_sector_3:
+  talent: talent_with_dependencies
+  sector: finance

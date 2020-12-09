@@ -71,9 +71,9 @@ class HeadhunterMailer < ApplicationMailer
   def alerte(user_id)
     @user = Headhunter.find(user_id)
 
-    mail( 
-      to: @user.email ,
-      cc: "bienvenue@thetalentist.com", 
+    mail(
+      to: @user.email,
+      cc: "bienvenue@thetalentist.com",
       subject: "Un nouveau talent pourrait t'intéresser"
     )
   end

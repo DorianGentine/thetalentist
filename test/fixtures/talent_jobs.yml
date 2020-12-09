@@ -1,0 +1,4 @@
+talent_job_1:
+  talent: talent_with_dependencies
+  job: market
+  year: 3
