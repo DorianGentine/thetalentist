@@ -4,5 +4,7 @@ class Mobility < ApplicationRecord
   belongs_to :next_aventure
   accepts_nested_attributes_for :next_aventure, :reject_if => :all_blank
 
-  scope :remote_mobility, -> { find_by(title: TELETRAVAIL_MOBILITY_TYPE) }
+  def remote_mobility?
+    title == TELETRAVAIL_MOBILITY_TYPE
+  end
 end

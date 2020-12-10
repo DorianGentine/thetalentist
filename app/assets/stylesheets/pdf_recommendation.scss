@@ -1,7 +1,26 @@
 .pdf-talent-card {
+  $main-text-color: #020267;
+  $information-text-color: #11184e;
+
+  @mixin selected-job($color, $background-color) {
+    border-color: $color;
+    background-color: $background-color;
+    color: $color;
+  }
+
+  %information-block {
+    color: $information-text-color;
+    margin-bottom: 20px;
+
+    p {
+      display: inline-block;
+      margin: 0;
+    }
+  }
+
   font-family: 'IBM Plex Sans', sans-serif;
   background-color: #f5f7fa;
-  border: 3px solid #020267;
+  border: 3px solid $main-text-color;
   border-radius: 5px;
   padding: 20px;
   min-height: 350px;
@@ -27,51 +46,40 @@
       margin: 0;
 
       &.sales {
-        border-color: #fe7373;
-        background-color: #fcebeb;
-        color: #fe7373;
+        @include selected-job(#fe7373, #fcebeb);
       }
 
       &.product {
-        border-color: #86c05b;
-        background-color: #e5fed6;
-        color: #86c05b;
+        @include selected-job(#86c05b, #e5fed6);
       }
 
       &.marketing {
-        border-color: #ffac4b;
-        background-color: #fff7e2;
-        color: #ffac4b;
+        @include selected-job(#ffac4b, #fff7e2);
       }
     }
   }
 
   .talent-position {
     display: inline-block;
-    color: #020267;
+    color: $main-text-color;
     font-size: 25pt;
     font-weight: bold;
     border-bottom: 2px solid #4fcca4;
     margin: 20px 0;
   }
 
-  .talent-information, .extend-information {
-    color: #11184e;
+  .talent-information {
+    @extend %information-block;
     font-size: 18pt;
-    margin-bottom: 20px;
+  }
 
-    p {
-      display: inline-block;
-      margin: 0;
-    }
-
-    &.extend-information {
-      font-size: 16pt;
-    }
+  .extend-information {
+    @extend %information-block;
+    font-size: 16pt;
   }
 
   .talent-wishes {
-    color: #020267;
+    color: $main-text-color;
     font-size: 14pt;
     text-align: justify;
   }

@@ -24,7 +24,7 @@ class TalentPresenter
   def can_work_remotely?
     return false if next_aventure.blank?
 
-    next_aventure.mobilities.remote_mobility.present?
+    next_aventure.mobilities.find { |mobility| mobility.remote_mobility? }.present?
   end
 
   def remuneration
