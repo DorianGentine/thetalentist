@@ -74,7 +74,9 @@ class TalentsController < ApplicationController
           pdf: "Recommandation de talents",
           disposition: 'attachment',
           template: 'talents/pdf_recommendation.html.erb',
-          layout: 'pdf.html.erb'
+          layout: 'pdf.html.erb',
+          page_width: 210,
+          page_height: 210
         )
       end
     end

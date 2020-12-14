@@ -24,6 +24,7 @@
   border-radius: 5px;
   padding: 20px;
   min-height: 350px;
+  text-rendering: optimizeLegibility;
 
   .talent-photo {
     position: absolute;
@@ -61,6 +62,7 @@
 
   .talent-position {
     display: inline-block;
+    max-width: 500px;
     color: $main-text-color;
     font-size: 25pt;
     font-weight: bold;

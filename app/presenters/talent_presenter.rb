@@ -14,7 +14,7 @@ class TalentPresenter
   end
 
   def position
-    experiences.first&.position.to_s.capitalize
+    @talent.overview || experiences.first&.position.to_s.capitalize
   end
 
   def years_of_experience
@@ -38,10 +38,12 @@ class TalentPresenter
   def mobilities_list
     return '' if next_aventure.blank?
 
-    next_aventure.mobilities.map(&:title).join(', ')
+    @mobilities_list ||= next_aventure.mobilities.map(&:title).join(', ')
   end
 
   def sectors_list
-    sectors.map(&:title).join(' ')
+    return '' if next_aventure.blank?
+
+    @sectors_list ||= next_aventure.sectors.map(&:title).join(' ')
   end
 end

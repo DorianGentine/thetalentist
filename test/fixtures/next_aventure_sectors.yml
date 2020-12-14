@@ -1,9 +1,9 @@
 talent_sector_1:
-  talent: talent_with_dependencies
+  next_aventure: next_aventure
   sector: saas
 talent_sector_2:
-  talent: talent_with_dependencies
+  next_aventure: next_aventure
   sector: marketplace
 talent_sector_3:
-  talent: talent_with_dependencies
+  next_aventure: next_aventure
   sector: finance

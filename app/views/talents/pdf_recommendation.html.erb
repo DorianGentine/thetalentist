@@ -1,6 +1,6 @@
 <div class="pdf-talent-card">
   <div class="talent-photo">
-    <%= image_tag(wicked_pdf_asset_base64("talentist_persons/Talentist_Perso #{@talent.photo_seed}.png"), size: '300') %>
+    <%= image_tag(wicked_pdf_asset_base64("talentist_persons/Talentist_Perso #{@talent.photo_seed}.png"), size: '230') %>
   </div>
   <% if @talent.first_job_title.present? %>
     <div class="job-information">
@@ -29,7 +29,7 @@
     <% end %>
   </div>
   <div class="extend-information">
-    <% if @talent.sectors.present? %>
+    <% if @talent.sectors_list.present? %>
       <div class="info-block">
         <p><b>Secteurs:</b> <%= @talent.sectors_list %></p>
       </div>
