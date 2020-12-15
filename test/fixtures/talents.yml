@@ -1,0 +1,10 @@
+talent:
+  email: talent@mail.com
+  firstname: Alex
+  last_name: Talent
+  city: Paris
+talent_with_dependencies:
+  email: talent_2@mail.com
+  firstname: Alex
+  last_name: Lex
+  city: Paris

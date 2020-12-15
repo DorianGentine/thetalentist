@@ -1,0 +1,47 @@
+<div class="pdf-talent-card">
+  <div class="talent-photo">
+    <%= image_tag(wicked_pdf_asset_base64("talentist_persons/Talentist_Perso #{@talent.photo_seed}.png"), size: '230') %>
+  </div>
+  <% if @talent.first_job_title.present? %>
+    <div class="job-information">
+      <p class="card-job <%= @talent.first_job_title.downcase %>"><%= @talent.first_job_title %></p>
+    </div>
+  <% end %>
+  <p class="talent-position"><%= @talent.position %></p>
+  <div class="talent-information">
+    <% if @talent.talent_job.present? %>
+      <div class="info-block">
+        <%= image_tag(wicked_pdf_asset_base64('pdf/hourglass.png'), size: '25') %>
+        <p><%= pluralize(@talent.years_of_experience, 'an') %> d'expérience</p>
+      </div>
+    <% end %>
+    <% if @talent.mobilities_list.present? %>
+      <div class="info-block">
+        <%= image_tag(wicked_pdf_asset_base64('pdf/pushpin.png'), size: '25') %>
+        <p><%= @talent.mobilities_list %></p>
+      </div>
+    <% end %>
+    <% if @talent.remuneration.present? %>
+      <div class="info-block">
+        <%= image_tag(wicked_pdf_asset_base64('pdf/money-bag.png'), size: '25') %>
+        <p><%= @talent.remuneration %></p>
+      </div>
+    <% end %>
+  </div>
+  <div class="extend-information">
+    <% if @talent.sectors_list.present? %>
+      <div class="info-block">
+        <p><b>Secteurs:</b> <%= @talent.sectors_list %></p>
+      </div>
+    <% end %>
+    <% mark_path = @talent.can_work_remotely? ? 'pdf/yes-check.png' : 'pdf/no-check.png' %>
+    <div class="info-block">
+      <p><b>Télétravail:</b> <%= image_tag(wicked_pdf_asset_base64(mark_path), size: '25') %></p>
+    </div>
+  </div>
+  <div class="talent-wishes">
+    <% if @talent.looking_for.present? %>
+      <p><b>Ce que ce Talent recherche:</b> <%= @talent.looking_for %></p>
+    <% end %>
+  </div>
+</div>
