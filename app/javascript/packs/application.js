@@ -35,6 +35,9 @@ import '../components/setJobColor';
 
 import '../components/valuesToSendFilter';
 
+import { revealModal } from "../components/modal";
+revealModal();
+
 import { openOnglet } from '../components/toggableVerticalTabs';
 openOnglet();
 

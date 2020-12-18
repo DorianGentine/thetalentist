@@ -55,7 +55,7 @@ class TalentMailer < ApplicationMailer
       to: @user.email,
       cc: Talentist.all.collect(&:email).join(", "),
       subject: "#{@user.firstname}, malheureusement ton profil n'a pas été retenu 😔"
-      )
+    )
   end
 
   def reminder_completed(user_id)

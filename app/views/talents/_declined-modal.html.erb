@@ -1,30 +1,19 @@
-<div id="modal_declined_<%= talent.id %>" class="modal">
-
-  <div class="modal-content">
-
-    <div class="modal-header">
-      <h3>WHY &#128557; ????</h3>
-
-      <span class="close" id="close_modal_declined_<%= talent.id %>">
+<div id="modal_declined_<%= talent.id %>" class='modal'>
+  <div class='modal-content'>
+    <div class='modal-header'>
+      <h3>Formulaire</h3>
+      <span class='close' id="close_modal_declined_<%= talent.id %>">
         <p>&times;</p>
       </span>
-
     </div>
+    <div class="margin-bottom-30 margin-top-60 modal-body row">
+      <%= simple_form_for(talent, url: refused_talent_path(talent), html: { style: 'width: 100%' }) do |f| %>
+        <h4>Raison du refus <%= f.object.firstname %> <%= f.object.last_name %></h4>
 
-    <%= simple_form_for talent, url: refused_talent_path(talent)  do |f| %>
-      <div style="padding: 30px">
-
-        <h4><%= f.object.firstname %> <%= f.object.last_name %></h4>
-
-        <div class="row">
-          <%= f.text_area :declined, placeholder: "En effet, malgré .... et ..., le ... est un critère extrêmement important pour nous.", label: false, :rows => 6, style: "width: 100%;" %>
-        </div>
-
-        <%= f.submit "Refuser", class: "btn-edit red-border red margin-top-30" %>
-
-      </div>
-    <% end %>
-   </div>
-
-
+        <% placeholder = 'En effet, malgré .... et ..., le ... est un critère extrêmement important pour nous.' %>
+        <%= f.input(:declined, as: :text, input_html: { style: 'width: 100%', rows: 3 }, placeholder: placeholder, label: false, wrapper_html: { class: 'col-xs-12 margin-top-15' })  %>
+        <%= f.submit('Refuser', class: 'btn red-border red btn-exercise btn-exercise-important contact_form_submit col-lg-2 margin-top-30 margin-left-15') %>
+      <% end %>
+    </div>
   </div>
+</div>

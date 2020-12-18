@@ -37,6 +37,8 @@ group :development, :test do
   gem "binding_of_caller"
 end
 
+gem 'simplecov', require: false, group: :test
+
 # add devise & pundit for talent / talentist / startup log
 gem 'devise'
 gem "pundit"
