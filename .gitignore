@@ -6,8 +6,7 @@ tmp/*
 !tmp/.keep
 *.swp
 .DS_Store
-# public/assets
-# public/packs
+public/assets
 public/packs-test
 node_modules
 yarn-error.log
@@ -21,13 +20,7 @@ yarn-error.log
 /node_modules
 yarn-debug.log*
 .yarn-integrity
-
-/public/packs
-/public/packs-test
-/node_modules
 /yarn-error.log
-yarn-debug.log*
-.yarn-integrity
-.env*
 dump.rdb
 .idea
+coverage
