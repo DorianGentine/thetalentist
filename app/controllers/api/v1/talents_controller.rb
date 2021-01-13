@@ -2,6 +2,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
   include Pagy::Backend
 
   before_action :autorize_call, only: [:repertoire, :repertoire_pagy, :analytics, :show, :sort]
+  wrap_parameters(:talent, include: %i[techno_ids known_ids skill_ids])
 
   def repertoire
     @talents = set_talents_repertoire()

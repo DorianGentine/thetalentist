@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Form, Field } from 'react-final-form';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {Field, Form} from 'react-final-form';
 import Creatable from 'react-select/creatable';
-import { components } from 'react-select';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {components} from 'react-select';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import { fetchGET, fetchPost, updateTalent } from '../../actions';
+import {fetchGET, fetchPost, updateTalent} from '../../actions';
 
 class RenderTechnos extends Component {
   constructor(props) {
@@ -44,8 +44,7 @@ class RenderTechnos extends Component {
 
     const validate = values => {
       console.log('values', values)
-      const errors = {}
-      return errors
+      return {}
     }
 
     const valuesFilter = values => {
@@ -144,7 +143,6 @@ class RenderTechnos extends Component {
           className="form-multi-select"
           classNamePrefix="select-form"
           isValidNewOption={isValidNewOption}
-          // defaultMenuIsOpen={true}
         />
       )
     }
@@ -188,7 +186,6 @@ class RenderTechnos extends Component {
             </div>
           : null }
         </div>
-        {/* <h5 className="box-subtitle">{`${technos.length} outils listés`}</h5> */}
         {this.state.edit ? 
           renderFormTechnos()
         :
@@ -199,7 +196,7 @@ class RenderTechnos extends Component {
       </div>
     );
   }
-};
+}
 
 function mapStateToProps(state) {
   return {
