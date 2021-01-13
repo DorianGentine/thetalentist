@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Form, Field } from 'react-final-form';
 import Creatable from 'react-select/creatable';
 
-import { fetchGET, fetchPost, updateTalent } from '../../actions';
+import { fetchGET, fetchPost } from '../../actions';
 // import setJobColor from '../../../components/setJobColor';
 
 import RenderDatePicker from './renderDatePicker'
@@ -341,7 +341,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost, updateTalent }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RenderFormations);

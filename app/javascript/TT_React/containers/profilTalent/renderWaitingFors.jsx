@@ -82,7 +82,6 @@ class RenderWaitingFors extends Component {
         nAA.waiting_for_one = waitingFor[0]
       }
 
-      this.props.updateTalent(this.props.talent, valuesToSend, values)
       initialValues = values
       return valuesToSend
     }
@@ -91,7 +90,9 @@ class RenderWaitingFors extends Component {
       const valuesToSend = valuesFilter(values)
       console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
-        this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
+        this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH", promise => {
+          this.props.updateTalent(promise);
+        });
       }
       this.setState({edit: false})
     }

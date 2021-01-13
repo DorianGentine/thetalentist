@@ -2,10 +2,9 @@ class Api::V1::TalentsController < Api::V1::BaseController
   include Pagy::Backend
 
   before_action :autorize_call, only: [:repertoire, :repertoire_pagy, :analytics, :show, :sort]
-  wrap_parameters(:talent, include: %i[techno_ids known_ids skill_ids])
 
   def repertoire
-    @talents = set_talents_repertoire()
+    @talents = set_talents_repertoire
     @talents = TalentFormat.new.for_api_repository(@talents, current_headhunter)
     @count = { count: @talents.length }
     repertoire = {
@@ -17,7 +16,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def repertoire_pagy
     @pagy, @records = pagy(
-      set_talents_repertoire(), 
+      set_talents_repertoire,
       items: 9, 
       size: []
     )
@@ -63,7 +62,7 @@ class Api::V1::TalentsController < Api::V1::BaseController
 
   def sort
     if params[:reorder]
-      jobsId = jobs_array()
+      jobsId = jobs_array
       talents = Talent.joins(:talent_job).where(:visible => true, talent_jobs: { job_id: jobsId }).reorder(completing: :desc, last_sign_in_at: :desc)
       talents.each_with_index do |talent, index|
         talent.update(position: index + 1)
@@ -82,18 +81,13 @@ class Api::V1::TalentsController < Api::V1::BaseController
   def update
     @talent = Talent.find(params[:id])
     if need_to_create_data?
-      if params.require(:talent)[:skill_ids].present?
-        set_new_skills(@talent)
-      end
-      if params.require(:talent)[:known_ids].present?
-        set_new_knowns(@talent)
-      end
-      if params.require(:talent)[:techno_ids].present?
-        set_new_technos(@talent)
-      end
+      set_new_skills(@talent) if params[:skill_ids].present?
+      set_new_knowns(@talent) if params[:known_ids].present?
+      set_new_technos(@talent) if params[:techno_ids].present?
     end
-    if params.require(:talent)[:talent_formations_attributes].present?
-      params.require(:talent)[:talent_formations_attributes].each do |formation|
+
+    if params.dig(:talent, :talent_formations_attributes).present?
+      params.dig(:talent, :talent_formations_attributes).each do |formation|
         if formation[:formation_id].present? && formation_is_available?(formation[:formation_id])
           formation[:formation_id] = set_new_formations(formation[:formation_id]) 
         end
@@ -167,32 +161,32 @@ class Api::V1::TalentsController < Api::V1::BaseController
         words << word_id
       end
     end
-    return words
+    words
   end
 
   def set_new_skills(talent)
-    skill_params = params.require(:talent).permit(skill_ids: [])[:skill_ids]
+    skill_params = params.permit(skill_ids: [])[:skill_ids]
     skill_ids = create_new_data_with_only_title(skill_params, "skill")
     talent.skill_ids = skill_ids
   end   
   
   def set_new_knowns(talent)
-    known_params = params.require(:talent).permit(known_ids: [])[:known_ids]
+    known_params = params.permit(known_ids: [])[:known_ids]
     known_ids = create_new_data_with_only_title(known_params, "known")
     talent.known_ids = known_ids
   end
   
   def set_new_technos(talent)
-    techno_params = params.require(:talent).permit(techno_ids: [])[:techno_ids]
+    techno_params = params.permit(techno_ids: [])[:techno_ids]
     techno_ids = create_new_data_with_only_title(techno_params, "techno")
     talent.techno_ids = techno_ids
   end
   
   def startup_is_available?(param)
     if Startup.where(name: param).count > 0 || Startup.where(name: param.upcase).count > 0
-      return false
+      false
     else
-      return true
+      true
     end
   end
   
@@ -204,33 +198,30 @@ class Api::V1::TalentsController < Api::V1::BaseController
         return true
       end
     else
-      return false
+      false
     end
   end
 
   def set_new_startups(param)
     if param.present?
       startup = Startup.create(name: param)
-      return startup.id
+      startup.id
     end
   end 
   
   def set_new_formations(param)
     if param.present?
       formation = Formation.create(title: param)
-      return formation.id
+      formation.id
     end
   end 
   
   def need_to_create_data?
-    skill_params = params.require(:talent).permit(skill_ids: [])[:skill_ids]
-    known_params = params.require(:talent).permit(known_ids: [])[:known_ids]
-    techno_params = params.require(:talent).permit(techno_ids: [])[:techno_ids]
-    if skill_params.nil? && known_params.nil? && techno_params.nil?
-      return false
-    else
-      return true
-    end
+    skill_params = params.permit(skill_ids: [])[:skill_ids]
+    known_params = params.permit(known_ids: [])[:known_ids]
+    techno_params = params.permit(techno_ids: [])[:techno_ids]
+
+    skill_params.present? || known_params.present? || techno_params.present?
   end
 
   def jobs_array
@@ -241,14 +232,14 @@ class Api::V1::TalentsController < Api::V1::BaseController
         jobs_filtered << job.id
       end
     end
-    return jobs_filtered
+    jobs_filtered
   end
 
   def set_talents_repertoire
-    jobsId = jobs_array()
+    jobsId = jobs_array
     @talents = Talent.joins(:talent_job).where(:visible => true, talent_jobs: { job_id: jobsId })
       .reorder(position: :asc, completing: :desc, last_sign_in_at: :desc)
-    return @talents
+    @talents
   end
 
   def talent_photo_params
@@ -258,6 +249,8 @@ class Api::V1::TalentsController < Api::V1::BaseController
   end
   
   def talent_params
+    return {} if params[:talent].blank?
+
     params.require(:talent).permit(
       :firstname,
       :last_name,

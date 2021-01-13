@@ -65,7 +65,6 @@ class RenderKnowns extends Component {
         delete valuesToSend['knowns']
       }
 
-      this.props.updateTalent(this.props.talent, valuesToSend, values)
       initialValues = values
       return valuesToSend
     }
@@ -73,7 +72,9 @@ class RenderKnowns extends Component {
     const onSubmit = values => {
       const valuesToSend = valuesFilter(values)
       if(Object.keys(valuesToSend).length > 0){
-        this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH")
+        this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH", promise => {
+          this.props.updateTalent(promise);
+        });
       }
       this.setState({edit: false})
     }
