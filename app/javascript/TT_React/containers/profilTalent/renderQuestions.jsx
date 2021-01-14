@@ -61,7 +61,6 @@ class ProchaineAventure extends Component {
     }
 
     const validate = values => {
-      console.log('values', values)
       const errors = {}
       return errors
     }
@@ -81,7 +80,6 @@ class ProchaineAventure extends Component {
 
     const onSubmit = values => {
       const valuesToSend = valuesFilter(values)
-      console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
         this.props.fetchPost(`/api/v1/talents/${talent.talent.id}`, valuesToSend, "PATCH", promise => {
           this.props.updateTalent(promise);

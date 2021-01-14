@@ -102,7 +102,6 @@ class RenderFormations extends Component {
       message: "Enregistrer"
     }
     const validate = values => {
-      console.log('values', values)
       const errors = {}
       for (let i = 0; i < values.talent_formations_attributes.length; i++) {
         const formation = values.talent_formations_attributes[i];
@@ -160,11 +159,9 @@ class RenderFormations extends Component {
 
     const onSubmit = values => {
       const valuesToSend = valuesFilter(values)
-      console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
         fetch(`/api/v1/talents/${talent.talent.id}`, {method: "PATCH", body: JSON.stringify(valuesToSend), headers: { 'Content-Type': 'application/json'}})
           .then(r => {
-            console.log('r', r)
             if(r.ok){
               this.props.fetchGET(`/api/v1/talents/${talent.talent.id}`, "FETCH_TALENT")
               this.setState({
