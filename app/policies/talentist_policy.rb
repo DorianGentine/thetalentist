@@ -43,4 +43,8 @@ class TalentistPolicy < ApplicationPolicy
   def all?
     user == record
   end
+
+  def recommandation?
+    true
+  end
 end
