@@ -32,7 +32,6 @@ class HeadhunterMailer < ApplicationMailer
       subject: "Déjà une semaine!")
   end
 
-
   def in_relation(user_id, talent_id, status)
     @user = Headhunter.find(user_id)
     @talent = Talent.find(talent_id)
@@ -57,16 +56,24 @@ class HeadhunterMailer < ApplicationMailer
   def recommanded(headhunter_id, talent_id)
     @headhunter = Headhunter.find(headhunter_id)
     @talent = Talent.find(talent_id)
-    rela = Relationship.find_by(headhunter_id: headhunter_id, talent_id: talent_id)
-    @status = rela&.status
+
+    relationship = Relationship.find_by(
+      headhunter_id: headhunter_id,
+      talent_id: talent_id
+    )
+    @status = relationship&.status
+
+    attachments[TalentRecommendationPdf::NAME] = TalentRecommendationPdf.new(
+      renderer: ApplicationController.renderer,
+      talent: TalentPresenter.new(@talent)
+    ).generate
 
     mail(
       to: @headhunter.email,
-      cc: Talentist.all.collect(&:email).join(", "),
+      cc: Talentist.all.collect(&:email).join(', '),
       subject: "#{@headhunter.firstname}, ce talent devrait te plaire"
     )
   end
-
 
   def alerte(user_id)
     @user = Headhunter.find(user_id)
