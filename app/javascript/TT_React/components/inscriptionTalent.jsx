@@ -142,7 +142,6 @@ class InscriptionTalent extends Component {
           talent: this.props.talent,
         }
         const valuesToSend = valuesToSendFilter(infos)
-        console.log('valuesToSend', valuesToSend)
         if(Object.keys(valuesToSend).length > 0){
           this.props.fetchPost(`/api/v1/talents/${this.props.match.params.talent_id}`, valuesToSend, "PATCH", promise => {
             console.log('promise', promise)
