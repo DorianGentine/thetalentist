@@ -67,7 +67,10 @@ class TalentsController < ApplicationController
   end
 
   def info_pdf
-    pdf = TalentRecommendationPdf.new(TalentPresenter.new(@talent)).generate
+    pdf = TalentRecommendationPdf.new(
+      renderer: renderer,
+      talent: TalentPresenter.new(@talent)
+    ).generate
     send_data(pdf, filename: TalentRecommendationPdf::NAME)
   end
 

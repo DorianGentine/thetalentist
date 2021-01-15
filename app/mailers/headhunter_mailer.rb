@@ -64,7 +64,8 @@ class HeadhunterMailer < ApplicationMailer
     @status = relationship&.status
 
     attachments[TalentRecommendationPdf::NAME] = TalentRecommendationPdf.new(
-      TalentPresenter.new(@talent)
+      renderer: ApplicationController.renderer,
+      talent: TalentPresenter.new(@talent)
     ).generate
 
     mail(
