@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Form, Field } from 'react-final-form';
 import Creatable from 'react-select/creatable';
 
-import { fetchGET, fetchPost, updateTalent } from '../../actions';
+import { fetchGET, fetchPost } from '../../actions';
 
 import RenderDatePicker from './renderDatePicker'
 
@@ -119,7 +119,6 @@ class ExperiencesProfessionnelles extends Component {
 
 
     const validate = values => {
-      console.log('values', values)
       const errors = {}
       return errors
     }
@@ -171,7 +170,6 @@ class ExperiencesProfessionnelles extends Component {
     
     const onSubmit = values => {
       const valuesToSend = valuesFilter(values)
-      console.log('valuesToSend', valuesToSend)
       if(Object.keys(valuesToSend).length > 0){
         fetch(`/api/v1/talents/${talent.talent.id}`, {method: "PATCH", body: JSON.stringify(valuesToSend), headers: { 'Content-Type': 'application/json'}})
           .then(r => {
@@ -363,7 +361,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchGET, fetchPost, updateTalent }, dispatch);
+  return bindActionCreators({ fetchGET, fetchPost }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExperiencesProfessionnelles);
