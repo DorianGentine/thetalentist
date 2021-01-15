@@ -57,12 +57,6 @@ class HeadhunterMailer < ApplicationMailer
     @headhunter = Headhunter.find(headhunter_id)
     @talent = Talent.find(talent_id)
 
-    relationship = Relationship.find_by(
-      headhunter_id: headhunter_id,
-      talent_id: talent_id
-    )
-    @status = relationship&.status
-
     attachments[TalentRecommendationPdf::NAME] = TalentRecommendationPdf.new(
       renderer: ApplicationController.renderer,
       talent: TalentPresenter.new(@talent)
