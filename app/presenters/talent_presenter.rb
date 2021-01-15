@@ -1,5 +1,5 @@
 class TalentPresenter
-  delegate :id, :firstname, :jobs, :experiences, :talent_job, :next_aventure, :sectors, to: :@talent
+  delegate :jobs, :experiences, :talent_job, :next_aventure, :sectors, to: :@talent
 
   def initialize(talent)
     @talent = talent

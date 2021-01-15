@@ -67,28 +67,8 @@ class TalentsController < ApplicationController
   end
 
   def info_pdf
-    @talent = TalentPresenter.new(@talent)
-
-    pdf_html = render_to_string(
-      template: 'talents/pdf_recommendation.html.erb',
-      layout: 'pdf.html.erb'
-    )
-    pdf = WickedPdf.new.pdf_from_string(pdf_html, pdf: 'Recommandation de talents', page_width: 210, page_height: 210)
-    send_data(pdf, filename: 'file.pdf')
-
-    # @talent = TalentPresenter.new(@talent)
-    # respond_to do |format|
-    #   format.pdf do
-    #     render(
-    #       pdf: 'Recommandation de talents',
-    #       disposition: 'attachment',
-    #       template: 'talents/pdf_recommendation.html.erb',
-    #       layout: 'pdf.html.erb',
-    #       page_width: 210,
-    #       page_height: 210
-    #     )
-    #   end
-    # end
+    pdf = TalentRecommendationPdf.new(TalentPresenter.new(@talent)).generate
+    send_data(pdf, filename: TalentRecommendationPdf::NAME)
   end
 
   private

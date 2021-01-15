@@ -55,7 +55,7 @@ class HeadhunterMailer < ApplicationMailer
 
   def recommanded(headhunter_id, talent_id)
     @headhunter = Headhunter.find(headhunter_id)
-    @talent = TalentPresenter.new(Talent.find(talent_id))
+    @talent = Talent.find(talent_id)
 
     relationship = Relationship.find_by(
       headhunter_id: headhunter_id,
@@ -63,20 +63,16 @@ class HeadhunterMailer < ApplicationMailer
     )
     @status = relationship&.status
 
-    pdf_html = render_to_string(
-      template: 'talents/pdf_recommendation.html.erb',
-      layout: 'pdf.html.erb'
-    )
-    pdf = TalentRecommendationPdf.new.generate(pdf_html)
-    attachments['recommandation_de_talents.pdf'] = pdf
+    attachments[TalentRecommendationPdf::NAME] = TalentRecommendationPdf.new(
+      TalentPresenter.new(@talent)
+    ).generate
 
     mail(
       to: @headhunter.email,
-      cc: Talentist.all.collect(&:email).join(", "),
+      cc: Talentist.all.collect(&:email).join(', '),
       subject: "#{@headhunter.firstname}, ce talent devrait te plaire"
     )
   end
-
 
   def alerte(user_id)
     @user = Headhunter.find(user_id)
