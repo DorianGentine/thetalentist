@@ -32,7 +32,6 @@ class HeadhunterMailer < ApplicationMailer
       subject: "Déjà une semaine!")
   end
 
-
   def in_relation(user_id, talent_id, status)
     @user = Headhunter.find(user_id)
     @talent = Talent.find(talent_id)
@@ -56,9 +55,20 @@ class HeadhunterMailer < ApplicationMailer
 
   def recommanded(headhunter_id, talent_id)
     @headhunter = Headhunter.find(headhunter_id)
-    @talent = Talent.find(talent_id)
-    rela = Relationship.find_by(headhunter_id: headhunter_id, talent_id: talent_id)
-    @status = rela&.status
+    @talent = TalentPresenter.new(Talent.find(talent_id))
+
+    relationship = Relationship.find_by(
+      headhunter_id: headhunter_id,
+      talent_id: talent_id
+    )
+    @status = relationship&.status
+
+    pdf_html = render_to_string(
+      template: 'talents/pdf_recommendation.html.erb',
+      layout: 'pdf.html.erb'
+    )
+    pdf = TalentRecommendationPdf.new.generate(pdf_html)
+    attachments['recommandation_de_talents.pdf'] = pdf
 
     mail(
       to: @headhunter.email,
