@@ -130,6 +130,11 @@ class Headhunter < ApplicationRecord
   end
 
   def send_recommandation(talent)
+    relationships.find_or_create_by(
+      talent: talent,
+      status: Relationship::STATUS_TYPE_ACCEPT
+    )
+
     HeadhunterMailer.recommanded(self.id, talent.id).deliver_later
   end
 
