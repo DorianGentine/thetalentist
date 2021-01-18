@@ -100,9 +100,10 @@ class TalentRepertoire extends Component {
         if(talent.next_aventure.mobilities){
           for (let i = 0; i < talent.next_aventure.mobilities.length; i++) {
             const title = talent.next_aventure.mobilities[i].title;
-            if(filter.mobilityFilter.includes(title.toLowerCase())){
-              toD = true
-            }
+
+            filter.mobilityFilter.forEach((filter) => {
+              if (title.toLowerCase().startsWith(filter)) toD = true
+            })
           }
         }
         return toD
