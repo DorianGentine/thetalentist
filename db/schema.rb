@@ -301,6 +301,8 @@ ActiveRecord::Schema.define(version: 2021_01_19_061144) do
     t.text "proud"
     t.text "favourite_businesses"
     t.text "see_my_job"
+    t.integer "remuneration_min"
+    t.integer "remuneration_max"
     t.index ["talent_id"], name: "index_next_aventures_on_talent_id"
   end
 
@@ -580,6 +582,9 @@ ActiveRecord::Schema.define(version: 2021_01_19_061144) do
     t.boolean "display_linkedin_picture", default: true
     t.integer "position"
     t.string "authentication_token", limit: 30
+    t.string "confirmation_token"
+￼   t.datetime "confirmed_at"
+￼   t.datetime "confirmation_sent_at"
     t.index ["authentication_token"], name: "index_talents_on_authentication_token", unique: true
     t.index ["email"], name: "index_talents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_talents_on_reset_password_token", unique: true
