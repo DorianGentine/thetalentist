@@ -22,7 +22,6 @@ class HeadhuntersController < ApplicationController
     end
 
     talents_scope = Talent.where(:visible => true).order('created_at DESC')
-    # talents_scope = Talent.where(:jobs => jobs.first.title.include?("Prod")).order('created_at DESC')
 
     @relationship = Relationship.new
     @job_alert = JobAlerte.new
@@ -30,29 +29,12 @@ class HeadhuntersController < ApplicationController
     @jobs = Job.all.order(:id)
       
     talents_visible = talents_scope.reorder(last_sign_in_at: :desc, completing: :desc)
-    # talents_visible = talents_scope.reorder(completing: :desc, last_sign_in_at: :desc)
 
     if params[:jobs].blank? || params[:jobs] == "Tous"
       talents = talents_visible
     else
       talents = talents_visible.his_job_is(params[:jobs]).to_a
     end
-
-    # if @headhunter.present?
-    #   finale_talents = []
-    #   talents.each do |talent|
-    #     talent.experiences.each do |experience|
-    #       if experience.company_name != @headhunter.startup.name
-    #         p "/// OUI /// #{experience.company_name} VS #{ @headhunter.startup.name}" if experience.company_name == "360LEARNING - LMS & CORPORATE UNIVERSITIES"
-    #         finale_talents << talent
-    #       end
-    #     end
-    #   end
-    # else
-    #   finale_talents = talents
-    # end
-
-      # finale_talents = talents
 
     @talents = TalentFormat.new.for_repository(talents)
     respond_to do |format|

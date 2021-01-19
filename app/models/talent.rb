@@ -111,6 +111,7 @@ class Talent < ApplicationRecord
   has_many :relationships, dependent: :destroy
   has_many :headhunters, through: :relationships
   has_many :talentists, through: :relationships
+  has_many :view_interactions, dependent: :destroy
 
   has_many :talent_messages, dependent: :destroy
 

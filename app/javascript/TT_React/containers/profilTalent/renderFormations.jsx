@@ -6,10 +6,8 @@ import { Form, Field } from 'react-final-form';
 import Creatable from 'react-select/creatable';
 
 import { fetchGET, fetchPost } from '../../actions';
-// import setJobColor from '../../../components/setJobColor';
 
 import RenderDatePicker from './renderDatePicker'
-import SelectCritere from './selectCritere'
 
 class RenderFormations extends Component {
   constructor(props) {
@@ -33,13 +31,12 @@ class RenderFormations extends Component {
   }
 
   componentDidMount() {
-    if(!this.props.formations){
+    if (!this.props.formations) {
       this.props.fetchGET('/api/v1/formations', "FETCH_FORMATIONS")
     }
   }
-  
 
-  render () {
+  render() {
     let talent = this.props.talent
     let user = this.props.user
     let ecoles = this.props.formations
@@ -86,6 +83,7 @@ class RenderFormations extends Component {
       }
       this.setState({add: !this.state.add})
     }
+
     const deleteFormation = index => {
       this.saveDeletedFormationId(formations[index])
       formations.splice(index, 1)
@@ -94,7 +92,6 @@ class RenderFormations extends Component {
       }
       this.setState({add: !this.state.add})
     }
-
 
     let disabled = {
       state: false,
@@ -306,7 +303,7 @@ class RenderFormations extends Component {
       )
     })
 
-    const handleClick = edit => {
+    const handleClick = () => {
       this.setState({edit: !this.state.edit})
     }
 

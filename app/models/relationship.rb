@@ -1,4 +1,6 @@
 class Relationship < ApplicationRecord
+  STATUS_TYPE_ACCEPT = 'Accepter'
+
   belongs_to :talent, optional: true
   belongs_to :headhunter, optional: true
   belongs_to :talentist, optional: true
@@ -33,10 +35,18 @@ class Relationship < ApplicationRecord
     end
 
     def create_config_conversations
-      p "LE SELF EST : #{self} /// #{self.id}"
       conversation = Mailboxer::Conversation.find(self.conversation_id)
-      ConfigConversation.create(conversation_id: conversation.id, user_id: conversation.participants.first.id, user_email: conversation.participants.first.email)
-      ConfigConversation.create(conversation_id: conversation.id, user_id: conversation.participants.second.id, user_email: conversation.participants.second.email)
+
+      ConfigConversation.create(
+        conversation_id: conversation.id,
+        user_id: conversation.participants.first.id,
+        user_email: conversation.participants.first.email
+      )
+      ConfigConversation.create(
+        conversation_id: conversation.id,
+        user_id: conversation.participants.second.id,
+        user_email: conversation.participants.second.email
+      )
     end
 
     def send_message
