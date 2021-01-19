@@ -35,8 +35,7 @@ class Relationship < ApplicationRecord
     end
 
     def create_config_conversations
-      conversation = Mailboxer::Conversation.find_by(id: conversation_id)
-      return if conversation.nil?
+      conversation = Mailboxer::Conversation.find(self.conversation_id)
 
       ConfigConversation.create(
         conversation_id: conversation.id,

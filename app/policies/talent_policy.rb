@@ -34,11 +34,14 @@ class TalentPolicy < ApplicationPolicy
 
   def show?
     if user.is_a?(Headhunter)
-      Relationship.find_by(
+      relationship = Relationship.find_by(
         talent: record,
         headhunter: user,
         status: Relationship::STATUS_TYPE_ACCEPT
-      ).present?
+      )
+      return true unless relationship.nil?
+
+      ViewInteraction.find_by(talent: record, headhunter: user).present?
     elsif user.is_a?(Talent)
       user == record
     elsif user.is_a?(Talentist)

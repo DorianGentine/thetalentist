@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_23_125520) do
+ActiveRecord::Schema.define(version: 2021_01_19_061144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -301,8 +301,6 @@ ActiveRecord::Schema.define(version: 2020_11_23_125520) do
     t.text "proud"
     t.text "favourite_businesses"
     t.text "see_my_job"
-    t.integer "remuneration_min"
-    t.integer "remuneration_max"
     t.index ["talent_id"], name: "index_next_aventures_on_talent_id"
   end
 
@@ -582,9 +580,6 @@ ActiveRecord::Schema.define(version: 2020_11_23_125520) do
     t.boolean "display_linkedin_picture", default: true
     t.integer "position"
     t.string "authentication_token", limit: 30
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
     t.index ["authentication_token"], name: "index_talents_on_authentication_token", unique: true
     t.index ["email"], name: "index_talents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_talents_on_reset_password_token", unique: true
@@ -594,6 +589,16 @@ ActiveRecord::Schema.define(version: 2020_11_23_125520) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "view_interactions", force: :cascade do |t|
+    t.bigint "talent_id"
+    t.bigint "headhunter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["headhunter_id"], name: "index_view_interactions_on_headhunter_id"
+    t.index ["talent_id", "headhunter_id"], name: "index_view_interactions_on_talent_id_and_headhunter_id", unique: true
+    t.index ["talent_id"], name: "index_view_interactions_on_talent_id"
   end
 
   create_table "words", force: :cascade do |t|
@@ -659,5 +664,7 @@ ActiveRecord::Schema.define(version: 2020_11_23_125520) do
   add_foreign_key "talent_skills", "talents"
   add_foreign_key "talent_technos", "talents"
   add_foreign_key "talent_technos", "technos"
+  add_foreign_key "view_interactions", "headhunters"
+  add_foreign_key "view_interactions", "talents"
   add_foreign_key "your_small_plus", "talents"
 end

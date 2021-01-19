@@ -12,6 +12,7 @@ class Headhunter < ApplicationRecord
   has_many :relationships, dependent: :destroy
   has_many :talents, through: :relationships
   has_many :talentists, through: :relationships
+  has_many :view_interactions, dependent: :destroy
 
   has_one :headhunter_email, dependent: :destroy
   accepts_nested_attributes_for :headhunter_email
@@ -130,10 +131,7 @@ class Headhunter < ApplicationRecord
   end
 
   def send_recommandation(talent)
-    relationships.find_or_create_by(
-      talent: talent,
-      status: Relationship::STATUS_TYPE_ACCEPT
-    )
+    view_interactions.find_or_create_by(talent: talent)
 
     HeadhunterMailer.recommanded(self.id, talent.id).deliver_later
   end
