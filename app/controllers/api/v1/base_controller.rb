@@ -22,6 +22,7 @@ class Api::V1::BaseController < ActionController::API
       false
     end
   end
+
   def user_not_authorized(exception)
     render json: {
       error: "Unauthorized #{exception.policy.class.to_s.underscore.camelize}.#{exception.query}"
@@ -33,15 +34,7 @@ class Api::V1::BaseController < ActionController::API
   end
 
   def internal_server_error(exception)
-    if Rails.env.development?
-      response = { type: exception.class.to_s, message: exception.message, backtrace: exception.backtrace }
-    else
-      response = { type: exception.class.to_s, message: exception.message, backtrace: exception.backtrace  }
-      # response = { error: "Internal Server Error" }
-    end
-    render json: response, status: :internal_server_error
+    response = { type: exception.class.to_s, message: exception.message, backtrace: exception.backtrace }
+    render(json: response, status: :internal_server_error)
   end
-
-
-
 end

@@ -1,7 +1,10 @@
 class Api::V1::TalentsController < Api::V1::BaseController
   include Pagy::Backend
 
-  before_action :autorize_call, only: [:repertoire, :repertoire_pagy, :analytics, :show, :sort]
+  before_action(
+    :authorize_call,
+    only: %i[repertoire repertoire_pagy analytics show sort recommandation]
+  )
 
   def repertoire
     @talents = set_talents_repertoire
@@ -130,12 +133,11 @@ class Api::V1::TalentsController < Api::V1::BaseController
     @talent = Talent.find(params[:id])
     @headhunter = Headhunter.find(params[:recruteur_id])
     @headhunter.send_recommandation(@talent)
-    authorize @talent
   end
 
   private
 
-  def autorize_call
+  def authorize_call
     user = current_talentist if current_talentist
     user = current_talent if current_talent
     user = current_headhunter if current_headhunter
