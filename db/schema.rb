@@ -583,8 +583,8 @@ ActiveRecord::Schema.define(version: 2021_01_19_061144) do
     t.integer "position"
     t.string "authentication_token", limit: 30
     t.string "confirmation_token"
-￼   t.datetime "confirmed_at"
-￼   t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
     t.index ["authentication_token"], name: "index_talents_on_authentication_token", unique: true
     t.index ["email"], name: "index_talents_on_email", unique: true
     t.index ["reset_password_token"], name: "index_talents_on_reset_password_token", unique: true
